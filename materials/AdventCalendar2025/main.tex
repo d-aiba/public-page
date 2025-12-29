@@ -593,7 +593,8 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 			f^\ast:&2^Y&\longrightarrow&2^X\\[0pt]&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\[-2pt]&(Y\xrightarrow{g} 2)&{\;\longmapsto\;}&(X\xrightarrow{f}Y\xrightarrow{g} 2)
 		\end{array}
 		\] 
-		この $f^\ast$ が、$f$ による述語変換子にあたるものです。（後ほど説明します。）
+		% この $f^\ast$ が、$f$ による述語変換子にあたるものです。（後ほど説明します。）
+		直観的には、以下の図のようなものだと理解するのがよいでしょう。
 		\begin{center}
 			\begin{tikzcd}
 				\scriptstyle\Pred_X & \scriptstyle\Pred_Y \\[-22pt]
@@ -602,7 +603,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 			\end{tikzcd}
 		\end{center}
 	% \end{small}
-	\item 以上で与えられたデータ $\Bigl((\Pred_X)_{X\in\Set}\,,\,(f^\ast:\Pred_Y\to\Pred_X)_{f:X\to Y\,\textrm{in}\,\Set}\Bigr)$ をもとに、ファイバーを貼り合わせて、「全体圏」(total category) と呼ばれる圏 $\Pred$ をつくります。
+	\item 以上で与えられたデータ $\Bigl((\Pred_X)_{X\in\Set}\,,\,(f^\ast:\Pred_Y\to\Pred_X)_{f:X\to Y\,\textrm{in}\,\Set}\Bigr)$ をもとにして、各ファイバーを貼り合わせて、「全体圏」(total category) と呼ばれる圏 $\Pred$ をつくります。
 	\begin{small}
 		\begin{center}
 			\begin{tikzcd}
@@ -637,7 +638,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 			\!\!\!\!\!\!
 		\end{center}
 	\end{small}
-	\item ここで、$\Pred$ を「全体圏」といい、$\Set$ を「基底圏」といいます。\\ また、$\overline{f}(Q)$ を、$f$ の $Q$ による「カルテシアン持ち上げ」(cartesian lifting) といいます。\\ $f^\ast$ を、$f$ の「置換」(substitution) といい、対象 $P,Q\in\Pred$ で $pP=pQ=Y$ なるものと、$\Pred$ の射 $(P\xrightarrow{u}Q)$ で $pu=\id_Y$ なるものについて、$\overline f_Q\circ f^\ast u=u\circ\overline f_P$ を満たすものと定められています。
+	\item ここで、$\Pred$ を「全体圏」といい、$\Set$ を「基底圏」といいます。\\ また、$\overline{f}(Q)$ を、$f$ の $Q$ による「カルテシアン持ち上げ」(cartesian lifting) といいます。\\ そして、$f^\ast$ を、$f$ の「置換」(substitution) といい、対象 $P,Q\in\Pred$ で $pP=pQ=Y$ なるものと、$\Pred$ の射 $(P\xrightarrow{u}Q)$ で $pu=\id_Y$ なるものについて、$\overline f_Q\circ f^\ast u=u\circ\overline f_P$ を満たすものと定められています。
 	\begin{center}
 		\begin{tikzcd}
 				& f^\ast P \ar[d,"f^\ast u"'] \ar[r,"\overline f_P"] & P \ar[d,"u"] \\
@@ -686,7 +687,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 % \end{center}
 \clearpage
 
-\noindent 以下、ファイブレーションの正確な定義を（念のため）書いておきます。ですが、上記の $p:\Pred\to\Set$ の考え方だけをきちんと押さえておけば、次節以降の内容を理解するうえで基本的には問題ないです。
+\noindent 以下、ファイブレーションの正確な定義を念のため書いておきます。（ですが、上記の $p\colon\Pred\to\Set$ の考え方だけをきちんと押さえておけば、次節以降の内容を理解するうえでまったく問題はありません。）
 
 \begin{definition}[カルテシアン]
 	$p:\E\to\B$ を関手とします。$\E$ の射 $(X\xrightarrow{f}Y)$ が $p$-カルテシアン ($p$-cartesian) であるとは、すべての $Z\in\E$ について、以下のプルバック図式が可換になることである。
@@ -943,7 +944,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 
 \section{最弱事前条件をどのように手に入れるか}
 
-さて、本節では、非決定的プログラムや確率的プログラムなどといった様々な種類のプログラムに対する述語変換子意味論を得る方法について、圏論的な視座から考えます。一般に、状態の集合 $X, Y$ と真理値の集合 $\Omega$ が与えられたときに、効果付き計算 $c:X\to FY$ に基づいて、事後条件 $q:Y\to\Omega$ を最弱事前条件 $wp\llbracket c\rrbracket(q):X\to \Omega$ に変換するための関数である「述語変換子」 $wp\llbracket c\rrbracket:\Omega^Y\to\Omega^X$ を手に入れるためには、どんな手続きを経たらよいでしょうか。
+さて、本節では、非決定的プログラムや確率的プログラムなどといった様々な種類のプログラムに対する述語変換子意味論を得る方法について、圏論的な視座から考えます。一般に、状態の集合 $X, Y$ と真理値の集合 $\Omega$ が与えられたときに、効果付き計算 $c:X\to FY$ に基づいて、事後条件 $q:Y\to\Omega$ を最弱事前条件 $wp\llbracket c\rrbracket(q):X\to \Omega$ に変換するための関数である「述語変換子」 $wp\llbracket c\rrbracket:\Omega^Y\to\Omega^X$ を手に入れるために、どんな手続きを経たらよいでしょうか。
 
 いくつか具体例を見てから、その後に一般論を考えましょう。
 
