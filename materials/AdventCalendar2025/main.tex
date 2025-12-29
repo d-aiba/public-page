@@ -147,7 +147,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 \end{definition}
 
 \begin{example}
-	たとえば
+	たとえば以下のようなものがホーア論理の証明図である。\vspace{5pt}
 	\begin{prooftree}
 		\AXC{$\substack{x\geq 0 \land x > 0\\\Rightarrow\; x-1\geq 0}$}
 		\AXC{}\RL{a}
@@ -364,9 +364,378 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 
 \section{圏論の関手でシステムの振舞いを捉える}
 
+様々な種類の状態遷移システム（例: 二分木グラフ、ストリーム、オートマトン、マルコフ連鎖、マルコフ決定過程など）を圏論的に扱うには、\textbf{余代数} (coalgebra) と呼ばれるものが役立ちます。
+
+\subsection{余代数入門}
+
+\begin{definition}[余代数]
+	$\mathbb{C}$ を圏とし、$F:\mathbb{C}\to\mathbb{C}$ を関手とする。$F$-余代数とは、$\mathbb C$ の対象 $X$ と射 $c:X\to F(X)$ の組 $(X,c)$ のことと定める。また、2つの余代数 $(X,c:X\to F(X)),\,(Y,d:Y\to F(Y))$ の間の余代数準同型とは、射 $f:X\to Y$ であって $d\circ f=F(f)\circ c$ を満たすものとする。\vspace{5pt}
+	\begin{center}
+		\begin{tikzcd}[row sep=2pt, column sep=4pt]
+			F(X) \ar[rr,"F(f)"] & & F(Y)\\
+			& \rotatebox{-45}{$=$} & \\
+			X \ar[uu,"c"] \ar[rr,"f"'] & & Y \ar[uu,"d"']
+		\end{tikzcd}
+	\end{center}
+\end{definition}
+
+\begin{definition}[余代数の圏]
+	$F$-余代数の圏を $\Coalg(F)$ と書くことにする。対象が余代数であり、射が余代数準同型であるような圏である。
+	% \begin{small}
+		\begin{align*}
+			\begin{small}
+			\left(\begin{array}{ccc}F(X)\\~\;\uparrow{\scriptstyle c}\\X\end{array}\right)\xrightarrow{~~f~~}\left(\begin{array}{ccc}F(Y)\\~\;\uparrow{\scriptstyle d}\\Y\end{array}\right)
+			\end{small}
+		\end{align*}
+	% \end{small}
+\end{definition}
+
+\subsection{余代数の様々な例}
+
+\begin{example}
+	二分木グラフは、$\Set$ 上の関手 $F(X)=1+(X\times X)$ に対する余代数 $c:X\to F(X)$ として定義される。
+	\[c(x)=(x',x'') \qquad\textrm{or}\qquad c(x)=\ast\]
+	\begin{center}
+		\begin{tikzcd}[row sep=15pt,column sep=6pt]
+			& \circled{\hspace*{4pt}$x$\hspace*{4pt}} \ar[ld,shorten=-5pt] \ar[rd,shorten=-5pt] & \\
+			 \circled{\hspace*{2pt}$x'$\hspace*{2pt}} && \circled{\hspace*{1pt}$x''$\hspace*{1pt}}
+		\end{tikzcd}
+		\qquad\qquad 
+		\begin{tikzcd}[row sep=15pt,column sep=6pt]
+			\circled{\hspace*{4pt}$x$\hspace*{4pt}} \ar[d,shorten=-2pt,"\backslash"marking]\\
+			{~~}
+		\end{tikzcd}
+	\end{center}
+\end{example}
+
+\begin{example}
+	ストリームは、$\Set$ 上の関手 $F(X)=A\times X$ に対する余代数 $c:X\to F(X)$ として定義される。
+	\[c(x)=(\head(x),\tail(x))\]
+	たとえば、ストリーム $x=(x_1,x_2,x_3,\dots)$ について、$\head(x)=x_1,\,\tail(x)=(x_2,x_3,\dots)$ である。\vspace{10pt}
+
+	\begin{center}
+		\begin{tikzcd}
+			{} \ar[r,shorten <=16pt,shorten >= -3pt]&\underset{abbbbb\dots}{\circled{\hspace*{1pt}$q_0$\hspace*{1pt}}} \ar[r,"a"] & \underset{~~bbb\dots}{\underset{~bbbb\dots}{\underset{bbbbb\dots}{\circled{\hspace*{1pt}$q_1$\hspace*{1pt}}}}} \ar[loop right,"b"]
+		\end{tikzcd}
+	\end{center}
+\end{example}
+
+\clearpage
+
+\begin{example}%[決定的オートマトン・非決定的オートマトン]
+	% 決定的オートマトンは、余代数 $\gamma:X\to 2\times X^A$ で与えられる。また、
+	非決定的オートマトンは、余代数 $\gamma:X\to 2\times\mathcal P(A\times X)$ で与えられる。なお $2=\{\bigcirc,\doublecirc\}$ とする。
+	\[\gamma(x)=\left(\doublecirc,\{(a,x'),\dots\}\right)\quad\textrm{or}\quad\gamma(x)=\left(\bigcirc,\{(a,x'),\dots\}\right)\]
+	\begin{center} \small
+		\begin{tikzcd}[row sep=2pt,column sep=5pt, /tikz/column 2/.append style={column sep={55pt}}, /tikz/column 1/.append style={column sep={15pt}}]
+			{} \ar[r]&\circled{$x_1$} \ar[r,"a"] \ar[rd,"b"] & \circled{$x_2$} \ar[loop above,"b"] \ar[r,"c"] & \doublecircled{$x_3$} \\[-2pt]
+			&& \circled{$x_4$}\\\\\hline\\\\
+			&x_1 \ar[r,mapsto] & \gamma(x_1) \ar[d,equal] \\[4pt]
+			&& \{(a,x_2),(b,x_4)\} \ar[r,mapsto] & \{(a,\gamma(x_2)),(b,\gamma(x_4))\} \ar[d,equal] \\[4pt]
+			&&& \{(a,\{(b,x_2),(c,x_3)\}),(b,\{\})\} \ar[d,mapsto,"T\lambda_{FX}"]\\[12pt]
+			&&& \{\{ (ab,x_2),(ac,x_3) \},\{\}\} \ar[d,mapsto,"\mu_{F^2X}"] \\[12pt]
+			&&& \{(ab,x_2),(ac,x_3)\}
+		\end{tikzcd}
+	\end{center}
+	% なお、非決定的オートマトンは、余代数 $\gamma:X\to 2\times\mathcal P(X)^A$ で与えられることもある。この見方をとると「非決定的オートマトンの決定化」（べき集合構成）を扱える。すなわち、非決定的オートマトン $\gamma:X\to\mathcal P(X)^A$ 
+	% 		\begin{multicols}{2}
+	% 			\begin{center}\small
+	% 				\begin{tikzcd}
+	% 					{\!\!\!\!} \ar[r,shorten <= 2mm] & \circled{$x_1$} \ar[r,"a",shift left=8pt] \ar[r,"b"] \ar[r,leftarrow,"a",shift right=8pt] \ar[loop above,looseness=2mm,"a"] &\doublecircled{$x_2$} 
+	% 				\end{tikzcd}
+	% 			\end{center}
+	% 			% \begin{align*}
+	% 			% 	\gamma(x_1) &=\left[\begin{array}{ccl} a &\mapsto& \{x_1,x_2\}\\ b&\mapsto &\{x_1\}\end{array}\right] \\
+	% 			% 	\gamma(x_2) &=\left[\begin{array}{ccl} a &\mapsto& \emptyset\\ b&\mapsto &\emptyset\end{array}\right]
+	% 			% \end{align*}
+	% 			\begin{align*}
+	% 				\gamma(x_1) &=\left[\begin{array}{ccl} a &\mapsto& \{x_1,x_2\}\\ b&\mapsto &\{x_2\}\end{array}\right] \\
+	% 				\gamma(x_2) &=\left[\begin{array}{ccl} a &\mapsto& \{x_1\}\\ b&\mapsto &\emptyset\end{array}\right]
+	% 			\end{align*}
+	% 		\end{multicols}
+	% 		から決定的オートマトン
+	% 		$\delta=(F\mu_X\circ \lambda_{TX}\circ T\gamma): \mathcal P(X)\to\mathcal P(X)^A$ 
+	% 		を構成することができる。
+	% 		\begin{multicols}{2}
+	% 			\begin{center}\small
+	% 				\begin{tikzcd}[row sep=-16pt]
+	% 					{\!\!\!\!\!} \ar[r,shorten <= 2mm] & \circled{\small $\{x_1\}$}  \ar[rd,"a"] & {}
+	% 					\\&& \doublecircled{\scriptsize $\{x_1,x_2\}$} \ar[loop right,looseness = 1.5mm, "a"] \ar[ld,"b"] \\
+	% 					& \doublecircled{\small$\{x_2\}$} \ar[uu,"a",shift left=1mm] \ar[uu, leftarrow, "b"', shift right=1mm]
+	% 				\end{tikzcd}
+	% 			\end{center}
+	% 			\begin{align*}
+	% 				\delta(\{x_1\}) &=\left[\begin{array}{ccl} a &\mapsto& \{x_1,x_2\}\\ b&\mapsto &\{x_2\}\end{array}\right] \\
+	% 				\delta(\{x_2\}) &= \left[\begin{array}{ccl} a &\mapsto& \{x_1\}\\ b&\mapsto &\emptyset\end{array}\right]
+	% 				\\
+	% 				\delta(\{x_1,x_2\}) &=\left[\begin{array}{ccl} a &\mapsto& \{x_1,x_2\}\\ b&\mapsto &\{x_2\}\end{array}\right]
+	% 			\end{align*}
+	% 		\end{multicols}
+	% なお、両者の捉え方がいずれも同じものであることは直ちにわかる。
+	% \begin{prooftree}
+	% 	\AXC{$X\to\mathcal P(X)^{A}$} \doubleLine \RL{curry}
+	% 	\UIC{$X\times A\to\mathcal P(X)$} \doubleLine \RL{classify}
+	% 	\UIC{$\textrm{relation}\subseteq (X\times A)\times X$} \doubleLine \RL{associate}
+	% 	\UIC{$\textrm{relation}\subseteq X\times (A\times X)$} \doubleLine \RL{classify}
+	% 	\UIC{$X\to\mathcal P(A\times X)$}
+	% \end{prooftree}
+\end{example}
+
+% \clearpage
+
+\begin{example}
+	マルコフ連鎖は、余代数 $\gamma:X\to \mathcal D(X)$ で与えられる。なお、関手 $\mathcal D:\Set\to\Set$ は
+	\begin{align*}\mathcal D(X)&=\{d:X\to [0,1]\mid\textrm{finite support,~}\textstyle\sum d(x)=1\}\\&=\{\textstyle\,\sum p_i\ket{x_i}\,\textrm{, where $p_i$ is a probability $d(x_i)\in[0,1]$.}\}\\\mathcal D(f)&:\mathcal D(X)\to\mathcal D(Y)\\&\mathcal D(f)(\textstyle\sum p_i\ket{x_i})=\textstyle\sum p_i\ket{f(x_i)}\end{align*}
+	と定められているものとする。
+	\begin{center}
+		\begin{tikzcd}[row sep=-7pt]
+			\circled{$x_1$} \ar[rd,shift left,"0.3"] \ar[dd,"0.5"'] \ar[loop above, looseness=5,"0.2"] & \\
+			& \circled{$x_2$} \ar[dl,"0.7"] \ar[ul,"0.3",shift left=1mm] \\
+			\circled{$x_3$} \ar[loop below,looseness=5, "1"] 
+		\end{tikzcd}
+		\quad \begin{align*}\gamma(x_1) & =0.2\ket{x_1}+0.3\ket{x_2}+0.5\ket{x_3},\\\gamma(x_2) & = 0.3\ket{x_1}+0.7\ket{x_3}, \\ \gamma(x_3) & = \ket{x_3}. \end{align*}
+	\end{center}
+\end{example}
+
+\begin{remark}[分布関手のためのケット記法]
+	% 分布に対して次の記法を用いる。
+	$\mathcal D(X)=\{\, d: X \to [0,1]\mid \sum d(x)=1 \,\}$ の各要素を $\sum p_i\lvert x_i\rangle$ と書く。ここで $p_i$ は確率 $d(x_i)\in[0,1]$ である。例えば、コイントス $X=\{H,T\}$ を考えるとき、「公平なコイン」の分布は $d=\tfrac12\lvert H\rangle+\tfrac12\lvert T\rangle$ と書ける。ここで $\lvert H\rangle=\left(\begin{smallmatrix}1\\0\end{smallmatrix}\right)$、$\lvert T\rangle=\left(\begin{smallmatrix}0\\1\end{smallmatrix}\right)$ である。
+\end{remark}
+
+\clearpage
+
+\subsection{「効果つき計算」について}
+\noindent 前節でいくつか例を挙げながら紹介したように、余代数 (coalgebra) は「1ステップの状態遷移」を表しています。\[c:X\to F(X)\] より一般に、計算 (computation) は以下で表されます。（$X=Y$ とすれば余代数です。）\[c:X\to F(Y)\] ここで「ただの関数」(pure function) と「効果つき計算」(effectful computation) を区別しておくことは重要です。%\[\textrm{pure function} \quad f:X\to Y \qquad \textrm{vs} \qquad \textrm{effectful computation} \quad c:X\to F(Y)\]
+\begin{framed}
+\[\textrm{pure function} \qquad \textrm{vs} \qquad \textrm{effectful computation}\] 
+\[f:X\to Y \qquad\qquad\quad\qquad c:X\to F(Y)\]
+\end{framed}
+% \begin{center}
+% \begin{tabular}{ccc}
+% 	pure function & vs & effectful computation \\
+% 	$f:X\to Y$ && $c:X\to F(Y)$
+% \end{tabular}
+% \end{center}
+
+\noindent なお、効果つき計算 $c:X\to F(Y)$ を便宜的に $c:X\computationrightarrow Y$ と表記することもあります。（厳密に言えば、これはモナド $F$ のクライスリ圏における射を表す記法ですが、ここでは詳細の説明は省略します。）\\
+
+\subsection{グロタンディーク・ファイブレーション入門}
+
+さて本節では、次節以降で使う「グロタンディーク・ファイブレーション」をごく簡単に導入します。複雑に見えるかもしれませんが、これを使うと、述語変換子
+やループ不変量
+を「引き戻し」と「持ち上げ」によって統一的に書けます。
+
+ここでは、まず直観を説明してから、後ほど正確な定義を述べます。例として $p:\Pred\to\Set$ というファイブレーションを考えてみましょう。ひとつずつステップを踏んで理解していきます。
+
+\begin{enumerate}
+	\item それぞれの対象 $X\in\Set$ に対して、「ファイバー」(fiber) と呼ばれる完備束 $\Pred_X\;(:=2^X)$ を割り当てます。
+	\begin{center}
+			\begin{tikzpicture}[auto,scale=0.55]
+				\draw (-4,3) -- (-4,8) -- (-0.5,8) -- (-0.5,3) --cycle; % X
+				\draw (0,1.5) -- (0,6.5) -- (3.5,6.5) -- (3.5,1.5) --cycle; % Z
+				\draw (4,2.5) -- (4,7.5) -- (7.5,7.5) -- (7.5,2.5) --cycle; % Y
+				%%%===
+				\node[above] (predx) at (-2.25,8) {$\scriptstyle\Pred_X\;(=2^X)$};
+				\node[above] (predz) at (1.75,6.5) {$\scriptstyle\Pred_Z\;(=2^Z)$};
+				\node[above] (predy) at (5.75,7.5) {$\scriptstyle\Pred_Y\;(=2^Y)$};
+				%=====
+				\node (X) at (0,-0.5) {$X$};
+				\node (Y) at (4,-0.5) {$Y$};
+				\node (Z) at (2,-2.0) {$Z$};
+				\draw [->] (X) -- node[above]{$\scriptstyle f$} (Y);
+				\draw [->] (Y) -- node[below right]{$\scriptstyle g$} (Z);
+				%=====
+				\node (xphi) at (-2.5,3.5) {$\scriptstyle(\emptyset\subseteq X)$};
+				\node (xpdash) at (-1.5,4.75) {$\scriptstyle(P'\subseteq X)$};
+				\node (xp) at (-3,6) {$\scriptstyle(P\subseteq X)$};
+				\node (xx) at (-2.5,7.5) {$\scriptstyle(X\subseteq X)$};
+				\draw[->] (xphi) -- (xpdash);
+				\draw[->] (xphi) -- (xp);
+				\draw[->] (xpdash) -- (xp);
+				\draw[->] (xp) -- (xx);
+				%===
+				\node (zphi) at (1.5,2) {$\scriptstyle(\emptyset\subseteq Z)$};
+				\node (zpdash) at (2.5,3.25) {$\scriptstyle(R'\subseteq Z)$};
+				\node (zp) at (1.0,4.5) {$\scriptstyle(R\subseteq Z)$};
+				\node (zz) at (1.5,6) {$\scriptstyle(Z\subseteq Z)$};
+				\draw[->] (zphi) -- (zpdash);
+				\draw[->] (zphi) -- (zp);
+				\draw[->] (zpdash) -- (zp);
+				\draw[->] (zp) -- (zz);
+				%===
+				\node (yphi) at (5.5,3) {$\scriptstyle(\emptyset\subseteq Y)$};
+				\node (ypdash) at (6.5,4.25) {$\scriptstyle(Q'\subseteq Y)$};
+				\node (yp) at (5,5.5) {$\scriptstyle (Q\subseteq Y)$};
+				\node (yy) at (5.5,7) {$\scriptstyle(Y\subseteq Y)$};
+				\draw[->] (yphi) -- (ypdash);
+				\draw[->] (yphi) -- (yp);
+				\draw[->] (ypdash) -- (yp);
+				\draw[->] (yp) -- (yy);
+				%===
+				\node (xbottom) at (-2.5,3) {};
+				\node (zbottom) at (1.5,1.5) {};
+				\node (ybottom) at (5.5,2.5) {};
+				\draw (xbottom) to[bend right=15pt] (X);
+				\draw[cross] (zbottom) to[bend right=18pt] (Z);
+				\draw (ybottom) edge[bend left=16pt] (Y);
+			\end{tikzpicture}
+		\end{center}
+	\item それぞれの射 $f:X\to Y$ に対して、$f^\ast:\Pred_Y\to\Pred_X$ を定めます。
+	% \begin{small}
+		\[
+		\begin{array}{cccc}
+			f^\ast:&2^Y&\longrightarrow&2^X\\[0pt]&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\[-2pt]&(Y\xrightarrow{g} 2)&{\;\longmapsto\;}&(X\xrightarrow{f}Y\xrightarrow{g} 2)
+		\end{array}
+		\] 
+		この $f^\ast$ が、$f$ による述語変換子にあたるものです。（後ほど説明します。）
+		\begin{center}
+			\begin{tikzcd}
+				\scriptstyle\Pred_X & \scriptstyle\Pred_Y \\[-22pt]
+				\;\fbox{$\substack{~~~~~~\\~~~~\\~~~~\\P'~~~~~~\\[-2pt]~~~~~~~P''\\~\nwarrow~~~~~\\[-4pt]~~~~~\nearrow~~\\[3pt]~~P~~~\\~~~}$}\; \ar[d,dash,bend right=12pt]  & \;\fbox{$\substack{~~~~~~\\~~~~\\~~~\\~~~~~~Q'~\\~~~~~\\~~\nearrow~~\\~~~\\~~Q~~~~~\\~~~}$}\; \ar[d,dash,bend left=12pt] \ar[l,"f^\ast"'] \\[5pt]
+				X \ar[r,"f"] & Y
+			\end{tikzcd}
+		\end{center}
+	% \end{small}
+	\item 以上で与えられたデータ $\Bigl((\Pred_X)_{X\in\Set}\,,\,(f^\ast:\Pred_Y\to\Pred_X)_{f:X\to Y\,\textrm{in}\,\Set}\Bigr)$ をもとに、ファイバーを貼り合わせて、「全体圏」(total category) と呼ばれる圏 $\Pred$ をつくります。
+	\begin{small}
+		\begin{center}
+			\begin{tikzcd}
+				\Pred \ar[d,"p"'] & \fbox{$\!\!\!\!\!\!\!\substack{~~~~~~~~~\\~~~~~\\~~~~~\\P'~~~~~~\\[-2pt]~~~~~P''~~~\\[-4pt]~~~~~~~~~~~~~~f^\ast \!(Q)\\[-2pt]~\rotatebox{130}{$\scriptstyle\longrightarrow$}~~~~~\\[-10pt]~~~~~~~~\rotatebox{98}{$\scriptstyle\longrightarrow$}~\nearrow~~~~\\[3pt]~~~~~~~P~~~~\\~~~~~~~~~~~~~~~~~}~\!\!\!\!\substack{~~\\~~\\~~\\~~\\\rotatebox{-20}{~$\longrightarrow$}\\~~\\\rotatebox{20}{$\longrightarrow$~}}\!\!\!\!\!\!\!\!\substack{\vdots\\[-4pt]\vdots\\[-4pt]\vdots\\[-4pt]\vdots\\[-4pt]\vdots\\~}~~~\substack{~~~~~~\\~~~~\\~~~\\~~~~~~Q'~\\~~~~~\\~~\nearrow~~\\~~~\\~~Q~~~~~\\~~~\\~~~\\~~~~~}~~~~$}\\
+				\Set & X\xrightarrow{\qquad f \qquad} Y 
+			\end{tikzcd}
+		\end{center}
+	\end{small}
+	\item この $\Pred$ は、対象が組 $(X,\,P\subseteq X)$ であり、射が写像 $(X,\,P\subseteq X)\to(Y,\,Q\subseteq Y)$ であるような圏です。
+	\begin{itemize}
+		\item 対象: \[\left|\Pred\right|=\coprod_{X\in\Set}\left|\Pred_X\right|\]
+		\item 射: 
+			% \begin{small}
+				\begin{prooftree}
+					\AXC{$(X,\,P\subseteq X)\longrightarrow (Y,\,Q\subseteq Y)$ in $\Pred$}
+					\doubleLine
+					\UIC{$X\xrightarrow{\;f\;}Y$ in $\Set$ s.t. $P\sqsubseteq f^\ast (Q)$ in $\Pred_X$}
+				\end{prooftree}
+				% \end{small}
+		\end{itemize}\vspace{5pt}
+	\item 以下の条件を満たす関手 $p:\Pred\to\Set$ は「ファイブレーション」(fibration) と呼ばれます。（詳細は後述）
+	\begin{small}
+		\begin{center}
+			\!\!\!\!\!\!
+			\begin{tikzcd}[row sep=-2pt,column sep=11.5pt]
+				 & &&&&&& R \ar[rrd,bend left=15pt,"\forall\,r"] \ar[rd,dashed,"{}{\exists !\,} s\!\!\!"',shorten >= -7pt] \ar[ddd,mapsto] && \\
+				\Pred \ar[ddd,"p"'] &&Q \ar[ddd,mapsto] && ~{}^{\exists}f^\ast\!(Q)~ \ar[r,"\exists\,\overline{f}(Q)~"',shorten=-4pt] \ar[ddd,mapsto] & ~Q~ \ar[ddd,mapsto] &&& ~f^\ast\!(Q)~ \ar[r,"\overline f(Q)"',shorten=-3pt] \ar[ddd,mapsto] & ~Q~ \ar[ddd,mapsto]\\
+				&&&\hspace*{-8pt}\implies\hspace*{-8pt} &&& \hspace*{-5pt}\textrm{s.t.}\hspace*{-5pt} &&&\\
+				&&&&&&& p(R) \ar[rd,"\forall\,g"'] \ar[rrd,bend left=15pt,pos=0.65,"g\circ f"] && \\
+				\Set & \,X\, \ar[r,"f"',shorten=-3pt] & \,Y\, && X \ar[r,"f"'] & Y &&& X \ar[r,"f"'] & Y
+			\end{tikzcd}
+			\!\!\!\!\!\!
+		\end{center}
+	\end{small}
+	\item ここで、$\Pred$ を「全体圏」といい、$\Set$ を「基底圏」といいます。\\ また、$\overline{f}(Q)$ を、$f$ の $Q$ による「カルテシアン持ち上げ」(cartesian lifting) といいます。\\ $f^\ast$ を、$f$ の「置換」(substitution) といい、対象 $P,Q\in\Pred$ で $pP=pQ=Y$ なるものと、$\Pred$ の射 $(P\xrightarrow{u}Q)$ で $pu=\id_Y$ なるものについて、$\overline f_Q\circ f^\ast u=u\circ\overline f_P$ を満たすものと定められています。
+	\begin{center}
+		\begin{tikzcd}
+				& f^\ast P \ar[d,"f^\ast u"'] \ar[r,"\overline f_P"] & P \ar[d,"u"] \\
+			\Pred \ar[d,"p"'] & f^\ast Q \ar[r,"\overline f_Q"'] & Q \\
+			\Set &X \ar[r,"f"'] & Y
+		\end{tikzcd}
+	\end{center}
+	\clearpage
+	\item 自己関手 $F:\Set\to\Set$ と、ファイブレーション $p:\Pred\to\Set$ について、\\ 関手 $\tilde{F}:\Pred\to\Pred$ が、$p$ に沿った $F$ の「持ち上げ」(fibred lifting) であるとは、
+	\begin{center}
+		\begin{small}
+			\begin{tikzcd}
+				\Pred \ar[r,"\tilde F"] \ar[d,"p"'] & \Pred \ar[d,"p"] \ar[ld,"\rotatebox{45}{$=$}",phantom]\\
+				\Set \ar[r,"F"'] & \Set
+			\end{tikzcd} 
+			\quad かつ \quad
+			\begin{tikzcd}[column sep=28pt]
+				\Pred_Y \ar[r,"f^\ast"] \ar[d,"\tilde F"'] & \Pred_X \ar[d,"\tilde F"] \ar[ld,phantom,"\rotatebox{40}{$\cong$}"',shorten=12pt] \\
+				\Set_{FY} \ar[r,"(Ff)^\ast\;"'] & \Set_{FX}
+			\end{tikzcd}
+		\end{small}
+	\end{center} 
+	を満たすことです。特に余代数との関わりの中では、以下の図のような状況を考えることが多いです。基底の関手 $F$ をどうやって $\tilde F$ に持ち上げるかが重要になります。（後述）
+	\begin{small}
+		\begin{center}
+			\begin{tikzcd}
+				\Pred \ar[loop left,"\tilde F"] \ar[d,"p"'] & \Pred_{X} \ar[rr,bend left=12pt,"\tilde F_X"] && \Pred_{\,FX} \ar[ll,bend left=12pt,"c^\ast"] \\
+				~\Set~ \ar[loop left,"F"]  & X \ar[rr,"c"'] && FX 
+			\end{tikzcd}
+		\end{center}
+	\end{small}
+	% \item 
+\end{enumerate}
+
+\begin{center}
+	~\\\hrulefill\\~
+\end{center}
+
+\noindent 以下、ファイブレーションの正確な定義を（念のため）書いておきますが、上記の $p:\Pred\to\Set$ の直観さえきちんと押さえておけば、次節以降の内容を理解するうえで基本的には問題ないです。
+
+\begin{definition}[カルテシアン]
+	$p:\E\to\B$ を関手とします。$\E$ の射 $(X\xrightarrow{f}Y)$ が $p$-カルテシアン ($p$-cartesian) であるとは、すべての $Z\in\E$ について、以下のプルバック図式が可換になることである。
+	\begin{multicols}{2}
+		\begin{small}
+		\begin{center}
+			\begin{tikzcd}[row sep=30pt,column sep=35pt]
+				\E(Z,X) \ar[r,"f\circ(-)"] \ar[d,"p_{ZX}"']  \arrow[dr, phantom, "\lrcorner", very near start] & \E(Z,Y) \ar[d,"p_{ZY}"] \\
+				\B(pZ,pX) \ar[r,"pf\circ(-)"'] & \B(pZ,pY) 
+			\end{tikzcd}
+		\end{center}
+		\end{small}
+		% ~\\
+		\begin{small}
+		\begin{center}
+			\quad i.e. \quad 
+			\begin{tikzcd}
+				\exists!\,h \ar[r,mapsto] \ar[d,mapsto] & \forall\, g \ar[d,mapsto]\\
+				\forall\,u \ar[r,mapsto] & \substack{\displaystyle ~~~~pg \\ \displaystyle\rotatebox{45}{$=~$}\\\displaystyle pf\circ u~~~~~~\\[3pt]\displaystyle~~~}
+			\end{tikzcd}
+		\end{center}
+		\end{small}
+	\end{multicols}
+\end{definition}
+
+\begin{remark}
+	これは要するに、以下と同じ。
+	\begin{small}
+	\begin{center}
+		\begin{tikzcd}[row sep=3pt,column sep=20pt]
+			& Z \ar[rrd,bend left=15pt,"\forall\,g"] \ar[rd,dashed,"{}{\exists !\,} h\!\!\!"']  && \\
+			~\E~ \ar[ddd,"p"'] && X \ar[r,"f"']  & Y \\
+			&&\\[5pt]
+			& pZ \ar[rd,"\forall\,u"'] \ar[rrd,bend left=15pt,pos=0.65,"pg"] && \\
+			~\B~ && pX \ar[r,"pf"'] & pY
+		\end{tikzcd}
+	\end{center}
+	\end{small}
+\end{remark}
+
+\begin{definition}[ファイブレーション]
+	関手 $p:\E\to\B$ がファイブレーション (fibration) であるとは、$\B$ の任意の射 $u:I\to J$ と、$J$ の上にある（つまり $pY=J$ であるような）任意の対象 $Y\in\E$ に対し、$\E$ の $p$-カルテシアン射 $f:X\to Y$ が $u$ の上に存在する（つまり $pf=u$である）ことである。
+\end{definition}
+
+\begin{definition}[ファイバー]
+	$p:\E\to\B$ を関手とする。各対象 $I\in\B$ について、圏 $\E_I$ をファイバー (fiber) と呼ぶ。対象は、$I$ の上にある（つまり $pX=I$ を満たすような）$X\in\E$ であり、射は $\id_I$ の上にある（つまり$pf=\id_I$ を満たすような） $\E$ の射 $f:X\to Y$ である。
+\end{definition}
+
+\clearpage
+
+\begin{definition}[置換]
+	
+\end{definition}
+
 \clearpage
 
 \section{最弱事前条件をどのように手に入れるか}
+
+さて、本節では、非決定的プログラムや確率的プログラムなど様々な種類のプログラムに対する述語変換子意味論を手に入れる方法について、圏論的な視座から考えます。一般に、状態の集合 $X, Y$ と真理値の集合 $\Omega$ が与えられたときに、効果付き計算 $c:X\to FY$ に基づいて、事後条件 $q:Y\to\Omega$ を最弱事前条件 $wp\llbracket c\rrbracket(q):X\to \Omega$ に変換するための関数である「述語変換子」 $wp\llbracket c\rrbracket:\Omega^Y\to\Omega^X$ を得るためには、どんな手続きを経たらよいでしょうか。
+
+いくつか例を見てから、その後に一般論を考えましょう。
+
+\begin{example}[2値的(boolean)モデル検査の場合]
+
+\end{example}
 
 \clearpage
 

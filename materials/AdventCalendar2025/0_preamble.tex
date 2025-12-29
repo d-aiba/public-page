@@ -159,6 +159,14 @@
 \usepackage{tikz}
 \usepackage{tikz-cd} %可換図式
 \usepackage{tikz-3dplot}
+\tikzset{cross/.style={preaction={-,draw=white,line width=4pt}}}
+\usetikzlibrary{arrows.meta}
+% \tikzcdset{
+%   arrow style=tikz, % TikZ の arrows.meta を使うモード
+%   diagrams={
+%     >={Straight Barb[scale=0.8]} % 矢印の先端だけ 0.7 倍に
+%   }
+% }
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.12}
 %---------
@@ -178,6 +186,10 @@
 %丸囲い
 \newcommand*\circled[1]{\tikz[baseline=(char.base)]{
             \node[shape=circle,draw,inner sep=2pt] (char) {#1};}}
+\newcommand*\doublecircled[1]{\tikz[baseline=(char.base)]{
+           	\node[shape=circle,draw,inner sep=1.6pt] (char) {#1};\node[shape=circle,draw,inner sep=2.4pt] (char) {#1};}}
+\newcommand{\doublecirc}{{\ooalign{$\bigcirc$\crcr\hss$\circ$\hss}}}
+
 %---------
 \renewcommand{\textgt}[1]{\textsf{\textbf{#1}}}
 %---------
@@ -189,7 +201,7 @@
 % 文章
 % \end{vwcol}
 %----------
-\usepackage{physics} %便利なパッケージ
+% \usepackage{physics} %便利なパッケージ
 % \qty() , \qty|| ,\norm{} など ...... カッコ
 % \vb{} ...... 太字のベクトル
 % 数式数式  \qq{テキスト}  数式数式
@@ -428,4 +440,73 @@
 % \pagestyle{empty}  %% ページ番号を消す
 % \renewcommand{¥qedsymbol}{¥parallel}
 %--------------------
-
+\newcommand{\AP}{\ensuremath{\mathrm{AP}}}
+\newcommand{\id}{\ensuremath{\mathrm{id}}}
+\newcommand{\dom}{\ensuremath{\mathrm{dom}}}
+\newcommand{\codom}{\ensuremath{\mathrm{codom}}}
+\newcommand{\Stream}{\ensuremath{\mathrm{Stream}}}
+\newcommand{\head}{\ensuremath{\mathsf{head}}}
+\newcommand{\tail}{\ensuremath{\mathsf{tail}}}
+\newcommand{\even}{\ensuremath{\mathsf{even}}}
+\newcommand{\odd}{\ensuremath{\mathsf{odd}}}
+\newcommand{\zip}{\ensuremath{\mathsf{zip}}}
+\newcommand{\nex}{\ensuremath{\mathsf{next}}}
+\newcommand{\beh}{\ensuremath{\mathrm{beh}}}
+\newcommand{\bisim}{\ensuremath{\mathbin{\,\underline{\!\leftrightarrow\!}\,}}}
+\newcommand{\Obj}{\ensuremath{\mathrm{Obj}}}
+\newcommand{\Arr}{\ensuremath{\mathrm{Arr}}}
+\newcommand{\Set}{\ensuremath{\mathbf{Set}}}
+\newcommand{\Sets}{\ensuremath{\mathbf{Sets}}}
+\newcommand{\Rel}{\ensuremath{\mathbf{Rel}}}
+\newcommand{\ERel}{\ensuremath{\mathbf{ERel}}}
+\newcommand{\EnRel}{\ensuremath{\mathbf{EnRel}}}
+\newcommand{\Grp}{\ensuremath{\mathbf{Grp}}}
+\newcommand{\Mon}{\ensuremath{\mathbf{Mon}}}
+\newcommand{\Cat}{\ensuremath{\mathbf{Cat}}}
+\newcommand{\Pred}{\ensuremath{\mathbf{Pred}}}
+% \newcommand{\colim}{\ensuremath{\mathrm{colim}}}
+\DeclareMathOperator*{\colim}{colim}
+\newcommand{\nil}{\ensuremath{\mathsf{nil}}}
+\newcommand{\cons}{\ensuremath{\mathsf{cons}}}
+\newcommand{\len}{\ensuremath{\mathsf{len}}}
+\newcommand{\initial}{\ensuremath{\mathsf{initial}}}
+\newcommand{\EMAlg}{\ensuremath{\mathrm{EMAlg}}}
+\newcommand{\Coalg}{\ensuremath{\mathrm{Coalg}}}
+%--------------------
+\renewcommand\A{\mathbb{A}}
+\renewcommand\B{\mathbb{B}}
+\renewcommand\C{\mathbb{C}}
+\renewcommand\D{\mathbb{D}}
+\newcommand\E{\mathbb{E}}
+\renewcommand\F{\mathbb{F}}
+\renewcommand\G{\mathbb{G}}
+% \newcommand\H{\mathbb{H}}
+\newcommand\I{\mathbb{I}}
+\newcommand\J{\mathbb{J}}
+\newcommand\K{\mathbb{K}}
+% \newcommand\L{\mathbb{L}}
+\renewcommand\M{\mathbb{M}}
+\newcommand\N{\mathbb{N}}
+% \newcommand\O{\mathbb{O}}
+% \newcommand\P{\mathbb{P}}
+\newcommand\Q{\mathbb{Q}}
+\newcommand\R{\mathbb{R}}
+% \newcommand\S{\mathbb{S}}
+\newcommand\T{\mathbb{T}}
+\renewcommand\U{\mathbb{U}}
+\newcommand\V{\mathbb{V}}
+\newcommand\W{\mathbb{W}}
+\renewcommand\X{\mathbb{X}}
+\newcommand\Y{\mathbb{Y}}
+\newcommand\Z{\mathbb{Z}}
+% %--------------------
+\renewcommand{\bra}[1]{\langle {#1}\rvert}
+\renewcommand{\ket}[1]{\lvert {#1} \rangle}
+\renewcommand{\braket}[1]{\langle {#1} \rangle}
+\newcommand{\Bra}[1]{\left\langle {#1} \right\rvert}
+\newcommand{\Ket}[1]{\left\lvert {#1} \right\rangle}
+\newcommand{\Braket}[1]{\left\langle {#1} \right\rangle}
+%-----
+\newcommand{\computationrightarrow}{\ensuremath{\mathrel{\;{\shortmid}\hspace{-12pt}\xrightarrow{\;~\;}}}}
+\newcommand{\computationlongrightarrow}{\ensuremath{\mathrel{~\,{\shortmid}\hspace{-14pt}\longrightarrow}}}
+\newcommand{\computationxrightarrow}[1]{\ensuremath{\overset{\substack{#1\\[-3pt]}\;}{\computationlongrightarrow}}}
