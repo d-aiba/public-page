@@ -266,7 +266,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 		\item プログラムの停止性 (termination) も保証する。
 	\end{itemize}
 \end{itemize}
-ホーア三つ組は部分正当性 (partial correctness) なのに対し、述語変換子は全正当性 (total correctness) です。この違いは、while ループの不動点のとり方に端を発しています。述語変換子の while の意味論は、最小不動点で与えられていたことを思い出しましょう。
+ホーア三つ組は部分正当性 (partial correctness) なのに対し、述語変換子は全正当性 (total correctness) です。この違いは、while ループの不動点のとり方に端を発しています。\vspace{5pt}\\述語変換子の while の意味論は、最小不動点で与えられていたことを思い出しましょう。
 \[wp\llbracket\mathrm{while}\;\varphi\;\mathrm{do}\;C\rrbracket(Q)=\mu X.\,\underbrace{((\varphi\land wp\llbracket C\rrbracket(X))\lor(\lnot\varphi\land Q))}_{\mathrm{loop~characteristic~function~} \Phi_Q(X)}\]
 それに対し、ホーア論理の while 文は、実は、最大不動点によって与えられていたのです！\vspace{5pt}
 	\begin{prooftree}
@@ -341,7 +341,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 \end{center}\vspace{5pt}
 あえて述語変換子の言葉に寄せると、以下のように書くこともできます。
 \[P\Rightarrow\nu X.\,((\varphi\Rightarrow wp\llbracket C\rrbracket(X))\land(\lnot\varphi\Rightarrow Q))\]
-つまり、同じものについて、ホーア論理では最大不動点 (gfp, $\nu$) を、最弱事前条件では最小不動点 (lfp, $\mu$) をとっていたことがわかります。（なお、述語変換子の中にも、while の部分正当化を行うものもあり、最弱リベラル事前条件 (weakest liberal precondition) と呼ばれます。）
+つまり、同じ中身について、ホーア論理では最大不動点 (gfp, $\nu$) を、最弱事前条件では最小不動点 (lfp, $\mu$) をとっていたことがわかります。（なお、述語変換子の中にも、部分正当化を行うものもあり、最弱リベラル事前条件 (weakest liberal precondition) と呼ばれます。）
 
 以上のことをまとめると、以下の表の通りです。\\
 
@@ -751,7 +751,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 % \clearpage
 
 \begin{definition}[置換]
-	$p:\E\to\B$ をファイブレーションとし、$u:I\to J$ を $\B$ の射とします。$u$ の置換 (substitution) とは、関手 $u^\ast\colon\E_J\to\E_I$ であって以下を満たすものである。（ここで、$\overline u_X\colon u^\ast X\to X$ は$p$-カルテシアン射で $p(\overline u_X)=u$ を満たすものとする。）\vspace{3pt}
+	$p:\E\to\B$ をファイブレーションとし、$u:I\to J$ を $\B$ の射とします。$u$ の置換 (substitution) とは、関手 $u^\ast\colon\E_J\to\E_I$ であって以下を満たすものである。（ここで $\overline u_X\colon u^\ast X\to X$ および $\overline{u}_Y\colon u^\ast Y\to Y$ は $p$-カルテシアン射でかつ $p(\overline u_X)=u$ と $p(\overline u_Y)=u$ を満たすものとする。）\vspace{3pt}
 	\begin{center}
 		\begin{tikzcd}%[row sep=15pt]
 			u^*X \ar[d,"u^*f"',dashed] \ar[r,"\overline u_X"] & X \ar[d,"f"] \\ u^*Y \ar[r,"\overline u_Y"] & Y \\[-8pt]
