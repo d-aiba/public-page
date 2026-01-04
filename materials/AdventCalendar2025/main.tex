@@ -437,6 +437,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 			&&& \{(ab,x_2),(ac,x_3)\}
 		\end{tikzcd}
 	\end{center}
+	% これは、非決定的分岐を表す関手 $T(-)=\mathcal P(-)$ 、1ステップの振舞いを表す関手 $F(-)=A\times (-)$、受理かどうかを表す関手 $G(-)=2\times(-)$ を組み合わせた余代数 $\gamma:X\to G(T(F(X)))$ である。なお、図中の $\mu$ はモナドの積 (multiplication)、$\lambda$ はモナドの分配則 (distributive law) を表しているが、これらについては後述する。
 	% なお、非決定的オートマトンは、余代数 $\gamma:X\to 2\times\mathcal P(X)^A$ で与えられることもある。この見方をとると「非決定的オートマトンの決定化」（べき集合構成）を扱える。すなわち、非決定的オートマトン $\gamma:X\to\mathcal P(X)^A$ 
 	% 		\begin{multicols}{2}
 	% 			\begin{center}\small
@@ -508,11 +509,11 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 
 \clearpage
 
-\subsection{「効果つき計算」について}
-\noindent 前節でいくつか例を挙げながら紹介したように、余代数 (coalgebra) は「1ステップの状態遷移」を表しています。\[c:X\to F(X)\] より一般に、計算 (computation) は以下で表されます。（$X=Y$ とすれば余代数です。）\[c:X\to F(Y)\] ここで「ただの関数」(pure function) と「効果つき計算」(effectful computation) を区別しておくことは重要です。%\[\textrm{pure function} \quad f:X\to Y \qquad \textrm{vs} \qquad \textrm{effectful computation} \quad c:X\to F(Y)\]
+\subsection{計算的作用 (computational effect) について}
+\noindent 前節でいくつか例を挙げながら紹介したように、余代数 (coalgebra) は「1ステップの状態遷移」を表しています。\[c:X\to F(X)\] より一般に、計算 (computation) は以下で表されます。（$X=Y$ とすれば余代数です。）\[f:X\to F(Y)\] ここで「ただの関数」(pure function) と「作用つき計算」(effectful computation) を区別することは重要です。%\[\textrm{pure function} \quad f:X\to Y \qquad \textrm{vs} \qquad \textrm{effectful computation} \quad c:X\to F(Y)\]
 \begin{framed}
 \[\textrm{pure function} \qquad \textrm{vs} \qquad \textrm{effectful computation}\] 
-\[f:X\to Y \qquad\qquad\quad\qquad c:X\to F(Y)\]
+\[f:X\to Y \qquad\qquad\quad\qquad f:X\to F(Y)\]
 \end{framed}
 % \begin{center}
 % \begin{tabular}{ccc}
@@ -521,7 +522,14 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 % \end{tabular}
 % \end{center}
 
-\noindent なお、効果つき計算 $c:X\to F(Y)$ を便宜的に $c:X\computationrightarrow Y$ と表記することもあります。（厳密に言えば、これはモナド $F$ のクライスリ圏における射を表す記法ですが、ここでは詳細の説明は省略します。）\\
+典型例としては、例外処理 (exception handling) と呼ばれる計算的作用を表す関手 $F(Y)=Y+E$ が挙げられます。ここで $+$ は余積を表し、$E$ は ``エラーの集合'' と考えます。このとき、計算 $f:X\to Y+E$ は、単に入力値 $x\in X$ から出力値 $f(y)\in Y$ を生成するだけでなく、「もし例外が生じたらエラーを返す」という計算的作用を持ちます。この例のような、計算的作用を持つ計算（作用つき計算）について詳しく知るためには、次節で導入する「モナド」と「クライスリ圏」という概念がとても役立ちます。（次節でもあらためてこの例外処理の例について考えます。）
+
+なお、作用つき計算 $f:X\to F(Y)$ を、便宜的に $f:X\computationrightarrow Y$ という特殊な矢印で表記することがよくあります。（厳密に言えば、これはモナド $F$ のクライスリ圏における射を表す記法ですが、ここでは詳細の説明は省略します。この点については、次節を読んで「モナド」や「クライスリ圏」について学んだ後にはわかるはずです。）
+
+\subsection{モナドとクライスリ圏}
+
+
+
 
 \clearpage
 
