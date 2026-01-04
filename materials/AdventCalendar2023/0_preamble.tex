@@ -111,7 +111,8 @@
 %日本語フォント
 \usepackage{luatexja-fontspec}
 \usepackage[hiragino-pro]{luatexja-preset}
-\setmainjfont{UDDigiKyokashoNP-R}[BoldFont={UDDigiKyokashoNP-B}]
+% \setmainjfont{UDDigiKyokashoNP-R}[BoldFont={UDDigiKyokashoNP-B}]
+\setmainjfont{UDDigiKyokashoProN-Regular}[BoldFont={UDDigiKyokashoProN-Bold}]
 %欧文フォント
 % \usepackage[LGR,LGRx,T2A,T1,OT1]{fontenc}
 \usepackage[LGR,T2A,T1]{fontenc}
@@ -133,8 +134,8 @@
 % \languageattribute{greek}{polutoniko}
 % ¥usepackage[boldLipsian,10pt,GlyphNames]{teubner}
 \usepackage{teubner}
-\usepackage{substitutefont}
-\substitutefont{LGR}{\rmdefault}{porson}
+% \usepackage{substitutefont}
+% \substitutefont{LGR}{\rmdefault}{porson}
 % ¥substitutefont{LGR}{¥rmdefault}{neohellenic}
 % 例		¥textgreek{paide'uw}	ギリシャ文字で表示
 % 例		¥greeknumeral{2022}		ギリシャ数字で表示
@@ -245,7 +246,7 @@
 %----------
 \usepackage{emoji} %絵文字
 % \setemojifont{EmojiOneMozilla}
-\setemojifont{Noto Emoji Regular}
+% \setemojifont{Noto Emoji Regular}
 %----------
 \newtheorem{definition}{定義}%[section]
 \newtheorem{proposition}[definition]{命題}
