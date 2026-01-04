@@ -28,15 +28,15 @@
 
 \begin{screen}
 	\begin{center}
-		\href{https://adventar.org/calendars/11397}{Mathematical Logic Advent Calendar 2025}\\の20日目の投稿です。
+		\href{https://adventar.org/calendars/11397}{Mathematical Logic Advent Calendar 2025}の20日目の投稿です。
 	\end{center}
-\end{screen}
+% \end{screen}
 
-\vspace{4mm}
+% \vspace{4mm}
 
-\begin{screen}
+% \begin{screen}
 	\begin{center}
-		このドキュメントは，見やすく読みまちがえにくい\\ユニバーサルデザインフォントを採用しています。
+		このドキュメントは，見やすく読み間違えにくいユニバーサルデザインフォントを採用しています。
 	\end{center}
 \end{screen}
 
@@ -86,7 +86,10 @@
 
 \textbf{ホーア論理} (Hoare logic) と\textbf{述語変換子} (predicate transformer) は、プログラムの正しさ（意図した挙動をするか、バグがないかどうか）を数学的に検証するための、異なる2つのアプローチです。プログラムの満たしていてほしい性質（仕様）を論理式で記述し、それが満たされているかを論理学的手法を用いて確かめます。
 
-たとえば、以下のような「入力 $N$ に対し、階乗 $N!$ を計算して出力するプログラム」を考えてみましょう。
+たとえば、以下の例「入力 $N$ に対し、階乗 $N!$ を計算して出力するプログラム」を考えてみましょう。
+
+\begin{multicols}{2}
+% \noindent 
 \begin{framed}
 	\begin{verbatim}
 		n := N
@@ -98,10 +101,20 @@
 	\end{verbatim}
 	~\\[-48pt]
 \end{framed}
+%
+% \noindent 
+\begin{framed}
+\noindent 【このプログラムについて知りたいこと】
+\begin{enumerate}
+	\item 事後条件「$k=N!$」（出力 $k$ が入力 $N$ の階乗になる）を保証するには、何が分かればよいか？
+	\item 事後条件「$k=N!$」を成り立たせるためには、最低限、どんな事前条件を課せばよいか？
+\end{enumerate}
+\end{framed}
+\end{multicols}
 
-$N$に正の自然数を入力してこのプログラムを実行した後に、事後条件「$k=N!$」を満たしてほしいものとします。ループが何回実行されるかわからない中で、あらゆる入力 $N$ に対してどうやって保証すればよいでしょうか。答えは、各回のループを通過する前後でいつも保存される条件（ループ不変量）「$k\cdot n!=N!$」に注目する、というものです。そうすることで「階乗を出力する」という仕様が必ず満たされることを保証できます。つまり、事後条件を保証するためには、ループ不変量を探せばよいのです。これが\textbf{ホーア論理}の考え方です。
+$N$に正の自然数を入力してこのプログラムを実行した後に、\uwave{事後条件「$k=N!$」を満たしてほしい}ものとします。ループが何回実行されるかわからない中で、\uwave{あらゆる入力 $N$ に対してどうやって保証}すればよいでしょうか。答えは、\uwave{毎回のループを通過する前後で（各変数の値が変わっても）常に保存される性質（ループ不変量）}「$k\cdot n!=N!$」に注目する、というアイデアです。そうすることで「階乗を出力する」という仕様が必ず満たされることを保証できます。つまり、事後条件を保証するためには、ループ不変量を探せばよいのです。これが\textbf{ホーア論理}の考え方です。
 
-では今度は、この事後条件「$k=N!$」を成り立たせるためには事前条件として何を課す必要があるか、という問題を考えてみましょう。答えは、「$N\geq 0$」です。これを求めるには、事後条件から出発してプログラムを後ろから前へたどり、各代入に応じて条件を置き換える、という操作をする必要があります。ただし、ループは何回実行されるかわからないので、この操作について不動点をとる必要があります。これが\textbf{述語変換子}の考え方です。
+では今度は、この事後条件「$k=N!$」を成立させるためには\uwave{事前条件として最低限どんな条件を課す必要があるか}、という問題を考えてみましょう。答えは、「$N\geq 0$」です。これを求めるには、\uwave{事後条件から出発してプログラムを後ろから前へ} \uwave{たどり、各計算に応じて条件を置き換えていく}、という操作をする必要があります。ただし、ループが何回実行されるかわからないため、この操作について不動点をとる必要があります。これが\textbf{述語変換子}の考え方です。
 
 \subsection{ホーア論理}
 
@@ -111,43 +124,43 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 	ホーア論理の導出規則は以下のものからなる。
 	\begin{center}	
 		\AXC{} \RL{skip}
-		\UIC{$\{A\}$ skip $\{A\}$}
+		\UIC{$\{P\}$ skip $\{P\}$}
 		\DisplayProof
 		\vspace{12pt}\\
 		%%
 		\AXC{} \RL{assignment}
-		\UIC{$\{A\,[a/x]\}$ $x:=a$ $\{A\}$}
+		\UIC{$\{P\,[a/x]\}$ $x:=a$ $\{P\}$}
 		\DisplayProof
 		\vspace{12pt}\\
 		%%%
-		\AXC{$\{A\}\,P_1\,\{C\}$}
-		\AXC{$\{C\}\,P_2\,\{B\}$} \RL{sequential composition}
-		\BIC{$\{A\}\,P_1;P_2\,\{B\}$}
+		\AXC{$\{P\}\,C_1\,\{S\}$}
+		\AXC{$\{S\}\,C_2\,\{Q\}$} \RL{sequential composition}
+		\BIC{$\{P\}\,C_1;C_2\,\{Q\}$}
 		\DisplayProof
 		\vspace{12pt}\\
 		%%% 
-		\AXC{$\{A\land b\}\,P_1\,\{B\}$}
-		\AXC{$\{A\land\lnot b\}\,P_2\,\{B\}$} \RL{if}
-		\BIC{$\{A\}$ if $b$ then $P_1$ else $P_2$ $\{B\}$}
+		\AXC{$\{P\land \varphi\}\,C_1\,\{Q\}$}
+		\AXC{$\{P\land\lnot \varphi\}\,C_2\,\{Q\}$} \RL{if}
+		\BIC{$\{P\}$ if $\varphi$ then $C_1$ else $C_2$ $\{Q\}$}
 		\DisplayProof
 		\vspace{12pt}\\
 		%%%
-		\AXC{$\{A\land b\} \,P\, \{A\}$} \RL{while}
-		\UIC{$\{A\}$ while $b$ do $P$ $\{A\land\lnot b\}$}
+		\AXC{$\{P\land \varphi\} \,C\, \{P\}$} \RL{while}
+		\UIC{$\{P\}$ while $\varphi$ do $C$ $\{P\land\lnot\varphi\}$}
 		\DisplayProof
 		\vspace{12pt}\\
 		%%% 
-		\AXC{$A\Rightarrow A'$}
-		\AXC{$\{A'\}\,P\,\{B'\}$}
-		\AXC{$B'\Rightarrow B$}
+		\AXC{$P\Rightarrow P'$}
+		\AXC{$\{P'\}\,C\,\{Q'\}$}
+		\AXC{$Q'\Rightarrow Q$}
 		\RL{consequence}
-		\TIC{$\{A\}\,P\,\{B\}$}
+		\TIC{$\{P\}\,C\,\{Q\}$}
 		\DisplayProof
 	\end{center}
 \end{definition}
 
 \begin{example}
-	たとえば以下のようなものがホーア論理の証明図である。\vspace{5pt}
+	たとえば以下は、ホーア論理の証明図の例である。\vspace{5pt}
 	\begin{prooftree}
 		\AXC{$\substack{x\geq 0 \land x > 0\\\Rightarrow\; x-1\geq 0}$}
 		\AXC{}\RL{a}
@@ -201,12 +214,12 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 		\AXC{$I\land \lnot \varphi\Rightarrow B$} \RL{conseq}
 		\TIC{$\{A\}\,\textrm{while}\;\varphi\;\textrm{do}\;C\,\{B\}$}
 	\end{prooftree}\vspace{5pt}
-	先ほどの「階乗を計算するプログラム」のホーア論理による証明図を書くと（長くなるので省略するが）$I$のところに現れる論理式は「$k\cdot n!=N!$」となる。これが先ほどのプログラムの while 文の「ループ不変量」にあたる。
+	先ほどの「階乗を計算するプログラム」のホーア論理の証明図を書くと（長くなるので省略するが）$I$のところに現れる論理式はまさに「$k\cdot n!=N!$」となる。これが、先ほどのプログラムの while 文の「ループ不変量」にあたる。
 \end{remark}
 
 \subsection{述語変換子}
 
-述語変換子は、述語 $Q$ を別の述語 $wp\llbracket C\rrbracket (Q)$ に変換します。これは「プログラム$C$について、事後条件$Q$を成り立たせる事前条件のうち、論理的含意関係に関して最も弱いもの」、\textbf{最弱事前条件} (weakest precondition) です。
+述語変換子は、述語 $Q$ を別の述語 $wp\llbracket C\rrbracket (Q)$ に変換します。これは「プログラム$C$について、事後条件$Q$を成立させる事前条件のうち、論理的含意関係に関して最も弱いもの」、つまり\textbf{最弱事前条件} (weakest precondition) です。
 
 \begin{definition}[述語変換子意味論]
 	状態集合を $S$ とする。$S$ 上の述語の集合を $\mathrm{Pred}(S)=\{Q\mid Q:S\to\{0,1\}\}$ と定める。なお、各述語 $Q:S\to\{0,1\}$ は、$Q=\{s\in S\mid s\models Q\}$ だと考えればよい。述語どうしの順序は、含意関係によって定めるものとする。そうすると、$(\mathrm{Pred}(S),\leq)$ は完備束をなす。\[P\leq Q \quad\textrm{iff}\quad P\Rightarrow Q\] プログラム $C$ の述語変換子 (predicate transformer) とは、写像 \[wp\llbracket C\rrbracket:\mathrm{Pred}(S)\to\mathrm{Pred}(S)\] であって単調性 $Q_1\leq Q_2 \;\Rightarrow\; wp\llbracket C\rrbracket(Q_1)\leq wp\llbracket C\rrbracket(Q_2)$ を満たすものである。具体的には以下のように帰納的に定義される。
@@ -220,16 +233,17 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 \end{definition}
 
 \begin{remark}
-	ここで $\mu$ は順序 $\leq$ についての最小不動点をとる操作である。$\Phi_Q:\mathrm{Pred}(S)\to\mathrm{Pred}(S)$ はスコット連続なので、クリーネの不動点定理より、$\displaystyle\mu X.\,\Phi_Q(X)=\bigvee_{n\in\mathbb N}\Phi_Q^n(\bot)$ が得られる。
+	ここで、$\mu$ は順序 $\leq$ についての最小不動点をとる操作である。$\Phi_Q:\mathrm{Pred}(S)\to\mathrm{Pred}(S)$ はスコット連続なので、クリーネの不動点定理より、$\displaystyle\mu X.\,\Phi_Q(X)=\bigvee_{n\in\mathbb N}\Phi_Q^n(\bot)$ が得られる。
 \end{remark}
 
 \clearpage
 
-\noindent 以上のように、ホーア論理と述語変換子という2つのアプローチがあります。ここで両者を整理しておきましょう。
+% \noindent 
+上記では、「ホーア論理」と「述語変換子」という2つのアプローチが導入されました。ここで、両者を整理しておきましょう。
 \[\begin{cases}\{P\}\,C\,\{Q\} & \textrm{Hoare-style}\\P\Rightarrow wp\llbracket C\rrbracket(Q) & \textrm{Dijkstra-style}\end{cases}\]
-両者の関係としては、以下が同値になることが知られています。
+両者の関係として、以下が同値になることが知られています。
 \[\{P\}\,C\,\{Q\} \quad\;\textrm{iff}\;\quad P\Rightarrow wp\llbracket C\rrbracket(Q)\] 
-より詳しく見ると、実は以下の違いがあります。
+両者には、以下の違いがあります。
 \begin{itemize}
 	\item ホーア三つ組は「関係的」(relational)。 \\
 	\quad 各述語 $P$ に対し、$\{P\}\,C\,\{Q\}$ が成り立つような述語 $Q$ は複数ありうる。\\
@@ -244,16 +258,17 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 	% 	\item 各述語 $Q$ に対し、述語 $wp\llbracket C\rrbracket(Q)$ は一意に定まる。
 	% \end{itemize}
 \end{itemize}
-他方、wp から Hoare triple を「再現」することができます。
+また、wp から Hoare triple を「再現」することができます。
 \begin{itemize}
 	\item $\{\,wp\llbracket C\rrbracket(Q)\,\}\,C\,\{Q\}$ はいつでも成り立つ。
 \end{itemize}
 
-さて、これら Hoare-style と Dijkstra-style には、それだけでなく、より本質的な違いがあります。それは、部分正当化 (partial correctness) か、全正当性 (total correctness) か、の違いです。
+さて、これら Hoare-style と Dijkstra-style には、それだけでなく、より本質的な違いがあります。それは、部分正当化 (partial correctness) か、全正当性 (total correctness) か、の違いです。次節ではその点について考えます。
 
 \subsection{部分正当性と全正当性}
 
-プログラムの正しさを検証するうえで、\textbf{部分正当性} (partial correctness) と\textbf{全正当性} (total correctness) という2種類の「正しさ」の考え方があります。ホーア三つ組 $\{P\}\,C\,\{Q\}$ は前者（部分正当性）を主張するものです。ここではさしあたり、後者（全正当性）のほうを $[P]\,C\,[Q]$ と表記して区別することにして、両者の違いを比べてみましょう。
+プログラムの正しさを検証するうえで、\textbf{部分正当性} (partial correctness) と\textbf{全正当性} (total correctness) という2種類の「正しさ」の考え方があります。ホーア三つ組 $\{P\}\,C\,\{Q\}$ は前者（部分正当性）を主張するものです。ここでさしあたり、後者（全正当性）のほうを $[P]\,C\,[Q]$ と表記して区別することにし、両者の違いを比べてみましょう。
+\begin{framed}
 \begin{itemize}
 	\item 部分正当性 (partial correctness) \;$\{P\}\,C\,\{Q\}$
 	\begin{itemize}
@@ -266,9 +281,12 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 		\item プログラムの停止性 (termination) も保証する。
 	\end{itemize}
 \end{itemize}
-ホーア三つ組は部分正当性 (partial correctness) なのに対し、述語変換子は全正当性 (total correctness) です。この違いは、while ループの不動点のとり方に端を発しています。\vspace{5pt}\\述語変換子の while の意味論は、最小不動点で与えられていたことを思い出しましょう。
+\end{framed}
+ホーア三つ組は部分正当性 (partial correctness) なのに対し、述語変換子は全正当性 (total correctness) です。この違いは、while ループの不動点のとり方に端を発しています。%\vspace{5pt}\\
+\begin{itemize}
+\item 述語変換子における while 文の解釈は、最小不動点で与えられていたことを、思い出しましょう。
 \[wp\llbracket\mathrm{while}\;\varphi\;\mathrm{do}\;C\rrbracket(Q)=\mu X.\,\underbrace{((\varphi\land wp\llbracket C\rrbracket(X))\lor(\lnot\varphi\land Q))}_{\mathrm{loop~characteristic~function~} \Phi_Q(X)}\]
-それに対し、ホーア論理の while 文は、実は、最大不動点によって与えられていたのです！\vspace{5pt}
+\item それに対し、ホーア論理における while 文の解釈は、実は、最大不動点によって与えられていたのです。\vspace{3pt}
 	\begin{prooftree}
 		\AXC{$P\Rightarrow I$}
 		\AXC{$\{I\land \varphi\}\,C\,\{I\}$} \RL{while}
@@ -276,7 +294,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 		\AXC{$I\land \lnot \varphi\Rightarrow Q$} \RL{conseq}
 		\TIC{$\{P\}\,\textrm{while}\;\varphi\;\textrm{do}\;C\,\{Q\}$}
 	\end{prooftree}\vspace{5pt}
-
+\end{itemize}
 \clearpage
 
 \begin{proposition}
@@ -315,12 +333,12 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 \end{proof}
 
 \noindent 
-ここで、$p$ は事前条件、$q$ は事後条件、$i$ はループ不変量に、おおよそ相当しています。いま、
+上記の命題において、$p$ は事前条件、$q$ は事後条件、$i$ はループ不変量に、おおよそ相当しています。ここで、
 \begin{itemize}
 	\item \fbox{\,$f(i)$\,} を \fbox{\,$\varphi\Rightarrow wp\llbracket C\rrbracket(I)$\,} に読み替える
 	\item \fbox{\,$q$\,} を \fbox{\,$\lnot\varphi\Rightarrow Q$\,} に読み替える
 \end{itemize}
-とすれば、先ほどの while ループの規則に対応していることがわかりやすいのではないかと思います。\vspace{5pt}
+とすれば、先ほどの while ループの規則に対応していることがわかりやすいのではないかと思います。\vspace{8pt}
 \begin{center}
 	% \begin{prooftree}
 		\AXC{$p\leq i$} 
@@ -338,10 +356,17 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 		\TIC{$\{P\}\,\textrm{while}\;\varphi\;\textrm{do}\;C\,\{Q\}$}
 	% \end{prooftree}\vspace{5pt}
 		\DisplayProof
-\end{center}\vspace{5pt}
-あえて述語変換子の言葉に寄せると、以下のように書くこともできます。
-\[P\Rightarrow\nu X.\,((\varphi\Rightarrow wp\llbracket C\rrbracket(X))\land(\lnot\varphi\Rightarrow Q))\]
-つまり、同じ中身について、ホーア論理では最大不動点 (gfp, $\nu$) を、最弱事前条件では最小不動点 (lfp, $\mu$) をとっていたことがわかります。（なお、述語変換子の中にも、部分正当化を行うものもあり、最弱リベラル事前条件 (weakest liberal precondition) と呼ばれます。）
+\end{center}\vspace{8pt}
+% あえて述語変換子の言葉に寄せると、以下のように書くこともできます。
+% \[P\Rightarrow\nu X.\,((\varphi\Rightarrow wp\llbracket C\rrbracket(X))\land(\lnot\varphi\Rightarrow Q))\]
+つまり、ホーア論理では最大不動点 $\nu$ (gfp) を、最弱事前条件では最小不動点 $\mu$ (lfp) をとっていたことがわかります。
+
+なお、述語変換子の中にも、部分正当化をおこなうものもあり、それは「最弱リベラル事前条件」(weakest liberal precondition, wlp) と呼ばれます。これは、while ループの解釈に lfp ではなく gfp を用いる点だけが異なります。
+
+\begin{itemize}
+	\item $wp\llbracket\mathrm{while}\;\varphi\;\mathrm{do}\;C\rrbracket(Q)=\mu X.\,((\varphi\land wp\llbracket C\rrbracket(X))\lor(\lnot\varphi\land Q))$
+	\item $wlp\llbracket\mathrm{while}\;\varphi\;\mathrm{do}\;C\rrbracket(Q)=\nu X.\,((\varphi\land wp\llbracket C\rrbracket(X))\lor(\lnot\varphi\land Q))$
+\end{itemize}
 
 以上のことをまとめると、以下の表の通りです。\\
 
@@ -349,14 +374,46 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 	\begin{tabular}{c|c|c}
 		\hline
 		& Hoare logic & predicate transformer \\ 
+		% & (ホーア論理) & (述語変換子) \\
 		\hline
 		gfp & partial correctness & weakest liberal precondition \\
+		(最大不動点) & $\{P\}\,C\,\{Q\}$ & $wlp\llbracket C\rrbracket(Q)$ \\
 		\hline
 		lfp & total correctness & weakest precondition \\ 
+		(最小不動点) & $[P]\,C\,[Q]$ & $wp\llbracket C\rrbracket(Q)$\\
 		\hline
 	\end{tabular}
 \end{center}
 ~\\
+
+\clearpage
+
+% \subsection{Almost Sure Termination ならば lfp=gfp}
+\subsection{while ループが停止するとき lfp\,=\,gfp（不動点の一致）}
+
+あらためて「部分正当性」と「全正当性」の違いを確認しておきましょう。
+
+\begin{framed}
+	\noindent 復習:
+	\begin{itemize}
+	\item 部分正当性 (partial correctness) \;$\{P\}\,C\,\{Q\}$
+	\begin{itemize}
+		\item 「事前条件 $P$ から始めて、\kenten{もし}プログラム $C$ が\kenten{停止したら}、その実行結果は事後条件 $Q$ を満たす。」
+		\item プログラムが停止しないときには何も保証しない。
+	\end{itemize}
+	\item 全正当性 (total correctness) \;$[P]\,C\,[Q]$
+	\begin{itemize}
+		\item 「事前条件 $P$ から始めて、プログラム $C$ が\kenten{必ず停止し}、\kenten{かつ}、その実行結果は事後条件 $Q$ を満たす。」
+		\item プログラムの停止性 (termination) も保証する。
+	\end{itemize}
+\end{itemize}
+\end{framed}
+
+ここで、プログラム $C$ が停止することがわかっているとき、
+
+……
+
+\subsection{次章へ}
 
 さて、この節で扱った述語変換子の考え方は、圏論的に扱うととても見通しがよくなります。そのための準備として、次節では、圏論の関手を使ってプログラムの振舞いを捉える方法について紹介します。
 
@@ -366,7 +423,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 
 様々な種類の状態遷移システム（例: 二分木グラフ、ストリーム、オートマトン、マルコフ連鎖、マルコフ決定過程など）を圏論的に扱うには、\textbf{余代数} (coalgebra) と呼ばれるものが役立ちます。
 
-\subsection{余代数入門}
+\subsection{余代数の定義}
 
 \begin{definition}[余代数]
 	$\mathbb{C}$ を圏とし、$F:\mathbb{C}\to\mathbb{C}$ を関手とする。$F$-余代数とは、$\mathbb C$ の対象 $X$ と射 $c:X\to F(X)$ の組 $(X,c)$ のことと定める。また、2つの余代数 $(X,c:X\to F(X)),\,(Y,d:Y\to F(Y))$ の間の余代数準同型とは、射 $f:X\to Y$ であって $d\circ f=F(f)\circ c$ を満たすものとする。\vspace{5pt}
@@ -390,11 +447,11 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 	% \end{small}
 \end{definition}
 
-\subsection{余代数の様々な例}
+\subsection{余代数の様々な例} \label{subsec:examples}
 
 \begin{example}
-	二分木グラフは、$\Set$ 上の関手 $F(X)=1+(X\times X)$ に対する余代数 $c:X\to F(X)$ として定義される。
-	\[c(x)=(x',x'') \qquad\textrm{or}\qquad c(x)=\ast\]
+	二分木グラフは、$\Set$ 上の関手 $F(X)=1+(X\times X)$ に対する余代数 $c:X\to F(X)$ として与えられる。
+	\[\textrm{分岐}\quad c(x)=(x',x'') \qquad\textrm{or}\qquad \textrm{停止}\quad c(x)=\ast\]
 	\begin{center}
 		\begin{tikzcd}[row sep=15pt,column sep=6pt]
 			& \circled{\hspace*{4pt}$x$\hspace*{4pt}} \ar[ld,shorten=-5pt] \ar[rd,shorten=-5pt] & \\
@@ -409,7 +466,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 \end{example}
 
 \begin{example}
-	ストリームは、$\Set$ 上の関手 $F(X)=A\times X$ に対する余代数 $c:X\to F(X)$ として定義される。
+	ストリームは、$\Set$ 上の関手 $F(X)=A\times X$ に対する余代数 $c:X\to F(X)$ として与えられる。
 	\[c(x)=(\head(x),\tail(x))\]
 	たとえば、ストリーム $x=(x_1,x_2,x_3,\dots)$ について、$\head(x)=x_1,\,\tail(x)=(x_2,x_3,\dots)$ である。\vspace{10pt}
 
@@ -423,13 +480,15 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 \clearpage
 
 \begin{example}%[決定的オートマトン・非決定的オートマトン]
-	% 決定的オートマトンは、余代数 $\gamma:X\to 2\times X^A$ で与えられる。また、
 	非決定的オートマトンは、余代数 $\gamma:X\to 2\times\mathcal P(A\times X)$ で与えられる。なお $2=\{\bigcirc,\doublecirc\}$ とする。
 	\[\gamma(x)=\left(\doublecirc,\{(a,x'),\dots\}\right)\quad\textrm{or}\quad\gamma(x)=\left(\bigcirc,\{(a,x'),\dots\}\right)\]
+	% 非決定的オートマトンは、余代数 $\gamma:X\to \mathcal P(A\times X)$ で与えられる。
+	% \[\gamma(x)=\{(a,x'),\dots\}\]
 	\begin{center} \small
 		\begin{tikzcd}[row sep=2pt,column sep=5pt, /tikz/column 2/.append style={column sep={55pt}}, /tikz/column 1/.append style={column sep={15pt}}]
-			{} \ar[r]&\circled{$x_1$} \ar[r,"a"] \ar[rd,"b"] & \circled{$x_2$} \ar[loop above,"b"] \ar[r,"c"] & \doublecircled{$x_3$} \\[-2pt]
-			&& \circled{$x_4$}\\\\\hline\\\\
+			{} \ar[r] & \circled{$x_1$} \ar[r,"a"] \ar[rd,"b"] & \circled{$x_2$} \ar[loop above,"b"] \ar[r,"c"] & \doublecircled{$x_3$} \\[-2pt]
+			&& \circled{$x_4$}
+			\\\\\hline\\\\
 			&x_1 \ar[r,mapsto] & \gamma(x_1) \ar[d,equal] \\[4pt]
 			&& \{(a,x_2),(b,x_4)\} \ar[r,mapsto] & \{(a,\gamma(x_2)),(b,\gamma(x_4))\} \ar[d,equal] \\[4pt]
 			&&& \{(a,\{(b,x_2),(c,x_3)\}),(b,\{\})\} \ar[d,mapsto,"T\lambda_{FX}"]\\[12pt]
@@ -486,7 +545,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 
 \begin{example}
 	マルコフ連鎖は、余代数 $\gamma:X\to \mathcal D(X)$ で与えられる。なお、関手 $\mathcal D:\Set\to\Set$ は
-	\begin{align*}\mathcal D(X)&=\{d:X\to [0,1]\mid\textrm{finite support,~}\textstyle\sum d(x)=1\}\\&=\{\textstyle\,\sum p_i\ket{x_i}\,\textrm{, where $p_i$ is a probability $d(x_i)\in[0,1]$.}\}\\\mathcal D(f)&:\mathcal D(X)\to\mathcal D(Y)\\&\mathcal D(f)(\textstyle\sum p_i\ket{x_i})=\textstyle\sum p_i\ket{f(x_i)}\end{align*}
+	\begin{align*}\mathcal D(X)&=\{d:X\to [0,1]\mid\textrm{finite support,~}\textstyle\sum d(x)=1\}\\&=\{\textstyle\,\sum p_i\ket{x_i}\,\textrm{, where each $p_i$ is a probability $d(x_i)\in[0,1]$.}\}\\\mathcal D(f)&:\mathcal D(X)\to\mathcal D(Y)\\&\mathcal D(f)(\textstyle\sum p_i\ket{x_i})=\textstyle\sum p_i\ket{f(x_i)}\end{align*}
 	と定められているものとする。
 	\begin{center}
 		\begin{tikzcd}[row sep=-7pt]
@@ -505,12 +564,19 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 
 \clearpage
 
-\subsection{終余代数の構成}
+\subsection{終余代数とその構成}
+
+
 
 \clearpage
 
 \subsection{計算的作用 (computational effect) について}
-\noindent 前節でいくつか例を挙げながら紹介したように、余代数 (coalgebra) は「1ステップの状態遷移」を表しています。\[c:X\to F(X)\] より一般に、計算 (computation) は以下で表されます。（$X=Y$ とすれば余代数です。）\[f:X\to F(Y)\] ここで「ただの関数」(pure function) と「作用つき計算」(effectful computation) を区別することは重要です。%\[\textrm{pure function} \quad f:X\to Y \qquad \textrm{vs} \qquad \textrm{effectful computation} \quad c:X\to F(Y)\]
+
+\ref{subsec:examples}節でいくつか例を挙げながら紹介したように、余代数 (coalgebra) は「1ステップの状態遷移」を表します。\[c:X\to F(X)\] 
+
+より一般に、計算 (computation) は、以下で表されます。（$X=Y$ とすれば余代数です。）\[f:X\to F(Y)\] 
+
+ここで「ただの関数」(pure function) と「作用つき計算」(effectful computation) を区別することは重要です。%\[\textrm{pure function} \quad f:X\to Y \qquad \textrm{vs} \qquad \textrm{effectful computation} \quad c:X\to F(Y)\]
 \begin{framed}
 \[\textrm{pure function} \qquad \textrm{vs} \qquad \textrm{effectful computation}\] 
 \[f:X\to Y \qquad\qquad\quad\qquad f:X\to F(Y)\]
@@ -522,7 +588,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 % \end{tabular}
 % \end{center}
 
-典型例としては、例外処理 (exception handling) と呼ばれる計算的作用を表す関手 $F(Y)=Y+E$ が挙げられます。ここで $+$ は余積を表し、$E$ は ``エラーの集合'' と考えます。このとき、計算 $f:X\to Y+E$ は、単に入力値 $x\in X$ から出力値 $f(y)\in Y$ を生成するだけでなく、「もし例外が生じたらエラーを返す」という計算的作用を持ちます。この例のような、計算的作用を持つ計算（作用つき計算）について詳しく知るためには、次節で導入する「モナド」と「クライスリ圏」という概念がとても役立ちます。（次節でもあらためてこの例外処理の例について考えます。）
+典型例としては、例外処理 (exception handling) と呼ばれる計算的作用を表す関手 $F(Y)=Y+E$ が挙げられます。ここで $+$ は余積を表し、$E$ は ``エラーの集合'' と考えます。このとき、計算 $f:X\to Y+E$ は、単に入力値 $x\in X$ から出力値 $f(y)\in Y$ を生成するだけでなく、「もし例外が生じたらエラーを返す」という計算的作用を持ちます。この例のような、計算的作用を持つ計算（作用つき計算）を詳しく扱うためには、次節で導入する「モナド」と「クライスリ圏」という概念が役立ちます。（次節でもあらためてこの例外処理の例について取り上げます。）
 
 なお、作用つき計算 $f:X\to F(Y)$ を、便宜的に $f:X\computationrightarrow Y$ という特殊な矢印で表記することがよくあります。（厳密に言えば、これはモナド $F$ のクライスリ圏における射を表す記法ですが、ここでは詳細の説明は省略します。この点については、次節を読んで「モナド」や「クライスリ圏」について学んだ後にはわかるはずです。）
 
@@ -956,12 +1022,31 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 
 いくつか具体例を見てから、その後に一般論を考えましょう。
 
-\subsection{具体例 (1): 決定的な2値的モデル検査の場合}
+\subsection{具体例}
+
+以下では3つのケースについて具体例を考えます。
+
+\subsubsection*{具体例 (1) 決定的な2値的モデル検査の場合}
+
+……
+
+\subsubsection*{具体例 (2) 非決定的な2値的モデル検査の場合}
+
+……
+
+\subsubsection*{具体例 (3) 確率的モデル検査の場合}
+
+……
 
 
-\subsection{具体例 (2): 非決定的な2値的モデル検査の場合}
 
-\subsection{具体例 (3): 確率的モデル検査の場合}
+\vspace{5pt}
+
+\subsection{一般論}
+
+これまで見た具体例をふまえて、一般論を展開していきましょう。
+
+
 
 \clearpage
 
