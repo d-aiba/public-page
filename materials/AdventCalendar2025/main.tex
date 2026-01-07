@@ -384,44 +384,44 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 		\hline
 	\end{tabular}
 \end{center}
-~\\
+\vspace{15pt}
 
-\clearpage
+% \clearpage
 
-% \subsection{Almost Sure Termination ならば lfp=gfp}
-\subsection{while ループが停止するとき lfp\,=\,gfp（不動点の一致）}
+% % \subsection{Almost Sure Termination ならば lfp=gfp}
+% \subsection{while ループが停止するとき lfp\,=\,gfp（不動点の一致）}
 
-あらためて「部分正当性」と「全正当性」の違いを確認しておきましょう。
+% あらためて「部分正当性」と「全正当性」の違いを確認しておきましょう。
 
-\begin{framed}
-	\noindent 復習:
-	\begin{itemize}
-	\item 部分正当性 (partial correctness) \;$\{P\}\,C\,\{Q\}$
-	\begin{itemize}
-		\item 「事前条件 $P$ から始めて、\kenten{もし}プログラム $C$ が\kenten{停止したら}、その実行結果は事後条件 $Q$ を満たす。」
-		\item プログラムが停止しないときには何も保証しない。
-	\end{itemize}
-	\item 全正当性 (total correctness) \;$[P]\,C\,[Q]$
-	\begin{itemize}
-		\item 「事前条件 $P$ から始めて、プログラム $C$ が\kenten{必ず停止し}、\kenten{かつ}、その実行結果は事後条件 $Q$ を満たす。」
-		\item プログラムの停止性 (termination) も保証する。
-	\end{itemize}
-\end{itemize}
-\end{framed}
+% \begin{framed}
+% 	\noindent 復習:
+% 	\begin{itemize}
+% 	\item 部分正当性 (partial correctness) \;$\{P\}\,C\,\{Q\}$
+% 	\begin{itemize}
+% 		\item 「事前条件 $P$ から始めて、\kenten{もし}プログラム $C$ が\kenten{停止したら}、その実行結果は事後条件 $Q$ を満たす。」
+% 		\item プログラムが停止しないときには何も保証しない。
+% 	\end{itemize}
+% 	\item 全正当性 (total correctness) \;$[P]\,C\,[Q]$
+% 	\begin{itemize}
+% 		\item 「事前条件 $P$ から始めて、プログラム $C$ が\kenten{必ず停止し}、\kenten{かつ}、その実行結果は事後条件 $Q$ を満たす。」
+% 		\item プログラムの停止性 (termination) も保証する。
+% 	\end{itemize}
+% \end{itemize}
+% \end{framed}
 
-ここで、プログラム $C$ が停止することがわかっている場合、
+% ここで、プログラム $C$ が停止することがわかっている場合、
 
-……
+% ……
 
-\subsection{次章へ向けて}
+% \subsection{次章へ向けて}
 
-さて、この節で扱った述語変換子の考え方は、圏論的に扱うととても見通しがよくなります。そのための準備として、次節では、圏論の関手を使ってプログラムの振舞いを捉える方法について紹介します。
+さて、この節で扱った述語変換子の考え方は、圏論の言葉を使うととても見通しがよくなります。そのための準備として、次節では、圏論の関手を使ってプログラムの振舞いを捉える方法について紹介します。
 
 \clearpage
 
 \section{圏論の関手でシステムの振舞いを捉える}
 
-様々な種類の状態遷移システム（例: 二分木グラフ、ストリーム、オートマトン、マルコフ連鎖、マルコフ決定過程など）を圏論的に扱うには、\textbf{余代数} (coalgebra) と呼ばれるものが役立ちます。
+様々な種類の状態遷移システム（例: 二分木グラフ、ストリーム、クリプキフレーム、オートマトン、マルコフ連鎖、マルコフ決定過程など）を圏論的に扱うには、\textbf{余代数} (coalgebra) と呼ばれるものが役立ちます。
 
 \subsection{余代数の定義}
 
@@ -479,21 +479,35 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 
 \clearpage
 
+\begin{example}
+	様相論理におけるクリプキフレーム (Kripke frame) は、余代数 $\delta:X\to\mathcal P(X)$ で与えられる。\[\begin{array}{cccl}\delta:&X&\longrightarrow&\mathcal P(X)\\&\rotatebox{90}{$\in$}&&~~\rotatebox{90}{$\in$}\\&x&\longmapsto&\delta(x)=\{x\mid x\to x'\}\end{array}\]
+	\begin{small}
+	\begin{center}
+		\begin{tikzcd}[row sep=0pt]
+			& \circled{$x_1$} \\[-1pt]
+			\circled{$x_0$} \ar[ur] \ar[r] \ar[dr] & \circled{$x_2$} \\[2pt]
+			& \cdots 
+		\end{tikzcd}
+	\end{center}
+	\end{small}
+\end{example}
+
 \begin{example}%[決定的オートマトン・非決定的オートマトン]
 	非決定的オートマトンは、余代数 $\gamma:X\to 2\times\mathcal P(A\times X)$ で与えられる。なお $2=\{\bigcirc,\doublecirc\}$ とする。
 	\[\gamma(x)=\left(\doublecirc,\{(a,x'),\dots\}\right)\quad\textrm{or}\quad\gamma(x)=\left(\bigcirc,\{(a,x'),\dots\}\right)\]
 	% 非決定的オートマトンは、余代数 $\gamma:X\to \mathcal P(A\times X)$ で与えられる。
 	% \[\gamma(x)=\{(a,x'),\dots\}\]
 	\begin{center} \small
-		\begin{tikzcd}[row sep=2pt,column sep=5pt, /tikz/column 2/.append style={column sep={55pt}}, /tikz/column 1/.append style={column sep={15pt}}]
-			{} \ar[r] & \circled{$x_1$} \ar[r,"a"] \ar[rd,"b"] & \circled{$x_2$} \ar[loop above,"b"] \ar[r,"c"] & \doublecircled{$x_3$} \\[-2pt]
+		% \begin{tikzcd}[row sep=2pt,column sep=5pt, /tikz/column 2/.append style={column sep={55pt}}, /tikz/column 1/.append style={column sep={15pt}}]
+		\begin{tikzcd}[row sep=5pt,column sep=35pt]
+			{} \ar[r,shorten <= 15pt] & \circled{$x_1$} \ar[r,"a"] \ar[rd,"c"] & \circled{$x_2$} \ar[loop above,"b"] \ar[r,"b"] & \doublecircled{$x_3$} \\[-2pt]
 			&& \circled{$x_4$}
-			\\\\\hline\\\\
-			&x_1 \ar[r,mapsto] & \gamma(x_1) \ar[d,equal] \\[4pt]
-			&& \{(a,x_2),(b,x_4)\} \ar[r,mapsto] & \{(a,\gamma(x_2)),(b,\gamma(x_4))\} \ar[d,equal] \\[4pt]
-			&&& \{(a,\{(b,x_2),(c,x_3)\}),(b,\{\})\} \ar[d,mapsto,"T\lambda_{FX}"]\\[12pt]
-			&&& \{\{ (ab,x_2),(ac,x_3) \},\{\}\} \ar[d,mapsto,"\mu_{F^2X}"] \\[12pt]
-			&&& \{(ab,x_2),(ac,x_3)\}
+			% \\\\\hline\\\\
+			% &x_1 \ar[r,mapsto] & \gamma(x_1) \ar[d,equal] \\[4pt]
+			% && \{(a,x_2),(b,x_4)\} \ar[r,mapsto] & \{(a,\gamma(x_2)),(b,\gamma(x_4))\} \ar[d,equal] \\[4pt]
+			% &&& \{(a,\{(b,x_2),(c,x_3)\}),(b,\{\})\} \ar[d,mapsto,"T\lambda_{FX}"]\\[12pt]
+			% &&& \{\{ (ab,x_2),(ac,x_3) \},\{\}\} \ar[d,mapsto,"\mu_{F^2X}"] \\[12pt]
+			% &&& \{(ab,x_2),(ac,x_3)\}
 		\end{tikzcd}
 	\end{center}
 	% これは、非決定的分岐を表す関手 $T(-)=\mathcal P(-)$ 、1ステップの振舞いを表す関手 $F(-)=A\times (-)$、受理かどうかを表す関手 $G(-)=2\times(-)$ を組み合わせた余代数 $\gamma:X\to G(T(F(X)))$ である。なお、図中の $\mu$ はモナドの積 (multiplication)、$\lambda$ はモナドの分配則 (distributive law) を表しているが、これらについては後述する。
@@ -547,14 +561,16 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 	マルコフ連鎖は、余代数 $\gamma:X\to \mathcal D(X)$ で与えられる。なお、関手 $\mathcal D:\Set\to\Set$ は
 	\begin{align*}\mathcal D(X)&=\{d:X\to [0,1]\mid\textrm{finite support,~}\textstyle\sum d(x)=1\}\\&=\{\textstyle\,\sum p_i\ket{x_i}\,\textrm{, where each $p_i$ is a probability $d(x_i)\in[0,1]$.}\}\\\mathcal D(f)&:\mathcal D(X)\to\mathcal D(Y)\\&\mathcal D(f)(\textstyle\sum p_i\ket{x_i})=\textstyle\sum p_i\ket{f(x_i)}\end{align*}
 	と定められているものとする。
+	% \begin{multicols}{2}
 	\begin{center}
 		\begin{tikzcd}[row sep=-7pt]
 			\circled{$x_1$} \ar[rd,shift left,"0.3"] \ar[dd,"0.5"'] \ar[loop above, looseness=5,"0.2"] & \\
 			& \circled{$x_2$} \ar[dl,"0.7"] \ar[ul,"0.3",shift left=1mm] \\
 			\circled{$x_3$} \ar[loop below,looseness=5, "1"] 
 		\end{tikzcd}
-		\quad \begin{align*}\gamma(x_1) & =0.2\ket{x_1}+0.3\ket{x_2}+0.5\ket{x_3},\\\gamma(x_2) & = 0.3\ket{x_1}+0.7\ket{x_3}, \\ \gamma(x_3) & = \ket{x_3}. \end{align*}
 	\end{center}
+		\begin{align*}\gamma(x_1) & =0.2\ket{x_1}+0.3\ket{x_2}+0.5\ket{x_3},\\[-2pt]\gamma(x_2) & = 0.3\ket{x_1}+0.7\ket{x_3}, \\[-2pt] \gamma(x_3) & = \ket{x_3}. \end{align*}
+	% \end{multicols}
 \end{example}
 
 \begin{remark}[分布関手のためのケット記法]
@@ -565,6 +581,31 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 \clearpage
 
 \subsection{終余代数とその構成}
+
+ここでは、終余代数の定義と、その構成のしかたを紹介します。まずは定義です。
+
+\begin{definition}[終余代数]
+	
+\end{definition}
+
+\begin{proposition}[ランベックの補題]
+	
+\end{proposition}
+
+\begin{corollary}
+	べき集合の関手 $\mathcal P:\Set\to\Set$ には、終余代数は存在しない。
+\end{corollary}
+
+\begin{proof}
+	
+\end{proof}
+
+ここからは、どうやって終余代数を構成するかについて見ていきます。終余代数の構成は、順序集合についての「クーゾー・クーゾーの定理」(the Cousot-Cousot theorem) を一般化したものなので、まずはその復習から始めましょう。
+
+\begin{proposition}[クーゾー・クーゾーの定理]
+	
+\end{proposition}
+
 
 
 
