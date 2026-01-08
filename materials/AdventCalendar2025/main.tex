@@ -62,17 +62,28 @@
 \subsection{この記事が想定する対象読者}
 
 
-\subsection{この記事の4つの目標}
+\subsection{この記事の目標}
 
-この記事では、以下の4つのことを目標とします。
+この記事では、以下のことを目標とします。
 
-\begin{enumerate}
-	\item 
-	\item 
-	\item 
-	\item 
-\end{enumerate}
+\begin{framed}
+	\noindent 大目標: %\\
+	\begin{center} 不動点 (fixed points) こそが計算機科学における中心的概念であることを理解する！ \end{center}
+\end{framed}
 
+これを細分化すると、次のようになります。
+\begin{framed}
+	\noindent 小目標:
+	\begin{enumerate}
+		% \item 大目標: 不動点 (fixed points) こそが計算機科学における中心的概念であることを理解する！
+		% \item 小目標 (1): 
+		% \item 小目標 (2): 
+		% \item 小目標 (3): 
+		\item 
+		\item 
+		\item 
+	\end{enumerate}
+\end{framed}
 % \vspace{3mm}
 
 \subsection{この記事では扱わないこと}
@@ -114,7 +125,7 @@
 
 $N$に正の自然数を入力してこのプログラムを実行した後に、\uwave{事後条件「$k=N!$」を満たしてほしい}ものとします。ループが何回実行されるかわからない中で、\uwave{あらゆる入力 $N$ に対してどうやって保証}すればよいでしょうか。答えは、\uwave{毎回のループを通過する前後で（各変数の値が変わっても）常に保存される性質（ループ不変量）}「$k\cdot n!=N!$」に注目する、というアイデアです。そうすることで「階乗を出力する」という仕様が必ず満たされることを保証できます。つまり、事後条件を保証するためには、ループ不変量を探せばよいのです。これが\textbf{ホーア論理}の考え方です。
 
-では今度は、この事後条件「$k=N!$」を成立させるためには\uwave{事前条件として最低限どんな条件を課す必要があるか}、という問題を考えてみましょう。答えは、「$N\geq 0$」です。これを求めるには、\uwave{事後条件から出発してプログラムを後ろから前へ} \uwave{たどり、各計算に応じて条件を置き換えていく}、という操作をする必要があります。ただし、ループが何回実行されるかわからないため、この操作について不動点をとる必要があります。これが\textbf{述語変換子}の考え方です。
+では今度は、この事後条件「$k=N!$」を成立させるためには\uwave{事前条件として最低限どんな条件を課す必要があるか}、という問題を考えてみましょう。答えは、「$N\geq 0$」です。これを求めるには、\uwave{事後条件から出発してプログラムを後ろから前へ} \uwave{たどり、各計算に応じて条件を置き換えていく}、という操作をする必要があります。ただし、ループが何回実行されるかわからないため、この操作について不動点をとります。これが\textbf{述語変換子}、とりわけ\textbf{最弱事前条件}の考え方です。
 
 \subsection{ホーア論理}
 
@@ -219,10 +230,10 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 
 \subsection{述語変換子}
 
-述語変換子は、述語 $Q$ を別の述語 $wp\llbracket C\rrbracket (Q)$ に変換します。これは「プログラム$C$について、事後条件$Q$を成立させる事前条件のうち、論理的含意関係に関して最も弱いもの」、つまり\textbf{最弱事前条件} (weakest precondition) です。
+述語変換子のひとつである\textbf{最弱事前条件} (weakest precondition) は、述語 $Q$ を別の述語 $wp\llbracket C\rrbracket (Q)$ に変換します。これは、「プログラム $C$ について、実行後に満たしてほしい事後条件 $Q$ を成立させるような事前条件のうち、論理的含意関係に関して最も弱いもの」です。
 
-\begin{definition}[述語変換子意味論]
-	状態集合を $S$ とする。$S$ 上の述語の集合を $\mathrm{Pred}(S)=\{Q\mid Q:S\to\{0,1\}\}$ と定める。なお、各述語 $Q:S\to\{0,1\}$ は、$Q=\{s\in S\mid s\models Q\}$ だと考えればよい。述語どうしの順序は、含意関係によって定めるものとする。そうすると、$(\mathrm{Pred}(S),\leq)$ は完備束をなす。\[P\leq Q \quad\textrm{iff}\quad P\Rightarrow Q\] プログラム $C$ の述語変換子 (predicate transformer) とは、写像 \[wp\llbracket C\rrbracket:\mathrm{Pred}(S)\to\mathrm{Pred}(S)\] であって単調性 $Q_1\leq Q_2 \;\Rightarrow\; wp\llbracket C\rrbracket(Q_1)\leq wp\llbracket C\rrbracket(Q_2)$ を満たすものである。具体的には以下のように帰納的に定義される。
+\begin{definition}[最弱事前条件意味論]
+	状態集合を $S$ とする。$S$ 上の述語の集合を $\mathrm{Pred}(S)=\{Q\mid Q:S\to\{0,1\}\}$ と定める。なお、各述語 $Q:S\to\{0,1\}$ は、$Q=\{s\in S\mid s\models Q\}$ だと考えればよい。述語どうしの順序は、論理的含意関係によって定めるものとする。そうすると、$(\mathrm{Pred}(S),\leq)$ は完備束をなす。\[P\leq Q \quad\textrm{iff}\quad P\Rightarrow Q\] プログラム $C$ の最弱事前条件 (weakest precondition) とは、述語変換子（述語を別の述語に変換する写像） \[wp\llbracket C\rrbracket:\mathrm{Pred}(S)\to\mathrm{Pred}(S)\] で単調性 $Q_1\leq Q_2 \;\Rightarrow\; wp\llbracket C\rrbracket(Q_1)\leq wp\llbracket C\rrbracket(Q_2)$ を満たすものである。以下のように帰納的に定義される。
 	\begin{itemize}
 		\item $wp\llbracket\textrm{skip}\rrbracket(Q)=Q$
 		\item $wp\llbracket x:=a\rrbracket(Q)=Q[a/x]$
@@ -239,7 +250,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 \clearpage
 
 % \noindent 
-上記では、「ホーア論理」と「述語変換子」という2つのアプローチが導入されました。ここで、両者を整理しておきましょう。
+上記では、「ホーア三つ組」と「最弱事前条件」の2つが導入されました。ここで、両者を整理しておきましょう。
 \[\begin{cases}\{P\}\,C\,\{Q\} & \textrm{Hoare-style}\\P\Rightarrow wp\llbracket C\rrbracket(Q) & \textrm{Dijkstra-style}\end{cases}\]
 両者の関係として、以下が同値になることが知られています。
 \[\{P\}\,C\,\{Q\} \quad\;\textrm{iff}\;\quad P\Rightarrow wp\llbracket C\rrbracket(Q)\] 
@@ -282,7 +293,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 	\end{itemize}
 \end{itemize}
 \end{framed}
-ホーア三つ組は部分正当性 (partial correctness) なのに対し、述語変換子は全正当性 (total correctness) です。この違いは、while ループの不動点のとり方に端を発しています。%\vspace{5pt}\\
+ホーア三つ組が保証するのは部分正当性 (partial correctness) なのに対し、最弱事前条件が保証するのは全正当性 (total correctness) です。この違いは、while ループの不動点のとり方に端を発しています。%\vspace{5pt}\\
 \begin{itemize}
 \item 述語変換子における while 文の解釈は、最小不動点で与えられていたことを、思い出しましょう。
 \[wp\llbracket\mathrm{while}\;\varphi\;\mathrm{do}\;C\rrbracket(Q)=\mu X.\,\underbrace{((\varphi\land wp\llbracket C\rrbracket(X))\lor(\lnot\varphi\land Q))}_{\mathrm{loop~characteristic~function~} \Phi_Q(X)}\]
@@ -333,12 +344,14 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 \end{proof}
 
 \noindent 
-上記の命題において、$p$ は事前条件、$q$ は事後条件、$i$ はループ不変量に、おおよそ相当しています。ここで、
-\begin{itemize}
-	\item \fbox{\,$f(i)$\,} を \fbox{\,$\varphi\Rightarrow wp\llbracket C\rrbracket(I)$\,} に読み替える
-	\item \fbox{\,$q$\,} を \fbox{\,$\lnot\varphi\Rightarrow Q$\,} に読み替える
-\end{itemize}
-とすれば、先ほどの while ループの規則に対応していることがわかりやすいのではないかと思います。\vspace{8pt}
+上記の命題において、$p$ は事前条件、$q$ は事後条件、$i$ はループ不変量に、それぞれ相当しています。
+% ここで、
+% \begin{itemize}
+% 	\item \fbox{\,$f(i)$\,} を \fbox{\,$\varphi\Rightarrow wp\llbracket C\rrbracket(I)$\,} に読み替える
+% 	\item \fbox{\,$q$\,} を \fbox{\,$\lnot\varphi\Rightarrow Q$\,} に読み替える
+% \end{itemize}
+% とすれば、先ほどの while ループの規則に対応していることがわかりやすいのではないかと思います。
+\vspace{12pt}
 \begin{center}
 	% \begin{prooftree}
 		\AXC{$p\leq i$} 
@@ -356,19 +369,19 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 		\TIC{$\{P\}\,\textrm{while}\;\varphi\;\textrm{do}\;C\,\{Q\}$}
 	% \end{prooftree}\vspace{5pt}
 		\DisplayProof
-\end{center}\vspace{8pt}
+\end{center}\vspace{12pt}
 % あえて述語変換子の言葉に寄せると、以下のように書くこともできます。
 % \[P\Rightarrow\nu X.\,((\varphi\Rightarrow wp\llbracket C\rrbracket(X))\land(\lnot\varphi\Rightarrow Q))\]
-つまり、ホーア論理では最大不動点 $\nu$ (gfp) を、最弱事前条件では最小不動点 $\mu$ (lfp) をとっていたことがわかります。
+ホーア論理では最大不動点 (gfp) $\nu$ を、最弱事前条件では最小不動点 (lfp) $\mu$ をとっていたことがわかります。
 
 なお、述語変換子の中にも、部分正当化をおこなうものもあり、それは「最弱リベラル事前条件」(weakest liberal precondition, wlp) と呼ばれます。これは、while ループの解釈に lfp ではなく gfp を用いる点だけが異なります。
 
 \begin{itemize}
 	\item $wp\llbracket\mathrm{while}\;\varphi\;\mathrm{do}\;C\rrbracket(Q)=\mu X.\,((\varphi\land wp\llbracket C\rrbracket(X))\lor(\lnot\varphi\land Q))$
-	\item $wlp\llbracket\mathrm{while}\;\varphi\;\mathrm{do}\;C\rrbracket(Q)=\nu X.\,((\varphi\land wp\llbracket C\rrbracket(X))\lor(\lnot\varphi\land Q))$
+	\item $wlp\llbracket\mathrm{while}\;\varphi\;\mathrm{do}\;C\rrbracket(Q)=\nu X.\,((\varphi\land wlp\llbracket C\rrbracket(X))\lor(\lnot\varphi\land Q))$
 \end{itemize}
 
-以上のことをまとめると、以下の表の通りです。\\
+以上を表に整理すると、以下の通りです。\\
 
 \begin{center}
 	\begin{tabular}{c|c|c}
@@ -378,9 +391,11 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 		\hline
 		gfp & partial correctness & weakest liberal precondition \\
 		(最大不動点) & $\{P\}\,C\,\{Q\}$ & $wlp\llbracket C\rrbracket(Q)$ \\
+		& \!「$P$から始めて、停止するなら$Q$」\! & \\
 		\hline
 		lfp & total correctness & weakest precondition \\ 
 		(最小不動点) & $[P]\,C\,[Q]$ & $wp\llbracket C\rrbracket(Q)$\\
+		& \!「$P$から始めて、停止し、かつ$Q$」\! & \\
 		\hline
 	\end{tabular}
 \end{center}
@@ -415,13 +430,201 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 
 % \subsection{次章へ向けて}
 
-さて、この節で扱った述語変換子の考え方は、圏論の言葉を使うととても見通しがよくなります。そのための準備として、次節では、圏論の関手を使ってプログラムの振舞いを捉える方法について紹介します。
+ここまで抽象的な話が続いたので、次節でいったん具体例を見ておきましょう。
+
+\clearpage
+
+\subsection{述語変換子を用いたモデル検査の簡単な例}
+
+本節では、述語変換子（前節で導入した最弱事前条件に限らず一般の述語変換子）を使って実際にモデル検査をする簡単な例を紹介します。以下では
+例として、クリプキフレーム $(X,\delta:X\to\mathcal PX)$ を考えます。$X$ は状態集合で、$\delta$ は遷移関数です。（これは次章で導入する用語で言うと「余代数」なのですが、詳しくは後で述べます。）
+\[\begin{array}{cccl}\delta:&X&\longrightarrow&\mathcal PX\\&\rotatebox{90}{$\in$}&&~\rotatebox{90}{$\in$}\\&x&\longmapsto&\delta(x)=\{x\mid x\to x'\}\end{array}\]
+絵で描くとたとえば次のようなものです。
+\begin{center}
+	\begin{tikzcd}[row sep=2pt]
+		& \circled{$x_1$} \\[-1pt]
+		\circled{$x_0$} \ar[ur] \ar[r] \ar[dr] & \circled{$x_2$} \\[2pt]
+		& \cdots 
+	\end{tikzcd}
+\end{center}
+$L$を完備束とし、以下で定められているものとします。
+\[L:=2^X=\{\top,\bot\}^X\]
+この$L$は述語の集合であり（補足: $p(x)=\top$ を $x\models p$ と考えます）、$L$上の順序$\leq$は述語どうしの論理的含意関係によって定められている、と考えます。なお、$L$の最小元と最大元をそれぞれ $0,1$ と書くことにします。
+
+ここで、述語変換子 $f:2^X\to 2^X$ を、次のように定めます。（補足: この $f$ は単調 (monotone) な関数です。）
+\[\begin{array}{cccl}f:&2^X&\longrightarrow&2^X\\&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&p&\longmapsto & \{x\mid \forall x' ~ (x'\in\delta(x)\Rightarrow x'\in p)\}\\[3pt] &&&=\{x\mid \textrm{all successors of $x$ satisfy $p$}\}.\end{array}\]
+そして、この $f$ の最小不動点 $\mu f$ をとります。（補足: この$\mu f$は、$L$の要素、すなわち述語です。）
+\[\mu f=\{x\mid\textrm{every path from $x$ reaches a state with no successors}\}\]
+$\mu f$ は、以下の図に見られるような$2^X$における鎖の、超限反復 (transfinite iteration) によって与えられます。
+\begin{center}
+	\begin{small}
+	\begin{tikzcd}[row sep=0pt]
+		0 \ar[r,"\leq"] \ar[rrrr,bend left=60pt] & f(0) \ar[r,"\leq"] \ar[rrr,bend left=50pt] & f^2(0) \ar[r,"\leq"] \ar[rr,bend left=40pt] & ~~\cdots~~ \ar[r,"\leq"] & f^\lambda (0) \ar[r,"\leq"] & f^{\lambda+1}(0) \ar[r,"\leq"] & ~~\cdots~~ \\ % & \textrm{(in $2^X$)}\\
+		\rotatebox{90}{$=$} & \rotatebox{90}{$=$} & \rotatebox{90}{$=$} && \rotatebox{90}{$=$}  \\
+		\emptyset & \{x\mid\delta(x)=\emptyset\} & \substack{\displaystyle\{x\mid \textrm{all paths are} \\ \displaystyle~~~~~~\textrm{of length $\leq 2$}\}} && ~~\underset{\beta<\lambda}{\sup}\,f^\beta 0~~
+	\end{tikzcd}
+	\end{small}
+\end{center}
+
+\clearpage
+
+具体的に、以下のクリプキフレーム $(X,\delta)$ について、上で定めた述語 $\mu f$ を実際に検証してみましょう。\vspace{8pt}
+\begin{center}
+\begin{small}
+\begin{tikzcd}[column sep=2pt,row sep=15pt]
+	&&\circled{\hspace*{2pt}$x_\varepsilon$\hspace*{2pt}} \ar[lld,dash] \ar[ld,dash] \ar[d,dash] \ar[rd,dash] \ar[rrd,dash] \ar[rrrd,dash] \\
+	\doublecircled{$x_{00}$} & \circled{$x_{10}$} \ar[d,dash] & \circled{$x_{20}$} \ar[d,dash] & \cdots & \circled{$x_{n0}$} \ar[d,dash] & ~~~\cdots~~~ \\
+	& \doublecircled{$x_{11}$} & \circled{$x_{21}$} \ar[d,dash] & & \circled{$x_{n1}$} \ar[d,dash,shorten >= -4pt] & \\
+	&& \doublecircled{$x_{22}$} && \vdots \ar[d,dash,shorten <= 2pt] & \\
+	&&&& \doublecircled{$x_{nn}$}
+\end{tikzcd}
+\end{small}
+\end{center}\vspace{8pt}
+$x_\varepsilon\models\mu f$ が成り立つことが、以下の図のような超限反復からわかります。（この鎖は、$\omega+1$で安定 (stabilize) し、そこから先は変わらない、つまり最小不動点となります。）
+
+\begin{framed}
+\noindent
+\begin{tiny}
+\begin{tikzcd}[column sep=2pt,row sep=15pt]
+	&& \scalebox{1.5}{$0$} &&& \\
+	&&\circled{$\bot$} \ar[lld,dash] \ar[ld,dash] \ar[d,dash] \ar[rd,dash] \ar[rrd,dash] \ar[rrrd,dash] \\
+	\doublecircled{$\bot$} & \circled{$\bot$} \ar[d,dash] & \circled{$\bot$} \ar[d,dash] & \cdots & \circled{$\bot$} \ar[d,dash] & ~~~\cdots~~~ \\
+	& \doublecircled{$\bot$} & \circled{$\bot$} \ar[d,dash] & & \circled{$\bot$} \ar[d,dash,shorten >= -4pt] & \\
+	&& \doublecircled{$\bot$} && \vdots \ar[d,dash,shorten <= 2pt] & \\
+	&&&& \doublecircled{$\bot$}
+\end{tikzcd}
+$\xrightarrow{~~\leq~~}$
+\begin{tikzcd}[column sep=2pt,row sep=15pt]
+	&& \scalebox{1.5}{\!$f(0)$\!} &&& \\
+	&&\circled{$\bot$} \ar[lld,dash] \ar[ld,dash] \ar[d,dash] \ar[rd,dash] \ar[rrd,dash] \ar[rrrd,dash] \\
+	\doublecircled{$\top$} & \circled{$\bot$} \ar[d,dash] & \circled{$\bot$} \ar[d,dash] & \cdots & \circled{$\bot$} \ar[d,dash] & ~~~\cdots~~~ \\
+	& \doublecircled{$\top$} & \circled{$\bot$} \ar[d,dash] & & \circled{$\bot$} \ar[d,dash,shorten >= -4pt] & \\
+	&& \doublecircled{$\top$} && \vdots \ar[d,dash,shorten <= 2pt] & \\
+	&&&& \doublecircled{$\top$}
+\end{tikzcd} 
+%\vspace{15pt}\\ %
+$\xrightarrow{~~\leq~~}$
+\begin{tikzcd}[column sep=2pt,row sep=15pt]
+	&& \scalebox{1.5}{\!$f^2(0)$\!} &&& \\
+	&&\circled{$\bot$} \ar[lld,dash] \ar[ld,dash] \ar[d,dash] \ar[rd,dash] \ar[rrd,dash] \ar[rrrd,dash] \\
+	\doublecircled{$\top$} & \circled{$\top$} \ar[d,dash] & \circled{$\bot$} \ar[d,dash] & \cdots & \circled{$\bot$} \ar[d,dash] & ~~~\cdots~~~ \\
+	& \doublecircled{$\top$} & \circled{$\top$} \ar[d,dash] & & \circled{$\bot$} \ar[d,dash,shorten >= -4pt] & \\
+	&& \doublecircled{$\top$} && \vdots \ar[d,dash,shorten <= 2pt] & \\
+	&&&& \doublecircled{$\top$}
+\end{tikzcd}
+$\xrightarrow{~~\leq~~}\;\cdots\;$
+\vspace{20pt}\\ %
+$\xrightarrow{~~\leq~~}$
+\begin{tikzcd}[column sep=2pt,row sep=15pt]
+	&& \scalebox{1.5}{\!$f^n(0)$\!} &&& \\
+	&&\circled{$\bot$} \ar[lld,dash] \ar[ld,dash] \ar[d,dash] \ar[rd,dash] \ar[rrd,dash] \ar[rrrd,dash] \\
+	\doublecircled{$\top$} & \circled{$\top$} \ar[d,dash] & \circled{$\top$} \ar[d,dash] & \cdots & \circled{$\bot$} \ar[d,dash] & ~~~\cdots~~~ \\
+	& \doublecircled{$\top$} & \circled{$\top$} \ar[d,dash] & & \circled{$\top$} \ar[d,dash,shorten >= -4pt] & \\
+	&& \doublecircled{$\top$} && \vdots \ar[d,dash,shorten <= 2pt] & \\
+	&&&& \doublecircled{$\top$}
+\end{tikzcd}
+$\xrightarrow{~~\leq~~}\;\cdots\;\xrightarrow{~~\leq~~}$
+\begin{tikzcd}[column sep=2pt,row sep=15pt]
+	&& \scalebox{1.5}{\!$f^\omega(0)$\!} &&& \\
+	&&\circled{$\bot$} \ar[lld,dash] \ar[ld,dash] \ar[d,dash] \ar[rd,dash] \ar[rrd,dash] \ar[rrrd,dash] \\
+	\doublecircled{$\top$} & \circled{$\top$} \ar[d,dash] & \circled{$\top$} \ar[d,dash] & \cdots & \circled{$\top$} \ar[d,dash] & ~~~\cdots~~~ \\
+	& \doublecircled{$\top$} & \circled{$\top$} \ar[d,dash] & & \circled{$\top$} \ar[d,dash,shorten >= -4pt] & \\
+	&& \doublecircled{$\top$} && \vdots \ar[d,dash,shorten <= 2pt] & \\
+	&&&& \doublecircled{$\top$}
+\end{tikzcd}
+% \vspace{15pt}\\ %
+$\xrightarrow{~~\leq~~}$
+\begin{tikzcd}[column sep=2pt,row sep=15pt]
+	&& \scalebox{1.5}{\!\!\!\!\!$f^{\omega+1}(0)$\!\!\!\!\!} &&& \\
+	&&\circled{$\top$} \ar[lld,dash] \ar[ld,dash] \ar[d,dash] \ar[rd,dash] \ar[rrd,dash] \ar[rrrd,dash] \\
+	\doublecircled{$\top$} & \circled{$\top$} \ar[d,dash] & \circled{$\top$} \ar[d,dash] & \cdots & \circled{$\top$} \ar[d,dash] & ~~~\cdots~~~ \\
+	& \doublecircled{$\top$} & \circled{$\top$} \ar[d,dash] & & \circled{$\top$} \ar[d,dash,shorten >= -4pt] & \\
+	&& \doublecircled{$\top$} && \vdots \ar[d,dash,shorten <= 2pt] & \\
+	&&&& \doublecircled{$\top$}
+\end{tikzcd}
+$\xrightarrow{~~\leq~~}\;\cdots\;$
+\end{tiny}
+\end{framed}
+% \vspace{10pt}
+
+\noindent 補足: $f^\omega(0)$ は、これより左に現れるすべての上限 (supremum) をとったものです。（てっぺん $x_\varepsilon$ にはまだ $\top$ が現れたことがないので、上限は $\bot$ のままです。）それに対し、$f^{\omega+1}(0)$ でやっと、てっぺん $x_\varepsilon$ にも $\top$ が現れます。
+
+\clearpage
+
+$\omega+1$よりも先で安定 (stabilize) する例もあります。分岐がもっと複雑なものを考えればよいのです。たとえば、以下のようなクリプキフレームを考えてみましょう。この場合、$\omega+2$で安定します。
+\vspace{8pt}
+%
+\begin{multicols}{2} %%%
+	\begin{center}
+	\begin{small}
+	\begin{tikzcd}[column sep=2pt,row sep=15pt]
+		&&\circled{\hspace*{2pt}$x_{\varepsilon}$\hspace*{2pt}} \ar[d,dash] \\
+		&&\circled{\hspace*{4pt}$y$\hspace*{4pt}} \ar[lld,dash] \ar[ld,dash] \ar[d,dash] \ar[rd,dash] \ar[rrd,dash] \ar[rrrd,dash] \\
+		\doublecircled{$x_{00}$} & \circled{$x_{10}$} \ar[d,dash] & \circled{$x_{20}$} \ar[d,dash] & \cdots & \circled{$x_{n0}$} \ar[d,dash] & ~~~\cdots~~~ \\
+		& \doublecircled{$x_{11}$} & \circled{$x_{21}$} \ar[d,dash] & & \circled{$x_{n1}$} \ar[d,dash,shorten >= -4pt] & \\
+		&& \doublecircled{$x_{22}$} && \vdots \ar[d,dash,shorten <= 2pt] & \\
+		&&&& \doublecircled{$x_{nn}$}
+	\end{tikzcd}
+	\end{small}
+	\end{center}
+	% 
+	（以降、左の図を以下のように略記することにします。）\\
+	\begin{center}
+		\begin{small}
+		\begin{tikzcd}[column sep=0pt]
+			& \circled{\hspace*{2pt}$x_\varepsilon$\hspace*{2pt}} \ar[d,dash] & \\
+			& \circled{\hspace*{4pt}$y$\hspace*{4pt}} \ar[ld,dash,shorten <= -5pt,shorten >= -2.2pt] \ar[rd,dash,shorten <= -5pt,shorten >= -2.2pt] & {} \\[8pt]
+			{} \ar[rr,dash,shorten = -4.8pt] & {} & {}
+		\end{tikzcd}
+		\end{small}
+	\end{center}
+\end{multicols}
+\vspace{8pt}
+
+% さらに、上の図を以下のように略記することにし、
+% \vspace{8pt}
+% \begin{center}
+% \begin{small}
+% \begin{tikzcd}[column sep=0pt]
+% 	& \circled{\hspace*{2pt}$x_\varepsilon$\hspace*{2pt}} \ar[d,dash] & \\
+% 	& \circled{\hspace*{4pt}$y$\hspace*{4pt}} \ar[ld,dash,shorten <= -5pt,shorten >= -2.2pt] \ar[rd,dash,shorten <= -5pt,shorten >= -2.2pt] & {} \\
+% 	{} \ar[rr,dash,shorten = -4.8pt] & {} & {}
+% \end{tikzcd}
+% \end{small}
+% \end{center}\vspace{8pt}
+さらに、（上記の略記を用いて）以下の図のクリプキフレームを考えましょう。この場合、$2\omega+1$ で安定します。
+\vspace{8pt}
+\begin{center}
+\begin{small}
+% \begin{tikzcd}[column sep=0pt,row sep=10pt]
+% 	&&&&&& \circled{\hspace*{2pt}$x_\varepsilon$\hspace*{2pt}} \ar[llllld,dash] \ar[lld,dash] \ar[rrd,dash] &&&&\\[8pt]
+% 	& \circled{$y_{00}$} \ar[ld,dash,shorten <= -5pt,shorten >= -2.2pt] \ar[rd,dash,shorten <= -5pt,shorten >= -2.2pt] & & & \circled{$y_{10}$} \ar[d,dash] & & \cdots & & \circled{$y_{n0}$} \ar[d,dash] & &\cdots \\
+% 	{} \ar[rr,dash,shorten = -4.8pt] & {} & {} & & \circled{$y_{11}$} \ar[ld,dash,shorten <= -5pt,shorten >= -2.2pt] \ar[rd,dash,shorten <= -5pt,shorten >= -2.2pt]  & & & & \circled{$y_{1n}$} \ar[d,dash,shorten >= -4pt] & \\
+% 	&&& {} \ar[rr,dash,shorten = -4.8pt] & {} & {} & & & \vdots \ar[d,dash,shorten >= 2pt] & \\
+% 	&&&&&&&& \circled{$y_{nn}$} \ar[ld,dash,shorten <= -5pt,shorten >= -2.2pt] \ar[rd,dash,shorten <= -5pt,shorten >= -2.2pt] & \\
+% 	&&&&&&& {} \ar[rr,dash,shorten = -4.8pt] & {} & {}
+% \end{tikzcd}
+\begin{tikzcd}[column sep=0pt,row sep=12pt]
+	&&&&&&& \circled{\hspace*{2pt}$x_\varepsilon$\hspace*{2pt}} \ar[lllllld,dash] \ar[llld,dash] \ar[d,dash] \ar[rrrrd,dash] &&&&&&\\[15pt]
+	& \circled{$y_{00}$} \ar[ld,dash,shorten <= -5pt,shorten >= -2.2pt] \ar[rd,dash,shorten <= -5pt,shorten >= -2.2pt] &&& \circled{$y_{10}$} \ar[d,dash] &&& \circled{$y_{20}$} \ar[d,dash] && \cdots && \circled{$y_{n0}$} \ar[d,dash] && \cdots \\
+	{} \ar[rr,dash,shorten = -4.8pt] & {} & {} && \circled{$y_{11}$} \ar[ld,dash,shorten <= -5pt,shorten >= -2.2pt] \ar[rd,dash,shorten <= -5pt,shorten >= -2.2pt] &&& \circled{$y_{21}$} \ar[d,dash] &&&& \circled{$y_{n1}$} \ar[d,dash] & \\
+	&&& {} \ar[rr,dash,shorten = -4.8pt] & {} & {} && \circled{$y_{22}$} \ar[ld,dash,shorten <= -5pt,shorten >= -2.2pt] \ar[rd,dash,shorten <= -5pt,shorten >= -2.2pt]  &&&& \circled{$y_{n2}$} \ar[d,dash,shorten >= -4pt] & \\
+	&&&&&&{} \ar[rr,dash,shorten = -4.8pt] &{}&{}&&&\vdots \ar[d,dash,shorten >= 2pt] & \\
+	&&&&&&&&&&& \circled{$y_{nn}$} \ar[ld,dash,shorten <= -5pt,shorten >= -2.2pt] \ar[rd,dash,shorten <= -5pt,shorten >= -2.2pt] & \\[15pt]
+	&&&&&&&&&&{} \ar[rr,dash,shorten = -4.8pt] &{}&{} 
+\end{tikzcd}
+\end{small}
+\end{center}\vspace{25pt}
+
+さて、本章でここまで扱ってきた述語変換子の考え方は、圏論の言葉を使うととても見通しがよくなります。そのための準備として、次章では、圏論の関手を使ってプログラムの振舞いを捉える方法について紹介します。
 
 \clearpage
 
 \section{圏論の関手でシステムの振舞いを捉える}
 
-様々な種類の状態遷移システム（例: 二分木グラフ、ストリーム、クリプキフレーム、オートマトン、マルコフ連鎖、マルコフ決定過程など）を圏論的に扱うには、\textbf{余代数} (coalgebra) と呼ばれるものが役立ちます。
+情報科学における「圏論的手法の強み」は、抽象的・俯瞰的であるがゆえに、様々な種類の情報システムに対して、既存の議論や知見を再編することで新たな問題設定に柔軟に適応できる点にあります。
+
+本章で紹介する\textbf{余代数} (coalgebra) は、そのように多様な状態遷移システム（例: 二分木グラフ、ストリーム、クリプキフレーム、オートマトン、マルコフ連鎖、マルコフ決定過程、etc.）を圏論的に扱う際にとても役立つ道具です。
 
 \subsection{余代数の定義}
 
@@ -575,7 +778,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 
 \begin{remark}[分布関手のためのケット記法]
 	% 分布に対して次の記法を用いる。
-	$\mathcal D(X)=\{\, d: X \to [0,1]\mid \sum d(x)=1 \,\}$ の各要素を $\sum p_i\lvert x_i\rangle$ と書く。ここで $p_i$ は確率 $d(x_i)\in[0,1]$ である。例えば、コイントス $X=\{H,T\}$ を考えるとき、「公平なコイン」の分布は $d=\tfrac12\lvert H\rangle+\tfrac12\lvert T\rangle$ と書ける。ここで $\lvert H\rangle=\left(\begin{smallmatrix}1\\0\end{smallmatrix}\right)$、$\lvert T\rangle=\left(\begin{smallmatrix}0\\1\end{smallmatrix}\right)$ である。
+	$\mathcal D(X)=\{\, d: X \to [0,1]\mid \sum d(x)=1 \,\}$ の各要素を $\sum p_i\lvert x_i\rangle$ と書く。ここで各 $p_i$ は確率 $d(x_i)\in[0,1]$ である。例えば、コイントス $X=\{H,T\}$ を考えるとき、「公平なコイン」の分布は $d=\tfrac12\lvert H\rangle+\tfrac12\lvert T\rangle$ と書ける。なお $\lvert H\rangle=\left(\begin{smallmatrix}1\\0\end{smallmatrix}\right)$ および $\lvert T\rangle=\left(\begin{smallmatrix}0\\1\end{smallmatrix}\right)$ である。
 \end{remark}
 
 \clearpage
@@ -1050,6 +1253,8 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 		\item 後者は、「関手の持ち上げが置換と整合的である」ということを意味する。
 	\end{itemize}
 \end{remark}
+
+さて、次章からは、これらの道具立てをフル活用して、様々な種類の（非決定的、確率的、etc.）プログラムに対する最弱事前条件を定める方法を紹介します
 
 % \begin{remark}
 % 	$\dot F_X:\E_X\to\E_{FX}$ である。
