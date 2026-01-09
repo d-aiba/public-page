@@ -438,7 +438,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 
 \subsection{述語変換子を用いたモデル検査の簡単な例}
 
-本節では、述語変換子（前節で導入した最弱事前条件に限らず一般の述語変換子）を使って実際にモデル検査をする簡単な例を紹介します。以下では
+本節では、述語変換子（前節で導入した最弱事前条件に限らず一般の述語変換子）を使って実際にモデル検査をする方法を、簡単な例を挙げて紹介します。以下では
 例として、クリプキフレーム $(X,\delta:X\to\mathcal P(X))$ を考えます。$X$ は状態集合で、$\delta$ は遷移関数です。（これは次章で導入する用語で言うと「余代数」なのですが、詳しくは後で述べます。）
 \[\begin{array}{cccl}\delta:&X&\longrightarrow&\mathcal P(X)\\&\rotatebox{90}{$\in$}&&~~\rotatebox{90}{$\in$}\\&x&\longmapsto&\delta(x)=\{x\mid x\to x'\}\end{array}\]
 絵で描くとたとえば次のようなものです。
@@ -856,7 +856,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 典型例としては、例外処理 (exception handling) と呼ばれる計算的作用を表す関手 $F(Y)=Y+E$ を用いた、「作用つきの計算」$f:X\to Y+E$ が挙げられます。ここで $+$ は余積を表し、$E$ は ``エラーの集合'' とみなします。このとき、計算 $f:X\to Y+E$ は、単に入力値 $x\in X$ から出力値 $y\in Y$ を返すだけでなく、「もし例外が生じたらエラー $e\in E$ を返す」という副作用 (side effect) を持ちます。
 % \[\begin{array}{cccc}f:&X&\longrightarrow&Y+E\\&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&x&\longmapsto &y\\&x'&\longmapsto&e\end{array}\]
 \[\begin{array}{cccccc}f:&X&\longrightarrow&Y\!\!&\!+\!&\!\!E\\&\rotatebox{90}{$\in$}&&&\!\!\rotatebox{90}{$\in$}\!\!\\&x&\longmapsto &y\!\!\\&x'&\longmapsto&&&\!\!e\end{array}\]
-では、この例のような副作用を持つ計算（作用つき計算）の「合成」はどう考えればいいでしょうか。たとえば、2つの作用つき計算 $f:X\to Y+E$ と $g:Y\to Z+E$ を合成して、$g\circ f:X\to Z+E$ のようなものを作りたいとき、一筋縄ではいかないことがわかります。そこで、次節で導入する「モナド」と「クライスリ圏」という概念が役立ちます。%（次節でもあらためてこの例外処理の例について取り上げます。）
+では、この例のような副作用を持つ計算（作用つき計算）の「合成」はどう考えればいいでしょうか。たとえば、2つの作用つき計算 $f:X\to Y+E$ と $g:Y\to Z+E$ を合成して、$g\circ f:X\to Z+E$ のようなものを作りたいとき、一筋縄ではいかないことがわかります。そこで、次節で導入する「モナド」と「クライスリ圏」という概念が役立ちます。\\%（次節でもあらためてこの例外処理の例について取り上げます。）
 
 % なお、作用つき計算 $f:X\to F(Y)$ を、便宜的に $f:X\computationrightarrow Y$ という特殊な矢印で表記することがよくあります。（厳密に言えば、これはモナド $F$ のクライスリ圏における射を表す記法ですが、ここでは詳細の説明は省略します。この点については、次節を読んで「モナド」や「クライスリ圏」について学んだ後ならわかるはずです。）\\
 
@@ -1029,7 +1029,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 % \end{center}
 \clearpage
 
-\noindent 以下、ファイブレーションの正確な定義を念のため書いておきます。（ですが、上記の $p\colon\Pred\to\Set$ の考え方だけをきちんと押さえておけば、次節以降の内容を理解するうえでほとんど問題はありません。）
+\noindent 以下、ファイブレーションの正確な定義を念のため書いておきます。（ですが、上記で扱った $p\colon\Pred\to\Set$ の考え方だけをきちんと丁寧に押さえておけば、次節以降の内容を理解するうえで支障はありません。）
 
 \begin{definition}[カルテシアン]
 	$p:\E\to\B$ を関手とします。$\E$ の射 $(X\xrightarrow{f}Y)$ が $p$-カルテシアン ($p$-cartesian) であるとは、すべての $Z\in\E$ について、以下のプルバック図式が可換になることである。
@@ -1093,7 +1093,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 % \clearpage
 
 \begin{definition}[置換]
-	$p:\E\to\B$ をファイブレーションとし、$u:I\to J$ を $\B$ の射とします。$u$ の置換 (substitution) とは、関手 $u^\ast\colon\E_J\to\E_I$ であって以下を満たすものである。（ここで $\overline u_X\colon u^\ast X\to X$ および $\overline{u}_Y\colon u^\ast Y\to Y$ は $p$-カルテシアン射でかつ $p(\overline u_X)=u$ と $p(\overline u_Y)=u$ を満たすものとする。）\vspace{3pt}
+	$p:\E\to\B$ をファイブレーションとし、$u:I\to J$ を $\B$ の射とします。$u$ の置換 (substitution) とは、関手 $u^\ast\colon\E_J\to\E_I$ であって以下を満たすものである。（ここで $\overline u_X\colon u^\ast X\to X$ および $\overline{u}_Y\colon u^\ast Y\to Y$ は、$p$-カルテシアン射でかつ $p(\overline u_X)=u$ および $p(\overline u_Y)=u$ を満たすものとする。）\vspace{3pt}
 	\begin{center}
 		\begin{tikzcd}%[row sep=15pt]
 			u^*X \ar[d,"u^*f"',dashed] \ar[r,"\overline u_X"] & X \ar[d,"f"] \\ u^*Y \ar[r,"\overline u_Y"] & Y \\[-8pt]
@@ -1102,7 +1102,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 	\end{center}
 	\begin{itemize}
 		\item 対象 $X\in\E_J$ に対し、対象 $u^\ast X\in\E_I$ を返し、
-		\item $\E_J$ の射 $f:X\to Y$ に対し、射 $u^\ast f:u^\ast X\to u^\ast Y$ が一意に定まり、以下のプルバック図式を満たす：
+		\item $\E_J$ の射 $f:X\to Y$ に対し、$\E_I$ の射 $u^\ast f:u^\ast X\to u^\ast Y$ を一意に定め、以下のプルバック図式を満たす: 
 		\begin{center}
 		\begin{small}
 			\begin{tikzcd}[column sep=38pt,row sep=30pt]
@@ -1125,7 +1125,8 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 \end{definition}
 
 \begin{remark}
-	同一の射の上にあるカルテシアン射は ``一意な同型を除いて一意'' (unique up to unique iso) である。より具体的に言うと、ファイブレーション $p:\E\to\B$ と、$\B$ の射 $u:I\to J$ が与えられ、$Y\in\E_J$ があり、2つの $p$-カルテシアン射 $\overline{u}_Y:u^\ast Y\to Y$ と $f:X\to Y$ がいずれも $u$ の上にあるとき、一意な同型射 $\alpha:X\xrightarrow{\cong} u^\ast Y$ がファイバー $\E_I$ に存在し、$f=\overline u_Y\circ\alpha$ が成り立つ。（証明略）
+	同一の射の上にあるカルテシアン射は ``一意な同型を除いて一意'' (unique up to unique iso) である。より正確に言うと、ファイブレーション $p:\E\to\B$ と、$\B$ の射 $u:I\to J$ が与えられ、$Y\in\E_J$ があり、2つの $p$-カルテシアン射 $\overline{u}_Y:u^\ast Y\to Y$ と $f:X\to Y$ がいずれも $u$ の上にあるとき、一意な同型射 $\alpha:X\xrightarrow{\cong} u^\ast Y$ がファイバー $\E_I$ に存在し、$f=\overline u_Y\circ\alpha$ が成り立つ。（証明略）%\vspace{3pt}
+
 	\begin{small}
 	\begin{center}
 		\begin{tikzcd}
@@ -1278,7 +1279,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 	\end{itemize}
 \end{remark}
 
-さて、次章からは、これらの道具立てをフル活用して、様々な種類の（非決定的、確率的、etc.）プログラムに対する最弱事前条件を定める方法を紹介します
+さて、次章からは、これらの道具立てをフル活用して、様々な種類の（非決定的、確率的、etc.）プログラムに対する最弱事前条件を定める方法を紹介します。
 
 % \begin{remark}
 % 	$\dot F_X:\E_X\to\E_{FX}$ である。
@@ -1288,7 +1289,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 
 \section{最弱事前条件をどのように手に入れるか}
 
-さて、本節では、非決定的プログラムや確率的プログラムなどといった様々な種類のプログラムに対する述語変換子意味論を得る方法について、圏論的な視座から考えます。一般に、状態の集合 $X, Y$ と真理値の集合 $\Omega$ が与えられたときに、効果付き計算 $c:X\to FY$ に基づいて、事後条件 $q:Y\to\Omega$ を最弱事前条件 $wp\llbracket c\rrbracket(q):X\to \Omega$ に変換するための関数である「述語変換子」 $wp\llbracket c\rrbracket:\Omega^Y\to\Omega^X$ を手に入れるために、どんな手続きを経たらよいでしょうか。
+さて、本節では、非決定的プログラムや確率的プログラムなどといった様々な種類のプログラムに対する述語変換子意味論を得る方法について、圏論的な視座から考えます。一般に、状態の集合 $X, Y$ と真理値の集合 $\Omega$ が与えられたときに、効果付き計算 $c:X\to FY$ に基づいて、事後条件 $q:Y\to\Omega$ を最弱事前条件 $wp\llbracket c\rrbracket(q):X\to \Omega$ に変換するための関数である述語変換子 $wp\llbracket c\rrbracket:\Omega^Y\to\Omega^X$ を手に入れるために、どんな手続きを経たらよいでしょうか。
 
 いくつか具体例を見てから、その後に一般論を考えましょう。
 
