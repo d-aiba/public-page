@@ -161,12 +161,12 @@
 \usepackage{tikz-3dplot}
 \tikzset{cross/.style={preaction={-,draw=white,line width=4pt}}}
 \usetikzlibrary{arrows.meta}
-% \tikzcdset{
-%   arrow style=tikz, % TikZ の arrows.meta を使うモード
-%   diagrams={
-%     >={Straight Barb[scale=0.8]} % 矢印の先端だけ 0.7 倍に
-%   }
-% }
+\tikzcdset{
+  arrow style=tikz, % TikZ の arrows.meta を使うモード
+  diagrams={
+    >={Straight Barb[scale=0.8]} % 矢印の先端だけ 0.7 倍に
+  }
+}
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.12}
 %---------
