@@ -469,7 +469,7 @@ $\mu f$ は、以下の図に見られるような$2^X$における鎖の、超�
 	\begin{tikzcd}[row sep=0pt]
 		\bot \ar[r,"\leq"] \ar[rrrr,bend left=60pt] & f(\bot) \ar[r,"\leq"] \ar[rrr,bend left=50pt] & f^2(\bot) \ar[r,"\leq"] \ar[rr,bend left=40pt] & ~~\cdots~~ \ar[r,"\leq"] & f^\omega (\bot) \ar[r,"\leq"] & f^{\omega+1}(\bot) \ar[r,"\leq"] & ~~\cdots~~ \\ % & \textrm{(in $2^X$)}\\
 		\rotatebox{90}{$=$} & \rotatebox{90}{$=$} & \rotatebox{90}{$=$} && \rotatebox{90}{$=$}  \\
-		\emptyset & \{x\mid\delta(x)=\emptyset\} & \!\!\substack{\displaystyle\{x\mid \textrm{all paths are}\\\displaystyle~~~~~~\textrm{of length $\leq 2$}\}}\!\! && ~~\underset{\beta<\omega}{\sup}\,f^\beta \bot~~
+		\emptyset & \{x\mid\delta(x)=\emptyset\} & \!\!\substack{\displaystyle\{x\mid \textrm{all paths are}\\\displaystyle~~~~~~\textrm{of length $\leq 2$}\}}\!\! && ~\underset{\beta<\omega}{\sup}\,f^\beta(\bot)~
 	\end{tikzcd}
 	\end{small}
 \end{center}\vspace{18pt}
@@ -603,7 +603,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 % \end{tikzcd}
 % \end{small}
 % \end{center}\vspace{8pt}
-さらに、（上記の略記を用いて）もっと複雑なものを考えてみます。たとえば、以下の図のクリプキフレームを考えましょう。この場合、$2\omega+1$ で安定します。
+さらに、（上記の略記を用いて）もっと複雑なものを考えてみます。たとえば、以下の図のクリプキフレームを考えましょう。この場合、$\omega\cdot 2+1$ で安定します。
 \vspace{8pt}
 \begin{center}
 \begin{small}
@@ -1214,6 +1214,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 
 \begin{proposition}
 	$p:\E\to\B$ をファイブレーションとする。$F:\B\to\B$, $\dot F:\E\to\E$ をそれぞれ $\B, \E$ の自己関手とし、$p\circ\dot F=F\circ p$を満たすものとする。（ここまでの状況は、先ほどの\textgt{命題\ref{prop:gamma-nat-trans}}のときと同じ。）
+
 	\begin{small}
 	\begin{center}
 		\begin{tikzcd}[column sep=16pt,row sep=16pt]
@@ -1301,23 +1302,155 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 
 \subsection{具体例}
 
-以下では3つのケースについて具体例を考えます。
+以下では、3つのケースについて、それぞれ具体例を考えていきます。
 
-\subsubsection*{具体例 (1) 決定的な2値的モデル検査の場合}
+\subsubsection*{具体例 (1): 決定的な2値的モデル検査の場合}
+% 以下のように考えます。
+\vspace{10pt}
 
-……
+\begin{itemize}
+	\item 真理値の集合を $\Omega=2=\{0,1\}$ とします。
+	\item 考えるべき完備束 $L=\Omega^X$ は、以下の通りです。（ここでは各 $X$ を状態集合とします。）\begin{center}$L=2^X=\{q:X\to 2,\textrm{ predicates}\}$\\\qquad\qquad$\ni\,\bot \,(\textrm{everywhere false}),\top\,(\textrm{everywhere true})$ \end{center}
+	\item ここで、$f:X\to Y$ という計算を考えます。 \\ （なお、$X=Y$ の場合、以下のような余代数です。）\vspace{5pt}\begin{center}\begin{small}$\left(\begin{array}{cccc} c:&X & \longrightarrow & X\\[-2pt] &\rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$}\\[-4pt] & x & \mapsto & x' \end{array}\,\right)$\end{small} \qquad\quad \begin{small}\begin{tikzcd}\circled{$x_1$}\ar[r] & \circled{$x_2$} \ar[r] & \cdots\end{tikzcd}\end{small}\end{center} \vspace{3pt}
+	\item $f:X\to Y$ に対し、述語変換子 $\left(\begin{array}{cccc}f^\ast:&2^Y&\longrightarrow & 2^X\\[-2pt]&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\[-2pt]& \scriptstyle(X\,\overset{q}{\to}\,2)&\mapsto & \scriptstyle (X\,\overset{f^\ast(q)}{\longrightarrow}\,2) \end{array}\right)$ を \vspace{10pt} \\ $f^\ast:2^Y\to 2^X$, $f^\ast(Q)=\{x\in X\mid f(x)\in Q\}$ で定めます。\vspace{5pt}
+	\item いま、以下の関数を定めましょう。\vspace{3pt}\\ 
+	% $\exists_c:2^X\to 2^Y$, $\exists_c(P)=\{f(x)\in Y\mid x\in P\}=\{y\in Y \mid \exists\, x\in X,\; f(x)=y\;\textrm{and}\;x\in P\}$
+	$\begin{array}{lccl}\exists_f:2^X\to 2^Y,&\exists_f(P)&\!\!=\!\!&\{f(x)\in Y\mid x\in P\}\\&&\!\!=\!\!&\{y\in Y \mid \exists\, x\in X,\; f(x)=y\;\textrm{and}\;x\in P\}\\\forall_f:2^X\to 2^Y,& \forall_f(P)&\!\!=\!\!&\{y\in Y\mid f^\ast(\{y\})\subseteq P\}\\&&\!\!=\!\!&\{y\in Y\mid\forall\,x\in X,\;f(x)=y\;\textrm{implies}\;x\in P\}\end{array}$ \vspace{5pt}
+	\item このとき、$\exists_f\dashv f^\ast\dashv \forall_f$ が成り立ちます。\\（これはまさに、トポスの基本定理 (the fundamental theorem of topos) として知られるものと同等です。）
+	\begin{center}
+				\begin{tikzcd}[column sep=30pt]
+					% 2^X \ar[r,bend left=30pt,"\amalg_f","\bot"'] \ar[r,bend right=30pt,"\Pi_f"',"\bot"] & 2^Y \ar[l]
+					2^X \ar[r,bend left=30pt,"\exists_f","\bot"'] \ar[r,bend right=30pt,"\forall_f"',"\bot"] & 2^Y \ar[l]
+				\end{tikzcd}
+			\end{center}
+			%
+			\begin{small}
+				\begin{center}
+				% \begin{prooftree}
+					\AXC{$\exists_f(P)\sqsubseteq Q$ in $2^Y$} \doubleLine
+					\UIC{$P\sqsubseteq f^\ast(Q)$ in $2^X$}
+					\DisplayProof
+					\; and \;
+					\AXC{$f^\ast(Q)\sqsubseteq P$ in $2^X$} \doubleLine
+					\UIC{$Q\sqsubseteq \forall_f(P)$ in $2^Y$}
+					\DisplayProof
+				% \end{prooftree}
+				\end{center}
+			\end{small}
+\end{itemize}
 
-\subsubsection*{具体例 (2) 非決定的な2値的モデル検査の場合}
+\clearpage
 
-……
+\subsubsection*{具体例 (2): 非決定的な2値的モデル検査の場合}
+\vspace{10pt}
 
-\subsubsection*{具体例 (3) 確率的モデル検査の場合}
+\begin{itemize}
+	\item 真理値の集合を $\Omega=2=\{0,1\}$ とします。
+	\item 考えるべき完備束 $L=\Omega^X$ は、以下の通りです。 \begin{center}$L=2^X=\{q:X\to 2,\textrm{ predicates}\}$\\\qquad\qquad$\ni\,\bot \,(\textrm{everywhere false}),\top\,(\textrm{everywhere true})$ \end{center} （ここまでは一つ前の例と同じです。）\vspace{5pt}
+	\item ここで、$f:X\to\mathcal PY$ という計算を考えます。\\（なお、$X=Y$ の場合、以下のような余代数です。）\vspace{5pt} %\\ 
+	\begin{center}
+	\begin{small}$\left(\begin{array}{cccccc} c:&X & \longrightarrow & \mathcal PX\\[-1pt] &\rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$}\\[-2pt] &x & \mapsto & c(x)&=&\{x'\mid x\to x'\} \end{array}~\textrm{Kripke structure}\right)$\end{small} \qquad\quad 
+	\begin{small}
+		\begin{tikzcd}[row sep=3pt]
+			& \circled{$\;y\;$}\\[-5pt]
+			\circled{$\;x\;$} \ar[ru] \ar[r] \ar[rd] & \circled{$y'$}\\
+			& {~\cdots~}
+		\end{tikzcd}
+	\end{small}
+	\hspace*{25pt}
+	\end{center}
+	\item さて、述語変換子 $\left(\begin{array}{cccc}f^\ast:&2^Y&\longrightarrow & 2^X\\[-2pt]&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\[-2pt]& \scriptstyle(X\,\overset{q}{\to}\,2)&\longmapsto & \scriptstyle (X\,\overset{\!f^\ast(q)\!}{\longrightarrow}\,2) \end{array}\right)$ をどうやって手に入れればよいでしょうか？ \vspace{15pt} \\ 以下のようにして得られます。（上段が入力、下段が出力です。）\vspace{5pt}
+	\begin{prooftree}
+		\AXC{$q:Y\to 2$,\; post-condition}
+		\UIC{$\left(\begin{array}{cccccccc}f^\ast(q):&X&\xrightarrow{~f~}&\mathcal PY&\xrightarrow{\;\mathcal P q\;}&\mathcal P2&\xrightarrow[\textrm{modality}]{\tau}&2 \\[-6pt] & \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[-4pt] & \scriptstyle x & \longmapsto & \scriptstyle \{x_1,\dots,\,x_n\} & \longmapsto & \scriptstyle \{q(x_1),\dots,\,q(x_n)\} & \longmapsto & \scriptstyle 0 \textrm{ or } 1 \end{array}\right)$} 
+	\end{prooftree} \vspace{5pt}
+	\item $f:X\to\mathcal PY$ に対し、\\ 述語変換子 $f^\ast$ は様相 $\tau$ の選び方に拠って決まります。\\ $\Box_f(-):2^Y\to 2^X,\,q\mapsto\{x\in X\mid \forall y\in Y\,(x\to y\textrm{ implies } y\in q)\}$ \\ $\Diamond_f(-):2^Y\to 2^X,\,q\mapsto\{x\in X \mid \exists y\in Y \, ( x\to y \textrm{ and } y\in q)\}$ \vspace{5pt}
+	\item いま、以下の関数を定めましょう。\\ $\exists_f:2^X\to 2^Y$, $p\mapsto \{y\in Y\mid \exists \, x\in X,\,x\to y \textrm{ and } x\in p\}$ \\ $\forall_f:2^X\to 2^Y$, $p\mapsto \{y\in Y\mid \forall \, x\in X,\,x\to y \textrm{ implies } x\in p\}$ \vspace{5pt}
+	\item このとき、$\exists_f\dashv \Box_f$ および $\Diamond_f\dashv\forall_f$ がともに成り立ちます。
+	\begin{center}
+		\begin{tikzcd}[column sep=30pt]
+			2^X \ar[r,bend left=30pt,"\exists_f","\bot"']  & 2^Y \ar[l,"\Box_f"]
+		\end{tikzcd}
+		\qquad\qquad
+		\begin{tikzcd}[column sep=30pt]
+			2^X  \ar[r,bend right=30pt,"\forall_f"',"\bot"] & 2^Y \ar[l,"\Diamond_f"']
+		\end{tikzcd}
+	\end{center} \vspace{0pt}
+	%
+	\begin{small}
+	\begin{center}
+		% \begin{prooftree}
+		\AXC{$\exists_f(P)\sqsubseteq Q$ in $2^Y$} \doubleLine
+		\UIC{$P\sqsubseteq \Box_f(Q)$ in $2^X$}
+		\DisplayProof
+		\; and \;
+		\AXC{$\Diamond_f(Q)\sqsubseteq P$ in $2^X$} \doubleLine
+		\UIC{$Q\sqsubseteq \forall_f(P)$ in $2^Y$}
+		\DisplayProof
+		% \end{prooftree}
+		\end{center}
+	\end{small}
+\end{itemize}
 
-……
+\clearpage
 
+\subsubsection*{具体例 (3): 確率的モデル検査の場合}
+\vspace{10pt}
 
+\begin{itemize}
+	\item 真理値の集合を $\Omega=[0,1]$ とします。
+	\item 考えるべき完備束 $L=\Omega^X$ は、以下の通りです。 \begin{center}$L=[0,1]^X=\{q:X\to [0,1],\;\textrm{predicates as random variables}\}$\end{center} 
+	\item ここで、$f:X\to\mathcal DY$ という計算を考えます。\\（なお、$X=Y$ の場合、以下のような余代数です。）
+	\begin{center}
+	$\Bigl(c:X\to\mathcal DX=\{d:X\to [0,1],\;\textrm{$X$ 上の確率分布}\}\Bigr)$
+	\qquad
+	\begin{small}
+		% \begin{center}
+			\begin{tikzcd}[row sep=8pt]
+				& \circled{$x_1$} \\[-3pt]
+				\circled{$\;x\;$} \ar[ru,"p_1"] \ar[r,"p_2"] \ar[rd,"\cdots"'] & \circled{$x_2$} \\
+				& {~\cdots~}
+			\end{tikzcd}
+		% \end{center}
+	\end{small}
+	\hspace*{50pt}
+	\end{center}
+	\item さて、述語変換子 $f^\ast:[0,1]^Y\to[0,1]^X$ をどうやって手に入れればよいでしょうか？\vspace{5pt} \\ 以下のようにして得られます。（上段が入力、下段が出力です。）\vspace{5pt} 
+	\begin{prooftree}
+		\AXC{$q:Y\to[0,1]$,\; post-condition}
+		\UIC{$\left(\begin{array}{cccccccc} f^\ast(q): & X & \xrightarrow{~f~} & \mathcal DY & \xrightarrow{\;\mathcal Dq\;} & \mathcal D[0,1] & \xrightarrow[=Av]{\tau}& [0,1] \\[-3pt] &\rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[-3pt] &\scriptstyle x & \longmapsto & \scriptstyle \sum p_i\Ket{x_i} & \longmapsto & \scriptstyle \sum p_i\Ket{q(x_i)} & \longmapsto & \scriptstyle \sum p_i\cdot q(x_i) \end{array}\right)$}
+	\end{prooftree} \vspace{5pt}
+	\item $f:X\to\mathcal PY$ に対し、述語変換子 $f^\ast:[0,1]^Y\to[0,1]^X$ は以下で定義されます。 \[f^\ast(q)(x)=\sum_{x'\in X}f(x)(x')\cdot q(x')\] すなわち、$f^\ast(q)$ は、各 $x$ に対し、$q$ による値の期待値 $p_1 \cdot q(x_1) + p_2 \cdot q(x_2) + \cdots$ を割り当てます。
+	\begin{center}	
+		\begin{small}
+			\begin{tikzcd}[row sep=8pt]
+				& \circled{$x_1$} \\[-3pt]
+				\circled{$\;x\;$} \ar[ru,"p_1"] \ar[r,"p_2"] \ar[rd,"\cdots"'] & \circled{$x_2$} \\
+				& {~\cdots~}
+			\end{tikzcd}
+		\end{small}
+	\end{center}
+	\item なお、この $f^\ast$ は、左右いずれの随伴も持ちません。\\ （対応策としては、以下のしかたで米田埋め込みを使う方法があります。詳細は省略します。）
+	\begin{center}
+		% \begin{small}
+		\begin{tikzcd}[column sep=68pt,row sep=40pt]
+			\widehat L \ar[rd,shift right=2.0pt,"\Lan_y(h)"'] \ar[rd,dash,shift left=0.8pt,phantom,"\rotatebox{55}{$\scriptstyle\dashv$}"]\\
+			L \ar[u,"y"]\ar[r,"h"'] & L' \ar[ul, shift right=4.45pt, "\Ran_h(y)"']
+		\end{tikzcd}
+		\qquad\qquad 
+		\begin{tikzcd}[column sep=58pt, row sep=30pt]
+			\widehat L \ar[r,"\Lan_y(y\,\circ\, f^\ast)"'] & \widehat L \ar[l,bend right=22pt,"\exists g"',"\top"] \\
+			L \ar[r,"f^\ast"'] \ar[u,"y"] & L \ar[u,"y"']
+		\end{tikzcd}\vspace{8pt}\\
+		% \begin{footnotesize}
+			$\Lan_y(h)(P)=\bigsqcup_{x\in P}h(x),\qquad \Lan_y(y\circ f^\ast)(P)=\{z\in L\mid\exists\,x\in P,\;z\sqsubseteq f^\ast(x)\}$
+		% \end{footnotesize}
+		% \end{small}
+	\end{center}
+\end{itemize}
+% \vspace{5pt}
 
-\vspace{5pt}
+\clearpage
 
 \subsection{一般論}
 
