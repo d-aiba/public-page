@@ -392,16 +392,16 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 		% & (ホーア論理) & (述語変換子) \\
 		\hline
 		gfp & partial correctness & weakest liberal precondition \\
-		(最大不動点) & $\{P\}\,C\,\{Q\}$ & $wlp\llbracket C\rrbracket(Q)$ \\
-		& \!「$P$から始めて、停止するなら$Q$」\! & \\
+		(最大不動点) & $\{P\}\,C\,\{Q\}$ & $wlp\llbracket C\rrbracket(Q)$ \\[3pt]
+		& \!「$P$から始めて、\kenten{もし}停止する\kenten{なら}$Q$」\! & 「\kenten{もし}停止する\kenten{なら}$Q$を満たす最弱条件」 \\
 		\hline
 		lfp & total correctness & weakest precondition \\ 
-		(最小不動点) & $[P]\,C\,[Q]$ & $wp\llbracket C\rrbracket(Q)$\\
-		& \!「$P$から始めて、停止し、かつ$Q$」\! & \\
+		(最小不動点) & $[P]\,C\,[Q]$ & $wp\llbracket C\rrbracket(Q)$\\[3pt]
+		& \!「$P$から始めて、\kenten{必ず}停止して\kenten{かつ}$Q$」\! & 「\kenten{必ず}停止して\kenten{かつ}$Q$を満たす最弱条件」 \\
 		\hline
 	\end{tabular}
 \end{center}
-\vspace{15pt}
+\vspace{35pt}
 
 % \clearpage
 
@@ -439,8 +439,8 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 \subsection{述語変換子を用いたモデル検査の簡単な例}
 
 本節では、述語変換子（前節で導入した最弱事前条件に限らず一般の述語変換子）を使って実際にモデル検査をする簡単な例を紹介します。以下では
-例として、クリプキフレーム $(X,\delta:X\to\mathcal PX)$ を考えます。$X$ は状態集合で、$\delta$ は遷移関数です。（これは次章で導入する用語で言うと「余代数」なのですが、詳しくは後で述べます。）
-\[\begin{array}{cccl}\delta:&X&\longrightarrow&\mathcal PX\\&\rotatebox{90}{$\in$}&&~\rotatebox{90}{$\in$}\\&x&\longmapsto&\delta(x)=\{x\mid x\to x'\}\end{array}\]
+例として、クリプキフレーム $(X,\delta:X\to\mathcal P(X))$ を考えます。$X$ は状態集合で、$\delta$ は遷移関数です。（これは次章で導入する用語で言うと「余代数」なのですが、詳しくは後で述べます。）
+\[\begin{array}{cccl}\delta:&X&\longrightarrow&\mathcal P(X)\\&\rotatebox{90}{$\in$}&&~~\rotatebox{90}{$\in$}\\&x&\longmapsto&\delta(x)=\{x\mid x\to x'\}\end{array}\]
 絵で描くとたとえば次のようなものです。
 \begin{center}
 	\begin{tikzcd}[row sep=2pt]
@@ -450,8 +450,8 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 	\end{tikzcd}
 \end{center}
 $L$を完備束とし、以下で定められているものとします。
-\[L:=2^X=\{\top,\bot\}^X\]
-この$L$は述語の集合であり（補足: $p(x)=\top$ を $x\models p$ と考えます）、$L$上の順序$\leq$は述語どうしの論理的含意関係によって定められている、と考えます。なお、$L$の最小元と最大元をそれぞれ $0,1$ と書くことにします。
+\[L:=2^X=\{0,1\}^X\]
+この$L$は述語の集合であり（補足: $p(x)=1$ を $x\models p$ と考えます）、$L$上の順序$\leq$は述語どうしの論理的含意関係によって定められている、と考えます。なお、$L$の最小元と最大元をそれぞれ $\bot,\top$ と書くことにします。
 
 ここで、述語変換子 $f:2^X\to 2^X$ を、次のように定めます。（補足: この $f$ は単調 (monotone) な関数です。）
 \[\begin{array}{cccl}f:&2^X&\longrightarrow&2^X\\&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&p&\longmapsto & \{x\mid \forall x' ~ (x'\in\delta(x)\Rightarrow x'\in p)\}\\[3pt] &&&=\{x\mid \textrm{all successors of $x$ satisfy $p$}\}.\end{array}\]
@@ -461,12 +461,14 @@ $\mu f$ は、以下の図に見られるような$2^X$における鎖の、超�
 \begin{center}
 	\begin{small}
 	\begin{tikzcd}[row sep=0pt]
-		0 \ar[r,"\leq"] \ar[rrrr,bend left=60pt] & f(0) \ar[r,"\leq"] \ar[rrr,bend left=50pt] & f^2(0) \ar[r,"\leq"] \ar[rr,bend left=40pt] & ~~\cdots~~ \ar[r,"\leq"] & f^\lambda (0) \ar[r,"\leq"] & f^{\lambda+1}(0) \ar[r,"\leq"] & ~~\cdots~~ \\ % & \textrm{(in $2^X$)}\\
+		\bot \ar[r,"\leq"] \ar[rrrr,bend left=60pt] & f(\bot) \ar[r,"\leq"] \ar[rrr,bend left=50pt] & f^2(\bot) \ar[r,"\leq"] \ar[rr,bend left=40pt] & ~~\cdots~~ \ar[r,"\leq"] & f^\omega (\bot) \ar[r,"\leq"] & f^{\omega+1}(\bot) \ar[r,"\leq"] & ~~\cdots~~ \\ % & \textrm{(in $2^X$)}\\
 		\rotatebox{90}{$=$} & \rotatebox{90}{$=$} & \rotatebox{90}{$=$} && \rotatebox{90}{$=$}  \\
-		\emptyset & \{x\mid\delta(x)=\emptyset\} & \substack{\displaystyle\{x\mid \textrm{all paths are} \\ \displaystyle~~~~~~\textrm{of length $\leq 2$}\}} && ~~\underset{\beta<\lambda}{\sup}\,f^\beta 0~~
+		\emptyset & \{x\mid\delta(x)=\emptyset\} & \!\!\substack{\displaystyle\{x\mid \textrm{all paths are}\\\displaystyle~~~~~~\textrm{of length $\leq 2$}\}}\!\! && ~~\underset{\beta<\omega}{\sup}\,f^\beta \bot~~
 	\end{tikzcd}
 	\end{small}
-\end{center}
+\end{center}\vspace{18pt}
+
+\noindent （補足: 一般に、$f$は単調ですが、スコット連続であるとは限らないため、$\omega$ よりも先まで（安定 (stabilize) するまで）反復を回し続ける必要があります。）
 
 \clearpage
 
@@ -488,72 +490,72 @@ $x_\varepsilon\models\mu f$ が成り立つことが、以下の図のような�
 \noindent
 \begin{tiny}
 \begin{tikzcd}[column sep=2pt,row sep=15pt]
-	&& \scalebox{1.5}{$0$} &&& \\
-	&&\circled{$\bot$} \ar[lld,dash] \ar[ld,dash] \ar[d,dash] \ar[rd,dash] \ar[rrd,dash] \ar[rrrd,dash] \\
-	\doublecircled{$\bot$} & \circled{$\bot$} \ar[d,dash] & \circled{$\bot$} \ar[d,dash] & \cdots & \circled{$\bot$} \ar[d,dash] & ~~~\cdots~~~ \\
-	& \doublecircled{$\bot$} & \circled{$\bot$} \ar[d,dash] & & \circled{$\bot$} \ar[d,dash,shorten >= -4pt] & \\
-	&& \doublecircled{$\bot$} && \vdots \ar[d,dash,shorten <= 2pt] & \\
-	&&&& \doublecircled{$\bot$}
+	&& \scalebox{1.5}{\!$\bot$\!} &&& \\
+	&&\circled{$0$} \ar[lld,dash] \ar[ld,dash] \ar[d,dash] \ar[rd,dash] \ar[rrd,dash] \ar[rrrd,dash] \\
+	\doublecircled{$0$} & \circled{$0$} \ar[d,dash] & \circled{$0$} \ar[d,dash] & \cdots & \circled{$0$} \ar[d,dash] & ~~~\cdots~~~ \\
+	& \doublecircled{$0$} & \circled{$0$} \ar[d,dash] & & \circled{$0$} \ar[d,dash,shorten >= -4pt] & \\
+	&& \doublecircled{$0$} && \vdots \ar[d,dash,shorten <= 2pt] & \\
+	&&&& \doublecircled{$0$}
 \end{tikzcd}
 $\xrightarrow{~~\leq~~}$
 \begin{tikzcd}[column sep=2pt,row sep=15pt]
-	&& \scalebox{1.5}{\!$f(0)$\!} &&& \\
-	&&\circled{$\bot$} \ar[lld,dash] \ar[ld,dash] \ar[d,dash] \ar[rd,dash] \ar[rrd,dash] \ar[rrrd,dash] \\
-	\doublecircled{$\top$} & \circled{$\bot$} \ar[d,dash] & \circled{$\bot$} \ar[d,dash] & \cdots & \circled{$\bot$} \ar[d,dash] & ~~~\cdots~~~ \\
-	& \doublecircled{$\top$} & \circled{$\bot$} \ar[d,dash] & & \circled{$\bot$} \ar[d,dash,shorten >= -4pt] & \\
-	&& \doublecircled{$\top$} && \vdots \ar[d,dash,shorten <= 2pt] & \\
-	&&&& \doublecircled{$\top$}
+	&& \scalebox{1.5}{\!\!$f(\bot)$\!\!} &&& \\
+	&&\circled{$0$} \ar[lld,dash] \ar[ld,dash] \ar[d,dash] \ar[rd,dash] \ar[rrd,dash] \ar[rrrd,dash] \\
+	\doublecircled{$1$} & \circled{$0$} \ar[d,dash] & \circled{$0$} \ar[d,dash] & \cdots & \circled{$0$} \ar[d,dash] & ~~~\cdots~~~ \\
+	& \doublecircled{$1$} & \circled{$0$} \ar[d,dash] & & \circled{$0$} \ar[d,dash,shorten >= -4pt] & \\
+	&& \doublecircled{$1$} && \vdots \ar[d,dash,shorten <= 2pt] & \\
+	&&&& \doublecircled{$1$}
 \end{tikzcd} 
 %\vspace{15pt}\\ %
 $\xrightarrow{~~\leq~~}$
 \begin{tikzcd}[column sep=2pt,row sep=15pt]
-	&& \scalebox{1.5}{\!$f^2(0)$\!} &&& \\
-	&&\circled{$\bot$} \ar[lld,dash] \ar[ld,dash] \ar[d,dash] \ar[rd,dash] \ar[rrd,dash] \ar[rrrd,dash] \\
-	\doublecircled{$\top$} & \circled{$\top$} \ar[d,dash] & \circled{$\bot$} \ar[d,dash] & \cdots & \circled{$\bot$} \ar[d,dash] & ~~~\cdots~~~ \\
-	& \doublecircled{$\top$} & \circled{$\top$} \ar[d,dash] & & \circled{$\bot$} \ar[d,dash,shorten >= -4pt] & \\
-	&& \doublecircled{$\top$} && \vdots \ar[d,dash,shorten <= 2pt] & \\
-	&&&& \doublecircled{$\top$}
+	&& \scalebox{1.5}{\!\!$f^2(\bot)$\!\!} &&& \\
+	&&\circled{$0$} \ar[lld,dash] \ar[ld,dash] \ar[d,dash] \ar[rd,dash] \ar[rrd,dash] \ar[rrrd,dash] \\
+	\doublecircled{$1$} & \circled{$1$} \ar[d,dash] & \circled{$0$} \ar[d,dash] & \cdots & \circled{$0$} \ar[d,dash] & ~~~\cdots~~~ \\
+	& \doublecircled{$1$} & \circled{$1$} \ar[d,dash] & & \circled{$0$} \ar[d,dash,shorten >= -4pt] & \\
+	&& \doublecircled{$1$} && \vdots \ar[d,dash,shorten <= 2pt] & \\
+	&&&& \doublecircled{$1$}
 \end{tikzcd}
 $\xrightarrow{~~\leq~~}\;\cdots\;$
 \vspace{20pt}\\ %
 $\xrightarrow{~~\leq~~}$
 \begin{tikzcd}[column sep=2pt,row sep=15pt]
-	&& \scalebox{1.5}{\!$f^n(0)$\!} &&& \\
-	&&\circled{$\bot$} \ar[lld,dash] \ar[ld,dash] \ar[d,dash] \ar[rd,dash] \ar[rrd,dash] \ar[rrrd,dash] \\
-	\doublecircled{$\top$} & \circled{$\top$} \ar[d,dash] & \circled{$\top$} \ar[d,dash] & \cdots & \circled{$\bot$} \ar[d,dash] & ~~~\cdots~~~ \\
-	& \doublecircled{$\top$} & \circled{$\top$} \ar[d,dash] & & \circled{$\top$} \ar[d,dash,shorten >= -4pt] & \\
-	&& \doublecircled{$\top$} && \vdots \ar[d,dash,shorten <= 2pt] & \\
-	&&&& \doublecircled{$\top$}
+	&& \scalebox{1.5}{\!\!$f^n(\bot)$\!\!} &&& \\
+	&&\circled{$0$} \ar[lld,dash] \ar[ld,dash] \ar[d,dash] \ar[rd,dash] \ar[rrd,dash] \ar[rrrd,dash] \\
+	\doublecircled{$1$} & \circled{$1$} \ar[d,dash] & \circled{$1$} \ar[d,dash] & \cdots & \circled{$1$} \ar[d,dash] & ~~~\cdots~~~ \\
+	& \doublecircled{$1$} & \circled{$1$} \ar[d,dash] & & \circled{$1$} \ar[d,dash,shorten >= -4pt] & \\
+	&& \doublecircled{$1$} && \vdots \ar[d,dash,shorten <= 2pt] & \\
+	&&&& \doublecircled{$1$}
 \end{tikzcd}
 $\xrightarrow{~~\leq~~}\;\cdots\;\xrightarrow{~~\leq~~}$
 \begin{tikzcd}[column sep=2pt,row sep=15pt]
-	&& \scalebox{1.5}{\!$f^\omega(0)$\!} &&& \\
-	&&\circled{$\bot$} \ar[lld,dash] \ar[ld,dash] \ar[d,dash] \ar[rd,dash] \ar[rrd,dash] \ar[rrrd,dash] \\
-	\doublecircled{$\top$} & \circled{$\top$} \ar[d,dash] & \circled{$\top$} \ar[d,dash] & \cdots & \circled{$\top$} \ar[d,dash] & ~~~\cdots~~~ \\
-	& \doublecircled{$\top$} & \circled{$\top$} \ar[d,dash] & & \circled{$\top$} \ar[d,dash,shorten >= -4pt] & \\
-	&& \doublecircled{$\top$} && \vdots \ar[d,dash,shorten <= 2pt] & \\
-	&&&& \doublecircled{$\top$}
+	&& \scalebox{1.5}{\!\!$f^\omega(\bot)$\!\!} &&& \\
+	&&\circled{$0$} \ar[lld,dash] \ar[ld,dash] \ar[d,dash] \ar[rd,dash] \ar[rrd,dash] \ar[rrrd,dash] \\
+	\doublecircled{$1$} & \circled{$1$} \ar[d,dash] & \circled{$1$} \ar[d,dash] & \cdots & \circled{$1$} \ar[d,dash] & ~~~\cdots~~~ \\
+	& \doublecircled{$1$} & \circled{$1$} \ar[d,dash] & & \circled{$1$} \ar[d,dash,shorten >= -4pt] & \\
+	&& \doublecircled{$1$} && \vdots \ar[d,dash,shorten <= 2pt] & \\
+	&&&& \doublecircled{$1$}
 \end{tikzcd}
 % \vspace{15pt}\\ %
 $\xrightarrow{~~\leq~~}$
 \begin{tikzcd}[column sep=2pt,row sep=15pt]
-	&& \scalebox{1.5}{\!\!\!\!\!$f^{\omega+1}(0)$\!\!\!\!\!} &&& \\
-	&&\circled{$\top$} \ar[lld,dash] \ar[ld,dash] \ar[d,dash] \ar[rd,dash] \ar[rrd,dash] \ar[rrrd,dash] \\
-	\doublecircled{$\top$} & \circled{$\top$} \ar[d,dash] & \circled{$\top$} \ar[d,dash] & \cdots & \circled{$\top$} \ar[d,dash] & ~~~\cdots~~~ \\
-	& \doublecircled{$\top$} & \circled{$\top$} \ar[d,dash] & & \circled{$\top$} \ar[d,dash,shorten >= -4pt] & \\
-	&& \doublecircled{$\top$} && \vdots \ar[d,dash,shorten <= 2pt] & \\
-	&&&& \doublecircled{$\top$}
+	&& \scalebox{1.5}{\!\!\!\!\!\!$f^{\omega+1}(\bot)$\!\!\!\!\!\!} &&& \\
+	&&\circled{$1$} \ar[lld,dash] \ar[ld,dash] \ar[d,dash] \ar[rd,dash] \ar[rrd,dash] \ar[rrrd,dash] \\
+	\doublecircled{$1$} & \circled{$1$} \ar[d,dash] & \circled{$1$} \ar[d,dash] & \cdots & \circled{$1$} \ar[d,dash] & ~~~\cdots~~~ \\
+	& \doublecircled{$1$} & \circled{$1$} \ar[d,dash] & & \circled{$1$} \ar[d,dash,shorten >= -4pt] & \\
+	&& \doublecircled{$1$} && \vdots \ar[d,dash,shorten <= 2pt] & \\
+	&&&& \doublecircled{$1$}
 \end{tikzcd}
 $\xrightarrow{~~\leq~~}\;\cdots\;$
 \end{tiny}
 \end{framed}
 % \vspace{10pt}
 
-\noindent 補足: $f^\omega(0)$ は、これより左に現れるすべての上限 (supremum) をとったものです。（てっぺん $x_\varepsilon$ にはまだ $\top$ が現れたことがないので、上限は $\bot$ のままです。）それに対し、$f^{\omega+1}(0)$ でやっと、てっぺん $x_\varepsilon$ にも $\top$ が現れます。
+\noindent 補足: $f^\omega(\bot)$ は、これより左に現れるすべての上限 (supremum) をとったものです。（てっぺん $x_\varepsilon$ にはまだ $1$ が現れたことがないので、上限は $0$ のままです。）それに対し、次の $f^{\omega+1}(\bot)$ でやっと、てっぺん $x_\varepsilon$ にも $1$ が現れます。
 
 \clearpage
 
-$\omega+1$よりも先で安定 (stabilize) する例もあります。分岐がもっと複雑なものを考えればよいのです。たとえば、以下のようなクリプキフレームを考えてみましょう。この場合、$\omega+2$で安定します。
+$\omega+1$よりもさらも先で安定 (stabilize) する例もあります。分岐がもっと複雑なものを考えればよいのです。たとえば、以下のようなクリプキフレームを考えてみましょう。この場合、$\omega+2$で安定します。
 \vspace{8pt}
 %
 \begin{multicols}{2} %%%
@@ -570,7 +572,8 @@ $\omega+1$よりも先で安定 (stabilize) する例もあります。分岐が
 	\end{small}
 	\end{center}
 	% 
-	（以降、左の図を以下のように略記することにします。）\\
+	~\\[25pt]
+	（以降、左の図を以下のように略記することにします。）\\[10pt]
 	\begin{center}
 		\begin{small}
 		\begin{tikzcd}[column sep=0pt]
@@ -594,7 +597,7 @@ $\omega+1$よりも先で安定 (stabilize) する例もあります。分岐が
 % \end{tikzcd}
 % \end{small}
 % \end{center}\vspace{8pt}
-さらに、（上記の略記を用いて）以下の図のクリプキフレームを考えましょう。この場合、$2\omega+1$ で安定します。
+さらに、（上記の略記を用いて）もっと複雑なものを考えてみます。たとえば、以下の図のクリプキフレームを考えましょう。この場合、$2\omega+1$ で安定します。
 \vspace{8pt}
 \begin{center}
 \begin{small}
@@ -616,7 +619,7 @@ $\omega+1$よりも先で安定 (stabilize) する例もあります。分岐が
 	&&&&&&&&&&{} \ar[rr,dash,shorten = -4.8pt] &{}&{} 
 \end{tikzcd}
 \end{small}
-\end{center}\vspace{35pt}
+\end{center}\vspace{40pt}
 
 さて、本章でここまで扱ってきた述語変換子の考え方は、圏論の言葉を使うととても見通しがよくなります。そのための準備として、次章では、圏論の関手を使ってプログラムの振舞いを捉える方法について紹介します。
 
