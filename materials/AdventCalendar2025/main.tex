@@ -92,6 +92,21 @@
 
 \subsection{この記事では扱わないこと}
 
+本記事では、以下のことは扱いません。
+
+\begin{itemize}
+	\item 
+	\item 
+	\item 
+\end{itemize}
+
+また、以下の事柄については、既知のものとして仮定します。
+
+\begin{itemize}
+	\item 順序集合や不動点についての基本事項（ナスター・タルスキの定理、クリーネの不動点定理、など）
+	\item 数理論理学における基本事項（古典命題論理、順序数の基本的な性質、様相論理のクリプキフレーム、など）
+	\item 圏論の基本事項（圏の定義、関手、自然変換、極限と余極限、など）
+\end{itemize}
 
 % \vspace{5mm}
 
@@ -389,7 +404,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 	\item $wlp\llbracket\mathrm{while}\;\varphi\;\mathrm{do}\;C\rrbracket(Q)=\nu X.\,((\varphi\land wlp\llbracket C\rrbracket(X))\lor(\lnot\varphi\land Q))$
 \end{itemize}
 
-以上を表に整理すると、以下の通りです。\\
+以上を表に整理すると、以下の通りです。\vspace{10pt}
 
 \begin{center}
 	\begin{tabular}{c|c|c}
@@ -407,7 +422,9 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 		\hline
 	\end{tabular}
 \end{center}
-\vspace{35pt}
+\vspace{10pt}
+直観的には、一般に順序集合における最小不動点と最大不動点の間には $\mu x.\,Fx\leq \nu x.\, Fx$ という大小関係があるわけですが、このギャップが「プログラムの停止性を保証するかしないか」の違いだ、と理解するのがわかりやすいでしょう。
+\vspace{10pt}
 
 % \clearpage
 
@@ -438,7 +455,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 
 % \subsection{次章へ向けて}
 
-ここまで抽象的な話が続いたので、次節でいったん具体例を見ておきましょう。
+さて、ここまで抽象的な話が続いたので、次節でいったん具体例を見ておきましょう。
 
 \clearpage
 
@@ -446,7 +463,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 
 本節では、述語変換子（前節で導入した最弱事前条件に限らず一般の述語変換子）を使って実際にモデル検査をする方法を、簡単な例を挙げて紹介します。以下では
 例として、クリプキフレーム $(X,\delta:X\to\mathcal P(X))$ を考えます。$X$ は状態集合で、$\delta$ は遷移関数です。（これは次章で導入する用語で言うと「余代数」なのですが、詳しくは後で述べます。）
-\[\begin{array}{cccl}\delta:&X&\longrightarrow&\mathcal P(X)\\&\rotatebox{90}{$\in$}&&~~\rotatebox{90}{$\in$}\\&x&\longmapsto&\delta(x)=\{x\mid x\to x'\}\end{array}\]
+\[\begin{array}{cccl}\delta:&X&\longrightarrow&\mathcal P(X)\\&\rotatebox{90}{$\in$}&&~~\rotatebox{90}{$\in$}\\&x&\longmapsto&\delta(x)=\{x'\mid x\to x'\}\end{array}\]
 絵で描くとたとえば次のようなものです。
 \begin{center}
 	\begin{tikzcd}[row sep=2pt]
@@ -463,7 +480,7 @@ $L$を完備束とし、以下で定められているものとします。
 \[\begin{array}{cccl}f:&2^X&\longrightarrow&2^X\\&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&p&\longmapsto & \{x\mid \forall x' ~ (x'\in\delta(x)\Rightarrow x'\in p)\}\\[3pt] &&&=\{x\mid \textrm{all successors of $x$ satisfy $p$}\}.\end{array}\]
 そして、この $f$ の最小不動点 $\mu f$ をとります。（補足: この$\mu f$は、$L$の要素、すなわち述語です。）
 \[\mu f=\{x\mid\textrm{every path from $x$ reaches a state with no successors}\}\]
-$\mu f$ は、以下の図に見られるような$2^X$における鎖の、超限反復 (transfinite iteration) によって構成されます。
+$\mu f$ は、以下の図に見られるような$2^X$における鎖の、超限反復 (transfinite iteration) によって構成されます。\\（最小不動点 $\mu f$ の近似列は、下から積み上げます。）
 \begin{center}
 	\begin{small}
 	\begin{tikzcd}[row sep=0pt]
@@ -472,13 +489,13 @@ $\mu f$ は、以下の図に見られるような$2^X$における鎖の、超�
 		\emptyset & \{x\mid\delta(x)=\emptyset\} & \!\!\substack{\displaystyle\{x\mid \textrm{all paths are}\\\displaystyle~~~~~~\textrm{of length $\leq 2$}\}}\!\! && ~\underset{\beta<\omega}{\sup}\,f^\beta(\bot)~
 	\end{tikzcd}
 	\end{small}
-\end{center}\vspace{18pt}
+\end{center}\vspace{15pt}
 
 \noindent （補足: 一般に、$f$は単調ですが、スコット連続であるとは限らないため、$\omega$ よりも先まで（安定 (stabilize) するまで）反復を回し続ける必要があります。）
 
 \clearpage
 
-具体的に、以下のクリプキフレーム $(X,\delta)$ について、上で定めた述語 $\mu f$ を実際に検証してみましょう。\vspace{8pt}
+ここで具体的に、以下のクリプキフレーム $(X,\delta)$ について、上で定めた述語 $\mu f$ を実際に検証してみましょう。\vspace{8pt}
 \begin{center}
 \begin{small}
 \begin{tikzcd}[column sep=2pt,row sep=15pt]
@@ -561,7 +578,7 @@ $\xrightarrow{~~\leq~~}\;\cdots\;$
 
 \clearpage
 
-$\omega+1$よりもさらも先で安定 (stabilize) する例もあります。分岐がもっと複雑なものを考えればよいのです。たとえば、以下のようなクリプキフレームを考えてみましょう。この場合、$\omega+2$で安定します。
+$\omega+1$よりもさらも先で安定 (stabilize) する例もあります。分岐がもっと複雑なものを考えればよいです。たとえば、以下のようなクリプキフレームを考えてみましょう。この場合、$\omega+2$で安定します。
 \vspace{8pt}
 %
 \begin{multicols}{2} %%%
@@ -625,9 +642,9 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 	&&&&&&&&&&{} \ar[rr,dash,shorten = -4.8pt] &{}&{} 
 \end{tikzcd}
 \end{small}
-\end{center}\vspace{40pt}
+\end{center}\vspace{35pt}
 
-さて、本章でここまで扱ってきた述語変換子の考え方は、圏論の言葉を使うととても見通しがよくなります。そのための準備として、次章では、圏論の関手を使ってプログラムの振舞いを捉える方法について紹介します。
+さて、本章でここまで扱ってきた述語変換子の考え方は、圏論の言葉を使うととても見通しがよくなります。そのための準備として、次章では、圏論の関手を使ってプログラムの振舞いを捉える方法について紹介します。（すでにだいたい知っているよ、という人は、3章まで飛ばしてください。）
 
 \clearpage
 
@@ -710,7 +727,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 \clearpage
 
 \begin{example}
-	様相論理におけるクリプキフレーム (Kripke frame) は、余代数 $\delta:X\to\mathcal P(X)$ で与えられる。\[\begin{array}{cccl}\delta:&X&\longrightarrow&\mathcal P(X)\\&\rotatebox{90}{$\in$}&&~~\rotatebox{90}{$\in$}\\&x&\longmapsto&\delta(x)=\{x\mid x\to x'\}\end{array}\]
+	様相論理におけるクリプキフレーム (Kripke frame) は、余代数 $\delta:X\to\mathcal P(X)$ で与えられる。\[\begin{array}{cccl}\delta:&X&\longrightarrow&\mathcal P(X)\\&\rotatebox{90}{$\in$}&&~~\rotatebox{90}{$\in$}\\&x&\longmapsto&\delta(x)=\{x'\mid x\to x'\}\end{array}\]
 	\begin{small}
 	\begin{center}
 		\begin{tikzcd}[row sep=0pt]
@@ -1364,7 +1381,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 		\AXC{$q:Y\to 2$,\; post-condition}
 		\UIC{$\left(\begin{array}{cccccccc}f^\ast(q):&X&\xrightarrow{~f~}&\mathcal PY&\xrightarrow{\;\mathcal P q\;}&\mathcal P2&\xrightarrow[\textrm{modality}]{\tau}&2 \\[-6pt] & \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[-4pt] & \scriptstyle x & \longmapsto & \scriptstyle \{x_1,\dots,\,x_n\} & \longmapsto & \scriptstyle \{q(x_1),\dots,\,q(x_n)\} & \longmapsto & \scriptstyle 0 \textrm{ or } 1 \end{array}\right)$} 
 	\end{prooftree} \vspace{5pt}
-	\item $f:X\to\mathcal PY$ に対し、\\ 述語変換子 $f^\ast$ は様相 $\tau$ の選び方に拠って決まります。\\ $\Box_f(-):2^Y\to 2^X,\,q\mapsto\{x\in X\mid \forall y\in Y\,(x\to y\textrm{ implies } y\in q)\}$ \\ $\Diamond_f(-):2^Y\to 2^X,\,q\mapsto\{x\in X \mid \exists y\in Y \, ( x\to y \textrm{ and } y\in q)\}$ \vspace{5pt}
+	\item $f:X\to\mathcal PY$ に対し、\\ 述語変換子 $f^\ast$ は、様相 $\tau:\mathcal P2\to 2$（パラメーターマップとも呼ばれる）の選び方に拠って決まります。\\ $f^\ast$ を以下のように2通りの異なるしかたで定めることができます。 \\$\Box_f(-):2^Y\to 2^X,\,q\mapsto\{x\in X\mid \forall y\in Y\,(x\to y\textrm{ implies } y\in q)\}$ \\ $\Diamond_f(-):2^Y\to 2^X,\,q\mapsto\{x\in X \mid \exists y\in Y \, ( x\to y \textrm{ and } y\in q)\}$ \vspace{5pt}
 	\item いま、以下の関数を定めましょう。\\ $\exists_f:2^X\to 2^Y$, $p\mapsto \{y\in Y\mid \exists \, x\in X,\,x\to y \textrm{ and } x\in p\}$ \\ $\forall_f:2^X\to 2^Y$, $p\mapsto \{y\in Y\mid \forall \, x\in X,\,x\to y \textrm{ implies } x\in p\}$ \vspace{5pt}
 	\item このとき、$\exists_f\dashv \Box_f$ および $\Diamond_f\dashv\forall_f$ がともに成り立ちます。
 	\begin{center}
@@ -1415,12 +1432,13 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 	\end{small}
 	\hspace*{50pt}
 	\end{center}
-	\item さて、述語変換子 $f^\ast:[0,1]^Y\to[0,1]^X$ をどうやって手に入れればよいでしょうか？\vspace{5pt} \\ 以下のようにして得られます。（上段が入力、下段が出力です。）\vspace{5pt} 
+	\item さて、述語変換子 $f^\ast:[0,1]^Y\to[0,1]^X$ をどうやって手に入れればよいでしょうか？\vspace{2pt} \\ 以下のようにして得られます。（上段が入力、下段が出力です。）\vspace{5pt} 
 	\begin{prooftree}
 		\AXC{$q:Y\to[0,1]$,\; post-condition}
 		\UIC{$\left(\begin{array}{cccccccc} f^\ast(q): & X & \xrightarrow{~f~} & \mathcal DY & \xrightarrow{\;\mathcal Dq\;} & \mathcal D[0,1] & \xrightarrow[=Av]{\tau}& [0,1] \\[-3pt] &\rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[-3pt] &\scriptstyle x & \longmapsto & \scriptstyle \sum p_i\Ket{x_i} & \longmapsto & \scriptstyle \sum p_i\Ket{q(x_i)} & \longmapsto & \scriptstyle \sum p_i\cdot q(x_i) \end{array}\right)$}
 	\end{prooftree} \vspace{5pt}
-	\item $f:X\to\mathcal PY$ に対し、述語変換子 $f^\ast:[0,1]^Y\to[0,1]^X$ は以下で定義されます。 \[f^\ast(q)(x)=\sum_{x'\in X}f(x)(x')\cdot q(x')\] すなわち、$f^\ast(q)$ は、各 $x$ に対し、$q$ による値の期待値 $p_1 \cdot q(x_1) + p_2 \cdot q(x_2) + \cdots$ を割り当てます。
+	\item $f:X\to\mathcal PY$ に対し、述語変換子 $f^\ast:[0,1]^Y\to[0,1]^X$ は以下で定義されます。 \[f^\ast(q)(x)=\sum_{x'\in X}f(x)(x')\cdot q(x')\] 
+	つまり、$f^\ast(q)$ は、各 $x$ に対し、$q$ による値の期待値 $p_1 \cdot q(x_1) + p_2 \cdot q(x_2) + \cdots$ を割り当てます。
 	\begin{center}	
 		\begin{small}
 			\begin{tikzcd}[row sep=8pt]
@@ -1431,32 +1449,88 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 		\end{small}
 	\end{center}
 	\item なお、この $f^\ast$ は、左右いずれの随伴も持ちません。
-	% \\ （対応策としては、以下のしかたで米田埋め込みを使う方法があります。詳細は省略します。）
-	% \begin{center}
-	% 	% \begin{small}
-	% 	\begin{tikzcd}[column sep=68pt,row sep=40pt]
-	% 		\widehat L \ar[rd,shift right=2.0pt,"\Lan_y(h)"'] \ar[rd,dash,shift left=0.8pt,phantom,"\rotatebox{55}{$\scriptstyle\dashv$}"]\\
-	% 		L \ar[u,"y"]\ar[r,"h"'] & L' \ar[ul, shift right=4.45pt, "\Ran_h(y)"']
-	% 	\end{tikzcd}
-	% 	\qquad\qquad 
-	% 	\begin{tikzcd}[column sep=58pt, row sep=30pt]
-	% 		\widehat L \ar[r,"\Lan_y(y\,\circ\, f^\ast)"'] & \widehat L \ar[l,bend right=22pt,"\exists g"',"\top"] \\
-	% 		L \ar[r,"f^\ast"'] \ar[u,"y"] & L \ar[u,"y"']
-	% 	\end{tikzcd}\vspace{8pt}\\
-	% 	% \begin{footnotesize}
-	% 		$\Lan_y(h)(P)=\bigsqcup_{x\in P}h(x),\qquad \Lan_y(y\circ f^\ast)(P)=\{z\in L\mid\exists\,x\in P,\;z\sqsubseteq f^\ast(x)\}$
-	% 	% \end{footnotesize}
-	% 	% \end{small}
-	% \end{center}
+	\\ （対応策としては、米田埋め込みを使う方法があります。詳細は省略しますが、おおむね以下の図の通りです。）
+	\begin{center}
+		\begin{tikzcd}[column sep=68pt,row sep=40pt]
+			\widehat L \ar[rd,shift right=2.0pt,"\Lan_y(h)"'] \ar[rd,dash,shift left=0.8pt,phantom,"\rotatebox{55}{$\scriptstyle\dashv$}"]\\
+			L \ar[u,"y"]\ar[r,"h"'] & L' \ar[ul, shift right=4.45pt, "\Ran_h(y)"']
+		\end{tikzcd}
+		\qquad\qquad 
+		\begin{tikzcd}[column sep=58pt, row sep=30pt]
+			\widehat L \ar[r,"\Lan_y(y\,\circ\, f^\ast)"'] & \widehat L \ar[l,bend right=22pt,"\exists g"',"\top"] \\
+			L \ar[r,"f^\ast"'] \ar[u,"y"] & L \ar[u,"y"']
+		\end{tikzcd}\vspace{8pt}\\
+			$\Lan_y(h)(P)=\bigsqcup_{x\in P}h(x),\qquad \Lan_y(y\circ f^\ast)(P)=\{z\in L\mid\exists\,x\in P,\;z\sqsubseteq f^\ast(x)\}$
+	\end{center}
 \end{itemize}
 \vspace{5pt}
 
-% \clearpage
+\clearpage
 
 \subsection{一般論}
 
+\noindent 
 これまで見た具体例をふまえて、一般論を展開していきましょう。
 
+\begin{itemize}
+	\item 副作用つき計算 $c:X\to FY$、真理値の集合 $\Omega$、様相 $\tau:F\Omega\to\Omega$ が与えられたとき、\\ 述語変換子 $wp\llbracket c\rrbracket:\Omega^Y\to\Omega^X$ は以下のしかたで得られます。
+	\begin{prooftree}
+		\AXC{$Y\xrightarrow{~q~} \Omega$,\; post-condition}
+		\UIC{$wp\llbracket c \rrbracket (q):X\xrightarrow{~c~}FY\xrightarrow{\;Fq\;}F\Omega\xrightarrow{~\tau~}\Omega$,\; weakest pre-condition}
+	\end{prooftree}\vspace{5pt}
+	このように $wp\llbracket c\rrbracket (q)=\tau\circ Fq\circ c$ で定まります。\vspace{8pt} %\clearpage
+\end{itemize}
+
+\noindent 
+これを、グロタンディーク・ファイブレーションの言葉で次のように捉えることができます。
+
+\begin{itemize}
+	\item （状況設定） ファイブレーション $p:\Pred\to\Set$ を考えます。各ファイバー $\Pred_X=\Omega^X$ は「各状態集合 $X$ 上の述語全体」であり順序集合をなし、各 $f:X\to Y$ に対する置換 $f^\ast:\Omega^Y\to\Omega^X,\,q\mapsto q\circ f$ は「事後条件 $q$ を $f$ によって引き戻した事前条件」を表します。 \vspace{10pt}
+	\item （課題） いま、副作用つき計算$c:X\to FY$が与えられたとき、単に $c^\ast$ を考えると、これは $\Omega^{FX}\to\Omega^X$という型を持ちます。しかし、われわれが欲しい述語変換子は、$\Omega^Y\to\Omega^X$ という型を持つものです。\\（というのも、事後条件（$Y$上の述語）から事前条件（$X$上の述語）への変換を行いたいからです。）\vspace{10pt}
+	\item （解決策） ここで、様相 $\tau:F\Omega\to\Omega$ が重要な役割を果たします。この $\tau$ は、「\uwave{$Y$上の述語}」から「\uwave{$FY$上の述語}」へと持ち上げる操作、\textbf{述語持ち上げ} (predicate lifting) を誘導します。\\具体的には、各 $Y$ について、\[\dot F_Y:\Omega^Y\to\Omega^{FY},\quad \dot F_Y(q):=\tau\circ Fq\qquad \textrm{(ただし $q:Y\to\Omega$ を任意の述語とする)}\] と定めます。この $\dot F_Y$ は、「$Y$上の述語$q$を、計算作用$F$で包まれた状態空間$FY$上の述語 $\dot F_Y(q)$ へと持ち上げる」操作となります。（通常、$\tau$ には単調性を課し、$\dot F_Y$ が単調になるようにします。）\vspace{10pt} \\
+	すると、最弱事前条件 $wp\llbracket c\rrbracket$ は、この「述語持ち上げ $\dot F_Y$」と「計算 $c$ による引き戻し $c^\ast$」の合成として書けます。
+	\[\begin{tikzcd}
+		\Omega^Y \ar[r,"\dot F_Y"] \ar[rd,"wp\llbracket c\rrbracket"'] & \Omega^{FY} \ar[d,"c^\ast"]\\
+		& \Omega^X
+	\end{tikzcd}\]
+	すなわち、任意の事後条件 $q:Y\to\Omega$に対して、
+	\begin{align*}
+		wp\llbracket c\rrbracket(q)&=c^\ast(\dot F_Y(q))\\ &=c^\ast(\tau\circ Fq) \\ &=\tau\circ Fq\circ c
+	\end{align*}
+	となります。つまり、\\(1) $Y$ 上の述語 $q$ を、\uwave{様相 $\tau$ を用いて} $FY$ 上に\kenten{持ち上げて}、\\(2) それを \uwave{計算 $c$ に沿って} $X$ 上に\kenten{引き戻す}、\\という2段階で理解できます。
+	% \begin{small}
+		% \begin{center}
+		% 	\begin{tikzcd}
+		% 		\Pred \ar[loop left,"\dot F"] \ar[d,"p"'] & \Omega^{X} \ar[rr,bend left=12pt,"\dot F_X"] && \Omega^{FY} \ar[ll,bend left=12pt,"c^\ast"] \\
+		% 		~\Set~ \ar[loop left,"F"]  & X \ar[rr,"c"'] && FY 
+		% 	\end{tikzcd}
+		% \end{center}
+		%%%
+	% 	\begin{center}
+	% 		\begin{tikzcd}
+	% 			& \Omega^{Y} \ar[d,"\substack{\rotatebox{90}{$\in$}}",phantom] && \Omega^{FY} \ar[d,"\rotatebox{90}{$\in$}",phantom] \\[-8pt]
+	% 			\Pred \ar[loop left,"\dot F"] \ar[d,"p"'] & q \ar[rr,mapsto,shorten=10pt] && \dot F_Y(q) \\
+	% 			~\Set~ \ar[loop left,"F"]  & Y \ar[rr] && FY 
+	% 		\end{tikzcd}
+	% 	\end{center}
+	% 	%%%
+	% 	\begin{center}
+	% 		\begin{tikzcd}
+	% 			& \Omega^{X} && \Omega^{Y} \ar[d,"\substack{\rotatebox{90}{$\in$}}",phantom] && \Omega^{FY} \ar[d,"\rotatebox{90}{$\in$}",phantom] \\[-8pt]
+	% 			& && q \ar[rrd,mapsto,shorten=10pt] && {} \\[-15pt]
+	% 			& && && \dot F_Y(q) \ar[dllll,mapsto] \\[-15pt]
+	% 			\Pred \ar[loop left,"\dot F"] \ar[d,"p"'] & wp\llbracket c\rrbracket(q) && {} && {} \\
+	% 			~\Set~ \ar[loop left,"F"]  & X && Y \ar[rr] && FY 
+	% 		\end{tikzcd}
+	% 	\end{center}
+	% % \end{small}
+	% \begin{tikzcd}[column sep=huge,row sep=large] 
+	% 	\Omega^Y \arrow[r,"\dot F_Y"] \arrow[rr,bend left=30pt,"wp\llbracket c \rrbracket"] \arrow[d,"p"'] & \Omega^{FY} \arrow[d,"p"] \arrow[r,"c^{\ast}"] & \Omega^{X} \arrow[d,"p"] \\ Y \arrow[r,"F"'] & FY & X \arrow[l,"c"] 
+	% \end{tikzcd} \quad 
+	% where 
+	% $\dot F_Y(q)=\tau\circ Fq$ is a predicate lifting. (???)
+	% \item 
+\end{itemize}
 
 
 \clearpage
