@@ -879,7 +879,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 典型例としては、例外処理 (exception handling) と呼ばれる計算効果を表す関手 $F(Y)=Y+E$ を用いた、「効果つきの計算」$f:X\to Y+E$ が挙げられます。ここで $+$ は余積を表し、$E$ は ``エラーの集合'' とみなします。このとき、計算 $f:X\to Y+E$ は、単に入力値 $x\in X$ から出力値 $y\in Y$ を返すだけでなく、「もし例外が生じたらエラー $e\in E$ を返す」という副作用 (side effect) を持ちます。
 % \[\begin{array}{cccc}f:&X&\longrightarrow&Y+E\\&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&x&\longmapsto &y\\&x'&\longmapsto&e\end{array}\]
 \[\begin{array}{cccccc}f:&X&\longrightarrow&Y\!\!&\!+\!&\!\!E\\&\rotatebox{90}{$\in$}&&&\!\!\rotatebox{90}{$\in$}\!\!\\&x&\longmapsto &y\!\!\\&x'&\longmapsto&&&\!\!e\end{array}\]
-では、この例のような副作用を持つ計算（効果つき計算）どうしの「合成」はどう考えればいいでしょうか。たとえば、2つの効果つき計算 $f:X\to Y+E$ と $g:Y\to Z+E$ を合成して、$g\circ f:X\to Z+E$ のようなものを作りたいとき、両者は型が合っていないため、一筋縄ではいかないことがわかります。そこで次節で導入する「モナド」と「クライスリ圏」という概念が役立ちます。\\%（次節でもあらためてこの例外処理の例について取り上げます。）
+では、この例のような副作用を持つ計算（効果つき計算）どうしの「合成」はどう考えればいいでしょうか。たとえば、2つの効果つき計算 $f:X\to Y+E$ と $g:Y\to Z+E$ を合成して、$g\circ f:X\to Z+E$ のようなものを作りたいとき、$f,g$の両者は型が合っていないため、一筋縄ではいかないことがわかります。そこで、次節で導入する「モナド」と「クライスリ圏」という概念が役立ちます。\\%（次節でもあらためてこの例外処理の例について取り上げます。）
 
 % なお、作用つき計算 $f:X\to F(Y)$ を、便宜的に $f:X\computationrightarrow Y$ という特殊な矢印で表記することがよくあります。（厳密に言えば、これはモナド $F$ のクライスリ圏における射を表す記法ですが、ここでは詳細の説明は省略します。この点については、次節を読んで「モナド」や「クライスリ圏」について学んだ後ならわかるはずです。）\\
 
@@ -897,7 +897,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 	\vspace{10pt}
 \end{center}
 
-以下では、「モナド」と「クライスリ圏」をそれぞれ導入します。（これらの概念そのものを後の章で直接的に使うというわけではありませんが、これらの考え方が後の章を理解するうえで役立つ、という意図で、本節を設けています。これらを念頭に置くことで、次章の背後にある問題設定や動機づけをより明確に理解できるようになるはずです。）
+以下では、「モナド」と「クライスリ圏」をそれぞれ導入します。（これらの概念そのものを後の章で直接的に使うわけではありませんが、これらの考え方が後の章を理解するうえで役立つ、という意図で、本節を設けています。これらを念頭に置くことで、次章の背後にある問題設定や動機づけをより明確に理解できるようになるはずです。）
 
 なお、この節で扱う内容は、Haskel などのプログラム言語にも用いられています。モナドとクライスリ圏の考え方は、「副作用」を関数型言語の中で扱うためのメカニズムとして知られています。この記事では Haskel のモナドに関する話題などには触れませんが、気になる人は自ら勉強してみてください。
 
@@ -1525,8 +1525,8 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 	\end{align*}
 	となります。まとめると、述語変換子は %\vspace{1pt}
 	\begin{enumerate}
-		\item[1)~~] $Y$ 上の述語 $q$ を、\uwave{様相 $\tau$ を用いて} $FY$ 上に\kenten{持ち上げて}、%\vspace{1pt}
-		\item[2)~~] それを \uwave{計算 $c$ に沿って} $X$ 上に\kenten{引き戻す}、%\vspace{2pt}
+		\item[1)~~] $Y$ 上の述語 $q$ を、\uwave{様相 $\tau$ を用いて} $FY$ 上に\textbf{\kenten{持ち上げて}}、%\vspace{1pt}
+		\item[2)~~] それを \uwave{計算 $c$ に沿って} $X$ 上に\textbf{\kenten{引き戻す}}、%\vspace{2pt}
 	\end{enumerate}
 	という2段階のプロセスとして理解できます。（スローガン:「\textbf{\kenten{持ち上げて}、\kenten{引き戻す}！}」）
 \end{itemize}
@@ -1542,7 +1542,11 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 %-----
 % \clearpage
 \begin{thebibliography}{99}
-    \item 
+	\item 蓮尾 (2011) 「Hoare論理によるプログラム検証」（スライド資料）, ......
+    \item 郡 (2025)「圏で圏を集める？---ファイブレーション入門」, 『圏論の歩き方 [改訂版]』, 日本評論社.
+    \item Jacobs, B. (1999) \textit{Categorical logic and type theory}, Elsevier.
+    \item Jacobs, B. (2016) \textit{Introduction to Coalgebra: Towards mathematics of states and observation}, Cambridge University Press.
+    \item Hasuo, I. (2025) \textit{Abstract and concrete model checking}, (lecture notes for Marktoberdorf summer school 2025), ...... 
 \end{thebibliography}
 %-----
 
