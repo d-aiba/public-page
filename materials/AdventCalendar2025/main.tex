@@ -858,13 +858,13 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\subsection{計算的作用 (computational effect) について}
+\subsection{計算効果 (computational effect) について}
 
 \ref{subsec:examples}節でいくつか例を挙げながら紹介したように、余代数 (coalgebra) は「1ステップの状態遷移」を表します。\[c:X\to F(X)\] 
 
 \noindent より一般に、計算 (computation) は、以下のように表されます。（なお $X=Y$ とすれば余代数です。）\[f:X\to F(Y)\] 
 
-\noindent ここで「ただの関数」(pure function) と「作用つき計算」(effectful computation) を区別することは重要です。%\[\textrm{pure function} \quad f:X\to Y \qquad \textrm{vs} \qquad \textrm{effectful computation} \quad c:X\to F(Y)\]
+\noindent ここで「ただの関数」(pure function) と「効果つき計算」(effectful computation) を区別することは重要です。%\[\textrm{pure function} \quad f:X\to Y \qquad \textrm{vs} \qquad \textrm{effectful computation} \quad c:X\to F(Y)\]
 \begin{framed}
 \[\textrm{pure function} \qquad \textrm{vs} \qquad \textrm{effectful computation}\] 
 \[f:X\to Y \qquad\qquad\quad\qquad f:X\to F(Y)\]
@@ -876,16 +876,41 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 % \end{tabular}
 % \end{center}
 
-典型例としては、例外処理 (exception handling) と呼ばれる計算的作用を表す関手 $F(Y)=Y+E$ を用いた、「作用つきの計算」$f:X\to Y+E$ が挙げられます。ここで $+$ は余積を表し、$E$ は ``エラーの集合'' とみなします。このとき、計算 $f:X\to Y+E$ は、単に入力値 $x\in X$ から出力値 $y\in Y$ を返すだけでなく、「もし例外が生じたらエラー $e\in E$ を返す」という副作用 (side effect) を持ちます。
+典型例としては、例外処理 (exception handling) と呼ばれる計算効果を表す関手 $F(Y)=Y+E$ を用いた、「効果つきの計算」$f:X\to Y+E$ が挙げられます。ここで $+$ は余積を表し、$E$ は ``エラーの集合'' とみなします。このとき、計算 $f:X\to Y+E$ は、単に入力値 $x\in X$ から出力値 $y\in Y$ を返すだけでなく、「もし例外が生じたらエラー $e\in E$ を返す」という副作用 (side effect) を持ちます。
 % \[\begin{array}{cccc}f:&X&\longrightarrow&Y+E\\&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&x&\longmapsto &y\\&x'&\longmapsto&e\end{array}\]
 \[\begin{array}{cccccc}f:&X&\longrightarrow&Y\!\!&\!+\!&\!\!E\\&\rotatebox{90}{$\in$}&&&\!\!\rotatebox{90}{$\in$}\!\!\\&x&\longmapsto &y\!\!\\&x'&\longmapsto&&&\!\!e\end{array}\]
-では、この例のような副作用を持つ計算（作用つき計算）の「合成」はどう考えればいいでしょうか。たとえば、2つの作用つき計算 $f:X\to Y+E$ と $g:Y\to Z+E$ を合成して、$g\circ f:X\to Z+E$ のようなものを作りたいとき、一筋縄ではいかないことがわかります。そこで、次節で導入する「モナド」と「クライスリ圏」という概念が役立ちます。\\%（次節でもあらためてこの例外処理の例について取り上げます。）
+では、この例のような副作用を持つ計算（効果つき計算）どうしの「合成」はどう考えればいいでしょうか。たとえば、2つの効果つき計算 $f:X\to Y+E$ と $g:Y\to Z+E$ を合成して、$g\circ f:X\to Z+E$ のようなものを作りたいとき、両者は型が合っていないため、一筋縄ではいかないことがわかります。そこで次節で導入する「モナド」と「クライスリ圏」という概念が役立ちます。\\%（次節でもあらためてこの例外処理の例について取り上げます。）
 
 % なお、作用つき計算 $f:X\to F(Y)$ を、便宜的に $f:X\computationrightarrow Y$ という特殊な矢印で表記することがよくあります。（厳密に言えば、これはモナド $F$ のクライスリ圏における射を表す記法ですが、ここでは詳細の説明は省略します。この点については、次節を読んで「モナド」や「クライスリ圏」について学んだ後ならわかるはずです。）\\
 
 \subsection{モナドとクライスリ圏}
 
+通常、プログラム意味論において副作用（非決定性や確率など）を伴う計算は、モナド $F$ を用いた写像 $c:X\to FY$ としてモデル化されます。これは、クライスリ圏 $\Kl(F)$ における射 $c:X\computationrightarrow Y$ とみなすことができます。
 
+\begin{center}
+	\vspace{10pt}
+	\begin{prooftree}
+		\AXC{~$c:X\rightarrow FY$~ in the category $\C$~}
+		\doubleLine
+		\UIC{~$c:X\computationrightarrow Y$~ in the Kleisli category $\Kl(F)$~}
+	\end{prooftree}
+	\vspace{10pt}
+\end{center}
+
+以下では、「モナド」と「クライスリ圏」をそれぞれ導入します。（これらの概念そのものを後の章で直接的に使うというわけではありませんが、これらの考え方が後の章を理解するうえで役立つ、という意図で、本節を設けています。これらを念頭に置くことで、次章の背後にある問題設定や動機づけをより明確に理解できるようになるはずです。）
+
+なお、この節で扱う内容は、Haskel などのプログラム言語にも用いられています。モナドとクライスリ圏の考え方は、「副作用」を関数型言語の中で扱うためのメカニズムとして知られています。この記事では Haskel のモナドに関する話題などには触れませんが、気になる人は自ら勉強してみてください。
+
+\clearpage
+
+\begin{definition}[モナド]
+	
+\end{definition}
+
+
+\begin{definition}[クライスリ圏]
+	
+\end{definition}
 
 
 \clearpage
@@ -1449,7 +1474,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 		\end{small}
 	\end{center}
 	\item なお、この $f^\ast$ は、左右いずれの随伴も持ちません。
-	\\ （対応策としては、米田埋め込みを使う方法があります。詳細は省略しますが、おおむね以下の図の通りです。）
+	\\ （随伴がないと不便な場面がいろいろあるのですが、対応策としては、米田埋め込みを使う方法があります。ここでは詳細は省略しますが、ざっくりとしたアイデアとしてはおおむね以下の図の通りです。）
 	\begin{center}
 		\begin{tikzcd}[column sep=68pt,row sep=40pt]
 			\widehat L \ar[rd,shift right=2.0pt,"\Lan_y(h)"'] \ar[rd,dash,shift left=0.8pt,phantom,"\rotatebox{55}{$\scriptstyle\dashv$}"]\\
@@ -1485,16 +1510,16 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 これを、グロタンディーク・ファイブレーションの言葉で次のように捉えることができます。
 
 \begin{itemize}
-	\item （状況設定） ファイブレーション $p:\Pred\to\Set$ を考えます。各ファイバー $\Pred_X=\Omega^X$ は「各状態集合 $X$ 上の述語全体」であり順序集合をなし、各 $f:X\to Y$ に対する置換 $f^\ast:\Omega^Y\to\Omega^X,\,q\mapsto q\circ f$ は「事後条件 $q$ を $f$ によって引き戻した事前条件」を表します。 \vspace{10pt}
+	\item （状況設定） ファイブレーション $p:\Pred\to\Set$ を考えます。各ファイバー $\Pred_X=\Omega^X$ は「各状態集合 $X$ 上の述語全体」であり順序集合をなし、各 $f:X\to Y$ に対する置換 $f^\ast:\Omega^Y\to\Omega^X,\,q\mapsto q\circ f$ は「事後条件 $q$ を $f$ によって引き戻した事前条件 $f^\ast(q)$ を返す写像」です。 \vspace{10pt}
 	\item （課題） いま、副作用つき計算$c:X\to FY$が与えられたとき、単に $c^\ast$ を考えると、これは $\Omega^{FX}\to\Omega^X$という型を持ちます。しかし、われわれが欲しい述語変換子は、$\Omega^Y\to\Omega^X$ という型を持つものです。\\（というのも、事後条件（$Y$上の述語）から事前条件（$X$上の述語）への変換を行いたいからです。）\vspace{10pt}
 	\item （解決策） ここで、様相 $\tau:F\Omega\to\Omega$ が重要な役割を果たします。この $\tau$ は、「\uwave{$Y$上の述語}」から「\uwave{$FY$上の述語}」へと持ち上げる操作、\textbf{述語持ち上げ} (predicate lifting) を誘導します。\vspace{8pt}\\
-	具体的には、各 $Y$ について、\[\dot F_Y:\Omega^Y\to\Omega^{FY},\quad \dot F_Y(q):=\tau\circ Fq\qquad \textrm{(ただし $q:Y\to\Omega$ を任意の述語とする)}\] と定めます。この $\dot F_Y$ は、「$Y$上の述語$q$を、計算的作用$F$で包まれた状態空間$FY$上の述語 $\dot F_Y(q)$ へと持ち上げる」操作です。これを、\textbf{述語持ち上げ}と呼びます。（通常、$\tau$ には単調性を課し、$\dot F_Y$ が単調になるようにします。）\vspace{8pt} \\
+	具体的には、各 $Y$ について、\[\dot F_Y:\Omega^Y\to\Omega^{FY},\quad \dot F_Y(q):=\tau\circ Fq\qquad \textrm{(ただし $q:Y\to\Omega$ を任意の述語とする)}\] と定めます。この $\dot F_Y$ は、「$Y$上の述語$q$を、計算効果$F$で包まれた状態空間$FY$上の述語 $\dot F_Y(q)$ へと持ち上げる」操作です。これを、\textbf{述語持ち上げ}と呼びます。（通常、$\tau$ には単調性を課し、$\dot F_Y$ が単調になるようにします。）\vspace{8pt} \\
 	すると、最弱事前条件 $wp\llbracket c\rrbracket$ は、この「述語持ち上げ $\dot F_Y$」と「計算 $c$ による引き戻し $c^\ast$」の合成として書けます。
 	\[\begin{tikzcd}
 		\Omega^Y \ar[r,"\dot F_Y"] \ar[rd,"wp\llbracket c\rrbracket"'] & \Omega^{FY} \ar[d,"c^\ast"]\\
 		& \Omega^X
 	\end{tikzcd}\]
-	つまり、任意の事後条件 $q:Y\to\Omega$に対して
+	すなわち、任意の事後条件 $q:Y\to\Omega$に対して
 	\begin{align*}
 		wp\llbracket c\rrbracket(q)&=c^\ast(\dot F_Y(q))\\ &=c^\ast(\tau\circ Fq) \\ &=\tau\circ Fq\circ c
 	\end{align*}
@@ -1503,9 +1528,8 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 		\item[1)~~] $Y$ 上の述語 $q$ を、\uwave{様相 $\tau$ を用いて} $FY$ 上に\kenten{持ち上げて}、%\vspace{1pt}
 		\item[2)~~] それを \uwave{計算 $c$ に沿って} $X$ 上に\kenten{引き戻す}、%\vspace{2pt}
 	\end{enumerate}
-	という2段階のプロセスとして理解できます。（スローガン:「\textbf{持ち上げて、引き戻す！}」）
+	という2段階のプロセスとして理解できます。（スローガン:「\textbf{\kenten{持ち上げて}、\kenten{引き戻す}！}」）
 \end{itemize}
-
 
 \clearpage
 
