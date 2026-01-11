@@ -1487,50 +1487,30 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 \begin{itemize}
 	\item （状況設定） ファイブレーション $p:\Pred\to\Set$ を考えます。各ファイバー $\Pred_X=\Omega^X$ は「各状態集合 $X$ 上の述語全体」であり順序集合をなし、各 $f:X\to Y$ に対する置換 $f^\ast:\Omega^Y\to\Omega^X,\,q\mapsto q\circ f$ は「事後条件 $q$ を $f$ によって引き戻した事前条件」を表します。 \vspace{10pt}
 	\item （課題） いま、副作用つき計算$c:X\to FY$が与えられたとき、単に $c^\ast$ を考えると、これは $\Omega^{FX}\to\Omega^X$という型を持ちます。しかし、われわれが欲しい述語変換子は、$\Omega^Y\to\Omega^X$ という型を持つものです。\\（というのも、事後条件（$Y$上の述語）から事前条件（$X$上の述語）への変換を行いたいからです。）\vspace{10pt}
-	\item （解決策） ここで、様相 $\tau:F\Omega\to\Omega$ が重要な役割を果たします。この $\tau$ は、「\uwave{$Y$上の述語}」から「\uwave{$FY$上の述語}」へと持ち上げる操作、\textbf{述語持ち上げ} (predicate lifting) を誘導します。\\具体的には、各 $Y$ について、\[\dot F_Y:\Omega^Y\to\Omega^{FY},\quad \dot F_Y(q):=\tau\circ Fq\qquad \textrm{(ただし $q:Y\to\Omega$ を任意の述語とする)}\] と定めます。この $\dot F_Y$ は、「$Y$上の述語$q$を、計算作用$F$で包まれた状態空間$FY$上の述語 $\dot F_Y(q)$ へと持ち上げる」操作となります。（通常、$\tau$ には単調性を課し、$\dot F_Y$ が単調になるようにします。）\vspace{10pt} \\
+	\item （解決策） ここで、様相 $\tau:F\Omega\to\Omega$ が重要な役割を果たします。この $\tau$ は、「\uwave{$Y$上の述語}」から「\uwave{$FY$上の述語}」へと持ち上げる操作、\textbf{述語持ち上げ} (predicate lifting) を誘導します。\vspace{8pt}\\
+	具体的には、各 $Y$ について、\[\dot F_Y:\Omega^Y\to\Omega^{FY},\quad \dot F_Y(q):=\tau\circ Fq\qquad \textrm{(ただし $q:Y\to\Omega$ を任意の述語とする)}\] と定めます。この $\dot F_Y$ は、「$Y$上の述語$q$を、計算的作用$F$で包まれた状態空間$FY$上の述語 $\dot F_Y(q)$ へと持ち上げる」操作です。これを、\textbf{述語持ち上げ}と呼びます。（通常、$\tau$ には単調性を課し、$\dot F_Y$ が単調になるようにします。）\vspace{8pt} \\
 	すると、最弱事前条件 $wp\llbracket c\rrbracket$ は、この「述語持ち上げ $\dot F_Y$」と「計算 $c$ による引き戻し $c^\ast$」の合成として書けます。
 	\[\begin{tikzcd}
 		\Omega^Y \ar[r,"\dot F_Y"] \ar[rd,"wp\llbracket c\rrbracket"'] & \Omega^{FY} \ar[d,"c^\ast"]\\
 		& \Omega^X
 	\end{tikzcd}\]
-	すなわち、任意の事後条件 $q:Y\to\Omega$に対して、
+	つまり、任意の事後条件 $q:Y\to\Omega$に対して
 	\begin{align*}
 		wp\llbracket c\rrbracket(q)&=c^\ast(\dot F_Y(q))\\ &=c^\ast(\tau\circ Fq) \\ &=\tau\circ Fq\circ c
 	\end{align*}
-	となります。つまり、\\(1) $Y$ 上の述語 $q$ を、\uwave{様相 $\tau$ を用いて} $FY$ 上に\kenten{持ち上げて}、\\(2) それを \uwave{計算 $c$ に沿って} $X$ 上に\kenten{引き戻す}、\\という2段階で理解できます。
-	% \begin{small}
-		% \begin{center}
-		% 	\begin{tikzcd}
-		% 		\Pred \ar[loop left,"\dot F"] \ar[d,"p"'] & \Omega^{X} \ar[rr,bend left=12pt,"\dot F_X"] && \Omega^{FY} \ar[ll,bend left=12pt,"c^\ast"] \\
-		% 		~\Set~ \ar[loop left,"F"]  & X \ar[rr,"c"'] && FY 
-		% 	\end{tikzcd}
-		% \end{center}
-		%%%
-	% 	\begin{center}
-	% 		\begin{tikzcd}
-	% 			& \Omega^{Y} \ar[d,"\substack{\rotatebox{90}{$\in$}}",phantom] && \Omega^{FY} \ar[d,"\rotatebox{90}{$\in$}",phantom] \\[-8pt]
-	% 			\Pred \ar[loop left,"\dot F"] \ar[d,"p"'] & q \ar[rr,mapsto,shorten=10pt] && \dot F_Y(q) \\
-	% 			~\Set~ \ar[loop left,"F"]  & Y \ar[rr] && FY 
-	% 		\end{tikzcd}
-	% 	\end{center}
-	% 	%%%
-	% 	\begin{center}
-	% 		\begin{tikzcd}
-	% 			& \Omega^{X} && \Omega^{Y} \ar[d,"\substack{\rotatebox{90}{$\in$}}",phantom] && \Omega^{FY} \ar[d,"\rotatebox{90}{$\in$}",phantom] \\[-8pt]
-	% 			& && q \ar[rrd,mapsto,shorten=10pt] && {} \\[-15pt]
-	% 			& && && \dot F_Y(q) \ar[dllll,mapsto] \\[-15pt]
-	% 			\Pred \ar[loop left,"\dot F"] \ar[d,"p"'] & wp\llbracket c\rrbracket(q) && {} && {} \\
-	% 			~\Set~ \ar[loop left,"F"]  & X && Y \ar[rr] && FY 
-	% 		\end{tikzcd}
-	% 	\end{center}
-	% % \end{small}
-	% \begin{tikzcd}[column sep=huge,row sep=large] 
-	% 	\Omega^Y \arrow[r,"\dot F_Y"] \arrow[rr,bend left=30pt,"wp\llbracket c \rrbracket"] \arrow[d,"p"'] & \Omega^{FY} \arrow[d,"p"] \arrow[r,"c^{\ast}"] & \Omega^{X} \arrow[d,"p"] \\ Y \arrow[r,"F"'] & FY & X \arrow[l,"c"] 
-	% \end{tikzcd} \quad 
-	% where 
-	% $\dot F_Y(q)=\tau\circ Fq$ is a predicate lifting. (???)
-	% \item 
+	となります。まとめると、述語変換子は %\vspace{1pt}
+	\begin{enumerate}
+		\item[1)~~] $Y$ 上の述語 $q$ を、\uwave{様相 $\tau$ を用いて} $FY$ 上に\kenten{持ち上げて}、%\vspace{1pt}
+		\item[2)~~] それを \uwave{計算 $c$ に沿って} $X$ 上に\kenten{引き戻す}、%\vspace{2pt}
+	\end{enumerate}
+	という2段階のプロセスとして理解できます。
 \end{itemize}
+
+
+\clearpage
+
+\section{まとめ}
+
 
 
 \clearpage
