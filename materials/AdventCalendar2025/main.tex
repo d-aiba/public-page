@@ -1510,7 +1510,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 これを、グロタンディーク・ファイブレーションの言葉で次のように捉えることができます。
 
 \begin{itemize}
-	\item （状況設定） ファイブレーション $p:\Pred\to\Set$ を考えます。各ファイバー $\Pred_X=\Omega^X$ は「各状態集合 $X$ 上の述語全体」であり順序集合をなし、各 $f:X\to Y$ に対する置換 $f^\ast:\Omega^Y\to\Omega^X,\,q\mapsto q\circ f$ は「事後条件 $q$ を $f$ によって引き戻した事前条件 $f^\ast(q)$ を返す写像」です。 \vspace{10pt}
+	\item （状況設定） ファイブレーション $p:\Pred\to\Set$ を考えます。各ファイバー $\Pred_X=\Omega^X$ は「各状態集合 $X$ 上の述語全体」であり順序集合をなし、各 $f:X\to Y$ に対する置換 $f^\ast:\Omega^Y\to\Omega^X,\,q\mapsto q\circ f$ は「事後条件 $q$ を $f$ によって引き戻した事前条件」$f^\ast(q)$ を返します。 \vspace{10pt}
 	\item （課題） いま、副作用つき計算$c:X\to FY$が与えられたとき、単に $c^\ast$ を考えると、これは $\Omega^{FX}\to\Omega^X$という型を持ちます。しかし、われわれが欲しい述語変換子は、$\Omega^Y\to\Omega^X$ という型を持つものです。\\（というのも、事後条件（$Y$上の述語）から事前条件（$X$上の述語）への変換を行いたいからです。）\vspace{10pt}
 	\item （解決策） ここで、様相 $\tau:F\Omega\to\Omega$ が重要な役割を果たします。この $\tau$ は、「\uwave{$Y$上の述語}」から「\uwave{$FY$上の述語}」へと持ち上げる操作、\textbf{述語持ち上げ} (predicate lifting) を誘導します。\vspace{8pt}\\
 	具体的には、各 $Y$ について、\[\dot F_Y:\Omega^Y\to\Omega^{FY},\quad \dot F_Y(q):=\tau\circ Fq\qquad \textrm{(ただし $q:Y\to\Omega$ を任意の述語とする)}\] と定めます。この $\dot F_Y$ は、「$Y$上の述語$q$を、計算効果$F$で包まれた状態空間$FY$上の述語 $\dot F_Y(q)$ へと持ち上げる」操作です。これを、\textbf{述語持ち上げ}と呼びます。（通常、$\tau$ には単調性を課し、$\dot F_Y$ が単調になるようにします。）\vspace{8pt} \\
@@ -1542,11 +1542,11 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 %-----
 % \clearpage
 \begin{thebibliography}{99}
-	\item 蓮尾 (2011) 「Hoare論理によるプログラム検証」（スライド資料）, ......
+	\item 蓮尾 (2011) 「Hoare論理によるプログラム検証」（資料）, \href{https://group-mmm.org/~ichiro/talks/komabaSogoHandout.pdf}{[URL]}. 
     \item 郡 (2025)「圏で圏を集める？---ファイブレーション入門」, 『圏論の歩き方 [改訂版]』, 日本評論社.
     \item Jacobs, B. (1999) \textit{Categorical logic and type theory}, Elsevier.
     \item Jacobs, B. (2016) \textit{Introduction to Coalgebra: Towards mathematics of states and observation}, Cambridge University Press.
-    \item Hasuo, I. (2025) \textit{Abstract and concrete model checking}, (lecture notes for Marktoberdorf summer school 2025), ...... 
+    \item Hasuo, I. (2025) \textit{Abstract and concrete model checking}, lecture notes for Marktoberdorf summer school 2025, \href{https://group-mmm.org/~ichiro/papers/hasuoMOD25LectNotes.pdf}{[URL]}.
 \end{thebibliography}
 %-----
 
