@@ -885,7 +885,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 
 \subsection{モナドとクライスリ圏}
 
-通常、プログラム意味論において副作用（非決定性や確率など）を伴う計算は、モナド $F$ を用いた写像 $c:X\to FY$ としてモデル化されます。これは、クライスリ圏 $\Kl(F)$ における射 $c:X\computationrightarrow Y$ とみなすことができます。
+通常、プログラム意味論において副作用（非決定性や確率など）を伴う計算は、モナド $F$ を用いた写像 $c:X\to FY$ としてモデル化されます。これは、クライスリ圏 $\Kl(F)$ における射 $c:X\computationrightarrow Y$ とみなすこともできます。
 
 \begin{center}
 	\vspace{10pt}
@@ -1358,7 +1358,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 	\item いま、以下の関数を定めましょう。\vspace{3pt}\\ 
 	% $\exists_c:2^X\to 2^Y$, $\exists_c(P)=\{f(x)\in Y\mid x\in P\}=\{y\in Y \mid \exists\, x\in X,\; f(x)=y\;\textrm{and}\;x\in P\}$
 	$\begin{array}{lccl}\exists_f:2^X\to 2^Y,&\exists_f(P)&\!\!=\!\!&\{f(x)\in Y\mid x\in P\}\\&&\!\!=\!\!&\{y\in Y \mid \exists\, x\in X,\; f(x)=y\;\textrm{and}\;x\in P\}\\\forall_f:2^X\to 2^Y,& \forall_f(P)&\!\!=\!\!&\{y\in Y\mid f^\ast(\{y\})\subseteq P\}\\&&\!\!=\!\!&\{y\in Y\mid\forall\,x\in X,\;f(x)=y\;\textrm{implies}\;x\in P\}\end{array}$ \vspace{5pt}
-	\item このとき、$\exists_f\dashv f^\ast\dashv \forall_f$ が成り立ちます。\\（これはまさに、トポスの基本定理 (the fundamental theorem of topos) として知られるものと同等です。）
+	\item このとき、$\exists_f\dashv f^\ast\dashv \forall_f$ が成り立ちます。%\\（これはまさに、トポスの基本定理 (the fundamental theorem of topos) として知られるものと同等です。）
 	\begin{center}
 				\begin{tikzcd}[column sep=30pt]
 					% 2^X \ar[r,bend left=30pt,"\amalg_f","\bot"'] \ar[r,bend right=30pt,"\Pi_f"',"\bot"] & 2^Y \ar[l]
