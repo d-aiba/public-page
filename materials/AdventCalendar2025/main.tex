@@ -800,11 +800,12 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 	% 	\UIC{$\textrm{relation}\subseteq X\times (A\times X)$} \doubleLine \RL{classify}
 	% 	\UIC{$X\to\mathcal P(A\times X)$}
 	% \end{prooftree}
+	\vspace{-5pt}
 \end{example}
 
 % \clearpage
 
-\begin{example}
+\begin{example} \label{ex:MarkovChain}
 	マルコフ連鎖は、余代数 $\gamma:X\to \mathcal D(X)$ で与えられる。なお、関手 $\mathcal D:\Set\to\Set$ は
 	\begin{align*}\mathcal D(X)&=\{d:X\to [0,1]\mid\textrm{finite support,~}\textstyle\sum d(x)=1\}\\&=\{\textstyle\,\sum p_i\ket{x_i}\,\textrm{, where each $p_i$ is a probability $d(x_i)\in[0,1]$.}\}\\\mathcal D(f)&:\mathcal D(X)\to\mathcal D(Y)\\&\mathcal D(f)(\textstyle\sum p_i\ket{x_i})=\textstyle\sum p_i\ket{f(x_i)}\end{align*}
 	と定められているものとする。
@@ -858,7 +859,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\subsection{計算効果 (computational effect) について}
+\subsection{余談: 計算効果 (computational effect) について}
 
 \ref{subsec:examples}節でいくつか例を挙げながら紹介したように、余代数 (coalgebra) は「1ステップの状態遷移」を表します。\[c:X\to F(X)\] 
 
@@ -883,9 +884,9 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 
 % なお、作用つき計算 $f:X\to F(Y)$ を、便宜的に $f:X\computationrightarrow Y$ という特殊な矢印で表記することがよくあります。（厳密に言えば、これはモナド $F$ のクライスリ圏における射を表す記法ですが、ここでは詳細の説明は省略します。この点については、次節を読んで「モナド」や「クライスリ圏」について学んだ後ならわかるはずです。）\\
 
-\subsection{モナドとクライスリ圏}
+\subsection{余談: モナドとクライスリ圏}
 
-通常、プログラム意味論において副作用（非決定性や確率など）を伴う計算は、モナド $F$ を用いた写像 $c:X\to FY$ としてモデル化されます。これは、クライスリ圏 $\Kl(F)$ における射 $c:X\computationrightarrow Y$ とみなすこともできます。
+通常、プログラム意味論において副作用（非決定性や確率など）を伴う計算は、モナド $F$ を用いた写像 $c:X\to FY$ として表されます。これは、クライスリ圏 $\Kl(F)$ における射 $c:X\computationrightarrow Y$ とみなすこともできます。
 
 \begin{center}
 	\vspace{10pt}
@@ -899,14 +900,160 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 
 以下では、「モナド」と「クライスリ圏」をそれぞれ導入します。（これらの概念そのものは後の章で直接的に使うわけではありませんが、これらの考え方が後の章を理解するうえで役立つという意図で、本節を設けています。これらを念頭に置くことで、次章の背後にある問題設定や動機づけをより明確に理解できるようになるはずです。）
 
-なお、この節で扱う内容は、Haskel などのプログラム言語にも用いられています。モナドとクライスリ圏の考え方は、「計算効果」を関数型言語の中で扱うための仕組みのひとつとして知られています。Haskel のモナドに関する話題についてはこの記事では触れませんが、気になる人は自ら勉強してみてください。
+なお、この節で扱う内容は、Haskel などのプログラム言語にも用いられています。モナドとクライスリ圏の考え方は、「計算効果」を関数型言語の中で扱うための仕組みのひとつとして知られています。（Haskel のモナドに関する話題についてはこの記事では一切触れませんが、気になる人は自ら勉強してみてください。）
 
 \clearpage
 
 \begin{definition}[モナド]
+	モナド (monad) とは3つ組 $(T,\mu,\eta)$ であって、以下を満たすものである。\\ 1) $T:\C\to\C$は関手である。2) $\mu:T\circ T\Rightarrow T$ は自然変換である。3) $\eta:\id_{\mathbb C}\Rightarrow T$は自然変換である。\\ そして 4) 以下の図式を満たす。
+	\begin{multicols}{2}
+		\begin{center}
+			\begin{tikzcd}
+				T\circ T\circ T \ar[r,Rightarrow,"\id_T\cdot\mu"] \ar[d,Rightarrow,"\mu\cdot \id_T"'] & T\circ T \ar[d,Rightarrow,"\mu"]\\
+				T\circ T \ar[r,Rightarrow,"\mu"'] & T
+			\end{tikzcd}
+		\end{center}
+		\begin{center}
+			\begin{tikzcd}
+				\id_\C\circ T \ar[r,Rightarrow,"\eta\cdot\id_T"] \ar[rd,equal] & T\circ T \ar[d,Rightarrow,"\mu"]\ar[r,Leftarrow,"\id_T\cdot\eta"] & T\circ\id_\C \ar[ld,equal]\\
+				&T&
+			\end{tikzcd}
+		\end{center}
+	\end{multicols}
+	言い換えると、任意の対象 $X\in\C$ について、$\mu_X:T(T(X))\to T(X)$ と $\eta_X:X\to T(X)$ は以下を満たす。
+	\begin{multicols}{2}
+		\begin{center}
+			\begin{tikzcd}
+				TTTX \ar[r,"T\mu_X"] \ar[d,"\mu_{{}_{T\!X}}"'] & TTX \ar[d,"\mu_X"]\\
+				TTX \ar[r,"\mu_X"'] & TX
+			\end{tikzcd}
+		\end{center}
+		\begin{center}
+			\begin{tikzcd}
+				TX \ar[r,"\eta_{{}_{T\!X}}"] & TTX \ar[r,leftarrow,"T\eta_X"] \ar[d,"\mu_X"] & TX \\
+				{} & TX \ar[lu,equal] \ar[ru,equal] & 
+			\end{tikzcd}
+		\end{center}
+	\end{multicols}
+\end{definition}
+
+\begin{remark}
+	モナドの$\mu$は、2段階の分岐を1段階に潰す役割を果たします。（後ほど例を交えて説明します。）\vspace{5pt}
+	\begin{center}
+	\begin{tikzcd}[row sep=2pt,column sep=18pt]
+		&& \bullet \\
+		& \bullet \ar[ru,rightsquigarrow] \ar[rd,rightsquigarrow] \\
+		\bullet \ar[ru,rightsquigarrow] \ar[rd,rightsquigarrow] & & \bullet \\
+		& \bullet \ar[r,rightsquigarrow] & \bullet \\
+	\end{tikzcd}
+	\quad $\implies$ \quad
+		\begin{tikzcd}[row sep=10pt,column sep=38pt]
+			& \bullet \\
+			\bullet \ar[ru,rightsquigarrow] \ar[r,rightsquigarrow] \ar[rd,rightsquigarrow] & \bullet \\
+			& \bullet
+		\end{tikzcd}
+	\end{center}
+\end{remark}
+
+\begin{definition}[モナドの分配則]
+	モナドの分配則 (distributive law) とは、2つのモナド $(T,\mu,\eta)$ と $(T',\mu',\eta')$ の間の自然変換 $\lambda:TT'\Rightarrow T'T$ であって以下の図式を可換にするものである。\vspace{5pt}
+	\begin{center}
+		\begin{small}
+		\begin{tikzcd}
+			TX \ar[r,"T\eta'"] \ar[rd,"\eta'T"'] & TT'X \ar[d,"\lambda"] & T'X \ar[l,"\eta T'"'] \ar[ld,"T'\eta"] \\
+			& T'TX 
+		\end{tikzcd}
+		\end{small}
+	\end{center}
+	%
+	\begin{multicols}{2}
+		\begin{center}
+			\begin{small}
+			\begin{tikzcd}[column sep=8pt,row sep=15pt]
+				TT'T'X \ar[rr,"T\mu'"] \ar[d,"\lambda T'"'] && TT'X \ar[d,"\lambda"]\\
+				T'TT'X \ar[rd,"T'\lambda"'] && T'TX \\
+				& T'T'TX \ar[ur,"\mu'T"'] &
+			\end{tikzcd}
+			\end{small}
+		\end{center}
+		%
+		\begin{center}
+			\begin{small}
+			\begin{tikzcd}[column sep=8pt,row sep=15pt]
+				TTT'X \ar[rr,"\mu T'"] \ar[d,"T \lambda "'] && TT'X \ar[d,"\lambda"]\\
+				TT'TX \ar[rd,"\lambda T"'] && T'TX \\
+				& T'TTX \ar[ur,"T'\mu"'] &
+			\end{tikzcd}
+			\end{small}
+		\end{center} 
+	\end{multicols}
+\end{definition}
+
+いくつかモナドの例を挙げます。
+
+\begin{example}[例外処理モナド]
+	
+\end{example}
+
+\begin{example}[writerモナド]
+	
+\end{example}
+
+\begin{example}[readerモナド]
+	
+\end{example}
+
+\begin{example}[冪集合モナド]
+
+\end{example}
+
+\begin{example}[分布モナド]
+	分布モナド (distribution monad) は、以下で定められた3つ組 $(\mathcal D,\eta,\mu)$ である。
+	\begin{itemize}
+		\item $\mathcal D:\Set\to\Set$ は分布関手である。（\textbf{例\ref{ex:MarkovChain}}を参照）
+		\begin{align*}
+			\mathcal D(X)&=\{d:X\to [0,1]\mid\textrm{finite support,~}\textstyle\sum d(x)=1\}\\&=\{\textstyle\,\sum p_i\ket{x_i}\,\textrm{, where each $p_i$ is a probability $d(x_i)\in[0,1]$.}\}\\\mathcal D(f)&:\mathcal D(X)\to\mathcal D(Y)\\&\mathcal D(f)(\textstyle\sum p_i\ket{x_i})=\textstyle\sum p_i\ket{f(x_i)}
+		\end{align*}
+		\item The unit $\eta_X:X\to T(X)$ is defined as \[\eta_X(x)=1\cdot\Ket{x}.\]
+		\item The multiplication $\mu_X:T(T(X))\to T(X)$ is defined as \[\mu_X\left( \sum_{i\in I} a_i \Ket{\sum_{x\in X} b_{ix} \Ket{x}} \right)=\sum_{x\in X} \left( \sum_{i\in I} a_i b_{ix} \right) \Ket{x}.\]
+	\end{itemize}
+\end{example}
+
+\begin{example}[継続モナド]
+
+\end{example}
+
+
+\clearpage
+
+次に、
+
+% \begin{definition}[クライスリ圏]
+	
+% \end{definition}
+
+\begin{definition}[強モナド]
 	
 \end{definition}
 
+\begin{remark}
+	$\Set$上のモナドは強モナドである。（$\Set$を、直積$\times$をテンソル積として持った対称モノイダル圏と見る！）
+\end{remark}
+
+\begin{definition}[可換な強モナド]
+	
+\end{definition}
+
+\begin{remark}
+	冪集合モナド $\mathcal P$ (powerset monad) や分布モナド $\mathcal D$ (distribution monad) は可換である。\\ 他方で、たとえば継続モナド $\Omega^{\Omega^{(-)}}$ (continuation monad) は可換ではない。
+\end{remark}
+
+\begin{proposition}
+	
+\end{proposition}
+
+
+\clearpage
 
 \begin{definition}[クライスリ圏]
 	
@@ -1060,11 +1207,20 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 			\end{tikzcd}
 		\end{small}
 	\end{center} 
-	を満たすことです。特に余代数との関わりの中では、以下の図のような状況を考えることが多いです。基底の関手 $F$ をどうやって $\dot F$ に持ち上げるかが重要になります。（後述）
+	を満たすことです。特に余代数との関わりの中では、以下の図のような状況を考えることが多いです。基底の関手 $F$ をどうやって $\dot F$ に持ち上げるか（様相の入れ方、たとえば$\Box$か$\Diamond$か）が重要になります。（後述）
 	\begin{small}
+		% \begin{center}
+		% 	\begin{tikzcd}
+		% 		\Pred \ar[loop left,"\dot F"] \ar[d,"p"'] & \Pred_{X} \ar[rr,bend left=12pt,"\dot F_X"] && \Pred_{\,FX} \ar[ll,bend left=12pt,"c^\ast"] \\
+		% 		~\Set~ \ar[loop left,"F"]  & X \ar[rr,"c"'] && FX 
+		% 	\end{tikzcd}
+		% \end{center}
 		\begin{center}
 			\begin{tikzcd}
-				\Pred \ar[loop left,"\dot F"] \ar[d,"p"'] & \Pred_{X} \ar[rr,bend left=12pt,"\dot F_X"] && \Pred_{\,FX} \ar[ll,bend left=12pt,"c^\ast"] \\
+				&\Pred_{X} \ar[rr,bend left=12pt,"\dot F_X"] && \Pred_{\,FX} \ar[ll,bend left=12pt,"c^\ast"] \\[-5pt]
+				& P \ar[rrd,mapsto,shorten=3pt] \\[-24pt] 
+				\Pred \ar[loop left,"\dot F"] \ar[dd,"p"'] &&& \dot F P \ar[lld,mapsto,shorten=3pt] \\[-24pt] 
+				& c^\ast\dot F P & \\
 				~\Set~ \ar[loop left,"F"]  & X \ar[rr,"c"'] && FX 
 			\end{tikzcd}
 		\end{center}
@@ -1328,7 +1484,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 	\end{itemize}
 \end{remark}
 
-さて、次章からは、これらの道具立てをフル活用して、様々な種類の（非決定的、確率的、etc.）プログラムに対する最弱事前条件を定める方法を紹介します。
+さて、次章からは、本章で導入した道具立てをフル活用して、様々な種類の（非決定的、確率的、etc.）プログラムに対する最弱事前条件を定める方法を紹介します。
 
 % \begin{remark}
 % 	$\dot F_X:\E_X\to\E_{FX}$ である。
@@ -1474,7 +1630,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 		\end{small}
 	\end{center}
 	\item なお、この $f^\ast$ は、左右いずれの随伴も持ちません。
-	\\ （随伴がないと不便な場面がいろいろあるのですが、対応策としては、米田埋め込みを使う方法があります。ここでは詳細は省略しますが、ざっくりとしたアイデアとしてはおおむね以下の図の通りです。）
+	\\ （随伴がないと不便な場面がいろいろあるのですが、対応策としては、米田埋め込みを使う方法があります。詳細は省略しますが、ざっくりとしたアイデアとしてはおおむね以下の図の通りです。）
 	\begin{center}
 		\begin{tikzcd}[column sep=68pt,row sep=40pt]
 			\widehat L \ar[rd,shift right=2.0pt,"\Lan_y(h)"'] \ar[rd,dash,shift left=0.8pt,phantom,"\rotatebox{55}{$\scriptstyle\dashv$}"]\\
@@ -1519,17 +1675,70 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 		\Omega^Y \ar[r,"\dot F_Y"] \ar[rd,"wp\llbracket c\rrbracket"'] & \Omega^{FY} \ar[d,"c^\ast"]\\
 		& \Omega^X
 	\end{tikzcd}\]
-	すなわち、任意の事後条件 $q:Y\to\Omega$に対して
+	すなわち、任意の事後条件 $q:Y\to\Omega$に対して、以下のように理解できます。
 	\begin{align*}
 		wp\llbracket c\rrbracket(q)&=c^\ast(\dot F_Y(q))\\ &=c^\ast(\tau\circ Fq) \\ &=\tau\circ Fq\circ c
 	\end{align*}
-	となります。まとめると、述語変換子は %\vspace{1pt}
+	% となります。
+	% \begin{multicols}{3}
+	% 	% \[
+	% 	\begin{center}
+	% 	\begin{tikzcd}
+	% 	\Omega^Y \ar[r,"\dot F_Y"] \ar[rd,"wp\llbracket c\rrbracket"'] & \Omega^{FY} \ar[d,"c^\ast"]\\
+	% 	& \Omega^X
+	% 	\end{tikzcd}
+	% 	\end{center}
+	% 	% \]
+	% 	%
+	% 	\begin{align*}
+	% 	wp\llbracket c\rrbracket(q)&=c^\ast(\dot F_Y(q))\\ &=c^\ast(\tau\circ Fq) \\ &=\tau\circ Fq\circ c
+	% 	\end{align*}
+	% 	%
+	% 	\begin{center}
+	% 		~\\[-15pt]
+	% 		（$q:Y\to\Omega$は任意の事後条件）
+	% 	\end{center}
+	% \end{multicols}
+	% 
+	%%%
+	% \noindent まとめると、述語変換子は %\vspace{1pt}
+	% \begin{enumerate}
+	% 	\item[1)~~] $Y$ 上の述語 $q$ を、\uwave{様相 $\tau$ を用いて} $FY$ 上に\textbf{\kenten{持ち上げて}}、%\vspace{1pt}
+	% 	\item[2)~~] それを \uwave{計算 $c$ に沿って} $X$ 上に\textbf{\kenten{引き戻す}}、%\vspace{2pt}
+	% \end{enumerate}
+	% という2段階のプロセスとして理解できます。（スローガン:「\textbf{\kenten{持ち上げて}、\kenten{引き戻す}！}」）
+\end{itemize}
+
+\begin{screen}
+	\noindent まとめると、述語変換子は %\vspace{1pt}
 	\begin{enumerate}
 		\item[1)~~] $Y$ 上の述語 $q$ を、\uwave{様相 $\tau$ を用いて} $FY$ 上に\textbf{\kenten{持ち上げて}}、%\vspace{1pt}
 		\item[2)~~] それを \uwave{計算 $c$ に沿って} $X$ 上に\textbf{\kenten{引き戻す}}、%\vspace{2pt}
 	\end{enumerate}
 	という2段階のプロセスとして理解できます。（スローガン:「\textbf{\kenten{持ち上げて}、\kenten{引き戻す}！}」）
-\end{itemize}
+\end{screen}
+
+\clearpage
+
+\noindent なお余代数 $c:X\to FX$ を考える場合は、まさに以下の図のようになります。\vspace{5pt}
+\begin{center}
+	% \begin{small}
+		\begin{tikzcd}
+			&\mathbf{\Omega}^{X} \ar[rr,bend left=12pt,"\dot F_X"] && \mathbf{\Omega}^{FX} \ar[ll,bend left=12pt,"c^\ast"] \\[-5pt]
+			& q \ar[rrd,mapsto,shorten=3pt] \\[-25pt] 
+			\Pred \ar[loop left,"\dot F"] \ar[dd,"p"'] &&& \dot F_X q \ar[lld,mapsto,shorten=3pt] \\[-25pt] 
+			& c^\ast\dot F_X q & \\
+			~\Set~ \ar[loop left,"F"]  & X \ar[rr,"c"'] && FX 
+		\end{tikzcd}
+	% \end{small}
+\end{center}
+\vspace{15pt}
+
+\subsection{応用例: 確率的プログラムの「停止性」および「期待実行時間」の検証}
+
+本節では、「最弱事前条件意味論の圏論的定式化が実際にどのようにモデル検査に役立つか」を紹介するという目的で、確率的プログラムの\textbf{停止性} (almost-sure termination) および\textbf{期待実行時間} (expected runtime) の検証に関して、筆者が最近行った研究内容を（少しだけ）取り上げます。
+
+...... 
 
 \clearpage
 
