@@ -1,7 +1,7 @@
 %----------
 %----------
 %----------
-\title{述語変換子意味論と余代数}
+\title{述語変換子意味論と余代数\\\Large{圏論を用いたモデル検査入門}}
 % \author{饗庭 大地 (Aiba, Daichi)}
 \author{こっとん (\href{https://twitter.com/CottonShampoo}{@CottonShampoo}) }
 \date{2025年12月20日 土曜日}
@@ -332,42 +332,42 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 \clearpage
 
 \begin{proposition}
-	$L$ を完備束とし、$f:L\to L$ を単調写像とする。このとき、以下の帰結関係（上から下）が成り立つ。\vspace{5pt}
+	$(L,\sqsubseteq)$ を完備束とし、$f:L\to L$ を単調写像とする。このとき、以下の帰結関係（上から下）が成り立つ。\vspace{5pt}
 	\begin{center}
 	\begin{prooftree}
-		\AXC{$p\leq i$} 
-		\AXC{$i\leq f(i)$} 
-		\AXC{$i\leq q$} 
-		\TIC{$p\leq\nu(f(-)\land q)$}
+		\AXC{$p\sqsubseteq i$} 
+		\AXC{$i\sqsubseteq f(i)$} 
+		\AXC{$i\sqsubseteq q$} 
+		\TIC{$p\sqsubseteq\nu(f(-)\sqcap q)$}
 	\end{prooftree}
 	\end{center}
 \end{proposition}
 
 \begin{proof}
-	$\land$ の普遍性より、以下の同値関係が成り立つ。
+	$\sqcap$ の普遍性より、以下の同値関係が成り立つ。
 	\begin{prooftree}
-		\AXC{$i\leq f(i)$}
-		\AXC{$i\leq q$}
+		\AXC{$i\sqsubseteq f(i)$}
+		\AXC{$i\sqsubseteq q$}
 		\doubleLine
-		\BIC{$i\leq f(i)\land q$}
+		\BIC{$i\sqsubseteq f(i)\sqcap q$}
 	\end{prooftree}
-	ナスター・タルスキの定理より、\[\nu(f(-)\land q)=\bigvee\{x\in L\mid x\leq f(x)\land q\}\] であるから、特に任意の $i\in L$ について以下の帰結関係が成り立つ。
+	ナスター・タルスキの定理より、\[\nu(f(-)\sqcap q)=\bigsqcup\{x\in L\mid x\sqsubseteq f(x)\sqcap q\}\] であるから、特に任意の $i\in L$ について以下の帰結関係が成り立つ。
 	\begin{prooftree}
-		\AXC{$i\leq f(i)\land q$}
-		\UIC{$i\leq\nu(f(-)\land q)$}
+		\AXC{$i\sqsubseteq f(i)\sqcap q$}
+		\UIC{$i\sqsubseteq\nu(f(-)\sqcap q)$}
 	\end{prooftree}
-	ここで、条件 $p\leq i$ と推移性から、最終的に
+	ここで、条件 $p\sqsubseteq i$ と推移性から、最終的に
 	\begin{prooftree}
-		\AXC{$p\leq i$} 
-		\AXC{$i\leq f(i)$} 
-		\AXC{$i\leq q$} 
-		\TIC{$p\leq\nu(f(-)\land q)$}
+		\AXC{$p\sqsubseteq i$} 
+		\AXC{$i\sqsubseteq f(i)$} 
+		\AXC{$i\sqsubseteq q$} 
+		\TIC{$p\sqsubseteq\nu(f(-)\sqcap q)$}
 	\end{prooftree}
 	が得られた。
 \end{proof}
 
 \noindent 
-上記の命題において、$p$ は事前条件、$q$ は事後条件、$i$ はループ不変量に、それぞれ相当しています。
+上記の命題の中の、$p$ は事前条件、$q$ は事後条件、$i$ はループ不変量に、それぞれ相当しています。
 % ここで、
 % \begin{itemize}
 % 	\item \fbox{\,$f(i)$\,} を \fbox{\,$\varphi\Rightarrow wp\llbracket C\rrbracket(I)$\,} に読み替える
@@ -377,10 +377,10 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 \vspace{12pt}
 \begin{center}
 	% \begin{prooftree}
-		\AXC{$p\leq i$} 
-		\AXC{$i\leq f(i)$} 
-		\AXC{$i\leq q$} 
-		\TIC{$p\leq\nu(f(-)\land q)$}
+		\AXC{$p\sqsubseteq i$} 
+		\AXC{$i\sqsubseteq f(i)$} 
+		\AXC{$i\sqsubseteq q$} 
+		\TIC{$p\sqsubseteq\nu(f(-)\sqcap q)$}
 		\DisplayProof
 	% \end{prooftree}
 	\qquad$\leadsto$\qquad
@@ -423,7 +423,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 	\end{tabular}
 \end{center}
 \vspace{10pt}
-直観的には、一般に順序集合における最小不動点と最大不動点の間には $\mu x.\,Fx\leq \nu x.\, Fx$ という大小関係があるわけですが、このギャップが「プログラムの停止性を保証するかしないか」の違いだ、と理解するのがわかりやすいでしょう。
+直観的には、一般に順序集合における最小不動点と最大不動点の間には $\mu x.\,\Phi x\leq \nu x.\,\Phi x$ という大小関係があるわけですが、このギャップが「\uwave{プログラムの停止性を保証するかしないか}」の違いだ、と理解するのがわかりやすいでしょう。
 \vspace{10pt}
 
 % \clearpage
@@ -474,7 +474,7 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 \end{center}
 $L$を完備束とし、以下で定められているものとします。
 \[L:=2^X=\{0,1\}^X\]
-この$L$は述語の集合であり（補足: $p(x)=1$ を $x\models p$ と考えます）、$L$上の順序$\leq$は述語どうしの論理的含意関係によって定められている、と考えます。なお、$L$の最小元と最大元をそれぞれ $\bot,\top$ と書くことにします。
+この$L$は述語の集合であり（補足: $p(x)=1$ を $x\models p$ と考えます）、$L$上の順序$\leq$は述語どうしの論理的含意関係によって定められているものとします。また、$L$の最小元と最大元をそれぞれ $\bot,\top$ と書くことにします。
 
 ここで、述語変換子 $f:2^X\to 2^X$ を、次のように定めます。（補足: この $f$ は単調 (monotone) な関数です。）
 \[\begin{array}{cccl}f:&2^X&\longrightarrow&2^X\\&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&p&\longmapsto & \{x\mid \forall x' ~ (x'\in\delta(x)\Rightarrow x'\in p)\}\\[3pt] &&&=\{x\mid \textrm{all successors of $x$ satisfy $p$}\}.\end{array}\]
@@ -507,7 +507,7 @@ $\mu f$ は、以下の図に見られるような$2^X$における鎖の、超�
 \end{tikzcd}
 \end{small}
 \end{center}\vspace{8pt}
-$x_\varepsilon\models\mu f$ が成り立つことが、以下の図のような超限反復からわかります。（この鎖は、$\omega+1$で安定 (stabilize) し、そこから先は変わらない、つまり最小不動点となります。）
+$x_\varepsilon\models\mu f$ が成り立つことが、以下の図のような超限反復からわかります。%（この鎖は、$\omega+1$で安定 (stabilize) し、そこから先は変わらない、つまり最小不動点となります。）
 
 \begin{framed}
 \noindent
@@ -573,6 +573,8 @@ $\xrightarrow{~~\leq~~}\;\cdots\;$
 \end{tiny}
 \end{framed}
 % \vspace{10pt}
+
+\noindent この鎖は、$\omega+1$で安定 (stabilize) し、そこから先は変わらない、つまり $f^{\omega+1}(\bot)$ が最小不動点となります。\vspace{5pt}
 
 \noindent 補足: $f^\omega(\bot)$ は、これより左に現れるすべての上限 (supremum) をとったものです。（てっぺん $x_\varepsilon$ にはまだ $1$ が現れたことがないので、上限は $0$ のままです。）それに対し、次の $f^{\omega+1}(\bot)$ でやっと、てっぺん $x_\varepsilon$ にも $1$ が現れます。
 
@@ -642,17 +644,17 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 	&&&&&&&&&&{} \ar[rr,dash,shorten = -4.8pt] &{}&{} 
 \end{tikzcd}
 \end{small}
-\end{center}\vspace{35pt}
+\end{center}\vspace{30pt}
 
-さて、本章でここまで扱ってきた述語変換子の考え方は、圏論の言葉を使うととても見通しがよくなります。そのための準備として、次章では、圏論の関手を使ってプログラムの振舞いを捉える方法について紹介します。（すでにだいたい知っているよ、という人は、3章まで飛ばしてください。）
+さて、本章でここまで扱ってきた述語変換子の考え方は、圏論の言葉を使うととても見通しがよくなります。そのための準備として、次章では、圏論の関手を使ってプログラムの振舞いを捉える方法について紹介します。（すでに「余代数」や「グロタンディーク・ファイブレーション」のことはだいたい知っているよ、という人は、3章へ飛んでください。）
 
 \clearpage
 
 \section{圏論の関手でシステムの振舞いを捉える}
 
-情報科学における「圏論的手法の強み」は、抽象的・俯瞰的であるがゆえに、様々な種類の情報システムに対して、既存の議論や知見を再編することで新たな問題設定に柔軟に適応できる点にあります。
+情報科学における「\textbf{圏論的な手法の強み}」は、抽象的・俯瞰的であるがゆえに、\uwave{様々な種類の情報システムに対して、} \uwave{既存の議論や知見を再編することで新たな問題設定に柔軟に適応できる}点にあると言えます。
 
-本章で紹介する\textbf{余代数} (coalgebra) は、そのように多様な状態遷移システム（例: 二分木グラフ、ストリーム、クリプキフレーム、オートマトン、マルコフ連鎖、マルコフ決定過程、etc.）を圏論的に扱う際にとても役立つ道具です。
+本章で紹介する\textbf{余代数} (coalgebra) は、そのように多様な状態遷移システム（例: 二分木グラフ、ストリーム、クリプキフレーム、オートマトン、マルコフ連鎖、マルコフ決定過程、etc.）を扱う際にとても役立つ道具です。
 
 \subsection{余代数の定義}
 
@@ -807,7 +809,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 
 \begin{example} \label{ex:MarkovChain}
 	マルコフ連鎖は、余代数 $\gamma:X\to \mathcal D(X)$ で与えられる。なお、関手 $\mathcal D:\Set\to\Set$ は
-	\begin{align*}\mathcal D(X)&=\{d:X\to [0,1]\mid\textrm{finite support,~}\textstyle\sum d(x)=1\}\\&=\{\textstyle\,\sum p_i\ket{x_i}\,\textrm{, where each $p_i$ is a probability $d(x_i)\in[0,1]$.}\}\\\mathcal D(f)&:\mathcal D(X)\to\mathcal D(Y)\\&\mathcal D(f)(\textstyle\sum p_i\ket{x_i})=\textstyle\sum p_i\ket{f(x_i)}\end{align*}
+	\begin{align*}\mathcal D(X)&=\{d:X\to [0,1]\mid\textstyle\sum d(x)=1\}\\&=\{\textstyle\,\sum p_i\ket{x_i}\,\textrm{, where each $p_i$ is a probability $d(x_i)\in[0,1]$.}\}\\\mathcal D(f)&:\mathcal D(X)\to\mathcal D(Y)\\&\mathcal D(f)(\textstyle\sum p_i\ket{x_i})=\textstyle\sum p_i\ket{f(x_i)}\end{align*}
 	と定められているものとする。
 	% \begin{multicols}{2}
 	\begin{center}
@@ -877,7 +879,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 % \end{tabular}
 % \end{center}
 
-典型例としては、例外処理 (exception handling) と呼ばれる計算効果を表す関手 $F(Y)=Y+E$ を用いた、「効果つきの計算」$f:X\to Y+E$ が挙げられます。ここで $+$ は余積を表し、$E$ は ``エラーの集合'' とみなしましょう。このとき、計算 $f:X\to Y+E$ は、単に入力値 $x\in X$ から出力値 $y\in Y$ を返すだけでなく、「もし例外が生じたらエラー $e\in E$ を返す」という副作用 (side effect) を持ちます。
+典型例としては、例外処理 (exception handling) と呼ばれる計算効果を表す関手 $F(Y)=Y+E$ を用いた、効果つきの計算 $f:X\to Y+E$ が挙げられます。ここでは $+$ は余積を表し、$E$ は ``エラーの集合'' とみなしましょう。このとき、計算 $f:X\to Y+E$ は、単に入力値 $x\in X$ から出力値 $y\in Y$ を返すだけでなく、「もし例外が生じたらエラー $e\in E$ を返す」という副作用 (side effect) を持ちます。
 % \[\begin{array}{cccc}f:&X&\longrightarrow&Y+E\\&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&x&\longmapsto &y\\&x'&\longmapsto&e\end{array}\]
 \[\begin{array}{cccccc}f:&X&\longrightarrow&Y\!\!&\!+\!&\!\!E\\&\rotatebox{90}{$\in$}&&&\!\!\rotatebox{90}{$\in$}\!\!\\&x&\longmapsto &y\!\!\\&x'&\longmapsto&&&\!\!e\end{array}\]
 では、この例のような副作用を持つ計算（効果つき計算）どうしの「合成」はどう考えればいいでしょうか。たとえば、2つの効果つき計算 $f:X\to Y+E$ と $g:Y\to Z+E$ を合成して、$g\circ f:X\to Z+E$ のようなものを作りたいとき、$f,g$の両者は型が合っていないため、一筋縄ではいかないことがわかります。そこで、次節で導入する「モナド」と「クライスリ圏」という概念が役立ちます。\\%（次節でもあらためてこの例外処理の例について取り上げます。）
@@ -898,9 +900,9 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 	\vspace{10pt}
 \end{center}
 
-以下では、「モナド」と「クライスリ圏」をそれぞれ導入します。（これらの概念そのものは後の章で直接的に使うわけではありませんが、これらの考え方が後の章を理解するうえでも役立つという意図で、本節を設けています。これらを念頭に置くことで、次章の背後にある問題設定や動機づけをより明確に理解できるようになるはずです。）
+以下では、「モナド」と「クライスリ圏」をそれぞれ導入します。（これらの概念そのものは後の章で直接的に使うわけではありませんが、これらの考え方が後の章を理解するうえでも役立つという意図で、また、関連する周辺事項にも入門しやすくなるという意図で、本節を設けています。これらを念頭に置くことで、次章の背後にある問題設定や動機づけをより明確に理解できるようになるはずです。）
 
-なお、この節で扱う内容は、Haskel などのプログラム言語にも用いられています。モナドとクライスリ圏の考え方は、「計算効果」を関数型言語の中で扱うための仕組みのひとつとして知られています。（Haskel のモナドに関する話題についてはこの記事では一切触れませんが、気になる人は自ら勉強してみてください。）
+なお、この節で扱う内容は、Haskel などのプログラム言語にも用いられています。モナドとクライスリ圏の考え方は、「計算効果」を関数型言語の中で扱うための仕組みのひとつとして知られています。（Haskel のモナドに関する話題についてはこの記事では一切触れませんが、気になる人はぜひ自ら勉強してみてください。）
 
 \clearpage
 
@@ -938,7 +940,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 \end{definition}
 
 \begin{remark}
-	モナドの$\mu$は、2段階の分岐を1段階に潰す役割を果たします。（後ほど例を交えて説明します。）\vspace{5pt}
+	モナドの$\mu$は、2段階の状態遷移を1段階に潰す役割を果たします。（後ほど例を交えて説明します。）\vspace{5pt}
 	\begin{center}
 	\begin{tikzcd}[row sep=2pt,column sep=18pt]
 		&& \bullet \\
@@ -965,6 +967,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 		\end{tikzcd}
 		\end{small}
 	\end{center}
+	\vspace{-8pt}
 	%
 	\begin{multicols}{2}
 		\begin{center}
@@ -1035,7 +1038,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 	\begin{itemize}
 		\item $\mathcal D:\Set\to\Set$ は分布関手である。（\textbf{例\ref{ex:MarkovChain}}を参照）
 		\begin{align*}
-			\mathcal D(X)&=\{d:X\to [0,1]\mid\textrm{finite support,~}\textstyle\sum d(x)=1\}\\&=\{\textstyle\,\sum p_i\ket{x_i}\,\textrm{, where each $p_i$ is a probability $d(x_i)\in[0,1]$.}\}\\\mathcal D(f)&:\mathcal D(X)\to\mathcal D(Y)\\&\mathcal D(f)(\textstyle\sum p_i\ket{x_i})=\textstyle\sum p_i\ket{f(x_i)}
+			\mathcal D(X)&=\{d:X\to [0,1]\mid\textstyle\sum d(x)=1\}\\&=\{\textstyle\,\sum p_i\ket{x_i}\,\textrm{, where each $p_i$ is a probability $d(x_i)\in[0,1]$.}\}\\\mathcal D(f)&:\mathcal D(X)\to\mathcal D(Y)\\&\mathcal D(f)(\textstyle\sum p_i\ket{x_i})=\textstyle\sum p_i\ket{f(x_i)}
 		\end{align*}
 		\item The unit $\eta_X:X\to T(X)$ is defined as \[\eta_X(x)=1\cdot\Ket{x}.\]
 		\item The multiplication $\mu_X:T(T(X))\to T(X)$ is defined as \[\mu_X\left( \sum_{i\in I} a_i \Ket{\sum_{x\in X} b_{ix} \Ket{x}} \right)=\sum_{x\in X} \left( \sum_{i\in I} a_i b_{ix} \right) \Ket{x}.\]
@@ -1242,8 +1245,8 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 			\begin{tikzcd}
 				&\Pred_{X} \ar[rr,bend left=12pt,"\dot F_X"] && \Pred_{\,FX} \ar[ll,bend left=12pt,"c^\ast"] \\[-5pt]
 				& P \ar[rrd,mapsto,shorten=3pt] \\[-24pt] 
-				\Pred \ar[loop left,"\dot F"] \ar[dd,"p"'] &&& \dot F P \ar[lld,mapsto,shorten=3pt] \\[-24pt] 
-				& c^\ast\dot F P & \\
+				\Pred \ar[loop left,"\dot F"] \ar[dd,"p"'] &&& \dot F_X P \ar[lld,mapsto,shorten=3pt] \\[-24pt] 
+				& c^\ast\dot F_X P & \\
 				~\Set~ \ar[loop left,"F"]  & X \ar[rr,"c"'] && FX 
 			\end{tikzcd}
 		\end{center}
@@ -1503,7 +1506,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 	を満たす。
 	\begin{itemize}
 		\item 前者より、各 $X\in\B$ について、$\dot F_X:\E_X\to\E_{FX}$ を定義できることが従う。
-		\item 後者は、「関手の持ち上げが置換と整合的である」ということを意味する。
+		\item 後者は、「関手の持ち上げ $\dot F$ が引き戻し $u^\ast$ と整合的である」ことを意味する。
 	\end{itemize}
 \end{remark}
 
@@ -1655,11 +1658,12 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 	\item なお、この $f^\ast$ は、左右いずれの随伴も持ちません。
 	\\ （随伴がないと不便な場面がいろいろあるのですが、対応策としては、米田埋め込みを使う方法があります。詳細は省略しますが、ざっくりとしたアイデアとしてはおおむね以下の図の通りです。）
 	\begin{center}
+		% \hspace*{-50pt}
 		\begin{tikzcd}[column sep=68pt,row sep=40pt]
 			\widehat L \ar[rd,shift right=2.0pt,"\Lan_y(h)"'] \ar[rd,dash,shift left=0.8pt,phantom,"\rotatebox{55}{$\scriptstyle\dashv$}"]\\
 			L \ar[u,"y"]\ar[r,"h"'] & L' \ar[ul, shift right=4.45pt, "\Ran_h(y)"']
 		\end{tikzcd}
-		\qquad\qquad 
+		\qquad\qquad\qquad 
 		\begin{tikzcd}[column sep=58pt, row sep=30pt]
 			\widehat L \ar[r,"\Lan_y(y\,\circ\, f^\ast)"'] & \widehat L \ar[l,bend right=22pt,"\exists g"',"\top"] \\
 			L \ar[r,"f^\ast"'] \ar[u,"y"] & L \ar[u,"y"']
@@ -1693,7 +1697,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 	\item （課題） いま、副作用つき計算$c:X\to FY$が与えられたとき、単に $c^\ast$ を考えると、これは $\Omega^{FX}\to\Omega^X$という型を持ちます。しかし、われわれが欲しい述語変換子は、$\Omega^Y\to\Omega^X$ という型を持つものです。\\（というのも、事後条件（$Y$上の述語）から事前条件（$X$上の述語）への変換を行いたいからです。）\vspace{10pt}
 	\item （解決策） ここで、様相 $\tau:F\Omega\to\Omega$ が重要な役割を果たします。この $\tau$ は、「\uwave{$Y$上の述語}」から「\uwave{$FY$上の述語}」へと持ち上げる操作、\textbf{述語持ち上げ} (predicate lifting) を誘導します。\vspace{8pt}\\
 	具体的には、各 $Y$ について、\[\dot F_Y:\Omega^Y\to\Omega^{FY},\quad \dot F_Y(q):=\tau\circ Fq\qquad \textrm{(ただし $q:Y\to\Omega$ を任意の述語とする)}\] と定めます。この $\dot F_Y$ は、「$Y$上の述語$q$を、計算効果$F$で包まれた状態空間$FY$上の述語 $\dot F_Y(q)$ へと持ち上げる」操作です。これを、\textbf{述語持ち上げ}と呼びます。（通常、$\tau$ には単調性を課し、$\dot F_Y$ が単調になるようにします。）\vspace{8pt} \\
-	すると、最弱事前条件 $wp\llbracket c\rrbracket$ は、この「述語持ち上げ $\dot F_Y$」と「計算 $c$ による引き戻し $c^\ast$」の合成として書けます。
+	すると、最弱事前条件 $wp\llbracket c\rrbracket$ は、この「述語持ち上げ $\dot F_Y$」と「計算 $c$ の引き戻し $c^\ast$」の合成として書けます。
 	\[\begin{tikzcd}
 		\Omega^Y \ar[r,"\dot F_Y"] \ar[rd,"wp\llbracket c\rrbracket"'] & \Omega^{FY} \ar[d,"c^\ast"]\\
 		& \Omega^X
@@ -1738,7 +1742,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 		\item[1)~~] $Y$ 上の述語 $q$ を、\uwave{様相 $\tau$ を用いて} $FY$ 上に\textbf{\kenten{持ち上げて}}、%\vspace{1pt}
 		\item[2)~~] それを \uwave{計算 $c$ に沿って} $X$ 上に\textbf{\kenten{引き戻す}}、%\vspace{2pt}
 	\end{enumerate}
-	という2段階のプロセスとして理解できます。（スローガン:「\textbf{\kenten{持ち上げて}、\kenten{引き戻す}！}」）
+	という2段階のプロセスとして理解できます。\!（スローガン:「\textbf{\kenten{持ち上げて}、\kenten{引き戻す}！}」\!）
 \end{screen}
 
 \clearpage
@@ -1759,7 +1763,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 
 \subsection{応用例: 確率的プログラムの「停止性」および「期待実行時間」の検証}
 
-本節では、「最弱事前条件意味論の圏論的定式化が実際にどのようにモデル検査に役立つか」を紹介するという目的で、確率的プログラムの\textbf{停止性} (almost-sure termination) および\textbf{期待実行時間} (expected runtime) の検証に関して、筆者が最近行った研究内容を（少しだけ）取り上げます。
+最後に、「最弱事前条件意味論の圏論的定式化が実際にどのようにモデル検査に役立つか」を紹介するという目的で、確率的プログラムの\textbf{停止性} (almost-sure termination) および\textbf{期待実行時間} (expected runtime) の検証に関して、筆者が最近行った研究内容を（少しだけ）取り上げます。
 
 ...... 
 
