@@ -924,36 +924,38 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 \clearpage
 
 \begin{definition}[モナド]
-	モナド (monad) とは3つ組 $(T,\mu,\eta)$ であって、以下を満たすものである。\\ 1) $T:\C\to\C$は関手である。2) $\mu:T\circ T\Rightarrow T$ は自然変換である。3) $\eta:\id_{\mathbb C}\Rightarrow T$は自然変換である。\\ そして 4) 以下の図式を満たす。
-	\begin{multicols}{2}
-		\begin{center}
-			\begin{tikzcd}
-				T\circ T\circ T \ar[r,Rightarrow,"\id_T\cdot\mu"] \ar[d,Rightarrow,"\mu\cdot \id_T"'] & T\circ T \ar[d,Rightarrow,"\mu"]\\
-				T\circ T \ar[r,Rightarrow,"\mu"'] & T
-			\end{tikzcd}
-		\end{center}
+	\textbf{モナド} (monad) とは3つ組 $(T,\eta,\mu)$ であって、以下を満たすものである。\\ 1) $T:\C\to\C$は関手である。2) 単位 $\eta:\id_{\mathbb C}\Rightarrow T$は自然変換である。3) 乗法 $\mu:T\circ T\Rightarrow T$ は自然変換である。\\ そして以下の図式を可換にする。\vspace{5pt}
+	% \begin{multicols}{2}
 		\begin{center}
 			\begin{tikzcd}
 				\id_\C\circ T \ar[r,Rightarrow,"\eta\cdot\id_T"] \ar[rd,equal] & T\circ T \ar[d,Rightarrow,"\mu"]\ar[r,Leftarrow,"\id_T\cdot\eta"] & T\circ\id_\C \ar[ld,equal]\\
 				&T&
 			\end{tikzcd}
-		\end{center}
-	\end{multicols}
-	言い換えると、任意の対象 $X\in\C$ について、$\mu_X:T(T(X))\to T(X)$ と $\eta_X:X\to T(X)$ は以下を満たす。
-	\begin{multicols}{2}
-		\begin{center}
+		% \end{center}
+		\qquad\qquad
+		% \begin{center}
 			\begin{tikzcd}
-				TTTX \ar[r,"T\mu_X"] \ar[d,"\mu_{{}_{T\!X}}"'] & TTX \ar[d,"\mu_X"]\\
-				TTX \ar[r,"\mu_X"'] & TX
-			\end{tikzcd}
+				T\circ T\circ T \ar[r,Rightarrow,"\id_T\cdot\mu"] \ar[d,Rightarrow,"\mu\cdot \id_T"'] & T\circ T \ar[d,Rightarrow,"\mu"]\\
+				T\circ T \ar[r,Rightarrow,"\mu"'] & T
+			\end{tikzcd}\vspace{5pt}
 		\end{center}
+	% \end{multicols}
+	言い換えると、任意の対象 $X\in\C$ について、$\eta_X:X\to T(X)$ と $\mu_X:T(T(X))\to T(X)$ は以下を満たす。\vspace{5pt}
+	% \begin{multicols}{2}
 		\begin{center}
 			\begin{tikzcd}
 				TX \ar[r,"\eta_{{}_{T\!X}}"] \ar[rd,"\id_{TX}"'] & TTX \ar[r,leftarrow,"T\eta_X"] \ar[d,"\mu_X"] & TX \ar[ld,"\id_{TX}"] \\
 				{} & TX & 
 			\end{tikzcd}
+		% \end{center}
+		\qquad\qquad
+		% \begin{center}
+			\begin{tikzcd}
+				TTTX \ar[r,"T\mu_X"] \ar[d,"\mu_{{}_{T\!X}}"'] & TTX \ar[d,"\mu_X"]\\
+				TTX \ar[r,"\mu_X"'] & TX
+			\end{tikzcd}
 		\end{center}
-	\end{multicols}
+	% \end{multicols}
 \end{definition}
 
 \begin{remark}
@@ -974,65 +976,153 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 	\end{center}
 \end{remark}
 
-\begin{definition}[モナドの分配則]
-	モナドの分配則 (distributive law) とは、2つのモナド $(T,\mu,\eta)$ と $(T',\mu',\eta')$ の間の自然変換 $\lambda:TT'\Rightarrow T'T$ であって以下の図式を可換にするものである。\vspace{5pt}
+\begin{definition}[強モナド]
+	カルテシアン閉圏 $(\mathbb C,\otimes,I)$ 上で定義される\textbf{左-強モナド} (left-strong monad) とは、モナド $(T,\eta,\mu)$ すなわち任意の $X\in \mathbb C$ について 1) $T(X)\in \mathbb C$, 2) $\eta_X:X\to T(X)$, 3) $\mu_X:T(T(X))\to T(X)$ の3つ組であって、さらにそれに加えて 4) \textbf{左-ストレングス} (left-strength)  \[str_{X,Y}^L:X\otimes T(Y)\to T(X\otimes Y)\] を持ち、
+	以下の図式を可換にする。
 	\begin{center}
-		\begin{small}
-		\begin{tikzcd}
-			TX \ar[r,"T\eta'"] \ar[rd,"\eta'T"'] & TT'X \ar[d,"\lambda"] & T'X \ar[l,"\eta T'"'] \ar[ld,"T'\eta"] \\
-			& T'TX 
+		\begin{tikzcd}[column sep=0pt]
+			I\otimes T(X) \ar[rr,"str_{I,X}"] \ar[dr,"\cong"'] && T(I\otimes A) \ar[dl,"\cong"]\\
+			& T(X) & 
 		\end{tikzcd}
-		\end{small}
-	\end{center}
-	\vspace{-8pt}
+	~
+		\begin{tikzcd}[column sep=-18pt,row sep=15pt]
+			(X\times Y)\otimes T(Z) \ar[rr,"str_{A\otimes B,C}"] \ar[d,"\cong"'] && T((X\otimes Y)\otimes Z) \ar[d,"\cong"]\\
+			X\otimes (Y\otimes T(Z)) \ar[rd,"\id_X\otimes str_{Y,Z}"'] && T(X\otimes(Y\otimes Z)) \\
+			&X\otimes T(Y\otimes Z) \ar[ru,"str_{X,Y\otimes Z}"']
+		\end{tikzcd}
+	\end{center}~\vspace{5pt}
 	%
-	\begin{multicols}{2}
-		\begin{center}
-			\begin{small}
-			\begin{tikzcd}[column sep=8pt,row sep=15pt]
-				TT'T'X \ar[rr,"T\mu'"] \ar[d,"\lambda T'"'] && TT'X \ar[d,"\lambda"]\\
-				T'TT'X \ar[rd,"T'\lambda"'] && T'TX \\
-				& T'T'TX \ar[ur,"\mu'T"'] &
-			\end{tikzcd}
-			\end{small}
-		\end{center}
-		%
-		\begin{center}
-			\begin{small}
-			\begin{tikzcd}[column sep=8pt,row sep=15pt]
-				TTT'X \ar[rr,"\mu T'"] \ar[d,"T \lambda "'] && TT'X \ar[d,"\lambda"]\\
-				TT'TX \ar[rd,"\lambda T"'] && T'TX \\
-				& T'TTX \ar[ur,"T'\mu"'] &
-			\end{tikzcd}
-			\end{small}
-		\end{center} 
-	\end{multicols}
+	\begin{center}
+		\begin{tikzcd}[column sep=0pt]
+			& X\otimes Y \ar[ld,"\id_X\otimes\eta_Y"'] \ar[rd,"\eta_{X\otimes Y}"] & \\
+			X\otimes T(Y) \ar[rr,"str_{X,Y}"'] && T(X\otimes Y)
+		\end{tikzcd}
+		~
+		\begin{tikzcd}[column sep=-15pt]
+			&T(X\otimes T(Y)) \ar[rd,"T(str_{X,Y})"]&\\
+			X\otimes T(T(Y)) \ar[ur,"str_{X,T(Y)}"] \ar[d,"\id_X\otimes\mu_Y"'] && T(T(X\otimes Y)) \ar[d,"\mu_{X\otimes Y}"]\\
+			X\otimes T(Y) \ar[rr,"str_{X,Y}"'] && T(X\otimes Y)
+		\end{tikzcd}
+	\end{center}
 \end{definition}
 
-\begin{remark}
-	具体的にどのように使うかは、後で例を挙げます。
-\end{remark}
-
-\begin{definition}[モナドの変換]
-	モナドの変換 (monad transformation, monad morphism) とは、
+\begin{definition}[可換モナド]
+	\textbf{可換モナド}とは、\textbf{二重-ストレングス} (double-strength) $T(X)\otimes T(Y)\to T(X\otimes Y)$ を持った強モナドである。二重-ストレングスは、以下の図式のとおり、左右のストレングスから構成される（可換性）。\vspace{5pt}
+	\begin{center}
+		\begin{tikzcd}[row sep=0pt,column sep=35pt]
+			& T(X\otimes T(Y)) \ar[r,"T(str^L)"] & T(T(X\otimes Y)) \ar[rd,"\mu"]\\
+			T(X)\otimes T(Y) \ar[ru,"str^R"] \ar[rd,"str^L"'] &&& T(X\otimes Y)\\
+			& T(T(X)\otimes Y) \ar[r,"T(str^R)"] & T(T(X\otimes Y)) \ar[ru,"\mu"']
+		\end{tikzcd} 
+	\end{center}
 \end{definition}
-
-\begin{remark}
-	モナド変換は、compositional reasoning を保ちます。すなわち、
-\end{remark}
 
 \clearpage
 
 \noindent いくつかモナドの例を挙げます。
 
 \begin{example}[恒等モナド]
-	自明な例として、以下はモナドになる。
-	\begin{itemize}
-		\item 
-		\item 
-		\item 
-	\end{itemize}
+	自明な例として、$T:=\id_\C:\C\to\C$, $\eta:=\id_{\id_\C}$, $\mu:=\id_{\id_\C}$ と定めると、$(T,\eta,\mu)$ はモナドになる。\vspace{5pt}
+	\begin{center}
+		\begin{tikzcd}
+			\id_{\mathbb C} \ar[r,Rightarrow,"\eta"] \ar[rd,equal] & T \ar[d,equal] \\
+			& \id_{\mathbb C}
+		\end{tikzcd}
+	\qquad\qquad
+		\begin{tikzcd}
+			T\circ T \ar[r,Rightarrow,"\mu"] \ar[d,equal] & T \ar[d,equal]\\
+			\id_{\mathbb C} \ar[r,Rightarrow,"\id_{\id_{\mathbb C}}"'] & \id_{\mathbb C}
+		\end{tikzcd}
+	\end{center}
 \end{example}
+
+\begin{example}[リストモナド]
+	$T:\Set\to\Set;\;X\mapsto TX:=\{\langle a_1,\dots,a_n\rangle\mid n\in\mathbb N,a_i\in X\}$ とする。この $T$ は、射 $f:X\to Y$ に対して $Tf:TX\to TY;\;\langle a_1,\dots,a_n\rangle\mapsto \langle f(a_1),\dots,f(a_n)\rangle$ を、各 $a_i\in X$ について $f(a_i)\in Y$ となるように定めると、関手である。ここで、以下の自然変換 $\eta:\id_\Set\Rightarrow T$ と $\mu:T\circ T\Rightarrow T$ により、$(T,\eta,\mu)$ はモナドとなる。
+	\begin{itemize}
+		\item 各 $X\in\Set$ に対し、$\eta_X:X\to TX;\;$ $a\mapsto\langle a \rangle$ と定める。
+		\item 各 $X\in\Set$ に対し、$\mu_X:TTX\to TX;\;$ $\langle a_1,\dots,a_n\rangle\mapsto \langle b_1^1,b_1^2,\dots,b_1^{n_1},\dots\dots, b_n^1,b_n^2,\dots, b_n^{n_n}\rangle$ と定める。 \\ なお $a_i=\langle b_i^1,\dots b_i^{n_i}\rangle \in TX$, $b_i\in X$ とする。
+	\end{itemize}
+	この $(T,\eta,\mu)$ がモナドをなすことは、各$X\in\Set$について以下の図式が可換になることを確かめればよい。\vspace{5pt}
+	% \begin{multicols}{2}
+		\begin{center}
+			\begin{tikzcd}
+				TX \ar[r,"\eta_{{}_{T\!X}}"] \ar[rd,"\id_{TX}"'] & T(TX) \ar[r,leftarrow,"T(\eta_X)"] \ar[d,"\mu_X"] & TX \ar[ld,"\id_{TX}"] \\
+				{} & TX & {}
+			\end{tikzcd}
+		% \end{center}
+		\qquad\qquad
+		% \begin{center}
+			\begin{tikzcd}
+				T(T(TX)) \ar[r,"T(\mu_X)"] \ar[d,"\mu_{{}_{T\!X}}"'] & T(TX) \ar[d,"\mu_X"]\\
+				T(TX) \ar[r,"\mu_X"'] & TX
+			\end{tikzcd}
+		\end{center}
+	% \end{multicols}
+\end{example}
+
+\begin{example}[モノイド計算作用]
+	\kenten{モノイド} $M$ に対し、$T:=M\otimes(-)$ は\kenten{モナド}をなす。
+	\begin{itemize}
+		\begin{multicols}{2}
+		\item モナドの単位 $X\xrightarrow{\eta_X} M\otimes X$ は、 \[X\xrightarrow{\;\cong\;} I\otimes X \xrightarrow{e\otimes X} M\otimes X\] で与えられる。この $I\xrightarrow{e} M$ はモノイドの単位。
+		\item モナドの積 $(M\otimes M)\otimes X\xrightarrow{\mu_X} M\otimes X$ は、%以下で与えられる。
+		% \[X\xrightarrow{f}M\otimes X\xrightarrow{M\otimes g} M\otimes(M\otimes Z)\xrightarrow{\textrm{assoc}} (M\otimes M)\otimes Z \xrightarrow{m\otimes Z} M\otimes Z\] 
+		\[(M\otimes M)\otimes X \xrightarrow{m\otimes X} M\otimes X\]
+		で与えられる。この $M\otimes M\xrightarrow{m} M$ はモノイドの積。
+		\end{multicols}
+	\end{itemize}
+	ここで、モノイド $M$ を「副作用」(side effect) と呼ぶ。この $(T,\eta,\mu)$ がモナドをなすことの恩恵は2つある。
+	\begin{enumerate}
+		% \begin{multicols}{2}
+		\item ただの関数 (pure function)  $X\to Y$ を、効果つき計算(effectful computation) $X\to TY$ とみなせる。
+		\begin{center}
+			\begin{tikzcd}[row sep=10pt]
+				X\ar[r,"f"] & Y \ar[d,"\eta_Y"] \\
+				& M\otimes Y
+			\end{tikzcd}
+		\end{center}
+		\item 計算作用 $X\to TY$ と $Y\to TZ$ を集約して、$X\to TZ$ に合成することができる。
+		\begin{center}
+			\begin{tikzcd}[row sep=15pt]
+				X \ar[r,"f"] & M\otimes Y \ar[r,"Tg"] & M\otimes(M\otimes Z) \ar[r,"\textrm{assoc}"] & (M\otimes M)\otimes Z \ar[d,"\mu_Z"] \\
+				&&& M\otimes Z
+			\end{tikzcd}
+		\end{center}
+		% \end{multicols}
+	\end{enumerate}
+	なお、$T=M\otimes(-)$ が\kenten{可換モナド}であるのは、$M$ が\kenten{可換モノイド}であるとき、かつそのときに限る。
+	\begin{center}
+		% \begin{footnotesize}
+		% \begin{tikzcd}
+		% 	\overset{\substack{1\\\rotatebox{90}{(}}}{M}\otimes \overset{\substack{2\\\rotatebox{90}{(}}}{M} \ar[rr,"\cong"',"\textrm{commutative}"] \ar[rd,"m"'] && \overset{\substack{2\\\rotatebox{90}{(}}}{M}\otimes \overset{\substack{1\\\rotatebox{90}{(}}}{M} \ar[ld,"m"]\\
+		% 	& M &
+		% \end{tikzcd}
+		% \end{footnotesize}
+	% \end{center}
+	% \vspace{3pt}
+	% \\
+	% $\iff$
+	% \begin{center}
+		\begin{scriptsize} %\!\!\!\!\!
+			\begin{tikzcd}[row sep=-3mm,column sep=15pt]
+			& \overset{\substack{1\\\rotatebox{90}{(}}}{M}\otimes(X\otimes (\overset{\substack{2\\\rotatebox{90}{(}}}{M}\otimes Y)) \ar[r] & \overset{\substack{1\\\rotatebox{90}{(}}}{M}\otimes(\overset{\substack{2\\\rotatebox{90}{(}}}{M}\otimes(X\otimes Y)) \ar[rd]\\
+			(\overset{\substack{1\\\rotatebox{90}{(}}}{M}\otimes X)\otimes (\overset{\substack{2\\\rotatebox{90}{(}}}{M}\otimes Y) \ar[ru] \ar[rd] &&& M\otimes(X\otimes Y)\\
+			& \overset{\substack{2\\\rotatebox{90}{(}}}{M}\otimes((\overset{\substack{1\\\rotatebox{90}{(}}}{M}\otimes X)\otimes Y) \ar[r] & \overset{\substack{2\\\rotatebox{90}{(}}}{M}\otimes(\overset{\substack{1\\\rotatebox{90}{(}}}{M}\otimes(X\otimes Y)) \ar[ru]
+		\end{tikzcd} 
+		\end{scriptsize}
+		%
+		$\overset{\textrm{iff}}{\iff}$
+		% 
+		\begin{footnotesize}
+		\begin{tikzcd}[column sep=15pt]
+			\overset{\substack{1\\\rotatebox{90}{(}}}{M}\otimes \overset{\substack{2\\\rotatebox{90}{(}}}{M} \ar[rr,"\cong"',"\textrm{commutative}"] \ar[rd,"m"'] && \overset{\substack{2\\\rotatebox{90}{(}}}{M}\otimes \overset{\substack{1\\\rotatebox{90}{(}}}{M} \ar[ld,"m"]\\
+			& M &
+		\end{tikzcd}
+		\end{footnotesize}
+	\end{center}
+\end{example}
+
+\clearpage
 
 \begin{example}[例外処理モナド]
 	
@@ -1066,14 +1156,9 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 
 \end{example}
 
-
 \clearpage
 
 次に、
-
-% \begin{definition}[クライスリ圏]
-	
-% \end{definition}
 
 \begin{definition}[強モナド]
 	
@@ -1106,6 +1191,92 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 \begin{definition}[EM圏]
 
 \end{definition}
+
+
+
+\clearpage
+
+\begin{definition}[モナドの分配則]
+	モナドの分配則 (distributive law) とは、2つのモナド $(T,\mu^T,\eta^T)$ と $(S,\mu^S,\eta^S)$ の間の自然変換 $\lambda:TS\Rightarrow ST$ であって以下の図式を可換にするものである。\vspace{8pt}
+	% \begin{center}
+	% 	\begin{small}
+	% 	\begin{tikzcd}
+	% 		TX \ar[r,"T\eta'"] \ar[rd,"\eta'T"'] & TT'X \ar[d,"\lambda"] & T'X \ar[l,"\eta T'"'] \ar[ld,"T'\eta"] \\
+	% 		& T'TX 
+	% 	\end{tikzcd}
+	% 	\end{small}
+	% \end{center}
+	% \vspace{-8pt}
+	% %
+	% \begin{multicols}{2}
+	% 	\begin{center}
+	% 		\begin{small}
+	% 		\begin{tikzcd}[column sep=8pt,row sep=15pt]
+	% 			TT'T'X \ar[rr,"T\mu'"] \ar[d,"\lambda T'"'] && TT'X \ar[d,"\lambda"]\\
+	% 			T'TT'X \ar[rd,"T'\lambda"'] && T'TX \\
+	% 			& T'T'TX \ar[ur,"\mu'T"'] &
+	% 		\end{tikzcd}
+	% 		\end{small}
+	% 	\end{center}
+	% 	%
+	% 	\begin{center}
+	% 		\begin{small}
+	% 		\begin{tikzcd}[column sep=8pt,row sep=15pt]
+	% 			TTT'X \ar[rr,"\mu T'"] \ar[d,"T \lambda "'] && TT'X \ar[d,"\lambda"]\\
+	% 			TT'TX \ar[rd,"\lambda T"'] && T'TX \\
+	% 			& T'TTX \ar[ur,"T'\mu"'] &
+	% 		\end{tikzcd}
+	% 		\end{small}
+	% 	\end{center} 
+	% \end{multicols}
+	\begin{center}
+		\begin{tikzcd}[column sep=15pt]
+			TS^2 \ar[r,"\lambda S"] \ar[d,"T\mu^S"'] & STS \ar[r,"S\lambda"] & S^2T \ar[d,"\mu^ST"] \\
+			TS \ar[rr,"\lambda"'] && ST 
+		\end{tikzcd}
+		\qquad 
+		\begin{tikzcd}[column sep=15pt]
+			T^2 S \ar[r,"T\lambda"] \ar[d,"\mu^TS"'] & TST \ar[r,"\lambda T"] & ST^2 \ar[d,"S\mu^T"] \\
+			TS \ar[rr,"\lambda"'] && ST 
+		\end{tikzcd}
+		\quad \\[8pt]
+		\begin{tikzcd}[column sep=5pt]
+			&T \ar[ld,"T\eta^S"'] \ar[rd,"\eta^S T"] \\
+			TS \ar[rr,"\lambda"'] && ST
+		\end{tikzcd}
+		\qquad
+		\begin{tikzcd}[column sep=5pt]
+			&S \ar[ld,"\eta^T S"'] \ar[rd,"S\eta^T"] \\
+			TS \ar[rr,"\lambda"'] && ST
+		\end{tikzcd}
+	\end{center}
+\end{definition}
+
+\begin{remark}
+	具体的にどのように使うかは、後で例を挙げます。
+\end{remark}
+
+\begin{definition}[モナドの変換]
+	モナドの変換 (monad transformation, monad morphism) とは、
+\end{definition}
+
+\begin{remark}
+	モナド変換は、compositional reasoning を保ちます。すなわち、
+\end{remark}
+
+\clearpage
+
+
+
+\clearpage
+
+次に、
+
+% \begin{definition}[クライスリ圏]
+	
+% \end{definition}
+
+
 
 
 
