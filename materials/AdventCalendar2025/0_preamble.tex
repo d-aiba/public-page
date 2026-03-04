@@ -102,7 +102,7 @@
 % パッケージ集
 %==========
 %数式フォント
-\usepackage{lxfonts}
+% \usepackage{lxfonts} % UD数式フォント %%%
 \usepackage{bm}%太字のベクトルを表示
 \usepackage{mathrsfs}%アルファベット筆記書体など
 \DeclareSymbolFont{symbolsC}{U}{txsyc}{m}{n}
@@ -112,7 +112,9 @@
 \usepackage{luatexja-fontspec}
 \usepackage[hiragino-pro]{luatexja-preset}
 % \setmainjfont{UDDigiKyokashoNP-R}[BoldFont={UDDigiKyokashoNP-B}]
-\setmainjfont{UDDigiKyokashoProN-Regular}[BoldFont={UDDigiKyokashoProN-Bold}]
+% \setmainjfont{UDDigiKyokashoProN-Regular}[BoldFont={UDDigiKyokashoProN-Bold}] % UDデジタル教科書体 %%%
+\setmainjfont{AP-OTF-RyuminKO+ProN-Light}[BoldFont={AP-OTF-FutoGoB101Pr6N-Medium}]
+\setsansjfont{AP-OTF-MidashiGoMB31Pr6N-Bold}[BoldFont={AP-OTF-MidashiGoMB31Pr6N-Bold}]
 %欧文フォント
 % \usepackage[LGR,LGRx,T2A,T1,OT1]{fontenc}
 \usepackage[LGR,T2A,T1]{fontenc}
@@ -514,6 +516,12 @@
 \newcommand{\Ket}[1]{\left\lvert {#1} \right\rangle}
 \newcommand{\Braket}[1]{\left\langle {#1} \right\rangle}
 %-----
-\newcommand{\computationrightarrow}{\ensuremath{\mathrel{\;{\shortmid}\hspace{-12pt}\xrightarrow{\;~\;}}}}
-\newcommand{\computationlongrightarrow}{\ensuremath{\mathrel{~\,{\shortmid}\hspace{-14pt}\longrightarrow}}}
+% Kleisli morphism
+\newcommand{\computationrightarrow}{\ensuremath{\mathrel{\,{\shortmid}\hspace{-8pt}\rightarrow}}}
+\newcommand{\computationlongrightarrow}{\ensuremath{\mathrel{~\,{\shortmid}\hspace{-11pt}\longrightarrow}}}
 \newcommand{\computationxrightarrow}[1]{\ensuremath{\overset{\substack{#1\\[-3pt]}\;}{\computationlongrightarrow}}}
+%-----
+% Kleisli morphism, UD version
+% \newcommand{\computationrightarrow}{\ensuremath{\mathrel{\;{\shortmid}\hspace{-12pt}\xrightarrow{\;~\;}}}}
+% \newcommand{\computationlongrightarrow}{\ensuremath{\mathrel{~\,{\shortmid}\hspace{-14pt}\longrightarrow}}}
+% \newcommand{\computationxrightarrow}[1]{\ensuremath{\overset{\substack{#1\\[-3pt]}\;}{\computationlongrightarrow}}}
