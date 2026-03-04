@@ -1129,7 +1129,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 \end{example}
 
 \begin{example}[readerモナド]
-	リーダーモナド (reader monad) とは、
+	リーダーモナド (reader monad) $T=(-)^I$ とは、
 \end{example}
 
 \begin{example}[例外処理モナド]
@@ -1147,8 +1147,8 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 		\begin{align*}
 			\mathcal D(X)&=\{d:X\to [0,1]\mid\textstyle\sum d(x)=1\}\\&=\{\textstyle\,\sum p_i\ket{x_i}\,\textrm{, where each $p_i$ is a probability $d(x_i)\in[0,1]$.}\}\\\mathcal D(f)&:\mathcal D(X)\to\mathcal D(Y)\\&\mathcal D(f)(\textstyle\sum p_i\ket{x_i})=\textstyle\sum p_i\ket{f(x_i)}
 		\end{align*}
-		\item The unit $\eta_X:X\to T(X)$ is defined as \[\eta_X(x)=1\cdot\Ket{x}.\]
-		\item The multiplication $\mu_X:T(T(X))\to T(X)$ is defined as \[\mu_X\left( \sum_{i\in I} a_i \Ket{\sum_{x\in X} b_{ix} \Ket{x}} \right)=\sum_{x\in X} \left( \sum_{i\in I} a_i b_{ix} \right) \Ket{x}.\]
+		\item 単位 $\eta_X:X\to T(X)$ は以下で定義される。 \[\eta_X(x)=1\cdot\Ket{x}.\]
+		\item 乗法 $\mu_X:T(T(X))\to T(X)$ は以下で定義される。 \[\mu_X\left( \sum_{i\in I} a_i \Ket{\sum_{x\in X} b_{ix} \Ket{x}} \right)=\sum_{x\in X} \left( \sum_{i\in I} a_i b_{ix} \right) \Ket{x}.\]
 	\end{itemize}
 \end{example}
 
