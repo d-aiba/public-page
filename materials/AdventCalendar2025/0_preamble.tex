@@ -102,7 +102,8 @@
 % パッケージ集
 %==========
 %数式フォント
-% \usepackage{lxfonts} % UD数式フォント %%%
+% \usepackage{lxfonts} % UD数式フォント
+%%%
 \usepackage{bm}%太字のベクトルを表示
 \usepackage{mathrsfs}%アルファベット筆記書体など
 \DeclareSymbolFont{symbolsC}{U}{txsyc}{m}{n}
@@ -113,8 +114,10 @@
 \usepackage[hiragino-pro]{luatexja-preset}
 % \setmainjfont{UDDigiKyokashoNP-R}[BoldFont={UDDigiKyokashoNP-B}]
 % \setmainjfont{UDDigiKyokashoProN-Regular}[BoldFont={UDDigiKyokashoProN-Bold}] % UDデジタル教科書体 %%%
-\setmainjfont{AP-OTF-RyuminKO+ProN-Light}[BoldFont={AP-OTF-FutoGoB101Pr6N-Medium}]
-\setsansjfont{AP-OTF-MidashiGoMB31Pr6N-Bold}[BoldFont={AP-OTF-MidashiGoMB31Pr6N-Bold}]
+\setmainjfont{IwaOMinPr6N-Th}[BoldFont={AP-OTF-FutoGoB101Pr6N-Medium}]
+% \setmainjfont{AP-OTF-RyuminKO+ProN-Light}[BoldFont={AP-OTF-FutoGoB101Pr6N-Medium}]
+\setsansjfont{AP-OTF-MidashiGoMB31Pr6N-Bold}[BoldFont={AP-OTF-MidashiGoMB31Pr6N-Bold}] %%
+% \setsansjfont{IwaOGoPr6N-Bd}[BoldFont={IwaOGoPr6N-Bd}]
 %欧文フォント
 % \usepackage[LGR,LGRx,T2A,T1,OT1]{fontenc}
 \usepackage[LGR,T2A,T1]{fontenc}
@@ -123,6 +126,7 @@
 % \usepackage[lutf8]{luainputenc} % lutf8 指定
 \usepackage{tgheros}
 \usepackage{lmodern}
+% \usepackage{fouriernc}
 % \usepackage{pxfonts}
 % \usepackage{mathpazo}
 % \setmainfont[Scale=MatchLowercase]{Linux Libertine O} % \rmfamily のフォント
@@ -132,10 +136,10 @@
 % \usepackage{pxcjkcat}
 % \cjkcategory{sym18}{cjk}
 % \usepackage{polyglossia}
-\usepackage[polutonikogreek,greek,english,japanese]{babel}
+% \usepackage[polutonikogreek,greek,english,japanese]{babel} %%
 % \languageattribute{greek}{polutoniko}
 % ¥usepackage[boldLipsian,10pt,GlyphNames]{teubner}
-\usepackage{teubner}
+% \usepackage{teubner} %%
 % \usepackage{substitutefont}
 % \substitutefont{LGR}{\rmdefault}{porson}
 % ¥substitutefont{LGR}{¥rmdefault}{neohellenic}
@@ -183,6 +187,9 @@
 \usepackage{ulem} %下線
 \usepackage{mathtools}
 %---------
+% \usepackage{unicode-math}
+% \setmathfont{latinmodern-math}
+%-----
 \usepackage{lipsum} %ダミーテキスト 
 % 例： \lipsum[1-5]
 \usepackage{todonotes}
@@ -479,19 +486,19 @@
 \newcommand{\Coalg}{\ensuremath{\mathrm{Coalg}}}
 \newcommand{\Kl}{\ensuremath{\mathrm{Kl}}}
 %--------------------
-\renewcommand\A{\mathbb{A}}
-\renewcommand\B{\mathbb{B}}
+\newcommand\A{\mathbb{A}}
+\newcommand\B{\mathbb{B}}
 \renewcommand\C{\mathbb{C}}
-\renewcommand\D{\mathbb{D}}
+\newcommand\D{\mathbb{D}}
 \newcommand\E{\mathbb{E}}
-\renewcommand\F{\mathbb{F}}
-\renewcommand\G{\mathbb{G}}
+\newcommand\F{\mathbb{F}}
+\newcommand\G{\mathbb{G}}
 % \newcommand\H{\mathbb{H}}
 \newcommand\I{\mathbb{I}}
 \newcommand\J{\mathbb{J}}
 \newcommand\K{\mathbb{K}}
 % \newcommand\L{\mathbb{L}}
-\renewcommand\M{\mathbb{M}}
+\newcommand\M{\mathbb{M}}
 \newcommand\N{\mathbb{N}}
 % \newcommand\O{\mathbb{O}}
 % \newcommand\P{\mathbb{P}}
@@ -502,7 +509,7 @@
 \renewcommand\U{\mathbb{U}}
 \newcommand\V{\mathbb{V}}
 \newcommand\W{\mathbb{W}}
-\renewcommand\X{\mathbb{X}}
+\newcommand\X{\mathbb{X}}
 \newcommand\Y{\mathbb{Y}}
 \newcommand\Z{\mathbb{Z}}
 %-----
