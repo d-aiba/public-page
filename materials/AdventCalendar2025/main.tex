@@ -917,7 +917,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 	\vspace{10pt}
 \end{center}
 
-以下では、「\textbf{モナド}」と「\textbf{クライスリ圏}」そして「\textbf{アイレンバーグ・ムーア圏}」をそれぞれ導入します。（これらの考え方が、後の章を理解するうえでも役立つという意図で、また、関連する周辺事項にも入門しやすくなるという意図で、本節を設けています。これらを念頭に置くことによって、次章の背後にある問題設定や動機づけをより明確に理解できるようになるはずです。）
+以下では、「\textbf{モナド}」と「\textbf{クライスリ圏}」そして「\textbf{アイレンバーグ・ムーア圏}」を導入します。（これらの考え方が、後の章を理解するうえでも役立つという意図で、また、関連する周辺事項にも入門しやすくなるという意図で、本節を設けます。これらを念頭に置くことで、次章の背後にある問題設定や動機づけをより明確に理解できるようになるはずです。）\vspace{5pt}
 
 なお、この節で扱う内容は、Haskell などのプログラム言語にも用いられています。モナドとクライスリ圏の考え方は、「計算効果」を関数型言語の中で扱うための仕組みのひとつとして知られています。（Haskel のモナドに関する話題についてはこの記事では一切触れませんが、気になる人はぜひ自ら勉強してみてください。）
 
@@ -1060,7 +1060,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 	% \end{multicols}
 \end{example}
 
-\begin{example}[モノイド計算作用]
+\begin{example}[モノイドによる計算効果] \label{ex:monoid-computational-effect}
 	\kenten{モノイド} $M$ に対し、$T:=M\otimes(-)$ は\kenten{モナド}をなす。
 	\begin{itemize}
 		\begin{multicols}{2}
@@ -1081,7 +1081,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 				& M\otimes Y
 			\end{tikzcd}
 		\end{center}
-		\item 計算作用 $X\to TY$ と $Y\to TZ$ を集約して、$X\to TZ$ に合成することができる。
+		\item 計算効果 $X\to TY$ と $Y\to TZ$ を集約して、$X\to TZ$ に合成することができる。
 		\begin{center}
 			\begin{tikzcd}[row sep=15pt]
 				X \ar[r,"f"] & M\otimes Y \ar[r,"Tg"] & M\otimes(M\otimes Z) \ar[r,"\textrm{assoc}"] & (M\otimes M)\otimes Z \ar[d,"\mu_Z"] \\
@@ -1090,7 +1090,7 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 		\end{center}
 		% \end{multicols}
 	\end{enumerate}
-	なお、$T=M\otimes(-)$ が\kenten{可換モナド}であるのは、$M$ が\kenten{可換モノイド}であるとき、かつそのときに限る。
+	なお、$T=M\otimes(-)$ が\kenten{可換モナド}であるのは、$M$ が\kenten{可換モノイド}であるとき、かつそのときに限る。\vspace{3pt}
 	\begin{center}
 		% \begin{footnotesize}
 		% \begin{tikzcd}
@@ -1124,15 +1124,15 @@ $\omega+1$よりもさらも先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\begin{example}[例外処理モナド]
-	
-\end{example}
-
 \begin{example}[writerモナド]
-	
+	ライターモナド (writer monad) $T=\Sigma^\ast\times(-)$とは、\textgt{例\ref{ex:monoid-computational-effect}}が非可換モナドの場合である。 
 \end{example}
 
 \begin{example}[readerモナド]
+	リーダーモナド (reader monad) とは、
+\end{example}
+
+\begin{example}[例外処理モナド]
 	
 \end{example}
 
