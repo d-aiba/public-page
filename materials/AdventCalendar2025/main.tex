@@ -936,6 +936,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\textbf{モナド} (monad) とは3つ組 $(T,\eta,\mu)$ であって、以下を満たすものである。\\ 1) $T:\C\to\C$は関手である。2) 単位 $\eta:\id_{\mathbb C}\Rightarrow T$は自然変換である。3) 乗法 $\mu:T\circ T\Rightarrow T$ は自然変換である。そして、以下の図式を可換にする。\vspace{5pt}
 	% \begin{multicols}{2}
 		\begin{center}
+			\small
 			\begin{tikzcd}
 				\id_\C\circ T \ar[r,Rightarrow,"\eta\cdot\id_T"] \ar[rd,equal] & T\circ T \ar[d,Rightarrow,"\mu"]\ar[r,Leftarrow,"\id_T\cdot\eta"] & T\circ\id_\C \ar[ld,equal]\\
 				&T&
@@ -952,6 +953,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	言い換えると、任意の対象 $X\in\C$ について、$\eta_X:X\to T(X)$ と $\mu_X:T(T(X))\to T(X)$ は以下を満たす。\vspace{5pt}
 	% \begin{multicols}{2}
 		\begin{center}
+			\small
 			\begin{tikzcd}
 				TX \ar[r,"\eta_{{}_{T\!X}}"] \ar[rd,"\id_{TX}"'] & TTX \ar[r,leftarrow,"T\eta_X"] \ar[d,"\mu_X"] & TX \ar[ld,"\id_{TX}"] \\
 				{} & TX & 
@@ -967,25 +969,25 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% \end{multicols}
 \end{definition}
 
-\begin{remark}
-	モナドの$\mu$は、2段階の状態遷移を1段階に潰す役割を果たします。\vspace{3pt}
-	\begin{center}
-	\begin{small}
-	\begin{tikzcd}[row sep=2pt,column sep=18pt]
-		&& \bullet \\
-		& \bullet \ar[ru,rightsquigarrow] \ar[rd,rightsquigarrow] \\
-		\bullet \ar[ru,rightsquigarrow] \ar[rd,rightsquigarrow] & & \bullet \\
-		& \bullet \ar[r,rightsquigarrow] & \bullet \\
-	\end{tikzcd}
-	\quad $\implies$ \quad
-		\begin{tikzcd}[row sep=10pt,column sep=38pt]
-			& \bullet \\
-			\bullet \ar[ru,rightsquigarrow] \ar[r,rightsquigarrow] \ar[rd,rightsquigarrow] & \bullet \\
-			& \bullet
-		\end{tikzcd}
-	\end{small}
-	\end{center}
-\end{remark}
+% \begin{remark}
+% 	モナドの$\mu$は、2段階の状態遷移を1段階に潰す役割を果たします。\vspace{3pt}
+% 	\begin{center}
+% 	\begin{small}
+% 	\begin{tikzcd}[row sep=0pt,column sep=18pt]
+% 		&& \bullet \\
+% 		& \bullet \ar[ru,rightsquigarrow] \ar[rd,rightsquigarrow] \\
+% 		\bullet \ar[ru,rightsquigarrow] \ar[rd,rightsquigarrow] & & \bullet \\
+% 		& \bullet \ar[r,rightsquigarrow] & \bullet \\
+% 	\end{tikzcd}
+% 	\quad $\implies$ \quad
+% 		\begin{tikzcd}[row sep=8pt,column sep=38pt]
+% 			& \bullet \\
+% 			\bullet \ar[ru,rightsquigarrow] \ar[r,rightsquigarrow] \ar[rd,rightsquigarrow] & \bullet \\
+% 			& \bullet
+% 		\end{tikzcd}
+% 	\end{small}
+% 	\end{center}
+% \end{remark}
 
 \noindent モナドの例として、\textbf{冪集合モナド} (powerset monad) は以下のようなものです。
 % \begin{align*}
@@ -995,7 +997,25 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{itemize}
 	\item $\mathcal P:\Set\to\Set$, such that $\mathcal P(X)=\{A\mid A\subseteq X\}$ is a powerset of $X$ \\ with $\mathcal P(f):\mathcal P(X)\to\mathcal P(Y)$, such that $\mathcal P(f)(A)=\{f(x)\mid x\in A\}\subseteq Y$, for each morphism $f:X\to Y$
 	\item $\eta_X:X\to\mathcal P(X)$, no-branching, such that $\eta_X(x)=\{x\}$
-	\item $\mu_X:\mathcal P(P(X))\to\mathcal P(X)$, flattening nested branches, such that $\mu_X(S)=\bigcup S$ 
+	\item $\mu_X:\mathcal P(P(X))\to\mathcal P(X)$, flattening nested branches, such that %$\mu_X(S)=\bigcup S$ 
+	$\{X_i\subseteq X\mid i\in I\}\mapsto\bigcup_{i\in I}X_i$ \\ 
+	例えば $\{\{x,y\},\{z\}\}\mapsto\{x,y,z\}$ となり、2段階の遷移を1段階に潰します。
+	\begin{center}
+		\begin{small}
+			\begin{tikzcd}[row sep=0pt,column sep=18pt]
+				&& \bullet \\
+				& \bullet \ar[ru,rightsquigarrow] \ar[rd,rightsquigarrow] \\
+				\bullet \ar[ru,rightsquigarrow] \ar[rd,rightsquigarrow] & & \bullet \\
+				& \bullet \ar[r,rightsquigarrow] & \bullet \\
+			\end{tikzcd}
+			\quad $\implies$ \quad
+			\begin{tikzcd}[row sep=8pt,column sep=38pt]
+				& \bullet \\
+				\bullet \ar[ru,rightsquigarrow] \ar[r,rightsquigarrow] \ar[rd,rightsquigarrow] & \bullet \\
+				& \bullet
+			\end{tikzcd}
+		\end{small}
+	\end{center}
 \end{itemize}
 
 \noindent また、\textbf{劣分布モナド} (sub-distribution monad) は以下のようなものです。
@@ -1016,14 +1036,34 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\eta_X(x)=1\cdot\Ket{x},\qquad 
 		\mu_X\left( \sum_{i\in I} a_i \Ket{\sum_{x\in X} b_{ix} \Ket{x}} \right)=\sum_{x\in X} \left( \sum_{i\in I} a_i b_{ix} \right) \Ket{x}
 	\end{align*}
+	例えば \begin{small}$\displaystyle \left(\frac{1}{3}\Ket{\frac{1}{2}\ket{x}+\frac{1}{2}\ket{y}}+\frac{2}{3}\Ket{\ket{z}}\right)\mapsto \left(\frac{1}{6}\ket{x}+\frac{1}{6}\ket{y}+\frac{2}{3}\ket{z}\right)$\end{small} となり、2段階の遷移を1段階に潰します。
+	%%%
+	\begin{center}
+		\begin{small}
+			\begin{tikzcd}[row sep=0pt,column sep=18pt]
+				&& \bullet \\
+				& \bullet \ar[ru,rightsquigarrow,"\frac{1}{2}"] \ar[rd,rightsquigarrow,"\frac{1}{2}"'] \\
+				\bullet \ar[ru,rightsquigarrow,"\frac{1}{3}"] \ar[rd,rightsquigarrow,"\frac{2}{3}"'] & & \bullet \\
+				& \bullet \ar[r,rightsquigarrow,"1"'] & \bullet \\
+			\end{tikzcd}
+			\quad $\implies$ \quad
+			\begin{tikzcd}[row sep=8pt,column sep=38pt]
+				& \bullet \\
+				\bullet \ar[ru,rightsquigarrow,"\frac{1}{6}"] \ar[r,rightsquigarrow,"\frac{1}{6}",near end] \ar[rd,rightsquigarrow,"\frac{2}{3}"'] & \bullet \\
+				& \bullet
+			\end{tikzcd}
+		\end{small}
+	\end{center}
 \end{itemize}
 
-\noindent なお「劣分布」とは、遷移確率が$1$以下の分布のことで、たとえば「$x_0$から、確率$0.4$で$x_1$に遷移し、確率$0.3$で$x_2$に遷移し、それ以外は異常停止 (deadlock) する」といったものです。（これは理論的にも便利で、sub-distribution の集合は $\omega$-cpo になります。）\vspace{10pt}
-
-さて、モナドの中でも「強モナド」と呼ばれるものがあります。次ページで紹介します。
-
+\noindent なお「劣分布」とは、遷移確率が$1$\kenten{以下}である確率分布のことです。たとえば「$x_0$から、確率$0.4$で$x_1$に遷移し、確率$0.3$で$x_2$に遷移し、それ以外は異常停止 (deadlock) する」といったものです。（これは理論的にも便利で、sub-distribution の集合は $\omega$-cpo になります。）%\vspace{10pt}
 
 \clearpage
+
+さて、モナドの中でも「強モナド」と呼ばれるものがあります。%次ページで紹介します。
+
+
+% \clearpage
 
 \begin{definition}[強モナド]
 	カルテシアン閉圏 $(\mathbb C,\otimes,I)$ 上で定義される\textbf{左-強モナド} (left-strong monad) とは、モナド $(T,\eta,\mu)$ すなわち任意の $X\in \mathbb C$ について 1) $T(X)\in \mathbb C$, 2) $\eta_X:X\to T(X)$, 3) $\mu_X:T(T(X))\to T(X)$ の3つ組であって、さらにそれに加えて 4) \textbf{左-ストレングス} (left-strength)  \[str_{X,Y}^L:X\otimes T(Y)\to T(X\otimes Y)\] を持ち、
@@ -1447,7 +1487,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{tikzcd}
 	\end{center}
 	ここで $TX\to F(TX)$ はまさに「\textbf{冪集合構成}」(powerset construction) として知られるものにあたります。\\
-	より詳しく言うと、以下の合成を通じて、
+	詳しく言うと、以下の合成を通じて、
 	\begin{center}
 		\begin{tikzcd}[row sep=12pt]
 			\mathcal P(X) \ar[r,"\mathcal P\gamma"] & \mathcal P(\mathcal P(X)^L) \ar[r,"\lambda'_{\mathcal P(X)}"] & \mathcal P(\mathcal P(X))^L \ar[d,"\mathcal P\mu_X"]\\
@@ -1492,19 +1532,20 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{multicols}
 \end{itemize}
 
-\noindent ※ なお、両者のアプローチ (1) $X\to \mathcal P(L\times X)$ と (2) $X\to \mathcal P(X)^{L}$ は、同じもの（見方を変えただけ）です。\vspace{2pt}%\\
+\noindent ※ 両者のアプローチ (1) $\gamma:X\to \mathcal P(L\times X)$ と (2) $\gamma:X\to \mathcal P(X)^{L}$ は、同じもの（見方を変えただけ）です。\vspace{5pt}%\\
 \small 
 \begin{prooftree}
-		\AXC{$X\to\mathcal P(X)^{L}$} \doubleLine \RL{curry}
-		\UIC{$X\times L\to\mathcal P(X)$} \doubleLine \RL{classify}
-		\UIC{$\textrm{relation}\subseteq (X\times L)\times X$} \doubleLine \RL{associate}
-		\UIC{$\textrm{relation}\subseteq X\times (L\times X)$} \doubleLine \RL{classify}
-		\UIC{$X\to\mathcal P(L\times X)$}
-	\end{prooftree}
+	\AXC{$X\to\mathcal P(X)^{L}$} \doubleLine \RL{curry}
+	\UIC{$X\times L\to\mathcal P(X)$} \doubleLine \RL{classify}
+	\UIC{$\textrm{relation}\subseteq (X\times L)\times X$} \doubleLine \RL{associate}
+	\UIC{$\textrm{relation}\subseteq X\times (L\times X)$} \doubleLine \RL{classify}
+	\UIC{$X\to\mathcal P(L\times X)$}
+\end{prooftree}
+\vspace{-5pt}
 
 \clearpage
 
-上記の2種類の異なるアプローチ \fbox{\textgt{(1) Kleisli approach}} および \fbox{\textgt{(2) Eilenberg-Moore approach}} で考えていたものは、以下で導入する \fbox{\textgt{(1) Kleisli extension}} と \fbox{\textgt{(2) Eilenberg-Moore lifting}} にそれぞれ相当します。
+上記の2種類の異なるアプローチ \fbox{\textgt{(1) Kleisli approach}} および \fbox{\textgt{(2) Eilenberg-Moore approach}} で考えていたのは、以下で導入する \fbox{\textgt{(1) Kleisli extension}} と \fbox{\textgt{(2) Eilenberg-Moore lifting}} にそれぞれ相当します。
 
 \begin{definition}[Kleisli extension]
 	... 
