@@ -1425,7 +1425,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \begin{supplement}
 
-いま、$\C$ をカルテシアン閉圏とし、$T:\C\to\C$ を、左ストレングス $str_{X,Y}^L:X\otimes T(Y)\to T(X\otimes Y)$ と右ストレングス $str_{X,Y}^R:T(X)\otimes Y\to T(X\otimes Y)$ を持つモナドとします。このとき、クライスリ圏 $\C_T$ は
+いま、$\C$ をカルテシアン閉圏とし、$T:\C\to\C$ を、左ストレングス $str_{X,Y}^L:X\otimes T(Y)\to T(X\otimes Y)$ と右ストレングス $str_{X,Y}^R:T(X)\otimes Y\to T(X\otimes Y)$ を持つ強モナドとします。このとき、クライスリ圏 $\C_T$ は
 \begin{itemize}
 	\item 対象： 圏 $\C$ における対象と同じ
 	\item 射： 圏 $\C_T$ における射 $X\to X'$ は、圏 $\C$ における射 $X\to T(X')$ として与えられる
@@ -1440,7 +1440,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		Y \ar[r,"g"] & Y'
 	\end{tikzcd}\vspace{4pt}
 \end{center}
-は、\kenten{どちらの射を先に適用するかに依存}しています。というのも、
+は、\kenten{どちらの射を先に適用するかに依存}してしまいます。というのも、
 \begin{align*}
 	X\otimes Y &\xrightarrow{f\otimes \id} T(X')\otimes Y \xrightarrow{str^R} T(X'\otimes Y) {\qquad\qquad\qquad\fbox{in $\C$}}\\ &\xrightarrow{T(\id\otimes g)} T(X'\otimes T(Y')) \xrightarrow{T(str^L)} TT(X'\otimes Y') \\ &\xrightarrow{~\mu~} T(X'\otimes Y')
 	\vspace{-3mm}
@@ -1449,7 +1449,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{align*}
 	X\otimes Y &\xrightarrow{\id\otimes g} X\otimes T(Y') \xrightarrow{str^L} T(X\otimes Y') {\qquad\qquad\qquad\fbox{in $\C$}}\\ &\xrightarrow{T(f\otimes \id)} T(T(X')\otimes Y') \xrightarrow{T(str^R)} TT(X'\otimes Y') \\ &\xrightarrow{~\mu~} T(X'\otimes Y')
 \end{align*}
-の両者は異なります。このように、クライスリ圏における直積は、射を適用する順番に敏感なのです。\vspace{6pt}
+の両者は一般に異なります。このように、クライスリ圏における直積は、射を適用する順番に敏感なのです。\vspace{6pt}
 
 ~~ そこでクイズです。クライスリ圏の\kenten{直積がモノイダルであるのはどんなとき}でしょうか？（考えてみてください。）答えは、$T$ が\kenten{可換な強モナドであるとき}です！ つまり、二重ストレングス $T(X)\otimes T(Y)\to T(X\otimes Y)$ があるとき、クライスリ圏 $\C_T$ はモノイダルになります。（すなわち、ストリング図式で書ける！）
 \begin{align*}
