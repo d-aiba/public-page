@@ -1112,10 +1112,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-強モナドのうち、特に可換モナドと呼ばれるものがあります。
+強モナドのうち、特に可換モナドと呼ばれるものがあります。\vspace{-2pt}
 
 \begin{definition}[可換モナド]
-	\textbf{可換モナド}とは、\textbf{二重-ストレングス} (double-strength) $T(X)\otimes T(Y)\to T(X\otimes Y)$ を持った強モナドである。なお、二重-ストレングスとは、以下の図式のように、左右のストレングスから構成されるものとする。（可換性）%\vspace{5pt}
+	\textbf{可換モナド}とは、\textbf{二重-ストレングス} (double-strength) $T(X)\otimes T(Y)\to T(X\otimes Y)$ を持った強モナドである。なお、二重-ストレングスとは、以下の図式のように、左右のストレングスから構成され、$\mu\circ T(str^L)\circ str^R=\mu\circ T(str^R)\circ str^L$ というふうに一致するものをいう。（可換性）\vspace{5pt}
 	\begin{center}
 		\begin{tikzcd}[row sep=3pt,column sep=35pt]
 			& T(X\otimes T(Y)) \ar[r,"T(str^L)"] & T(T(X\otimes Y)) \ar[rd,"\mu"]\\
@@ -1156,7 +1156,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			\end{tikzcd}
 		\end{center}
 		% \end{multicols}
-	\end{enumerate}\vspace{5pt}
+	\end{enumerate}\vspace{2pt}
 	ちなみに、$T=M\otimes(-)$ が \textbf{\kenten{可換モナド}} であるのは、$M$ が \textbf{\kenten{可換モノイド}} であるとき、かつそのときに限る。\vspace{6pt}
 	\begin{center}
 		% \begin{footnotesize}
@@ -1432,7 +1432,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{itemize}
 といったものでした（ここまでは復習）。\vspace{3pt}
 
-~~ ここで、クライスリ圏 $\C_T$ における直積が、一般には「モノイダルな直積」ではなく、「前モノイダルな直積」をなすことに注意が必要です。具体的に言うと、圏 $\C_T$ における直積 $f\otimes g$ の構成\vspace{4pt}
+~~ ここで、クライスリ圏 $\C_T$ における直積が、一般には「モノイダルな直積」ではなく、「前モノイダルな直積」をなすことに注意が必要です。具体的に言うと、圏 $\C_T$ における直積 $f\otimes g$（射の並列合成）の構成\vspace{4pt}
 \begin{center}
 	\begin{tikzcd}[row sep=-2mm,column sep=15mm]
 		X \ar[r,"f"] & X' & \fbox{in $\C_T$}\\
