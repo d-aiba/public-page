@@ -1343,25 +1343,138 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
+ここで、「\textbf{クライスリ圏}」と「\textbf{アイレンバーグ・ムーア圏}」を導入します。これらは、モナドと密接な関係を持ち、コンピューターサイエンスの中でたくさん使われます。
+
 \begin{definition}[クライスリ圏]
-	
+	$T:\C\to\C$ を、圏 $\C$ 上の自己関手とする。モナド $(T,\eta,\mu)$ が与えられたとき、以下のように定められた圏 $\C_T$ を、\textbf{クライスリ圏} (Kleisli category) と呼ぶ。
+	\begin{itemize}
+		\item $\C_T$ における対象 $X,Y,\dots$ は、$\C$ における対象 $X,Y,\dots$ とする。
+		\item $\C_T$ における射 $f:X\computationrightarrow Y$ は、$\C$ における射 $f:X\to TY$ とする。
+		\begin{prooftree}
+			\AXC{$f:X\computationrightarrow Y$ in $\C_T$}
+			\doubleLine
+			\UIC{$f:X\to TY$ in $\C$}
+		\end{prooftree}
+		\item 射の合成： $\C_T$ の射 $f:X\to Y$ と $g:Y\to Z$ に対し、合成 $g\circ f:X\to Z$ は、以下で定義される。
+		\begin{center} %\small
+			\begin{tikzcd}[row sep=7pt]
+				& X \ar[r,"f"] & Y \ar[r,"g"] & Z & (\textrm{in~} \mathbb C_T) \\\hline\\
+				& X \ar[r,"f"] & T(Y) &&(\textrm{in~} \mathbb C) \\
+				&& Y \ar[r,"g"] & T(Z) & \\\hline\\
+				& X \ar[r,"f"] & T(Y) \ar[r,"T(g)"] & T(T(Z)) \ar[dd,"\mu_Z"] & (\textrm{in~} \mathbb C)\\\\
+				&&& T(Z) &
+			\end{tikzcd}
+		\end{center}
+		\item 恒等射： $\C_T$ における射 $\id_X:X\to X$ は、$\C$ における射 $\eta_X:X\to T(X)$ で定義される。
+	\end{itemize}
 \end{definition}
 
-\begin{supplement}[前モノイダル直積]
+\begin{remark}
+	圏 $\C$ における任意の射 $f:X\to TY$ に対し、$(-)^\ast:\Hom_{\C}(X,TY)\to\Hom_{\C}(TX,TY)$ を、\[f^\ast=\mu_Y\circ Tf\] と定める。この表記を用いると、$\C_T$ における射 $f \in \Hom_{\C_T}(X,Y)$ と射 $g \in \Hom_{C_T}(Y,Z)$ の合成射 $g\circ f$ は、$\C$ における射 $g^\ast\circ f : X \to T Z$ のことである。
+\end{remark}
 
-\end{supplement}
+% \begin{supplement}[前モノイダル直積]
 
+% \end{supplement}
+
+% \todo[inline]{加筆}
+
+
+% \clearpage
 
 \begin{definition}[EM圏]
-
+	$T:\C\to\C$ を、圏 $\C$ 上の自己関手とする。モナド $(T,\eta,\mu)$ が与えられたとき、以下のように定められた圏 $\C^T$ を、\textbf{アイレンバーグ・ムーア圏} (Eilenberg-Moore category) と呼ぶ。
+	\begin{itemize}
+		\item $\C^T$ における対象は、$T$-代数 $(TX\xrightarrow{a} X)$ である。
+		\item $\C^T$ における射は、$T$-代数どうしの間の準同型である。
+		\begin{prooftree}
+			\AXC{$\left(\begin{array}{c}TX\\[-4pt]~~\downarrow\substack{a}\\[-4pt]X\end{array}\right)\xrightarrow{\;f\;}\left(\begin{array}{c}TY\\[-4pt]~~\downarrow\substack{b}\\[-4pt]Y\end{array}\right)$ in $\C^T$}
+			\doubleLine
+			\UIC{$X\xrightarrow{\;f\;} Y$ in $\C$}
+		\end{prooftree}
+		\item そして $\eta$ と $\mu$ に整合的である。
+		\begin{center}
+			\begin{tikzcd}
+				T^2X \ar[r,"Ta"] \ar[d,"\mu_X"'] & TX \ar[d,"a"] \\
+				TX \ar[r,"a"'] & X
+			\end{tikzcd}
+		\end{center}
+	\end{itemize}
 \end{definition}
 
-\begin{supplement}[EM代数]
+% \begin{supplement}[EM代数]
 	
-\end{supplement}
+% \end{supplement}
+
+% \todo[inline]{加筆}
 
 
 \clearpage
+
+ここで、「\textbf{前モノイダル直積}」(pre-monoidal product) という考え方に触れておきましょう。
+
+\begin{supplement}
+
+いま、$\C$ をカルテシアン閉圏とし、$T:\C\to\C$ を、左ストレングス $str_{X,Y}^L:X\otimes T(Y)\to T(X\otimes Y)$ と右ストレングス $str_{X,Y}^R:T(X)\otimes Y\to T(X\otimes Y)$ を持つモナドとします。このとき、クライスリ圏 $\C_T$ は
+\begin{itemize}
+	\item 対象： 圏 $\C$ における対象と同じ
+	\item 射： 圏 $\C_T$ における射 $X\to X'$ は、圏 $\C$ における射 $X\to T(X')$ として与えられる
+\end{itemize}
+といったものです。
+
+ここで、クライスリ圏 $\C_T$ における直積が、一般には「モノイダルな直積」ではなく、「前モノイダルな直積」をなすことに注意が必要です。具体的に言うと、圏 $\C_T$ における直積の構成
+\begin{center}
+	\begin{tikzcd}[row sep=-2mm,column sep=15mm]
+		X \ar[r,"f"] & X' & \fbox{in $\mathrm{Kl}(T)$}\\
+		\otimes & \otimes \\[2pt]
+		Y \ar[r,"g"] & Y'
+	\end{tikzcd}
+\end{center}
+は、\kenten{射を適用する順番に左右されます}。というのも、
+\begin{align*}
+	X\otimes Y &\xrightarrow{f\otimes \id} T(X')\otimes Y \xrightarrow{str^R} T(X'\otimes Y) {\qquad\qquad\qquad\fbox{in $\C$}}\\ &\xrightarrow{T(\id\otimes g)} T(X'\otimes T(Y')) \xrightarrow{T(str^L)} TT(X'\otimes Y') \\ &\xrightarrow{~\mu~} T(X'\otimes Y')
+	\vspace{-3mm}
+\end{align*}
+と
+\begin{align*}
+	X\otimes Y &\xrightarrow{\id\otimes g} X\otimes T(Y') \xrightarrow{str^L} T(X\otimes Y') {\qquad\qquad\qquad\fbox{in $\C$}}\\ &\xrightarrow{T(f\otimes \id)} T(T(X')\otimes Y') \xrightarrow{T(str^R)} TT(X'\otimes Y') \\ &\xrightarrow{~\mu~} T(X'\otimes Y')
+\end{align*}
+の両者は異なります。このように、クライスリ圏における直積は、射を適用する順番に敏感なのです。
+
+ここでクイズです。クライスリ圏の直積がモノイダルになるのはどんなときでしょうか？ 答えは、$T$ が可換な強モナドであるときです！ すなわち、二重ストレングス $T(X)\otimes T(Y)\to T(X\otimes Y)$ があるとき、クライスリ圏 $\C_T$ はモノイダルになります。
+\begin{align*}
+	\begin{array}{cccccc}
+		f\otimes g &=& (\id\otimes g)\circ(f\otimes\id) &=& (f\otimes\id)\circ(\id\otimes g) & \qquad\fbox{in $\Kl(T)$}\\[8pt]
+		~\textrm{\scriptsize ---\fbox{\quad$f$\quad}---}~ && ~\textrm{\scriptsize ---\fbox{\quad$f$\quad}---------------}~ &&  ~\textrm{\scriptsize ---------------\fbox{\quad$f$\quad}---}~  \\[-6pt]
+		& = && = & \\[-6pt]
+		~\textrm{\scriptsize ---\fbox{\quad$g$\quad}---}~  && ~\textrm{\scriptsize ---------------\fbox{\quad$g$\quad}---}~ && ~\textrm{\scriptsize ---\fbox{\quad$g$\quad}---------------}~
+	\end{array}
+\end{align*}
+これはなぜかというと、$T$ が可換なモナドであるとき、
+\begin{center}
+	\begin{tikzcd}[row sep=-1mm,column sep=7mm]
+		X \ar[r,"f"] & T(X') \ar[r,equal] & T(X') \ar[rd]&&\hspace{-5mm}\fbox{in $\C$} \\
+		\otimes & \otimes & \otimes & T(X'\otimes Y')\\
+		Y \ar[r,equal] & Y \ar[r,"g"] & T(Y') \ar[ru] \vspace{-3mm}
+	\end{tikzcd}
+\end{center}
+と
+\begin{center}
+	\begin{tikzcd}[row sep=-1mm,column sep=7mm]
+		X \ar[r,equal] & X \ar[r,"f"] & T(X') \ar[rd] &&\hspace{-5mm}\fbox{in $\C$} \\
+		\otimes & \otimes & \otimes & T(X'\otimes Y')\\
+		Y \ar[r,"g"] & T(Y') \ar[r,equal] & T(Y') \ar[ru]
+	\end{tikzcd}
+\end{center}
+の両者は一致するからです！%\vspace{5pt}\\
+
+\end{supplement}
+
+\clearpage
+
+さて、ここからは、しばらく「モナド分配則」について取り上げます。
+
+% \clearpage
 
 % \subsection{余談 (3)\; モナド分配則}
 
@@ -1403,17 +1516,17 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			TS^2 \ar[r,"\lambda S"] \ar[d,"T\mu^S"'] & STS \ar[r,"S\lambda"] & S^2T \ar[d,"\mu^ST"] \\
 			TS \ar[rr,"\lambda"'] && ST 
 		\end{tikzcd}
-		\qquad 
+		\quad 
 		\begin{tikzcd}[column sep=15pt]
 			T^2 S \ar[r,"T\lambda"] \ar[d,"\mu^TS"'] & TST \ar[r,"\lambda T"] & ST^2 \ar[d,"S\mu^T"] \\
 			TS \ar[rr,"\lambda"'] && ST 
 		\end{tikzcd}
-		\quad \\[8pt]
+		\quad %\\[8pt]
 		\begin{tikzcd}[column sep=5pt]
 			&T \ar[ld,"T\eta^S"'] \ar[rd,"\eta^S T"] \\
 			TS \ar[rr,"\lambda"'] && ST
 		\end{tikzcd}
-		\qquad
+		\quad
 		\begin{tikzcd}[column sep=5pt]
 			&S \ar[ld,"\eta^T S"'] \ar[rd,"S\eta^T"] \\
 			TS \ar[rr,"\lambda"'] && ST
