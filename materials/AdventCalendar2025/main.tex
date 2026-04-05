@@ -1422,7 +1422,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{itemize}
 といったものです。
 
-ここで、クライスリ圏 $\C_T$ における直積が、一般には「モノイダルな直積」ではなく、「前モノイダルな直積」をなすことに注意が必要です。具体的に言うと、圏 $\C_T$ における直積の構成
+~~~ここで、クライスリ圏 $\C_T$ における直積が、一般には「モノイダルな直積」ではなく、「前モノイダルな直積」をなすことに注意が必要です。具体的に言うと、圏 $\C_T$ における直積の構成
 \begin{center}
 	\begin{tikzcd}[row sep=-2mm,column sep=15mm]
 		X \ar[r,"f"] & X' & \fbox{in $\mathrm{Kl}(T)$}\\
@@ -1441,7 +1441,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{align*}
 の両者は異なります。このように、クライスリ圏における直積は、射を適用する順番に敏感なのです。
 
-ここでクイズです。クライスリ圏の直積がモノイダルになるのはどんなときでしょうか？ 答えは、$T$ が可換な強モナドであるときです！ すなわち、二重ストレングス $T(X)\otimes T(Y)\to T(X\otimes Y)$ があるとき、クライスリ圏 $\C_T$ はモノイダルになります。（つまり、ストリング図式で書ける！）
+~~~さて、クイズです。クライスリ圏の\kenten{直積がモノイダルになるのはどんなとき}でしょうか？（考えてみてください。）答えは、$T$ が\kenten{可換な強モナドであるとき}です！ つまり、二重ストレングス $T(X)\otimes T(Y)\to T(X\otimes Y)$ があるとき、クライスリ圏 $\C_T$ はモノイダルになります。（すなわち、ストリング図式で書ける！）
 \begin{align*}
 	\begin{array}{cccccc}
 		f\otimes g &=& (\id\otimes g)\circ(f\otimes\id) &=& (f\otimes\id)\circ(\id\otimes g) & \qquad\fbox{in $\Kl(T)$}\\[8pt]
@@ -1450,7 +1450,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		~\textrm{\scriptsize ---\fbox{\quad$g$\quad}---}~  && ~\textrm{\scriptsize ---------------\fbox{\quad$g$\quad}---}~ && ~\textrm{\scriptsize ---\fbox{\quad$g$\quad}---------------}~
 	\end{array}
 \end{align*}
-これはなぜかというと、$T$ が可換なモナドであるとき、
+これはなぜかというと、$T$ が可換な強モナドであるとき、
 \begin{center}
 	\begin{tikzcd}[row sep=-1mm,column sep=7mm]
 		X \ar[r,"f"] & T(X') \ar[r,equal] & T(X') \ar[rd]&&\hspace{-5mm}\fbox{in $\C$} \\
