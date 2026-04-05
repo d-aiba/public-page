@@ -1411,7 +1411,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent ここで、「\textbf{前モノイダル直積}」(pre-monoidal product) という考え方に触れておきましょう。
+% \noindent 
+ここで、「\textbf{前モノイダル直積}」(pre-monoidal product) という考え方に触れておきましょう。
 
 \begin{supplement}
 
@@ -1450,7 +1451,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		~\textrm{\scriptsize ---\fbox{\quad$g$\quad}---}~  && ~\textrm{\scriptsize ---------------\fbox{\quad$g$\quad}---}~ && ~\textrm{\scriptsize ---\fbox{\quad$g$\quad}---------------}~
 	\end{array}
 \end{align*}
-これはなぜかというと、$T$ が可換な強モナドであるとき、\vspace{3pt}
+これはなぜかというと、モナド $T$ が可換であるとき、\vspace{3pt}
 \begin{center}
 	\begin{tikzcd}[row sep=-1mm,column sep=7mm]
 		X \ar[r,"f"] & T(X') \ar[r,equal] & T(X') \ar[rd]&&\hspace{-5mm}\fbox{in $\C$} \\
@@ -1479,7 +1480,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 % \subsection{余談 (3)\; モナド分配則}
 
 \begin{definition}[モナド分配則]
-	モナド分配則 (distributive law) とは、2つのモナド $(T,\eta^T,\mu^T)$ と $(S,\eta^S,\mu^S)$ の間の自然変換 $\lambda:TS\Rightarrow ST$ であって以下の図式を可換にするものである。\vspace{8pt}
+	モナド分配則 (distributive law) とは、2つのモナド $(T,\eta^T,\mu^T)$ と $(S,\eta^S,\mu^S)$ の間の自然変換 $\lambda:TS\Rightarrow ST$ であって、以下の図式を可換にするものである。\vspace{8pt}
 	% \begin{center}
 	% 	\begin{small}
 	% 	\begin{tikzcd}
