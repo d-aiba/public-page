@@ -2416,7 +2416,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\section{最弱事前条件をどのように手に入れるか}
+\section{最弱事前条件をどのように手に入れるか --- 圏論的な観点で}
 \label{sec:categorical-weakest-precondition}
 
 さて、本節では、非決定的プログラムや確率的プログラムなどといった様々な種類のプログラムに対する述語変換子意味論を得る方法について、圏論的な視座から考えます。一般に、状態の集合 $X, Y$ と真理値の集合 $\Omega$ が与えられたときに、効果付き計算 $c:X\to FY$ に基づいて、事後条件 $q:Y\to\Omega$ を最弱事前条件 $wp\llbracket c\rrbracket(q):X\to \Omega$ に変換する関数である「述語変換子」 $wp\llbracket c\rrbracket:\Omega^Y\to\Omega^X$ を手に入れるためには、どんな手続きを経たらよいでしょうか。\vspace{8pt}
