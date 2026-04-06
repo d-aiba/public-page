@@ -1065,6 +1065,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \noindent なお「\textbf{劣分布}」とは、遷移確率が$1$\kenten{以下}である確率分布のことです。たとえば「$x_0$から、確率$0.4$で$x_1$に遷移し、確率$0.3$で$x_2$に遷移し、それ以外は異常停止 (deadlock) する」といったものです。（これは理論的にも便利で、sub-distribution の集合は $\omega$-cpo になります。）%\vspace{10pt}
 
+% \clearpage
+
+% モナドの例として、代数的エフェクト (algebraic effect)、とりわけ例外処理 (exception handler) の例を見ておきましょう。
+
 \clearpage
 
 さて、モナドの中でも「強モナド」と呼ばれるものがよく知られています。%次ページで紹介します。
@@ -1353,7 +1357,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 ではここで、「\textbf{クライスリ圏}」と「\textbf{アイレンバーグ・ムーア圏}」を導入します。これらは、モナドと密接な関係を持ち、コンピューターサイエンスの中でたくさん使われます。
 
 \begin{definition}[クライスリ圏]
-	$T:\C\to\C$ を、圏 $\C$ 上の自己関手とする。モナド $(T,\eta,\mu)$ が与えられたとき、以下で定められた圏 $\C_T$ を、\textbf{クライスリ圏} (Kleisli category) と呼ぶ。
+	$T:\C\to\C$ を、圏 $\C$ 上の自己関手とする。モナド $(T,\eta,\mu)$ が与えられたとき、以下で定められた圏 $\C_T$ を、\textgt{クライスリ圏} (Kleisli category) と呼ぶ。
 	% （なお $\Kl(T)$ と表記することもある。）
 	\begin{itemize}
 		\item $\C_T$ における対象 $X,Y,\dots$ は、$\C$ における対象 $X,Y,\dots$ とする。
@@ -1391,7 +1395,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 % \clearpage
 
 \begin{definition}[EM圏]
-	$T:\C\to\C$ を、圏 $\C$ 上の自己関手とする。モナド $(T,\eta,\mu)$ が与えられたとき、以下で定められた圏 $\C^T$ を、\textbf{アイレンバーグ・ムーア圏} (Eilenberg-Moore category) と呼ぶ。
+	$T:\C\to\C$ を、圏 $\C$ 上の自己関手とする。モナド $(T,\eta,\mu)$ が与えられたとき、以下で定められた圏 $\C^T$ を、\textgt{アイレンバーグ・ムーア圏} (Eilenberg-Moore category) と呼ぶ。
 	%（$\mathrm{EM}(T)$ と表記することもある）
 	\begin{itemize}
 		\item $\C^T$ における対象は、$T$-代数 $(TX\xrightarrow{a} X)$ である。
@@ -1417,6 +1421,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 % \todo[inline]{加筆}
 
+\clearpage
+
+\noindent 
+ここで、モナド、クライスリ圏、アイレンバーグ・ムーア圏を考えることのモチベーションをつかむために、例として、\textgt{代数的エフェクト} (algebraic effect)、とりわけ\textgt{例外処理} (exception handler) の例を見ておくことにしましょう。\vspace{5pt}
 
 \clearpage
 
@@ -1652,7 +1660,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{multicols}
 \end{itemize}
 
-\noindent ※ 両者のアプローチ (1) $\gamma:X\to \mathcal P(L\times X)$ と (2) $\gamma:X\to \mathcal P(X)^{L}$ は、同じもの（見方を変えただけ）です。\vspace{5pt}%\\
+\noindent ※ なお、両者のアプローチ (1) $\gamma:X\to \mathcal P(L\times X)$ と (2) $\gamma:X\to \mathcal P(X)^{L}$ は、同じものです（自然同型で対応）。\vspace{5pt}%\\
 % \small 
 \begin{small}
 \begin{prooftree}
@@ -1758,7 +1766,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\begin{align*}
 			\begin{array}{ccc}
 				~~\C_T~~ & \xrightarrow{~~~F_T~~~} & \C_T \\[10pt] 
-				\substack{\displaystyle X\\\rotatebox{-90}{$\!\textstyle\computationlongrightarrow$\;}\\\displaystyle Y}  & \longmapsto & \begin{array}{c} FX \\ ~~~ \downarrow \substack{Ff} \\ FTY \\ ~~~\downarrow \substack{\lambda_Y} \\ TFY \end{array}
+				\substack{\displaystyle X\\[4pt]\rotatebox{-90}{$\!\textstyle\computationlongrightarrow$\;}\\[4pt]\displaystyle Y}  & \longmapsto & \begin{array}{c} FX \\ ~~~ \downarrow \substack{Ff} \\ FTY \\ ~~~\downarrow \substack{\lambda_Y} \\ TFY \end{array}
 			\end{array}
 		\end{align*}
 		モナド分配則 $\lambda':TF\Rightarrow FT$ は、\\$F$ のEM持ち上げ $F^T$ を誘導する。
@@ -1772,6 +1780,79 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{align*}
 	\end{multicols}
 \end{supplement}
+
+\clearpage
+
+\noindent まず、\fbox{\textbf{(1) Kleisli approach}} のほうは、以下のように理解することができます。
+\begin{itemize}
+	\item 圏 $\C$ における余代数 $\gamma:X\to TFX$ は、圏 $\C_T$ における射 $\gamma:X\computationrightarrow FX$ です。
+	\item ここで、$\gamma$ に $F_T$ を適用すると、
+	% \[F_T(\gamma)=\left(FX\xrightarrow{\;\lambda_{FX}\,\circ\,F\gamma\;} TF^2 X\right)\] 
+	\begin{align*}
+		F_T(\gamma)&=\left(FX\xrightarrow{\;\lambda_{FX}\,\circ\,F\gamma\;} TF^2 X\right)\\
+		&=\left(FX\xrightarrow{\;F\gamma\;}FTFX\xrightarrow{\;\lambda_{FX}\;}TFFX\right)
+	\end{align*}
+	が得られます。
+	\item そして、Kleisli 合成をすると \[X \xrightarrow{\;\gamma\;} TFX \xrightarrow{\;T(F_T(\gamma))\;} TTF^2X \xrightarrow{\;\mu\;} TF^2X\] になります。
+	\item これは、先ほどの「2ステップ遷移」そのものです。\vspace{8pt}
+\end{itemize}
+
+\noindent 次に、\fbox{\textbf{(2) Eilenberg-Moore approach}} のほうは、以下のように理解することができます。
+
+\begin{itemize}
+	\item 余代数 $\gamma:X\to FTX$ を考えます。%から、自由代数 $\gamma':TX\to FTX$ 
+	\item このとき、$FTX=R^T(F^T(L^T(X)))$ となります。%\\ 任意の対象 $X$ に対し、自由 $T$-代数とは、$L^T(X)=\left(TTX\xrightarrow{\;\mu_X\;}TX\right)$ です。（台集合が$TX$）\\ %ここで、$FTX$ の自由 $T$-代数 $\alpha:T(FTX)\to FTX$ を考え、 \[\delta=\] を考えます。
+	\begin{itemize}
+		\item 任意の対象 $X$ に対し、自由 $T$-代数とは、$L^T(X)=\left(TTX\xrightarrow{\;\mu_X\;}TX\right)$ です。（台集合が$TX$）
+		\item ここで、この $L^T(X)$ に $F^T$ を適用すると、
+		\begin{align*}
+			\begin{array}{ccc}
+				\C^T & \xrightarrow{~~~~~F^T~~~~~} & \C^T \\
+				\rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$} \\
+				\left(\begin{array}{c}
+					TTX \\
+					~~~\downarrow \substack{\mu_X}\\
+					TX
+				\end{array}\right)
+				&
+				\longmapsto 
+				&
+				\left(\begin{array}{c}
+					TFTX\\
+					~~~\downarrow\substack{\lambda_{TX}}\\
+					FTTX\\
+					~~~\downarrow\substack{F{\mu_X}}\\
+					FTX
+				\end{array}\right)
+			\end{array}
+		\end{align*}
+		となり、その台集合（つまり忘却関手 $R^T$ を適用したもの）は $FTX$ です。
+		% \item 
+		% \item 
+	\end{itemize}
+	% いま、
+	\item そのため、$\gamma:X\to FTX$ は、実は $\gamma:X\to R^T(F^T(L^T(X)))$ という射だと言えます。
+	% \item ここで、「自由代数の普遍性」を使うと \[\gamma^\sharp=\left(TX\xrightarrow{\;(F\mu_X\,\circ\,\lambda_{TX})\,\circ\,T\gamma\;}FTX\right)\] が得られます。
+	\item ここで、「自由代数の普遍性」より、
+	\begin{multicols}{2}
+		\begin{center}
+			\begin{tikzcd}[column sep=5pt]
+				X \ar[rr,"\eta_X"] \ar[rd,"\gamma"'] && TX \ar[ld,"\gamma^\sharp"]\\
+				& FTX & 
+			\end{tikzcd}
+		\end{center}
+		%%%
+		% \begin{center}
+			$\gamma^\sharp=\left(TX\xrightarrow{\;(F\mu_X\,\circ\,\lambda_{TX})\,\circ\,T\gamma\;}FTX\right)$
+		% \end{center}
+	\end{multicols}
+	が得られます。（？？？）
+	\item 
+	\item 
+	\item 
+	\item これは、先ほどの「冪集合構成による非決定的オートマトンの決定化」そのものです。
+\end{itemize}
+
 
 \clearpage
 
