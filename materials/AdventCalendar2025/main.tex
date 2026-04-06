@@ -1569,7 +1569,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\item つまり、このシステムは $\gamma:X\to\mathcal P(L\times X)$ という余代数で、$\gamma(x)=\{(a,x'),\dots\}$ といったものです。
 	\end{itemize}
 	\item ここで、モナド分配則 $\lambda:FT\Rightarrow TF$ を考えます。
-	\item すると、以下のように\textbf{合成}を考えることができます。（ここで $X\to TF^2X$ が「\textbf{2ステップ遷移}」を表します。）
+	\item すると、以下のように\textgt{合成}を考えることができます。（ここで $X\to TF^2X$ が「\textgt{2ステップ遷移}」を表します。）
 	\begin{center}
 		\begin{tikzcd}[row sep=6pt]
 			X \ar[r,"\gamma"] & TFX \\[-4pt]
@@ -1606,7 +1606,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\item つまり、このシステムは $\gamma:X\to\mathcal P(X)^L$ という余代数で、$\gamma(x)(a)=\{x',\dots\}$ といったものです。
 	\end{itemize}
 	\item ここで、モナド分配則 $\lambda':TF\Rightarrow FT$ を考えます。
-	\item すると、以下のように、非決定的オートマトンを\textbf{決定化} (determinize) することができます。
+	\item すると、以下のように、非決定的オートマトンを\textgt{決定化} (determinize) することができます。
 	\begin{center}
 		\begin{tikzcd}[row sep=12pt]
 			TX \ar[r,"T\gamma"] & TFTX \ar[r,"\lambda'_{TX}"] & FTTX \ar[d,"F\mu_X"]\\
@@ -1614,7 +1614,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{tikzcd}
 	\end{center}
 	% ここで $TX\to F(TX)$ はまさに「\textbf{冪集合構成}」(powerset construction) として知られるものにあたります。\\
-	この $TX\to F(TX)$ を得る過程は、まさに「\textbf{冪集合構成}」(powerset construction) に相当します。\\
+	この $TX\to F(TX)$ を得る過程は、まさに「\textgt{冪集合構成}」(powerset construction) に相当します。\\
 	詳しく言うと、以下の合成を通じて、
 	\begin{center}
 		\begin{tikzcd}[row sep=12pt]
@@ -1794,7 +1794,9 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{align*}
 	が得られます。
 	\item そして、Kleisli 合成をすると \[X \xrightarrow{\;\gamma\;} TFX \xrightarrow{\;T(F_T(\gamma))\;} TTF^2X \xrightarrow{\;\mu\;} TF^2X\] になります。
-	\item これはまさに、先ほどの「2ステップ遷移」そのものです。\vspace{8pt}
+	\item これはまさに、先ほどの「遷移を合成して得られる2ステップ遷移」そのものです。
+	\\
+	%\vspace{8pt}
 \end{itemize}
 
 \noindent 次に、\fbox{\textbf{(2) Eilenberg-Moore approach}} のほうは、以下のように理解することができます。
@@ -1819,14 +1821,14 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 				&
 				\left(\begin{array}{c}
 					TFTX\\
-					~~~\downarrow\substack{\lambda_{TX}}\\
+					~~~\downarrow\substack{\lambda'_{TX}}\\
 					FTTX\\
 					~~~\downarrow\substack{F{\mu_X}}\\
 					FTX
 				\end{array}\right)
 			\end{array}
 		\end{align*}
-		となり、その台集合（つまり忘却関手 $R^T$ を適用したもの）は $FTX$ です。
+		となり、その台集合 (underlying object) は $FTX$ です。
 		% \item 
 		% \item 
 	\end{itemize}
@@ -1843,13 +1845,16 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{center}
 		%%%
 		% \begin{center}
-			$\gamma^\sharp=\left(TX\xrightarrow{\;(F\mu_X\,\circ\,\lambda_{TX})\,\circ\,T\gamma\;}FTX\right)$
+			$\gamma^\sharp=\left(TX\xrightarrow{\;F\mu_X\,\circ\,\lambda'_{TX}\,\circ\,T\gamma\;}FTX\right)$
 		% \end{center}
 	\end{multicols}
-	のように、$\gamma$ から $\gamma^\sharp$ が一意に得られます。（？？？）
-	\item 
-	\item 
-	\item 
+	\noindent 
+	のように、$\gamma$ から $\gamma^\sharp$ が一意に得られます。
+	% \[\Hom_{\C}(X,R^TF^TL^TX)\;\cong\;\Hom_{\C^T}(L^TX,F^TL^TX)\]
+	\[\begin{array}{ccc}\Hom_{\C}(X,R^TF^TL^TX) & \cong & \Hom_{\C^T}(L^TX,F^TL^TX)\\ \rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\ \gamma && \textrm{its underlying map is $\gamma^\sharp$}\end{array}\]
+	% \item 
+	% \item 
+	% \item 
 	\item これはまさに、先ほどの「冪集合構成による非決定的オートマトンの決定化」そのものです。
 \end{itemize}
 
