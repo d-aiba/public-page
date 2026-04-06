@@ -1795,8 +1795,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	が得られます。
 	\item そして、Kleisli 合成をすると \[X \xrightarrow{\;\gamma\;} TFX \xrightarrow{\;T(F_T(\gamma))\;} TTF^2X \xrightarrow{\;\mu\;} TF^2X\] になります。
 	\item これはまさに、先ほどの「遷移を合成して得られる2ステップ遷移」そのものです。
-	\\
-	%\vspace{8pt}
+	% \\
+	\vspace{10pt}
 \end{itemize}
 
 \noindent 次に、\fbox{\textbf{(2) Eilenberg-Moore approach}} のほうは、以下のように理解することができます。
@@ -1808,9 +1808,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\item 任意の対象 $X$ に対し、自由 $T$-代数とは、$L^T(X)=\left(TTX\xrightarrow{\;\mu_X\;}TX\right)$ です。（台集合が$TX$）
 		\item ここで、この $L^T(X)$ に $F^T$ を適用すると、
 		\begin{align*}
-			\begin{array}{ccc}
-				\C^T & \xrightarrow{~~~~~F^T~~~~~} & \C^T \\
-				\rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$} \\
+			\begin{array}{ccccc}
+				& \C^T & \xrightarrow{~~~~~F^T~~~~~} & \C^T & \\
+				&\rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$}& \\
+				L^TX \;= &
 				\left(\begin{array}{c}
 					TTX \\
 					~~~\downarrow \substack{\mu_X}\\
@@ -1825,7 +1826,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 					FTTX\\
 					~~~\downarrow\substack{F{\mu_X}}\\
 					FTX
-				\end{array}\right)
+				\end{array}\right) & =\; F^T(L^TX)
 			\end{array}
 		\end{align*}
 		となり、その台集合 (underlying object) は $FTX$ です。
@@ -1835,7 +1836,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% いま、
 	\item そのため、$\gamma:X\to FTX$ は、実は $\gamma:X\to R^T(F^T(L^T(X)))$ という射だと言えます。
 	% \item ここで、「自由代数の普遍性」を使うと \[\gamma^\sharp=\left(TX\xrightarrow{\;(F\mu_X\,\circ\,\lambda_{TX})\,\circ\,T\gamma\;}FTX\right)\] が得られます。
-	\item ここで、「自由代数の普遍性」より、
+	\item ここで、``自由代数の普遍性'' より、
 	\begin{multicols}{2}
 		\begin{center}
 			\begin{tikzcd}[column sep=5pt]
@@ -1845,13 +1846,19 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{center}
 		%%%
 		% \begin{center}
-			$\gamma^\sharp=\left(TX\xrightarrow{\;F\mu_X\,\circ\,\lambda'_{TX}\,\circ\,T\gamma\;}FTX\right)$
+			% $\gamma^\sharp=\left(TX\xrightarrow{\;F\mu_X\,\circ\,\lambda'_{TX}\,\circ\,T\gamma\;}FTX\right)$
+			\begin{align*}
+				\hspace*{-20pt}\gamma^\sharp&=\left(TX\xrightarrow{\;F\mu_X\,\circ\,\lambda'_{TX}\,\circ\,T\gamma\;}FTX\right)\\
+				&=\left(TX\xrightarrow{T\gamma}TFTX\xrightarrow{\lambda'_{TX}}FTTX\xrightarrow{F\mu_X}FTX\right)
+			\end{align*}
 		% \end{center}
 	\end{multicols}
 	\noindent 
 	のように、$\gamma$ から $\gamma^\sharp$ が一意に得られます。
+	（この$\gamma^\sharp$は、$F^T$-coalgebra の underlying map です。）
+	% のように、$\gamma$ から $\gamma^\sharp$ が一意に（なお $F^T$-coalgebra の underlying map として）得られます。
 	% \[\Hom_{\C}(X,R^TF^TL^TX)\;\cong\;\Hom_{\C^T}(L^TX,F^TL^TX)\]
-	\[\begin{array}{ccc}\Hom_{\C}(X,R^TF^TL^TX) & \cong & \Hom_{\C^T}(L^TX,F^TL^TX)\\ \rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\ \gamma && \textrm{its underlying map is $\gamma^\sharp$}\end{array}\]
+	\[\begin{array}{ccc}\Hom_{\C}(X,\,R^T(F^T(L^TX))) & ~\cong~ & \Hom_{\C^T}(L^TX,\,F^T(L^TX))\\ \rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\ \gamma:X\to FTX && \overline\gamma:L^TX\to F^T(L^TX) \\[2pt] &&\left(~\substack{\displaystyle\textrm{its underlying map is} \\ \displaystyle\gamma^\sharp:TX\to FTX}~\right) \end{array}\]
 	% \item 
 	% \item 
 	% \item 
