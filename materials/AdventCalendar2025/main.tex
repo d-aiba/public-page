@@ -1875,7 +1875,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			\end{tikzcd}
 		\end{small}
 	\end{center} 
-	を満たすことです。特に余代数との関わりの中では、以下の図のような状況を考えることが多いです。基底の関手 $F$ をどうやって $\dot F$ に持ち上げるか（様相の入れ方、たとえば$\Box$か$\Diamond$か）が重要になります。（後述）
+	を満たすことです。特に余代数との関わりの中では、以下の図のような状況を考えることが多いです。基底の関手 $F$ をどうやって $\dot F$ に持ち上げるか（様相の入れ方、たとえば$\Box$か$\Diamond$か）が重要になります。（\ref{sec:categorical-weakest-precondition}章で後述）
 	\begin{small}
 		% \begin{center}
 		% 	\begin{tikzcd}
@@ -1887,7 +1887,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			\begin{tikzcd}
 				&\Pred_{X} \ar[rr,bend left=12pt,"\dot F_X"] && \Pred_{\,FX} \ar[ll,bend left=12pt,"c^\ast"] \\[-5pt]
 				& P \ar[rrd,mapsto,shorten=3pt] \\[-24pt] 
-				\Pred \ar[loop left,"\dot F"] \ar[dd,"p"'] &&& \dot F_X P \ar[lld,mapsto,shorten=3pt] \\[-24pt] 
+				\Pred \ar[loop left,"\dot F_X"] \ar[dd,"p"'] &&& \dot F_X P \ar[lld,mapsto,shorten=3pt] \\[-24pt] 
 				& c^\ast\dot F_X P & \\
 				~\Set~ \ar[loop left,"F"]  & X \ar[rr,"c"'] && FX 
 			\end{tikzcd}
@@ -2396,7 +2396,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\begin{tikzcd}
 			&\mathbf{\Omega}^{X} \ar[rr,bend left=12pt,"\dot F_X"] && \mathbf{\Omega}^{FX} \ar[ll,bend left=12pt,"c^\ast"] \\[-5pt]
 			& q \ar[rrd,mapsto,shorten=3pt] \\[-25pt] 
-			\Pred \ar[loop left,"\dot F"] \ar[dd,"p"'] &&& \dot F_X q \ar[lld,mapsto,shorten=3pt] \\[-25pt] 
+			\Pred \ar[loop left,"\dot F_X"] \ar[dd,"p"'] &&& \dot F_X q \ar[lld,mapsto,shorten=3pt] \\[-25pt] 
 			& c^\ast\dot F_X q & \\
 			~\Set~ \ar[loop left,"F"]  & X \ar[rr,"c"'] && FX 
 		\end{tikzcd}
