@@ -1424,7 +1424,65 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \clearpage
 
 \noindent 
-ここで、モナド、クライスリ圏、アイレンバーグ・ムーア圏を考えることのモチベーションをつかむために、例として、\textgt{代数的エフェクト} (algebraic effect)、とりわけ\textgt{例外処理} (exception handler) の例を見ておくことにしましょう。\vspace{5pt}
+ここで、モナド、クライスリ圏、アイレンバーグ・ムーア圏を考えることのモチベーションをつかむために、例として、\textgt{代数的エフェクト} (algebraic effect)、とりわけ\textgt{例外処理} (exception handler) の例を見ておくことにしましょう。\vspace{18pt}
+
+\begin{itemize}
+	\item まず、例外モナド (exception monad) は以下のように与えられます。
+	\begin{itemize}
+		\item $T(X):=X+E$ と定めます。ここで $+$ は余積とし、$E$ は ``エラーの集合'' とします。\\ さらに、$f:X\to Y$ については、$T(f)=f+\id_E$ とします。
+		\item ここで、単位 $\eta_X$ を以下のように定義します。（「もしエラーがなければ、計算結果をそのまま埋め込む。」）
+		\begin{multicols}{2}
+			\begin{center}
+				$\begin{array}{cccccc}\eta_X:&X&\longrightarrow &X&+&E\\[2pt] & x & \mapsto & x\end{array}$
+			\end{center}
+			\begin{center} \small
+				$\left(\begin{array}{cc}\eta_X(x)&:=inl(x)\end{array}\right)$
+			\end{center}
+		\end{multicols}
+		\item また、乗法 $\mu_X$ を以下のように定義します。（「エラーが起きたら、そのエラーを送って、最後に集める。」）
+		\begin{multicols}{2}
+			\begin{center}
+				$\begin{array}{ccccccccccc}\mu_X:({\!\!}&X&\!+\!&E&{\!\!})&\!+\!&E&\longrightarrow&X&\!+\!&E\\[-1pt] & x &&&&&&\mapsto &x\\[-3pt] &&& e &&&& \mapsto &&& e \\[-3pt]  &&&&&& e & \mapsto &&& e \end{array}$
+			\end{center}
+			\begin{center} \small
+				$\left(\begin{array}{rl} \mu_X(inl (inl (x))) &:= inl(x)\\ \mu_X(inl(inr(e)))&:=inr(e)\\ \mu_X(inr(e)) &:= inr(e) \end{array}\right)$	
+			\end{center}
+		\end{multicols}
+		\item このようにして、$(T,\eta,\mu)$ はモナドをなします。
+	\end{itemize}
+	\item 次に、$f: X\to Y+E$ と $g: Y\to Z+E$ に対し、それらのクライスリ合成 (Kleisli composition) は \[g\ast f:=\mu_Z\circ Tg\circ f\] で定まります。（「もしエラーが起きたら、そのエラーを送って、次の計算はスキップする。もしエラーが起きなければ、その計算結果を送ってから、そのまま次の計算も続行する。」）
+	\begin{align*}
+		\begin{array}{ccccccccccccccccc}
+			X & \overset{f}{\;\longrightarrow\;} & Y&\!+\!&E& \overset{Tg}{\;\longrightarrow\;} & ({\!\!}&Z&\!+\!&E&{\!\!}) &\!+\!&E& \overset{\mu_Z}{\;\longrightarrow\;} & Z&\!+\!&E \\[2pt]
+			x & \mapsto & y &&& \mapsto &&z &&&&&& \mapsto & z && \\[-2pt]
+			x & \mapsto & y &&& \mapsto &&&& e &&&& \mapsto &&& e \\[-2pt]
+			x & \mapsto &&& e & \mapsto &&&&&&& e & \mapsto &&& e
+		\end{array}
+	\end{align*}
+	\item さらに、このモナド $(T,\eta,\mu)$ のもとで、$X+E\xrightarrow{h} X$ を「例外処理」(exception handler) と呼びます。\\これは $T$-代数をなします。（代数的エフェクトと呼ばれるもののうちの一種です。）
+	\begin{multicols}{2}
+		\begin{center}
+			% \begin{tikzcd}
+			% 	X \ar[r,"\eta_X"] \ar[rd,"\id_X"'] & X+E \ar[d,dashed,"\exists!\,h"] \\
+			% 	& X 
+			% \end{tikzcd}
+			\begin{tikzcd}
+				X \ar[r,"\eta_X"] \ar[rd,"\id_X"'] & X+E \ar[d,"h"] \\
+				& X 
+			\end{tikzcd}
+		\end{center}
+		\begin{center}
+			\begin{tikzcd}
+				(X+E)+E \ar[r,"\mu_X"] \ar[d,"T(h)"'] & X+E \ar[d,"h"] \\
+				X+E \ar[r,"h"'] & X
+			\end{tikzcd}
+		\end{center}
+	\end{multicols}
+\end{itemize}
+
+\vspace{25pt}
+
+\noindent まさにこの例こそ、モナド、クライスリ圏、アイレンバーグ・ムーア圏を考えることの嬉しさがよくわかる、最もシンプルで典型的な例だと言えるでしょう！
 
 \clearpage
 
@@ -1872,7 +1930,46 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 続いて、ここで軌跡意味論 (trace semantics) と呼ばれる考え方について紹介します。
 
-\vspace{650pt}
+\clearpage
+
+このように、モナド分配則はあると便利なのですが、実際には、都合よくモナド分配則がいつもあるとは限りません。\\以下ではそのことについて、簡単な例をもとに考えてみましょう。（以下に挙げるような例は、自然変換にならないため、したがってモナド分配則の候補にすらなれないことを確認しましょう。）
+
+\begin{example}
+	$\mathcal P:\Set\to\Set$ を冪集合モナドとする。このとき、以下の $\lambda:\mathcal P\mathcal P\Rightarrow\mathcal P\mathcal P$ は自然変換にならない。
+	\[\sum_{i\in I} a_i\Ket{\sum_{x\in X} b_{ix}\Ket{x}}\;\xmapsto{~~\lambda~~}\; \sum_{f\in X^I} \left(\prod_{i\in I} b_{i,f(i)}\right) \Ket{ \sum_{i\in I} a_i \Ket{f(i)}}\]
+	たとえば、$X=\{a,b,c,d\}$, $Y=\{\alpha,\beta\}$ とし、
+	\begin{align*}
+		\begin{array}{ccccc}
+			f: & X & \longrightarrow & Y\\
+			& a & \mapsto & \alpha\\[-5pt]
+			& b & \mapsto & \beta \\[-5pt]
+			& c & \mapsto & \alpha\\[-5pt]
+			& d & \mapsto & \beta &\!.
+		\end{array}
+	\end{align*}
+	とする。このとき、以下の図式は可換にならない。（自然性が成り立たない）\vspace{10pt}
+	\begin{center} %\small
+		\begin{tikzcd}[column sep=24pt]
+			\{\{a,b\},\{c,d\}\} \ar[r,mapsto,"\lambda"] \ar[dd,mapsto,"PPf"']  & \{\{a,c\},\{a,d\}, \ar[rdd,mapsto,bend left=15pt,"PPf"]\\[-25pt]
+			& ~~\{b,c\},\{b,d\}\}  \\
+			~~\{\{\alpha,\beta\}\}~~ \ar[r,mapsto,"\lambda"'] & \{\{\alpha\},\{\beta\}\} \ar[r,phantom,"\neq"] & \{\{\alpha\},\{\alpha,\beta\},\{\beta\}\}
+		\end{tikzcd}\vspace{5mm} 
+	\end{center}
+	（なお、ケット記法では、$\{\{a,b\},\{c,d\}\}$ は、$\BigKet{\Ket{a}+\Ket{b}}+\BigKet{\Ket{c}+\Ket{d}}$ と書かれることに注意。）
+\end{example}
+
+他にも有名な例だと、以下のようなモナド分配則もないことが知られています。
+
+\begin{example}%[Plotkin]
+	冪集合モナド $\mathcal P:\Set\to\Set$ と、分布モナド $\mathcal D:\Set\to\Set$ について、
+	\[\mathcal D\mathcal P\Rightarrow\mathcal P\mathcal D\] 
+	や
+	\[\mathcal P\mathcal D\Rightarrow\mathcal D\mathcal P\] 
+	% は自然変換にならない。
+	といった分配則は得られない。（詳細は省略）
+\end{example}
+
+\vspace{120pt}
 
 さて、寄り道（余談）はこのくらいにしておいて、次節では、いよいよ（この記事の本題である）「グロタンディーク・ファイブレーション」の話に移りましょう。
 
