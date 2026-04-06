@@ -108,7 +108,7 @@
 \begin{itemize}
 	\item 順序集合や不動点理論の基本事項（ナスター・タルスキの定理、クリーネ/クーゾー・クーゾーの定理、など）
 	\item 数理論理学に関する基本事項（古典命題論理、順序数の基本的な性質、様相論理のクリプキフレーム、など）
-	\item 圏論の基本事項（圏の定義、関手、自然変換、極限と余極限、カルテシアン閉圏、など）
+	\item 圏論の基本事項（圏の定義、関手、自然変換、極限と余極限、随伴、カルテシアン閉圏、など）
 \end{itemize}
 
 % \vspace{5mm}
@@ -1350,7 +1350,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-ここで、「\textbf{クライスリ圏}」と「\textbf{アイレンバーグ・ムーア圏}」を導入します。これらは、モナドと密接な関係を持ち、コンピューターサイエンスの中でたくさん使われます。
+ではここで、「\textbf{クライスリ圏}」と「\textbf{アイレンバーグ・ムーア圏}」を導入します。これらは、モナドと密接な関係を持ち、コンピューターサイエンスの中でたくさん使われます。
 
 \begin{definition}[クライスリ圏]
 	$T:\C\to\C$ を、圏 $\C$ 上の自己関手とする。モナド $(T,\eta,\mu)$ が与えられたとき、以下で定められた圏 $\C_T$ を、\textbf{クライスリ圏} (Kleisli category) と呼ぶ。
@@ -1421,7 +1421,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \clearpage
 
 \noindent 
-ここで、「\textbf{前モノイダル直積}」(pre-monoidal product) という考え方に触れておきましょう。
+ちょうどいい機会なので、「\textbf{前モノイダル直積}」(pre-monoidal product) という考え方にも触れておきましょう。
 
 \begin{supplement}
 
@@ -1482,64 +1482,58 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-さて、ここからは、しばらく「モナド分配則」について取り上げます。
+さて、ここからは、しばらく「モナド分配則」について取り上げます。（補足: 実用上は、$F$ のほうはモナドでなくてただの関手で済む状況もあり、その場合は、下の定義のうち左から2番目と4番目の図式の条件は要らなくなります。）
 
 % \clearpage
 
 % \subsection{余談 (3)\; モナド分配則}
 
+% \begin{definition}[モナド分配則]
+% 	モナド分配則 (distributive law) とは、2つのモナド $(T,\eta^T,\mu^T)$ と $(S,\eta^S,\mu^S)$ の間の自然変換 $\lambda:TS\Rightarrow ST$ であって、以下の図式を可換にするものである。\vspace{8pt}
+% 	\begin{center}
+% 		\begin{tikzcd}[column sep=15pt]
+% 			TS^2 \ar[r,"\lambda S"] \ar[d,"T\mu^S"'] & STS \ar[r,"S\lambda"] & S^2T \ar[d,"\mu^ST"] \\
+% 			TS \ar[rr,"\lambda"'] && ST 
+% 		\end{tikzcd}
+% 		\quad 
+% 		\begin{tikzcd}[column sep=15pt]
+% 			T^2 S \ar[r,"T\lambda"] \ar[d,"\mu^TS"'] & TST \ar[r,"\lambda T"] & ST^2 \ar[d,"S\mu^T"] \\
+% 			TS \ar[rr,"\lambda"'] && ST 
+% 		\end{tikzcd}
+% 		\quad %\\[8pt]
+% 		\begin{tikzcd}[column sep=5pt]
+% 			&T \ar[ld,"T\eta^S"'] \ar[rd,"\eta^S T"] \\
+% 			TS \ar[rr,"\lambda"'] && ST
+% 		\end{tikzcd}
+% 		\quad
+% 		\begin{tikzcd}[column sep=5pt]
+% 			&S \ar[ld,"\eta^T S"'] \ar[rd,"S\eta^T"] \\
+% 			TS \ar[rr,"\lambda"'] && ST
+% 		\end{tikzcd}
+% 	\end{center}
+% \end{definition}
+
 \begin{definition}[モナド分配則]
-	モナド分配則 (distributive law) とは、2つのモナド $(T,\eta^T,\mu^T)$ と $(S,\eta^S,\mu^S)$ の間の自然変換 $\lambda:TS\Rightarrow ST$ であって、以下の図式を可換にするものである。\vspace{8pt}
-	% \begin{center}
-	% 	\begin{small}
-	% 	\begin{tikzcd}
-	% 		TX \ar[r,"T\eta'"] \ar[rd,"\eta'T"'] & TT'X \ar[d,"\lambda"] & T'X \ar[l,"\eta T'"'] \ar[ld,"T'\eta"] \\
-	% 		& T'TX 
-	% 	\end{tikzcd}
-	% 	\end{small}
-	% \end{center}
-	% \vspace{-8pt}
-	% %
-	% \begin{multicols}{2}
-	% 	\begin{center}
-	% 		\begin{small}
-	% 		\begin{tikzcd}[column sep=8pt,row sep=15pt]
-	% 			TT'T'X \ar[rr,"T\mu'"] \ar[d,"\lambda T'"'] && TT'X \ar[d,"\lambda"]\\
-	% 			T'TT'X \ar[rd,"T'\lambda"'] && T'TX \\
-	% 			& T'T'TX \ar[ur,"\mu'T"'] &
-	% 		\end{tikzcd}
-	% 		\end{small}
-	% 	\end{center}
-	% 	%
-	% 	\begin{center}
-	% 		\begin{small}
-	% 		\begin{tikzcd}[column sep=8pt,row sep=15pt]
-	% 			TTT'X \ar[rr,"\mu T'"] \ar[d,"T \lambda "'] && TT'X \ar[d,"\lambda"]\\
-	% 			TT'TX \ar[rd,"\lambda T"'] && T'TX \\
-	% 			& T'TTX \ar[ur,"T'\mu"'] &
-	% 		\end{tikzcd}
-	% 		\end{small}
-	% 	\end{center} 
-	% \end{multicols}
+	モナド分配則 (distributive law) とは、2つのモナド $(T,\eta^T,\mu^T)$ と $(F,\eta^F,\mu^F)$ の間の自然変換 $\lambda:FT\Rightarrow TF$ であって、以下の図式を可換にするものである。\vspace{8pt}
 	\begin{center}
 		\begin{tikzcd}[column sep=15pt]
-			TS^2 \ar[r,"\lambda S"] \ar[d,"T\mu^S"'] & STS \ar[r,"S\lambda"] & S^2T \ar[d,"\mu^ST"] \\
-			TS \ar[rr,"\lambda"'] && ST 
+			FT^2 \ar[r,"\lambda T"] \ar[d,"F\mu^T"'] & TFT \ar[r,"T\lambda"] & T^2F \ar[d,"\mu^TF"] \\
+			FT \ar[rr,"\lambda"'] && TF 
 		\end{tikzcd}
 		\quad 
 		\begin{tikzcd}[column sep=15pt]
-			T^2 S \ar[r,"T\lambda"] \ar[d,"\mu^TS"'] & TST \ar[r,"\lambda T"] & ST^2 \ar[d,"S\mu^T"] \\
-			TS \ar[rr,"\lambda"'] && ST 
+			F^2 T \ar[r,"F\lambda"] \ar[d,"\mu^FT"'] & FTF \ar[r,"\lambda F"] & TF^2 \ar[d,"T\mu^F"] \\
+			FT \ar[rr,"\lambda"'] && TF 
 		\end{tikzcd}
 		\quad %\\[8pt]
 		\begin{tikzcd}[column sep=5pt]
-			&T \ar[ld,"T\eta^S"'] \ar[rd,"\eta^S T"] \\
-			TS \ar[rr,"\lambda"'] && ST
+			&F \ar[ld,"F\eta^T"'] \ar[rd,"\eta^T F"] \\
+			FT \ar[rr,"\lambda"'] && TF
 		\end{tikzcd}
 		\quad
 		\begin{tikzcd}[column sep=5pt]
-			&S \ar[ld,"\eta^T S"'] \ar[rd,"S\eta^T"] \\
-			TS \ar[rr,"\lambda"'] && ST
+			&T \ar[ld,"\eta^F T"'] \ar[rd,"T\eta^F"] \\
+			FT \ar[rr,"\lambda"'] && TF
 		\end{tikzcd}
 	\end{center}
 \end{definition}
@@ -1611,7 +1605,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			&& F(TX)
 		\end{tikzcd}
 	\end{center}
-	ここで $TX\to F(TX)$ はまさに「\textbf{冪集合構成}」(powerset construction) として知られるものにあたります。\\
+	% ここで $TX\to F(TX)$ はまさに「\textbf{冪集合構成}」(powerset construction) として知られるものにあたります。\\
+	この $TX\to F(TX)$ を得る過程は、まさに「\textbf{冪集合構成}」(powerset construction) に相当します。\\
 	詳しく言うと、以下の合成を通じて、
 	\begin{center}
 		\begin{tikzcd}[row sep=12pt]
@@ -1677,10 +1672,43 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 % もう少し正確に言うと、上の2つの見方は、それぞれ
 \noindent 上記で挙げた2種類の異なる見方 \fbox{\textgt{(1) Kleisli approach}} と \fbox{\textgt{(2) Eilenberg-Moore approach}} は、それぞれ
 \begin{enumerate}[(1)~]
-	\item 分配則 $\lambda:FT\Rightarrow TF$ によって誘導される $F$ の \fbox{\textgt{Kleisli extension}} と、\vspace{2pt}
-	\item 分配則 $\lambda':TF\Rightarrow FT$ によって誘導される $F$ の \fbox{\textgt{Eilenberg-Moore lifting}}
+	\item 分配則 $\lambda:FT\Rightarrow TF$ によって誘導される $F$ の \fbox{\textgt{Kleisli extension}} 
+	$F_T$ 
+	と \vspace{2pt}
+	\item 分配則 $\lambda':TF\Rightarrow FT$ によって誘導される $F$ の \fbox{\textgt{Eilenberg-Moore lifting}} 
+	$F^T$ 
 \end{enumerate}
-に基づくものだと言えます。このことについて、以下で詳しく見ていきましょう。まずは両者の定義から。
+に基づくものだと言えます。このことについて、以下で詳しく見ていきましょう。%まずは両者の定義から。
+
+\begin{proposition}
+	クライスリ圏とEM圏について、それぞれ、以下の自由忘却随伴が知られている。（証明略） %(free-forgetful adjunction) 
+	\begin{multicols}{2}
+		\begin{center}
+			\begin{tikzcd}[row sep=large,column sep=large]
+				\C_T \ar[r,"F_T"] \ar[d,bend left=20pt,"R_T"] & \C_T \ar[d,bend left=20pt,,"R_T"] \\
+				\C \ar[r,"F"'] \ar[u,bend left=20pt,"\dashv"',"L_T"] & \C \ar[u,bend left=20pt,"\dashv"',"L_T"]
+			\end{tikzcd}
+		\end{center}
+		%%
+		\begin{center}
+			\begin{tikzcd}[row sep=large,column sep=large]
+				\C^T \ar[r,"F^T"] \ar[d,bend left=20pt,"R^T"] & \C^T \ar[d,bend left=20pt,"R^T"] \\
+				\C \ar[r,"F"'] \ar[u,bend left=20pt,"\dashv"',"L^T"] & \C \ar[u,bend left=20pt,"\dashv"',"L^T"]
+			\end{tikzcd}
+		\end{center}
+	\end{multicols}
+	%%%
+	\begin{multicols}{2}
+		\begin{center}
+			$L_T\dashv R_T$
+		\end{center}
+		%  \\
+		\begin{center}
+			$L^T\dashv R^T$
+		\end{center}
+	\end{multicols}
+	%%%
+\end{proposition}
 
 \begin{definition}[Kleisli extension]
 	... 
@@ -2397,6 +2425,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{thebibliography}{99}
 	\item 蓮尾 (2011) 「Hoare論理によるプログラム検証」（資料）, \href{https://group-mmm.org/~ichiro/talks/komabaSogoHandout.pdf}{[URL]}. 
     \item 郡 (2025)「圏で圏を集める？---ファイブレーション入門」, 『圏論の歩き方 [改訂版]』, 日本評論社.
+    \item Ad\'{a}mek J, Milius S, Moss LS. \textit{Initial Algebras and Terminal Coalgebras: The Theory of Fixed Points of Functors}. Cambridge Tracts in Theoretical Computer Science. Cambridge University Press. 
     \item Jacobs, B. (1999) \textit{Categorical logic and type theory}, Elsevier.
     \item Jacobs, B. (2016) \textit{Introduction to coalgebra: towards mathematics of states and observation}, Cambridge University Press.
     \item Hasuo, I. (2015) Generic weakest precondition semantics from monads enriched with order, TCS.
