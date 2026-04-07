@@ -1427,11 +1427,14 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \clearpage
 
 \noindent 
-ここで、モナド、クライスリ圏、アイレンバーグ・ムーア圏を考えることのモチベーションをつかむために、例として、\textgt{代数的エフェクト} (algebraic effect)、とりわけ\textgt{例外処理} (exception handler) の例を見ておくことにしましょう。\vspace{18pt}
+ここで、モナド、クライスリ圏、アイレンバーグ・ムーア圏を考えることのモチベーションをつかむために、例として、
+% \textgt{代数的エフェクト} (algebraic effect)、および
+\textgt{例外処理} (exception handler) の例を見ておくことにしましょう。\vspace{18pt}
+
 \begin{itemize}
 	\item まず、例外モナド (exception monad) は以下のように与えられます。
 	\begin{itemize}
-		\item $T(X):=X+E$ と定めます。ここで $+$ は余積とし、$E$ は ``エラーの集合'' とします。\\ さらに、$f:X\to Y$ については、$T(f)=f+\id_E$ とします。
+		\item $T:\Set\to\Set$ を、$T(X):=X+E$ と定めます。ここで $+$ は余積とし、$E$ は ``エラーの集合'' とします。\\ さらに、$f:X\to Y$ については、$T(f)=f+\id_E$ とします。
 		\item ここで、単位 $\eta_X$ を以下のように定義します。（「もしエラーがなければ、計算結果をそのまま埋め込む。」）
 		\begin{multicols}{2}
 			\begin{center}
@@ -1441,7 +1444,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 				$\left(\begin{array}{cc}\eta_X(x)&:=inl(x)\end{array}\right)$
 			\end{center}
 		\end{multicols}
-		\item また、乗法 $\mu_X$ を以下のように定義します。（「エラーが起きたら、そのエラーを送って、最後に集める。」）
+		\item また、乗法 $\mu_X$ を以下のように定義します。（「一度でもエラーが起きたら、そのエラーを返す。」）
 		\begin{multicols}{2}
 			\begin{center}
 				$\begin{array}{ccccccccccc}\mu_X:({\!\!}&X&\!+\!&E&{\!\!})&\!+\!&E&\longrightarrow&X&\!+\!&E\\[-1pt] & x &&&&&&\mapsto &x\\[-3pt] &&& e &&&& \mapsto &&& e \\[-3pt]  &&&&&& e & \mapsto &&& e \end{array}$
@@ -1452,7 +1455,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{multicols}
 		\item このようにして、$(T,\eta,\mu)$ はモナドをなします。
 	\end{itemize}
-	\item 次に、$f: X\to Y+E$ と $g: Y\to Z+E$ に対し、それらのクライスリ合成 (Kleisli composition) は \[g\ast f:=\mu_Z\circ Tg\circ f\] で定まります。（「もしエラーが起きたら、そのエラーを送って、次の計算はスキップする。もしエラーが起きなければ、その計算結果を送ってから、そのまま次の計算も続行する。」）
+	\item 次に、$f: X\to Y+E$ と $g: Y\to Z+E$ に対し、それらのクライスリ合成 (Kleisli composition) は \[g\ast f:=\mu_Z\circ Tg\circ f\] で定まります。（「もしエラーが起きたら、そのエラーを返して、次の計算はスキップする。もしエラーが起きなければ、その計算結果を送ってから、そのまま次の計算も続行する。」）
 	\begin{align*}
 		\begin{array}{ccccccccccccccccc}
 			X & \overset{f}{\;\longrightarrow\;} & Y&\!+\!&E& \overset{Tg}{\;\longrightarrow\;} & ({\!\!}&Z&\!+\!&E&{\!\!}) &\!+\!&E& \overset{\mu_Z}{\;\longrightarrow\;} & Z&\!+\!&E \\[2pt]
@@ -1461,7 +1464,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			x & \mapsto &&& e & \mapsto &&&&&&& e & \mapsto &&& e
 		\end{array}
 	\end{align*}
-	\item さらに、このモナド $(T,\eta,\mu)$ のもとで、$X+E\xrightarrow{h} X$ を「例外処理」(exception handler) と呼びます。\\これは $T$-代数をなします。%（代数的エフェクトと呼ばれるもののうちの一種です。）
+	\item さらに、このモナド $(T,\eta,\mu)$ のもとで、以下の$T$-代数 $X+E\xrightarrow{h} X$ を「例外処理」(exception handler) と呼びます。%\\これは $T$-代数をなします。%（代数的エフェクトと呼ばれるもののうちの一種です。）
 	（「すべての例外を最終的に処理し、回復して通常値に戻す。」）
 	\begin{multicols}{2}
 		\begin{center}
@@ -1483,17 +1486,16 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{multicols}
 	\noindent なお、このような $h$ を与えることは、
 	\[k:E\to X,\quad k(e):=h(inr(e))\]
-	によって「各例外 $e$ に対して、回復値 $k(e)\in X$ を選ぶこと」と実質的に同じです。
+	\[\textrm{i.e.,}~~ h=[\id_X,k]:X+E\to X\]
+	によって「各例外 $e$ に対して、回復値 $k(e)\in X$ を選ぶこと」と実質的に同じです。\vspace{18pt}
 \end{itemize}
-
-\vspace{18pt}
 
 \noindent まさにこの例こそ、モナド、クライスリ圏、アイレンバーグ・ムーア圏を考えることの嬉しさがよくわかる、最もシンプルで典型的な例だと言えるでしょう！
 
 \clearpage
 
 \noindent 
-ちょうどいい機会なので、「\textbf{前モノイダル直積}」(pre-monoidal product) という考え方にも触れておきましょう。
+ちょうどいい機会なので、「\textgt{前モノイダル直積}」(pre-monoidal product) という考え方にも触れておきましょう。
 
 \begin{supplement}
 
@@ -1867,7 +1869,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \begin{itemize}
 	\item 余代数 $\gamma:X\to FTX$ を考えます。%から、自由代数 $\gamma':TX\to FTX$ 
-	\item このとき、$FTX=R^T(F^T(L^T(X)))$ となります。%\\ 任意の対象 $X$ に対し、自由 $T$-代数とは、$L^T(X)=\left(TTX\xrightarrow{\;\mu_X\;}TX\right)$ です。（台集合が$TX$）\\ %ここで、$FTX$ の自由 $T$-代数 $\alpha:T(FTX)\to FTX$ を考え、 \[\delta=\] を考えます。
+	\item このとき、$FTX=R^T(F^T(L^TX))$ となります。%\\ 任意の対象 $X$ に対し、自由 $T$-代数とは、$L^T(X)=\left(TTX\xrightarrow{\;\mu_X\;}TX\right)$ です。（台集合が$TX$）\\ %ここで、$FTX$ の自由 $T$-代数 $\alpha:T(FTX)\to FTX$ を考え、 \[\delta=\] を考えます。
 	\begin{itemize}
 		\item 任意の対象 $X$ に対し、自由 $T$-代数とは、$L^T(X)=\left(TTX\xrightarrow{\;\mu_X\;}TX\right)$ です。（台集合が$TX$）
 		\item ここで、この $L^T(X)$ に $F^T$ を適用すると、
@@ -1898,7 +1900,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		% \item 
 	\end{itemize}
 	% いま、
-	\item すなわち、$\gamma:X\to FTX$ は、実は $\gamma:X\to R^T(F^T(L^T(X)))$ という射だと言えます。
+	\item すなわち、$\gamma:X\to FTX$ は、実は $\gamma:X\to R^T(F^T(L^TX))$ という射だと言えます。
 	% \item ここで、「自由代数の普遍性」を使うと \[\gamma^\sharp=\left(TX\xrightarrow{\;(F\mu_X\,\circ\,\lambda_{TX})\,\circ\,T\gamma\;}FTX\right)\] が得られます。
 	\item ここで、``自由代数の普遍性'' より、
 	\begin{multicols}{2}
@@ -1936,11 +1938,32 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 続いて、ここで、\textgt{軌跡意味論} (trace semantics) と呼ばれる考え方について紹介します。
 
+\begin{itemize}
+	\item まず、$\gamma:X\to TFX$ を、圏 $\C$ における\,$TF$-余代数\,とします。 \\ また、$\alpha:FA\xrightarrow{\;\cong\;}A$ を、圏 $\C$ における\,始$F$-代数\,とします。
+	\item ここで、圏 $\C$ における $TF$-余代数 $\gamma:X\to TFX$ は、\\ 
+	% 圏 $\C_T$ における $F$-余代数 $\gamma:X\computationrightarrow FX$ であり、なおかつ \\ 
+	% 圏 $\C_T$ における $F_T$-余代数 $\gamma:X\computationrightarrow F_TX$ です。
+	圏 $\C_T$ における $F$-余代数 $\gamma:X\computationrightarrow FX$ です。
+	\item このとき、ある一意な射 $\mathrm{tr}_\gamma$ が存在して、
+	\begin{center}
+		\begin{tikzcd}
+			FX \ar[r,"F\mathrm{tr}_{\gamma}",dashed] & FA & \fbox{in $\C_T$} \\
+			X \ar[r,"\mathrm{tr}_{\gamma}"',dashed] \ar[u,"\gamma~","\shortmid" marking] & A \ar[u,"~\eta_{FA}\,\circ\,\alpha^{-1}"',"\shortmid" marking]
+		\end{tikzcd}
+	\end{center}
+	が可換になります。
+	\item 
+	\item 
+	\item 
+	\item たとえば、$T=\mathcal P(-)$, $F=L\times X$ について、$\gamma:X\to\mathcal P(L\times X)$ は
+	\item たとえば、$T=\mathcal D(-)$, 
+\end{itemize}
+
 \todo[inline]{まだ}
 
 \clearpage
 
-このように、モナド分配則はあると便利なのですが、実際には、都合よくモナド分配則がいつもあるとは限りません。\\以下ではそのことについて、簡単な例をもとに考えてみましょう。（以下に挙げるような例は、自然変換にならないため、したがってモナド分配則の候補にもなれないことを確認しましょう。）
+以上のように、モナド分配則はあると便利なのですが、実際には、都合よくモナド分配則がいつもあると限りません。\\以下ではそのことについて、簡単な例をもとに考えてみましょう。（以下に挙げるような例は、自然変換にならないため、したがってモナド分配則の候補にもなれないことを確認しましょう。）
 
 \begin{example}
 	$\mathcal P:\Set\to\Set$ を冪集合モナドとする。このとき、以下の $\lambda:\mathcal P\mathcal P\Rightarrow\mathcal P\mathcal P$ は自然変換にならない。
