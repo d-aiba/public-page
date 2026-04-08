@@ -1408,13 +1408,28 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			\doubleLine
 			\UIC{$X\xrightarrow{\;f\;} Y$ in $\C$}
 		\end{prooftree}
-		\item そして $\eta$ と $\mu$ に整合的である。
-		\begin{center}
-			\begin{tikzcd}
-				T^2X \ar[r,"Ta"] \ar[d,"\mu_X"'] & TX \ar[d,"a"] \\
-				TX \ar[r,"a"'] & X
-			\end{tikzcd}
-		\end{center}
+		\item そして $\eta$ と $\mu$ に整合的である。\vspace{-8pt}
+		\begin{multicols}{2}
+			\begin{center}
+				\begin{tikzcd}
+					X \ar[r,"\eta_X"] \ar[rd,"\id_X"'] & TX \ar[d,"a"] \\
+					& X
+				\end{tikzcd}
+			\end{center}
+			%%%
+			\begin{center}
+				\begin{tikzcd}
+					T^2X \ar[d,"Ta"'] \ar[r,"\mu_X"] & TX \ar[d,"a"] \\
+					TX \ar[r,"a"'] & X
+				\end{tikzcd}
+			\end{center}
+		\end{multicols}
+		% \begin{center}
+		% 	\begin{tikzcd}
+		% 		T^2X \ar[r,"Ta"] \ar[d,"\mu_X"'] & TX \ar[d,"a"] \\
+		% 		TX \ar[r,"a"'] & X
+		% 	\end{tikzcd}
+		% \end{center}
 	\end{itemize}
 \end{definition}
 
@@ -1684,7 +1699,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	詳しく言うと、以下の合成を通じて、
 	\begin{center}
 		\begin{tikzcd}[row sep=12pt]
-			\mathcal P(X) \ar[r,"\mathcal P\gamma"] & \mathcal P(\mathcal P(X)^L) \ar[r,"\lambda'_{\mathcal P(X)}"] & \mathcal P(\mathcal P(X))^L \ar[d,"\mathcal P\mu_X"]\\
+			\mathcal P(X) \ar[r,"\mathcal P\gamma"] & \mathcal P(\mathcal P(X)^L) \ar[r,"\lambda'_{\mathcal P(X)}"] & \mathcal P(\mathcal P(X))^L \ar[d,"(\mu_X)^L"]\\
 			&& \mathcal P(X)^L
 		\end{tikzcd}
 	\end{center}
@@ -1726,7 +1741,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{multicols}
 \end{itemize}
 
-\noindent ※ なお、両者のアプローチ (1) $\gamma:X\to \mathcal P(L\times X)$ と (2) $\gamma:X\to \mathcal P(X)^{L}$ は、同じものです（自然同型で対応）。\vspace{5pt}%\\
+\noindent ※ なお、両者のアプローチ (1) $\gamma:X\to \mathcal P(L\times X)$ と (2) $\gamma:X\to \mathcal P(X)^{L}$ は同じものです（自然同型で対応）。\vspace{5pt}%\\
 % \small 
 \begin{small}
 \begin{prooftree}
@@ -1868,8 +1883,9 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent 次に、\fbox{\textbf{(2) Eilenberg-Moore approach}} のほうは、以下のように理解することができます。
 
 \begin{itemize}
-	\item 余代数 $\gamma:X\to FTX$ を考えます。%から、自由代数 $\gamma':TX\to FTX$ 
-	\item このとき、$FTX=R^T(F^T(L^TX))$ となります。%\\ 任意の対象 $X$ に対し、自由 $T$-代数とは、$L^T(X)=\left(TTX\xrightarrow{\;\mu_X\;}TX\right)$ です。（台集合が$TX$）\\ %ここで、$FTX$ の自由 $T$-代数 $\alpha:T(FTX)\to FTX$ を考え、 \[\delta=\] を考えます。
+	\item 余代数 $\gamma:X\to FTX$ %を考えます。%から、自由代数 $\gamma':TX\to FTX$ 
+	% \item この余代数
+	は、$\gamma:X\to R^T(F^T(L^TX))$ と同じものであると言えます。
 	\begin{itemize}
 		\item 任意の対象 $X$ に対し、自由 $T$-代数とは、$L^T(X)=\left(TTX\xrightarrow{\;\mu_X\;}TX\right)$ です。（台集合が$TX$）
 		\item ここで、この $L^T(X)$ に $F^T$ を適用すると、
@@ -1895,12 +1911,12 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 				\end{array}\right) & =\; F^T(L^TX)
 			\end{array}
 		\end{align*}
-		となり、その台集合 (underlying object) は $FTX$ です。
-		% \item 
+		となり、その台集合 (underlying object) は $R^T(L^TX)=FTX$ です。
+		\item すなわち、$\gamma:X\to FTX$ は、実は $\gamma:X\to R^T(F^T(L^TX))$ という射だと言えます。
 		% \item 
 	\end{itemize}
 	% いま、
-	\item すなわち、$\gamma:X\to FTX$ は、実は $\gamma:X\to R^T(F^T(L^TX))$ という射だと言えます。
+	% \item すなわち、$\gamma:X\to FTX$ は、実は $\gamma:X\to R^T(F^T(L^TX))$ という射だと言えます。
 	% \item ここで、「自由代数の普遍性」を使うと \[\gamma^\sharp=\left(TX\xrightarrow{\;(F\mu_X\,\circ\,\lambda_{TX})\,\circ\,T\gamma\;}FTX\right)\] が得られます。
 	\item ここで、``自由代数の普遍性'' より、
 	\begin{multicols}{2}
