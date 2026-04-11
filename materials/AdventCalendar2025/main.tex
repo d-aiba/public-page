@@ -961,18 +961,114 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent では、多項式関手 (polynomial functor) について、始代数と終余代数を具体的に求める練習をしましょう。
-\[F_{\Sigma}=\sum_{\sigma\in\Sigma}X^{|\sigma|} ~~ ???\]
-たとえば
+\noindent では、多項式関手 (polynomial functor) について、始代数と終余代数を具体的に求める練習をしてみましょう。
+%\\
+
+\begin{screen}
+	\noindent まず、$\Set$ 上の関手 $F_{\Sigma}:\Set\to\Set$ が\textgt{多項式関手} (polynomial functor) であるとは、
+	\[F_{\Sigma}\;=\;\sum_{\sigma\in\Sigma}(-)^{|\sigma|}\]
+	の形で表される関手のことです。ここで、$\Sigma$ は\textgt{ランクつきアルファベット} (ranked alphabet) とします。\\ たとえば、$\Sigma=\{a:2,\,b:1,\,c:0,\,d:2\}$ のとき、 $F_{\Sigma}=(\underparenthesis{a}{-})^2+(\underparenthesis{b}{-})^1+\underset{\substack{~\\[1.5pt]\rotatebox{90}{)}\\c}}{1}+(\underparenthesis{d}{-})^2$ です。\vspace{5pt}\\
+	このとき、$\Sigma$-tree とは、以下の図のような node で構成される木とします。\vspace{4pt}
+	\begin{center}
+		\begin{tikzcd}[column sep=-5pt,row sep=5pt]
+			{} & {} \ar[d,dash,shorten=-5pt] & {} \\
+			{} & \circled{$a$} \ar[ld,dash,shorten=-9pt] \ar[rd,dash,shorten=-9pt] & {} \\[-5pt]
+			{} & {} & {}
+		\end{tikzcd}\; 
+		\begin{tikzcd}[column sep=2pt,row sep=5pt]
+			{} \ar[d,dash,shorten=-5pt]\\
+			\circled{$b$} \ar[d,dash,shorten=-4.5pt]\\[-5pt]
+			{}
+		\end{tikzcd}\; 
+		\begin{tikzcd}[column sep=2pt,row sep=5pt]
+			{} \ar[d,dash,shorten=-5pt] \\
+			\circled{$c$} \\[-5pt]
+			{}
+		\end{tikzcd}\; 
+		\begin{tikzcd}[column sep=-5pt,row sep=5pt]
+			{} & {} \ar[d,dash,shorten=-5pt] & {} \\
+			{} & \circled{$d$} \ar[ld,dash,shorten=-9pt] \ar[rd,dash,shorten=-9pt] & {} \\[-5pt]
+			{} & {} & {}
+		\end{tikzcd}\vspace{4pt}
+	\end{center}
+	ここで $\mu F$（始代数の carrier set）と $\nu F$（終余代数の carrier set）は以下の通りになります。
+	\begin{align*}
+		\mu F &= \{\textrm{ all ``finite-depth'' $\Sigma$-trees }\}\\
+		\nu F &= \{\textrm{ all $\Sigma$-trees, possibly with infinite paths }\}
+	\end{align*}
+\end{screen}
+% \\
+
+\noindent 例として、$F=A\times(-)$ という polynomial functor を考えてみましょう。
+\begin{align*}
+	F &= A\times(-) \\
+	&= \underbrace{\;(-)^{1}+\cdots+(-)^1\;}_{\displaystyle |A|}
+\end{align*}
+いま、簡単のため $A=\{a,b\}$ としましょう。（このとき $a,b$ は rank（arity）が 1 の文字です。）\\
+% \begin{center}
+% \begin{multicols}{2}
+	\begin{minipage}[b]{0.48\columnwidth}
+		\begin{align*}
+			F &= \{a,b\}\times(-) \\
+			&= (\underparenthesis{a}{-})^1 + (\underparenthesis{b}{-})^1 
+		\end{align*}
+	\end{minipage}
+	%%%
+	\hspace{0.04\columnwidth}
+	%%%
+	\begin{minipage}[b]{0.48\columnwidth}
+		% \begin{center} 
+			\vspace{-15pt}
+			\begin{tikzcd}[row sep=2pt]
+				{} \ar[d,dash,shorten=-5pt] \\
+				\circled{$a$} \ar[d,dash,shorten=-5pt] \\
+				{} 
+			\end{tikzcd}
+			%%
+			\begin{tikzcd}[row sep=2pt]
+				{} \ar[d,dash,shorten=-5pt] \\
+				\circled{$b$} \ar[d,dash,shorten=-5pt] \\
+				{} 
+			\end{tikzcd}
+		% \end{center}
+	\end{minipage}
+% \end{multicols}
+% \end{center}
+
+% となります。ここで $a,b$ は rank（arity）が 2 の文字です。
+\begin{center}
+	
+\end{center}
+ここで、$\mu F$ と $\nu F$ は次のようになります。
+\begin{align*}
+	\mu F &= \emptyset \\
+	\nu F &= A^\omega
+\end{align*}
+
+\noindent まとめると
+\begin{center}
+	\begin{tabular}{l|c|c}
+		\hline
+		& $\mu F$ & $\nu F$ \\
+		& carrier of initial algebra & carrier of final coalgebra \\\hline\hline
+		$F=A\times(-)$ & $\emptyset$ & $A^{\omega}$ \\\hline
+		$F=1+A\times(-)$ & $A^\ast$ & $A^\infty \;(=A^\ast \cup A^\omega)$ \\\hline
+		$F=2\times (-)^A$ & $\displaystyle 2^{(A^*)}$ & \\\hline
+		$F=B\times (-)^A$ & & \\\hline
+		$F=C+B\times (-)^A$ & & \\\hline
+	\end{tabular}
+\end{center}
+となります。
 
 \clearpage
 
 \begin{screen}
 	\noindent ここで「\textgt{可能無限}」(potential infinity) と「\textgt{実無限}」(actual infinity) の考え方をおさえておきましょう。
 	\begin{itemize}
-		\item 始代数は、\kenten{有限回の操作で到達できるような無限}（＝\textgt{可能無限}）を表すことができるのに対し、
-		\item 終余代数は、\kenten{無限に続く振舞い}や\kenten{無限対象}（＝\textgt{実無限}）までを含めて扱うことができます。
+		\item 始代数は、{有限回の操作で到達できるような無限}（＝\textgt{可能無限}）を表すことができるのに対し、
+		\item 終余代数は、{無限に続く振舞い}や{無限対象}（＝\textgt{実無限}）までを含めて扱うことができます。
 	\end{itemize}
+	※ 注意: 
 \end{screen}
 
 % また、
