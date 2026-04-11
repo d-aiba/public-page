@@ -772,8 +772,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{small}
 \end{example}
 
-\begin{example}%[決定的オートマトン・非決定的オートマトン]
-	非決定的オートマトンは、余代数 $\gamma:X\to \mathcal P(A\times X)+1$ で与えられる。なお $1=\{\ast\}$ とする。
+\begin{example}%[決定性オートマトン・非決定性オートマトン]
+	非決定性オートマトンは、余代数 $\gamma:X\to \mathcal P(A\times X)+1$ で与えられる。なお $1=\{\ast\}$ とする。
 	\[\textrm{遷移}\quad\gamma(x)=\{(a,x'),(b,x''),\dots\}\qquad\textrm{or}\qquad\textrm{停止}\quad\gamma(x)=\ast\]
 	% 非決定的オートマトンは、余代数 $\gamma:X\to \mathcal P(A\times X)$ で与えられる。
 	% \[\gamma(x)=\{(a,x'),\dots\}\]
@@ -1091,7 +1091,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent 次に、例として $F=2\times(-)^A$ も考えてみましょう。この $F$-余代数は、決定的オートマトンです。
+\noindent 次に、例として $F=2\times(-)^A$ も考えてみましょう。この $F$-余代数は、決定性オートマトンです。
 % \begin{align*}
 % 	F &= 
 % \end{align*}
@@ -1940,7 +1940,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\item つまり、このシステムは $\gamma:X\to\mathcal P(X)^L$ という余代数で、$\gamma(x)(a)=\{x',\dots\}$ といったものです。
 	\end{itemize}
 	\item ここで、モナド分配則 $\lambda':TF\Rightarrow FT$ を考えます。
-	\item すると、以下のように、非決定的オートマトンを\textgt{決定化} (determinize) することができます。
+	\item すると、以下のように、非決定性オートマトンを\textgt{決定化} (determinize) することができます。
 	\begin{center}
 		\begin{tikzcd}[row sep=12pt]
 			TX \ar[r,"T\gamma"] & TFTX \ar[r,"\lambda'_{TX}"] & FTTX \ar[d,"F\mu_X"]\\
@@ -1963,7 +1963,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			\delta: & \mathcal P(X) & \longrightarrow & \mathcal P(X)^{L}  
 		\end{tikzcd}
 	\end{center}
-	\item たとえば、以下の非決定的オートマトン $\gamma:X\to\mathcal P(X)^L$ は、
+	\item たとえば、以下の非決定性オートマトン $\gamma:X\to\mathcal P(X)^L$ は、
 	\begin{multicols}{2}
 		\begin{center}%\small
 			\begin{tikzcd}
@@ -1975,7 +1975,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			\gamma(x_2) &=\left[\begin{array}{ccl} a &\mapsto& \{x_1\}\\ b&\mapsto &\emptyset\end{array}\right]
 		\end{align*}
 	\end{multicols}
-	$\delta=(F\mu_X\circ \lambda'_{TX}\circ T\gamma): \mathcal P(X)\to\mathcal P(X)^L$ により、決定的オートマトンになります。
+	$\delta=(F\mu_X\circ \lambda'_{TX}\circ T\gamma): \mathcal P(X)\to\mathcal P(X)^L$ により、決定性オートマトンになります。
 	\begin{multicols}{2}
 		\begin{center}%\small
 			\begin{tikzcd}[row sep=-16pt]
@@ -2199,7 +2199,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% \item 
 	% \item 
 	% \item 
-	\item これはまさに、先ほどの「冪集合構成による非決定的オートマトンの決定化」そのものです。
+	\item これはまさに、先ほどの「冪集合構成による非決定性オートマトンの決定化」そのものです。
 \end{itemize}
 
 
