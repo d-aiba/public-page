@@ -121,7 +121,7 @@
 
 \clearpage
 
-\section{ホーア論理と述語変換子 --- まずは非圏論的な話から}
+\section{ホーア論理と述語変換子 ------ まずは非圏論的な話から}
 
 \textgt{ホーア論理} (Hoare logic) と\textgt{述語変換子} (predicate transformer) は、プログラムの正しさ（意図した挙動をするか、バグがないかどうか）を数学的に検証するための、互いに密接な、異なる2つのアプローチです。プログラムが満たしていてほしい性質（仕様）を論理式で記述し、それが満たされているかを論理学的手法を用いて確かめます。
 
@@ -939,7 +939,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\subsection{代数と始代数、余代数と終余代数}
+\subsection{代数と始代数、余代数と終余代数 ------ 異なる2種類の無限をとらえる}
 
 さて、$F$-余代数の圏論的双対である、$F$-代数を導入します。
 
@@ -961,14 +961,18 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent では、多項式関手 (polynomial functor) について、始代数と終余代数を具体的に求める練習をしてみましょう。
+\noindent では、多項式関手 (polynomial functor) について、始代数と終余代数を具体的に求める練習をしましょう。
+\vspace{8pt}
 %\\
 
-\begin{screen}
+%%%%% 
+% \begin{screen}
+\begin{itembox}{考え方}
 	\noindent まず、$\Set$ 上の関手 $F_{\Sigma}:\Set\to\Set$ が\textgt{多項式関手} (polynomial functor) であるとは、
 	\[F_{\Sigma}\;=\;\sum_{\sigma\in\Sigma}(-)^{|\sigma|}\]
-	の形で表される関手のことです。ここで、$\Sigma$ は\textgt{ランクつきアルファベット} (ranked alphabet) とします。\\ たとえば、$\Sigma=\{a:2,\,b:1,\,c:0,\,d:2\}$ のとき、 $F_{\Sigma}=(\underparenthesis{a}{-})^2+(\underparenthesis{b}{-})^1+\underset{\substack{~\\[1.5pt]\rotatebox{90}{)}\\c}}{1}+(\underparenthesis{d}{-})^2$ です。\vspace{5pt}\\
-	このとき、$\Sigma$-tree とは、以下の図のような node で構成される木とします。\vspace{4pt}
+	の形で表される関手のことです。ここで、$\Sigma$ は\textgt{ランクつきアルファベット} (ranked alphabet) とします。\vspace{4pt}\\ 
+	たとえば、$\Sigma=\{a:2,\,b:1,\,c:0,\,d:2\}$ のとき、 $F_{\Sigma}=(\underparenthesis{a}{-})^2+(\underparenthesis{b}{-})^1+\underset{\substack{~\\[1.5pt]\rotatebox{90}{)}\\c}}{1}+(\underparenthesis{d}{-})^2$ です。\vspace{5pt}\\
+	このとき、\textgt{$\Sigma$-木} ($\Sigma$-tree) とは、以下の図のような node で構成される木のことです。\vspace{4pt}
 	\begin{center}
 		\begin{tikzcd}[column sep=-5pt,row sep=5pt]
 			{} & {} \ar[d,dash,shorten=-5pt] & {} \\
@@ -991,34 +995,41 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			{} & {} & {}
 		\end{tikzcd}\vspace{4pt}
 	\end{center}
-	ここで $\mu F$（始代数の carrier set）と $\nu F$（終余代数の carrier set）は以下の通りになります。
+	ここで、$\mu F$（始代数の carrier set）と $\nu F$（終余代数の carrier set）は以下の通りになります。
 	\begin{align*}
-		\mu F &= \{\textrm{ all ``finite-depth'' $\Sigma$-trees }\}\\
+		\mu F &= \{\textrm{ all finite-depth $\Sigma$-trees }\}\\
 		\nu F &= \{\textrm{ all $\Sigma$-trees, possibly with infinite paths }\}
 	\end{align*}
-\end{screen}
-% \\
+\end{itembox}
+% \end{screen} 
+\vspace{-5pt}
+%%%%%
 
 \noindent 例として、$F=A\times(-)$ という polynomial functor を考えてみましょう。
 \begin{align*}
 	F &= A\times(-) \\
 	&= \underbrace{\;(-)^{1}+\cdots+(-)^1\;}_{\displaystyle |A|}
 \end{align*}
-いま、簡単のため $A=\{a,b\}$ としましょう。（このとき $a,b$ は rank（arity）が 1 の文字です。）\\
+
+\noindent いま、簡単のため $A=\{a,b\}$ としましょう。（ここで、$a,b$ は rank（arity）が 1 の文字です。）
 % \begin{center}
-% \begin{multicols}{2}
-	\begin{minipage}[b]{0.48\columnwidth}
-		\begin{align*}
-			F &= \{a,b\}\times(-) \\
-			&= (\underparenthesis{a}{-})^1 + (\underparenthesis{b}{-})^1 
-		\end{align*}
-	\end{minipage}
+\begin{multicols}{2}
+	% \begin{minipage}[b]{0.48\columnwidth}
+		% \begin{align*}
+		% 	F &= \{a,b\}\times(-) \\
+		% 	&= (\underparenthesis{a}{-})^1 + (\underparenthesis{b}{-})^1 
+		% \end{align*}
+		\begin{center}
+		$ \begin{array}{rl} F &= \{a,b\}\times(-) \\ &= (\underparenthesis{a}{-})^1 + (\underparenthesis{b}{-})^1 \end{array} $
+		\end{center}
+	% \end{minipage}
 	%%%
-	\hspace{0.04\columnwidth}
+	% \hspace{0.04\columnwidth}
+	\quad \\
 	%%%
-	\begin{minipage}[b]{0.48\columnwidth}
+	% \begin{minipage}[b]{0.48\columnwidth}
 		% \begin{center} 
-			\vspace{-15pt}
+			% \vspace{-15pt}
 			\begin{tikzcd}[row sep=2pt]
 				{} \ar[d,dash,shorten=-5pt] \\
 				\circled{$a$} \ar[d,dash,shorten=-5pt] \\
@@ -1031,36 +1042,95 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 				{} 
 			\end{tikzcd}
 		% \end{center}
-	\end{minipage}
-% \end{multicols}
+	% \end{minipage}
+\end{multicols}
 % \end{center}
 
-% となります。ここで $a,b$ は rank（arity）が 2 の文字です。
+\noindent ここで、各$A$-tree は、以下の図のような、無限に続く一本木となります。\vspace{5pt}
 \begin{center}
-	
+	% \begin{tikzcd}[row sep=2pt]
+	% 	{} \ar[d,dash,shorten=-5pt] \\
+	% 	\circled{$a$} \ar[d,dash,shorten=-5pt] \\
+	% 	\circled{$a$} \ar[d,dash,shorten=-5pt] \\
+	% 	\circled{$a$} \ar[d,dash,shorten=-5pt] \\
+	% 	{\vdots} 
+	% \end{tikzcd} , \; 
+	\begin{tikzcd}[row sep=2pt]
+		{} \ar[d,dash,shorten=-5pt] \\
+		\circled{$a$} \ar[d,dash,shorten=-5pt] \\
+		\circled{$a$} \ar[d,dash,shorten=-5pt] \\
+		\circled{$b$} \ar[d,dash,shorten=-5pt] \\
+		{\vdots} 
+	\end{tikzcd} , \; 
+	\begin{tikzcd}[row sep=2pt]
+		{} \ar[d,dash,shorten=-5pt] \\
+		\circled{$a$} \ar[d,dash,shorten=-5pt] \\
+		\circled{$b$} \ar[d,dash,shorten=-5pt] \\
+		\circled{$a$} \ar[d,dash,shorten=-5pt] \\
+		{\vdots} 
+	\end{tikzcd} , \; 
+	\begin{tikzcd}[row sep=2pt]
+		{} \ar[d,dash,shorten=-5pt] \\
+		\circled{$b$} \ar[d,dash,shorten=-5pt] \\
+		\circled{$b$} \ar[d,dash,shorten=-5pt] \\
+		\circled{$b$} \ar[d,dash,shorten=-5pt] \\
+		{\vdots} 
+	\end{tikzcd} ,\; etc. 
+	\vspace{5pt}
 \end{center}
-ここで、$\mu F$ と $\nu F$ は次のようになります。
+
+\noindent 以上より、$\mu F$ と $\nu F$ は次のようになります。（補足:「有限長で止まる木」はないので、$\mu F$ は空集合です。）
 \begin{align*}
 	\mu F &= \emptyset \\
 	\nu F &= A^\omega
 \end{align*}
 
-\noindent まとめると
+\clearpage
+
+\noindent 次に、例として $F=2\times(-)^A$ も考えてみましょう。この $F$-余代数は、決定的オートマトンです。
+% \begin{align*}
+% 	F &= 
+% \end{align*}
+\begin{prooftree}
+	\rootAtTop
+	\AXC{$X\longrightarrow 2$} 
+	\AXC{$A\times X\longrightarrow X$} \doubleLine
+	\UIC{$X\longrightarrow X^A$} \doubleLine
+	\BIC{$X \longrightarrow 2\times X^A$} 
+\end{prooftree}
+
+\noindent たとえば $|A|=3$ のとき、
+\begin{align*}
+	F &= 2\times (-)^3 \\
+	&= (\underparenthesis{\circled{~}}{-})^3 + (\underparenthesis{\doublecircled{~}}{-})^3 
+\end{align*}
+となります。ここで、各$A$-tree は、$|A|$-branching tree with 2-colors となります。
+\begin{center}
+	\begin{tikzcd}
+		... 
+	\end{tikzcd}
+\end{center}
+
+\clearpage
+
+\noindent まとめると \vspace{8pt}
 \begin{center}
 	\begin{tabular}{l|c|c}
 		\hline
 		& $\mu F$ & $\nu F$ \\
 		& carrier of initial algebra & carrier of final coalgebra \\\hline\hline
 		$F=A\times(-)$ & $\emptyset$ & $A^{\omega}$ \\\hline
-		$F=1+A\times(-)$ & $A^\ast$ & $A^\infty \;(=A^\ast \cup A^\omega)$ \\\hline
-		$F=2\times (-)^A$ & $\displaystyle 2^{(A^*)}$ & \\\hline
+		$F=1+A\times(-)$ & $A^\ast$ & $A^\infty \;(=A^\ast + A^\omega)$ \\\hline
+		% $F=(-)^2$ & & \\\hline
+		% $F=(-)^A$ & & \\\hline
+		$F=2\times (-)^A$ & & $\displaystyle 2^{(A^*)}\;(\cong\mathcal P(A^\ast))$ \\\hline
 		$F=B\times (-)^A$ & & \\\hline
 		$F=C+B\times (-)^A$ & & \\\hline
-	\end{tabular}
+	\end{tabular}\vspace{8pt}
 \end{center}
-となります。
+となります。\vspace{8pt}
 
-\clearpage
+% \clearpage
 
 \begin{screen}
 	\noindent ここで「\textgt{可能無限}」(potential infinity) と「\textgt{実無限}」(actual infinity) の考え方をおさえておきましょう。
@@ -1068,7 +1138,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\item 始代数は、{有限回の操作で到達できるような無限}（＝\textgt{可能無限}）を表すことができるのに対し、
 		\item 終余代数は、{無限に続く振舞い}や{無限対象}（＝\textgt{実無限}）までを含めて扱うことができます。
 	\end{itemize}
-	※ 注意: 
+	% ※ 注意: 
 \end{screen}
 
 % また、
@@ -2634,7 +2704,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\section{最弱事前条件をどのように手に入れるか --- 圏論的な観点で}
+\section{最弱事前条件をどのように手に入れるか ------ 圏論的な観点で}
 \label{sec:categorical-weakest-precondition}
 
 さて、本節では、非決定的プログラムや確率的プログラムなどといった様々な種類のプログラムに対する述語変換子意味論を得る方法について、圏論的な視座から考えます。一般に、状態の集合 $X, Y$ と真理値の集合 $\Omega$ が与えられたときに、効果付き計算 $c:X\to FY$ に基づいて、事後条件 $q:Y\to\Omega$ を最弱事前条件 $wp\llbracket c\rrbracket(q):X\to \Omega$ に変換する関数である「述語変換子」 $wp\llbracket c\rrbracket:\Omega^Y\to\Omega^X$ を手に入れるためには、どんな手続きを経たらよいでしょうか。\vspace{8pt}
