@@ -702,6 +702,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{definition}
 
 \begin{definition}[余代数の圏]
+	\label{def:category-of-coalgebra}
 	$F$-余代数の圏を $\Coalg(F)$ と書くことにする。
 	% 対象が余代数であり、射が余代数準同型であるような圏である。
 	対象が余代数、射が余代数準同型である。
@@ -868,31 +869,113 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 ここでは、終余代数の定義と、その構成のしかたを紹介します。まずは定義です。
 
 \begin{definition}[終余代数]
-	
+	終 $F$-余代数 $\zeta:Z\to F(Z)$ とは、余代数の圏 $\Coalg(F)$ の中の終対象である。つまり、任意の余代数 $c:X\to F(X)$ に対し、一意な余代数準同型 $f:X\to Z$ が存在することである。\vspace{8pt}
+	\begin{center}
+		\begin{tikzcd}[row sep=2pt,column sep=4pt]
+			F(X) \ar[rr,"F(f)",dashed] && F(Z) \\
+			& \rotatebox{-45}{$=$} & \\
+			X\ar[rr,"\exists ! f"',dashed] \ar[uu,"c"] && Z \ar[uu,"\zeta"]
+		\end{tikzcd}
+	\end{center}
 \end{definition}
 
-\todo[inline]{まだ}
+% \todo[inline]{まだ}
 
 \begin{proposition}[ランベックの補題]
-	
+	$\zeta:Z\to F(Z)$ が終余代数なら、$\zeta$ は同型射である。つまり $Z\cong F(Z)$ である。
 \end{proposition}
+
+\begin{proof}
+	余代数 $F(\zeta):F(Z)\to F(F(Z))$ を考える。$Z$ の終対象性より、一意な $g:F(Z)\to Z$ が手に入る。
+	\begin{center}
+		\begin{tikzcd}[row sep=2pt,column sep=4pt]
+			F(F(Z)) \ar[rr,"F(g)",dashed] && F(Z)\\
+			&\!\!\!\rotatebox{-45}{$=$}&\\
+			F(Z) \ar[uu,"F(\zeta)"] \ar[rr,"g"',dashed] && Z \ar[uu,"\zeta"']
+		\end{tikzcd}
+	\end{center}
+	このとき、$g=\zeta^{-1}$ であることを示す。\\
+	1) 第一に、$g\circ\zeta=\id_Z$ である。（$Z$ は終対象のため、$g\circ\zeta:Z\to Z$ と $\id_Z:Z\to Z$ は同一の射。）
+	\begin{center}
+		\begin{tikzcd}[row sep=2pt,column sep=4pt]
+				F(Z) \ar[rr,"F(\zeta)"] && F(F(Z)) \ar[rr,"F(g)"] && F(Z) \\
+				&\rotatebox{-45}{$=$}&&\rotatebox{-45}{$=$}&\\
+				Z \ar[uu,"\zeta"] \ar[rr,"\zeta"'] \ar[rrrr,bend right,"\id_Z"'] && F(Z) \ar[uu,"F(\zeta)"] \ar[rr,"g"'] && Z \ar[uu,"\zeta"]
+			\end{tikzcd}
+	\end{center}
+	2) 第二に、$\zeta\circ g=\id_{F(Z)}$ である。（以下の簡単な計算により示せる。）
+	\begin{align*}
+		\zeta\circ g&=F(g)\circ F(\zeta)&(\textrm{by definition of }g)\\
+		&=F(g\circ\zeta)&(\textrm{functionality of }F)\\
+		&=F(\id_Z)&(g\circ\zeta=\id_Z\textrm{ as we proved})\\
+		&=\id_{F(Z)}&(\textrm{because } F \textrm{ is a functor})
+	\end{align*}
+	それゆえ、$f\circ\zeta=\id_Z$ と $\zeta\circ f=\id_{F(Z)}$ である。よって、$g=\zeta^{-1}$ である。
+\end{proof}
 
 \begin{corollary}
 	べき集合の関手 $\mathcal P:\Set\to\Set$ には、終余代数は存在しない。
 \end{corollary}
 
 \begin{proof}
-	
+	もし終余代数 $\zeta:Z\to\mathcal P(Z)$ があるとすると、$\zeta$ は同型射になるはずである（ランベックの補題）。しかし、カントールの冪集合の定理より、$Z\not\cong\mathcal P(Z)$ である。というのも、任意の集合 $Z$ について、濃度は $|Z|<|\mathcal P(Z)|$ であるからである。以上より、$\Set$ において終 $\mathcal P$-余代数は存在しない。
 \end{proof}
 
-ここからは、どうやって終余代数を構成するかについて見ていきます。
+\clearpage
+
+\noindent ここからは、どうやって終余代数を構成するかについて見ていきます。
 % % 終余代数の構成は、順序集合についての「クーゾー・クーゾーの定理」(the Cousot-Cousot theorem) を一般化したものなので、まずはその復習から始めましょう。
 % % \begin{proposition}[クーゾー・クーゾーの定理]
 % % 	% 
 % % \end{proposition}
 
+\begin{proposition}
+	... 
+\end{proposition}
 
+\begin{proof}
+	... 
+\end{proof}
 
+\clearpage
+
+\subsection{代数と始代数、余代数と終余代数}
+
+さて、$F$-余代数の圏論的双対である、$F$-代数を導入します。
+
+\begin{definition}[代数]
+	... 
+\end{definition}
+
+\begin{definition}[始代数]
+	... 
+\end{definition}
+
+\begin{proposition}[ランベックの補題]
+	... 
+\end{proposition}
+
+\begin{proposition}[始代数の構成]
+	... 
+\end{proposition}
+
+\clearpage
+
+\noindent では、多項式関手 (polynomial functor) について、始代数と終余代数を具体的に求める練習をしましょう。
+\[F_{\Sigma}=\sum_{\sigma\in\Sigma}X^{|\sigma|} ~~ ???\]
+たとえば
+
+\clearpage
+
+\begin{screen}
+	\noindent ここで「\textgt{可能無限}」(potential infinity) と「\textgt{実無限}」(actual infinity) の考え方をおさえておきましょう。
+	\begin{itemize}
+		\item 始代数は、\kenten{有限回の操作で到達できるような無限}（＝\textgt{可能無限}）を表すことができるのに対し、
+		\item 終余代数は、\kenten{無限に続く振舞い}や\kenten{無限対象}（＝\textgt{実無限}）までを含めて扱うことができます。
+	\end{itemize}
+\end{screen}
+
+% また、
 
 \clearpage
 
