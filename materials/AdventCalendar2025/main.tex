@@ -1156,7 +1156,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 % \clearpage
 
-\noindent\textgt{\fbox{例3}~} 次に、$F=2\times(-)^A$ も考えてみましょう。$A$ は有限な非空集合とします。\\ この $F$-余代数は、決定性オートマトンです。
+\noindent\textgt{\fbox{例3}~} さらに、$F=2\times(-)^A$ も考えてみましょう。$A$ は有限な非空集合とします。\\ この $F$-余代数は、決定性オートマトンです。
 % \begin{align*}
 % 	F &= 
 % \end{align*}
@@ -1220,7 +1220,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% ※ 注意: 
 \end{screen}\vspace{10pt}
 
-\noindent 一般に $\mu F\subseteq \nu F$ となりますが、この包含関係は、圏論的な観点からは次のように理解されます。\vspace{5pt}
+\noindent \textgt{\fbox{観察1}~} 一般に $\mu F\subseteq \nu F$ となりますが、この包含関係は、圏論的な観点からは次のように理解されます。\vspace{5pt}
 \begin{center}
 	\begin{tikzcd}
 		F(\mu F) \ar[d,"\cong",shift left=5pt] \ar[r,dashed] & F(\nu F) \\
@@ -1230,20 +1230,31 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 これが mono 射になることは、$F:\Set\to\Set$ が有限交叉を保つ（$F(A\cap B)\cong F(A)\cap F(B)$ for all $A,B\subseteq X$）という仮定のもとで言えます。（少なくとも $\Set$ 上の多項式関手なら、有限交叉は保たれます。）ここでは詳細は省略。
 \vspace{12pt}
 
-\noindent また、$\mu F$ は「ボトムアップ」に木が育ち、$\nu F$ は「トップダウン」に木が育ちます。\\例: $F=\underparenthesis{\ast}{1}+(\underparenthesis{a}{-})^1+(\underparenthesis{b}{-})^2$ だと、
+\noindent \textgt{\fbox{観察2}~} $\mu F$ は「ボトムアップ」に木が育ち、$\nu F$ は「トップダウン」に木が育ちます。\vspace{2pt}\\
+例: $F=\underparenthesis{\ast}{1}+(\underparenthesis{a}{-})^1+(\underparenthesis{b}{-})^2$ だと、initial chain と final chain は、それぞれ以下のようになります。%\vspace{3pt}
 \[0\longrightarrow F0\longrightarrow F^20\longrightarrow\cdots\xrightarrow[\colim]{}\mu F\]
-\[1\longleftarrow F1\longleftarrow F^21\longleftarrow\cdots\xleftarrow[\;\lim\;]{}\nu F\]
-という initial chain と final chain は、それぞれ以下のように育ちます。\vspace{3pt}
+\[1\longleftarrow F1\longleftarrow F^21\longleftarrow\cdots\xleftarrow[\;\lim\;]{}\nu F\]\vspace{1pt}
+% という 
+% initial chain と final chain は、それぞれ以下のように育ちます。\vspace{4pt}
 \begin{center}\small
 	\begin{tikzcd}[row sep=2pt,column sep=-6pt]
-		{0} \ar[rr] & {} & {F0} \ar[rrrr] & {} & {} & {} & {F^20} \ar[rrrrrrrrr] & {} & {} & {} & {} & {} & {} & {} & {} & {F^30} \ar[rrrrrr] & {} & {} & {} & {} & {} & {\cdots} \\
+		{0} \ar[rr] & {} & {F0} \ar[rrrr] & {} & {} & {} & {F^20} \ar[rrrrrrrrr] & {} & {} & {} & {} & {} & {} & {} & {} & {F^30} \ar[rrrrrr] & {} & {} & {} & {} & {} & {~~\cdots~~} \ar[rrrrr,"\colim"',shorten=-3pt] &{}&{}&{}&{}& {~\mu F~}\\[-2pt]
 		{} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\
 		{} & {} & {} & {} & {} & {} & {} & {} & {} & {} & \circled{$a$} \ar[u,dash,shorten=-4pt] & {} & {} & \circled{$a$} \ar[u,dash,shorten=-4pt] & {} & {} & {} & \circled{$b$} \ar[u,dash,shorten=-4pt] & {} & {} & {} & {} \\
 		{} & {~~~\longrightarrow~~~} & {} & {~~~\longrightarrow~~~} & \circled{$a$} \ar[u,dash,shorten=-4pt] & {~,~} & {} & \circled{$b$} \ar[u,dash,shorten=-4pt] & {} & {~~\longrightarrow~~} & \circled{$a$} \ar[u,dash,shorten=-4pt]  & {~,} & {} & \circled{$b$} \ar[u,dash,shorten=-4pt]  & {} & {,~~} & \circled{$a$} \ar[ur,dash,shorten=-7pt]  & {} & \circled{$b$} \ar[ul,dash,shorten=-7pt]  & {} & {~~\longrightarrow~~} & \cdots \\
 		{} & {} & \circled{$\ast$} \ar[u,dash,shorten=-4pt] & {} & \circled{$\ast$} \ar[u,dash,shorten=-4pt] & {} & \circled{$\ast$} \ar[ru,dash,shorten=-7.0pt] & {} & \circled{$\ast$} \ar[lu,dash,shorten=-7.0pt] & {} & \circled{$\ast$} \ar[u,dash,shorten=-4.0pt]  & {} & \circled{$\ast$} \ar[ur,dash,shorten=-7pt] & {} & \circled{$\ast$} \ar[ul,dash,shorten=-7pt] & {} & \circled{$\ast$} \ar[u,dash,shorten=-4pt] & \circled{$\ast$} \ar[ur,dash,shorten=-7pt] & {} & \circled{$\ast$} \ar[ul,dash,shorten=-7pt] & {} & {}
 	\end{tikzcd}
+\end{center}\vspace{15pt}
+\begin{center}\small
+	\begin{tikzcd}[row sep=2pt,column sep=-6pt]
+		{1} \ar[rrrrr,leftarrow] & {} & {} & {} & {} & {F1} \ar[rrrrrrrrrr,leftarrow] & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {F^21} \ar[rrrrrrr,leftarrow]  & {} & {} & {} & {} & {} & {} & {~~\cdots~~} \ar[rrrrr,leftarrow,"\lim"',shorten=-3pt] &{}&{}&{}&{}& {~\nu F~}\\
+		{} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\
+		{??} & {} & \circled{$\ast$} \ar[u,dash,shorten=-4pt] & {} & \circled{$a$} \ar[u,dash,shorten=-4pt] \ar[d,dash,shorten <=-4pt] & {} & {} & \circled{$b$} \ar[u,dash,shorten=-4pt] \ar[dl,dash,shorten <=-6.5pt] \ar[dr,dash,shorten <=-6.5pt] & {} & {} & \circled{$a$} \ar[u,dash,shorten=-4pt] \ar[d,dash,shorten=-4pt] & {} & \circled{$a$} \ar[u,dash,shorten=-4pt] \ar[d,dash,shorten=-4pt] & {} & {} & \circled{$a$} \ar[u,dash,shorten=-4pt] \ar[d,dash,shorten=-4pt] & {} & {} & {} & \circled{$b$} \ar[u,dash,shorten=-4pt] \ar[ld,dash,shorten=-6.5pt] \ar[rd,dash,shorten=-6.5pt] & {} & {} & {} & {} \\
+		{} & {~~\longleftarrow~~} & {} & {~~,~~} & ?? & {~~,~~} & {??} & {} & {??} & {~~~\longleftarrow~~~} & \circled{$\ast$} & {~~,~~} & \circled{$a$} \ar[d,dash,shorten <=-4pt] & {~,} & {} & \circled{$b$} \ar[dl,dash,shorten <=-6.5pt] \ar[dr,dash,shorten <=-6.5pt] & {} & {,~~} & \circled{$a$} \ar[d,dash,shorten <= -4pt] & {} & \circled{$b$} \ar[dl,dash,shorten <=-6.5pt] \ar[dr,dash,shorten <=-6.5pt] & {} & {~~\longleftarrow~~} & {\cdots} \\[2pt]
+		{} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {??} & {} & {??} & {} & {??} & {} & {??} & {??} & {} & {??} & {} & {} \\
+		% {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\
+	\end{tikzcd}
 \end{center}
-
 
 
 
