@@ -938,11 +938,13 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	... 
 \end{proof}
 
+\todo[inline]{証明を書く。ordinal な議論に気をつけて。}
+
 \noindent 補足: 終 $F$-余代数の carrier は、関手 $F$ の最大不動点にあたるものであるため、それを $\nu F$ と書くことが多いです。\\すなわち、終 $F$-余代数とは $\zeta:\nu F\xrightarrow{\cong} F(\nu F)$ という同型射です。
 
 \clearpage
 
-\subsection{代数と始代数、余代数と終余代数 ------ 異なる2種類の無限をとらえる}
+\subsection{代数と始代数、余代数と終余代数 ------ 異なる2種類の``無限''をとらえる}
 
 さて、$F$-余代数の圏論的双対である、$F$-代数を導入します。
 
@@ -962,11 +964,13 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	... 
 \end{proposition}
 
+\todo[inline]{主張だけ書く}
+
 \noindent 補足: 始 $F$-代数の carrier は、関手 $F$ の最小不動点にあたるものであるため、それを $\mu F$ と書くことが多いです。\\すなわち、始 $F$-代数とは $\zeta:F(\mu F)\xrightarrow{\cong} \mu F$ という同型射です。
 
 \clearpage
 
-\noindent では、多項式関手 (polynomial functor) について、始代数と終余代数を具体的に求める練習をしましょう。
+\noindent ではここで、多項式関手 (polynomial functor) について、始代数と終余代数を\kenten{具体的に}求める練習をしましょう。
 \vspace{8pt}
 %\\
 
@@ -1246,13 +1250,20 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{tikzcd}
 \end{center}\vspace{15pt}
 \begin{center}\small
+	% \begin{tikzcd}[row sep=2pt,column sep=-6pt]
+	% 	{1} \ar[rrrrr,leftarrow] & {} & {} & {} & {} & {F1} \ar[rrrrrrrrrr,leftarrow] & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {F^21} \ar[rrrrrrr,leftarrow]  & {} & {} & {} & {} & {} & {} & {~~\cdots~~} \ar[rrrrr,leftarrow,"\lim"',shorten=-3pt] &{}&{}&{}&{}& {~\nu F~}\\
+	% 	{} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\
+	% 	{??} & {} & \circled{$\ast$} \ar[u,dash,shorten=-4pt] & {} & \circled{$a$} \ar[u,dash,shorten=-4pt] \ar[d,dash,shorten <=-4pt] & {} & {} & \circled{$b$} \ar[u,dash,shorten=-4pt] \ar[dl,dash,shorten <=-6.5pt] \ar[dr,dash,shorten <=-6.5pt] & {} & {} & \circled{$a$} \ar[u,dash,shorten=-4pt] \ar[d,dash,shorten=-4pt] & {} & \circled{$a$} \ar[u,dash,shorten=-4pt] \ar[d,dash,shorten=-4pt] & {} & {} & \circled{$a$} \ar[u,dash,shorten=-4pt] \ar[d,dash,shorten=-4pt] & {} & {} & {} & \circled{$b$} \ar[u,dash,shorten=-4pt] \ar[ld,dash,shorten=-6.5pt] \ar[rd,dash,shorten=-6.5pt] & {} & {} & {} & {} \\
+	% 	{} & {~~\longleftarrow~~} & {} & {~~,~~} & ?? & {~~,~~} & {??} & {} & {??} & {~~~\longleftarrow~~~} & \circled{$\ast$} & {~~,~~} & \circled{$a$} \ar[d,dash,shorten <=-4pt] & {~,} & {} & \circled{$b$} \ar[dl,dash,shorten <=-6.5pt] \ar[dr,dash,shorten <=-6.5pt] & {} & {,~~} & \circled{$a$} \ar[d,dash,shorten <= -4pt] & {} & \circled{$b$} \ar[dl,dash,shorten <=-6.5pt] \ar[dr,dash,shorten <=-6.5pt] & {} & {~~\longleftarrow~~} & {\cdots} \\[2pt]
+	% 	{} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {??} & {} & {??} & {} & {??} & {} & {??} & {??} & {} & {??} & {} & {} \\
+	% 	% {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\
+	% \end{tikzcd}
 	\begin{tikzcd}[row sep=2pt,column sep=-6pt]
 		{1} \ar[rrrrr,leftarrow] & {} & {} & {} & {} & {F1} \ar[rrrrrrrrrr,leftarrow] & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {F^21} \ar[rrrrrrr,leftarrow]  & {} & {} & {} & {} & {} & {} & {~~\cdots~~} \ar[rrrrr,leftarrow,"\lim"',shorten=-3pt] &{}&{}&{}&{}& {~\nu F~}\\
 		{} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\
 		{??} & {} & \circled{$\ast$} \ar[u,dash,shorten=-4pt] & {} & \circled{$a$} \ar[u,dash,shorten=-4pt] \ar[d,dash,shorten <=-4pt] & {} & {} & \circled{$b$} \ar[u,dash,shorten=-4pt] \ar[dl,dash,shorten <=-6.5pt] \ar[dr,dash,shorten <=-6.5pt] & {} & {} & \circled{$a$} \ar[u,dash,shorten=-4pt] \ar[d,dash,shorten=-4pt] & {} & \circled{$a$} \ar[u,dash,shorten=-4pt] \ar[d,dash,shorten=-4pt] & {} & {} & \circled{$a$} \ar[u,dash,shorten=-4pt] \ar[d,dash,shorten=-4pt] & {} & {} & {} & \circled{$b$} \ar[u,dash,shorten=-4pt] \ar[ld,dash,shorten=-6.5pt] \ar[rd,dash,shorten=-6.5pt] & {} & {} & {} & {} \\
 		{} & {~~\longleftarrow~~} & {} & {~~,~~} & ?? & {~~,~~} & {??} & {} & {??} & {~~~\longleftarrow~~~} & \circled{$\ast$} & {~~,~~} & \circled{$a$} \ar[d,dash,shorten <=-4pt] & {~,} & {} & \circled{$b$} \ar[dl,dash,shorten <=-6.5pt] \ar[dr,dash,shorten <=-6.5pt] & {} & {,~~} & \circled{$a$} \ar[d,dash,shorten <= -4pt] & {} & \circled{$b$} \ar[dl,dash,shorten <=-6.5pt] \ar[dr,dash,shorten <=-6.5pt] & {} & {~~\longleftarrow~~} & {\cdots} \\[2pt]
 		{} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {??} & {} & {??} & {} & {??} & {} & {??} & {??} & {} & {??} & {} & {} \\
-		% {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\
 	\end{tikzcd}
 \end{center}
 
@@ -1263,7 +1274,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \subsection{余談 (1)\; 計算効果 (computational effect) について}
 
-\ref{subsec:examples}節でいくつか例を挙げながら紹介したように、余代数 (coalgebra) は「1ステップの状態遷移」を表します。\[c:X\to F(X)\] 
+\noindent \ref{subsec:examples}節でいくつか例を挙げながら紹介したように、余代数 (coalgebra) は「1ステップの状態遷移」を表します。\[c:X\to F(X)\] 
 
 \noindent より一般に、計算 (computation) は、以下のように表されます。（なお $X=Y$ とすれば余代数です。）\[f:X\to F(Y)\] 
 
@@ -1279,7 +1290,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 % \end{tabular}
 % \end{center}
 
-典型例としては、例外処理 (exception handling) と呼ばれる計算効果を表す関手 $F(Y)=Y+E$ を用いた、効果つきの計算 $f:X\to Y+E$ が挙げられます。ここでは $+$ は余積を表し、$E$ は ``エラーの集合'' とみなしましょう。このとき、計算 $f:X\to Y+E$ は、単に入力値 $x\in X$ から出力値 $y\in Y$ を返すだけでなく、「もし例外が生じたらエラー $e\in E$ を返す」という副作用 (side effect) を持ちます。
+\noindent 典型例として、例外処理 (exception handling) と呼ばれる計算効果を表す関手 $F(Y)=Y+E$ を用いた、効果つきの計算 $f:X\to Y+E$ が挙げられます。ここでは $+$ は余積を表し、$E$ は ``エラーの集合'' とみなしましょう。このとき、計算 $f:X\to Y+E$ は、単に入力値 $x\in X$ から出力値 $y\in Y$ を返すだけでなく、「もし例外が生じたらエラー $e\in E$ を返す」という副作用 (side effect) を持ちます。
 % \[\begin{array}{cccc}f:&X&\longrightarrow&Y+E\\&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&x&\longmapsto &y\\&x'&\longmapsto&e\end{array}\]
 \[\begin{array}{cccccc}f:&X&\longrightarrow&Y\!\!&\!+\!&\!\!E\\&\rotatebox{90}{$\in$}&&&\!\!\rotatebox{90}{$\in$}\!\!\\&x&\longmapsto &y\!\!\\&x'&\longmapsto&&&\!\!e\end{array}\]
 では、この例のような副作用を持つ計算（効果つき計算）どうしの「合成」はどう考えればいいでしょうか。たとえば、2つの効果つき計算 $f:X\to Y+E$ と $g:Y\to Z+E$ を合成して、$g\circ f:X\to Z+E$ のようなものを作りたいとき、$f,g$の両者は型が合っていないため、一筋縄ではいかないことがわかります。そこで、次節で導入する「モナド」と「クライスリ圏」という概念が役立ちます。\vspace{5pt}\\
