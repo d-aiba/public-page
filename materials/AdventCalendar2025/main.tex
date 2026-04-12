@@ -1231,7 +1231,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\mu F \ar[u,shift left,"\alpha^{-1}"] \ar[r,dashed,"\textrm{mono}"'] & \nu F \ar[u,"\cong"']
 	\end{tikzcd}
 \end{center}\vspace{5pt} 
-これが mono 射になることは、$F:\Set\to\Set$ が有限交叉を保つ（$F(A\cap B)\cong F(A)\cap F(B)$ for all $A,B\subseteq X$）という仮定のもとで言えます。（少なくとも $\Set$ 上の多項式関手なら、有限交叉は保たれます。）ここでは詳細は省略。
+これが mono 射になることは、$F:\Set\to\Set$ が有限交叉を保つ（$F(A\cap B)\cong F(A)\cap F(B)$ for all $A,B\subseteq X$）という条件のもとで成り立ちます。（なお、$\Set$ 上の多項式関手なら、有限交叉は保たれます。）ここでは詳細は省略。
 \vspace{12pt}
 
 \noindent \textgt{\fbox{観察2}~} $\mu F$ は「ボトムアップ」に木が育ち、$\nu F$ は「トップダウン」に木が育ちます。\vspace{2pt}\\
@@ -1442,7 +1442,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{center}
 \end{itemize}
 
-\noindent なお「\textbf{劣分布}」とは、遷移確率が$1$\kenten{以下}である確率分布のことです。たとえば「$x_0$から、確率$0.4$で$x_1$に遷移し、確率$0.3$で$x_2$に遷移し、それ以外は異常停止 (deadlock) する」といったものです。（これは理論的にも便利で、sub-distribution の集合は $\omega$-cpo になります。）%\vspace{10pt}
+\noindent なお「\textbf{劣分布}」(sub-distribution) とは、遷移確率が$1$\kenten{以下}である確率分布のことです。たとえば、「$x_0$から、確率$0.4$で$x_1$に遷移し、確率$0.3$で$x_2$に遷移し、それ以外は異常停止 (deadlock) する」といった、合計が1よりも小さい遷移確率も認めるものです。（これは理論的にも便利で、sub-distribution の集合は $\omega$-cpo になります。）%\vspace{10pt}
 
 % \clearpage
 
