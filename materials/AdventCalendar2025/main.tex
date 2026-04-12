@@ -106,9 +106,10 @@
 \noindent また、以下の事柄については、既知のものとし、本文中で仮定します。（適宜、勉強して補いながら読んでください。）
 
 \begin{itemize}
-	\item 順序集合や不動点理論の基本事項（ナスター・タルスキの定理、クリーネ/クーゾー・クーゾーの定理、など）
-	\item 数理論理学に関する基本事項（古典命題論理、順序数の基本的な性質、様相論理のクリプキフレーム、など）
-	\item 圏論の基本事項（圏の定義、関手、自然変換、極限と余極限、随伴、カルテシアン閉圏、など）
+	\item \uline{順序集合}や\uline{不動点理論}の基本事項（ナスター・タルスキの定理、クリーネ/クーゾー・クーゾーの定理、など）
+	\item \uline{数理論理学}に関する基本事項（古典命題論理、順序数の基本的な性質、様相論理のクリプキフレーム、など）
+	\item \uline{圏論}の基本事項（圏の定義、関手、自然変換、極限と余極限、随伴、カルテシアン閉圏、など）
+	\item \uline{形式言語理論}の基本事項（正規言語、有限オートマトン、非決定性オートマトンの決定化、など）
 \end{itemize}
 
 % \vspace{5mm}
@@ -1001,52 +1002,37 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{center}
 	ここで、$\mu F$（始代数の carrier set）と $\nu F$（終余代数の carrier set）は以下の通りになります。
 	\begin{align*}
-		\mu F &= \{\textrm{ all finite-depth $\Sigma$-trees }\}\\
-		\nu F &= \{\textrm{ all $\Sigma$-trees, possibly with infinite paths }\}
+		\mu F &\;=\; \{\textrm{ all well-founded $\Sigma$-trees }\}\\
+		\nu F &\;=\; \{\textrm{ all $\Sigma$-trees, possibly with infinite paths }\}
 	\end{align*}
-\end{itembox}
-% \end{screen} 
-\vspace{-5pt}
+\end{itembox}\vspace{10pt}
+% \end{screen}
 %%%%%
 
-\noindent 例として、$F=A\times(-)$ という polynomial functor を考えてみましょう。
+\noindent \textgt{\fbox{例1}~} 例として、$F=A\times(-)$ という polynomial functor を考えてみましょう。
 \begin{align*}
 	F &= A\times(-) \\
 	&= \underbrace{\;(-)^{1}+\cdots+(-)^1\;}_{\displaystyle |A|}
 \end{align*}
 
-\noindent いま、簡単のため $A=\{a,b\}$ としましょう。（ここで、$a,b$ は rank（arity）が 1 の文字です。）
+\noindent いま、簡単のため $A=\{a,b\}$ としましょう。（ここで、$a,b$ は rank が 1 の文字です。）
 % \begin{center}
 \begin{multicols}{2}
-	% \begin{minipage}[b]{0.48\columnwidth}
-		% \begin{align*}
-		% 	F &= \{a,b\}\times(-) \\
-		% 	&= (\underparenthesis{a}{-})^1 + (\underparenthesis{b}{-})^1 
-		% \end{align*}
-		\begin{center}
-		$ \begin{array}{rl} F &= \{a,b\}\times(-) \\ &= (\underparenthesis{a}{-})^1 + (\underparenthesis{b}{-})^1 \end{array} $
-		\end{center}
-	% \end{minipage}
-	%%%
-	% \hspace{0.04\columnwidth}
+	\begin{center}
+		$ \begin{array}{rl} F &=\; \{a,b\}\times(-) \\ &=\; (\underparenthesis{a}{-})^1 + (\underparenthesis{b}{-})^1 \end{array} $
+	\end{center}
 	\quad \\
-	%%%
-	% \begin{minipage}[b]{0.48\columnwidth}
-		% \begin{center} 
-			% \vspace{-15pt}
-			\begin{tikzcd}[row sep=2pt]
-				{} \ar[d,dash,shorten=-5pt] \\
-				\circled{$a$} \ar[d,dash,shorten=-5pt] \\
-				{} 
-			\end{tikzcd}
-			%%
-			\begin{tikzcd}[row sep=2pt]
-				{} \ar[d,dash,shorten=-5pt] \\
-				\circled{$b$} \ar[d,dash,shorten=-5pt] \\
-				{} 
-			\end{tikzcd}
-		% \end{center}
-	% \end{minipage}
+	\begin{tikzcd}[row sep=2pt]
+		{} \ar[d,dash,shorten=-5pt] \\
+		\circled{$a$} \ar[d,dash,shorten=-5pt] \\
+		{} 
+	\end{tikzcd}
+	%%
+	\begin{tikzcd}[row sep=2pt]
+		{} \ar[d,dash,shorten=-5pt] \\
+		\circled{$b$} \ar[d,dash,shorten=-5pt] \\
+		{} 
+	\end{tikzcd}
 \end{multicols}
 % \end{center}
 
@@ -1083,7 +1069,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\vspace{5pt}
 \end{center}
 
-\noindent 以上より、$\mu F$ と $\nu F$ は次のようになります。（補足:「有限長で止まる木」はないので、$\mu F$ は空集合です。）
+\noindent このとき、$\mu F$ と $\nu F$ は次のようになります。（補足:「有限長で止まる木」はないので、$\mu F$ は空集合です。）
 \begin{align*}
 	\mu F &= \emptyset \\
 	\nu F &= A^\omega
@@ -1091,7 +1077,86 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent 次に、例として $F=2\times(-)^A$ も考えてみましょう。この $F$-余代数は、決定性オートマトンです。
+\noindent\textgt{\fbox{例2}~} 次に、$F=1+A\times(-)$ を考えてみましょう。
+\begin{align*}
+	F &= 1+A\times(-)\\
+	&= (-)^0 + \underbrace{\,(-)^1 +\cdots+ (-)^1\,}_{\displaystyle |A|}
+\end{align*}
+いま、$1=\{\ast\}$, $A=\{a,b\}$ としましょう。つまり $\Sigma=\{\ast:0,\,a:1,\,b:1\}$ です。
+\begin{multicols}{2}
+	\begin{center}
+		$ \begin{array}{rl} F &=\; 1+\{a,b\}\times(-) \\ &=\; (\underparenthesis{\ast}{-})^0 + (\underparenthesis{a}{-})^1 + (\underparenthesis{b}{-})^1 \end{array} $
+	\end{center}
+	\quad \\
+	% \begin{center}
+		\begin{tikzcd}[row sep=2pt]
+			{} \ar[d,dash,shorten=-5pt] \\
+			\circled{$\ast$} \\
+			{} 
+		\end{tikzcd}
+		%%
+		\begin{tikzcd}[row sep=2pt]
+			{} \ar[d,dash,shorten=-5pt] \\
+			\circled{$a$} \ar[d,dash,shorten=-5pt] \\
+			{} 
+		\end{tikzcd}
+		%%
+		\begin{tikzcd}[row sep=2pt]
+			{} \ar[d,dash,shorten=-5pt] \\
+			\circled{$b$} \ar[d,dash,shorten=-5pt] \\
+			{} 
+		\end{tikzcd}
+	% \end{center}
+\end{multicols}
+
+\noindent ここで、各$\Sigma$-tree は、以下のような、有限で止まるか、無限に続く、一本木となります。
+\begin{center}
+	\begin{tikzcd}[row sep=2pt,column sep=1pt]
+		{}\ar[d,dash,shorten=-5pt] && {}\ar[d,dash,shorten=-5pt] && {}\ar[d,dash,shorten=-5pt] && {}\ar[d,dash,shorten=-5pt] && {}\ar[d,dash,shorten=-5pt] && {}\ar[d,dash,shorten=-5pt] \\
+		\circled{$\ast$} && \circled{$a$} \ar[d,dash,shorten=-5pt] && \circled{$b$} \ar[d,dash,shorten=-5pt] && \circled{$b$} \ar[d,dash,shorten=-5pt] && \circled{$a$} \ar[d,dash,shorten=-5pt] && \circled{$b$} \ar[d,dash,shorten=-5pt]\\
+		{} &{,\;}& \circled{$\ast$} &{,\;}& \circled{$\ast$} &{,\;}& \circled{$a$} \ar[d,dash,shorten=-5pt] &{,\;}& \circled{$a$} \ar[d,dash,shorten=-5pt] &{,\;}& \circled{$a$} \ar[d,dash,shorten=-5pt] &{,\;\textrm{etc.}}\\
+		{} && {} && {} && \circled{$\ast$} && \circled{$b$} \ar[d,dash,shorten=-5pt] && \circled{$a$} \ar[d,dash,shorten=-5pt] \\
+		{} && {} && {} && {} && {\vdots} && {\vdots} 
+	\end{tikzcd}
+	% \begin{tikzcd}[row sep=2pt]
+	% 	{} \ar[d,dash,shorten=-5pt] \\
+	% 	\circled{$\ast$}\\
+	% 	{~}\\
+	% 	{~}\\
+	% 	{~}
+	% \end{tikzcd} , \; 
+	% \begin{tikzcd}[row sep=2pt]
+	% 	{} \ar[d,dash,shorten=-5pt] \\
+	% 	\circled{$a$} \ar[d,dash,shorten=-5pt] \\
+	% 	\circled{$a$} \ar[d,dash,shorten=-5pt] \\
+	% 	\circled{$b$} \ar[d,dash,shorten=-5pt] \\
+	% 	{\vdots} 
+	% \end{tikzcd} , \; 
+	% \begin{tikzcd}[row sep=2pt]
+	% 	{} \ar[d,dash,shorten=-5pt] \\
+	% 	\circled{$a$} \ar[d,dash,shorten=-5pt] \\
+	% 	\circled{$b$} \ar[d,dash,shorten=-5pt] \\
+	% 	\circled{$a$} \ar[d,dash,shorten=-5pt] \\
+	% 	{\vdots} 
+	% \end{tikzcd} , \; 
+	% \begin{tikzcd}[row sep=2pt]
+	% 	{} \ar[d,dash,shorten=-5pt] \\
+	% 	\circled{$b$} \ar[d,dash,shorten=-5pt] \\
+	% 	\circled{$b$} \ar[d,dash,shorten=-5pt] \\
+	% 	\circled{$b$} \ar[d,dash,shorten=-5pt] \\
+	% 	{\vdots} 
+	% \end{tikzcd} ,\; etc. 
+	% \vspace{5pt}
+\end{center}
+このとき、$\mu F$ と $\nu F$ は次のようになります。（有限で止まるものが $A^\ast$、無限に続きうるものを含めて $A^\infty$ です。）
+\begin{align*}
+	\mu F &= A^\ast \\
+	\nu F &= A^\infty \; (=A^\ast+A^\omega) 
+\end{align*}%\vspace{0pt}
+
+% \clearpage
+
+\noindent\textgt{\fbox{例3}~} 次に、$F=2\times(-)^A$ も考えてみましょう。$A$ は有限な非空集合とします。\\ この $F$-余代数は、決定性オートマトンです。
 % \begin{align*}
 % 	F &= 
 % \end{align*}
@@ -1108,12 +1173,22 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	F &= 2\times (-)^3 \\
 	&= (\underparenthesis{\circled{~}}{-})^3 + (\underparenthesis{\doublecircled{~}}{-})^3 
 \end{align*}
-となります。ここで、各$A$-tree は、$|A|$-branching tree with 2-colors となります。
-\begin{center}
-	\begin{tikzcd}
-		... 
-	\end{tikzcd}
+となります。ここで、各$A$-tree は、$|A|$-branching tree with 2-colors となります。（下の図は $|A|=3$ の場合。）\\
+以下の図のような、色のつきかた（\,$\circled{\textcolor{white}{$x$}}$ か $\doublecircled{\textcolor{white}{$x$}}$ か）だけが違う、形の同じ、高さ無限の木が、たくさん作れます。
+\begin{center}\small
+	\begin{tikzcd}[column sep=-2pt,row sep=3pt]
+		{} & {} & {} & {} & \circled{\textcolor{white}{$x$}} \ar[llld,dash,shorten=-6pt] \ar[d,dash,shorten=-4.5pt] \ar[rrrd,dash,shorten=-6pt] & {} & {} & {} & {} \\
+		{} & \circled{\textcolor{white}{$x$}} \ar[ld,dash,shorten=-7.5pt] \ar[d,dash,shorten=-4.5pt] \ar[rd,dash,shorten=-7.5pt] & {} & {} & \doublecircled{\textcolor{white}{$x$}} \ar[ld,dash,shorten=-7.5pt] \ar[d,dash,shorten=-4.5pt] \ar[rd,dash,shorten=-7.5pt] & {} & {} & \circled{\textcolor{white}{$x$}} \ar[ld,dash,shorten=-7.5pt] \ar[d,dash,shorten=-4.5pt] \ar[rd,dash,shorten=-7.5pt] & {} &  \\
+		\circled{\textcolor{white}{$x$}} & \circled{\textcolor{white}{$x$}} & \doublecircled{\textcolor{white}{$x$}} & \circled{\textcolor{white}{$x$}} & \circled{\textcolor{white}{$x$}} & \circled{\textcolor{white}{$x$}} & \doublecircled{\textcolor{white}{$x$}} & \circled{\textcolor{white}{$x$}} & \circled{\textcolor{white}{$x$}} \\[-10pt]
+		{} & {\vdots} & {} & {} & {\vdots} & {} & {} & {\vdots} & {} \\
+	\end{tikzcd}\vspace{3pt}
 \end{center}
+
+\noindent このとき、$\nu F$ は、$A$ 上の言語全体、つまり $2^{A^\ast}$ となります。\\（補足: 各言語 $L\subseteq A^\ast$ は、「各語 $w\in A^\ast$ を受理するかどうか」を 0 か 1 で返す関数 $L:A^\ast\to 2$ です。）
+\begin{align*}
+	\mu F &= \emptyset \\
+	\nu F &= 2^{A^\ast} \;(\cong \mathcal P(A^\ast))
+\end{align*}
 
 \clearpage
 
@@ -1127,7 +1202,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		$F=1+A\times(-)$ & $A^\ast$ & $A^\infty \;(=A^\ast + A^\omega)$ \\\hline
 		% $F=(-)^2$ & & \\\hline
 		% $F=(-)^A$ & & \\\hline
-		$F=2\times (-)^A$ & & $\displaystyle 2^{(A^*)}\;(\cong\mathcal P(A^\ast))$ \\\hline
+		$F=2\times (-)^A$ & $\emptyset$ & $\displaystyle 2^{A^*}\;(\cong\mathcal P(A^\ast))$ \\\hline
 		$F=B\times (-)^A$ & & \\\hline
 		$F=C+B\times (-)^A$ & & \\\hline
 	\end{tabular}\vspace{8pt}
@@ -1139,13 +1214,54 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{screen}
 	\noindent ここで「\textgt{可能無限}」(potential infinity) と「\textgt{実無限}」(actual infinity) の考え方をおさえておきましょう。
 	\begin{itemize}
-		\item 始代数は、{有限回の操作で到達できるような無限}（＝\textgt{可能無限}）を表すことができるのに対し、
-		\item 終余代数は、{無限に続く振舞い}や{無限対象}（＝\textgt{実無限}）までを含めて扱うことができます。
+		\item 始代数 ($\mu F$) は、{有限回の操作で到達できるような無限}（＝\textgt{可能無限}）を表すことができるのに対し、
+		\item 終余代数 ($\nu F$) は、{無限に続く振舞い}や{無限対象}（＝\textgt{実無限}）までも含めて扱うことができます。
 	\end{itemize}
 	% ※ 注意: 
-\end{screen}
+\end{screen}\vspace{12pt}
 
-% また、
+\noindent 一般に $\mu F\subseteq \nu F$ となりますが、この包含関係は、圏論的な観点からは次のように理解されます。\vspace{5pt}
+\begin{center}
+	\begin{tikzcd}
+		F(\mu F) \ar[d,"\cong",shift left=5pt] \ar[r,dashed] & F(\nu F) \\
+		\mu F \ar[u,shift left,"\alpha^{-1}"] \ar[r,dashed,"\textrm{mono}"'] & \nu F \ar[u,"\cong"']
+	\end{tikzcd}
+\end{center}\vspace{5pt} 
+これが mono 射になることは、$F:\Set\to\Set$ が有限交叉を保つ（$F(A\cap B)\cong F(A)\cap F(B)$ for all $A,B\subseteq X$）という仮定のもとで言えます。（少なくとも $\Set$ 上の多項式関手なら、有限交叉は保たれます。）ここでは詳細は省略。
+\vspace{15pt}
+
+\noindent また、$\mu F$ は「ボトムアップ」に木が育ち、$\nu F$ は「トップダウン」に木が育ちます。\\例: $F=1+A\times(-)$ だと、
+\[0\longrightarrow F0\longrightarrow F^20\longrightarrow\cdots\xrightarrow[\colim]{}\mu F\]
+\[1\longleftarrow F1\longleftarrow F^21\longleftarrow\cdots\xleftarrow[\;\lim\;]{}\nu F\]
+という initial chain と final chain は、それぞれ
+\begin{center}\small
+	\begin{tikzcd}[row sep=-8pt,column sep=0pt]
+		\circled{\textcolor{white}{$x$}} \ar[rd,dash,shorten=-6.8pt] & {} & \\
+		{} & \circled{\textcolor{white}{$x$}} \ar[rd,dash,shorten=-6.8pt]  & {} \\
+		\circled{\textcolor{white}{$x$}} \ar[ru,dash,shorten=-6.8pt] & {} & \circled{\textcolor{white}{$x$}} \\
+		{} & \circled{\textcolor{white}{$x$}} \ar[ru,dash,shorten=-6.8pt] \ar[ld,dash,shorten=-6.8pt] & {} \\
+		\circled{\textcolor{white}{$x$}}  & {} & {}
+	\end{tikzcd}
+\end{center}
+
+% \begin{tikzcd}[row sep=-5pt,column sep=0pt]
+% 	\circled{~} & {} & \\
+% 	{} & {} & {} \\
+% 	{} & {} & {} \\
+% 	{} & {} & {} \\
+% 	{} & {} & {}
+% \end{tikzcd}
+% \;$\longrightarrow$\; 
+% \begin{tikzcd}[row sep=-5pt,column sep=0pt]
+% 	\circled{} \ar[rd,dash,shorten=-10pt] & {} & \\
+% 	{} & \circled{} & {} \\
+% 	\circled{} \ar[ru,dash,shorten=-10pt] & {} & {} \\
+% 	{} & {} & {} \\
+% 	{} & {} & {}
+% \end{tikzcd}
+
+
+
 
 \clearpage
 
@@ -2980,6 +3096,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
     \item Jacobs, B. (2016) \textit{Introduction to coalgebra: towards mathematics of states and observation}, Cambridge University Press.
     \item Hasuo, I. (2015) Generic weakest precondition semantics from monads enriched with order, TCS.
     \item Hasuo, I. (2025) \textit{Abstract and concrete model checking}, lecture notes for Marktoberdorf summer school 2025, \href{https://group-mmm.org/~ichiro/papers/hasuoMOD25LectNotes.pdf}{[URL]}.
+    \item nLab authors. (2023) \textit{List of notable initial algebras and terminal coalgebras}, \href{https://ncatlab.org/nlab/show/list+of+notable+initial+algebras+and+terminal+coalgebras}{[URL]}.
 \end{thebibliography}
 %-----
 
