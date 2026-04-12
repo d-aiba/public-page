@@ -1188,7 +1188,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{tikzcd}\vspace{3pt}
 \end{center}
 
-\noindent このとき、$\nu F$ は、$A$ 上の言語全体、つまり $2^{A^\ast}$ となります。\\（補足: 各言語 $L\subseteq A^\ast$ は、「各語 $w\in A^\ast$ を受理するかどうか」を 0 か 1 で返す関数 $L:A^\ast\to 2$ です。）
+\noindent このとき、$\nu F$ は、そのような木たちの全体なので、$A$ 上の言語全体、つまり $2^{A^\ast}$ となります。\\（補足: 各言語 $L\subseteq A^\ast$ は、「各語 $w\in A^\ast$ を受理するかどうか」を 0 か 1 で返す関数 $L:A^\ast\to 2$ です。）
 \begin{align*}
 	\mu F &= \emptyset \\
 	\nu F &= 2^{A^\ast} \;(\cong \mathcal P(A^\ast))
@@ -1259,7 +1259,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% 	% {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\
 	% \end{tikzcd}
 	\begin{tikzcd}[row sep=2pt,column sep=-6pt]
-		{1} \ar[rrrrr,leftarrow] & {} & {} & {} & {} & {F1} \ar[rrrrrrrrrr,leftarrow] & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {F^21} \ar[rrrrrrr,leftarrow]  & {} & {} & {} & {} & {} & {} & {~~\cdots~~} \ar[rrrrr,leftarrow,"\lim"',shorten=-3pt] &{}&{}&{}&{}& {~\nu F~}\\
+		{1} \ar[rrrrr,leftarrow] & {} & {} & {} & {} & {F1} \ar[rrrrrrrrrr,leftarrow, shorten >= -8pt] & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {F^21} \ar[rrrrrrr,leftarrow]  & {} & {} & {} & {} & {} & {} & {~~\cdots~~} \ar[rrrrr,leftarrow,"\lim"',shorten=-3pt] &{}&{}&{}&{}& {~\nu F~}\\
 		{} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} & {} \\
 		{??} & {} & \circled{$\ast$} \ar[u,dash,shorten=-4pt] & {} & \circled{$a$} \ar[u,dash,shorten=-4pt] \ar[d,dash,shorten <=-4pt] & {} & {} & \circled{$b$} \ar[u,dash,shorten=-4pt] \ar[dl,dash,shorten <=-6.5pt] \ar[dr,dash,shorten <=-6.5pt] & {} & {} & \circled{$a$} \ar[u,dash,shorten=-4pt] \ar[d,dash,shorten=-4pt] & {} & \circled{$a$} \ar[u,dash,shorten=-4pt] \ar[d,dash,shorten=-4pt] & {} & {} & \circled{$a$} \ar[u,dash,shorten=-4pt] \ar[d,dash,shorten=-4pt] & {} & {} & {} & \circled{$b$} \ar[u,dash,shorten=-4pt] \ar[ld,dash,shorten=-6.5pt] \ar[rd,dash,shorten=-6.5pt] & {} & {} & {} & {} \\
 		{} & {~~\longleftarrow~~} & {} & {~~,~~} & ?? & {~~,~~} & {??} & {} & {??} & {~~~\longleftarrow~~~} & \circled{$\ast$} & {~~,~~} & \circled{$a$} \ar[d,dash,shorten <=-4pt] & {~,} & {} & \circled{$b$} \ar[dl,dash,shorten <=-6.5pt] \ar[dr,dash,shorten <=-6.5pt] & {} & {,~~} & \circled{$a$} \ar[d,dash,shorten <= -4pt] & {} & \circled{$b$} \ar[dl,dash,shorten <=-6.5pt] \ar[dr,dash,shorten <=-6.5pt] & {} & {~~\longleftarrow~~} & {\cdots} \\[2pt]
