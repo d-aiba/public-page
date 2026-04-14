@@ -1821,7 +1821,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \textgt{例外処理} (exception handler) の例を見ておくことにしましょう。\vspace{18pt}
 
 \begin{itemize}
-	\item まず、例外モナド (exception monad) は以下のように与えられます。
+	\item まず、\textgt{例外モナド} (exception monad) は以下のように与えられます。
 	\begin{itemize}
 		\item $T:\Set\to\Set$ を、$T(X):=X+E$ と定めます。ここで $+$ は余積とし、$E$ は ``エラーの集合'' とします。\\ さらに、$f:X\to Y$ については、$T(f)=f+\id_E$ とします。
 		\item ここで、単位 $\eta_X$ を以下のように定義します。（「もしエラーがなければ、計算結果をそのまま埋め込む。」）
@@ -1853,7 +1853,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			x & \mapsto &&& e & \mapsto &&&&&&& e & \mapsto &&& e
 		\end{array}
 	\end{align*}
-	\item さらに、このモナド $(T,\eta,\mu)$ のもとで、以下の$T$-代数 $X+E\xrightarrow{h} X$ を「例外処理」(exception handler) と呼びます。%\\これは $T$-代数をなします。%（代数的エフェクトと呼ばれるもののうちの一種です。）
+	\item さらに、このモナド $(T,\eta,\mu)$ のもとで、以下の$T$-代数 $X+E\xrightarrow{h} X$ を「\textgt{例外処理}」(exception handler) と呼びます。%\\これは $T$-代数をなします。%（代数的エフェクトと呼ばれるもののうちの一種です。）
 	（「すべての例外を最終的に処理し、回復して通常値に戻す。」）
 	\begin{multicols}{2}
 		\begin{center}
@@ -2408,6 +2408,24 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% \item 
 	\item これはまさに、先ほどの「冪集合構成による非決定性オートマトンの決定化」そのものです。
 \end{itemize}
+\todo[inline]{修正する・この1ページぶんはいったんすべて書き直す}
+
+\clearpage
+
+\noindent このような\textgt{冪集合構成} (powerset construction) の恩恵は、以下のようなことができる点にもあります。\\ （終 $2\times(\mathcal P-)^A$-余代数は存在しないが、終 $2\times{(-)}^A$-余代数は存在する！） \vspace{10pt}
+\begin{prooftree}
+	\AXC{$c:X\to 2\times(\mathcal PX)^A$, a non-deterministic automaton}
+	\UIC{$c':\mathcal PX\to 2\times(\mathcal PX)^A$, a deterministic automaton}
+	\UIC{~~~}\vspace{-5pt}
+\end{prooftree}
+\begin{center}%\small
+	\begin{tikzcd}
+		{} & {} & 2\times(\mathcal PX)^A \ar[r,dashed] & 2\times(2^{A^\ast})^A & {} \\
+		{} & X \ar[r,"\eta_X^{\mathcal P}"'] & \mathcal PX \ar[u,"c'"] \ar[r,dashed] & 2^{A^\ast} \ar[u,"\zeta","\cong"'] & {} %\ar[r,"\cong"] & \mathcal P(A^\ast)
+	\end{tikzcd} 
+\end{center}
+
+\todo[inline]{受理言語が determinization の前後で変わらないことは、どう示せばいい？？？}
 
 
 \clearpage
