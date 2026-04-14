@@ -3,7 +3,8 @@
 %----------
 \title{\textgt{述語変換子意味論と余代数}\\\textgt{\Large{圏論を用いたモデル検査入門}}}
 % \author{饗庭 大地 (Aiba, Daichi)}
-\author{こっとん (\href{https://twitter.com/CottonShampoo}{@CottonShampoo}) }
+% \author{こっとん (\href{https://twitter.com/CottonShampoo}{@CottonShampoo}) }
+\author{こっとん (\href{https://twitter.com/StoneDuality}{@StoneDuality})}
 \date{2025年12月20日 土曜日}
 %----------
 \documentclass[
@@ -2140,22 +2141,36 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\item 分配則 $\lambda':TF\Rightarrow FT$ によって誘導される $F$ の \fbox{\textgt{Eilenberg-Moore lifting}} 
 	$F^T$ 
 \end{enumerate}
-に基づくものだと言えます。このことについて、以下で詳しく見ていきましょう。%まずは両者の定義から。
+に基づくものだと言えます。このことについて、以下で詳しく見ていきます。\vspace{15pt}
+
+\noindent まずは、以下の自由忘却随伴 (free-forgetful adjunction) について確認しておきましょう。
 
 \begin{proposition}
-	クライスリ圏とEM圏について、それぞれ、以下のような自由忘却随伴が知られている。（証明略） %(free-forgetful adjunction) 
+	クライスリ圏とEM圏について、それぞれ、以下のような自由忘却随伴がある。（証明略） %(free-forgetful adjunction) 
 	\begin{multicols}{2}
+		% \begin{center}
+		% 	\begin{tikzcd}[row sep=large,column sep=large]
+		% 		\C_T \ar[r,"F_T"] \ar[d,bend left=20pt,"R_T"] & \C_T \ar[d,bend left=20pt,"R_T"] \\
+		% 		\C \ar[r,"F"'] \ar[u,bend left=20pt,"\dashv"',"L_T"] & \C \ar[u,bend left=20pt,"\dashv"',"L_T"]
+		% 	\end{tikzcd}
+		% \end{center}
 		\begin{center}
 			\begin{tikzcd}[row sep=large,column sep=large]
-				\C_T \ar[r,"F_T"] \ar[d,bend left=20pt,"R_T"] & \C_T \ar[d,bend left=20pt,"R_T"] \\
-				\C \ar[r,"F"'] \ar[u,bend left=20pt,"\dashv"',"L_T"] & \C \ar[u,bend left=20pt,"\dashv"',"L_T"]
+				\C_T  \ar[d,bend left=20pt,"R_T"] \\
+				\C \ar[u,bend left=20pt,"\dashv"',"L_T"]
 			\end{tikzcd}
 		\end{center}
 		%%
+		% \begin{center}
+		% 	\begin{tikzcd}[row sep=large,column sep=large]
+		% 		\C^T \ar[r,"F^T"] \ar[d,bend left=20pt,"R^T"] & \C^T \ar[d,bend left=20pt,"R^T"] \\
+		% 		\C \ar[r,"F"'] \ar[u,bend left=20pt,"\dashv"',"L^T"] & \C \ar[u,bend left=20pt,"\dashv"',"L^T"]
+		% 	\end{tikzcd}
+		% \end{center}
 		\begin{center}
 			\begin{tikzcd}[row sep=large,column sep=large]
-				\C^T \ar[r,"F^T"] \ar[d,bend left=20pt,"R^T"] & \C^T \ar[d,bend left=20pt,"R^T"] \\
-				\C \ar[r,"F"'] \ar[u,bend left=20pt,"\dashv"',"L^T"] & \C \ar[u,bend left=20pt,"\dashv"',"L^T"]
+				\C^T \ar[d,bend left=20pt,"R^T"] \\
+				\C \ar[u,bend left=20pt,"\dashv"',"L^T"]
 			\end{tikzcd}
 		\end{center}
 	\end{multicols}
@@ -2172,7 +2187,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	%%%
 \end{proposition}
 
+\noindent ここで、クライスリ拡大 $F_T$ と アイレンバーグ・ムーア持ち上げ $F^T$ の、両者の定義を見ます。
+
 \begin{definition}[Kleisli extension]
+	\label{def:kleisli-extension}
 	$F_T$ が $F$ の\textgt{クライスリ拡大} (Kleisli extension) であるとは、
 	\begin{multicols}{2}
 		\begin{center}
@@ -2196,6 +2214,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 % \end{supplement}
 
 \begin{definition}[EM lifting]
+	\label{def:EM-lifting}
 	$F^T$ が $F$ の\textgt{アイレンバーグ・ムーア持ち上げ} (Eilenberg-Moore lifting) であるとは、
 	\begin{multicols}{2}
 		\begin{center}
@@ -2213,6 +2232,12 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{multicols}
 	を満たすことである。
 \end{definition}
+
+\noindent （補足: $F$ のほうをモナドではなくただの関手と考える場合には、上の\textgt{定義\ref{def:kleisli-extension}}と\textgt{定義\ref{def:EM-lifting}}の、2つ目と3つ目の条件をなくして、単に「上記の図式が可換になること」だけをもって定義とします。）
+
+\clearpage
+
+\noindent ここで、分配則 $\lambda,\;\lambda'$ と、$F_T,\;F^T$ が、互いに誘導することを確認しましょう。
 
 \begin{supplement}
 	\begin{multicols}{2}
@@ -2234,6 +2259,68 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{align*}
 	\end{multicols}
 \end{supplement}
+
+\begin{supplement}
+	\begin{multicols}{2}
+		$F$ のクライスリ拡大 $F_T$ は、\\
+		モナド分配則 $\lambda:FT\Rightarrow TF$ を誘導する。
+		% \begin{align*}
+		% 	...\\
+		% 	...\\
+		% 	...\\
+		% 	...\\
+		% 	... 
+		% \end{align*}
+		\begin{align*}
+			\begin{array}{ccc}
+				% ~~\C_T~~ & \xrightarrow{~~~F_T~~~} & \C_T \\[10pt] 
+				\substack{\displaystyle TX\\[4pt]\rotatebox{-90}{$\!\textstyle\computationlongrightarrow$\;}\\[4pt]\displaystyle X}~~~~ & \xmapsto{~~F_T~~} & \begin{array}{c} FTX \\ ~~~~~~ \downarrow \substack{F_T(\id_{TX})} \!\!\! \\ TFX \end{array} 
+			\end{array}
+		\end{align*}\vspace{10pt}
+
+		$F$ のEM 持ち上げ $F^T$ は、\\ モナド分配則 $\lambda':TF\Rightarrow FT$ を誘導する。
+		\begin{align*}
+			% \begin{array}{ccccc}
+			% 	&\C^T & \xrightarrow{~~~F^T~~~} & \C^T &\\
+			% 	&\rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} & \\
+			% 	L^TX=&\substack{\left(\begin{array}{c} TTX \\ ~~\downarrow \substack{\mu_X} \\ TX \end{array}\right)}~ & \longmapsto & 
+			% 	\substack{ \begin{array}{c}\displaystyle TFX \\ ~~~~\downarrow\substack{TF\eta_X}\!\! \\
+			% 	\substack{\left(\begin{array}{c} TFTX \\ ~~~\downarrow \substack{\varphi_X} \\ FTX \end{array}\right)}\end{array}}
+			% \end{array}
+			\begin{array}{ccccc}
+				% &\C^T & \xrightarrow{~~~F^T~~~} & \C^T &\\
+				% &\rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} & \\
+				L^TX=&\substack{\left(\begin{array}{c} TTX \\ ~~\downarrow \substack{\mu_X} \\ TX \end{array}\right)}~ & \substack{\displaystyle ~~~\\[3pt] \displaystyle \xmapsto{~~F^T~~}} & 
+				\substack{ \begin{array}{c}\displaystyle TFX \\ ~~~~\downarrow\substack{TF\eta_X}\!\! \\
+				\substack{\left(\begin{array}{c} TFTX \\ ~~~\downarrow \substack{\varphi_X} \\ FTX \end{array}\right)}\end{array}}
+			\end{array}
+		\end{align*}
+	\end{multicols}
+\end{supplement}
+
+\noindent ここで、先ほどの (1) Kleisli approach と (2) Eilenberg-Moore approach は、数学的主張として正確に述べると、それぞれ次のようなものとして理解されます。
+
+\begin{proposition}[Kleisli approach]
+	分配則 $\lambda:FT\Rightarrow TF$ が与えられたとき、$L_T$ は $\widehat{L_T}$ に持ち上がる。\vspace{5pt}
+	\begin{center}
+		\begin{tikzcd}[row sep=large,column sep=large]
+			\Coalg\; TF \ar[d,""] \ar[r,"\widehat{L_T}",shift left=4.6pt,"\bot"'] \ar[r,leftarrow,"\widehat{R_T}"',shift right=4.6pt] & \Coalg\; F_T \ar[d,""] \\
+			\C \ar[r,"L_T",shift left=4.6pt,"\bot"'] \ar[r,leftarrow,"R_T"',shift right=4.6pt] \ar[loop left,"F", looseness=15] \ar[loop below,"T",looseness=15] & \C_T \ar[loop right, "F_T"]
+		\end{tikzcd}
+	\end{center}
+\end{proposition}
+
+\begin{proposition}[EM approach]
+	分配則 $\lambda':TF\Rightarrow FT$ が与えられたとき、$L^T$ は $\widehat{L^T}$ に持ち上がる。\vspace{5pt}
+	\begin{center}
+		\begin{tikzcd}[row sep=large,column sep=large]
+			\Coalg\; FT \ar[d,""'] \ar[r,"\widehat{L^T}",shift left=4.6pt,"\bot"'] \ar[r,leftarrow,"\widehat{R^T}"',shift right=4.6pt] & \Coalg\; F^T \ar[d,""] \\
+			\C \ar[r,"L^T",shift left=4.6pt,"\bot"'] \ar[r,leftarrow,"R^T"',shift right=4.6pt] \ar[loop left,"F", looseness=15] \ar[loop below,"T",looseness=15] & \C^T \ar[loop right, "F^T"]
+		\end{tikzcd}
+	\end{center}
+\end{proposition}
+
+\noindent これだけだと抽象的すぎるので、もう少し詳しく見ていきましょう。
 
 \clearpage
 
