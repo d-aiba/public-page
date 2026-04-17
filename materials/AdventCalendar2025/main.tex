@@ -2052,7 +2052,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\subsubsection*{\fbox{(2) Eilenberg-Moore approach}}
+\subsubsection*{\fbox{(2) Eilenberg-Moore approach}} \label{subsec:EM-approach}
 \begin{itemize}
 	\item 状態遷移システム $\gamma:X\to FTX$ を考えます。
 	\begin{itemize}
@@ -2339,7 +2339,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{align*}
 	が得られます。
 	\item そして、Kleisli 合成をすると \[X \xrightarrow{\;\gamma\;} TFX \xrightarrow{\;T(F_T(\gamma))\;} TTF^2X \xrightarrow{\;\mu\;} TF^2X\] になります。
-	\item これはまさに、先ほどの「遷移を合成して得られる2ステップ遷移」そのものです。
+	\item これはまさに、先ほどの「遷移を合成して得られる2ステップ遷移」の一般化です。
 	% \\
 	\vspace{10pt}
 \end{itemize}
@@ -2412,47 +2412,51 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% \item 
 	\item これはまさに、先ほどの「冪集合構成による非決定性オートマトンの決定化」の一般化（抽象化）です。
 \end{itemize}
-
 \todo[inline]{修正する・この1ページぶんはいったんすべて書き直す}
 
 \clearpage
 
-\noindent 後者（Eilenberg-Moore approach）については、
-% 以下のように理解することができます。
-もう少し整理しておきましょう。
+\noindent 後者 \fbox{\textgt{(2) Eilenberg-Moore approach}} については、
+以下のように理解することができます。
+% 複雑なのでもう少し整理しておきましょう。
+\vspace{8pt}
 
-\begin{itemize} 
-	\item 関手 $\widehat{L^T}:\Coalg\;FT\to\Coalg\;F^T$ は、
+% \begin{itemize} 
+	% \item 
+	\noindent 
+	関手 $\widehat{L^T}:\Coalg_{\,\C\,}(FT)\to\Coalg_{\C_T}(F^T)$ は、以下のように定めます。
 	\begin{itemize}
 		\item 対象に対しては、
-		\[\small \Coalg_{\,\C\,}(FT)\;\ni\;\left(\begin{array}{c}FTX\\~~~\uparrow\;\substack{\gamma}\\X\end{array}\right)\;\xmapsto{~~\widehat{L^T}~~}\;\left(\begin{array}{c}F^TL^TX\\~~~\uparrow \substack{\overline\gamma}\\ L^TX\end{array}\right)\;\in\;\Coalg_{\,\C^T\,}(F^T)\]
-		とします。これは自由忘却随伴 $R^T\dashv L^T$ より、
-		\[\begin{array}{ccc}\Hom_\C(X,R^TF^TL^TX)&\cong&\Hom_{\C^T}(L^TX,F^TL^TX)\\\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\\gamma&&\overline\gamma\end{array}\]
-		という対応関係から得られるものであり、具体的には以下のように定まります。
+		\[\small \Coalg_{\,\C\,}(FT)\;\ni\;\left(\begin{array}{c}FTX\\~~~\uparrow\;\substack{\gamma}\\X\end{array}\right)\;\xmapsto{~~\widehat{L^T}~~}\;\left(\begin{array}{c}F^TL^TX\\~~~\uparrow \substack{\overline\gamma}\\ L^TX\end{array}\right)\;\in\;\Coalg_{\,\C^T}(F^T)\]
+		とします。これは自由忘却随伴 $L^T\dashv R^T$ より、
+		\[\begin{array}{ccc}\Hom_{\,\C\,}(X,R^TF^TL^TX)&\cong&\Hom_{\,\C^T}(L^TX,F^TL^TX)\\\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\\gamma&&\overline\gamma\end{array}\]
+		という対応関係から一意に得られるものであり、具体的には以下のように定まります。
 		\[\small \begin{array}{ccccccc}\overline\gamma&:=&L^TX & \xrightarrow{~~L^T\gamma~~}&L^TR^TF^TL^TX&\xrightarrow{~~\varepsilon_{(F^TL^TX)}~~}& F^TL^TX\\ && \rotatebox{90}{$=$} && \rotatebox{90}{$=$} && \rotatebox{90}{$=$} \\ && \left(\begin{array}{c}TTX\\~~\downarrow\substack{\mu_X}\\TX\end{array}\right) & \xrightarrow{\;T\gamma\;} & \left(\begin{array}{c}TTFTX\\~~~\downarrow\substack{\mu_{(FTX)}}\!\!\! \\TFTX\end{array}\right) & \xrightarrow{\;\varphi_X\;} & \left(\begin{array}{c}TFTX\\~~\downarrow\substack{\varphi_X}\!\!\\FTX\end{array}\right) \end{array}\]
 		% です。
 		この $\overline\gamma$ は $F^T$-余代数であり、その underlying map は $R^T(\overline\gamma):TX\to FTX$ となります。\\ 
 		なお、$\gamma=R^T(\overline\gamma)\circ\eta_X$ が、随伴の tranpose の性質から従います。
 		\begin{center} \small
 			\begin{tikzcd}[column sep=8pt]
-				X \ar[rr,"\eta_X"] \ar[rd,"\gamma"'] && TX \ar[ld,"R^T(\gamma)"]\\
+				X \ar[rr,"\eta_X"] \ar[rd,"\gamma"'] && TX \ar[ld,"R^T(\overline\gamma)"]\\
 				{} & FTX & {}
 			\end{tikzcd}
 		\end{center}
-		ここで得られた $R^T(\overline\gamma)$ は、以下の$\gamma^\sharp$ と一致します。（そのため、冪集合構成だと言えます。）
+		ここで得られた $R^T(\overline\gamma)$ は、以下の$\gamma^\sharp$ と一致します。（それゆえ、\pageref{subsec:EM-approach}ページの冪集合構成の一般化。）
 		\begin{align*} \small
-			\hspace*{-20pt}\gamma^\sharp&=\left(TX\xrightarrow{\;F\mu_X\,\circ\,\lambda'_{TX}\,\circ\,T\gamma\;}FTX\right)\\
-			&=\left(TX\xrightarrow{T\gamma}TFTX\xrightarrow{\lambda'_{TX}}FTTX\xrightarrow{F\mu_X}FTX\right)
+			% \hspace*{-20pt}\gamma^\sharp&=\left(TX\xrightarrow{\;F\mu_X\,\circ\,\lambda'_{TX}\,\circ\,T\gamma\;}FTX\right)\\
+			% &=\left(TX\xrightarrow{T\gamma}TFTX\xrightarrow{\lambda'_{TX}}FTTX\xrightarrow{F\mu_X}FTX\right)
+			\gamma^\sharp = \left(TX\xrightarrow{~T\gamma~}TFTX\xrightarrow{~\lambda'_{TX}~}FTTX\xrightarrow{~F\mu_X~}FTX\right)
 		\end{align*}
-		$R^T(\overline\gamma)=\gamma^\sharp$ を確かめましょう。以下の図式は、外側がちゃんと可換になります。（右下は $\varphi$ の自然性より。）\vspace{5pt}
+		% $R^T(\overline\gamma)=\gamma^\sharp$ を確かめましょう。
+		というのも、以下の図式は、外側がちゃんと可換になります。（右下は $\varphi$ の自然性より。）\vspace{5pt}
 		\begin{center} \small
 			\begin{tikzcd}[column sep=5pt]
 				{} & TX \ar[rr,"T\gamma"] \ar[ld,"T\gamma"'] & {} & TFTX \ar[rd,"\varphi_X"] & {} \\
 				TFTX \ar[rrd,"{\lambda'_{TX}}"'] \ar[rr,"TF\eta_{TX}"'] \ar[rrru,"\id"] & {} & {TFTTX} \ar[ru,"TF\mu_X"'] \ar[d,"\varphi_{TX}"] & {} & FTX \\
 				{} & {} & FTTX \ar[rru,"F\mu_X"'] & {} & {} \\
-			\end{tikzcd}
+			\end{tikzcd} \vspace{-23pt}
 		\end{center}
-		\item 射に対しては、以下の図式のようにします。
+		\item 射に対しては、%以下の図式のようにします。
 		% \begin{multicols}{2}
 			% \begin{align*}
 			% 	& \left(\begin{array}{c}FTX\\~~\uparrow\substack{\gamma}\\X\end{array}\right)\;\xrightarrow{~f~}\;\left(\begin{array}{c}FTY\\~~\uparrow\substack{\delta}\\Y\end{array}\right) \quad\textrm{in $\Coalg_{\,\C\,}(FT)$} \\
@@ -2460,8 +2464,9 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			% \end{align*}
 			\[ \small
 				\left(\begin{array}{c}FTX\\~~\uparrow\substack{\gamma}\\X\end{array}\right)\;\xrightarrow{~f~}\;\left(\begin{array}{c}FTY\\~~\uparrow\substack{\delta}\\Y\end{array}\right) ~\textrm{in $\Coalg_{\,\C\,}(FT)$} 
-				\implies \left(\begin{array}{c}F^TL^TX\\~~\uparrow\substack{\overline\gamma}\\L^TX\end{array}\right) \;\xrightarrow{~L^Tf~} \left(\begin{array}{c}F^TL^TY\\~~\uparrow\substack{\overline\delta}\\L^TY\end{array}\right) ~\textrm{in $\Coalg_{\,\C^T\,}(F^T)$}
+				\implies \left(\begin{array}{c}F^TL^TX\\~~\uparrow\substack{\overline\gamma}\\L^TX\end{array}\right) \;\xrightarrow{~L^Tf~} \left(\begin{array}{c}F^TL^TY\\~~\uparrow\substack{\overline\delta}\\L^TY\end{array}\right) ~\textrm{in $\Coalg_{\,\C^T}(F^T)$}
 			\]
+			を以下の図式のように定めます。\vspace{-10pt}
 			\begin{center} \small
 				\begin{tikzcd}
 					FTX \ar[r,"FTf"] & FTY \\
@@ -2483,7 +2488,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			\end{center}
 		% \end{multicols}
 	\end{itemize}
-\end{itemize}
+% \end{itemize}
 
 
 % \vspace{30pt}
