@@ -2237,7 +2237,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent ここで、分配則 $\lambda,\;\lambda'$ と、$F_T,\;F^T$ が、互いに誘導することを確認しましょう。
+\noindent ここで、分配則 $\lambda,\;\lambda'$ と、拡大 $F_T$ と持ち上げ $F^T$ が、互いに bijective に誘導し合うことを確認しましょう。
 
 \begin{supplement}
 	\begin{multicols}{2}
@@ -2304,7 +2304,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	分配則 $\lambda:FT\Rightarrow TF$ が与えられたとき、$L_T$ は $\widehat{L_T}$ に持ち上がる。\vspace{5pt}
 	\begin{center}
 		\begin{tikzcd}[row sep=large,column sep=large]
-			\Coalg\; TF \ar[d,""] \ar[r,"\widehat{L_T}",shift left=4.8pt,"\bot"'] \ar[r,leftarrow,"\widehat{R_T}"',shift right=4.8pt] & \Coalg\; F_T \ar[d,""] \\
+			\Coalg_{\,\C\,}(TF) \ar[d,""] \ar[r,"\widehat{L_T}",shift left=4.8pt,"\bot"'] \ar[r,leftarrow,"\widehat{R_T}"',shift right=4.8pt] & \Coalg_{\,\C_T\,}(F_T) \ar[d,""] \\
 			\C \ar[r,"L_T",shift left=4.8pt,"\bot"'] \ar[r,leftarrow,"R_T"',shift right=4.8pt] \ar[loop left,"F", looseness=15] \ar[loop below,"T",looseness=15] & \C_T \ar[loop right, "F_T"]
 		\end{tikzcd}
 	\end{center}
@@ -2314,7 +2314,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	分配則 $\lambda':TF\Rightarrow FT$ が与えられたとき、$L^T$ は $\widehat{L^T}$ に持ち上がる。\vspace{5pt}
 	\begin{center}
 		\begin{tikzcd}[row sep=large,column sep=large]
-			\Coalg\; FT \ar[d,""'] \ar[r,"\widehat{L^T}",shift left=4.8pt,"\bot"'] \ar[r,leftarrow,"\widehat{R^T}"',shift right=4.8pt] & \Coalg\; F^T \ar[d,""] \\
+			\Coalg_{\,\C\,}(FT) \ar[d,""'] \ar[r,"\widehat{L^T}",shift left=4.8pt,"\bot"'] \ar[r,leftarrow,"\widehat{R^T}"',shift right=4.8pt] & \Coalg_{\,\C^T\,}(F^T) \ar[d,""] \\
 			\C \ar[r,"L^T",shift left=4.8pt,"\bot"'] \ar[r,leftarrow,"R^T"',shift right=4.8pt] \ar[loop left,"F", looseness=15] \ar[loop below,"T",looseness=15] & \C^T \ar[loop right, "F^T"]
 		\end{tikzcd}
 	\end{center}
@@ -2323,6 +2323,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent これだけだとやや抽象的でわかりにくいので、もう少し詳しく見ていきましょう。
 
 \clearpage
+
+% \noindent まず、
+
+% \clearpage
 
 \noindent まず、\fbox{\textbf{(1) Kleisli approach}} のほうは、以下のように理解することができます。
 \begin{itemize}
@@ -2406,9 +2410,83 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% \item 
 	% \item 
 	% \item 
-	\item これはまさに、先ほどの「冪集合構成による非決定性オートマトンの決定化」そのものです。
+	\item これはまさに、先ほどの「冪集合構成による非決定性オートマトンの決定化」の一般化（抽象化）です。
 \end{itemize}
+
 \todo[inline]{修正する・この1ページぶんはいったんすべて書き直す}
+
+\clearpage
+
+\noindent 後者（Eilenberg-Moore approach）については、
+% 以下のように理解することができます。
+もう少し整理しておきましょう。
+
+\begin{itemize} 
+	\item 関手 $\widehat{L^T}:\Coalg\;FT\to\Coalg\;F^T$ は、
+	\begin{itemize}
+		\item 対象に対しては、
+		\[\small \Coalg_{\,\C\,}(FT)\;\ni\;\left(\begin{array}{c}FTX\\~~~\uparrow\;\substack{\gamma}\\X\end{array}\right)\;\xmapsto{~~\widehat{L^T}~~}\;\left(\begin{array}{c}F^TL^TX\\~~~\uparrow \substack{\overline\gamma}\\ L^TX\end{array}\right)\;\in\;\Coalg_{\,\C^T\,}(F^T)\]
+		とします。これは自由忘却随伴 $R^T\dashv L^T$ より、
+		\[\begin{array}{ccc}\Hom_\C(X,R^TF^TL^TX)&\cong&\Hom_{\C^T}(L^TX,F^TL^TX)\\\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\\gamma&&\overline\gamma\end{array}\]
+		という対応関係から得られるものであり、具体的には以下のように定まります。
+		\[\small \begin{array}{ccccccc}\overline\gamma&:=&L^TX & \xrightarrow{~~L^T\gamma~~}&L^TR^TF^TL^TX&\xrightarrow{~~\varepsilon_{(F^TL^TX)}~~}& F^TL^TX\\ && \rotatebox{90}{$=$} && \rotatebox{90}{$=$} && \rotatebox{90}{$=$} \\ && \left(\begin{array}{c}TTX\\~~\downarrow\substack{\mu_X}\\TX\end{array}\right) & \xrightarrow{\;T\gamma\;} & \left(\begin{array}{c}TTFTX\\~~~\downarrow\substack{\mu_{(FTX)}}\!\!\! \\TFTX\end{array}\right) & \xrightarrow{\;\varphi_X\;} & \left(\begin{array}{c}TFTX\\~~\downarrow\substack{\varphi_X}\!\!\\FTX\end{array}\right) \end{array}\]
+		% です。
+		この $\overline\gamma$ は $F^T$-余代数であり、その underlying map は $R^T(\overline\gamma):TX\to FTX$ となります。\\ 
+		なお、$\gamma=R^T(\overline\gamma)\circ\eta_X$ が、随伴の tranpose の性質から従います。
+		\begin{center} \small
+			\begin{tikzcd}[column sep=8pt]
+				X \ar[rr,"\eta_X"] \ar[rd,"\gamma"'] && TX \ar[ld,"R^T(\gamma)"]\\
+				{} & FTX & {}
+			\end{tikzcd}
+		\end{center}
+		ここで得られた $R^T(\overline\gamma)$ は、以下の$\gamma^\sharp$ と一致します。（そのため、冪集合構成だと言えます。）
+		\begin{align*} \small
+			\hspace*{-20pt}\gamma^\sharp&=\left(TX\xrightarrow{\;F\mu_X\,\circ\,\lambda'_{TX}\,\circ\,T\gamma\;}FTX\right)\\
+			&=\left(TX\xrightarrow{T\gamma}TFTX\xrightarrow{\lambda'_{TX}}FTTX\xrightarrow{F\mu_X}FTX\right)
+		\end{align*}
+		$R^T(\overline\gamma)=\gamma^\sharp$ を確かめましょう。以下の図式の外側が可換になるからです。（右下は $\varphi$ の自然性より。）\vspace{5pt}
+		\begin{center} \small
+			\begin{tikzcd}[column sep=5pt]
+				{} & TX \ar[rr,"T\gamma"] \ar[ld,"T\gamma"'] & {} & TFTX \ar[rd,"\varphi_X"] & {} \\
+				TFTX \ar[rrd,"{\lambda'_{TX}}"'] \ar[rr,"TF\eta_{TX}"'] \ar[rrru,"\id"] & {} & {TFTTX} \ar[ru,"TF\mu_X"'] \ar[d,"\varphi_{TX}"] & {} & FTX \\
+				{} & {} & FTTX \ar[rru,"F\mu_X"'] & {} & {} \\
+			\end{tikzcd}
+		\end{center}
+		\item 射に対しては、以下の図式のようにします。
+		% \begin{multicols}{2}
+			% \begin{align*}
+			% 	& \left(\begin{array}{c}FTX\\~~\uparrow\substack{\gamma}\\X\end{array}\right)\;\xrightarrow{~f~}\;\left(\begin{array}{c}FTY\\~~\uparrow\substack{\delta}\\Y\end{array}\right) \quad\textrm{in $\Coalg_{\,\C\,}(FT)$} \\
+			% 	&\implies \left(\begin{array}{c}F^TL^TX\\~~\uparrow\substack{\overline\gamma}\\L^TX\end{array}\right) \;\xrightarrow{~L^Tf~} \left(\begin{array}{c}F^TL^TY\\~~\uparrow\substack{\overline\delta}\\L^TY\end{array}\right)
+			% \end{align*}
+			\[ \small
+				\left(\begin{array}{c}FTX\\~~\uparrow\substack{\gamma}\\X\end{array}\right)\;\xrightarrow{~f~}\;\left(\begin{array}{c}FTY\\~~\uparrow\substack{\delta}\\Y\end{array}\right) ~\textrm{in $\Coalg_{\,\C\,}(FT)$} 
+				\implies \left(\begin{array}{c}F^TL^TX\\~~\uparrow\substack{\overline\gamma}\\L^TX\end{array}\right) \;\xrightarrow{~L^Tf~} \left(\begin{array}{c}F^TL^TY\\~~\uparrow\substack{\overline\delta}\\L^TY\end{array}\right) ~\textrm{in $\Coalg_{\,\C^T\,}(F^T)$}
+			\]
+			\begin{center} \small
+				\begin{tikzcd}
+					FTX \ar[r,"FTf"] & FTY \\
+					X \ar[r,"f"'] \ar[u,"\gamma"] & Y \ar[u,"\delta"']
+				\end{tikzcd}
+			% \end{center}
+			% \begin{center}
+				$\implies$
+				\begin{tikzcd}
+					F^TL^TX \ar[r,"F^TL^Tf"] & F^TL^TY \\
+					L^TX \ar[r,"L^Tf"'] \ar[u,"\overline\gamma"] & L^TY \ar[u,"\overline\delta"']
+				\end{tikzcd}
+				~given as~ 
+				\begin{tikzcd}[row sep=12pt,column sep=8pt]
+					FTX \ar[rrrr,"FTf"] & {} & {} & {} & FTY \\
+					{} & TFTX \ar[lu,"\varphi_X"'] \ar[rr,"TFTf"] & {} & TFTY \ar[ur,"\varphi_Y"] & {} \\
+					TX \ar[rrrr,"Tf"'] \ar[uu,"R^T\overline\gamma"] \ar[ur,"T\gamma"'] & {} & {} & {} & TY \ar[uu,"R^T\overline\delta"'] \ar[lu,"T\delta"]
+				\end{tikzcd}
+			\end{center}
+		% \end{multicols}
+	\end{itemize}
+\end{itemize}
+
+
+% \vspace{30pt}
 
 \clearpage
 
@@ -2421,7 +2499,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{center}%\small
 	\begin{tikzcd}
 		{} & {} & 2\times(\mathcal PX)^A \ar[r,dashed] & 2\times(2^{A^\ast})^A & {} \\
-		{} & X \ar[r,"\eta_X^{\mathcal P}"'] & \mathcal PX \ar[u,"c'"] \ar[r,dashed] & 2^{A^\ast} \ar[u,"\zeta","\cong"'] & {} %\ar[r,"\cong"] & \mathcal P(A^\ast)
+		{} & X \ar[r,"\eta_X"'] & \mathcal PX \ar[u,"c'"] \ar[r,dashed] & 2^{A^\ast} \ar[u,"\zeta","\cong"'] & {} %\ar[r,"\cong"] & \mathcal P(A^\ast)
 	\end{tikzcd} 
 \end{center}
 
@@ -3201,6 +3279,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\item 蓮尾 (2011) 「Hoare論理によるプログラム検証」（資料）, \href{https://group-mmm.org/~ichiro/talks/komabaSogoHandout.pdf}{[URL]}. 
     \item 郡 (2025)「圏で圏を集める？---ファイブレーション入門」, 『圏論の歩き方 [改訂版]』, 日本評論社.
     \item Ad\'{a}mek J, Milius S, Moss LS. \textit{Initial Algebras and Terminal Coalgebras: The Theory of Fixed Points of Functors}. Cambridge Tracts in Theoretical Computer Science. Cambridge University Press. 
+    \item Beck, J. (1969) Distributive laws. In: Seminar on Triples and Categorical Homology Theory (Zürich, 1966/1967), vol. 80, pp. 119-140. Lecture Notes in Mathematics. Springer.
     \item Jacobs, B. (1999) \textit{Categorical logic and type theory}, Elsevier.
     \item Jacobs, B. (2016) \textit{Introduction to coalgebra: towards mathematics of states and observation}, Cambridge University Press.
     \item Hasuo, I. (2015) Generic weakest precondition semantics from monads enriched with order, TCS.
