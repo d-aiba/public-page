@@ -2326,101 +2326,101 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \noindent これだけだとやや抽象的でわかりにくいので、もう少し詳しく見ていきましょう。
 
-\clearpage
-
-% \noindent まず、
-
 % \clearpage
 
-\noindent まず、\fbox{\textbf{(1) Kleisli approach}} のほうは、以下のように理解することができます。
-\begin{itemize}
-	\item 圏 $\C$ における余代数 $\gamma:X\to TFX$ は、圏 $\C_T$ における射 $\gamma:X\computationrightarrow FX$ です。
-	\item ここで、$\gamma$ に $F_T$ を適用すると、
-	% \[F_T(\gamma)=\left(FX\xrightarrow{\;\lambda_{FX}\,\circ\,F\gamma\;} TF^2 X\right)\] 
-	\begin{align*}
-		F_T(\gamma)&=\left(FX\xrightarrow{\;\lambda_{FX}\,\circ\,F\gamma\;} TF^2 X\right)\\
-		&=\left(FX\xrightarrow{\;F\gamma\;}FTFX\xrightarrow{\;\lambda_{FX}\;}TFFX\right)
-	\end{align*}
-	が得られます。
-	\item そして、Kleisli 合成をすると \[X \xrightarrow{\;\gamma\;} TFX \xrightarrow{\;T(F_T(\gamma))\;} TTF^2X \xrightarrow{\;\mu\;} TF^2X\] になります。
-	\item これはまさに、先ほどの「遷移を合成して得られる2ステップ遷移」の一般化です。
-	% \\
-	\vspace{10pt}
-\end{itemize}
+% % \noindent まず、
 
-\noindent 次に、\fbox{\textbf{(2) Eilenberg-Moore approach}} のほうは、以下のように理解することができます。
+% % \clearpage
 
-\begin{itemize}
-	\item 余代数 $\gamma:X\to FTX$ %を考えます。%から、自由代数 $\gamma':TX\to FTX$ 
-	% \item この余代数
-	は、$\gamma:X\to R^T(F^T(L^TX))$ と同じものであると言えます。
-	\begin{itemize}
-		\item 任意の対象 $X$ に対し、自由 $T$-代数とは、$L^T(X)=\left(TTX\xrightarrow{\;\mu_X\;}TX\right)$ です。（台集合が$TX$）
-		\item ここで、この $L^T(X)$ に $F^T$ を適用すると、
-		\begin{align*}
-			\begin{array}{ccccc}
-				& \C^T & \xrightarrow{~~~~~F^T~~~~~} & \C^T & \\
-				&\rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$}& \\
-				L^TX \;= &
-				\left(\begin{array}{c}
-					TTX \\
-					~~~\downarrow \substack{\mu_X}\\
-					TX
-				\end{array}\right)
-				&
-				\longmapsto 
-				&
-				\left(\begin{array}{c}
-					TFTX\\
-					~~~\downarrow\substack{\lambda'_{TX}}\\
-					FTTX\\
-					~~~\downarrow\substack{F{\mu_X}}\\
-					FTX
-				\end{array}\right) & =\; F^T(L^TX)
-			\end{array}
-		\end{align*}
-		となり、その台集合 (underlying object) は $R^T(L^TX)=FTX$ です。
-		\item すなわち、$\gamma:X\to FTX$ は、実は $\gamma:X\to R^T(F^T(L^TX))$ という射だと言えます。
-		% \item 
-	\end{itemize}
-	% いま、
-	% \item すなわち、$\gamma:X\to FTX$ は、実は $\gamma:X\to R^T(F^T(L^TX))$ という射だと言えます。
-	% \item ここで、「自由代数の普遍性」を使うと \[\gamma^\sharp=\left(TX\xrightarrow{\;(F\mu_X\,\circ\,\lambda_{TX})\,\circ\,T\gamma\;}FTX\right)\] が得られます。
-	\item ここで、``自由代数の普遍性'' より、
-	\begin{multicols}{2}
-		\begin{center}
-			\begin{tikzcd}[column sep=5pt]
-				X \ar[rr,"\eta_X"] \ar[rd,"\gamma"'] && TX \ar[ld,"\gamma^\sharp"]\\
-				& FTX & 
-			\end{tikzcd}
-		\end{center}
-		%%%
-		% \begin{center}
-			% $\gamma^\sharp=\left(TX\xrightarrow{\;F\mu_X\,\circ\,\lambda'_{TX}\,\circ\,T\gamma\;}FTX\right)$
-			\begin{align*}
-				\hspace*{-20pt}\gamma^\sharp&=\left(TX\xrightarrow{\;F\mu_X\,\circ\,\lambda'_{TX}\,\circ\,T\gamma\;}FTX\right)\\
-				&=\left(TX\xrightarrow{T\gamma}TFTX\xrightarrow{\lambda'_{TX}}FTTX\xrightarrow{F\mu_X}FTX\right)
-			\end{align*}
-		% \end{center}
-	\end{multicols}
-	\noindent 
-	% のように、
-	$\gamma$ から $\gamma^\sharp$ が一意に得られます。
-	% （この$\gamma^\sharp$は、$F^T$-coalgebra の underlying map です。）
-	（この$\gamma^\sharp$は、$F^T$-coalgebra の underlying map として理解されます。）
-	% のように、$\gamma$ から $\gamma^\sharp$ が一意に（なお $F^T$-coalgebra の underlying map として）得られます。
-	% \[\Hom_{\C}(X,R^TF^TL^TX)\;\cong\;\Hom_{\C^T}(L^TX,F^TL^TX)\]
-	\[\begin{array}{ccc}\Hom_{\C}(X,\,R^T(F^T(L^TX))) & ~\cong~ & \Hom_{\C^T}(L^TX,\,F^T(L^TX))\\ \rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\ \gamma:X\to FTX && \overline\gamma:L^TX\to F^T(L^TX) \\[2pt] &&\left(~\substack{\displaystyle\textrm{its underlying map is} \\ \displaystyle\gamma^\sharp:TX\to FTX}~\right) \end{array}\]
-	% \item 
-	% \item 
-	% \item 
-	\item これはまさに、先ほどの「冪集合構成による非決定性オートマトンの決定化」の一般化（抽象化）です。
-\end{itemize}
-\todo[inline]{修正する・この1ページぶんはいったんすべて書き直す}
+% \noindent まず、\fbox{\textbf{(1) Kleisli approach}} のほうは、以下のように理解することができます。
+% \begin{itemize}
+% 	\item 圏 $\C$ における余代数 $\gamma:X\to TFX$ は、圏 $\C_T$ における射 $\gamma:X\computationrightarrow FX$ です。
+% 	\item ここで、$\gamma$ に $F_T$ を適用すると、
+% 	% \[F_T(\gamma)=\left(FX\xrightarrow{\;\lambda_{FX}\,\circ\,F\gamma\;} TF^2 X\right)\] 
+% 	\begin{align*}
+% 		F_T(\gamma)&=\left(FX\xrightarrow{\;\lambda_{FX}\,\circ\,F\gamma\;} TF^2 X\right)\\
+% 		&=\left(FX\xrightarrow{\;F\gamma\;}FTFX\xrightarrow{\;\lambda_{FX}\;}TFFX\right)
+% 	\end{align*}
+% 	が得られます。
+% 	\item そして、Kleisli 合成をすると \[X \xrightarrow{\;\gamma\;} TFX \xrightarrow{\;T(F_T(\gamma))\;} TTF^2X \xrightarrow{\;\mu\;} TF^2X\] になります。
+% 	\item これはまさに、先ほどの「遷移を合成して得られる2ステップ遷移」の一般化です。
+% 	% \\
+% 	\vspace{10pt}
+% \end{itemize}
+
+% \noindent 次に、\fbox{\textbf{(2) Eilenberg-Moore approach}} のほうは、以下のように理解することができます。
+
+% \begin{itemize}
+% 	\item 余代数 $\gamma:X\to FTX$ %を考えます。%から、自由代数 $\gamma':TX\to FTX$ 
+% 	% \item この余代数
+% 	は、$\gamma:X\to R^T(F^T(L^TX))$ と同じものであると言えます。
+% 	\begin{itemize}
+% 		\item 任意の対象 $X$ に対し、自由 $T$-代数とは、$L^T(X)=\left(TTX\xrightarrow{\;\mu_X\;}TX\right)$ です。（台集合が$TX$）
+% 		\item ここで、この $L^T(X)$ に $F^T$ を適用すると、
+% 		\begin{align*}
+% 			\begin{array}{ccccc}
+% 				& \C^T & \xrightarrow{~~~~~F^T~~~~~} & \C^T & \\
+% 				&\rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$}& \\
+% 				L^TX \;= &
+% 				\left(\begin{array}{c}
+% 					TTX \\
+% 					~~~\downarrow \substack{\mu_X}\\
+% 					TX
+% 				\end{array}\right)
+% 				&
+% 				\longmapsto 
+% 				&
+% 				\left(\begin{array}{c}
+% 					TFTX\\
+% 					~~~\downarrow\substack{\lambda'_{TX}}\\
+% 					FTTX\\
+% 					~~~\downarrow\substack{F{\mu_X}}\\
+% 					FTX
+% 				\end{array}\right) & =\; F^T(L^TX)
+% 			\end{array}
+% 		\end{align*}
+% 		となり、その台集合 (underlying object) は $R^T(L^TX)=FTX$ です。
+% 		\item すなわち、$\gamma:X\to FTX$ は、実は $\gamma:X\to R^T(F^T(L^TX))$ という射だと言えます。
+% 		% \item 
+% 	\end{itemize}
+% 	% いま、
+% 	% \item すなわち、$\gamma:X\to FTX$ は、実は $\gamma:X\to R^T(F^T(L^TX))$ という射だと言えます。
+% 	% \item ここで、「自由代数の普遍性」を使うと \[\gamma^\sharp=\left(TX\xrightarrow{\;(F\mu_X\,\circ\,\lambda_{TX})\,\circ\,T\gamma\;}FTX\right)\] が得られます。
+% 	\item ここで、``自由代数の普遍性'' より、
+% 	\begin{multicols}{2}
+% 		\begin{center}
+% 			\begin{tikzcd}[column sep=5pt]
+% 				X \ar[rr,"\eta_X"] \ar[rd,"\gamma"'] && TX \ar[ld,"\gamma^\sharp"]\\
+% 				& FTX & 
+% 			\end{tikzcd}
+% 		\end{center}
+% 		%%%
+% 		% \begin{center}
+% 			% $\gamma^\sharp=\left(TX\xrightarrow{\;F\mu_X\,\circ\,\lambda'_{TX}\,\circ\,T\gamma\;}FTX\right)$
+% 			\begin{align*}
+% 				\hspace*{-20pt}\gamma^\sharp&=\left(TX\xrightarrow{\;F\mu_X\,\circ\,\lambda'_{TX}\,\circ\,T\gamma\;}FTX\right)\\
+% 				&=\left(TX\xrightarrow{T\gamma}TFTX\xrightarrow{\lambda'_{TX}}FTTX\xrightarrow{F\mu_X}FTX\right)
+% 			\end{align*}
+% 		% \end{center}
+% 	\end{multicols}
+% 	\noindent 
+% 	% のように、
+% 	$\gamma$ から $\gamma^\sharp$ が一意に得られます。
+% 	% （この$\gamma^\sharp$は、$F^T$-coalgebra の underlying map です。）
+% 	（この$\gamma^\sharp$は、$F^T$-coalgebra の underlying map として理解されます。）
+% 	% のように、$\gamma$ から $\gamma^\sharp$ が一意に（なお $F^T$-coalgebra の underlying map として）得られます。
+% 	% \[\Hom_{\C}(X,R^TF^TL^TX)\;\cong\;\Hom_{\C^T}(L^TX,F^TL^TX)\]
+% 	\[\begin{array}{ccc}\Hom_{\C}(X,\,R^T(F^T(L^TX))) & ~\cong~ & \Hom_{\C^T}(L^TX,\,F^T(L^TX))\\ \rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\ \gamma:X\to FTX && \overline\gamma:L^TX\to F^T(L^TX) \\[2pt] &&\left(~\substack{\displaystyle\textrm{its underlying map is} \\ \displaystyle\gamma^\sharp:TX\to FTX}~\right) \end{array}\]
+% 	% \item 
+% 	% \item 
+% 	% \item 
+% 	\item これはまさに、先ほどの「冪集合構成による非決定性オートマトンの決定化」の一般化（抽象化）です。
+% \end{itemize}
+% \todo[inline]{修正する・この1ページぶんはいったんすべて書き直す}
 
 \clearpage
 
-\noindent まず前者 \fbox{\textgt{(1) Kleisli approach}} については、以下のように理解することができます。
+\noindent まず、前者 \fbox{\textgt{(1) Kleisli approach}} については、以下のように理解することができます。
 \vspace{8pt}
 
 \noindent 
@@ -2428,7 +2428,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{itemize}
 	\item 対象に対しては、
 	% \[\small \Coalg_{\,\C\,}(TF)\;\ni\;\left(\begin{array}{c}TFX\\~~\uparrow\substack{\gamma}\\X\end{array}\right)\;\xmapsto{~~\widehat{L_T}~~}\;\left(\begin{array}{c}F_TL_TX\\~\rotatebox{90}{$\computationrightarrow$}\;\substack{\gamma}\\L_TX\end{array}\right)\;\in\;\Coalg_{\,\C_T}(F_T)\] とします。
-	\[\small \Coalg_{\,\C\,}(TF)\;\ni\;\left(\begin{array}{c}TFX\\~~\uparrow\substack{\gamma}\\X\end{array}\right)\;\xmapsto{~~\widehat{L_T}~~}\;\left(\begin{array}{c}FX\\~~\rotatebox{90}{$\computationrightarrow$}\;\substack{\gamma}\\X\end{array}\right)\;\in\;\Coalg_{\,\C_T}(F_T)\] とします。
+	\[ \Coalg_{\,\C\,}(TF)\;\ni\;\left(\begin{array}{c}TFX\\~~\uparrow\substack{\gamma}\\X\end{array}\right)\;\xmapsto{~~\widehat{L_T}~~}\;\left(\begin{array}{c}FX\\~~\rotatebox{90}{$\!\computationrightarrow$}\;\substack{\gamma}\\X\end{array}\right)\;\in\;\Coalg_{\,\C_T}(F_T)\] とします。
 	% ここで、右辺の $c:L_TX\to F_TL_TX$ は、
 	% もとの $c:X\to TFX$ を、
 	これは、クライスリ圏における射の定義より、 %自由忘却随伴 $L_T\dashv R_T$ より、
@@ -2452,10 +2452,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% 	\;F_TFX\right)$} \doubleLine
 	% 	\UIC{$F_T(\gamma)=\left(FX\xrightarrow{\;F\gamma\;}FTFX\xrightarrow{\;\lambda_{FX}\;}TFFX\right)$}
 	% \end{prooftree}
-	\[ \small
+	\[ %\small
 		\begin{array}{ccc}
 			\left(\begin{array}{c}
-				FX\\~~\rotatebox{90}{$\computationrightarrow$}\;\substack{\gamma}\\X
+				FX\\~~\rotatebox{90}{$\!\computationrightarrow$}\;\substack{\gamma}\\X
 			\end{array}\right) 
 			& 
 			\xmapsto{~F_T~}
@@ -2476,7 +2476,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% \end{align*}
 	が得られます。さらに、Kleisli 合成をすると、
 	% \[X \xrightarrow{\;\gamma\;} TFX \xrightarrow{\;T(F_T(\gamma))\;} TTF^2X \xrightarrow{\;\mu\;} TF^2X\]
-	\begin{center} \small 
+	\begin{center} %\small 
 		\begin{tikzcd}[column sep=40pt, row sep=15pt]
 			X \ar[r,"\substack{\gamma\\[-2pt]~}","\shortmid" marking] & FX \ar[r,"\substack{F_T(\gamma)\\[-2pt]~}","\shortmid" marking] & FFX 
 	% 	\end{tikzcd}
@@ -2490,14 +2490,23 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			& & TFFX
 		\end{tikzcd}
 	\end{center}
-	となります。（まさに、\pageref{subsec:Kleisli-approach}ページの「1ステップ遷移を合成して2ステップ遷移を得る操作」に相当します。）\vspace{8pt}
+	となります。（まさに、\pageref{subsec:Kleisli-approach}ページの「1ステップ遷移を合成して2ステップ遷移を得る操作」に相当します。）\vspace{10pt}
 	% \[\]
 	\item 射に対しては、
+	\[\left(\begin{array}{c}TFX\\~\uparrow\substack{\gamma}\\X\end{array}\right)\;\xrightarrow{~f~}\;\left(\begin{array}{c}TFY\\~\uparrow\substack{\delta}\\Y\end{array}\right)\quad\textrm{in $\Coalg_{\,\C\,}(TF)$}\]
+	に対し、$\widehat{L_T}(f)$ を
+	\[\left(\begin{array}{c}TFX\\~\rotatebox{90}{$\!\computationrightarrow$}\;\substack{\gamma}\\X\end{array}\right)
+	\;
+	\mathrel{~\;{\shortmid}\hspace{-16pt}\xrightarrow{~\;\substack{f\\[-2pt]~}\;~}}
+	\;
+	\left(\begin{array}{c}TFY\\~\rotatebox{90}{$\!\computationrightarrow$}\;\substack{\delta}\\Y\end{array}\right)\quad\textrm{in $\Coalg_{\,\C_T}(F_T)$}\]
+	% を、\[\widehat{L_T}(f):=L_T f=\eta_Y\circ f:X\to TY\] 
+	によって定めます。
 \end{itemize}
 
 \clearpage
 
-\noindent 後者 \fbox{\textgt{(2) Eilenberg-Moore approach}} については、
+\noindent 次に、後者 \fbox{\textgt{(2) Eilenberg-Moore approach}} については、
 以下のように理解することができます。
 % 複雑なのでもう少し整理しておきましょう。
 \vspace{8pt}
@@ -2579,7 +2588,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent このような\textgt{冪集合構成} (powerset construction) の恩恵は、以下のようなことができる点にもあります。\\ （終 $2\times(\mathcal P-)^A$-余代数は存在しないが、終 $2\times{(-)}^A$-余代数は存在する！） \vspace{10pt}
 \begin{prooftree}
 	\AXC{$c:X\to 2\times(\mathcal PX)^A$, 非決定性オートマトン}
-	\UIC{$c':\mathcal PX\to 2\times(\mathcal PX)^A$, 決定性オートマトン}
+	\UIC{~~$c':\mathcal PX\to 2\times(\mathcal PX)^A$, 決定性オートマトン~~}
 	\UIC{~~~}\vspace{-5pt}
 \end{prooftree}
 \begin{center}%\small
@@ -2621,7 +2630,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-以上のように、モナド分配則はあると便利なのですが、実際には、都合よくモナド分配則がいつもあると限りません。\\以下ではそのことについて、簡単な例をもとに考えてみましょう。（以下に挙げるような例は、自然変換にならないため、したがってモナド分配則の候補にもなれないことを確認しましょう。）
+以上のように、モナド分配則はあると便利なのですが、実際には、いつも都合良くモナド分配則が手に入るとは限りません。以下ではそのことについて、簡単な例をもとに考えてみましょう。（以下に挙げるような例は、自然変換にならないため、したがってモナド分配則の候補にもなれないことを確認しましょう。）
 
 \begin{example}
 	$\mathcal P:\Set\to\Set$ を冪集合モナドとする。このとき、以下の $\lambda:\mathcal P\mathcal P\Rightarrow\mathcal P\mathcal P$ は自然変換にならない。
