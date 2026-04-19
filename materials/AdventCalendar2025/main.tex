@@ -1818,12 +1818,12 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent 
 ここで、モナド、クライスリ圏、アイレンバーグ・ムーア圏を考えることのモチベーションをつかむために、例として、
 % \textgt{代数的エフェクト} (algebraic effect)、および
-\textgt{例外処理} (exception handler) の例を見ておくことにしましょう。\vspace{18pt}
-
+\textgt{例外処理} (exception handler) の例を見ておくことにしましょう。%\vspace{10pt}
+\begin{oframed}
 \begin{itemize}
 	\item まず、\textgt{例外モナド} (exception monad) は以下のように与えられます。
 	\begin{itemize}
-		\item $T:\Set\to\Set$ を、$T(X):=X+E$ と定めます。ここで $+$ は余積とし、$E$ は ``エラーの集合'' とします。\\ さらに、$f:X\to Y$ については、$T(f)=f+\id_E$ とします。
+		\item $T:\Set\to\Set$ を、$T(X):=X+E$ と定めます。ここで $+$ は余積とし、$E$ は ``エラーの集合'' とします。さらに、$f:X\to Y$ については、$T(f)=f+\id_E$ とします。
 		\item ここで、単位 $\eta_X$ を以下のように定義します。（「もしエラーがなければ、計算結果をそのまま埋め込む。」）
 		\begin{multicols}{2}
 			\begin{center}
@@ -1873,11 +1873,13 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			\end{tikzcd}
 		\end{center}
 	\end{multicols}
-	\noindent なお、このような $h$ を与えることは、
+	\noindent なお、この $h$ を与えることは、
+	「各例外 $e$ に対して、回復値 $k(e)\in X$ を選ぶこと」と実質的に同じです。
 	\[k:E\to X,\quad k(e):=h(inr(e))\]
 	\[\textrm{i.e.,}~~ h=[\id_X,k]:X+E\to X\]
-	によって「各例外 $e$ に対して、回復値 $k(e)\in X$ を選ぶこと」と実質的に同じです。\vspace{18pt}
+	% によって「各例外 $e$ に対して、回復値 $k(e)\in X$ を選ぶこと」と実質的に同じです。%\vspace{18pt}
 \end{itemize}
+\end{oframed}
 
 \noindent まさにこの例こそ、モナド、クライスリ圏、アイレンバーグ・ムーア圏を考えることの嬉しさがよくわかる、最もシンプルで典型的な例だと言えるでしょう！
 
@@ -2412,13 +2414,13 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% \item 
 	\item これはまさに、先ほどの「冪集合構成による非決定性オートマトンの決定化」の一般化（抽象化）です。
 \end{itemize}
-\todo[inline]{修正する・この1ページぶんはいったんすべて書き直す}
+% \todo[inline]{修正する・この1ページぶんはいったんすべて書き直す}
 
 \clearpage
 
 \noindent 後者 \fbox{\textgt{(2) Eilenberg-Moore approach}} については、
-以下のように理解することができます。
-% 複雑なのでもう少し整理しておきましょう。
+% 以下のように理解することができます。
+複雑なのでもう少し整理しておきましょう。
 \vspace{8pt}
 
 % \begin{itemize} 
