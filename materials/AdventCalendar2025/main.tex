@@ -130,19 +130,19 @@
 
 \begin{oframed}
 \begin{itemize}
-	\item \textgt{形式検証} (formal verification): \\ $\cdots$ゴールは、ソフトウェアの正しさの証明 (correctness proof) を与えること。
+	\item \textgt{形式検証} (formal verification): \\ $\cdots$ゴールは、「ソフトウェアの\textgt{正しさの証明} (correctness proof) を与えること」。\\~~~~（発生確率の低い、小さなバグであっても、時として多大な金銭的損害や人命的被害をもたらしうる。）\vspace{6pt}
 	\begin{enumerate}
 		\item \textgt{定理証明} (theorem proving): 
 		\begin{itemize}
 			\item \textgt{対話型定理証明} (interactive theorem proving): Lean, Rocq/Coq, Agda, など \\ $\cdots$数学的な証明を書くためのソフトウェア。
-			\item \textgt{自動定理証明} (automatic theorem proving): SAT/SMT solvers など \\ $\cdots$形式的な仕様が与えられると、証明や反例を探索し、その性質が成り立つかどうかを判定する。
+			\item \textgt{自動定理証明} (automatic theorem proving): SAT/SMT solvers など \\ $\cdots$形式的な仕様が与えられると、証明や反例を探索し、その性質が成り立つかどうかを判定する。\vspace{6pt}
 		\end{itemize}
-		\item \textgt{モデル検査} (model checking): \\ $\cdots$正しさの問題 (correctness problem) を、``グラフ理論的な問題''に帰着させ、\\~~~~\,それを``グラフアルゴリズム''を使って解く。\\~~~~（ここでの ``グラフ理論的'' とは、状態遷移システム (transition system) といった広い意味で。）
+		\item \textgt{モデル検査} (model checking): \\ $\cdots$正しさの問題 (correctness problem) を、``グラフ理論的な問題''に帰着させて、\\~~~~\,それを``グラフ・アルゴリズム''を使って解く。\\~~~~（ここでの ``グラフ理論的'' とは、状態遷移システム (transition system) といった広い意味で。）
 	\end{enumerate}
 \end{itemize}
 \end{oframed}
 
-発生確率の低い小さなバグであっても、金銭的ダメージをもたらすことがあり、さらには人命に関わることもあります。そのため、
+% 発生確率の低い小さなバグであっても、金銭的ダメージをもたらすことがあり、さらには人命に関わることもあります。そのため、
 
 \noindent 
 
