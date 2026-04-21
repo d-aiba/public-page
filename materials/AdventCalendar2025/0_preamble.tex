@@ -546,3 +546,52 @@
 %-----
 \newcommand{\overparenthesis}[2]{\overset{\substack{#1\\\rotatebox{90}{(}}}{#2}}
 \newcommand{\underparenthesis}[2]{\underset{\substack{~\\\rotatebox{90}{)}\\#1}}{#2}}
+%%%%%
+%%%%%
+%%%%%
+% % \usepackage{amsmath}
+% \makeatletter
+% \newlength{\doublefracgap}
+% \setlength{\doublefracgap}{0.8pt}
+% \DeclareRobustCommand{\doublefrac}[2]{%
+%   \mathinner{\mathpalette\doublefracaux{{#1}{#2}}}%
+% }
+% \newcommand{\doublefracaux}[2]{\doublefracauxaux#1#2}
+% \newcommand{\doublefracauxaux}[3]{%
+%   \ooalign{%
+%     \raisebox{\doublefracgap}{$\m@th#1\dfrac{#2}{\phantom{#3}}$}\cr
+%     \raisebox{-\doublefracgap}{$\m@th#1\dfrac{\phantom{#2}}{#3}$}\cr
+%   }%
+% }
+% \makeatother
+% %%%%%
+% %%%%%
+% %%%%%
+\makeatletter
+\newcommand{\ddfrac}[2]{\mathchoice
+  {\@ddfrac\displaystyle{#1}{#2}}
+  {\@ddfrac\displaystyle{#1}{#2}}
+  {\@ddfrac\textstyle{#1}{#2}}
+  {\@ddfrac\scriptstyle{#1}{#2}}}
+%%%%%
+\newcommand{\@ddfrac}[3]{%
+  \begingroup
+  \setbox0=\hbox{$\m@th#1#2$}%
+  \setbox2=\hbox{$\m@th#1#3$}%
+  \dimen0=\wd0
+  \ifdim\wd2>\dimen0 \dimen0=\wd2\fi
+  \vcenter{%
+    \offinterlineskip
+    \halign{%
+      \hfil$\m@th#1##$\hfil\cr
+      \box0\cr
+      \noalign{\hrule height0.4pt \kern1pt \hrule height0.4pt \kern1pt}
+      \box2\cr
+    }%
+  }%
+  \endgroup
+}
+\makeatother
+%%%%%
+%%%%%
+%%%%%

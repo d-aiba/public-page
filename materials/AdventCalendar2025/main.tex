@@ -2048,8 +2048,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\item 状態遷移システム $\gamma:X\to TFX$ を考えます。
 	\begin{itemize}
 		\item $T$: 分岐をあらわす冪集合モナド $\mathcal P(-)$
-		\item $F$: 1ステップ遷移をあらわす関手 $L\times(-)$
-		\item つまり、このシステムは $\gamma:X\to\mathcal P(L\times X)$ という余代数で、$\gamma(x)=\{(a,x'),\dots\}$ といったものです。
+		\item $F$: 1ステップ遷移をあらわす関手 $1+\Sigma\times(-)$
+		\item つまり、このシステムは $\gamma:X\to\mathcal P(1+\Sigma\times X)$ という余代数で、$\gamma(x)=\{(a,x'),\dots\}$ といったもの。
 	\end{itemize}
 	\item ここで、モナド分配則 $\lambda:FT\Rightarrow TF$ を考えます。
 	\item すると、以下のように\textgt{合成}を考えることができます。（ここで $X\to TF^2X$ が「\textgt{2ステップ遷移}」を表します。）
@@ -2086,8 +2086,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\item 状態遷移システム $\gamma:X\to FTX$ を考えます。
 	\begin{itemize}
 		\item $T$: 分岐をあらわす冪集合モナド $\mathcal P(-)$
-		\item $F$: 1ステップ遷移をあらわす関手 $(-)^L$
-		\item つまり、このシステムは $\gamma:X\to\mathcal P(X)^L$ という余代数で、$\gamma(x)(a)=\{x',\dots\}$ といったものです。
+		\item $F$: 1ステップ遷移をあらわす関手 $2\times(-)^\Sigma$
+		\item つまり、このシステムは $\gamma:X\to 2\times\mathcal P(X)^\Sigma$ という余代数で、$\gamma(x)(a)=\{x',\dots\}$ といったもの。
 	\end{itemize}
 	\item ここで、モナド分配則 $\lambda':TF\Rightarrow FT$ を考えます。
 	\item すると、以下のように、非決定性オートマトンを\textgt{決定化} (determinize) することができます。
@@ -2102,18 +2102,18 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	詳しく言うと、以下の合成を通じて、
 	\begin{center}
 		\begin{tikzcd}[row sep=12pt]
-			\mathcal P(X) \ar[r,"\mathcal P\gamma"] & \mathcal P(\mathcal P(X)^L) \ar[r,"\lambda'_{\mathcal P(X)}"] & \mathcal P(\mathcal P(X))^L \ar[d,"(\mu_X)^L"]\\
-			&& \mathcal P(X)^L
+			\mathcal P(X) \ar[r,"\mathcal P\gamma"] & \mathcal P(2\times\mathcal P(X)^\Sigma) \ar[r,"\lambda'_{\mathcal P(X)}"] & 2\times\mathcal P(\mathcal P(X))^\Sigma \ar[d,"\;2\times(\mu_X)^\Sigma"]\\
+			&& 2\times\mathcal P(X)^\Sigma
 		\end{tikzcd}
 	\end{center}
 	$\delta(S)(a)=\bigcup_{x\in S}\gamma(x)(a)$ という決定化 (determinization) を得ることができます。
 	\begin{center}
 		\begin{tikzcd}[column sep=0pt,row sep=-4pt]
-			\gamma: \ar[d,rightsquigarrow,"\textrm{``determinize''~~}"'] & X & \longrightarrow & \mathcal P(X)^{L} \\[15pt]
-			\delta: & \mathcal P(X) & \longrightarrow & \mathcal P(X)^{L}  
+			\gamma: \ar[d,rightsquigarrow,"\textrm{``determinize''~~}"'] & X & \longrightarrow & 2\times\mathcal P(X)^{\Sigma} \\[15pt]
+			\delta: & \mathcal P(X) & \longrightarrow & 2\times\mathcal P(X)^{\Sigma}  
 		\end{tikzcd}
 	\end{center}
-	\item たとえば、以下の非決定性オートマトン $\gamma:X\to\mathcal P(X)^L$ は、
+	\item たとえば、以下の非決定性オートマトン $\gamma:X\to 2\times\mathcal P(X)^\Sigma$ は、
 	\begin{multicols}{2}
 		\begin{center}%\small
 			\begin{tikzcd}
@@ -2125,7 +2125,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			\gamma(x_2) &=\left[\begin{array}{ccl} a &\mapsto& \{x_1\}\\ b&\mapsto &\emptyset\end{array}\right]
 		\end{align*}
 	\end{multicols}
-	$\delta=(F\mu_X\circ \lambda'_{TX}\circ T\gamma): \mathcal P(X)\to\mathcal P(X)^L$ により、決定性オートマトンになります。
+	$\delta=(F\mu_X\circ \lambda'_{TX}\circ T\gamma): \mathcal P(X)\to 2\times\mathcal P(X)^\Sigma$ により、決定性オートマトンになります。
 	\begin{multicols}{2}
 		\begin{center}%\small
 			\begin{tikzcd}[row sep=-16pt]
@@ -2144,23 +2144,63 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{multicols}
 \end{itemize}
 
-\noindent ※ なお、両者のアプローチ (1) $\gamma:X\to \mathcal P(L\times X)$ と (2) $\gamma:X\to \mathcal P(X)^{L}$ は同じものです（自然同型で対応）。\vspace{5pt}%\\
+\noindent ※ なお、両者 (1) $\gamma:X\to \mathcal P(1+\Sigma\times X)$ と (2) $\gamma:X\to 2\times\mathcal P(X)^{\Sigma}$ は同じものです（自然同型で対応）。\vspace{5pt}%\\
 % \small 
-\begin{small}
-\begin{prooftree}
-	\AXC{$X\to\mathcal P(X)^{L}$} \doubleLine \RL{curry}
-	\UIC{$X\times L\to\mathcal P(X)$} \doubleLine \RL{classify}
-	\UIC{$\textrm{relation}\subseteq (X\times L)\times X$} \doubleLine \RL{associate}
-	\UIC{$\textrm{relation}\subseteq X\times (L\times X)$} \doubleLine \RL{classify}
-	\UIC{$X\to\mathcal P(L\times X)$}
-\end{prooftree}
-\end{small}
-\vspace{-5pt}
-
+% \begin{small}
+% \begin{prooftree}
+% 	\AXC{$X\to\mathcal P(X)^{\Sigma}$} \doubleLine \RL{curry}
+% 	\UIC{$X\times \Sigma\to\mathcal P(X)$} \doubleLine \RL{classify}
+% 	\UIC{$\textrm{relation}\subseteq (X\times \Sigma)\times X$} \doubleLine \RL{associate}
+% 	\UIC{$\textrm{relation}\subseteq X\times (\Sigma\times X)$} \doubleLine \RL{classify}
+% 	\UIC{$X\to\mathcal P(\Sigma\times X)$}
+% \end{prooftree}
+	% \[
+	% \dfrac{X \to \mathcal P(1+\Sigma\times X)}
+	% {
+	% \dfrac{\textrm{relation } R \subseteq X\times(1+\Sigma\times X)}
+	% {
+	% \dfrac{
+	% \dfrac{~\textrm{relation } R_1 \subseteq X\times 1~}{X\to 2}
+	% \qquad
+	% \dfrac{~\textrm{relation } R_2 \subseteq X\times \Sigma\times X~}{X\times\Sigma\to\mathcal P(X)}
+	% }
+	% {X\to 2\times \mathcal P(X)^\Sigma}
+	% }
+	% }\]
+	%%%%%%%%%%
+	% \[
+	% \doublefrac{X \to \mathcal P(1+\Sigma\times X)}
+	% {
+	% \doublefrac{\textrm{relation } R \subseteq X\times(1+\Sigma\times X)}
+	% {
+	% \doublefrac{
+	% \doublefrac{~\textrm{relation } R_1 \subseteq X\times 1~}{X\to 2}
+	% \qquad
+	% \doublefrac{~\textrm{relation } R_2 \subseteq X\times \Sigma\times X~}{X\times\Sigma\to\mathcal P(X)}
+	% }
+	% {X\to 2\times \mathcal P(X)^\Sigma}
+	% }
+	% }\]
+	% \begin{small}
+		\[
+			\ddfrac{X \to \mathcal P(1+\Sigma\times X)}
+			{
+			\ddfrac{\textrm{relation } R \subseteq X\times(1+\Sigma\times X)}
+			{
+			\ddfrac{
+			\ddfrac{~\textrm{relation } R_1 \subseteq X\times 1~}{\ddfrac{~\textrm{relation } R_1\subseteq X~}{X\to 2}}
+			\qquad
+			\ddfrac{~\textrm{relation } R_2 \subseteq X\times \Sigma\times X~}{\ddfrac{~X\times\Sigma\to\mathcal P(X)~}{X\to \mathcal P(X)^\Sigma}}
+			}
+			{X\to 2\times \mathcal P(X)^\Sigma}
+			}
+			}
+		\]
+	% \end{small}
+% \end{small}
+% \vspace{-15pt}
 \clearpage
-
 % 上記の2種類の異なるアプローチ \fbox{\textgt{(1) Kleisli approach}} および \fbox{\textgt{(2) Eilenberg-Moore approach}} で考えていたのは、\vspace{1pt}\\ 以下で導入する \fbox{\textgt{(1) Kleisli extension}} と \fbox{\textgt{(2) Eilenberg-Moore lifting}} にそれぞれ相当します。\\
-
 % もう少し正確に言うと、上の2つの見方は、それぞれ
 \noindent 上記で挙げた2種類の異なる見方 \fbox{\textgt{(1) Kleisli approach}} と \fbox{\textgt{(2) Eilenberg-Moore approach}} は、それぞれ
 \begin{enumerate}[(1)~]
@@ -2610,18 +2650,49 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent このような\textgt{冪集合構成} (powerset construction) の恩恵は、以下のようなことができる点にもあります。\\ （終 $2\times(\mathcal P-)^A$-余代数は存在しないが、終 $2\times{(-)}^A$-余代数は存在する！） \vspace{10pt}
-\begin{prooftree}
-	\AXC{$c:X\to 2\times(\mathcal PX)^A$, 非決定性オートマトン}
-	\UIC{~~$c':\mathcal PX\to 2\times(\mathcal PX)^A$, 決定性オートマトン~~}
-	\UIC{~~~}\vspace{-5pt}
-\end{prooftree}
-\begin{center}%\small
-	\begin{tikzcd}
-		{} & {} & 2\times(\mathcal PX)^A \ar[r,dashed] & 2\times(2^{A^\ast})^A & {} \\
-		{} & X \ar[r,"\eta_X"'] & \mathcal PX \ar[u,"c'"] \ar[r,dashed] & 2^{A^\ast} \ar[u,"\zeta","\cong"'] & {} %\ar[r,"\cong"] & \mathcal P(A^\ast)
-	\end{tikzcd} 
-\end{center}
+\noindent これら \fbox{\textgt{(1) Kleisli approach}} と \fbox{\textgt{(2) Eilenberg-Moore approach}} について、関連する話題を紹介します。\vspace{10pt}
+
+\begin{itemize}
+	\item (1) に関して、\textgt{軌跡意味論} (trace semantics) と呼ばれる考え方があります。\\ $\cdots$圏 $\C$ における $TF$-余代数 $c:X\to TFX$ は、圏 $\C_T$ における $F$-余代数 $c:X\computationrightarrow FX$ です。\\~~~~ここで、圏 $\C$ での\,始$F$-代数$\alpha:FA\xrightarrow{\;\cong\;}A$ から、圏 $\C_T$ での\,終$F$-余代数 $\eta_{FA}\circ\alpha^{-1}:A\computationrightarrow FA$を作る！ \\~~~~このとき、この終余代数への一意な射 $\mathrm{tr}_c:X\computationrightarrow A$ を、軌跡意味論と呼びます。\vspace{5pt}
+	\begin{center}
+		\begin{tikzcd}
+			FX \ar[r,"{\substack{F\mathrm{tr}_{c}\\[-2pt]~}}",dashed] & FA & \fbox{in $\C_T$} \\
+			X \ar[r,"{\substack{~\\[-2pt]\mathrm{tr}_{c}}}"',dashed] \ar[u,"c~","\shortmid" marking] & A \ar[u,"~\eta_{FA}\,\circ\,\alpha^{-1}"',"\shortmid" marking]
+		\end{tikzcd}
+	\end{center}
+	~~~~たとえば、余代数 $c:X\to\mathcal P(1+\Sigma\times X)$ と、始代数 $\alpha:1+\Sigma\times\Sigma^\ast\xrightarrow{\;\cong\;}\Sigma^\ast$ に対し、\\~~~~軌跡意味論 $\mathrm{tr}_c:X\computationrightarrow \Sigma^\ast$ が得られます。\vspace{5pt}
+	\begin{center}
+		\begin{tikzcd}
+			1+\Sigma\times X \ar[r,"{\substack{F\mathrm{tr}_{c}\\[-2pt]~}}",dashed] & 1+\Sigma\times\Sigma^\ast & \fbox{in $\C_{\mathcal P}$} \\
+			X \ar[r,"{\substack{~\\[-2pt]\mathrm{tr}_{c}}}"',dashed] \ar[u,"c~","\shortmid" marking] & \Sigma^\ast \ar[u,"~\eta_{1+\Sigma\times\Sigma^\ast}\,\circ\,\alpha^{-1}"',"\shortmid" marking]
+		\end{tikzcd}
+	\end{center}
+	\item (2) に関して、このような\textgt{冪集合構成} (powerset construction) の恩恵は、以下のことができる点にもあります。\\ $\cdots$終$FT$-余代数が作れなくても、終$T$-余代数は作れることがある！\\~~~~たとえば、終 $2\times(\mathcal P-)^\Sigma$-余代数は存在しないが、終 $2\times{(-)}^\Sigma$-余代数は存在する！ \vspace{5pt}
+	\begin{prooftree}
+		\AXC{$c:X\to 2\times(\mathcal PX)^\Sigma$, 非決定性オートマトン}
+		\UIC{~~$c':\mathcal PX\to 2\times(\mathcal PX)^\Sigma$, 決定性オートマトン~~}
+		\UIC{~~~}\vspace{-5pt}
+	\end{prooftree}
+	\begin{center}%\small
+		\begin{tikzcd}
+			{} & {} & 2\times(\mathcal PX)^\Sigma \ar[r,dashed] & 2\times(2^{\Sigma^\ast})^\Sigma & {} \\
+			{} & X \ar[r,"\eta_X"'] & \mathcal PX \ar[u,"c'"] \ar[r,dashed] & 2^{\Sigma^\ast} \ar[u,"\zeta","\cong"'] & {} %\ar[r,"\cong"] & \mathcal P(A^\ast)
+		\end{tikzcd} 
+	\end{center}
+\end{itemize}
+
+% \noindent このような\textgt{冪集合構成} (powerset construction) の恩恵は、以下のようなことができる点にもあります。\\ （終 $2\times(\mathcal P-)^A$-余代数は存在しないが、終 $2\times{(-)}^A$-余代数は存在する！） \vspace{10pt}
+% \begin{prooftree}
+% 	\AXC{$c:X\to 2\times(\mathcal PX)^A$, 非決定性オートマトン}
+% 	\UIC{~~$c':\mathcal PX\to 2\times(\mathcal PX)^A$, 決定性オートマトン~~}
+% 	\UIC{~~~}\vspace{-5pt}
+% \end{prooftree}
+% \begin{center}%\small
+% 	\begin{tikzcd}
+% 		{} & {} & 2\times(\mathcal PX)^A \ar[r,dashed] & 2\times(2^{A^\ast})^A & {} \\
+% 		{} & X \ar[r,"\eta_X"'] & \mathcal PX \ar[u,"c'"] \ar[r,dashed] & 2^{A^\ast} \ar[u,"\zeta","\cong"'] & {} %\ar[r,"\cong"] & \mathcal P(A^\ast)
+% 	\end{tikzcd} 
+% \end{center}
 
 \todo[inline]{受理言語が determinization の前後で変わらないことは、どう示せばいい？？？}
 
