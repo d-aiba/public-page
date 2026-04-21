@@ -2625,25 +2625,37 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent これら \fbox{\textgt{(1) Kleisli approach}} と \fbox{\textgt{(2) Eilenberg-Moore approach}} について、関連する話題を紹介します。\vspace{10pt}
 
 \begin{itemize}
-	\item (1) に関して、\textgt{軌跡意味論} (trace semantics) と呼ばれる考え方があります。\\ $\cdots$圏 $\C$ における $TF$-余代数 $c:X\to TFX$ は、圏 $\C_T$ における $F$-余代数 $c:X\computationrightarrow FX$ です。\\~~~~ここで、圏 $\C$ での\,始$F$-代数$\alpha:FA\xrightarrow{\;\cong\;}A$ から、圏 $\C_T$ での\,終$F$-余代数 $\eta_{FA}\circ\alpha^{-1}:A\computationrightarrow FA$を作る！ \\~~~~このとき、この終余代数への一意な射 $\mathrm{tr}_c:X\computationrightarrow A$ を、軌跡意味論と呼びます。\vspace{5pt}
+	\item (1) に関して、\textgt{軌跡意味論} (trace semantics) と呼ばれる考え方がある。\\ $\cdots$圏 $\C$ における $TF$-余代数 $c:X\to TFX$ は、圏 $\C_T$ における $F$-余代数 $c:X\computationrightarrow FX$ である。\\~~~~ここで、圏 $\C$ での\,始$F$-代数$\alpha:FA\xrightarrow{\;\cong\;}A$ から、圏 $\C_T$ での\,終$F$-余代数 $\eta_{FA}\circ\alpha^{-1}:A\computationrightarrow FA$を作る！ \\~~~~このとき、この終余代数への一意な射 $\mathrm{tr}_c:X\computationrightarrow A$（つまり $\mathrm{tr}_c:X\to TA$）を、軌跡意味論と呼ぶ。\vspace{5pt}
 	\begin{center}
 		\begin{tikzcd}
 			FX \ar[r,"{\substack{F\mathrm{tr}_{c}\\[-2pt]~}}",dashed] & FA & \fbox{in $\C_T$} \\
 			X \ar[r,"{\substack{~\\[-2pt]\mathrm{tr}_{c}}}"',dashed] \ar[u,"c~","\shortmid" marking] & A \ar[u,"~\eta_{FA}\,\circ\,\alpha^{-1}"',"\shortmid" marking]
 		\end{tikzcd}
 	\end{center}
-	~~~~たとえば、余代数 $c:X\to\mathcal P(1+\Sigma\times X)$ と、始代数 $\alpha:1+\Sigma\times\Sigma^\ast\xrightarrow{\;\cong\;}\Sigma^\ast$ に対し、\\~~~~軌跡意味論 $\mathrm{tr}_c:X\computationrightarrow \Sigma^\ast$ が得られます。\vspace{5pt}
+	~~~~たとえば、余代数 $c:X\to\mathcal P(1+\Sigma\times X)$ と、始代数 $\alpha:1+\Sigma\times\Sigma^\ast\xrightarrow{\;\cong\;}\Sigma^\ast$ に対し、\\~~~~軌跡意味論 $\mathrm{tr}_c:X\computationrightarrow \Sigma^\ast$（つまり $\mathrm{tr}_c:X\to\mathcal P(\Sigma^\ast)$）が得られる！ \vspace{5pt}
 	\begin{center}
 		\begin{tikzcd}
 			1+\Sigma\times X \ar[r,"{\substack{F\mathrm{tr}_{c}\\[-2pt]~}}",dashed] & 1+\Sigma\times\Sigma^\ast & \fbox{in $\C_{\mathcal P}$} \\
 			X \ar[r,"{\substack{~\\[-2pt]\mathrm{tr}_{c}}}"',dashed] \ar[u,"c~","\shortmid" marking] & \Sigma^\ast \ar[u,"~\eta_{1+\Sigma\times\Sigma^\ast}\,\circ\,\alpha^{-1}"',"\shortmid" marking]
 		\end{tikzcd}
+	\end{center}\vspace{15pt}
+	\item (2) に関して、このような\textgt{冪集合構成} (powerset construction) の恩恵は、以下のことができる点にもある。\\ $\cdots$終$FT$-余代数が作れない場合でも、終$T$-余代数なら作れることがある。
+	\begin{prooftree}
+		\AXC{$c:X\to FTX$, もともとの$FT$-余代数}
+		\UIC{~$c':TX\to TFX$, 決定化された $T$-余代数~}
+		\UIC{~~~}\vspace{-4pt}
+	\end{prooftree}
+	\begin{center}%\small
+		\begin{tikzcd}
+			{} & {} & FTX \ar[r,dashed] & FZ & {} \\
+			{} & X \ar[r,"\eta_X"'] & TX \ar[u,"c'"] \ar[r,dashed] & Z \ar[u,"\zeta","\cong"'] & {} %\ar[r,"\cong"] & \mathcal P(A^\ast)
+		\end{tikzcd} 
 	\end{center}
-	\item (2) に関して、このような\textgt{冪集合構成} (powerset construction) の恩恵は、以下のことができる点にもあります。\\ $\cdots$終$FT$-余代数が作れなくても、終$T$-余代数は作れることがある！\\~~~~たとえば、終 $2\times(\mathcal P-)^\Sigma$-余代数は存在しないが、終 $2\times{(-)}^\Sigma$-余代数は存在する！ \vspace{5pt}
+	~~~~たとえば、終 $2\times(\mathcal P-)^\Sigma$-余代数は存在しないが、終 $2\times{(-)}^\Sigma$-余代数は存在する！ \vspace{5pt}
 	\begin{prooftree}
 		\AXC{$c:X\to 2\times(\mathcal PX)^\Sigma$, 非決定性オートマトン}
 		\UIC{~~$c':\mathcal PX\to 2\times(\mathcal PX)^\Sigma$, 決定性オートマトン~~}
-		\UIC{~~~}\vspace{-5pt}
+		\UIC{~~~}\vspace{-4pt}
 	\end{prooftree}
 	\begin{center}%\small
 		\begin{tikzcd}
@@ -2666,39 +2678,39 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 % 	\end{tikzcd} 
 % \end{center}
 
-\todo[inline]{受理言語が determinization の前後で変わらないことは、どう示せばいい？？？}
+% \todo[inline]{受理言語が determinization の前後で変わらないことは、どう示せばいい？？？}
 
+
+% \clearpage
+
+% 続いて、ここで、\textgt{軌跡意味論} (trace semantics) と呼ばれる考え方について紹介します。
+
+% \begin{itemize}
+% 	\item まず、$\gamma:X\to TFX$ を、圏 $\C$ における\,$TF$-余代数\,とします。 \\ また、$\alpha:FA\xrightarrow{\;\cong\;}A$ を、圏 $\C$ における\,始$F$-代数\,とします。
+% 	\item ここで、圏 $\C$ における $TF$-余代数 $\gamma:X\to TFX$ は、\\ 
+% 	% 圏 $\C_T$ における $F$-余代数 $\gamma:X\computationrightarrow FX$ であり、なおかつ \\ 
+% 	% 圏 $\C_T$ における $F_T$-余代数 $\gamma:X\computationrightarrow F_TX$ です。
+% 	圏 $\C_T$ における $F$-余代数 $\gamma:X\computationrightarrow FX$ です。
+% 	\item このとき、ある一意な射 $\mathrm{tr}_\gamma$ が存在して、
+% 	\begin{center}
+% 		\begin{tikzcd}
+% 			FX \ar[r,"F\mathrm{tr}_{\gamma}",dashed] & FA & \fbox{in $\C_T$} \\
+% 			X \ar[r,"\mathrm{tr}_{\gamma}"',dashed] \ar[u,"\gamma~","\shortmid" marking] & A \ar[u,"~\eta_{FA}\,\circ\,\alpha^{-1}"',"\shortmid" marking]
+% 		\end{tikzcd}
+% 	\end{center}
+% 	が可換になります。
+% 	\item 
+% 	\item 
+% 	\item 
+% 	\item たとえば、$T=\mathcal P(-)$, $F=L\times X$ について、$\gamma:X\to\mathcal P(L\times X)$ は
+% 	\item たとえば、$T=\mathcal D(-)$, 
+% \end{itemize}
+
+% \todo[inline]{まだ}
 
 \clearpage
 
-続いて、ここで、\textgt{軌跡意味論} (trace semantics) と呼ばれる考え方について紹介します。
-
-\begin{itemize}
-	\item まず、$\gamma:X\to TFX$ を、圏 $\C$ における\,$TF$-余代数\,とします。 \\ また、$\alpha:FA\xrightarrow{\;\cong\;}A$ を、圏 $\C$ における\,始$F$-代数\,とします。
-	\item ここで、圏 $\C$ における $TF$-余代数 $\gamma:X\to TFX$ は、\\ 
-	% 圏 $\C_T$ における $F$-余代数 $\gamma:X\computationrightarrow FX$ であり、なおかつ \\ 
-	% 圏 $\C_T$ における $F_T$-余代数 $\gamma:X\computationrightarrow F_TX$ です。
-	圏 $\C_T$ における $F$-余代数 $\gamma:X\computationrightarrow FX$ です。
-	\item このとき、ある一意な射 $\mathrm{tr}_\gamma$ が存在して、
-	\begin{center}
-		\begin{tikzcd}
-			FX \ar[r,"F\mathrm{tr}_{\gamma}",dashed] & FA & \fbox{in $\C_T$} \\
-			X \ar[r,"\mathrm{tr}_{\gamma}"',dashed] \ar[u,"\gamma~","\shortmid" marking] & A \ar[u,"~\eta_{FA}\,\circ\,\alpha^{-1}"',"\shortmid" marking]
-		\end{tikzcd}
-	\end{center}
-	が可換になります。
-	\item 
-	\item 
-	\item 
-	\item たとえば、$T=\mathcal P(-)$, $F=L\times X$ について、$\gamma:X\to\mathcal P(L\times X)$ は
-	\item たとえば、$T=\mathcal D(-)$, 
-\end{itemize}
-
-\todo[inline]{まだ}
-
-\clearpage
-
-以上のように、モナド分配則はあると便利なのですが、実際には、いつも都合良くモナド分配則が手に入るとは限りません。以下ではそのことについて、簡単な例をもとに考えてみましょう。（以下に挙げるような例は、自然変換にならないため、したがってモナド分配則の候補にもなれないことを確認しましょう。）
+さて、以上のように、モナド分配則はあると便利なのですが、実際には、いつも都合良くモナド分配則が手に入るとは限りません。以下ではそのことについて、簡単な例をもとに考えてみましょう。（以下に挙げるような例は、自然変換にならないため、したがってモナド分配則の候補にもなれないことを確認しましょう。）
 
 \begin{example}
 	$\mathcal P:\Set\to\Set$ を冪集合モナドとする。このとき、以下の $\lambda:\mathcal P\mathcal P\Rightarrow\mathcal P\mathcal P$ は自然変換にならない。
@@ -2738,7 +2750,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \vspace{120pt}
 
-さて、寄り道（余談）はこのくらいにしておいて、次節では、いよいよ（この記事の本題である）「グロタンディーク・ファイブレーション」の話に移りましょう。
+寄り道（余談）はこのくらいにしておいて、次節では、いよいよ（この記事の本題である）「グロタンディーク・ファイブレーション」の話に移りましょう。
 
 
 
