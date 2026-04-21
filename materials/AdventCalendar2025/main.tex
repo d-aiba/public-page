@@ -142,12 +142,16 @@
 \end{itemize}
 \end{oframed}
 
-\noindent モデル検査において証明したいことは、「\textgt{モデル} $M$ のもとで\textgt{仕様} $\varphi$（望ましい性質, desired property）が成り立つ」
+\noindent モデル検査において、示したいことは、「\textgt{モデル} $M$ のもとで\textgt{仕様} $\varphi$（望ましい性質）が成り立つかどうか」です。
 % こと
-\[M\models\varphi\]
+\[M\models\varphi\quad\textrm{($M$ satisfies $\varphi$)}\]
 % です。ここで、$M$ は\textgt{モデル}であり、$\varphi$ は\textgt{仕様} (specification) つまり望ましい性質 (desired property) のことです。\\
 % つまり、かどうか」を検証するのが、モデル検査です。\\ 
-です。仕様は、時相論理の論理式（例えば $\mathbf{G}\,(\mathit{req}\to\mathbf{F}\,\mathit{resp})$「リクエストが生じたらレスポンスが返ってくる」など）で書かれることもあれば、
+仕様は、時相論理の論理式（例えば $\mathbf{G}\,(\mathit{req}\to\mathbf{F}\,\mathit{resp})$「リクエストが生じたらレスポンスが返ってくる」）などで書かれることが典型的ですが、ここでは特定の形式化に限定せず、大きく分けて2種類の仕様に注目しましょう。
+\begin{itemize}
+	\item 安全性 (safety property): 悪いことが決して起こらない
+	\item 到達性 (reachability property): 良いことがいつか起こる
+\end{itemize}
 
 \noindent 
 
