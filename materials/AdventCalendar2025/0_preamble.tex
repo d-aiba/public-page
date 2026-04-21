@@ -549,24 +549,6 @@
 %%%%%
 %%%%%
 %%%%%
-% % \usepackage{amsmath}
-% \makeatletter
-% \newlength{\doublefracgap}
-% \setlength{\doublefracgap}{0.8pt}
-% \DeclareRobustCommand{\doublefrac}[2]{%
-%   \mathinner{\mathpalette\doublefracaux{{#1}{#2}}}%
-% }
-% \newcommand{\doublefracaux}[2]{\doublefracauxaux#1#2}
-% \newcommand{\doublefracauxaux}[3]{%
-%   \ooalign{%
-%     \raisebox{\doublefracgap}{$\m@th#1\dfrac{#2}{\phantom{#3}}$}\cr
-%     \raisebox{-\doublefracgap}{$\m@th#1\dfrac{\phantom{#2}}{#3}$}\cr
-%   }%
-% }
-% \makeatother
-% %%%%%
-% %%%%%
-% %%%%%
 \makeatletter
 \newcommand{\ddfrac}[2]{\mathchoice
   {\@ddfrac\displaystyle{#1}{#2}}
