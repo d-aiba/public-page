@@ -142,7 +142,12 @@
 \end{itemize}
 \end{oframed}
 
-% 発生確率の低い小さなバグであっても、金銭的ダメージをもたらすことがあり、さらには人命に関わることもあります。そのため、
+\noindent モデル検査において証明したいことは、「\textgt{モデル} $M$ のもとで\textgt{仕様} $\varphi$（望ましい性質, desired property）が成り立つ」
+% こと
+\[M\models\varphi\]
+% です。ここで、$M$ は\textgt{モデル}であり、$\varphi$ は\textgt{仕様} (specification) つまり望ましい性質 (desired property) のことです。\\
+% つまり、かどうか」を検証するのが、モデル検査です。\\ 
+です。仕様は、時相論理の論理式（例えば $\mathbf{G}\,(\mathit{req}\to\mathbf{F}\,\mathit{resp})$「リクエストが生じたらレスポンスが返ってくる」など）で書かれることもあれば、
 
 \noindent 
 
@@ -2628,15 +2633,15 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\item (1) に関して、\textgt{軌跡意味論} (trace semantics) と呼ばれる考え方がある。\\ $\cdots$圏 $\C$ における $TF$-余代数 $c:X\to TFX$ は、圏 $\C_T$ における $F$-余代数 $c:X\computationrightarrow FX$ である。\\~~~~ここで、圏 $\C$ での\,始$F$-代数$\alpha:FA\xrightarrow{\;\cong\;}A$ から、圏 $\C_T$ での\,終$F$-余代数 $\eta_{FA}\circ\alpha^{-1}:A\computationrightarrow FA$を作る！ \\~~~~このとき、この終余代数への一意な射 $\mathrm{tr}_c:X\computationrightarrow A$（つまり $\mathrm{tr}_c:X\to TA$）を、軌跡意味論と呼ぶ。\vspace{5pt}
 	\begin{center}
 		\begin{tikzcd}
-			FX \ar[r,"{\substack{F\mathrm{tr}_{c}\\[-2pt]~}}",dashed] & FA & \fbox{in $\C_T$} \\
-			X \ar[r,"{\substack{~\\[-2pt]\mathrm{tr}_{c}}}"',dashed] \ar[u,"c~","\shortmid" marking] & A \ar[u,"~\eta_{FA}\,\circ\,\alpha^{-1}"',"\shortmid" marking]
+			FX \ar[r,"{F\mathrm{tr}_{c}}",dashed] & FA & \fbox{in $\C_T$} \\
+			X \ar[r,"{\mathrm{tr}_{c}}"',dashed] \ar[u,"c~","\shortmid" marking] & A \ar[u,"~\eta_{FA}\,\circ\,\alpha^{-1}"',"\shortmid" marking]
 		\end{tikzcd}
 	\end{center}
 	~~~~たとえば、余代数 $c:X\to\mathcal P(1+\Sigma\times X)$ と、始代数 $\alpha:1+\Sigma\times\Sigma^\ast\xrightarrow{\;\cong\;}\Sigma^\ast$ に対し、\\~~~~軌跡意味論 $\mathrm{tr}_c:X\computationrightarrow \Sigma^\ast$（つまり $\mathrm{tr}_c:X\to\mathcal P(\Sigma^\ast)$）が得られる！ \vspace{5pt}
 	\begin{center}
 		\begin{tikzcd}
-			1+\Sigma\times X \ar[r,"{\substack{F\mathrm{tr}_{c}\\[-2pt]~}}",dashed] & 1+\Sigma\times\Sigma^\ast & \fbox{in $\C_{\mathcal P}$} \\
-			X \ar[r,"{\substack{~\\[-2pt]\mathrm{tr}_{c}}}"',dashed] \ar[u,"c~","\shortmid" marking] & \Sigma^\ast \ar[u,"~\eta_{1+\Sigma\times\Sigma^\ast}\,\circ\,\alpha^{-1}"',"\shortmid" marking]
+			1+\Sigma\times X \ar[r,"{F\mathrm{tr}_{c}}",dashed] & 1+\Sigma\times\Sigma^\ast & \fbox{in $\C_{\mathcal P}$} \\
+			X \ar[r,"{\mathrm{tr}_{c}}"',dashed] \ar[u,"c~","\shortmid" marking] & \Sigma^\ast \ar[u,"~\eta_{1+\Sigma\times\Sigma^\ast}\,\circ\,\alpha^{-1}"',"\shortmid" marking]
 		\end{tikzcd}
 	\end{center}\vspace{15pt}
 	\item (2) に関して、このような\textgt{冪集合構成} (powerset construction) の恩恵は、以下のことができる点にもある。\\ $\cdots$終$FT$-余代数が作れない場合でも、終$T$-余代数なら作れることがある。
@@ -2664,6 +2669,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{tikzcd} 
 	\end{center}
 \end{itemize}
+
+\todo[inline]{ただし、$\mathcal P(\Sigma^\ast)$ のほうは covariant で、$2^{\Sigma^\ast}$ のほうは contravariant であることに注意。}
+
+% \todo[inline]{ただし、$\mathcal P(A^\ast)$ は}
 
 % \noindent このような\textgt{冪集合構成} (powerset construction) の恩恵は、以下のようなことができる点にもあります。\\ （終 $2\times(\mathcal P-)^A$-余代数は存在しないが、終 $2\times{(-)}^A$-余代数は存在する！） \vspace{10pt}
 % \begin{prooftree}
