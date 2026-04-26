@@ -1329,6 +1329,77 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \todo[inline]{書く}
 
+
+\clearpage
+
+\noindent ここで、\textgt{スパン同値性} (span equivalence) と\textgt{コスパン同値性} (cospan equivalence) について、概観しておきます。圏 $\Coalg(F)$ において、\textgt{スパン同値性}はときどき存在しないことがあります。というのも、スパンの推移性はいつでも成り立つわけではないからです。それに対し、\textgt{コスパン同値性}はいつでも存在します。というのも、コスパンの推移性はいつでも成り立つからです。 \vspace{12pt}
+\begin{center}
+	\begin{tabular}{|c|c|}
+		\hline 
+		Span equivalence in $\Coalg(F)$ & Cospan equivalence in $\Coalg(F)$
+		\\
+		\hline
+		Pullback does not always exist. & Pushout always exists. 
+		\\
+		\begin{small}
+		\begin{tikzcd}[row sep=8pt,column sep=8pt]
+			&&&&&\bullet \ar[ld] \ar[rd] \arrow[dd, phantom, "\rotatebox{-45}{$\lrcorner$}", very near start] &\\
+			\bullet \ar[dr] && \bullet \ar[dl] & \centernot\implies &\bullet \ar[rd] &&\bullet \ar[ld]\\
+			& \bullet &&&& \bullet &
+		\end{tikzcd}
+		\end{small}
+		&
+		\begin{small}
+		\begin{tikzcd}[row sep=9.5pt,column sep=8pt]
+			& \bullet \ar[ld] \ar[rd] &&&& \bullet \ar[ld] \ar[rd] & \\
+			\bullet && \bullet & \implies & \bullet \ar[rd] && \bullet \ar[ld] \\
+			&&&&& \bullet \arrow[uu, phantom, "\rotatebox{-45}{\!$\ulcorner$}", very near start] &
+		\end{tikzcd}
+		\end{small}
+		\\[-4pt]
+		& 
+		\begin{small}
+			\!\!\fontsize{9pt}{9pt}\selectfont (Because $U\colon\Coalg(F)\to\C$ creates colimits.)\!\!
+		\end{small}
+		\\
+		\hline 
+		Span's transitivity does not hold. & Cospan's transitivity holds. 
+		\\
+		\begin{small}
+		\begin{tikzcd}[row sep=8pt,column sep=1.5pt]
+			\\[5pt]
+			& \bullet \ar[ld] \ar[rd] && \bullet \ar[ld] \ar[rd] &\\
+			\bullet && \bullet && \bullet 
+		\end{tikzcd} 
+		$\centernot\implies$
+		\begin{tikzcd}[row sep=8pt,column sep=1.5pt]
+			&& \bigstar \ar[dl]\ar[dr] \arrow[dd, phantom, "\rotatebox{-45}{$\lrcorner$}", very near start] &&\\
+			& \bullet \ar[dl]\ar[dr] &&\bullet \ar[dl]\ar[dr] &\\
+			\bullet && \bullet && \bullet
+		\end{tikzcd}
+		\end{small}
+		&
+		\begin{small}
+		\begin{tikzcd}[row sep=8pt,column sep=1.5pt]
+			\bullet \ar[rd] && \bullet \ar[ld] \ar[rd] && \bullet \ar[ld] \\
+			& \bullet && \bullet & \\[14pt]
+		\end{tikzcd}
+		$\implies$
+		\begin{tikzcd}[row sep=8pt,column sep=1.5pt]
+			\bullet \ar[dr] && \bullet \ar[dl] \ar[dr] && \bullet \ar[dl]\\
+			& \bullet \ar[dr] &&\bullet \ar[dl] &\\
+			&& \bigstar \arrow[uu, phantom, "\rotatebox{-45}{\!$\ulcorner$}", very near start] &&\\
+		\end{tikzcd}
+		\end{small}
+		\\[-6pt]
+		\begin{small}
+			\!\!\fontsize{9pt}{9pt}\selectfont (It \textit{does} when $F$ preserves weak pullbacks.)\!\!
+		\end{small} 
+		& 
+		\\\hline
+	\end{tabular}
+\end{center}
+
 \clearpage
 
 \subsection{計算効果 (computational effect) について}
