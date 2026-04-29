@@ -110,12 +110,13 @@
 	\item 
 \end{itemize}
 
-\noindent また、以下の事柄については、既知のものとし、本文中で仮定します。（適宜、勉強して補いながら読んでください。）
+\noindent また、以下の事柄については、前提知識として、本文中で使用します。（適宜、勉強して補いながら読んでください。）\\ ただし、これらすべてを詳細に知っておかなければ本記事を読めないわけではないので、安心してください。
 
 \begin{itemize}
 	\item \uline{順序集合}や\uline{不動点理論}の基本事項（ナスター・タルスキの定理、クリーネ / クーゾー・クーゾーの定理、など）
 	\item \uline{数理論理学}に関する基本事項（古典命題論理、順序数の基本的な性質、様相論理のクリプキフレーム、など）
-	\item \uline{圏論}の基本事項（圏の定義、関手、自然変換、極限と余極限、随伴、カルテシアン閉圏、など）
+	\item \uline{圏論}の基本事項（圏の定義、関手、自然変換、極限と余極限、随伴、カルテシアン閉圏、2-圏、など）
+	% \item \uline{2-圏論}の基本事項（lax）
 	\item \uline{形式言語理論}の基本事項（正規言語、有限オートマトン、非決定性オートマトンの決定化、など）
 \end{itemize}
 
@@ -1345,7 +1346,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \noindent 集合$A$を固定します。ここで、$A$上の\textgt{リスト}の集まり $A^\ast$ と、$A$上の\textgt{ストリーム}の集まり $A^\omega$ は、それぞれ
 \[A^\ast\,\cong\,1+A\times A^\ast,\qquad A^\omega\,\cong\,A\times A^\omega\]
-という構造を持ちます。（前ページの表も参照！）
+という構造を持ちます。（前ページの表も参照！ 実はそれぞれ 始$1+A\times(-)$-代数 と 終$A\times(-)$-余代数 です！）
 \begin{itemize}
 	\item \textgt{リスト}は、$(a_0\,a_1\,a_2\cdots a_{n-1})$ といった\kenten{有限列}であり、2種類の\kenten{構成子} $\mathrm{\mathbf{nil}}$ と $\mathrm{\mathbf{cons}}$ によって
 	% \[(a_0\,a_1\,a_2\,a_3)\,=\,\textsf{cons}(a_0,\textsf{cons}(a_1,\textsf{cons}(a_2,\textsf{cons}(a_3,\textsf{nil}(\ast)))))\]
@@ -1354,7 +1355,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{align*}
 	のように\kenten{構成}されます。ここで $\mathrm{\mathbf{nil}}$ と $\mathrm{\mathbf{cons}}$ は、それぞれ次のような関数です。
 	\[\mathrm{\mathbf{nil}}:1\to A^\ast, \qquad \mathrm{\mathbf{cons}}:A\times A^\ast\to A^\ast\]
-	これらをまとめると、リストの構造射は、以下の始代数です。
+	これらをまとめると、リストの構造射は、以下の\kenten{始代数}です。
 	\[[\mathrm{\mathbf{nil}},\mathrm{\mathbf{cons}}]:1+A\times A^\ast\xrightarrow{\;\cong\;} A^\ast\]
 	% \vspace{5pt}
 	\item \textgt{ストリーム}は、$(a_0\,a_1\,a_2\,\cdots)$ といった\kenten{無限列}であり、2種類の\kenten{解体子} $\mathrm{\mathbf{head}}$ と $\mathrm{\mathbf{tail}}$ によって
@@ -1367,11 +1368,22 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{align*}
 	のように\kenten{解体}されます。ここで $\mathrm{\mathbf{head}}$ と $\mathrm{\mathbf{tail}}$ は、それぞれ次のような関数です。
 	\[\mathrm{\mathbf{head}}:A^\omega\to A,\qquad \mathrm{\mathbf{tail}}:A^\omega\to A^\omega\]
-	これらをまとめると、ストリームの構造射は、以下の終余代数です。
+	これらをまとめると、ストリームの構造射は、以下の\kenten{終余代数}です。
 	\[\langle\mathrm{\mathbf{head}},\mathrm{\mathbf{tail}}\rangle:A^\omega\xrightarrow{\,\cong\,} A\times A^\omega\]
 \end{itemize}
 
-% \todo[inline]{nil, cons / head, tail}
+\clearpage
+
+\noindent ここで、\textgt{定義原理としての余帰納法} (coinduction as a definition principle) の考え方を確認しましょう。
+
+\todo[inline]{even, odd, ones, ...}
+
+
+\noindent また、\textgt{証明原理としての余帰納法} (coinduction as a proof principle) についても考えてみましょう。
+
+\todo[inline]{例: odd=even$\circ$tail}
+
+
 
 \clearpage
 
