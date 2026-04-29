@@ -1325,7 +1325,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent 代数と余代数の典型例として、\textgt{リスト} (list) と\textgt{ストリーム} (stream) の違いについて見ておきましょう。
+\noindent 始代数と終余代数の典型例として、\textgt{リスト} (list) と\textgt{ストリーム} (stream)、そして両者の違いを見ておきましょう。
 
 \begin{definition}[リスト]
 	集合 $A$ 上の\textgt{リスト}の集まり$A^\ast$は、次のように\kenten{帰納的}に定義される。
@@ -1346,7 +1346,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \noindent 集合$A$を固定します。ここで、$A$上の\textgt{リスト}の集まり $A^\ast$ と、$A$上の\textgt{ストリーム}の集まり $A^\omega$ は、それぞれ
 \[A^\ast\,\cong\,1+A\times A^\ast,\qquad A^\omega\,\cong\,A\times A^\omega\]
-という構造を持ちます。（前ページの表も参照！ 実はそれぞれ 始$1+A\times(-)$-代数 と 終$A\times(-)$-余代数 です！）
+という構造を持ちます。（前ページの表も参照！ 実はそれぞれ \textgt{始$1+A\times(-)$-代数} と \textgt{終$A\times(-)$-余代数} です！）
 \begin{itemize}
 	\item \textgt{リスト}は、$(a_0\,a_1\,a_2\cdots a_{n-1})$ といった\kenten{有限列}であり、2種類の\kenten{構成子} $\mathrm{\mathbf{nil}}$ と $\mathrm{\mathbf{cons}}$ によって
 	% \[(a_0\,a_1\,a_2\,a_3)\,=\,\textsf{cons}(a_0,\textsf{cons}(a_1,\textsf{cons}(a_2,\textsf{cons}(a_3,\textsf{nil}(\ast)))))\]
@@ -1361,7 +1361,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\item \textgt{ストリーム}は、$(a_0\,a_1\,a_2\,\cdots)$ といった\kenten{無限列}であり、2種類の\kenten{解体子} $\mathrm{\mathbf{head}}$ と $\mathrm{\mathbf{tail}}$ によって
 	\begin{align*}
 		a&\,=\, (a_0\,a_1\,a_2\,\cdots)\\
-		&\,=\, (\mathrm{\mathbf{head}}(a),\underbracket{\mathsf{tail}(a)}_{a'})\\
+		&\,=\, (\mathrm{\mathbf{head}}(a),\underbracket{\mathrm{\mathbf{tail}}(a)}_{a'})\\
 		&\,=\, (\mathrm{\mathbf{head}}(a),(\mathrm{\mathbf{head}}(a'),\underbracket{\mathrm{\mathbf{tail}}(a')}_{a''})) \\
 		&\,=\, (\mathrm{\mathbf{head}}(a),(\mathrm{\mathbf{head}}(a'),(\mathrm{\mathbf{head}}(a''),\mathrm{\mathbf{tail}}(a''))))\\
 		&\,=\,\cdots
