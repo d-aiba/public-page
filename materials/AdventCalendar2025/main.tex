@@ -1055,7 +1055,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 % % 	% 
 % % \end{proposition}
 
-\begin{proposition}
+\begin{proposition}[終余代数の構成]
 	... 
 \end{proposition}
 
@@ -1414,7 +1414,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \noindent 集合$A$を固定します。ここで、$A$上の\textgt{リスト}の集まり $A^\ast$ と、$A$上の\textgt{ストリーム}の集まり $A^\omega$ は、それぞれ
 \[A^\ast\,\cong\,1+A\times A^\ast,\qquad A^\omega\,\cong\,A\times A^\omega\]
-という構造を持ちます。（前ページの表も参照！ 実はそれぞれ \textgt{始$1+A\times(-)$-代数} と \textgt{終$A\times(-)$-余代数} です！）
+という構造を持ちます。（前ページの表も参照！\,実はそれぞれ \textgt{始$1+A\times(-)$-代数} と \textgt{終$A\times(-)$-余代数} です！）
 \begin{itemize}
 	\item \textgt{リスト}は、$(a_0\,a_1\,a_2\cdots a_{n-1})$ といった\kenten{有限列}であり、2種類の\kenten{構成子} $\mathrm{\mathbf{nil}}$ と $\mathrm{\mathbf{cons}}$ によって
 	% \[(a_0\,a_1\,a_2\,a_3)\,=\,\textsf{cons}(a_0,\textsf{cons}(a_1,\textsf{cons}(a_2,\textsf{cons}(a_3,\textsf{nil}(\ast)))))\]
@@ -3458,7 +3458,18 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{itemize}
 	\item 真理値の集合を $\Omega=2=\{0,1\}$ とします。
 	\item 考えるべき完備束 $L=\Omega^X$ は、以下の通りです。（ここでは各 $X$ を状態集合とします。）\begin{center}$L=2^X=\{q:X\to 2,\textrm{ predicates}\}$\\\qquad\qquad$\ni\,\bot \,(\textrm{everywhere false}),\top\,(\textrm{everywhere true})$ \end{center}
-	\item ここで、$f:X\to Y$ という計算を考えます。 \\ （なお、$Y=X$ の場合、以下のような余代数です。）\vspace{5pt}\begin{center}\begin{small}$\left(\begin{array}{cccc} c:&X & \longrightarrow & X\\[-2pt] &\rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$}\\[-4pt] & x & \mapsto & x' \end{array}\,\right)$\end{small} \qquad\quad \begin{small}\begin{tikzcd}\circled{$x_1$}\ar[r] & \circled{$x_2$} \ar[r] & \cdots\end{tikzcd}\end{small}\end{center} \vspace{3pt}
+	\item ここで、$f:X\to Y$ という計算を考えます。 \\ （なお、$Y=X$ の場合、以下のような余代数です。）\vspace{5pt}
+	\begin{center}
+		% \begin{small}
+			$\left(\begin{array}{cccc} c:&X & \longrightarrow & X\\[-2pt] &\rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$}\\[-4pt] & x & \mapsto & x' \end{array}\,\right)$
+		% \end{small} 
+		\qquad\quad 
+		\begin{small}
+				\begin{tikzcd}
+					\circled{$x_1$}\ar[r] & \circled{$x_2$} \ar[r] & \cdots
+				\end{tikzcd}
+		\end{small}
+	\end{center} \vspace{3pt}
 	\item $f:X\to Y$ に対し、述語変換子 $\left(\begin{array}{cccc}f^\ast:&2^Y&\longrightarrow & 2^X\\[-2pt]&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\[-2pt]& \scriptstyle(X\,\overset{q}{\to}\,2)&\mapsto & \scriptstyle (X\,\overset{f^\ast(q)}{\longrightarrow}\,2) \end{array}\right)$ を \vspace{10pt} \\ $f^\ast:2^Y\to 2^X$, $f^\ast(Q)=\{x\in X\mid f(x)\in Q\}$ で定めます。\vspace{5pt}
 	\item いま、以下の関数を定めましょう。\vspace{3pt}\\ 
 	% $\exists_c:2^X\to 2^Y$, $\exists_c(P)=\{f(x)\in Y\mid x\in P\}=\{y\in Y \mid \exists\, x\in X,\; f(x)=y\;\textrm{and}\;x\in P\}$
@@ -3496,7 +3507,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\item 考えるべき完備束 $L=\Omega^X$ は、以下の通りです。 \begin{center}$L=2^X=\{q:X\to 2,\textrm{ predicates}\}$\\\qquad\qquad$\ni\,\bot \,(\textrm{everywhere false}),\top\,(\textrm{everywhere true})$ \end{center} （ここまでは一つ前の例と同じです。）\vspace{5pt}
 	\item ここで、$f:X\to\mathcal PY$ という計算を考えます。\\（なお、$Y=X$ の場合、以下のような余代数です。）\vspace{5pt} %\\ 
 	\begin{center}
-	\begin{small}$\left(\begin{array}{cccccc} c:&X & \longrightarrow & \mathcal PX\\[-1pt] &\rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$}\\[-2pt] &x & \mapsto & c(x)&=&\{x'\mid x\to x'\} \end{array}~\textrm{Kripke structure}\right)$\end{small} \qquad\quad 
+	% \begin{small}
+		$\left(\begin{array}{cccccc} c:&X & \longrightarrow & \mathcal PX\\[-1pt] &\rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$}\\[-2pt] &x & \mapsto & c(x)&=&\{x'\mid x\to x'\} \end{array}~\textrm{Kripke structure}\right)$
+	% \end{small} 
+	\qquad%\quad 
 	\begin{small}
 		\begin{tikzcd}[row sep=3pt]
 			& \circled{$\;y\;$}\\[-5pt]
@@ -3549,7 +3563,16 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\item 考えるべき完備束 $L=\Omega^X$ は、以下の通りです。 \begin{center}$L=[0,1]^X=\{q:X\to [0,1],\;\textrm{predicates as random variables}\}$\end{center} 
 	\item ここで、$f:X\to\mathcal DY$ という計算を考えます。\\（なお、$Y=X$ の場合、以下のような余代数です。）
 	\begin{center}
-	$\Bigl(c:X\to\mathcal DX=\{d:X\to [0,1],\;\textrm{$X$ 上の確率分布}\}\Bigr)$
+	% $\Bigl(c:X\to\mathcal DX=\{d:X\to [0,1],\;\textrm{$X$ 上の確率分布}\}\Bigr)$
+	% \begin{small}
+	$\left(
+		\begin{array}{ccccl} 
+			c:&X&\to&\mathcal DX&=\;\{d:X\to [0,1],\;\textrm{$X$ 上の確率分布}\}\\
+			& \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\
+			& x & \mapsto & c(x) & =\;~\substack{\textstyle\textrm{a probabilistic distribution}\\ \textstyle\textrm{over successors of $x$}}
+		\end{array}
+	\right)$
+	% \end{small}
 	\qquad
 	\begin{small}
 		% \begin{center}
