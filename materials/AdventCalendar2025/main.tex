@@ -1,7 +1,7 @@
 %----------
 %----------
 %----------
-\title{\textgt{述語変換子意味論と余代数}\\\textgt{\Large{圏論を用いたモデル検査入門}}}
+\title{\textgt{圏論を用いたモデル検査入門}\\\textgt{\Large{述語変換子意味論と余代数}}}
 % \author{饗庭 大地 (Aiba, Daichi)}
 % \author{こっとん (\href{https://twitter.com/CottonShampoo}{@CottonShampoo}) }
 \author{こっとん (\href{https://twitter.com/StoneDuality}{@StoneDuality})}
@@ -58,7 +58,7 @@
 \clearpage
 
 
-\section{前置き（対象読者・本記事の目標・扱わない内容）}
+\section{前置き}
 
 % \todo[inline]{Todo: \\ 1) ループ不変量の例を4つくらい追加で挙げる。 \\ 2) モナドとクライスリ圏の説明を簡潔に書く。 \\ 3) 最終章をちゃんと整理して書く。}
 
@@ -68,9 +68,9 @@
 \noindent 本記事は、以下のことに興味がある読者を想定して書かれています。
 
 \begin{itemize}
-	\item 
-	\item 
-	\item 
+	\item 論理学や数学基礎論のコンピューターサイエンスへの応用を知って興味を持ち、もっと学びたいと思った人
+	\item 圏論がコンピューターサイエンスの現場で実際にどのように使われて威力を発揮するかを垣間見たい人
+	\item 様々なプログラムや情報システムが「望み通りの挙動をすること」や「バグがないこと」をチェックするための手法の数学的基礎に関心がある人
 \end{itemize}
 
 \subsection*{この記事の目標}
@@ -114,8 +114,8 @@
 
 \begin{itemize}
 	\item LTLやSTLといった、時相論理（様相論理）の特定の体系を用いたモデル検査については扱いません。
-	\item 本記事では、関手の余代数については扱いますが、コモナドの余代数については扱いません。
-	\item 
+	\item 様相$\mu$計算については、本質的にかなり密接に関係のある話もしますが、明示的には扱いません。
+	\item 本記事では、関手の余代数については扱うものの、コモナドの余代数については扱いません。
 	\item 
 	\item 
 \end{itemize}
@@ -3459,7 +3459,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\section{最弱事前条件をどのように手に入れるか: 圏論的な観点で}
+\section{最弱事前条件をどのように手に入れるか：圏論的な観点で}
 \label{sec:categorical-weakest-precondition}
 
 さて、本節では、非決定的プログラムや確率的プログラムなどといった様々な種類のプログラムに対する述語変換子意味論を得る方法について、圏論的な視座から考えます。一般に、状態の集合 $X, Y$ と真理値の集合 $\Omega$ が与えられたときに、効果付き計算 $c:X\to FY$ に基づいて、事後条件 $q:Y\to\Omega$ を最弱事前条件 $wp\llbracket c\rrbracket(q):X\to \Omega$ に変換する関数である「述語変換子」 $wp\llbracket c\rrbracket:\Omega^Y\to\Omega^X$ を手に入れるためには、どんな手続きを経たらよいでしょうか。\vspace{8pt}
