@@ -79,6 +79,7 @@
 
 \begin{itemize}
 	\item 
+	\item 余代数について、意味は終余代数への一意な射で与えられ、意味の等しさは余帰納法で証明されることを理解する。
 	\item 
 	\item 
 \end{itemize}
@@ -139,7 +140,7 @@
 
 \clearpage
 
-\section{導入: モデル検査とは？・なぜ圏論を使うのか？}
+\section{導入: モデル検査とは？ なぜ圏論を使うのか？}
 \label{sec:intro}
 
 \noindent 
@@ -179,7 +180,7 @@
 
 % \noindent 
 
-\vspace{20pt}
+\vspace{25pt}
 
 
 % \clearpage
@@ -1069,6 +1070,15 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
+% \subsection*{終余代数意味論という考え方について}
+
+\noindent ここで「\textgt{終余代数意味論}」(final coalgebra semantics) という考え方について取り上げます。\\
+\noindent 終$F$-余代数は、あらゆる個々の$F$-余代数から一意に射を受け取る対象です。
+
+\todo[inline]{続きを書く}
+
+\clearpage
+
 \subsection{代数・始代数、余代数・終余代数: 異なる2種類の``無限''をとらえる}
 
 さて、$F$-余代数の圏論的双対である、$F$-代数を導入します。
@@ -1442,12 +1452,21 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent ここで、\textgt{定義原理としての余帰納法} (coinduction as a definition principle) の考え方を確認しましょう。
+\noindent ここで、ストリームを例にして、
+\begin{itemize}
+	\item \textgt{定義原理としての余帰納法} (coinduction as a definition principle)
+	\item \textgt{証明原理としての余帰納法} (coinduction as a proof principle)
+\end{itemize}
+の考え方を確認しましょう。\\
+
+\noindent\fbox{\textgt{定義原理としての余帰納法} (coinduction as a definition principle)}\vspace{5pt}\\
+あああ
 
 \todo[inline]{even, odd, ones, ...}
 
 
-\noindent また、\textgt{証明原理としての余帰納法} (coinduction as a proof principle) についても考えてみましょう。
+\noindent\fbox{\textgt{証明原理としての余帰納法} (coinduction as a proof principle)}\vspace{5pt}\\
+あああ
 
 \todo[inline]{例: odd=even$\circ$tail}
 
@@ -1466,7 +1485,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent ここで、\textgt{スパン同値性} (span equivalence) と\textgt{コスパン同値性} (cospan equivalence) について、概観しておきます。圏 $\Coalg(F)$ において、\textgt{スパン同値性}はときどき存在しないことがあります。というのも、スパンの推移性はいつでも成り立つわけではないからです。それに対し、\textgt{コスパン同値性}はいつでも存在します。というのも、コスパンの推移性はいつでも成り立つからです。 \vspace{12pt}
+\noindent ここで、\textgt{スパン同値性} (span equivalence) と\textgt{コスパン同値性} (cospan equivalence) について、概観しておきます。圏 $\Coalg(F)$ において、\textgt{スパン同値性}はときどき存在しないことがあります。というのも、スパンの推移性はいつでも成り立つわけではないからです。それに対し、\textgt{コスパン同値性}はいつでも存在します。というのも、コスパンの推移性はいつでも成り立つからです。 \vspace{15pt}
 \begin{center}
 	\begin{tabular}{|c|c|}
 		\hline 
@@ -2882,10 +2901,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			X \ar[r,"{\mathrm{tr}_{c}}"',dashed] \ar[u,"c~","\shortmid" marking] & \Sigma^\ast \ar[u,"~\eta_{1+\Sigma\times\Sigma^\ast}\,\circ\,\alpha^{-1}"',"\shortmid" marking]
 		\end{tikzcd}
 	\end{center}\vspace{15pt}
-	\item (2) に関して、このような\textgt{冪集合構成} (powerset construction) の恩恵は、以下のことができる点にもある。\\ $\cdots$終$FT$-余代数が作れない場合でも、終$T$-余代数なら作れることがある。
+	\item (2) に関して、このような\textgt{冪集合構成} (powerset construction) の恩恵は、以下のことができる点にもある。\\ $\cdots$終$FT$-余代数が作れない場合でも、終$F$-余代数なら作れることがある。%\\ \quad\; つまり $c:X\to FTX$ には終余代数意味論がつかないが $c':TX\to FTX$ には終余代数意味論がつく、という場合がある。
 	\begin{prooftree}
 		\AXC{$c:X\to FTX$, もともとの$FT$-余代数}
-		\UIC{~$c':TX\to TFX$, 決定化された $T$-余代数~}
+		\UIC{~$c':TX\to FTX$, 決定化された $F$-余代数~}
 		\UIC{~~~}\vspace{-4pt}
 	\end{prooftree}
 	\begin{center}%\small
@@ -2894,7 +2913,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			{} & X \ar[r,"\eta_X"'] & TX \ar[u,"c'"] \ar[r,dashed] & Z \ar[u,"\zeta","\cong"'] & {} %\ar[r,"\cong"] & \mathcal P(A^\ast)
 		\end{tikzcd} 
 	\end{center}
-	~~~~たとえば、終 $2\times(\mathcal P-)^\Sigma$-余代数は存在しないが、終 $2\times{(-)}^\Sigma$-余代数は存在する！ \vspace{5pt}
+	~~~~たとえば、終 $2\times(\mathcal P-)^\Sigma$-余代数は存在しないが、終 $2\times{(-)}^\Sigma$-余代数は存在する！ \\~~~~つまり、$c:X\to 2\times(\mathcal PX)^\Sigma$ には終余代数意味論がつかないが、$c':\mathcal PX\to 2\times(\mathcal PX)^\Sigma$ にはつく！ \vspace{5pt}
 	\begin{prooftree}
 		\AXC{$c:X\to 2\times(\mathcal PX)^\Sigma$, 非決定性オートマトン}
 		\UIC{~~$c':\mathcal PX\to 2\times(\mathcal PX)^\Sigma$, 決定性オートマトン~~}
