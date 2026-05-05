@@ -1473,7 +1473,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \subsection{双模倣関係と双模倣同値性：無限に続くプロセスの等価性を判定する}
 
-\noindent 本節では、\textgt{双模倣関係} (bisimulation) と\textgt{双模倣同値性} (bisimilarity) について扱います。
+\noindent 本節では、\textgt{双模倣関係} (bisimulation) および\textgt{双模倣同値性} (bisimilarity) について扱います。
 
 
 
@@ -1616,7 +1616,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \subsubsection*{\fbox{(2) Cospan equivalence always exists!}}
 
-\noindent まずは、\textgt{余極限を創出する関手} (colimit-creating functor) を定義します。
+\noindent 準備として、まずは\textgt{余極限を創出する関手} (colimit-creating functor) を定義します。
 
 \begin{definition}[colimit-creating functor]
 	$T:\C\to\D$ を関手とする。$T$ が colimit を create するとは、任意の diagram $D:\mathbb I\to\C$ と、$\D$ における $TD$ の任意の colimiting cocone $(X,(\lambda_I:TDI\to X)_{I\in\mathbb I})$ について、$\C$ における $D$ の cocone $(L,(\ell_I:DI\to L)_{I\in\mathbb I})$ が存在し、1) $TL=X$ および任意の $I\in\mathbb I$ について $T(\ell_I)=\lambda_I$ が成り立ち、かつ 2) $(L,(\ell_I:DI\to L)_{I\in\mathbb I})$ が $\C$ における $D$ の colimiting cocone であることである。\vspace{10pt}
@@ -1778,9 +1778,9 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	集合圏 $\Set$ においては、余極限が存在する。忘却関手 $U:\Coalg(F)\to\Set$ は余極限を創出するため、$\Coalg(F)$ においても余極限が存在する。特に、押し出し (pushout) は余極限の一種であるから、$\Coalg(F)$ には押し出しが存在することが言える。
 \end{proof}
 
-\noindent ＊＊＊＊＊
+\noindent 以上の議論によって、コスパン同値性がいつでも手に入ることがわかりました。
 
-\vspace{50pt}
+\vspace{30pt}
 
 \begin{screen}
 \noindent【まとめ】
