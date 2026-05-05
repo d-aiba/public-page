@@ -1588,7 +1588,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	つまり、$\C$ の中で余極限を計算したければ、$\D$ の中で計算すればよい、ということ！
 \end{remark}
 
-\noindent ここで、$U:\Coalg(F)\to\C$ が余極限を創出することを、以下の命題で確認しましょう。
+\noindent ここで、忘却関手 $U:\Coalg(F)\to\C$ が余極限を創出することを、以下の命題で確認しましょう。
 
 \begin{proposition}
 	任意の圏 $\C$ と、任意の自己関手 $F:\C\to\C$ について、忘却関手 $U:\Coalg(F)\to\C$ は余極限を創出する。すなわち、任意の図式 $D:\mathbb I\to\Coalg(F)$ に対し、$\C$ における $UD$ の余極限 \[(X,(\lambda_I:UDI\to X)_{I\in\mathbb I})\] が与えられたとき、一意な $F$-余代数構造 $\gamma:X\to FX$ が手に入り、\[((X,\gamma),(\lambda_I:DI\to(X,\gamma))_{I\in\mathbb I})\]
@@ -1636,8 +1636,9 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\item $(X,(\lambda_I)_{I\in\mathbb I})$ が $\C$ における $UD$ の colimit cone であることから、一意な射 $\gamma:X\to FX$ が存在し、任意の $I\in\mathbb I$ について $\gamma\circ\lambda_I=F(\lambda_I)\circ\delta_I$ を満たす。それゆえ $F$-余代数 $(X,\gamma)$ を得る。また $\lambda_I:UDI\to X$ は、余代数準同型 $\lambda_I:DI\to(X,\gamma)$ をなす。
 		\item もともと $(X,(\lambda_I)_{I\in\mathbb I})$ は $\C$ における $UD$ の cocone だから、$\Coalg(F)$ においても $((X,\gamma),(\lambda_I)_{I\in\mathbb I})$ は $D$ の cocone である。あとは、この cocone が $\Coalg(F)$ における colimiting cocone であることを示す。
 		\begin{itemize}
-			\item 任意の $F$-余代数 $(Y,\,\theta\colon Y\to FY)$ と、$\Coalg(F)$ における cocone $((Y,\theta),(\iota_I:DI\to(Y,\theta))_{I\in\mathbb I})$ をとる。ここで、各 $\iota_I$ は余代数準同型なので、$\C$ において $\theta\circ\iota_I=F(\iota_I)\circ\delta_I$ が成り立つ。
-			\item また、
+			\item $\Coalg(F)$ における $D$ の任意の cocone $((Y,\theta),(\iota_I:DI\to(Y,\theta))_{I\in\mathbb I})$ をとる。%ここで、各 $\iota_I$ は余代数準同型なので、$\C$ において $\theta\circ\iota_I=F(\iota_I)\circ\delta_I$ が成り立つ。
+			% \item また、
+			これを忘却すると、$(Y,(\iota_I:UDI\to Y)_{I\in\mathbb I})$ は、$\C$ における $UD$ の cocone である。したがって $(X,(\lambda_I)_{I\in\mathbb I})$ の余極限性より、一意な射 $h:X\to Y$ が存在し、任意の $I\in\mathbb I$ について $h\circ\lambda_I=\iota_I$ を満たす。
 			\item 
 			\item 
 			\item 
@@ -1689,16 +1690,21 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			\begin{tikzcd}[column sep=-3pt,row sep=23pt]
 				&&&\hspace*{-38pt}\textrm{(in $\Coalg(F)$)}\\[-35pt]
 				& \scriptstyle\left(\begin{array}{c}FY\\~\;\uparrow{\scriptstyle\theta}\\ Y \end{array}\right) &&  \\
-				& \scriptstyle\left(\begin{array}{c}FX\\~\;\uparrow{\scriptstyle\gamma}\\ X \end{array}\right) \ar[u,dashed] &&  \\
-				\hspace*{-18pt} DI_1=\,\scriptstyle\left(\begin{array}{c}FUDI_1\\~~\uparrow{\scriptstyle\delta_{I_1}}\\UDI_1\end{array}\right) \hspace*{-8pt} \ar[ur,bend left=18pt,"\lambda_{I_1}",near start] \ar[uur,bend left=30pt] && \hspace*{-18pt} DI_2=\,\scriptstyle\left(\begin{array}{c}FUDI_2\\~~\uparrow{\scriptstyle\delta_{I_2}}\\UDI_2\end{array}\right) \hspace*{-8pt} \ar[ul,bend right=18pt,"\lambda_{I_2}"',near start] \ar[uul,bend right=30pt]
+				& \scriptstyle\left(\begin{array}{c}FX\\~\;\uparrow{\scriptstyle\gamma}\\ X \end{array}\right) \ar[u,dashed,"\exists !\,h"'] &&  \\
+				\hspace*{-18pt} DI_1=\,\scriptstyle\left(\begin{array}{c}FUDI_1\\~~\uparrow{\scriptstyle\delta_{I_1}}\\UDI_1\end{array}\right) \hspace*{-8pt} \ar[ur,bend left=18pt,"\lambda_{I_1}",near start] \ar[uur,bend left=30pt,"\iota_{I_1}"] && \hspace*{-18pt} DI_2=\,\scriptstyle\left(\begin{array}{c}FUDI_2\\~~\uparrow{\scriptstyle\delta_{I_2}}\\UDI_2\end{array}\right) \hspace*{-8pt} \ar[ul,bend right=18pt,"\lambda_{I_2}"',near start] \ar[uul,bend right=30pt,"\iota_{I_2}"']
 			\end{tikzcd}
 			\end{small}
 		\end{center}
 		%
 		\begin{center}
-			\begin{small}
-				
-			\end{small}
+		\begin{small}
+			% \begin{tikzcd}[column sep=10pt]
+			% 	{} & FX & {} & \!\!\!\textrm{(in $\C$)} \\[6pt]
+			% 	FUDI_1 \ar[ru,bend left=15pt,"F(\lambda_{I_1})"] & {} & FUDI_2 \ar[lu,bend right=15pt,"F(\lambda_{I_2})"']\\[-10pt]
+			% 	{} & X \ar[uu,"\exists!\,\gamma",dashed] \\[6pt]
+			% 	UDI_1 \ar[ru,bend left=15pt,"\lambda_{I_1}",near end] \ar[uu,"\delta_{I_1}"] & {} & UDI_2 \ar[lu,bend right=15pt,"\lambda_{I_2}"',near end] \ar[uu,"\delta_{I_2}"']
+			% \end{tikzcd}
+		\end{small}
 		\end{center}
 	\end{multicols}
 \end{proof}
