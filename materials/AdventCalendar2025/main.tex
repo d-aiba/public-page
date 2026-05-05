@@ -1482,7 +1482,59 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent ここで、\textgt{スパン同値性} (span equivalence) と\textgt{コスパン同値性} (cospan equivalence) について、概観しておきます。圏 $\Coalg(F)$ において、\textgt{スパン同値性}はときどき存在しないことがあります。というのも、スパンの推移性はいつでも成り立つわけではないからです。それに対し、\textgt{コスパン同値性}はいつでも存在します。というのも、コスパンの推移性はいつでも成り立つからです。 \vspace{15pt}
+\noindent ここで、\textgt{スパン同値性} (span equivalence) と\textgt{コスパン同値性} (cospan equivalence) について、整理しておきます。
+
+\begin{definition}[スパン同値性]
+	スパン同値性 (span equivalence) は以下で定義される。
+	\begin{center}
+	\begin{tabular}{p{12em}p{22em}}
+		\begin{center}
+			\begin{tikzcd}
+				&\bullet \ar[ld] \ar[rd] &\\
+				\bullet &&\bullet
+			\end{tikzcd}
+		\end{center}
+		&
+		\begin{center}
+			\begin{small}
+				\begin{tikzcd}[row sep=15pt,column sep=10pt]
+					&\left(\begin{array}{c}F(R)\\~\uparrow{\scriptstyle\rho}\\R\end{array}\right) \ar[ld,"f"'] \ar[rd,"g"] &\\
+					\left(\begin{array}{c}F(X)\\~\uparrow{\scriptstyle\gamma}\\X\end{array}\right) && \left(\begin{array}{c}F(Y)\\~\uparrow{\scriptstyle\delta}\\Y\end{array}\right)
+				\end{tikzcd}
+			\end{small}
+		\end{center}	
+		~\\[10pt]
+		& \centering$x\sim_{\mathrm{sp}} y\iff \exists \, r\;\textrm{such that}\;x=f(r)\;\textrm{and}\;y=g(r)$
+	\end{tabular}
+	\end{center}
+\end{definition}
+
+\begin{definition}[コスパン同値性]
+	コスパン同値性 (cospan equivalence) は以下で定義される。
+	\begin{center}
+	\begin{tabular}{p{12em}p{22em}}
+		\begin{center}
+			\begin{tikzcd}
+				\bullet\ar[rd]&&\bullet\ar[ld]\\
+				&\bullet &\\
+			\end{tikzcd}
+		\end{center}
+		&
+		\begin{center}
+			\begin{small}
+				\begin{tikzcd}[row sep=15pt,column sep=10pt]
+					\left(\begin{array}{c}F(X)\\~\uparrow{\scriptstyle\gamma}\\X\end{array}\right) \ar[dr,"f"'] && \left(\begin{array}{c}F(Y)\\~\uparrow{\scriptstyle\delta}\\Y\end{array}\right) \ar[dl,"g"]\\
+					& \left(\begin{array}{c}F(Z)\\~\uparrow{\scriptstyle\zeta}\\Z\end{array}\right) &
+				\end{tikzcd}
+			\end{small}
+		\end{center}	
+		~\\[10pt]
+		& \centering $x\sim_{\mathrm{csp}} y\iff f(x)=g(y)$
+	\end{tabular}
+	\end{center}
+\end{definition}
+
+\noindent 圏 $\Coalg(F)$ において、\textgt{スパン同値性}はときどき存在しないことがあります。というのも、スパンの推移性はいつでも成り立つわけではないからです。それに対し、\textgt{コスパン同値性}はいつでも存在します。というのも、コスパンの推移性はいつでも成り立つからです。 \vspace{15pt}
 \begin{center}
 	\begin{tabular}{|c|c|}
 		\hline 
@@ -1552,9 +1604,11 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \noindent このことを正確に理解しておきましょう。
 
+\clearpage
+
 \subsubsection*{\fbox{(1) Span equivalence sometimes fails!}}
 
-
+\noindent まず、
 
 
 
@@ -1689,13 +1743,55 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
+\noindent この命題より、以下の事実が直ちに従います。
+
+\begin{proposition}
+	関手 $F:\Set\to\Set$ とする。圏 $\Coalg(F)$ において、押し出し (pushouts) が存在する。\vspace{10pt}
+
+	\begin{center}
+		\begin{small}
+			\begin{tikzcd}[row sep=15pt,column sep=5pt]
+				&\left(\begin{array}{c}F(R)\\~\uparrow{\scriptstyle\rho}\\R\end{array}\right) \ar[ld] \ar[rd] &&&& \left(\begin{array}{c}F(R)\\~\uparrow{\scriptstyle\rho}\\R\end{array}\right) \ar[ld] \ar[rd]\\
+				\left(\begin{array}{c}F(X)\\~\uparrow{\scriptstyle\gamma}\\X\end{array}\right) & & \left(\begin{array}{c}F(Y)\\~\uparrow{\scriptstyle\delta}\\Y\end{array}\right) & \textrm{\;\normalsize$\implies$\;} & \left(\begin{array}{c}F(X)\\~\uparrow{\scriptstyle\gamma}\\X\end{array}\right) \ar[rd] & & \left(\begin{array}{c}F(Y)\\~\uparrow{\scriptstyle\delta}\\Y\end{array}\right) \ar[ld] \\
+				&&&&& \left(\begin{array}{c}F(Z)\\~\uparrow{\scriptstyle\zeta}\\Z\end{array}\right) \arrow[uu, phantom, "\rotatebox{-45}{\!$\ulcorner$}", very near start] &
+			\end{tikzcd}
+		\end{small}\vspace{15pt}
+	\end{center}
+	また、その帰結として、コスパンの推移性（pushout によってもたらされる）が成り立つ。\vspace{8pt}
+	\begin{center}
+		\begin{small}
+		\begin{tikzcd}[row sep=8pt,column sep=2.8pt]
+			\bullet \ar[rd] && \bullet \ar[ld] \ar[rd] && \bullet \ar[ld] \\
+			& \bullet && \bullet & \\[14pt]
+		\end{tikzcd}
+		$\implies$
+		\begin{tikzcd}[row sep=8pt,column sep=2.8pt]
+			\bullet \ar[dr] && \bullet \ar[dl] \ar[dr] && \bullet \ar[dl]\\
+			& \bullet \ar[dr] &&\bullet \ar[dl] &\\
+			&& \bigstar \arrow[uu, phantom, "\rotatebox{-45}{\!$\ulcorner$}", very near start] &&\\
+		\end{tikzcd}
+		\end{small}
+	\end{center}
+\end{proposition}
+
+\begin{proof}
+	集合圏 $\Set$ においては、余極限が存在する。忘却関手 $U:\Coalg(F)\to\Set$ は余極限を創出するため、$\Coalg(F)$ においても余極限が存在する。特に、押し出し (pushout) は余極限の一種であるから、$\Coalg(F)$ には押し出しが存在することが言える。
+\end{proof}
+
 \noindent ＊＊＊＊＊
 
 \vspace{50pt}
 
 \begin{screen}
-\noindent【まとめ】\\
-個々の余代数に対し、意味は終余代数への一意な射で与えられ、意味の等しさは余帰納法で証明される！
+\noindent【まとめ】
+\begin{itemize}
+	\item 個々の余代数に対し、意味は終余代数への一意な射で与えられ、意味の等しさは余帰納法で証明される！
+	\item 双模倣同値性は、最大の双模倣関係として与えられる。これはスパン同値性の一種である。
+	% \item 振舞いの同値性には、スパン同値性とコスパン同値性がある。
+	\item 関手 $F$ が weak pullback preserving なら、スパンの推移性が成り立つ（のでスパン同値性が手に入る）。
+	\item それに対し、コスパン同値性はいつでも手に入る。なぜなら $U:\Coalg(F)\to\C$ が余極限を創出するから。
+	\item 
+\end{itemize}
 \end{screen}
 
 
