@@ -143,7 +143,7 @@
 \label{sec:intro}
 
 \noindent 
-\textgt{モデル検査} (model checking) は、\textgt{形式検証} (formal verification) と呼ばれる分野の中に位置づけられます。\vspace{5pt}
+\textgt{モデル検査} (model checking) は、\textgt{形式検証} (formal verification) と呼ばれる分野の中に位置づけられます。\vspace{3pt}
 
 \begin{oframed}
 \begin{itemize}
@@ -157,11 +157,12 @@
 		\item \textgt{モデル検査} (model checking): \\ $\cdots$正しさの問題 (correctness problem) を、``グラフ理論的な問題''に帰着させ、\\~~~~\,``グラフ・アルゴリズム''を使ってその問題を解く。\\~~~~（ここでの ``グラフ理論的'' とは、状態遷移システム (transition system) といった広い意味で。）
 	\end{enumerate}
 \end{itemize}
-\end{oframed}\vspace{5pt}%\vspace{20pt}
+\end{oframed}\vspace{3pt}%\vspace{20pt}
 
 \noindent 一般に、モデル検査において示したいことは、「\textgt{モデル} $\mathcal M$ のもとで\textgt{仕様} $\varphi$（望ましい性質）が成り立つかどうか」です。
 % % こと
-\[\mathcal M\models\varphi\quad\textrm{($\mathcal M$ satisfies $\varphi$)}\]
+% \[\mathcal M\models\varphi\quad\textrm{($\mathcal M$ satisfies $\varphi$)}\]
+\[\textgt{input: } \textrm{a model } \mathcal M, \textrm{ a specification } \varphi, \qquad \textgt{output: } \mathcal M\models\varphi \textrm{ (i.e., $\mathcal M$ satisfies $\varphi$)} \textrm{ or not}\]
 % です。ここで、$M$ は\textgt{モデル}であり、$\varphi$ は\textgt{仕様} (specification) つまり望ましい性質 (desired property) のことです。\\
 % つまり、かどうか」を検証するのが、モデル検査です。\\ 
 % 仕様は、時相論理の論理式（例えば $\mathbf{G}\,(p\to\mathbf{F}q)$「リクエスト$p$が生じたらレスポンス$q$が返ってくる」など）で書かれることが典型的ですが、ここでは特定の形式化に限定せず、
@@ -171,19 +172,17 @@
 仕様 $\varphi$ は典型的には、時相論理式（例えば $\mathbf{G}\,(\mathit{req}\to\mathbf{F}\,\mathit{resp})$「リクエストが生じたらレスポンスが返ってくる」など）で書かれることが多いですが、
 本記事では特定の形式化にはあまり限定せず、
 より一般論を展開することを目指します。
+
 % 大きく分けて2種類の仕様に注目しましょう。
 % \begin{itemize}
 % 	\item 安全性 (safety property): 悪いことが決して起こらない
 % 	\item 到達性 (reachability property): 良いことがいつか起こる
 % \end{itemize}
-
 % \noindent 
 
-\vspace{25pt}
-
+\vspace{15pt}
 
 % \clearpage
-
 % \noindent 形式的検証・モデル検査の中のさまざまな分野
 % \begin{itemize}
 % 	\item 
@@ -193,17 +192,12 @@
 % 	\item 
 % \end{itemize}
 
-% \clearpage
-
-% \subsection*{なぜ圏論？}
-
-\noindent とりわけ本記事では「\kenten{圏論を使ったモデル検査}」を紹介するのですが、\textgt{なぜ圏論を使うのか}について説明しておきます。\\
-% \vspace{8pt}
-% 
-% \noindent まず、圏論は「言葉」です。それは、＊＊＊＊＊をすることを可能にするような言葉です。
-% \vspace{8pt}
-% 
-\noindent 情報科学やコンピューターサイエンスの研究の現場では、圏論は以下のようなしかたで使われることが多いです。\vspace{5pt}
+\noindent とりわけ本記事では「\kenten{圏論を使ったモデル検査}」を紹介するのですが、
+\textgt{なぜ圏論を使うのか}について説明しておきます。\\
+% \textgt{圏論とは何か}、\textgt{なぜ圏論を使うのか}を説明しておきます。\\
+\noindent 圏論とは、抽象化や構造の可視化をもたらす「\textgt{数学的な言語}」です。純粋数学や情報科学など多くの分野で使われます。
+\\
+\noindent 特に、コンピューターサイエンスの研究の現場では、圏論は以下のようなしかたで使われることが多いです。\vspace{3pt}
 
 \begin{framed}
 \noindent 【コンピューターサイエンスにおける圏論の使い方（の一例）】
@@ -213,10 +207,10 @@
 	\item できた証明を眺め直して、その定理を圏論的にうまく抽象化する方法を模索する
 	\item 圏論的な抽象化を行う過程で、定理が成り立つための条件の「より良い公理化」が見つかる
 	\item それを別の具体的状況にも適用できるか考えるうちに、当初は見えなかった良い応用が見つかる
-	\item パンチの効いた応用事例と実験結果を含めて、成果を論文に書く（表向きは圏論を使わないこともある）
+	\item パンチの効いた応用事例と実験結果を含めて、成果を論文に書く（表向きは圏論を使わないこともある！）
 \end{enumerate}
 \end{framed}
-\vspace{5pt}
+\vspace{3pt}
 
 \noindent 現代において情報システムが急速に複雑化・多様化するなか、単一の理論的パラダイムにのみ特化した手法を追究し続けるのでは、変化に対処しきれません。それに対し、\textgt{情報科学における圏論的手法の強み}は、抽象的・俯瞰的であるがゆえに、分野の動向や理論的パラダイムに変化が生じた場合にも、\textgt{既存の議論や知見を再編することで新たな問題設定に柔軟に適応できる}という点にあると言えます。それゆえ、圏論を用いた俯瞰的視座から形式検証の問題群に取り組むことは、形式検証の理論的発展にとって非常に有用です。
 
@@ -3316,7 +3310,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{definition}
 
 \begin{remark}
-	同一の射の上にあるカルテシアン射は ``カノニカルな同型を除いて一意'' (unique up to canonical isomorphism) である。より正確に言うと、ファイブレーション $p:\E\to\B$ と、$\B$ の射 $u:I\to J$ が与えられ、$Y\in\E_J$ があり、2つの $p$-カルテシアン射 $\overline{u}_Y:u^\ast Y\to Y$ と $f:X\to Y$ がいずれも $u$ の上にあるとき、一意な同型射 $\alpha:X\xrightarrow{\cong} u^\ast Y$ がファイバー $\E_I$ に存在し、$f=\overline u_Y\circ\alpha$ が成り立つ。（証明略）
+	同一の射の上にあるカルテシアン射は ``一意な同型を除いて一意'' (unique up to unique isomorphism) である。より正確に言うと、ファイブレーション $p:\E\to\B$ と、$\B$ の射 $u:I\to J$ が与えられ、$Y\in\E_J$ があり、2つの $p$-カルテシアン射 $\overline{u}_Y:u^\ast Y\to Y$ と $f:X\to Y$ がいずれも $u$ の上にあるとき、一意な同型射 $\alpha:X\xrightarrow{\cong} u^\ast Y$ がファイバー $\E_I$ に存在し、$f=\overline u_Y\circ\alpha$ が成り立つ。（証明略）
 	\vspace{2pt}
 
 	\begin{small}
