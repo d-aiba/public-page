@@ -1639,51 +1639,26 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			\item $\Coalg(F)$ における $D$ の任意の cocone $((Y,\theta),(\iota_I:DI\to(Y,\theta))_{I\in\mathbb I})$ をとる。%ここで、各 $\iota_I$ は余代数準同型なので、$\C$ において $\theta\circ\iota_I=F(\iota_I)\circ\delta_I$ が成り立つ。
 			% \item また、
 			これを忘却すると、$(Y,(\iota_I:UDI\to Y)_{I\in\mathbb I})$ は、$\C$ における $UD$ の cocone である。したがって $(X,(\lambda_I)_{I\in\mathbb I})$ の余極限性より、一意な射 $h:X\to Y$ が存在し、任意の $I\in\mathbb I$ について $h\circ\lambda_I=\iota_I$ を満たす。
-			\item 
-			\item 
-			\item 
-			\item 
+			\item この $h$ が余代数準同型であることを示す。各 $I\in\mathbb I$ について
+			% \begin{multicols}{2}
+			% 	\[\begin{aligned} (\theta\circ h)\circ\lambda_I &=\theta\circ\iota_I\\ 
+			% 		&=F(\iota_I)\circ\delta_I, \end{aligned}\]
+			% 	\[\begin{aligned} (F(h)\circ\gamma)\circ\lambda_I &=F(h)\circ F(\lambda_I)\circ\delta_I\\ &=F(h\circ\lambda_I)\circ\delta_I\\ &=F(\iota_I)\circ\delta_I. \end{aligned}\]
+			% \end{multicols}
+			\begin{align*}
+				\begin{array}{rclcrcl}
+					(\theta\circ h)\circ\lambda_I &=& \theta\circ\iota_I & \quad\qquad & (F(h)\circ\gamma)\circ\lambda_I &=& F(h)\circ F(\lambda_I)\circ\delta_I \\
+					{} &=& F(\iota_I)\circ\delta_I & & {} & = & F(h\circ\lambda_I)\circ\delta_I\\
+					{} & {} & {} & {} & {} & = & F(\iota_I)\circ\delta_I
+				\end{array}
+			\end{align*}
+			\noindent したがって、任意の $I\in\mathbb I$ について $(\theta\circ h)\circ\lambda_I=(F(h)\circ\gamma)\circ\lambda_I$ である。よって、$(X,(\lambda_I)_I)$ の余極限性より $\theta\circ h=F(h)\circ\gamma$ が従う。それゆえ、$h:(X,\gamma)\to(Y,\theta)$ は余代数準同型である。
+			\item また，このような $h$ の一意性は，忘却して $\C$ における余極限の一意性から従う。
+			\item したがって、$((X,\gamma),(\lambda_I:DI\to(X,\gamma))_{I\in\mathbb I})$ は $\Coalg(F)$ における $D$ の colimiting cocone である。
+			% \item 
 		\end{itemize}
-		% \item 
-		% \item 
 	\end{itemize}
-	% 図式 $D:\mathbb I\to\Coalg(F)$ が与えられ、$UD$ が余極限 $(X,(\lambda_I:UDI\to X)_{I\in\mathbb I})$ を持つとする。$\gamma:X\to FX$ は、以下の図式を可換にする（つまり $F(\lambda_I)\circ\delta_I=\gamma\circ\lambda_I$ を成り立たせる）ような$\C$ における一意な射である。
-	% 図式 $D:\mathbb I\to\Coalg(F)$ を任意に取る。$\C$ において$UD$ が余極限 $(X,(\lambda_I:UDI\to X)_{I\in\mathbb I})$ を持つとする。\\ 各 $I\in\mathbb I$ に対し、余代数 $DI$ を、$DI=(UDI,\delta_I:UDI\to FUDI)$ と書くことにする。
-	% また、$\mathbb I$ における射 $f:I\to J$ に対し、$Df:DI\to DJ$ は $\Coalg(F)$ における射である。それゆえ $\lambda_{J}\circ U(Df)=\lambda_I$ が成り立つ。\\
-	% \noindent まず、各 $I\in\mathbb I$ に対し、射 $F(\lambda_I)\circ\delta_I:UDI\to FX$ を考える。この族が、$UD$ から $FX$ への cocone であることを示す。実際、任意の射 $f$ に対し、
-	% \begin{align*}
-	% 	F(\lambda_J)\circ\delta_J\circ U(Df) &= F(\lambda_J)\circ F(U(Df))\circ\delta_I\\ &= F(\lambda_J\circ U(Df))\circ\delta_I\\&= F(\lambda)\circ\delta_I
-	% \end{align*}
-	% である。そのため、$(F(\lambda_I)\circ\delta_I:UDI\to FX)_{I\in\mathbb I}$ は $UD$ 上の cocone である。そして $(X,(\lambda_I)_{I\in\mathbb I})$ が $UD$ の余極限であることから、一意な射 $\gamma:X\to FX$ が存在して、任意の $I\in\mathbb I$ について $\gamma\circ\lambda_I=F(\lambda_I)\circ\delta_I$ を満たす。よって $X$ 上に $F$-余代数 $(X,\gamma)$ を得る。また $\lambda_I:UDI\to X$ は、余代数準同型 $\lambda_I:DI\to(X,\gamma)$ をなす。
-	% \\
-	% もともと $(\lambda_I)_{I\in\mathbb I}$ は $\C$ における $UD$ 上の cocone であったから、$\Coalg(F)$ においても $((X,\gamma),(\lambda_I)_{I\in\mathbb I})$ は $D$ 上の cocone である。%\\
-	% あとは、この cocone が $\Coalg(F)$ における colimiting cocone であることを示す。\\
-	% 任意の $F$-余代数 $(Y,\theta:Y\to FY)$ と、$\Coalg(F)$ における cocone $(\iota:DI\to(Y,d))_{I\in\mathbb I}$ をとる。ここで、各 $\iota_I$ は余代数準同型なので、$\C$ において $\theta\circ\iota_I=F(\iota_I)\circ\delta_I$ が成り立つ。また、$(\iota_I)_{I\in\mathbb I}$ は $\Coalg(F)$ における cocone なので、これを忘却すれば、$\C$ において、任意の $f:I\to J$ について $\iota_J\circ U(Df)=\iota_I$ が成り立つ。したがって、$(\iota_I:UDI\to Y)_{I\in\mathbb I}$ は $\C$ における $UD$ 上の cocone である。よって、$(X,(\lambda_I)_I)$ が余極限であることから、一意な射 $h:X\to Y$ が存在して、すべての $I\in\mathbb I$ について $h\circ\lambda_I=\iota_I$ を満たす。\\ ここで、この $h:X\to Y$ が余代数準同型 $h:(X,\gamma)\to(Y,\theta)$ でもあることを示す。つまり、$\theta\circ h=F(h)\circ\gamma$ を示せばよい。これは、各 $I\in\mathbb I$ について、
-	% \\
-	% $\gamma:X\to FX$ は、以下の図式を可換にする（つまり $F(\lambda_I)\circ\delta_I=\gamma\circ\lambda_I$ を成り立たせる）ような$\C$ における一意な射である。\\
-	% \begin{multicols}{2}
-	% \begin{center}
-	% 	\begin{small}
-	% 	\begin{tikzcd}[column sep=-3pt,row sep=23pt]
-	% 		&&&\hspace*{-38pt}\textrm{(in $\Coalg(F)$)}\\[-35pt]
-	% 		& \scriptstyle\left(\begin{array}{c}FX\\~\;\uparrow{\scriptstyle\gamma}\\ X \end{array}\right) &&  \\
-	% 		\hspace*{-18pt} DI_1=\,\scriptstyle\left(\begin{array}{c}FUDI_1\\~~\uparrow{\scriptstyle\delta_{I_1}}\\UDI_1\end{array}\right) \hspace*{-8pt} \ar[ur,bend left=18pt,"\lambda_{I_1}",near start] && \hspace*{-18pt} DI_2=\,\scriptstyle\left(\begin{array}{c}FUDI_2\\~~\uparrow{\scriptstyle\delta_{I_2}}\\UDI_2\end{array}\right) \hspace*{-8pt} \ar[ul,bend right=18pt,"\lambda_{I_2}"',near start]
-	% 	\end{tikzcd}
-	% 	\end{small}
-	% \end{center}
-	% %
-	% \begin{center}
-	% 	\begin{small}
-	% 		\begin{tikzcd}[column sep=10pt]
-	% 			{} & FX & {} & \!\!\!\textrm{(in $\C$)} \\[6pt]
-	% 			FUDI_1 \ar[ru,bend left=15pt,"F(\lambda_{I_1})"] & {} & FUDI_2 \ar[lu,bend right=15pt,"F(\lambda_{I_2})"']\\[-10pt]
-	% 			{} & X \ar[uu,"\exists!\,\gamma",dashed] \\[6pt]
-	% 			UDI_1 \ar[ru,bend left=15pt,"\lambda_{I_1}",near end] \ar[uu,"\delta_{I_1}"] & {} & UDI_2 \ar[lu,bend right=15pt,"\lambda_{I_2}"',near end] \ar[uu,"\delta_{I_2}"']
-	% 		\end{tikzcd}
-	% 	\end{small}
-	% \end{center}
-	% \end{multicols} 
-	% $\gamma$ の存在は、余極限の普遍性から従う。ここで、$\C$ における各 $\delta_I:UDI\to FUDI$ は、$\Coalg(F)$ における $DI$ 上の余代数の構造射に対応している。ここで、われわれが示すべきことは、$((X,\gamma),(\lambda_I:DI\to(X,\gamma))_{I\in\I})$ が $\Coalg(F)$ における colimiting cocone であるということである。a) まず、明らかに cocone である。なぜなら各 $DI$ は余代数であり、各 $\lambda_I$ は余代数準同型であるからである。b) 次に、これは colimiting cocone である。なぜなら、$\C$ における普遍性、それゆえ $\Coalg(F)$ における普遍性による。
+	% 
 	\begin{multicols}{2}
 		\begin{center}
 			\begin{small}
@@ -1698,18 +1673,19 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		%
 		\begin{center}
 		\begin{small}
-			% \begin{tikzcd}[column sep=10pt]
-			% 	{} & FX & {} & \!\!\!\textrm{(in $\C$)} \\[6pt]
-			% 	FUDI_1 \ar[ru,bend left=15pt,"F(\lambda_{I_1})"] & {} & FUDI_2 \ar[lu,bend right=15pt,"F(\lambda_{I_2})"']\\[-10pt]
-			% 	{} & X \ar[uu,"\exists!\,\gamma",dashed] \\[6pt]
-			% 	UDI_1 \ar[ru,bend left=15pt,"\lambda_{I_1}",near end] \ar[uu,"\delta_{I_1}"] & {} & UDI_2 \ar[lu,bend right=15pt,"\lambda_{I_2}"',near end] \ar[uu,"\delta_{I_2}"']
-			% \end{tikzcd}
+			\begin{tikzcd}[column sep=10pt]
+				{} & {} & {} & \!\!\!\!\!\textrm{(in $\C$)} \\[-30pt]
+				{} & {FY} & {} & {} \\
+				{} & {Y} \ar[u,"\theta"'] & {} & {} \\
+				{} & FX \ar[uu,bend left=40pt,"F(h)" near start] & {} & {} \\[6pt]
+				FUDI_1 \ar[ru,bend left=15pt,"F(\lambda_{I_1})"] \ar[uuur,bend left=50pt,"F(\iota_{I_1})"] & {} & FUDI_2 \ar[lu,bend right=15pt,"F(\lambda_{I_2})"'] \ar[uuul,bend right=50pt,"F(\iota_{I_2})"'] \\[-10pt]
+				{} & X \ar[uu,"\exists!\,\gamma",dashed] \ar[uuu,bend right=38pt,dashed,"\exists!\,h"' near end] \\[6pt]
+				UDI_1 \ar[ru,bend left=15pt,"\lambda_{I_1}",near end] \ar[uu,"\delta_{I_1}"] \ar[uuuur,bend left=60pt,"\iota_{I_1}",near start] & {} & UDI_2 \ar[lu,bend right=15pt,"\lambda_{I_2}"',near end] \ar[uu,"\delta_{I_2}"'] \ar[uuuul,bend right=60pt,"\iota_{I_2}"',near start]
+			\end{tikzcd}
 		\end{small}
 		\end{center}
 	\end{multicols}
 \end{proof}
-
-\todo[inline]{書く}
 
 \clearpage
 
