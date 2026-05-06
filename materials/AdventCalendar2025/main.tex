@@ -1421,17 +1421,20 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \[A^\ast\,\cong\,1+A\times A^\ast,\qquad A^\omega\,\cong\,A\times A^\omega\]
 という構造を持ちます。（前ページの表も参照！\,実はそれぞれ \textgt{始$1+A\times(-)$-代数} と \textgt{終$A\times(-)$-余代数} です！）
 \begin{itemize}
-	\item \textgt{リスト}は、$(a_0\,a_1\,a_2\cdots a_{n-1})$ といった\kenten{有限列}であり、2種類の\kenten{構成子} $\mathrm{\mathbf{nil}}$ と $\mathrm{\mathbf{cons}}$ によって
+	\item \textgt{リスト}は、$(a_0\,a_1\,a_2\cdots a_{n-1})$ といった\kenten{有限列}であり、これは2種類の\kenten{構成子} $\mathrm{\mathbf{nil}}$ と $\mathrm{\mathbf{cons}}$ によって
 	% \[(a_0\,a_1\,a_2\,a_3)\,=\,\textsf{cons}(a_0,\textsf{cons}(a_1,\textsf{cons}(a_2,\textsf{cons}(a_3,\textsf{nil}(\ast)))))\]
+	% \begin{align*}
+	% 	&(a_0\,a_1\,a_2\,a_3)\\&=\,\mathrm{\mathbf{cons}}(a_0,\mathrm{\mathbf{cons}}(a_1,\mathrm{\mathbf{cons}}(a_2,\mathrm{\mathbf{cons}}(a_3,\mathrm{\mathbf{nil}}(\ast)))))
+	% \end{align*}
 	\begin{align*}
-		&(a_0\,a_1\,a_2\,a_3)\\&=\,\mathrm{\mathbf{cons}}(a_0,\mathrm{\mathbf{cons}}(a_1,\mathrm{\mathbf{cons}}(a_2,\mathrm{\mathbf{cons}}(a_3,\mathrm{\mathbf{nil}}(\ast)))))
+		&(a_0\,a_1\,a_2\,\cdots\,a_{n-1})\\&=\,\mathrm{\mathbf{cons}}(a_0,\mathrm{\mathbf{cons}}(a_1,\mathrm{\mathbf{cons}}(a_2,\mathrm{\mathbf{cons}}(\cdots,\mathrm{\mathbf{cons}}(a_{n-1},\mathrm{\mathbf{nil}}(\ast))))))
 	\end{align*}
 	のように\kenten{構成}されます。ここで $\mathrm{\mathbf{nil}}$ と $\mathrm{\mathbf{cons}}$ は、それぞれ次のような関数です。
 	\[\mathrm{\mathbf{nil}}:1\to A^\ast, \qquad \mathrm{\mathbf{cons}}:A\times A^\ast\to A^\ast\]
 	これらをまとめると、リストの構造射は、以下の\kenten{始代数}です。
 	\[[\mathrm{\mathbf{nil}},\mathrm{\mathbf{cons}}]:1+A\times A^\ast\xrightarrow{\;\cong\;} A^\ast\]
 	% \vspace{5pt}
-	\item \textgt{ストリーム}は、$(a_0\,a_1\,a_2\,\cdots)$ といった\kenten{無限列}であり、2種類の\kenten{解体子} $\mathrm{\mathbf{head}}$ と $\mathrm{\mathbf{tail}}$ によって
+	\item \textgt{ストリーム}は、$(a_0\,a_1\,a_2\,\cdots)$ といった\kenten{無限列}であり、これは2種類の\kenten{解体子} $\mathrm{\mathbf{head}}$ と $\mathrm{\mathbf{tail}}$ によって
 	\begin{align*}
 		a&\,=\, (a_0\,a_1\,a_2\,\cdots)\\
 		&\,=\, (\mathrm{\mathbf{head}}(a),\underbracket{\mathrm{\mathbf{tail}}(a)}_{a'})\\
@@ -3738,25 +3741,27 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	$\begin{array}{lccl}\exists_f:2^X\to 2^Y,&\exists_f(P)&\!\!=\!\!&\{f(x)\in Y\mid x\in P\}\\&&\!\!=\!\!&\{y\in Y \mid \exists\, x\in X,\; f(x)=y\;\textrm{and}\;x\in P\}\\\forall_f:2^X\to 2^Y,& \forall_f(P)&\!\!=\!\!&\{y\in Y\mid f^\ast(\{y\})\subseteq P\}\\&&\!\!=\!\!&\{y\in Y\mid\forall\,x\in X,\;f(x)=y\;\textrm{implies}\;x\in P\}\end{array}$ \vspace{5pt}
 	\item このとき、$\exists_f\dashv f^\ast\dashv \forall_f$ が成り立ちます。%\\（これはまさに、トポスの基本定理 (the fundamental theorem of topos) として知られるものと同等です。）
 	\begin{center}
-				\begin{tikzcd}[column sep=30pt]
-					% 2^X \ar[r,bend left=30pt,"\amalg_f","\bot"'] \ar[r,bend right=30pt,"\Pi_f"',"\bot"] & 2^Y \ar[l]
-					2^X \ar[r,bend left=30pt,"\exists_f","\bot"'] \ar[r,bend right=30pt,"\forall_f"',"\bot"] & 2^Y \ar[l]
-				\end{tikzcd}
-			\end{center}
-			%
-			\begin{small}
-				\begin{center}
-				% \begin{prooftree}
-					\AXC{$\exists_f(P)\sqsubseteq Q$ in $2^Y$} \doubleLine
-					\UIC{$P\sqsubseteq f^\ast(Q)$ in $2^X$}
-					\DisplayProof
-					\; and \;
-					\AXC{$f^\ast(Q)\sqsubseteq P$ in $2^X$} \doubleLine
-					\UIC{$Q\sqsubseteq \forall_f(P)$ in $2^Y$}
-					\DisplayProof
-				% \end{prooftree}
-				\end{center}
-			\end{small}
+		% \begin{tikzcd}[column sep=30pt]
+		% 	2^X \ar[r,bend left=30pt,"\exists_f","\bot"'] \ar[r,bend right=30pt,"\forall_f"',"\bot"] & 2^Y \ar[l]
+		% \end{tikzcd}
+		\begin{tikzcd}[column sep=45pt]
+			2^X \ar[r,bend left=30pt,"\exists_f","\bot"'] \ar[r,bend right=30pt,"\forall_f"',"\bot"] & 2^Y \ar[l,"f^\ast"{description, fill=white, inner sep=0pt,near start}]
+		\end{tikzcd}
+	\end{center}
+	%
+	\begin{small}
+		\begin{center}
+		% \begin{prooftree}
+			\AXC{$\exists_f(P)\sqsubseteq Q$ in $2^Y$} \doubleLine
+			\UIC{$P\sqsubseteq f^\ast(Q)$ in $2^X$}
+			\DisplayProof
+			\; and \;
+			\AXC{$f^\ast(Q)\sqsubseteq P$ in $2^X$} \doubleLine
+			\UIC{$Q\sqsubseteq \forall_f(P)$ in $2^Y$}
+			\DisplayProof
+		% \end{prooftree}
+		\end{center}
+	\end{small}
 \end{itemize}
 
 \clearpage
@@ -3791,11 +3796,11 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\item いま、以下の関数を定めましょう。\\ $\exists_f:2^X\to 2^Y$, $p\mapsto \{y\in Y\mid \exists \, x\in X,\,x\to y \textrm{ and } x\in p\}$ \\ $\forall_f:2^X\to 2^Y$, $p\mapsto \{y\in Y\mid \forall \, x\in X,\,x\to y \textrm{ implies } x\in p\}$ \vspace{5pt}
 	\item このとき、$\exists_f\dashv \Box_f$ および $\Diamond_f\dashv\forall_f$ がともに成り立ちます。
 	\begin{center}
-		\begin{tikzcd}[column sep=30pt]
+		\begin{tikzcd}[column sep=45pt]
 			2^X \ar[r,bend left=30pt,"\exists_f","\bot"']  & 2^Y \ar[l,"\Box_f"]
 		\end{tikzcd}
-		\qquad\qquad
-		\begin{tikzcd}[column sep=30pt]
+		\qquad\quad
+		\begin{tikzcd}[column sep=45pt]
 			2^X  \ar[r,bend right=30pt,"\forall_f"',"\bot"] & 2^Y \ar[l,"\Diamond_f"']
 		\end{tikzcd}
 	\end{center} \vspace{0pt}
