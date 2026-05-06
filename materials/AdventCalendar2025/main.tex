@@ -1534,11 +1534,11 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{center}
 \end{definition}
 
-\noindent 圏 $\Coalg(F)$ において、\textgt{スパン同値性}はときどき存在しないことがあります。というのも、スパンの推移性はいつでも成り立つわけではないからです。それに対し、\textgt{コスパン同値性}はいつでも存在します。というのも、コスパンの推移性はいつでも成り立つからです。 \vspace{15pt}
+\noindent 圏 $\Coalg(F)$ において、\textgt{スパン同値性}はときどき存在しないことがあります。というのも、スパンの推移性はいつでも成り立つわけではないからです。それに対し、\textgt{コスパン同値性}はいつでも存在します。というのも、コスパンの推移性はいつでも成り立つからです。 \vspace{18pt}
 \begin{center}
 	\begin{tabular}{|c|c|}
 		\hline 
-		Span equivalence in $\Coalg(F)$ & Cospan equivalence in $\Coalg(F)$
+		\textbf{Span equivalence} in $\Coalg(F)$ & \textbf{Cospan equivalence} in $\Coalg(F)$
 		\\
 		\hline
 		Pullback does not always exist. & Pushout always exists. 
@@ -1565,7 +1565,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{small}
 		\\
 		\hline 
-		Span's transitivity does not hold. & Cospan's transitivity holds. 
+		\textbf{Span's transitivity} does not hold. & \textbf{Cospan's transitivity} holds. 
 		\\
 		\begin{small}
 		\begin{tikzcd}[row sep=8pt,column sep=2.8pt]
@@ -1599,10 +1599,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{small} 
 		& 
 		\\\hline
-	\end{tabular}\vspace{15pt}
+	\end{tabular}\vspace{18pt}
 \end{center}
 
-\noindent このことを正確に理解しておきましょう。
+\noindent このことを以下で正確に理解しておきましょう。
 
 \clearpage
 
@@ -1751,7 +1751,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\begin{center}
 		\begin{small}
 			\begin{tikzcd}[row sep=15pt,column sep=5pt]
-				&\left(\begin{array}{c}F(R)\\~\uparrow{\scriptstyle\rho}\\R\end{array}\right) \ar[ld] \ar[rd] &&&& \left(\begin{array}{c}F(R)\\~\uparrow{\scriptstyle\rho}\\R\end{array}\right) \ar[ld] \ar[rd]\\
+				&\left(\begin{array}{c}F(U)\\~\uparrow{\scriptstyle\upsilon}\\U\end{array}\right) \ar[ld] \ar[rd] &&&& \left(\begin{array}{c}F(U)\\~\uparrow{\scriptstyle\upsilon}\\U\end{array}\right) \ar[ld] \ar[rd]\\
 				\left(\begin{array}{c}F(X)\\~\uparrow{\scriptstyle\gamma}\\X\end{array}\right) & & \left(\begin{array}{c}F(Y)\\~\uparrow{\scriptstyle\delta}\\Y\end{array}\right) & \textrm{\;\normalsize$\implies$\;} & \left(\begin{array}{c}F(X)\\~\uparrow{\scriptstyle\gamma}\\X\end{array}\right) \ar[rd] & & \left(\begin{array}{c}F(Y)\\~\uparrow{\scriptstyle\delta}\\Y\end{array}\right) \ar[ld] \\
 				&&&&& \left(\begin{array}{c}F(Z)\\~\uparrow{\scriptstyle\zeta}\\Z\end{array}\right) \arrow[uu, phantom, "\rotatebox{-45}{\!$\ulcorner$}", very near start] &
 			\end{tikzcd}
@@ -1790,6 +1790,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% \item 振舞いの同値性には、スパン同値性とコスパン同値性がある。
 	\item 関手 $F$ が weak pullback preserving なら、スパンの推移性が成り立つ（のでスパン同値性が手に入る）。
 	\item それに対し、コスパン同値性はいつでも手に入る。なぜなら $U:\Coalg(F)\to\C$ が余極限を創出するから。
+	\item 
 	\item 
 \end{itemize}
 \end{screen}
@@ -1977,7 +1978,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-さて、モナドの中でも「強モナド」と呼ばれるものがよく知られています。%次ページで紹介します。
+\noindent さて、モナドの中でも「強モナド」と呼ばれるものがよく知られています。%次ページで紹介します。
 
 
 % \clearpage
@@ -2022,7 +2023,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-強モナドのうち、特に可換モナドと呼ばれるものがあります。\vspace{-2pt}
+\noindent 強モナドのうち、特に可換モナドと呼ばれるものがあります。\vspace{-2pt}
 
 \begin{definition}[可換モナド]
 	\textgt{可換モナド}とは、\textgt{二重-ストレングス} (double-strength) $T(X)\otimes T(Y)\to T(X\otimes Y)$ を持った強モナドである。なお、二重-ストレングスとは、以下の図式のように、左右のストレングスから構成され、$\mu\circ T(str^L)\circ str^R=\mu\circ T(str^R)\circ str^L$ というふうに一致するものをいう。（可換性）\vspace{5pt}
@@ -2443,7 +2444,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{align*}
 	X\otimes Y &\xrightarrow{\id\otimes g} X\otimes T(Y') \xrightarrow{str^L} T(X\otimes Y') {\qquad\qquad\qquad\fbox{in $\C$}}\\ &\xrightarrow{T(f\otimes \id)} T(T(X')\otimes Y') \xrightarrow{T(str^R)} TT(X'\otimes Y') \\ &\xrightarrow{~\mu~} T(X'\otimes Y')
 \end{align*}
-の両者は一般に異なります。このように、クライスリ圏における直積は、射を適用する順番に敏感なのです。\vspace{6pt}
+の両者は一般には異なります。このように、クライスリ圏における直積は、射を適用する順番に敏感なのです。\vspace{6pt}
 
 ~~ そこでクイズです。クライスリ圏の\kenten{直積がモノイダルであるのはどんなとき}でしょうか？（考えてみてください。）答えは、$T$ が\kenten{可換な強モナドであるとき}です！ つまり、二重ストレングス $T(X)\otimes T(Y)\to T(X\otimes Y)$ があるとき、クライスリ圏 $\C_T$ はモノイダルになります。（すなわち、ストリング図式で書ける！）
 \begin{align*}
@@ -4014,12 +4015,14 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\item 蓮尾 (2011) 「Hoare論理によるプログラム検証」（資料）, \href{https://group-mmm.org/~ichiro/talks/komabaSogoHandout.pdf}{[URL]}. 
     \item 郡 (2025)「圏で圏を集める？---ファイブレーション入門」, 『圏論の歩き方 [改訂版]』, 日本評論社.
     \item Ad\'{a}mek J, Milius S, Moss LS. \textit{Initial Algebras and Terminal Coalgebras: The Theory of Fixed Points of Functors}. Cambridge Tracts in Theoretical Computer Science. Cambridge University Press. 
+    \item Barr, M. (1999) \textit{Terminal coalgebras for endofunctors on sets}. Theoretical Coputer Science 114(2), pp. 299-315, \href{https://www.math.mcgill.ca/barr/papers/trmclg.pdf}{[URL]}. 
     \item Beck, J. (1969) Distributive laws. In: Seminar on Triples and Categorical Homology Theory (Zürich, 1966/1967), vol. 80, pp. 119-140. Lecture Notes in Mathematics. Springer.
     \item Jacobs, B. (1999) \textit{Categorical logic and type theory}, Elsevier.
     \item Jacobs, B. (2016) \textit{Introduction to coalgebra: towards mathematics of states and observation}, Cambridge University Press.
     \item Hasuo, I. (2015) Generic weakest precondition semantics from monads enriched with order, TCS.
     \item Hasuo, I. (2025) \textit{Abstract and concrete model checking}, lecture notes for Marktoberdorf summer school 2025, \href{https://group-mmm.org/~ichiro/papers/hasuoMOD25LectNotes.pdf}{[URL]}.
     \item nLab authors. (2023) \textit{List of notable initial algebras and terminal coalgebras}, \href{https://ncatlab.org/nlab/show/list+of+notable+initial+algebras+and+terminal+coalgebras}{[URL]}.
+    \item Pattinson, D. (2003) An introduction to the theory of coalgebras. Course notes for NASSLLI, \href{https://nasslli.sitehost.iu.edu/2003/datas/DirkPattinson.pdf}{[URL]}.
 \end{thebibliography}
 %-----
 
