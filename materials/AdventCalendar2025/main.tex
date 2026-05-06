@@ -119,14 +119,14 @@
 	\item 
 \end{itemize}
 
-\noindent また、以下の事柄は、前提知識として、本文中で使用します。（知識を適宜補いながら、本記事を読んでください。）\\ ただし、これらすべてを詳細に知っておかなければ本記事を読めないわけではないので、安心してください。むしろ、\\これらの道具が実際にどのような使われ方をするかを本記事で見ることで、後から勉強しやすくなるかもしれません。
+\noindent また、以下の事柄は ``前提知識'' として本文中で使用します。（知識を適宜補いながら、本記事を読んでください。）\\ ただし、これらすべてを詳細に知っておかなければ本記事を読めないわけではないので、安心してください。むしろ、\\これらの道具が実際にどのような使われ方をするかを本記事で見ることで、後から勉強しやすくなるかもしれません。
 
 \begin{itemize}
-	\item \textgt{順序集合}と\textgt{不動点理論}の基本事項（ナスター・タルスキの定理、クリーネ / クーゾー・クーゾーの定理、など）
-	\item \textgt{数理論理学}に関する基本事項（古典命題論理、順序数の基本的な性質、様相論理のクリプキフレーム、など）
-	\item \textgt{圏論}の基本事項（圏、関手、自然変換、極限と余極限、随伴、カルテシアン閉圏、2-圏の初歩的な知識、など）
+	\item {順序集合}と{不動点理論}の基本事項（ナスター・タルスキの定理、クリーネ / クーゾー・クーゾーの定理、など）
+	\item {数理論理学}に関する基本事項（古典命題論理、順序数の基本的な性質、様相論理のクリプキフレーム、など）
+	\item {圏論}の基本事項（圏、関手、自然変換、極限と余極限、随伴、カルテシアン閉圏、2-圏の初歩的な知識、など）
 	% \item \uline{2-圏論}の基本事項（lax）
-	\item \textgt{形式言語理論}の基本事項（受理と非受理、正規言語、有限オートマトン、非決定性オートマトンの決定化、など）
+	\item {形式言語理論}の基本事項（受理と非受理、正規言語、有限オートマトン、非決定性オートマトンの決定化、など）
 \end{itemize}
 
 % \vspace{5mm}
@@ -157,46 +157,24 @@
 		\item \textgt{モデル検査} (model checking): \\ $\cdots$正しさの問題 (correctness problem) を、``グラフ理論的な問題''に帰着させ、\\~~~~\,``グラフ・アルゴリズム''を使ってその問題を解く。\\~~~~（ここでの ``グラフ理論的'' とは、状態遷移システム (transition system) といった広い意味で。）
 	\end{enumerate}
 \end{itemize}
-\end{oframed}\vspace{3pt}%\vspace{20pt}
+\end{oframed}\vspace{3pt}
 
-\noindent 一般に、モデル検査において示したいことは、「\textgt{モデル} $\mathcal M$ のもとで\textgt{仕様} $\varphi$（望ましい性質）が成り立つかどうか」です。
-% % こと
+\noindent %一般に、
+モデル検査において示したいことは、「\textgt{モデル} $\mathcal M$ のもとで\textgt{仕様} $\varphi$（望ましい性質）が成り立つかどうか」です。
 % \[\mathcal M\models\varphi\quad\textrm{($\mathcal M$ satisfies $\varphi$)}\]
 \[\textgt{input: } \textrm{a model } \mathcal M, \textrm{ a specification } \varphi, \qquad \textgt{output: } \mathcal M\models\varphi \textrm{ (i.e., $\mathcal M$ satisfies $\varphi$)} \textrm{ or not}\]
-% です。ここで、$M$ は\textgt{モデル}であり、$\varphi$ は\textgt{仕様} (specification) つまり望ましい性質 (desired property) のことです。\\
-% つまり、かどうか」を検証するのが、モデル検査です。\\ 
-% 仕様は、時相論理の論理式（例えば $\mathbf{G}\,(p\to\mathbf{F}q)$「リクエスト$p$が生じたらレスポンス$q$が返ってくる」など）で書かれることが典型的ですが、ここでは特定の形式化に限定せず、
-% % 一般論を展開することを試みます。
-% % 大きく分けて2種類の仕様に注目しましょう。
-% 仕様は、時相論理の論理式（例えば $\mathbf{G}\,(\mathit{req}\to\mathbf{F}\,\mathit{resp})$「リクエストが生じたらレスポンスが返ってくる」など）で書かれることが典型的ですが、
 仕様 $\varphi$ は典型的には、時相論理式（例えば $\mathbf{G}\,(\mathit{req}\to\mathbf{F}\,\mathit{resp})$「リクエストが生じたらレスポンスが返ってくる」など）で書かれることが多いですが、
-本記事では特定の形式化にはあまり限定せず、
-より一般論を展開することを目指します。
-
-% 大きく分けて2種類の仕様に注目しましょう。
-% \begin{itemize}
-% 	\item 安全性 (safety property): 悪いことが決して起こらない
-% 	\item 到達性 (reachability property): 良いことがいつか起こる
-% \end{itemize}
-% \noindent 
+本記事では特定の形式化にはあまり限定せず
+% 、
+に、
+% より
+一般論を展開することを目指します。
 
 \vspace{15pt}
 
-% \clearpage
-% \noindent 形式的検証・モデル検査の中のさまざまな分野
-% \begin{itemize}
-% 	\item 
-% 	\item 
-% 	\item 
-% 	\item \textgt{オートマトン学習} (automata learning): ブラックボックスシステム（内部の挙動が不明なシステム）に対し、その入出力をもとに、機械学習を用いてそのシステムの挙動を近似的に説明するオートマトンを作って、それを用いてテストを効率的に行う手法。
-% 	\item 
-% \end{itemize}
-
 \noindent とりわけ本記事では「\kenten{圏論を使ったモデル検査}」を紹介するのですが、
 \textgt{なぜ圏論を使うのか}について説明しておきます。\\
-% \textgt{圏論とは何か}、\textgt{なぜ圏論を使うのか}を説明しておきます。\\
-\noindent 圏論とは、抽象化や構造の図式化をもたらす「\textgt{数学的な言語}」です。純粋数学や情報科学など多くの分野で使われます。
-\\
+\noindent 圏論とは、抽象化や構造の図式化をもたらす「\textgt{数学的な言語}」です。純粋数学や情報科学など多くの分野で使われます。\\
 \noindent 特に、コンピューターサイエンスの研究の現場では、圏論は以下のようなしかたで使われることが多いです。\vspace{3pt}
 
 \begin{framed}
@@ -4032,6 +4010,92 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
     \item Pattinson, D. (2003) An introduction to the theory of coalgebras. Course notes for NASSLLI, \href{https://nasslli.sitehost.iu.edu/2003/datas/DirkPattinson.pdf}{[URL]}.
 \end{thebibliography}
 %-----
+\clearpage
 
+\section*{演習問題}
+
+\subsection*{A ホーア論理}
+
+\begin{enumerate}
+	\item 
+	\item 
+	\item 
+	\item 
+	\item 
+\end{enumerate}
+
+\subsection*{B 最弱事前条件意味論}
+
+\begin{enumerate}
+	\item 
+	\item 
+	\item 
+	\item 
+	\item 
+\end{enumerate}
+
+\subsection*{C 束論・不動点理論}
+
+\begin{enumerate}
+	\item 
+	\item 
+	\item 
+	\item 
+	\item 
+\end{enumerate}
+
+\subsection*{D 圏論の道具}
+
+\begin{enumerate}
+	\item 
+	\item 
+	\item 
+	\item 
+	\item 
+\end{enumerate}
+
+\subsection*{E 余代数・終余代数}
+
+\begin{enumerate}
+	\item 
+	\item 
+	\item 
+	\item 
+	\item 
+\end{enumerate}
+
+\subsection*{F 双模倣関係と双模倣同値性}
+
+\begin{enumerate}
+	\item 
+	\item 
+	\item 
+	\item 
+	\item 
+\end{enumerate}
+
+\subsection*{G モナド}
+
+\begin{enumerate}
+	\item 
+	\item 
+	\item 
+	\item 
+	\item 
+\end{enumerate}
+
+\subsection*{H グロタンディーク・ファイブレーション}
+
+\begin{enumerate}
+	\item 
+	\item 
+	\item 
+	\item 
+	\item 
+\end{enumerate}
+
+
+
+\clearpage
 
 \end{document}
