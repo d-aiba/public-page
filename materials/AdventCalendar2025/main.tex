@@ -806,9 +806,9 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 情報科学における「\textgt{圏論的な手法の強み}」は、抽象的・俯瞰的であるがゆえに、\uwave{様々な種類の情報システムに対して、} \uwave{既存の議論や知見を再編することで新たな問題設定に柔軟に適応できる}点にあると言えます。
 
-本章で紹介する\textgt{余代数} (coalgebra) は、そのように多様な状態遷移システム（例: 二分木グラフ、ストリーム、クリプキフレーム、オートマトン、マルコフ連鎖、マルコフ決定過程、etc.）を扱う際にとても役立つ道具です。
+本章で紹介する\textgt{余代数} (coalgebra) は、そのように、多様な状態遷移システム（例: 二分木グラフ、ストリーム、クリプキフレーム、オートマトン、マルコフ連鎖、マルコフ決定過程、etc.）を扱う際にとても役立つ道具です。
 
-\subsection{余代数の定義：1ステップの状態遷移をとらえる}
+\subsection{余代数の定義と例：グラフにおける「1ステップの状態遷移」をとらえる}
 \label{subsec:def-and-example-of-coalgebra}
 
 \noindent まずは、\textgt{余代数} (coalgebra) および\textgt{余代数準同型} (coalgebra homomorphism) を定義します。
@@ -839,7 +839,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{definition}
 
 % \subsection{余代数の様々な例} \label{subsec:examples}
-\noindent いくつか例を挙げます。
+\noindent いくつか例を挙げます。余代数が「\textgt{1ステップの状態遷移}」をとらえるものであることを理解しましょう。
 
 \begin{example}
 	二分木グラフは、$\Set$ 上の関手 $F(X)=(X\times X)+1$ に対する余代数 $c:X\to F(X)$ として与えられる。
@@ -884,7 +884,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \clearpage
 
 \begin{example}
-	様相論理におけるクリプキフレーム (Kripke frame) は、余代数 $\delta:X\to\mathcal P(X)$ で与えられる。\[\begin{array}{cccl}\delta:&X&\longrightarrow&\mathcal P(X)\\&\rotatebox{90}{$\in$}&&~~\rotatebox{90}{$\in$}\\&x&\longmapsto&\delta(x)=\{x'\mid x\to x'\}\end{array}\]
+	様相論理におけるクリプキフレーム (Kripke frame) は、余代数 $\delta:X\to\mathcal P(X)$ で与えられる。\[\begin{array}{cccl}\delta:&X&\longrightarrow&\mathcal P(X)\\&\rotatebox{90}{$\in$}&&~~\rotatebox{90}{$\in$}\\&x&\longmapsto&\delta(x)=\{x'\mid x\leadsto x'\}\end{array}\]
 	\begin{small}
 	\begin{center}
 		\begin{tikzcd}[row sep=0pt]
@@ -3737,7 +3737,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 				\end{tikzcd}
 		\end{small}
 	\end{center} \vspace{3pt}
-	\item $f:X\to Y$ に対し、述語変換子 $\left(\begin{array}{cccc}f^\ast:&2^Y&\longrightarrow & 2^X\\[-2pt]&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\[-2pt]& \scriptstyle(X\,\overset{q}{\to}\,2)&\mapsto & \scriptstyle (X\,\overset{f^\ast(q)}{\longrightarrow}\,2) \end{array}\right)$ を \vspace{10pt} \\ $f^\ast:2^Y\to 2^X$, $f^\ast(Q)=\{x\in X\mid f(x)\in Q\}$ で定めます。\vspace{5pt}
+	\item $f:X\to Y$ に対し、述語変換子 $\left(\begin{array}{cccc}f^\ast:&2^Y&\longrightarrow & 2^X\\[-2pt]&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\[-2pt]& (X\xrightarrow{q}2)&\mapsto & (X\xrightarrow{f^\ast(q)}2) \end{array}\right)$ を \vspace{10pt} \\ $f^\ast:2^Y\to 2^X$, $f^\ast(Q)=\{x\in X\mid f(x)\in Q\}$ で定めます。\vspace{5pt}
 	\item いま、以下の関数を定めましょう。\vspace{3pt}\\ 
 	% $\exists_c:2^X\to 2^Y$, $\exists_c(P)=\{f(x)\in Y\mid x\in P\}=\{y\in Y \mid \exists\, x\in X,\; f(x)=y\;\textrm{and}\;x\in P\}$
 	$\begin{array}{lccl}\exists_f:2^X\to 2^Y,&\exists_f(P)&\!\!=\!\!&\{f(x)\in Y\mid x\in P\}\\&&\!\!=\!\!&\{y\in Y \mid \exists\, x\in X,\; f(x)=y\;\textrm{and}\;x\in P\}\\\forall_f:2^X\to 2^Y,& \forall_f(P)&\!\!=\!\!&\{y\in Y\mid f^\ast(\{y\})\subseteq P\}\\&&\!\!=\!\!&\{y\in Y\mid\forall\,x\in X,\;f(x)=y\;\textrm{implies}\;x\in P\}\end{array}$ \vspace{5pt}
@@ -3777,7 +3777,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\item ここで、$f:X\to\mathcal PY$ という計算を考えます。\\（なお、$Y=X$ の場合、以下のような余代数です。）\vspace{5pt} %\\ 
 	\begin{center}
 	% \begin{small}
-		$\left(\begin{array}{cccccc} c:&X & \longrightarrow & \mathcal PX\\[-1pt] &\rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$}\\[-2pt] &x & \mapsto & c(x)&=&\{x'\mid x\to x'\} \end{array}~\textrm{Kripke structure}\right)$
+		$\left(\begin{array}{cccccc} c:&X & \longrightarrow & \mathcal PX\\[-1pt] &\rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$}\\[-2pt] &x & \mapsto & c(x)&=&\{x'\mid x\leadsto x'\} \end{array}~\textrm{Kripke structure}\right)$
 	% \end{small} 
 	\qquad%\quad 
 	\begin{small}
@@ -3789,10 +3789,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{small}
 	\hspace*{25pt}
 	\end{center}
-	\item さて、述語変換子 $\left(\begin{array}{cccc}f^\ast:&2^Y&\longrightarrow & 2^X\\[-2pt]&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\[-2pt]& \scriptstyle(X\,\overset{q}{\to}\,2)&\longmapsto & \scriptstyle (X\,\overset{\!f^\ast(q)\!}{\longrightarrow}\,2) \end{array}\right)$ をどうやって手に入れればよいでしょうか？ \vspace{15pt} \\ 以下のようにして得られます。（上段が入力、下段が出力です。）\vspace{5pt}
+	\item さて、述語変換子 $\left(\begin{array}{cccc}f^\ast:&2^Y&\longrightarrow & 2^X\\[-2pt]&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\[-2pt]& (X\xrightarrow{q}2)&\longmapsto &  (X\xrightarrow{f^\ast(q)}2) \end{array}\right)$ をどうやって手に入れればよいでしょうか？ \vspace{15pt} \\ 以下のようにして得られます。（上段が入力、下段が出力です。）\vspace{5pt}
 	\begin{prooftree}
 		\AXC{$q:Y\to 2$,\; post-condition}
-		\UIC{$\left(\begin{array}{cccccccc}f^\ast(q):&X&\xrightarrow{~f~}&\mathcal PY&\xrightarrow{\;\mathcal P q\;}&\mathcal P2&\xrightarrow[\textrm{modality}]{\tau}&2 \\[-6pt] & \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[-4pt] & \scriptstyle x & \longmapsto & \scriptstyle \{x_1,\dots,\,x_n\} & \longmapsto & \scriptstyle \{q(x_1),\dots,\,q(x_n)\} & \longmapsto & \scriptstyle 0 \textrm{ or } 1 \end{array}\right)$} 
+		\UIC{$\left(\begin{array}{cccccccc}f^\ast(q):&X&\xrightarrow{~f~}&\mathcal PY&\xrightarrow{\;\mathcal P q\;}&\mathcal P2&\xrightarrow[\textrm{modality}]{\tau}&2 \\[-6pt] & \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[-4pt] & x & \longmapsto & \{x_1,\dots,\,x_n\} & \longmapsto & \{q(x_1),\dots,\,q(x_n)\} & \longmapsto & 0 \textrm{ or } 1 \end{array}\right)$} 
 	\end{prooftree} \vspace{5pt}
 	\item $f:X\to\mathcal PY$ に対し、\\ 述語変換子 $f^\ast$ は、様相 $\tau:\mathcal P2\to 2$（パラメーターマップとも呼ばれる）の選び方に拠って決まります。\\ $f^\ast$ を以下のように2通りの異なるしかたで定めることができます。 \\$\Box_f(-):2^Y\to 2^X,\,q\mapsto\{x\in X\mid \forall y\in Y\,(x\to y\textrm{ implies } y\in q)\}$ \\ $\Diamond_f(-):2^Y\to 2^X,\,q\mapsto\{x\in X \mid \exists y\in Y \, ( x\to y \textrm{ and } y\in q)\}$ \vspace{5pt}
 	\item いま、以下の関数を定めましょう。\\ $\exists_f:2^X\to 2^Y$, $p\mapsto \{y\in Y\mid \exists \, x\in X,\,x\to y \textrm{ and } x\in p\}$ \\ $\forall_f:2^X\to 2^Y$, $p\mapsto \{y\in Y\mid \forall \, x\in X,\,x\to y \textrm{ implies } x\in p\}$ \vspace{5pt}
@@ -3857,7 +3857,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\item さて、述語変換子 $f^\ast:[0,1]^Y\to[0,1]^X$ をどうやって手に入れればよいでしょうか？\vspace{2pt} \\ 以下のようにして得られます。（上段が入力、下段が出力です。）\vspace{5pt} 
 	\begin{prooftree}
 		\AXC{$q:Y\to[0,1]$,\; post-condition}
-		\UIC{$\left(\begin{array}{cccccccc} f^\ast(q): & X & \xrightarrow{~f~} & \mathcal DY & \xrightarrow{\;\mathcal Dq\;} & \mathcal D[0,1] & \xrightarrow[=Av]{\tau}& [0,1] \\[-3pt] &\rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[-3pt] &\scriptstyle x & \longmapsto & \scriptstyle \sum p_i\Ket{x_i} & \longmapsto & \scriptstyle \sum p_i\Ket{q(x_i)} & \longmapsto & \scriptstyle \sum p_i\cdot q(x_i) \end{array}\right)$}
+		\UIC{$\left(\begin{array}{cccccccc} f^\ast(q): & X & \xrightarrow{~f~} & \mathcal DY & \xrightarrow{\;\mathcal Dq\;} & \mathcal D[0,1] & \xrightarrow[=Av]{\tau}& [0,1] \\[-3pt] &\rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[-3pt] & x & \longmapsto & \sum p_i\Ket{x_i} & \longmapsto & \sum p_i\Ket{q(x_i)} & \longmapsto & \sum p_i\cdot q(x_i) \end{array}\right)$}
 	\end{prooftree} \vspace{5pt}
 	\item $f:X\to\mathcal PY$ に対し、述語変換子 $f^\ast:[0,1]^Y\to[0,1]^X$ は以下で定義されます。 \[f^\ast(q)(x)=\sum_{x'\in X}f(x)(x')\cdot q(x')\] 
 	つまり、$f^\ast(q)$ は、各 $x$ に対し、$q$ による値の期待値 $p_1 \cdot q(x_1) + p_2 \cdot q(x_2) + \cdots$ を割り当てます。
