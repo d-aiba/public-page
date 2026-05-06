@@ -809,8 +809,9 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 本章で紹介する\textgt{余代数} (coalgebra) は、そのように多様な状態遷移システム（例: 二分木グラフ、ストリーム、クリプキフレーム、オートマトン、マルコフ連鎖、マルコフ決定過程、etc.）を扱う際にとても役立つ道具です。
 
 \subsection{余代数の定義：1ステップの状態遷移をとらえる}
+\label{subsec:def-and-example-of-coalgebra}
 
-まずは余代数の定義を述べます。
+\noindent まずは、\textgt{余代数} (coalgebra) および\textgt{余代数準同型} (coalgebra homomorphism) を定義します。
 
 \begin{definition}[余代数]
 	$\mathbb{C}$ を圏とし、$F:\mathbb{C}\to\mathbb{C}$ を関手とする。\textgt{$F$-余代数}とは、$\mathbb C$ の対象 $X$ と射 $c:X\to F(X)$ の組 $(X,c)$ のことと定める。また、2つの余代数 $(X,\,c:X\to F(X)),\,(Y,\,d:Y\to F(Y))$ の間の\textgt{余代数準同型}とは、射 $f:X\to Y$ であって $d\circ f=F(f)\circ c$ を満たすものとする。\vspace{5pt}
@@ -837,8 +838,9 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% \end{small}
 \end{definition}
 
-\subsection{余代数の様々な例} \label{subsec:examples}
-いくつか例を挙げます。
+% \subsection{余代数の様々な例} \label{subsec:examples}
+\noindent いくつか例を挙げます。
+
 \begin{example}
 	二分木グラフは、$\Set$ 上の関手 $F(X)=(X\times X)+1$ に対する余代数 $c:X\to F(X)$ として与えられる。
 	\[\textrm{分岐}\quad c(x)=(x',x'') \qquad\textrm{or}\qquad \textrm{停止}\quad c(x)=\ast\]
@@ -855,13 +857,13 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{tikzcd}
 	\end{center} \vspace{2pt}
 	\end{small}
-	たとえば以下のような二分木グラフが挙げられる。\vspace{2pt}
+	たとえば、以下のような形の二分木グラフが挙げられる。（各 node は、状態集合 $X$ の要素からなる。）\vspace{3pt}
 	\begin{center}
-		\begin{tikzcd}[row sep=8pt,column sep=12pt]
-			& \circled{} \ar[ld,dash] \ar[rd,dash] \\
-			\circled{} \ar[d,dash] & & \circled{} \ar[ld,dash] \ar[rd,dash] \\
-			\ast & \circled{} \ar[d,dash] & {} & \circled{} \ar[ld,dash] \ar[rd,"\ddots", phantom] \\
-			& \ast & \circled{} \ar[d,dash] & {} & {} \\
+		\begin{tikzcd}[row sep=5pt,column sep=12pt]
+			& \circled{\textcolor{white}{a}} \ar[ld,dash,shorten=-8.8pt] \ar[rd,dash,shorten=-8.8pt] \\
+			\circled{\textcolor{white}{a}} \ar[d,dash,shorten=-5pt,shorten >= 0.3pt] & & \circled{\textcolor{white}{a}} \ar[ld,dash,shorten=-8.8pt] \ar[rd,dash,shorten=-8.8pt] \\
+			\ast & \circled{\textcolor{white}{a}} \ar[d,dash,shorten=-5pt,shorten >= 0.3pt] & {} & \circled{\textcolor{white}{a}} \ar[ld,dash,shorten=-8.8pt] \ar[rd,"\ddots", phantom] \\
+			& \ast & \circled{\textcolor{white}{a}} \ar[d,dash,shorten=-5pt,shorten >= 0.3pt] & {} & {} \\
 			&& \ast & 
 		\end{tikzcd}
 	\end{center}
@@ -1803,7 +1805,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \subsection{計算効果 (computational effect) について}
 
-\noindent \ref{subsec:examples}節でいくつか例を挙げながら紹介したように、余代数 (coalgebra) は「1ステップの状態遷移」を表します。\[c:X\to F(X)\] 
+\noindent \ref{subsec:def-and-example-of-coalgebra}節でいくつか例を挙げながら紹介したように、余代数 (coalgebra) は「1ステップの状態遷移」を表します。\[c:X\to F(X)\] 
 
 \noindent より一般に、計算 (computation) は、以下のように表されます。（なお $X=Y$ とすれば余代数です。）\[f:X\to F(Y)\] 
 
