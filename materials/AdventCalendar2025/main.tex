@@ -162,13 +162,33 @@
 \noindent %一般に、
 モデル検査において示したいことは、「\textgt{モデル} $\mathcal M$ のもとで\textgt{仕様} $\varphi$（望ましい性質）が成り立つかどうか」です。
 % \[\mathcal M\models\varphi\quad\textrm{($\mathcal M$ satisfies $\varphi$)}\]
-\[\textgt{input: } \textrm{a model } \mathcal M, \textrm{ a specification } \varphi, \qquad \textgt{output: } \mathcal M\models\varphi \textrm{ (i.e., $\mathcal M$ satisfies $\varphi$)} \textrm{ or not}\]
-仕様 $\varphi$ は典型的には、時相論理式（例えば $\mathbf{G}\,(\mathit{req}\to\mathbf{F}\,\mathit{resp})$「リクエストが生じたらレスポンスが返ってくる」など）で書かれることが多いですが、
+% \[\textgt{input: } \textrm{a model } \mathcal M, \textrm{ a specification } \varphi, \qquad \textgt{output: } \mathcal M\models\varphi \textrm{ (i.e., $\mathcal M$ satisfies $\varphi$)} \textrm{ or not}\]
+\begin{align*}
+	&\textgt{input: } \textrm{a formal model } \mathcal M, \textrm{ a formal specification } \varphi \qquad \\ &\textgt{output: } \textrm{whether }\mathcal M\models\varphi \textrm{ (i.e., $\mathcal M$ satisfies $\varphi$)} \textrm{ or not}
+\end{align*}
+%
+%
+\begin{framed}
+	\vspace{8pt}
+	\begin{center}
+		\begin{tikzcd}[row sep=5pt,column sep=38pt]
+			\textrm{(real-world system)} \ar[r,"\textrm{formalize}"] & \fbox{formal model} \ar[dr,"\textrm{input}"] & {} & {} \\
+			& & \doublebox{model checker} \ar[r,"\textrm{output}"] & ~\textrm{\ding{51}\;or\;\ding{55}}~ \\
+			\textrm{(requirement)} \ar[r,"\textrm{formalize}"'] & \fbox{formal specification} \ar[ur,"\textrm{input}"'] & {} & {}
+		\end{tikzcd}
+	\end{center}
+	\vspace{8pt}
+\end{framed}
+%
+%
+\noindent 仕様 $\varphi$ は典型的には、時相論理式（例えば $\mathbf{G}\,(\mathit{req}\to\mathbf{F}\,\mathit{resp})$「リクエストが生じたらレスポンスが返ってくる」など）で書かれることが多いですが、
 本記事では特定の形式化にはあまり限定せずに、
 一般論を展開することを目指します。
 
 % \vspace{18pt}
-\vspace{28pt}
+% \vspace{28pt}
+
+\clearpage
 
 \noindent とりわけ本記事では「\kenten{圏論を使ったモデル検査}」を紹介するのですが、
 \textgt{なぜ圏論を使うのか}について説明しておきます。
