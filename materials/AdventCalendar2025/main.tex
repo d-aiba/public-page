@@ -799,9 +799,9 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\subsection{不動点を推定するための効率的なアルゴリズム}
+\subsection{最小・最大不動点を推定するための効率的なアルゴリズム}
 
-\noindent ここで、完備束 (complete lattice) の\textgt{不動点} (lfp, gfp) \textgt{を推定}するための\textgt{効率的なアルゴリズム}を考えましょう。\\ 実際問題として、最小・最大不動点の値そのものをぴったり求めることは困難であることが多いので、\textgt{上界・下界推定} (over/under-approximation) をしたいです。具体的には、以下の表に挙げたやり方があります。\\（補足： これらは、完備束 $L$ と単調関数 $f:L\to L$ について知られる2種類の定理、the Knaster-Tarski theorem と the Cousot-Cousot theorem に基づくものです。）\vspace{15pt}
+\noindent ここで、完備束 (complete lattice) の\textgt{不動点} (lfp, gfp) \textgt{を推定}するための\textgt{アルゴリズム}について考えましょう。\\ 実際問題として、最小・最大不動点の値そのものをぴったり求めることは困難であることが多いので、\textgt{上界・下界推定} (over/under-approximation) をしたいです。具体的には、以下の表に挙げたやり方があります。\\（補足： これらは、完備束 $L$ と単調関数 $f:L\to L$ について知られる2種類の定理、the Knaster-Tarski theorem と the Cousot-Cousot theorem に基づくものです。）\vspace{15pt}
 
 \begin{center}
 	\begin{tabular}{c|c|c}
@@ -858,9 +858,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{align*}
 	\end{multicols}
 \end{itemize}
-\vspace{5pt}
+% \vspace{5pt}
+\vspace{10pt}
 
-さて、本章でここまで扱ってきた述語変換子の考え方は、圏論の言葉を使うととても見通しがよくなります。そのための準備として、次章では、圏論の関手を使ってプログラムの振舞いを捉える方法について紹介します。（すでに「余代数」や「モナド」や「グロタンディーク・ファイブレーション」のことは知っているよ、という人は\ref{sec:categorical-weakest-precondition}章へ飛んでください。）
+さて、本章でこれまで扱ってきた述語変換子の考え方は、圏論の言葉を使うととても見通しがよくなります。そのための準備として、次章では、圏論の関手を使ってプログラムの振舞いを捉える方法について紹介します。%（すでに「余代数」や「モナド」や「グロタンディーク・ファイブレーション」のことは知っているよ、という人は\ref{sec:categorical-weakest-precondition}章へ飛んでください。）
 \clearpage
 
 \section{圏論の関手を用いて「情報システムの振舞い」をとらえる手法}
