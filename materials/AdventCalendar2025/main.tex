@@ -797,7 +797,9 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent ここで、完備束 (complete lattice) の\textgt{不動点} (lfp, gfp) \textgt{を推定}するための\textgt{効率的なアルゴリズム}を考えましょう。\\ 実際問題として、最小・最大不動点の値そのものをぴったり当てることは困難であることが多いため、\textgt{上界・下界推定} (over/under-approximation) をしたいです。具体的には、以下の表に挙げたやり方で行うことができます。\vspace{15pt}
+\subsection{不動点を推定するための効率的なアルゴリズム}
+
+\noindent ここで、完備束 (complete lattice) の\textgt{不動点} (lfp, gfp) \textgt{を推定}するための\textgt{効率的なアルゴリズム}を考えましょう。\\ 実際問題として、最小・最大不動点の値そのものをぴったり求めることは困難であることが多いので、\textgt{上界・下界推定} (over/under-approximation) をしたいです。具体的には、以下の表に挙げたやり方があります。\\（なお、これらは、完備束 $L$ と単調関数 $f:L\to L$ について知られる2種類の定理、the Knaster-Tarski theorem と the Cousot-Cousot theorem に基づくものです。）\vspace{18pt}
 
 \begin{center}
 	\begin{tabular}{c|c|c}
@@ -814,7 +816,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		& $\implies$ \textbf{under-approx. of gfp} & $\implies$ \textbf{over-approx. of gfp}\\[-2pt] && \\[-5pt]
 		& \AXC{$y\sqsubseteq f(y)$}\UIC{$y\sqsubseteq \nu f$}\DisplayProof & $\nu f\sqsubseteq f^\alpha(\top)$ \;(for each $\alpha\in\mathbf{Ord}$)\\ && \\ \hline
 	\end{tabular}
-\end{center}\vspace{15pt}
+\end{center}\vspace{18pt}
 
 もう少し詳しく見ておくと: 
 \begin{itemize}
@@ -850,11 +852,9 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{align*}
 	\end{multicols}
 \end{itemize}
-
-\vspace{50pt}
+\vspace{5pt}
 
 さて、本章でここまで扱ってきた述語変換子の考え方は、圏論の言葉を使うととても見通しがよくなります。そのための準備として、次章では、圏論の関手を使ってプログラムの振舞いを捉える方法について紹介します。（すでに「余代数」や「モナド」や「グロタンディーク・ファイブレーション」のことは知っているよ、という人は\ref{sec:categorical-weakest-precondition}章へ飛んでください。）
-
 \clearpage
 
 \section{圏論の関手を用いて「情報システムの振舞い」をとらえる手法}
