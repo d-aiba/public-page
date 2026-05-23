@@ -795,6 +795,61 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \todo[inline]{safety/reachability property  の、upperbound/lowerbound estimation の、verification/refutation の方法}
 
+\clearpage
+
+\noindent ここで、完備束 (complete lattice) の\textgt{不動点} (lfp, gfp) \textgt{を推定}するための\textgt{効率的なアルゴリズム}を考えましょう。\\ 実際問題として、最小・最大不動点の値そのものをぴったり当てることは困難であることが多いため、\textgt{上界・下界推定} (over/under-approximation) をしたいです。具体的には、以下の表に挙げたやり方で行うことができます。\vspace{15pt}
+
+\begin{center}
+	\begin{tabular}{c|c|c}
+		\hline
+		& the Knaster-Tarski theorem & the Cousot-Cousot theorem \\
+		& ``guess-and-check algorithm'' & ``iterative algorithm'' \\\hline
+		&&\\
+		~~~lfp~~~ & ~~~~$\mu f=\bigsqcap\{x\in L\mid f(x)\sqsubseteq x\}$~~~~ & ~$\bot\,\sqsubseteq\, f(\bot) \,\sqsubseteq\, f^2(\bot) \,\sqsubseteq\,\cdots\,\to\,\mu f$~ \\[5pt]
+		&&\\[-5pt]
+		& $\implies$ \textbf{over-approx. of lfp} & $\implies$ \textbf{under-approx. of lfp}\\[-2pt] &&\\[-5pt]
+		&\AXC{$f(y)\sqsubseteq y$}\UIC{$\mu f\sqsubseteq y$}\DisplayProof & $f^\alpha(\bot)\sqsubseteq\mu f$ \;(for each $\alpha\in\mathbf{Ord}$) \\[-0.05pt] && \\\hline &&\\
+		gfp & $\nu f=\bigsqcup\{x\in L\mid x\sqsubseteq f(x)\}$ & $\top\sqsupseteq f(\top)\sqsupseteq f^2(\top)\sqsupseteq\cdots \to \nu f$ \\[5pt]
+		&& \\[-5pt]
+		& $\implies$ \textbf{under-approx. of gfp} & $\implies$ \textbf{over-approx. of gfp}\\[-2pt] && \\[-5pt]
+		& \AXC{$y\sqsubseteq f(y)$}\UIC{$y\sqsubseteq \nu f$}\DisplayProof & $\nu f\sqsubseteq f^\alpha(\top)$ \;(for each $\alpha\in\mathbf{Ord}$)\\ && \\ \hline
+	\end{tabular}
+\end{center}\vspace{15pt}
+
+もう少し詳しく見ておくと: 
+\begin{itemize}
+	\begin{multicols}{2}
+	\item 最小不動点の上界推定 (by Knaster-Tarski): 
+		\begin{align*}
+			&f(y)\sqsubseteq y \\
+			&\implies \textrm{$y$ is a prefixed point}\\
+			&\implies \textrm{$\mu f$ \begin{small}(the least prefixed point)\end{small} is below $y$} \\
+			&\textrm{thus}~\mu f\sqsubseteq y
+		\end{align*}
+	\item 最小不動点の下界推定 (by Cousot-Cousot):
+		\begin{align*}
+			&\bot\,\sqsubseteq\, f(\bot) \,\sqsubseteq\, f^2(\bot) \,\sqsubseteq\,\cdots\,\longrightarrow\, \mu f\\ 
+			& (\textrm{stabilizes, and converges to $\mu f$})\\
+			&\textrm{thus}~ f^\alpha(\bot)\sqsubseteq\mu f~\textrm{for each}~\alpha\in\mathbf{Ord}
+		\end{align*}
+	\end{multicols}
+	%%
+	\begin{multicols}{2}
+	\item 最大不動点の下界推定 (by Knaster-Tarski): 
+		\begin{align*}
+			&\top\,\sqsupseteq\, f(\top) \,\sqsupseteq\, f^2(\top) \,\sqsupseteq\, \cdots \,\longrightarrow\,\nu f\\
+			&(\textrm{stabilizes, and converges to $\nu f$})\\
+			&\textrm{thus}~\nu f\sqsubseteq f^\alpha(\top)~\textrm{for each}~\alpha\in\mathbf{Ord}
+		\end{align*}
+	\item 最大不動点の上界推定 (by Cousot-Cousot): 
+		\begin{align*}
+			&y\sqsubseteq f(y)\\
+			&\implies \textrm{$y$ is a postfixed point} \\
+			&\implies \textrm{$\nu f$ \begin{small}(the greatest postfixed point)\end{small} is above $y$} \\
+			&\textrm{thus}~y\sqsubseteq\nu f
+		\end{align*}
+	\end{multicols}
+\end{itemize}
 
 \vspace{50pt}
 
@@ -3433,7 +3488,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			\begin{tikzcd}
 				&\Pred_{X} \ar[rr,bend left=12pt,"\dot F_X"] && \Pred_{\,FX} \ar[ll,bend left=12pt,"c^\ast"] \\[-5pt]
 				& P \ar[rrd,mapsto,shorten=3pt] \\[-24pt] 
-				\Pred \ar[loop left,"\dot F_X"] \ar[dd,"p"'] &&& \dot F_X P \ar[lld,mapsto,shorten=3pt] \\[-24pt] 
+				\Pred \ar[loop left,"\dot F"] \ar[dd,"p"'] &&& \dot F_X P \ar[lld,mapsto,shorten=3pt] \\[-24pt] 
 				& c^\ast\dot F_X P & \\
 				~\Set~ \ar[loop left,"F"]  & X \ar[rr,"c"'] && FX 
 			\end{tikzcd}
@@ -4047,7 +4102,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\begin{tikzcd}
 			&\mathbf{\Omega}^{X} \ar[rr,bend left=12pt,"\dot F_X"] && \mathbf{\Omega}^{FX} \ar[ll,bend left=12pt,"c^\ast"] \\[-5pt]
 			& q \ar[rrd,mapsto,shorten=3pt] \\[-25pt] 
-			\Pred \ar[loop left,"\dot F_X"] \ar[dd,"p"'] &&& \dot F_X q \ar[lld,mapsto,shorten=3pt] \\[-25pt] 
+			\Pred \ar[loop left,"\dot F"] \ar[dd,"p"'] &&& \dot F_X q \ar[lld,mapsto,shorten=3pt] \\[-25pt] 
 			& c^\ast\dot F_X q & \\
 			~\Set~ \ar[loop left,"F"]  & X \ar[rr,"c"'] && FX 
 		\end{tikzcd}
