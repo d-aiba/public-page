@@ -799,26 +799,30 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \subsection{不動点を推定するための効率的なアルゴリズム}
 
-\noindent ここで、完備束 (complete lattice) の\textgt{不動点} (lfp, gfp) \textgt{を推定}するための\textgt{効率的なアルゴリズム}を考えましょう。\\ 実際問題として、最小・最大不動点の値そのものをぴったり求めることは困難であることが多いので、\textgt{上界・下界推定} (over/under-approximation) をしたいです。具体的には、以下の表に挙げたやり方があります。\\（なお、これらは、完備束 $L$ と単調関数 $f:L\to L$ について知られる2種類の定理、the Knaster-Tarski theorem と the Cousot-Cousot theorem に基づくものです。）\vspace{18pt}
+\noindent ここで、完備束 (complete lattice) の\textgt{不動点} (lfp, gfp) \textgt{を推定}するための\textgt{効率的なアルゴリズム}を考えましょう。\\ 実際問題として、最小・最大不動点の値そのものをぴったり求めることは困難であることが多いので、\textgt{上界・下界推定} (over/under-approximation) をしたいです。具体的には、以下の表に挙げたやり方があります。\\（補足： これらは、完備束 $L$ と単調関数 $f:L\to L$ について知られる2種類の定理、the Knaster-Tarski theorem と the Cousot-Cousot theorem に基づくものです。）\vspace{15pt}
 
 \begin{center}
 	\begin{tabular}{c|c|c}
-		\hline
-		& the Knaster-Tarski theorem & the Cousot-Cousot theorem \\
+		% \hline
+		\Xhline{1.0pt}
+		% & the Knaster-Tarski theorem & the Cousot-Cousot theorem \\
+		& Knaster-Tarski & Cousot-Cousot \\
 		& ``guess-and-check algorithm'' & ``iterative algorithm'' \\\hline
 		&&\\
-		~~~lfp~~~ & ~~~~$\mu f=\bigsqcap\{x\in L\mid f(x)\sqsubseteq x\}$~~~~ & ~$\bot\,\sqsubseteq\, f(\bot) \,\sqsubseteq\, f^2(\bot) \,\sqsubseteq\,\cdots\,\to\,\mu f$~ \\[5pt]
+		~~~lfp~~~ & ~~~~~~$\mu f=\bigsqcap\{x\in L\mid f(x)\sqsubseteq x\}$~~~~~~ & ~~$\bot\,\sqsubseteq\, f(\bot) \,\sqsubseteq\, f^2(\bot) \,\sqsubseteq\,\cdots\,\to\,\mu f$~~ \\[5pt]
 		&&\\[-5pt]
 		& $\implies$ \textbf{over-approx. of lfp} & $\implies$ \textbf{under-approx. of lfp}\\[-2pt] &&\\[-5pt]
 		&\AXC{$f(y)\sqsubseteq y$}\UIC{$\mu f\sqsubseteq y$}\DisplayProof & $f^\alpha(\bot)\sqsubseteq\mu f$ \;(for each $\alpha\in\mathbf{Ord}$) \\[-0.05pt] && \\\hline &&\\
 		gfp & $\nu f=\bigsqcup\{x\in L\mid x\sqsubseteq f(x)\}$ & $\top\sqsupseteq f(\top)\sqsupseteq f^2(\top)\sqsupseteq\cdots \to \nu f$ \\[5pt]
 		&& \\[-5pt]
 		& $\implies$ \textbf{under-approx. of gfp} & $\implies$ \textbf{over-approx. of gfp}\\[-2pt] && \\[-5pt]
-		& \AXC{$y\sqsubseteq f(y)$}\UIC{$y\sqsubseteq \nu f$}\DisplayProof & $\nu f\sqsubseteq f^\alpha(\top)$ \;(for each $\alpha\in\mathbf{Ord}$)\\ && \\ \hline
+		& \AXC{$y\sqsubseteq f(y)$}\UIC{$y\sqsubseteq \nu f$}\DisplayProof & $\nu f\sqsubseteq f^\alpha(\top)$ \;(for each $\alpha\in\mathbf{Ord}$)\\ && \\ 
+		% \hline
+		\Xhline{1.0pt}
 	\end{tabular}
-\end{center}\vspace{18pt}
+\end{center}\vspace{15pt}
 
-もう少し詳しく見ておくと: 
+もう少し詳しく見ておくと: \vspace{-5pt}
 \begin{itemize}
 	\begin{multicols}{2}
 	\item 最小不動点の上界推定 (by Knaster-Tarski): 
@@ -1118,7 +1122,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \todo[inline]{証明を書く。ordinal な議論に気をつけて。}
 
-\noindent 補足: 終 $F$-余代数の carrier は、関手 $F$ の最大不動点にあたるものであるため、それを $\nu F$ と書くことが多いです。\\すなわち、終 $F$-余代数とは $\zeta:\nu F\xrightarrow{\cong} F(\nu F)$ という同型射です。
+\noindent 補足: 終 $F$-余代数の carrier は、関手 $F$ の最大不動点にあたるものであるため、それを $\nu F$ と書くことが多いです。\\この記法を使えば、すなわち、終 $F$-余代数とは $\zeta:\nu F\xrightarrow{\cong} F(\nu F)$ という同型射です。
 
 \clearpage
 
@@ -1153,7 +1157,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \todo[inline]{主張だけ書く}
 
-\noindent 補足: 始 $F$-代数の carrier は、関手 $F$ の最小不動点にあたるものであるため、それを $\mu F$ と書くことが多いです。\\すなわち、始 $F$-代数とは $\zeta:F(\mu F)\xrightarrow{\cong} \mu F$ という同型射です。
+\noindent 補足: 始 $F$-代数の carrier は、関手 $F$ の最小不動点にあたるものであるため、それを $\mu F$ と書くことが多いです。\\この記法を使えば、すなわち、始 $F$-代数とは $\zeta:F(\mu F)\xrightarrow{\cong} \mu F$ という同型射です。
 
 \clearpage
 
@@ -4171,90 +4175,90 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 %-----
 \clearpage
 
-\section*{Appendices and Exercises}
+% \section*{Appendices and Exercises}
 
-\subsection*{A ホーア論理}
+% \subsection*{A ホーア論理}
 
-\begin{enumerate}
-	\item 
-	\item 
-	\item 
-	\item 
-	\item 
-\end{enumerate}
+% \begin{enumerate}
+% 	\item 
+% 	\item 
+% 	\item 
+% 	\item 
+% 	\item 
+% \end{enumerate}
 
-\subsection*{B 最弱事前条件意味論}
+% \subsection*{B 最弱事前条件意味論}
 
-\begin{enumerate}
-	\item 
-	\item 
-	\item 
-	\item 
-	\item 
-\end{enumerate}
+% \begin{enumerate}
+% 	\item 
+% 	\item 
+% 	\item 
+% 	\item 
+% 	\item 
+% \end{enumerate}
 
-\subsection*{C 束論・不動点理論}
+% \subsection*{C 束論・不動点理論}
 
-\begin{enumerate}
-	\item 
-	\item 
-	\item 
-	\item 
-	\item 
-\end{enumerate}
+% \begin{enumerate}
+% 	\item 
+% 	\item 
+% 	\item 
+% 	\item 
+% 	\item 
+% \end{enumerate}
 
-\subsection*{D 圏論の道具}
+% \subsection*{D 圏論の道具}
 
-\begin{enumerate}
-	\item 
-	\item 
-	\item 
-	\item 
-	\item 
-\end{enumerate}
+% \begin{enumerate}
+% 	\item 
+% 	\item 
+% 	\item 
+% 	\item 
+% 	\item 
+% \end{enumerate}
 
-\subsection*{E 余代数・終余代数}
+% \subsection*{E 余代数・終余代数}
 
-\begin{enumerate}
-	\item 
-	\item 
-	\item 
-	\item 
-	\item 
-\end{enumerate}
+% \begin{enumerate}
+% 	\item 
+% 	\item 
+% 	\item 
+% 	\item 
+% 	\item 
+% \end{enumerate}
 
-\subsection*{F 双模倣関係と双模倣同値性}
+% \subsection*{F 双模倣関係と双模倣同値性}
 
-\begin{enumerate}
-	\item 
-	\item 
-	\item 
-	\item 
-	\item 
-\end{enumerate}
+% \begin{enumerate}
+% 	\item 
+% 	\item 
+% 	\item 
+% 	\item 
+% 	\item 
+% \end{enumerate}
 
-\subsection*{G モナド}
+% \subsection*{G モナド}
 
-\begin{enumerate}
-	\item 
-	\item 
-	\item 
-	\item 
-	\item 
-\end{enumerate}
+% \begin{enumerate}
+% 	\item 
+% 	\item 
+% 	\item 
+% 	\item 
+% 	\item 
+% \end{enumerate}
 
-\subsection*{H グロタンディーク・ファイブレーション}
+% \subsection*{H グロタンディーク・ファイブレーション}
 
-\begin{enumerate}
-	\item 
-	\item 
-	\item 
-	\item 
-	\item 
-\end{enumerate}
+% \begin{enumerate}
+% 	\item 
+% 	\item 
+% 	\item 
+% 	\item 
+% 	\item 
+% \end{enumerate}
 
 
 
-\clearpage
+% \clearpage
 
 \end{document}
