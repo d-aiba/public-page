@@ -172,16 +172,17 @@
 	\vspace{8pt}
 	\begin{center}
 		\begin{tikzcd}[row sep=5pt,column sep=38pt]
-			\textrm{(real-world system)} \ar[r,"\textrm{formalize}"] & \fbox{formal model} \ar[dr,"\textrm{input}"] & {} & {} \\
+			\textrm{(real-world system)} \ar[r,"\textrm{formalize}"] & \fbox{formal model} \ar[dr,"\textrm{input}" sloped] & {} & {} \\
 			& & \doublebox{model checker} \ar[r,"\textrm{output}"] & ~\textrm{\ding{51}\;or\;\ding{55}}~ \\
-			\textrm{(requirement)} \ar[r,"\textrm{formalize}"'] & \fbox{formal specification} \ar[ur,"\textrm{input}"'] & {} & {}
+			\textrm{(requirement)} \ar[r,"\textrm{formalize}"'] & \fbox{formal specification} \ar[ur,"\textrm{input}"' sloped] & {} & {}
 		\end{tikzcd}
 	\end{center}
 	\vspace{8pt}
 \end{framed}
 %
 %
-\noindent 仕様 $\varphi$ は典型的には、時相論理式（例えば $\mathbf{G}\,(\mathit{req}\to\mathbf{F}\,\mathit{resp})$「リクエストが生じたらレスポンスが返ってくる」など）で書かれることが多いですが、
+\noindent 仕様 $\varphi$ は典型的には、時相論理式（例えば $\mathbf{G}\,(p\to\mathbf{F}\,q)$「リクエスト$p$が生じたらレスポンス$q$が返ってくる」など）で書かれることが多いですが、
+% \noindent 仕様 $\varphi$ は典型的には、時相論理式（例えば $\mathbf{G}\,(\mathit{req}\to\mathbf{F}\,\mathit{resp})$「リクエストが生じたらレスポンスが返ってくる」など）で書かれることが多いですが、
 本記事では特定の形式化にはあまり限定せずに、
 一般論を展開することを目指します。
 
