@@ -204,7 +204,7 @@
 \textgt{なぜ圏論を使うのか}について説明しておきます。
 \vspace{10pt}\\
 % \noindent 圏論とは、抽象化や構造の図式化をもたらす「\textgt{数学的な言語}」です。純粋数学や情報科学など多くの分野で使われます。%\\圏論を使うと様々な数学的対象を統一して扱うことができ、よりよい手法の考案に役立ちます。
-\noindent 圏論とは、数学の概念を抽象化して統一的に記述するための「言語」です。圏論を使うと、様々な数学的対象の共通点を見出して、俯瞰的に議論することができるようになります。また、そのような一般化・抽象化は、特にコンピューターサイエンスでは、「\textgt{よりよい手法の考案}」に繋がります。
+\noindent 圏論とは、数学の概念を抽象化して統一的に記述するための「言語」です。圏論を使うと、様々な数学的対象の共通点を見出して、俯瞰的に議論することができるようになります。また、特にコンピューターサイエンスにおいては、そのような一般化・抽象化は、「\textgt{よりよい手法の考案}」に繋がります。
 \vspace{10pt}\\
 % \noindent 特に、コンピューターサイエンスの研究の現場では、圏論は以下のようなしかたで使われることがよくあります。\\
 \noindent 現代において情報システムが急速に複雑化・多様化するなか、単一の理論的パラダイムにのみ特化した手法を追究し続けるのでは、変化に対処しきれません。それに対し、\textgt{情報科学における圏論的手法の強み}は、抽象的・俯瞰的であるがゆえに、分野の動向や理論的パラダイムに変化が生じた場合にも、\textgt{既存の議論や知見を再編することで新たな問題設定に柔軟に適応できる}という点にあると言えます。そのため、圏論を用いた俯瞰的視座から形式検証の問題群に取り組むことは、この分野の理論的発展にとって非常に有益です。
@@ -217,7 +217,7 @@
 	\item その問題を、いったん\textgt{具体的な問題設定}のまま解いて、定理（数学的主張）の形で述べ、証明を書く
 	\item 出来上がった証明を眺め直して、その定理を圏論的にうまく\textgt{抽象化}する方法を模索する
 	\item 圏論的な抽象化を行う過程で、定理が成り立つための条件の「\textgt{より良い公理化}」を行う
-	\item それを別の\textgt{具体的状況にも適用}できるか考えるうちに、当初は見えなかった良い\textgt{応用}が見つかる
+	\item その公理を別の\textgt{具体的状況にも適用}できるか考えるうちに、当初は見えなかった良い\textgt{応用}が見つかる
 	\item パンチの効いた\textgt{応用事例}と\textgt{実験結果}を含めて、成果を論文に書く（表向きは圏論を使わないこともある！）
 \end{enumerate}
 \end{framed}
@@ -3887,7 +3887,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 				\end{tikzcd}
 		\end{small}
 	\end{center} \vspace{3pt}
-	\item $f:X\to Y$ に対し、述語変換子 $\left(\begin{array}{cccc}f^\ast:&2^Y&\longrightarrow & 2^X\\[-2pt]&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\[-2pt]& (X\xrightarrow{q}2)&\mapsto & (X\xrightarrow{f^\ast(q)}2) \end{array}\right)$ を \vspace{10pt} \\ $f^\ast:2^Y\to 2^X$, $f^\ast(Q)=\{x\in X\mid f(x)\in Q\}$ で定めます。\vspace{5pt}
+	\item $f:X\to Y$ に対し、述語変換子 $\left(\begin{array}{cccc}f^\ast:&2^Y&\longrightarrow & 2^X\\[-2pt]&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\[-2pt] & (Y\xrightarrow{q}2)&\mapsto & (X\xrightarrow{f^\ast(q)}2) \end{array}\right)$ を \vspace{10pt} \\ $f^\ast:2^Y\to 2^X$, $f^\ast(Q)=\{x\in X\mid f(x)\in Q\}$ で定めます。\vspace{5pt}
 	\item いま、以下の関数を定めましょう。\vspace{3pt}\\ 
 	% $\exists_c:2^X\to 2^Y$, $\exists_c(P)=\{f(x)\in Y\mid x\in P\}=\{y\in Y \mid \exists\, x\in X,\; f(x)=y\;\textrm{and}\;x\in P\}$
 	$\begin{array}{lccl}\exists_f:2^X\to 2^Y,&\exists_f(P)&\!\!=\!\!&\{f(x)\in Y\mid x\in P\}\\&&\!\!=\!\!&\{y\in Y \mid \exists\, x\in X\; (f(x)=y\;\textrm{and}\;x\in P)\}\\\forall_f:2^X\to 2^Y,& \forall_f(P)&\!\!=\!\!&\{y\in Y\mid f^\ast(\{y\})\subseteq P\}\\&&\!\!=\!\!&\{y\in Y\mid\forall\,x\in X\;(f(x)=y\;\textrm{implies}\;x\in P)\}\end{array}$ \vspace{5pt}
@@ -3914,6 +3914,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		% \end{prooftree}
 		\end{center}
 	\end{small}
+	なお、これらは、逆像 $f^\ast(Q)=f^{-1}(Q)$, 直像 $\exists_f(P)=f(P)$, そして $\forall_f(P)=Y\setminus f(X\setminus P)$ です。
 \end{itemize}
 
 \clearpage
@@ -3942,9 +3943,9 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\item さて、述語変換子 $\left(\begin{array}{cccc}f^\ast:&2^Y&\longrightarrow & 2^X\\[-2pt]&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\[-2pt]& (X\xrightarrow{q}2)&\longmapsto &  (X\xrightarrow{f^\ast(q)}2) \end{array}\right)$ をどうやって手に入れればよいでしょうか？ \vspace{15pt} \\ 以下のようにして得られます。（上段が入力、下段が出力です。）\vspace{5pt}
 	\begin{prooftree}
 		\AXC{$q:Y\to 2$,\; post-condition}
-		\UIC{$\left(\begin{array}{cccccccc}f^\ast(q):&X&\xrightarrow{~f~}&\mathcal PY&\xrightarrow{\;\mathcal P q\;}&\mathcal P2&\xrightarrow[\textrm{modality}]{\tau}&2 \\[-6pt] & \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[-4pt] & x & \longmapsto & \{x_1,\dots,\,x_n\} & \longmapsto & \{q(x_1),\dots,\,q(x_n)\} & \longmapsto & 0 \textrm{ or } 1 \end{array}\right)$} 
+		\UIC{$\left(\begin{array}{cccccccc}f^\ast(q):&X&\xrightarrow{~f~}&\mathcal PY&\xrightarrow{\;\mathcal P q\;}&\mathcal P2&\xrightarrow[\textrm{modality}]{\tau}&2 \\[-6pt] & \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[-4pt] & x & \longmapsto & \{y_1,\dots,\,y_n\} & \longmapsto & \{q(y_1),\dots,\,q(y_n)\} & \longmapsto & 0 \textrm{ or } 1 \end{array}\right)$} 
 	\end{prooftree} \vspace{5pt}
-	\item 計算 $f:X\to\mathcal PY$ に対し、\\ 述語変換子 $f^\ast$ は、様相 $\tau:\mathcal P2\to 2$（パラメーターマップとも呼ばれる）の選び方に拠って決まります。\\ 具体的には、$f^\ast$ (backward predicate transformer) を以下の2通りの異なるしかたで定義しましょう。 \\$\Box_f(-):2^Y\to 2^X,\,q\mapsto\{x\in X\mid \forall y\in Y\;(x\to y\textrm{ implies } y\in q)\}$ \\ $\Diamond_f(-):2^Y\to 2^X,\,q\mapsto\{x\in X \mid \exists y\in Y \;( x\to y \textrm{ and } y\in q)\}$ \vspace{5pt}
+	\item $f:X\to\mathcal PY$ に対し、\\ 述語変換子 $f^\ast$ は、様相 $\tau:\mathcal P2\to 2$（パラメーターマップとも呼ばれる）の選び方に拠って決まります。\\ 具体的には、$f^\ast$ (backward predicate transformer) を以下の2通りの異なるしかたで定義しましょう。 \\$\Box_f(-):2^Y\to 2^X,\,q\mapsto\{x\in X\mid \forall y\in Y\;(x\to y\textrm{ implies } y\in q)\}$ \\ $\Diamond_f(-):2^Y\to 2^X,\,q\mapsto\{x\in X \mid \exists y\in Y \;( x\to y \textrm{ and } y\in q)\}$ \vspace{5pt}
 	\item ここで、以下の関数 (forward predicate transformer) を定めましょう。\\ $\exists_f:2^X\to 2^Y$, $p\mapsto \{y\in Y\mid \exists \, x\in X\;(x\to y \textrm{ and } x\in p)\}$ \\ $\forall_f:2^X\to 2^Y$, $p\mapsto \{y\in Y\mid \forall \, x\in X\;(x\to y \textrm{ implies } x\in p)\}$ \vspace{5pt}
 	\item このとき、$\exists_f\dashv \Box_f$ および $\Diamond_f\dashv\forall_f$ がともに成り立ちます。%（後者は実はあまり使わないが）
 	\begin{center}
@@ -4011,10 +4012,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\item さて、述語変換子 $f^\ast:[0,1]^Y\to[0,1]^X$ をどうやって手に入れればよいでしょうか？\vspace{2pt} \\ 以下のようにして得られます。（上段が入力、下段が出力です。）\vspace{5pt} 
 	\begin{prooftree}
 		\AXC{$q:Y\to[0,1]$,\; post-condition}
-		\UIC{$\left(\begin{array}{cccccccc} f^\ast(q): & X & \xrightarrow{~f~} & \mathcal DY & \xrightarrow{\;\mathcal Dq\;} & \mathcal D[0,1] & \xrightarrow[=Av]{\tau}& [0,1] \\[-3pt] &\rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[-3pt] & x & \longmapsto & \sum p_i\Ket{x_i} & \longmapsto & \sum p_i\Ket{q(x_i)} & \longmapsto & \sum p_i\cdot q(x_i) \end{array}\right)$}
+		\UIC{$\left(\begin{array}{cccccccc} f^\ast(q): & X & \xrightarrow{~f~} & \mathcal DY & \xrightarrow{\;\mathcal Dq\;} & \mathcal D[0,1] & \xrightarrow[=Av]{\tau}& [0,1] \\[-3pt] &\rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[-3pt] & x & \longmapsto & \sum p_i\Ket{y_i} & \longmapsto & \sum p_i\Ket{q(y_i)} & \longmapsto & \sum p_i\cdot q(y_i) \end{array}\right)$}
 	\end{prooftree} \vspace{5pt}
-	\item $f:X\to\mathcal PY$ に対し、述語変換子 $f^\ast:[0,1]^Y\to[0,1]^X$ を以下で定義しましょう。 \[f^\ast(q)(x)=\sum_{x'\in X}f(x)(x')\cdot q(x')\] 
-	つまり、$f^\ast(q)$ は、各 $x$ に対し、$q$ による値の期待値 $p_1 \cdot q(x_1) + p_2 \cdot q(x_2) + \cdots$ を割り当てます。
+	\item $f:X\to\mathcal PY$ に対し、述語変換子 $f^\ast:[0,1]^Y\to[0,1]^X$ を以下で定義しましょう。 \[f^\ast(q)(x)=\sum_{y_i\in Y}f(x)(y_i)\cdot q(y_i)\] 
+	つまり、$f^\ast(q)$ は、各 $x$ に対し、$q$ による値の期待値 $p_1 \cdot q(x_1) + p_2 \cdot q(x_2) + \cdots$ を返します。
 	\begin{center}	
 		\begin{small}
 			\begin{tikzcd}[row sep=8pt]
@@ -4024,8 +4025,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			\end{tikzcd}
 		\end{small}
 	\end{center}
-	\item なお、この $f^\ast$ は、左右いずれの随伴も持ちません。
-	\\ （随伴がないと不便な場面がいろいろあるのですが、対応策としては、米田埋め込みを使う方法があります。詳細は省略しますが、ざっくりとしたアイデアとしては、おおむね下の図の通りです。やや複雑な話なので、読み飛ばして構いません。）
+	\item なお、この $f^\ast$ は、一般には左右いずれの随伴も持ちません。
+	\\ （随伴がないと不便な場面がいろいろあるのですが、対応策としては、米田埋め込みを使って$f^\ast$ から $\widehat{f^\ast}$ を構成する方法があります。詳細は省略しますが、ざっくりとしたアイデアとしては、おおむね下の図の通りです。やや複雑な話なので、読み飛ばして構いません。）
 	\begin{center}
 		% \hspace*{-50pt}
 		\begin{tikzcd}[column sep=68pt,row sep=40pt]
@@ -4037,7 +4038,16 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			\widehat L \ar[r,"\Lan_y(y\,\circ\, f^\ast)"'] & \widehat L \ar[l,bend right=22pt,"\exists g"',"\top"] \\
 			L \ar[r,"f^\ast"'] \ar[u,"y"] & L \ar[u,"y"']
 		\end{tikzcd}\vspace{8pt}\\
-			$\Lan_y(h)(P)=\bigsqcup_{x\in P}h(x),\qquad \Lan_y(y\circ f^\ast)(P)=\{z\in L\mid\exists\,x\in P,\;z\sqsubseteq f^\ast(x)\}$
+			% $\Lan_y(h)(P)=\bigsqcup_{x\in P}h(x),\qquad \Lan_y(y\circ f^\ast)(P)=\{z\in L\mid\exists\,x\in P,\;z\sqsubseteq f^\ast(x)\}$\\
+			% $=\{f^\ast(x)\mid x\in P\}^\downarrow$
+			%%%
+			$\Lan_y(h)(P)=\bigsqcup_{x\in P}h(x), \qquad\qquad 
+			\begin{array}{rrl}
+					\widehat{f^\ast}&:=&\Lan_y(y\circ f^\ast)(P)\\ 
+					&=&\{z\in L\mid z\sqsubseteq f^\ast(x)\;\textrm{for some}\;x\in P\}\\
+					% &=&\{f^\ast(x)\mid x\in P\}^\downarrow
+					&=& \bigsqcup_{x\in P} f^{\ast}(x)^\downarrow
+				\end{array}$
 	\end{center}
 \end{itemize}
 \vspace{5pt}
