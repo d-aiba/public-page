@@ -170,7 +170,7 @@
 
 \begin{framed}
 	\noindent 【見取り図】
-	\vspace{5pt}
+	\vspace{8pt}
 	% \begin{center}
 	% 	\begin{tikzcd}[row sep=15pt,column sep=38pt]
 	% 		\textrm{(real-world system)} \ar[r,"\textrm{formalize}"] & \fbox{formal model} \ar[dr,"\textrm{input}" sloped] & {} & {} \\
@@ -182,7 +182,7 @@
 		\begin{tikzcd}[row sep=3pt,column sep=36pt]
 			\textrm{(real-world system)} \ar[r,"\textrm{formalize}"] & \framebox[9.5em]{\rule{0pt}{1.5ex} $\substack{\displaystyle\textrm{formal model}\\[5pt]\displaystyle\mathcal M}$} \ar[dr,"\textrm{input}" sloped] & {} & {} \\
 			& & \doublebox{~~~$\substack{\displaystyle\textrm{model checker}\\[5pt]\displaystyle\mathcal M\models\varphi\;?}$~~~} \ar[r,"\textrm{output}"'] & ~\textrm{\ding{51}\;or\;\ding{55}}~ \\
-			~~~\textrm{(requirement)}~~~ \ar[r,"\textrm{formalize}"'] & \framebox[9.5em]{\rule{0pt}{1.5ex} $\substack{\displaystyle\textrm{formal specification}\\[5pt]\displaystyle\varphi}$} \ar[ur,"\textrm{input}"' sloped] & {} & {}
+			~~~\;\textrm{(requirement)}\;~~~ \ar[r,"\textrm{formalize}"'] & \framebox[9.5em]{\rule{0pt}{1.5ex} $\substack{\displaystyle\textrm{formal specification}\\[5pt]\displaystyle\varphi}$} \ar[ur,"\textrm{input}"' sloped] & {} & {}
 		\end{tikzcd}
 	\end{center}
 	\vspace{10pt}
@@ -3890,7 +3890,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\item $f:X\to Y$ に対し、述語変換子 $\left(\begin{array}{cccc}f^\ast:&2^Y&\longrightarrow & 2^X\\[-2pt]&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\[-2pt]& (X\xrightarrow{q}2)&\mapsto & (X\xrightarrow{f^\ast(q)}2) \end{array}\right)$ を \vspace{10pt} \\ $f^\ast:2^Y\to 2^X$, $f^\ast(Q)=\{x\in X\mid f(x)\in Q\}$ で定めます。\vspace{5pt}
 	\item いま、以下の関数を定めましょう。\vspace{3pt}\\ 
 	% $\exists_c:2^X\to 2^Y$, $\exists_c(P)=\{f(x)\in Y\mid x\in P\}=\{y\in Y \mid \exists\, x\in X,\; f(x)=y\;\textrm{and}\;x\in P\}$
-	$\begin{array}{lccl}\exists_f:2^X\to 2^Y,&\exists_f(P)&\!\!=\!\!&\{f(x)\in Y\mid x\in P\}\\&&\!\!=\!\!&\{y\in Y \mid \exists\, x\in X,\; f(x)=y\;\textrm{and}\;x\in P\}\\\forall_f:2^X\to 2^Y,& \forall_f(P)&\!\!=\!\!&\{y\in Y\mid f^\ast(\{y\})\subseteq P\}\\&&\!\!=\!\!&\{y\in Y\mid\forall\,x\in X,\;f(x)=y\;\textrm{implies}\;x\in P\}\end{array}$ \vspace{5pt}
+	$\begin{array}{lccl}\exists_f:2^X\to 2^Y,&\exists_f(P)&\!\!=\!\!&\{f(x)\in Y\mid x\in P\}\\&&\!\!=\!\!&\{y\in Y \mid \exists\, x\in X\; (f(x)=y\;\textrm{and}\;x\in P)\}\\\forall_f:2^X\to 2^Y,& \forall_f(P)&\!\!=\!\!&\{y\in Y\mid f^\ast(\{y\})\subseteq P\}\\&&\!\!=\!\!&\{y\in Y\mid\forall\,x\in X\;(f(x)=y\;\textrm{implies}\;x\in P)\}\end{array}$ \vspace{5pt}
 	\item このとき、$\exists_f\dashv f^\ast\dashv \forall_f$ が成り立ちます。%\\（これはまさに、トポスの基本定理 (the fundamental theorem of topos) として知られるものと同等です。）
 	\begin{center}
 		% \begin{tikzcd}[column sep=30pt]
@@ -3924,7 +3924,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{itemize}
 	\item 真理値の集合を $\Omega=2=\{0,1\}$ とします。
 	\item 考えるべき完備束 $L=\Omega^X$ は、以下の通りです。 \begin{center}$L=2^X=\{q:X\to 2,\textrm{ predicates}\}$\\\qquad\qquad$\ni\,\bot \,(\textrm{everywhere false}),\top\,(\textrm{everywhere true})$ \end{center} （ここまでは一つ前の例と同じです。）\vspace{5pt}
-	\item ここで、$f:X\to\mathcal PY$ という計算を考えます。\\（なお、$Y=X$ の場合、以下のような余代数です。）\vspace{5pt} %\\ 
+	\item ここで、$f:X\to\mathcal PY$ という非決定的な計算効果を持つ計算を考えます。\\（なお、$Y=X$ の場合、以下のような余代数です。）\vspace{5pt} %\\ 
 	\begin{center}
 	% \begin{small}
 		$\left(\begin{array}{cccccc} c:&X & \longrightarrow & \mathcal PX\\[-1pt] &\rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$}\\[-2pt] &x & \mapsto & c(x)&=&\{x'\mid x\leadsto x'\} \end{array}~\textrm{Kripke structure}\right)$
@@ -3944,18 +3944,18 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\AXC{$q:Y\to 2$,\; post-condition}
 		\UIC{$\left(\begin{array}{cccccccc}f^\ast(q):&X&\xrightarrow{~f~}&\mathcal PY&\xrightarrow{\;\mathcal P q\;}&\mathcal P2&\xrightarrow[\textrm{modality}]{\tau}&2 \\[-6pt] & \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[-4pt] & x & \longmapsto & \{x_1,\dots,\,x_n\} & \longmapsto & \{q(x_1),\dots,\,q(x_n)\} & \longmapsto & 0 \textrm{ or } 1 \end{array}\right)$} 
 	\end{prooftree} \vspace{5pt}
-	\item $f:X\to\mathcal PY$ に対し、\\ 述語変換子 $f^\ast$ は、様相 $\tau:\mathcal P2\to 2$（パラメーターマップとも呼ばれる）の選び方に拠って決まります。\\ $f^\ast$ を以下のように2通りの異なるしかたで定めることができます。 \\$\Box_f(-):2^Y\to 2^X,\,q\mapsto\{x\in X\mid \forall y\in Y\,(x\to y\textrm{ implies } y\in q)\}$ \\ $\Diamond_f(-):2^Y\to 2^X,\,q\mapsto\{x\in X \mid \exists y\in Y \, ( x\to y \textrm{ and } y\in q)\}$ \vspace{5pt}
-	\item いま、以下の関数を定めましょう。\\ $\exists_f:2^X\to 2^Y$, $p\mapsto \{y\in Y\mid \exists \, x\in X,\,x\to y \textrm{ and } x\in p\}$ \\ $\forall_f:2^X\to 2^Y$, $p\mapsto \{y\in Y\mid \forall \, x\in X,\,x\to y \textrm{ implies } x\in p\}$ \vspace{5pt}
-	\item このとき、$\exists_f\dashv \Box_f$ および $\Diamond_f\dashv\forall_f$ がともに成り立ちます。
+	\item 計算 $f:X\to\mathcal PY$ に対し、\\ 述語変換子 $f^\ast$ は、様相 $\tau:\mathcal P2\to 2$（パラメーターマップとも呼ばれる）の選び方に拠って決まります。\\ 具体的には、$f^\ast$ (backward predicate transformer) を以下の2通りの異なるしかたで定義しましょう。 \\$\Box_f(-):2^Y\to 2^X,\,q\mapsto\{x\in X\mid \forall y\in Y\;(x\to y\textrm{ implies } y\in q)\}$ \\ $\Diamond_f(-):2^Y\to 2^X,\,q\mapsto\{x\in X \mid \exists y\in Y \;( x\to y \textrm{ and } y\in q)\}$ \vspace{5pt}
+	\item ここで、以下の関数 (forward predicate transformer) を定めましょう。\\ $\exists_f:2^X\to 2^Y$, $p\mapsto \{y\in Y\mid \exists \, x\in X\;(x\to y \textrm{ and } x\in p)\}$ \\ $\forall_f:2^X\to 2^Y$, $p\mapsto \{y\in Y\mid \forall \, x\in X\;(x\to y \textrm{ implies } x\in p)\}$ \vspace{5pt}
+	\item このとき、$\exists_f\dashv \Box_f$ および $\Diamond_f\dashv\forall_f$ がともに成り立ちます。%（後者は実はあまり使わないが）
 	\begin{center}
 		\begin{tikzcd}[column sep=45pt]
 			2^X \ar[r,bend left=30pt,"\exists_f","\bot"']  & 2^Y \ar[l,"\Box_f"]
 		\end{tikzcd}
-		\qquad\quad
+		\qquad\qquad
 		\begin{tikzcd}[column sep=45pt]
 			2^X  \ar[r,bend right=30pt,"\forall_f"',"\bot"] & 2^Y \ar[l,"\Diamond_f"']
 		\end{tikzcd}
-	\end{center} \vspace{0pt}
+	\end{center} \vspace{-8pt}
 	%
 	\begin{small}
 	\begin{center}
@@ -3963,13 +3963,17 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\AXC{$\exists_f(P)\sqsubseteq Q$ in $2^Y$} \doubleLine
 		\UIC{$P\sqsubseteq \Box_f(Q)$ in $2^X$}
 		\DisplayProof
-		\; and \;
+		% \; and \;
+		\qquad\qquad
 		\AXC{$\Diamond_f(Q)\sqsubseteq P$ in $2^X$} \doubleLine
 		\UIC{$Q\sqsubseteq \forall_f(P)$ in $2^Y$}
 		\DisplayProof
 		% \end{prooftree}
 		\end{center}
 	\end{small}
+	\vspace{5pt}
+	\noindent なお、これらは、一階述語論理でよく知られている、以下の2つの性質をそれぞれ抽象化したものです。
+	\[(\exists x.\, P(x))\Rightarrow Q ~\cong~ \forall x.\,(P(x)\Rightarrow Q)\qquad\qquad (\forall x.\,P(x))\Rightarrow Q ~\cong~ \exists x.\,(P(x)\Rightarrow Q)\]
 \end{itemize}
 
 \clearpage
@@ -4009,7 +4013,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\AXC{$q:Y\to[0,1]$,\; post-condition}
 		\UIC{$\left(\begin{array}{cccccccc} f^\ast(q): & X & \xrightarrow{~f~} & \mathcal DY & \xrightarrow{\;\mathcal Dq\;} & \mathcal D[0,1] & \xrightarrow[=Av]{\tau}& [0,1] \\[-3pt] &\rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[-3pt] & x & \longmapsto & \sum p_i\Ket{x_i} & \longmapsto & \sum p_i\Ket{q(x_i)} & \longmapsto & \sum p_i\cdot q(x_i) \end{array}\right)$}
 	\end{prooftree} \vspace{5pt}
-	\item $f:X\to\mathcal PY$ に対し、述語変換子 $f^\ast:[0,1]^Y\to[0,1]^X$ は以下で定義されます。 \[f^\ast(q)(x)=\sum_{x'\in X}f(x)(x')\cdot q(x')\] 
+	\item $f:X\to\mathcal PY$ に対し、述語変換子 $f^\ast:[0,1]^Y\to[0,1]^X$ を以下で定義しましょう。 \[f^\ast(q)(x)=\sum_{x'\in X}f(x)(x')\cdot q(x')\] 
 	つまり、$f^\ast(q)$ は、各 $x$ に対し、$q$ による値の期待値 $p_1 \cdot q(x_1) + p_2 \cdot q(x_2) + \cdots$ を割り当てます。
 	\begin{center}	
 		\begin{small}
