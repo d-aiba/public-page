@@ -169,17 +169,25 @@
 \end{align*}
 
 \begin{framed}
-	\vspace{8pt}
+	\noindent 【見取り図】
+	\vspace{5pt}
+	% \begin{center}
+	% 	\begin{tikzcd}[row sep=15pt,column sep=38pt]
+	% 		\textrm{(real-world system)} \ar[r,"\textrm{formalize}"] & \fbox{formal model} \ar[dr,"\textrm{input}" sloped] & {} & {} \\
+	% 		& & \doublebox{model checker} \ar[r,"\textrm{output}"'] & ~\textrm{\ding{51}\;or\;\ding{55}}~ \\
+	% 		\textrm{(requirement)} \ar[r,"\textrm{formalize}"'] & \fbox{formal specification} \ar[ur,"\textrm{input}"' sloped] & {} & {}
+	% 	\end{tikzcd}
+	% \end{center}
 	\begin{center}
-		\begin{tikzcd}[row sep=8pt,column sep=38pt]
-			\textrm{(real-world system)} \ar[r,"\textrm{formalize}"] & \fbox{formal model} \ar[dr,"\textrm{input}" sloped] & {} & {} \\
-			& & \doublebox{model checker} \ar[r,"\textrm{output}"'] & ~\textrm{\ding{51}\;or\;\ding{55}}~ \\
-			\textrm{(requirement)} \ar[r,"\textrm{formalize}"'] & \fbox{formal specification} \ar[ur,"\textrm{input}"' sloped] & {} & {}
+		\begin{tikzcd}[row sep=3pt,column sep=36pt]
+			\textrm{(real-world system)} \ar[r,"\textrm{formalize}"] & \framebox[9.5em]{\rule{0pt}{1.5ex} $\substack{\displaystyle\textrm{formal model}\\[5pt]\displaystyle\mathcal M}$} \ar[dr,"\textrm{input}" sloped] & {} & {} \\
+			& & \doublebox{~~~$\substack{\displaystyle\textrm{model checker}\\[5pt]\displaystyle\mathcal M\models\varphi\;?}$~~~} \ar[r,"\textrm{output}"'] & ~\textrm{\ding{51}\;or\;\ding{55}}~ \\
+			~~~\textrm{(requirement)}~~~ \ar[r,"\textrm{formalize}"'] & \framebox[9.5em]{\rule{0pt}{1.5ex} $\substack{\displaystyle\textrm{formal specification}\\[5pt]\displaystyle\varphi}$} \ar[ur,"\textrm{input}"' sloped] & {} & {}
 		\end{tikzcd}
 	\end{center}
-	\vspace{8pt}
+	\vspace{10pt}
 \end{framed}
-\vspace{3pt}
+\vspace{5pt}
 
 
 \noindent 仕様 $\varphi$ は典型的には、時相論理式（例えば $\mathbf{G}\,(p\to\mathbf{F}\,q)$「リクエスト$p$が生じたらレスポンス$q$が返ってくる」など）で書かれることが多いですが、
@@ -860,7 +868,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{multicols}
 \end{itemize}
 % \vspace{5pt}
-\vspace{15pt}
+\vspace{18pt}
 
 さて、本章でこれまで扱ってきた述語変換子の考え方は、圏論の言葉を使うととても見通しがよくなります。そのための準備として、次章では、圏論の関手を使ってプログラムの振舞いを捉える方法について紹介します。%（すでに「余代数」や「モナド」や「グロタンディーク・ファイブレーション」のことは知っているよ、という人は\ref{sec:categorical-weakest-precondition}章へ飛んでください。）
 \clearpage
