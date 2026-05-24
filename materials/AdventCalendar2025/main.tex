@@ -154,7 +154,7 @@
 			\item \textgt{対話型定理証明} (interactive theorem proving): Lean, Rocq/Coq, Agda, など \\ $\cdots$数学的な証明を書くためのソフトウェア。
 			\item \textgt{自動定理証明} (automatic theorem proving): SAT/SMT solvers など \\ $\cdots$形式的な仕様が与えられると、証明や反例を探索し、その性質が成り立つかどうかを判定する。\vspace{8pt}
 		\end{itemize}
-		\item \textgt{モデル検査} (model checking): \\ $\cdots$正しさの問題 (correctness problem) を、状態遷移システムに関する問題に帰着させ、その問題を \\~~~~\,状態遷移システムについての（広い意味で``グラフ理論的''な）アルゴリズムを使って解く。%\\~~~~（ここでの ``グラフ理論的'' とは、状態遷移システム (transition system) といった広い意味で。）
+		\item \textgt{モデル検査} (model checking): \\ $\cdots$正しさの問題 (correctness problem) を、状態遷移システム（有向グラフ）に関する問題に帰着させ、 \\~~~~\,その問題を、状態遷移システムに関する（広い意味で``グラフ理論的''な）アルゴリズムを使って解く。%\\~~~~（ここでの ``グラフ理論的'' とは、状態遷移システム (transition system) といった広い意味で。）
 		% \item \textgt{モデル検査} (model checking): \\ $\cdots$正しさの問題 (correctness problem) を、``グラフ理論的な問題''に帰着させ、\\~~~~\,``グラフ・アルゴリズム''を使ってその問題を解く。\\~~~~（ここでの ``グラフ理論的'' とは、状態遷移システム (transition system) といった広い意味で。）
 	\end{enumerate}
 \end{itemize}
@@ -171,7 +171,7 @@
 \begin{framed}
 	\vspace{8pt}
 	\begin{center}
-		\begin{tikzcd}[row sep=5pt,column sep=38pt]
+		\begin{tikzcd}[row sep=8pt,column sep=38pt]
 			\textrm{(real-world system)} \ar[r,"\textrm{formalize}"] & \fbox{formal model} \ar[dr,"\textrm{input}" sloped] & {} & {} \\
 			& & \doublebox{model checker} \ar[r,"\textrm{output}"'] & ~\textrm{\ding{51}\;or\;\ding{55}}~ \\
 			\textrm{(requirement)} \ar[r,"\textrm{formalize}"'] & \fbox{formal specification} \ar[ur,"\textrm{input}"' sloped] & {} & {}
@@ -194,12 +194,13 @@
 
 \noindent とりわけ本記事では「\kenten{圏論を使ったモデル検査}」を紹介するのですが、
 \textgt{なぜ圏論を使うのか}について説明しておきます。
-\vspace{6pt}\\
-\noindent 圏論とは、抽象化や構造の図式化をもたらす「\textgt{数学的な言語}」です。純粋数学や情報科学など多くの分野で使われます。
-\vspace{6pt}\\
+\vspace{10pt}\\
+% \noindent 圏論とは、抽象化や構造の図式化をもたらす「\textgt{数学的な言語}」です。純粋数学や情報科学など多くの分野で使われます。%\\圏論を使うと様々な数学的対象を統一して扱うことができ、よりよい手法の考案に役立ちます。
+\noindent 圏論とは、数学の概念を抽象化して統一的に記述するための「言語」です。圏論を使うと、様々な数学的対象の共通点を見出して、俯瞰的に議論することができるようになります。また、そのような一般化・抽象化は、特にコンピューターサイエンスでは、「\textgt{よりよい手法の考案}」に繋がります。
+\vspace{10pt}\\
 % \noindent 特に、コンピューターサイエンスの研究の現場では、圏論は以下のようなしかたで使われることがよくあります。\\
-\noindent 現代において情報システムが急速に複雑化・多様化するなか、単一の理論的パラダイムにのみ特化した手法を追究し続けるのでは、変化に対処しきれません。それに対し、\textgt{情報科学における圏論的手法の強み}は、抽象的・俯瞰的であるがゆえに、分野の動向や理論的パラダイムに変化が生じた場合にも、\textgt{既存の議論や知見を再編することで新たな問題設定に柔軟に適応できる}という点にあると言えます。そのため、圏論を用いた俯瞰的視座から形式検証の問題群に取り組むことは、分野の理論的発展にとって非常に有用です。
-\vspace{3pt}
+\noindent 現代において情報システムが急速に複雑化・多様化するなか、単一の理論的パラダイムにのみ特化した手法を追究し続けるのでは、変化に対処しきれません。それに対し、\textgt{情報科学における圏論的手法の強み}は、抽象的・俯瞰的であるがゆえに、分野の動向や理論的パラダイムに変化が生じた場合にも、\textgt{既存の議論や知見を再編することで新たな問題設定に柔軟に適応できる}という点にあると言えます。そのため、圏論を用いた俯瞰的視座から形式検証の問題群に取り組むことは、この分野の理論的発展にとって非常に有益です。
+\vspace{8pt}
 
 \begin{framed}
 \noindent 【コンピューターサイエンスにおける圏論の使い方（の一例）】
@@ -870,7 +871,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 本章で紹介する\textgt{余代数} (coalgebra) は、そのように、多様な状態遷移システム（例: 二分木グラフ、ストリーム、クリプキフレーム、オートマトン、マルコフ連鎖、マルコフ決定過程、etc.）を扱う際にとても役立つ道具です。
 
-\subsection{余代数の定義と例：グラフにおける「1ステップの状態遷移」をとらえる}
+\subsection{余代数：グラフにおける「1ステップの状態遷移」をとらえる}
 \label{subsec:def-and-example-of-coalgebra}
 
 \noindent まずは、\textgt{余代数} (coalgebra) および\textgt{余代数準同型} (coalgebra homomorphism) を定義します。
