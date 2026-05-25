@@ -192,7 +192,7 @@
 
 \noindent 仕様 $\varphi$ は典型的には、時相論理式（例えば $\mathbf{G}\,(p\to\mathbf{F}\,q)$「リクエスト$p$が生じたらレスポンス$q$が返ってくる」など）で書かれることが多いですが、
 % \noindent 仕様 $\varphi$ は典型的には、時相論理式（例えば $\mathbf{G}\,(\mathit{req}\to\mathbf{F}\,\mathit{resp})$「リクエストが生じたらレスポンスが返ってくる」など）で書かれることが多いですが、
-本記事では特定の形式化にはあまり限定せずに、
+本記事では特定の形式化には限定せずに、
 一般論を展開することを目指します。
 
 % \vspace{18pt}
@@ -207,7 +207,7 @@
 \noindent 圏論とは、数学の概念を抽象化して統一的に記述するための「言語」です。圏論を使うと、様々な数学的対象の共通点を見出して、俯瞰的に議論することができるようになります。また、特にコンピューターサイエンスにおいては、そのような一般化・抽象化は、「\textgt{よりよい手法の考案}」に繋がります。
 \vspace{10pt}\\
 % \noindent 特に、コンピューターサイエンスの研究の現場では、圏論は以下のようなしかたで使われることがよくあります。\\
-\noindent 現代において情報システムが急速に複雑化・多様化するなか、単一の理論的パラダイムにのみ特化した手法を追究し続けるのでは、変化に対処しきれません。それに対し、\textgt{情報科学における圏論的手法の強み}は、抽象的・俯瞰的であるがゆえに、分野の動向や理論的パラダイムに変化が生じた場合にも、\textgt{既存の議論や知見を再編することで新たな問題設定に柔軟に適応できる}という点にあると言えます。そのため、圏論を用いた俯瞰的視座から形式検証の問題群に取り組むことは、この分野の理論的発展にとって非常に有益です。
+\noindent 現代において、情報システムが急速に複雑化・多様化する中、単一の理論的パラダイムにのみ特化した手法を追究し続けるのでは、変化に対処しきれません。それに対し、\textgt{情報科学における圏論的手法の強み}は、抽象的・俯瞰的であるがゆえに、分野の動向や理論的パラダイムに変化が生じた場合にも、\textgt{既存の議論や知見を再編することで新たな問題設定に柔軟に適応できる}という点にあると言えます。それゆえ、圏論を用いた俯瞰的視座から形式検証の問題群に取り組むことは、分野の理論的発展にとって非常に有益です。
 \vspace{8pt}
 
 \begin{framed}
@@ -808,7 +808,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\subsection{最小・最大不動点を推定するための効率的なアルゴリズム}
+\subsection{最小・最大不動点を推定するためのアルゴリズム}
 
 \noindent ここで、完備束 (complete lattice) の\textgt{不動点} (lfp, gfp) \textgt{を推定}するための\textgt{アルゴリズム}について考えましょう。\\ 実際問題として、最小・最大不動点の値そのものをぴったり求めることは困難であることが多いので、\textgt{上界・下界推定} (over/under-approximation) をしたいです。具体的には、以下の表に挙げたやり方があります。\\（補足： これらは、完備束 $L$ と単調関数 $f:L\to L$ について知られる2種類の定理、the Knaster-Tarski theorem と the Cousot-Cousot theorem に基づくものです。）\vspace{15pt}
 
@@ -817,7 +817,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		% \hline
 		\Xhline{1.0pt}
 		% & the Knaster-Tarski theorem & the Cousot-Cousot theorem \\
-		& Knaster-Tarski & Cousot-Cousot \\
+		& the Knaster-Tarski theorem & the Cousot-Cousot theorem \\
 		& ``guess-and-check algorithm'' & ``iterative algorithm'' \\\hline
 		&&\\
 		~~~lfp~~~ & ~~~~~~$\mu f=\bigsqcap\{x\in L\mid f(x)\sqsubseteq x\}$~~~~~~ & ~~$\bot\,\sqsubseteq\, f(\bot) \,\sqsubseteq\, f^2(\bot) \,\sqsubseteq\,\cdots\,\to\,\mu f$~~ \\[5pt]
@@ -1895,7 +1895,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent 典型例として、例外処理 (exception handling) と呼ばれる計算効果を表す関手 $F(Y)=Y+E$ を用いた、効果つきの計算 $f:X\to Y+E$ が挙げられます。ここでは $+$ は余積を表し、$E$ は ``エラーの集合'' とみなしましょう。このとき、計算 $f:X\to Y+E$ は、単に入力値 $x\in X$ から出力値 $y\in Y$ を返すだけでなく、「もし例外が生じたらエラー $e\in E$ を返す」という\textgt{副作用} (side effect) を持ちます。
 % \[\begin{array}{cccc}f:&X&\longrightarrow&Y+E\\&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&x&\longmapsto &y\\&x'&\longmapsto&e\end{array}\]
 \[\begin{array}{cccccc}f:&X&\longrightarrow&Y\!\!&\!+\!&\!\!E\\&\rotatebox{90}{$\in$}&&&\!\!\rotatebox{90}{$\in$}\!\!\\&x&\longmapsto &y\!\!\\&x'&\longmapsto&&&\!\!e\end{array}\]
-では、この例のような副作用を持つ計算（効果つき計算）どうしの「合成」はどう考えればいいでしょうか。たとえば、2つの効果つき計算 $f:X\to Y+E$ と $g:Y\to Z+E$ を合成して、$g\circ f:X\to Z+E$ のようなものを作りたいとき、$f,g$の両者は型が合っていないため、一筋縄ではいかないことがわかります。そこで、次節で導入する「モナド」や「クライスリ圏」といった道具が役立ちます。\vspace{5pt}\\
+では、この例のような副作用を持つ計算（効果つき計算）どうしの「合成」はどう考えればいいでしょうか。たとえば、2つの効果つき計算 $f:X\to Y+E$ と $g:Y\to Z+E$ を合成して、$g\circ f:X\to Z+E$ のようなものを作りたいとき、$f,g$の両者は型が合っていないため、一筋縄ではいかないことがわかります。そこで、次節で導入する「\textgt{モナド}」や「クライスリ圏」といった道具が役立ちます。 (``Computational effects are modeled by monads.''  [Moggi])\vspace{5pt}\\
 %（次節でもあらためてこの例外処理の例について取り上げます。）
 
 % なお、作用つき計算 $f:X\to F(Y)$ を、便宜的に $f:X\computationrightarrow Y$ という特殊な矢印で表記することがよくあります。（厳密に言えば、これはモナド $F$ のクライスリ圏における射を表す記法ですが、ここでは詳細の説明は省略します。この点については、次節を読んで「モナド」や「クライスリ圏」について学んだ後ならわかるはずです。）\\
@@ -3246,7 +3246,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{center}
 \end{itemize}
 
-\todo[inline]{ただし、$\mathcal P(\Sigma^\ast)$ のほうは covariant で、$2^{\Sigma^\ast}$ のほうは contravariant であることに注意。}
+% \todo[inline]{ただし、$\mathcal P(\Sigma^\ast)$ のほうは covariant で、$2^{\Sigma^\ast}$ のほうは contravariant であることに注意。}
 
 % \todo[inline]{ただし、$\mathcal P(A^\ast)$ は}
 
@@ -4196,7 +4196,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
     \item Hasuo, I. (2025) \textit{Abstract and concrete model checking}, lecture notes for Marktoberdorf summer school 2025, \href{https://group-mmm.org/~ichiro/papers/hasuoMOD25LectNotes.pdf}{[URL]}.
     \item nLab authors. (2023) \textit{List of notable initial algebras and terminal coalgebras}, \href{https://ncatlab.org/nlab/show/list+of+notable+initial+algebras+and+terminal+coalgebras}{[URL]}.
     \item Pattinson, D. (2003) An introduction to the theory of coalgebras. Course notes for NASSLLI, \href{https://nasslli.sitehost.iu.edu/2003/datas/DirkPattinson.pdf}{[URL]}.
-    % \item 
+    \item Venema Y. (2026) Coalgebra and Modal Logic: a first introduction. (lecture notes), \href{https://staff.science.uva.nl/y.venema/teaching/ml/}{[URL]}
 \end{thebibliography}
 %-----
 \clearpage
