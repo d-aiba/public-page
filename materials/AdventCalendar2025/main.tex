@@ -68,7 +68,7 @@
 \noindent 本記事は、以下（のいずれか）に興味・関心がある読者を想定して書かれています。
 
 \begin{enumerate}
-	\item 数理論理学や数学基礎論の「コンピューターサイエンスへの応用」を知って興味を持ち、もっと学びたいと思った人
+	\item 数理論理学（特に様相論理）の「コンピューターサイエンスへの応用」を知って興味を持ち、もっと学びたい人
 	\item 圏論がコンピューターサイエンスの現場で実際にどのように使われ、どんな威力を発揮するかを垣間見たい人
 	\item 様々な情報システムやコンピュータープログラムが「望み通りの挙動をすること」や「バグがないこと」を検証するための手法の数学的基礎について知りたい人
 \end{enumerate}
@@ -202,13 +202,13 @@
 
 \noindent とりわけ本記事では「\kenten{圏論を使ったモデル検査}」を紹介するのですが、
 \textgt{なぜ圏論を使うのか}について説明しておきます。
-\vspace{10pt}\\
+\vspace{12pt}\\
 % \noindent 圏論とは、抽象化や構造の図式化をもたらす「\textgt{数学的な言語}」です。純粋数学や情報科学など多くの分野で使われます。%\\圏論を使うと様々な数学的対象を統一して扱うことができ、よりよい手法の考案に役立ちます。
 \noindent 圏論とは、数学の概念を抽象化して統一的に記述するための「言語」です。圏論を使うと、様々な数学的対象の共通点を見出して、俯瞰的に議論することができるようになります。また、特にコンピューターサイエンスにおいては、そのような一般化・抽象化は、「\textgt{よりよい手法の考案}」に繋がります。
-\vspace{10pt}\\
+\vspace{12pt}\\
 % \noindent 特に、コンピューターサイエンスの研究の現場では、圏論は以下のようなしかたで使われることがよくあります。\\
 \noindent 現代において、情報システムが急速に複雑化・多様化する中、単一の理論的パラダイムにのみ特化した手法を追究し続けるのでは、変化に対処しきれません。それに対し、\textgt{情報科学における圏論的手法の強み}は、抽象的・俯瞰的であるがゆえに、分野の動向や理論的パラダイムに変化が生じた場合にも、\textgt{既存の議論や知見を再編することで新たな問題設定に柔軟に適応できる}という点にあると言えます。それゆえ、圏論を用いた俯瞰的視座から形式検証の問題群に取り組むことは、分野の理論的発展にとって非常に有益です。
-\vspace{8pt}
+\vspace{10pt}
 
 \begin{framed}
 \noindent 【コンピューターサイエンスにおける圏論の使い方（の一例）】
@@ -810,7 +810,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \subsection{最小・最大不動点を推定するためのアルゴリズム}
 
-\noindent ここで、完備束 (complete lattice) の\textgt{不動点} (lfp, gfp) \textgt{を推定}するための\textgt{アルゴリズム}について考えましょう。\\ 実際問題として、最小・最大不動点の値そのものをぴったり求めることは困難であることが多いので、\textgt{上界・下界推定} (over/under-approximation) をしたいです。具体的には、以下の表に挙げたやり方があります。\\（補足： これらは、完備束 $L$ と単調関数 $f:L\to L$ について知られる2種類の定理、the Knaster-Tarski theorem と the Cousot-Cousot theorem に基づくものです。）\vspace{15pt}
+\noindent ここで、完備束 (complete lattice) の\textgt{不動点} (lfp, gfp) \textgt{を推定}するための\textgt{アルゴリズム}について考えましょう。\\ 現実の場面では、最小・最大不動点の値そのものをぴったり求めることは困難であることが多いので、\textgt{上界・下界推定} (over/under-approximation) をしたいです。具体的には、以下の表に挙げたやり方で行うことができます。\\（補足： これらは、完備束 $L$ と単調関数 $f:L\to L$ について知られる2種類の定理、the Knaster-Tarski theorem と the Cousot-Cousot theorem に基づくものです。）\vspace{15pt}
 
 \begin{center}
 	\begin{tabular}{c|c|c}
@@ -822,11 +822,11 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		&&\\
 		~~~lfp~~~ & ~~~~~~$\mu f=\bigsqcap\{x\in L\mid f(x)\sqsubseteq x\}$~~~~~~ & ~~$\bot\,\sqsubseteq\, f(\bot) \,\sqsubseteq\, f^2(\bot) \,\sqsubseteq\,\cdots\,\to\,\mu f$~~ \\[5pt]
 		&&\\[-5pt]
-		& $\implies$ \textbf{over-approx. of lfp} & $\implies$ \textbf{under-approx. of lfp}\\[-2pt] &&\\[-5pt]
+		& $\implies$ \textbf{over-approximation of lfp} & $\implies$ \textbf{under-approximation of lfp}\\[-2pt] &&\\[-5pt]
 		&\AXC{$f(y)\sqsubseteq y$}\UIC{$\mu f\sqsubseteq y$}\DisplayProof & $f^\alpha(\bot)\sqsubseteq\mu f$ \;(for each $\alpha\in\mathbf{Ord}$) \\[-0.05pt] && \\\hline &&\\
 		gfp & $\nu f=\bigsqcup\{x\in L\mid x\sqsubseteq f(x)\}$ & $\top\sqsupseteq f(\top)\sqsupseteq f^2(\top)\sqsupseteq\cdots \to \nu f$ \\[5pt]
 		&& \\[-5pt]
-		& $\implies$ \textbf{under-approx. of gfp} & $\implies$ \textbf{over-approx. of gfp}\\[-2pt] && \\[-5pt]
+		& $\implies$ \textbf{under-approximation of gfp} & $\implies$ \textbf{over-approximation of gfp}\\[-2pt] && \\[-5pt]
 		& \AXC{$y\sqsubseteq f(y)$}\UIC{$y\sqsubseteq \nu f$}\DisplayProof & $\nu f\sqsubseteq f^\alpha(\top)$ \;(for each $\alpha\in\mathbf{Ord}$)\\ && \\ 
 		% \hline
 		\Xhline{1.0pt}
@@ -836,14 +836,14 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 もう少し詳しく見ておくと: \vspace{-5pt}
 \begin{itemize}
 	\begin{multicols}{2}
-	\item 最小不動点の上界推定 (by Knaster-Tarski): 
+	\item \textgt{最小不動点の上界推定} (by Knaster-Tarski): 
 		\begin{align*}
 			&f(y)\sqsubseteq y \\
 			&\implies \textrm{$y$ is a prefixed point}\\
 			&\implies \textrm{$\mu f$ \begin{small}(the least prefixed point)\end{small} is below $y$} \\
 			&\textrm{thus}~\mu f\sqsubseteq y
 		\end{align*}
-	\item 最小不動点の下界推定 (by Cousot-Cousot):
+	\item \textgt{最小不動点の下界推定} (by Cousot-Cousot):
 		\begin{align*}
 			&\bot\,\sqsubseteq\, f(\bot) \,\sqsubseteq\, f^2(\bot) \,\sqsubseteq\,\cdots\,\longrightarrow\, \mu f\\ 
 			& (\textrm{stabilizes, and converges to $\mu f$})\\
@@ -852,13 +852,13 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{multicols}
 	%%
 	\begin{multicols}{2}
-	\item 最大不動点の下界推定 (by Knaster-Tarski): 
+	\item \textgt{最大不動点の下界推定} (by Knaster-Tarski): 
 		\begin{align*}
 			&\top\,\sqsupseteq\, f(\top) \,\sqsupseteq\, f^2(\top) \,\sqsupseteq\, \cdots \,\longrightarrow\,\nu f\\
 			&(\textrm{stabilizes, and converges to $\nu f$})\\
 			&\textrm{thus}~\nu f\sqsubseteq f^\alpha(\top)~\textrm{for each}~\alpha\in\mathbf{Ord}
 		\end{align*}
-	\item 最大不動点の上界推定 (by Cousot-Cousot): 
+	\item \textgt{最大不動点の上界推定} (by Cousot-Cousot): 
 		\begin{align*}
 			&y\sqsubseteq f(y)\\
 			&\implies \textrm{$y$ is a postfixed point} \\
@@ -870,16 +870,16 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 % \vspace{5pt}
 \vspace{18pt}
 
-さて、本章でこれまで扱ってきた述語変換子の考え方は、圏論の言葉を使うととても見通しがよくなります。そのための準備として、次章では、圏論の関手を使ってプログラムの振舞いを捉える方法について紹介します。%（すでに「余代数」や「モナド」や「グロタンディーク・ファイブレーション」のことは知っているよ、という人は\ref{sec:categorical-weakest-precondition}章へ飛んでください。）
+さて、本章でこれまで扱ってきた述語変換子の考え方は、圏論の言葉を使うととても見通しがよくなります。そのための準備として、次章では、圏論を用いて情報システムの振舞いをとらえる方法について紹介します。%（すでに「余代数」や「モナド」や「グロタンディーク・ファイブレーション」のことは知っているよ、という人は\ref{sec:categorical-weakest-precondition}章へ飛んでください。）
 \clearpage
 
-\section{圏論の関手を用いて「情報システムの振舞い」をとらえる手法}
+\section{圏論を用いて「情報システムの振舞い」をとらえる手法}
 
 情報科学における「\textgt{圏論的な手法の強み}」は、抽象的・俯瞰的であるがゆえに、\uwave{様々な種類の情報システムに対して、} \uwave{既存の議論や知見を再編することで新たな問題設定に柔軟に適応できる}点にあると言えます。
 
 本章で紹介する\textgt{余代数} (coalgebra) は、そのように、多様な状態遷移システム（例: 二分木グラフ、ストリーム、クリプキフレーム、オートマトン、マルコフ連鎖、マルコフ決定過程、etc.）を扱う際にとても役立つ道具です。
 
-\subsection{余代数：グラフにおける「1ステップの状態遷移」をとらえる}
+\subsection{余代数：状態遷移システムにおける「1ステップの状態遷移」をとらえる}
 \label{subsec:def-and-example-of-coalgebra}
 
 \noindent まずは、\textgt{余代数} (coalgebra) および\textgt{余代数準同型} (coalgebra homomorphism) を定義します。
@@ -3857,14 +3857,14 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent さて、次章では、本章で導入した道具立てをフル活用して、様々な種類の（非決定的、確率的、etc.）プログラムに対する最弱事前条件を定める方法を紹介します。
 \clearpage
 
-\section{最弱事前条件をどのように手に入れるか：圏論的な観点で}
+\section{述語変換子をどのように手に入れるか：圏論的な観点で}
 \label{sec:categorical-weakest-precondition}
 
 さて、本節では、非決定的プログラムや確率的プログラムなどといった様々な種類のプログラムに対する述語変換子意味論を得る方法について、圏論的な視座から考えます。一般に、状態の集合 $X, Y$ と真理値の集合 $\Omega$ が与えられたときに、効果付き計算 $c:X\to FY$ に基づいて、事後条件 $q:Y\to\Omega$ を最弱事前条件 $wp\llbracket c\rrbracket(q):X\to \Omega$ に変換する関数である「述語変換子」 $wp\llbracket c\rrbracket:\Omega^Y\to\Omega^X$ を手に入れるためには、どんな手続きを経たらよいでしょうか。\vspace{8pt}
 
-まずはいくつか具体例を見てから、その後に一般論を考えましょう。\vspace{5pt}
+いくつか具体例を見てから、その後に一般論を考えましょう。\vspace{5pt}
 
-\subsection{具体例を観察する}
+\subsection{まずは具体例を観察する}
 
 以下では、3つのケースについて、それぞれ具体例を考えていきます。
 
@@ -4054,10 +4054,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\subsection{一般論を展開する}
+\subsection{具体例をふまえて一般論を展開する}
 
 \noindent 
-これまで見た具体例をふまえて、一般論を展開していきましょう。
+これまで見た具体例をもとに、一般論を展開していきましょう。
 
 \begin{itemize}
 	\item 副作用つき計算 $c:X\to FY$、真理値の集合 $\Omega$、様相 $\tau:F\Omega\to\Omega$ が与えられたとき、\\ 述語変換子 $wp\llbracket c\rrbracket:\Omega^Y\to\Omega^X$ は以下のしかたで得られます。
@@ -4126,7 +4126,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent なお余代数 $c:X\to FX$ を考える場合は、まさに以下の図のような状況になります。\vspace{8pt}
+\noindent なお余代数 $c:X\to FX$ について扱う場合は、まさに以下の図のような状況を考えます。\vspace{8pt}
 \begin{center}
 	% \begin{small}
 		\begin{tikzcd}
@@ -4139,6 +4139,19 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% \end{small}
 \end{center}
 \vspace{25pt}
+
+\subsection{抽象化された一般論に基づいてさらなる具体例を取り出す}
+
+\noindent ここまでで、述語変換子 (predicate transformer) の手に入れ方の一般論がわかったところで、今度はそれを応用して、\uwave{もっと別の事例を取り出す}ことにも試みましょう。ここでは、状態遷移システムにおける「\textgt{状態どうしの類似性}」を表す2種類の概念、\textgt{双模倣性} (bisimilarity) と \textgt{Wasserstein距離} (Wasserstein distance) を題材にして観察します。
+
+\subsubsection*{具体例 (4) 双模倣性: 非決定的な状態遷移システムにおける``状態どうしの近さ''の概念}
+
+
+
+\subsubsection*{具体例 (5) Wasserstein距離: 確率的な状態遷移システムにおける``状態どうしの近さ''の概念}
+
+
+\clearpage
 
 % \section{応用例: 確率的プログラムの「停止性」および「期待実行時間」の検証}
 \section{研究紹介：確率的プログラムの「停止性」および「期待累積報酬」の検証} 
