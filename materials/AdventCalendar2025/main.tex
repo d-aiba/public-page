@@ -1769,7 +1769,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			\item $\Coalg(F)$ における $D$ の任意の cocone $((Y,\theta),(\iota_I:DI\to(Y,\theta))_{I\in\mathbb I})$ をとる。%ここで、各 $\iota_I$ は余代数準同型なので、$\C$ において $\theta\circ\iota_I=F(\iota_I)\circ\delta_I$ が成り立つ。
 			% \item また、
 			これを忘却すると、$(Y,(\iota_I:UDI\to Y)_{I\in\mathbb I})$ は、$\C$ における $UD$ の cocone である。したがって $(X,(\lambda_I)_{I\in\mathbb I})$ の余極限性より、一意な射 $h:X\to Y$ が存在し、任意の $I\in\mathbb I$ について $h\circ\lambda_I=\iota_I$ を満たす。
-			\item この $h$ が余代数準同型であることを示す。各 $I\in\mathbb I$ について
+			\item この $h$ が余代数準同型であることを示す。各 $I\in\mathbb I$ について、
 			% \begin{multicols}{2}
 			% 	\[\begin{aligned} (\theta\circ h)\circ\lambda_I &=\theta\circ\iota_I\\ 
 			% 		&=F(\iota_I)\circ\delta_I, \end{aligned}\]
@@ -1783,7 +1783,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 				\end{array}
 			\end{align*}
 			\noindent したがって、任意の $I\in\mathbb I$ について $(\theta\circ h)\circ\lambda_I=(F(h)\circ\gamma)\circ\lambda_I$ である。よって、$(X,(\lambda_I)_I)$ の余極限性より $\theta\circ h=F(h)\circ\gamma$ が従う。それゆえ、$h:(X,\gamma)\to(Y,\theta)$ は余代数準同型である。
-			\item また，このような $h$ の一意性は，忘却して $\C$ における余極限の一意性から従う。
+			\item また、このような $h$ の一意性は、忘却して $\C$ における余極限の一意性から従う。
 			\item したがって、$((X,\gamma),(\lambda_I:DI\to(X,\gamma))_{I\in\mathbb I})$ は $\Coalg(F)$ における $D$ の colimiting cocone である。
 			% \item 
 		\end{itemize}
@@ -4126,7 +4126,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent なお余代数 $c:X\to FX$ について扱う場合は、まさに以下の図のような状況を考えます。\vspace{8pt}
+\noindent なお、余代数 $c:X\to FX$ について扱う場合は、まさに、以下の図のような状況を考えます。（次節で詳しく見ます）\vspace{8pt}
 \begin{center}
 	% \begin{small}
 		\begin{tikzcd}
@@ -4142,7 +4142,16 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \subsection{抽象化された一般論に基づいてさらなる具体例を取り出す}
 
-\noindent ここまでで、述語変換子 (predicate transformer) の手に入れ方の一般論がわかったところで、今度はそれを応用して、\uwave{もっと別の事例を取り出す}ことにも試みましょう。ここでは、状態遷移システムにおける「\textgt{状態どうしの類似性}」を表す2種類の概念、\textgt{双模倣性} (bisimilarity) と \textgt{Wasserstein距離} (Wasserstein distance) を題材にして観察します。
+\noindent ここまでで、\textgt{述語変換子} (predicate transformer) の手に入れ方の一般論がわかったところで、今度はそれを適用して、\uwave{もっと他の応用例を取り出す}ことに試みましょう。ここでは、状態遷移システムにおける「\textgt{状態どうしの類似性}」を表す2種類の概念、\textgt{双模倣性} (bisimilarity) と \textgt{Wasserstein距離} (Wasserstein distance) を題材にして観察します。\vspace{10pt}%\\
+
+\begin{oframed}
+\noindent 基本形はいつも以下の形です。
+\[\begin{array}{cccccc}
+	\textrm{predicate transformer}~\Phi:& \mathbf\Omega^{X} & \xrightarrow[\dot F_X]{~~~\substack{\textrm{predicate}\\ \textrm{lifting}}~~~} & \mathbf\Omega^{FX} & \xrightarrow[c^\ast]{~~~\substack{\textrm{pullback by}\\\textrm{coalgebra}}~~~} & \mathbf\Omega^{X} \\
+	& \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} &&\rotatebox{90}{$\in$}\\
+	& q & \longmapsto & \dot F_X & \longmapsto & c^\ast\dot F_X q
+\end{array}\]
+\end{oframed}
 
 \subsubsection*{具体例 (a) 双模倣性: 非決定的な状態遷移システムにおける``状態どうしの類似性''の概念}
 
@@ -4152,16 +4161,108 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\item 
 \end{itemize}
 
+\todo[inline]{続きを書く}
+
 \clearpage
 
 \subsubsection*{具体例 (b) Wasserstein距離: 確率的な状態遷移システムにおける``状態どうしの類似性''の概念}
 
 \begin{itemize}
 	\item まず準備として、カップリング (coupling) を定義します。\\ 
-	\item 
-	\item 
+	$X\in\Set$ とし、$\mathcal D:\Set\to\Set$ を分布関手とします。$\alpha,\beta\in\mathcal DX$ を確率分布とします。
+	\[\alpha=p_1\ket{s_1}+\cdots+p_n\ket{s_n}, \quad\qquad \beta=p_1'\ket{s_1}+\cdots+p_n'\ket{s_n}\] 
+	\begin{center}\small
+		\begin{tikzcd}[column sep=8pt,row sep=12pt]
+			& \circled{$s_0$} \ar[ld,"p_1"'] \ar[rd,"p_n"] & \\
+			\circled{$s_1$} & \cdots & \circled{$s_n$}
+		\end{tikzcd}
+		\quad\qquad
+		\begin{tikzcd}[column sep=8pt,row sep=12pt]
+			& \circled{$s_0$} \ar[ld,"p_1'"'] \ar[rd,"p_n'"] & \\
+			\circled{$s_1$} & \cdots & \circled{$s_n$}
+		\end{tikzcd}
+	\end{center}
+	分布$\alpha,\beta$の\textgt{カップリング} (coupling) とは、分布 $\gamma\in\mathcal D(X\times X)$ で、周辺分布が $\alpha,\beta$ となるものとします。	\[\mathcal D(\pi_1)(\gamma)=\alpha, \qquad\qquad \mathcal D(\pi_2)(\gamma)=\beta.\] つまり、任意の $x,x'\in X$ について以下が成り立つということです。 \[\sum_{x'\in X}\gamma(x,x')=\alpha(x),\qquad\qquad \sum_{x\in X}\gamma(x,x')=\beta(x')\] 
+	\item 特に、{最適輸送理論} (optimal transportation theory) と呼ばれる分野では、以下のような状況を考えます。
+	\begin{itemize}
+		\item $\alpha$: source distribution
+		\item $\beta$: target distribution
+		\item $\gamma(x,x')$: the amount transported from $x$ to $x'$
+		\item $d(x,x')$: the transportation cost from $x$ to $x'$
+		\item Here, an \textbf{optimal coupling} is given as 
+		\[\operatorname*{argmin}_{\substack{\gamma:\;\textrm{coupling}\\\textrm{of}\;\alpha,\beta}}\sum_{x,x'}\gamma(x,x')\cdot d(x,x').\]
+	\end{itemize}
+	% \item 
+	\item この話を踏まえつつ、完備束 $L=[0,1]^{X\times X}$ 上の述語変換子 $\Phi:[0,1]^{X\times X}\to[0,1]^{X\times X}$ を次のように定めます。
+	\[\begin{array}{cccccc}
+		\Phi\colon & [0,1]^{X\times X} & \;\xrightarrow[\mathcal W]{\substack{\textrm{Wasserstein}\\\textrm{lifting}}}\hspace*{-25pt} & [0,1]^{\mathcal DX\times\mathcal DX} & \hspace*{-45pt}\xrightarrow[(c\times c)^\ast]{~~~~~\substack{\textrm{pullback}\\\textrm{by MC}}~~~~~}\hspace*{-45pt} & [0,1]^{X\times X} \\[2pt]
+		{} & \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[1pt]
+		& d & \longmapsto & \left(\begin{array}{l}(\alpha,\beta)\mapsto\\\displaystyle\inf_{\substack{\gamma:\;\textrm{coupling}\\\textrm{of}\;\alpha,\beta}}\sum_{x,x'}\begin{array}{l}\gamma(x,x')\\[-2pt]\,\cdot\, d(x,x')\end{array}\end{array}\right) & \longmapsto & \left(\begin{array}{ccc}
+			X\times X & \xrightarrow{c\times c} & \mathcal DX\times\mathcal DX \\
+			&& ~~~\downarrow\substack{\mathcal W(d)}\!\!\! \\
+			& & [0,1]
+		\end{array}\right)
+	\end{array}\]
+	\item ここでわれわれが興味があるのは、最小不動点 $\mu\Phi:X\times X\to[0,1]$ です。これは、以下によって構成されます。
+	\[\bot\;\sqsubseteq\;\Phi(\bot)\;\sqsubseteq\;\Phi^2(\bot)\;\sqsubseteq\;\cdots\cdots\;\sqsubseteq\;\mu\Phi\]
+	\begin{itemize}
+		\item $\bot$: ``No observation yet, so everything is the same.''
+		\item $\Phi(\bot)$: ``One-step observation, can distinguish some.''
+		\item $\Phi^2(\bot)$: ``Two-step observation, can distinguish more.''
+	\end{itemize}
+	\item いま、$\mu\Phi$ の上界推定 (over-approximation) について考えましょう。
+	\[\mu\Phi\sqsubseteq i\qquad\textrm{(``two states $x,x'$ are \textgt{at most} $i(x,x')$-different.'')}\] 
+	これは、証拠 (witness) $j$ をもとに、Knaster-Tarski の定理より、以下のしかたで導出されます。
+	\begin{prooftree}
+		\AXC{$\Phi(j)\sqsubseteq j$} \AXC{$j\sqsubseteq i$}
+		\RL{by Knaster-Tarski}
+		\BIC{$\mu\Phi\sqsubseteq i$}
+	\end{prooftree}\clearpage
+	% によって示されます。
+	\item なお、対合 (involution) をとると、
+	\begin{center}
+		\begin{tikzcd}
+			{[0,1]^{X\times X}} \ar[r,"\Phi"] & {[0,1]^{X\times X}} \ar[d,"\lnot"]\\
+			{[0,1]^{X\times X}} \ar[r,"\Phi^{\lnot\lnot}"'] \ar[u,"\lnot"] & {[0,1]^{X\times X}} 
+		\end{tikzcd}
+	\end{center}
+	述語変換子 $\Phi^{\lnot\lnot}:[0,1]^{X\times X}\to[0,1]^{X\times X}$ が得られます。
+	% \begin{align*} 
+	% 	\Phi^{\lnot\lnot} &\;:=\;\lnot\circ\Phi\circ\lnot \\ 
+	% 	& \,=\, 
+	% 	%  (L\xrightarrow{\lnot} L^\op \xrightarrow{\Phi}L^\op \xrightarrow{\lnot} L) 
+	% 	(L \xrightarrow{\;\lnot\;} L^\op \xrightarrow{\;\Phi\;} L^\op \xrightarrow{\;\lnot\;} L)
+	% \end{align*} 
+	\begin{align*}
+		\Phi^{\lnot\lnot}\,&:=\,\lnot\circ \Phi \circ \lnot \\&\,=\,(L \xrightarrow{\;\lnot\;} L^\op \xrightarrow{\;\Phi\;} L^\op \xrightarrow{\;\lnot\;} L).
+	\end{align*}
+	% \begin{center}
+	% 	\begin{tikzcd}
+	% 		{[0,1]^{X\times X}} \ar[r,"\Phi"] & {[0,1]^{X\times X}} \ar[d,"\lnot"]\\
+	% 		{[0,1]^{X\times X}} \ar[r,"\Phi^{\lnot\lnot}"'] \ar[u,"\lnot"] & {[0,1]^{X\times X}} 
+	% 	\end{tikzcd}
+	% \end{center}
+	そして、この述語変換子の最大不動点 $\nu(\Phi^{\lnot\lnot}):X\times X\to[0,1]$ は、
+	\[\nu(\Phi^{\lnot\lnot})\,=\,\lnot(\mu f)\,=\,1-\mu\Phi\] 
+	として得られます。
+	\[\top\;\sqsupseteq\;\Phi^{\lnot\lnot}(\top)\;\sqsupseteq\;(\Phi^{\lnot\lnot})^2(\top)\;\sqsupseteq\;\cdots\cdots\;\sqsupseteq\;\nu(\Phi^{\lnot\lnot})\]
+	この述語 $\nu(\Phi^{\lnot\lnot})$ がまさに ``状態どうしの類似度'' を表すものです。
+	% \item 
 \end{itemize}
+\vspace{30pt}
 
+%%%---
+
+% \subsection*{ここまでのまとめ}
+\begin{screen}
+	\noindent 【ここまでのまとめ】
+	\begin{itemize}
+		\item 
+		\item 
+		\item 
+		\item 
+	\end{itemize}
+\end{screen}
 
 \clearpage
 
@@ -4201,7 +4302,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\section{まとめ}
+\section{本記事の全体のまとめ・学習案内}
 
 
 
