@@ -180,9 +180,9 @@
 	% \end{center}
 	\begin{center}
 		\begin{tikzcd}[row sep=3pt,column sep=36pt]
-			\textrm{(real-world system)} \ar[r,"\textrm{formalize}"] & \framebox[9.5em]{\rule{0pt}{1.5ex} $\substack{\displaystyle\textrm{formal model}\\[5pt]\displaystyle\mathcal M}$} \ar[dr,"\textrm{input}" sloped] & {} & {} \\
+			\textrm{(real-world system)} \ar[r,"\textrm{formalize}"] & \framebox[9.0em]{\rule{0pt}{1.5ex} $\substack{\displaystyle\textrm{system model}\\[5pt]\displaystyle\mathcal M}$} \ar[dr,"\textrm{input}" sloped] & {} & {} \\
 			& & \doublebox{~~~$\substack{\displaystyle\textrm{model checker}\\[5pt]\displaystyle\mathcal M\models\varphi\;?}$~~~} \ar[r,"\textrm{output}"'] & ~\textrm{\ding{51}\;or\;\ding{55}}~ \\
-			~~~\;\textrm{(requirement)}\;~~~ \ar[r,"\textrm{formalize}"'] & \framebox[9.5em]{\rule{0pt}{1.5ex} $\substack{\displaystyle\textrm{formal specification}\\[5pt]\displaystyle\varphi}$} \ar[ur,"\textrm{input}"' sloped] & {} & {}
+			~~~\;\textrm{(requirement)}\;~~~ \ar[r,"\textrm{formalize}"'] & \framebox[9.0em]{\rule{0pt}{1.5ex} $\substack{\displaystyle\textrm{specification}\\[5pt]\displaystyle\varphi}$} \ar[ur,"\textrm{input}"' sloped] & {} & {}
 		\end{tikzcd}
 	\end{center}
 	\vspace{10pt}
@@ -4149,7 +4149,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \[\begin{array}{cccccc}
 	\textrm{predicate transformer}~\Phi:& \mathbf\Omega^{X} & \xrightarrow[\dot F_X]{~~~\substack{\textrm{predicate}\\ \textrm{lifting}}~~~} & \mathbf\Omega^{FX} & \xrightarrow[c^\ast]{~~~\substack{\textrm{pullback by}\\\textrm{coalgebra}}~~~} & \mathbf\Omega^{X} \\
 	& \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} &&\rotatebox{90}{$\in$}\\
-	& q & \longmapsto & \dot F_X & \longmapsto & c^\ast\dot F_X q
+	& q & \longmapsto & \dot F_X q & \longmapsto & c^\ast\dot F_X q
 \end{array}\]
 \end{oframed}
 
