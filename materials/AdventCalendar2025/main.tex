@@ -810,7 +810,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \subsection{最小・最大不動点を推定するためのアルゴリズム}
 
-\noindent ここで、完備束 (complete lattice) の\textgt{不動点} (lfp, gfp) \textgt{を推定}するための\textgt{アルゴリズム}について考えましょう。\\ 現実の場面では、最小・最大不動点の値そのものをぴったり求めることは困難であることが多いので、\textgt{上界・下界推定} (over/under-approximation) をしたいです。具体的には、以下の表に挙げたやり方で行うことができます。\\（補足： これらは、完備束 $L$ と単調関数 $f:L\to L$ について知られる2種類の定理、the Knaster-Tarski theorem と the Cousot-Cousot theorem に基づくものです。）\vspace{15pt}
+\noindent ここで、完備束 (complete lattice) の\textgt{不動点} (lfp, gfp) \textgt{を推定}するための\textgt{アルゴリズム}について考えましょう。\\ 現実の場面では、最小・最大不動点の値そのものをぴったり求めることは困難であることが多いので、\textgt{上界・下界推定} (over/under-approximation) をしたいです。具体的には、以下の表に挙げたやり方で行うことができます。\\（補足： これらは、完備束 $L$ と単調関数 $f:L\to L$ について知られる2種類の定理、the Knaster-Tarski theorem と the Cousot-Cousot theorem からの帰結です。）\vspace{15pt}
 
 \begin{center}
 	\begin{tabular}{c|c|c}
@@ -1547,11 +1547,36 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\subsection{双模倣関係と双模倣同値性：無限に続くプロセスの等価性を判定する}
+\subsection{双模倣関係と双模倣性：無限に続くプロセスの等価性を判定する}
 
-\noindent 本節では、\textgt{双模倣関係} (bisimulation) および\textgt{双模倣同値性} (bisimilarity) について扱います。
+\noindent 本節では、\textgt{双模倣関係} (bisimulation) および\textgt{双模倣性} (bisimilarity) について扱います。
 
+\begin{definition}[双模倣関係と双模倣性]
+	$F:\Set\to\Set$ を $\Set$ 上の自己関手とし、$c:X\to FX$ と $d:X\to FY$ を $F$-余代数とします。関係 $R\subseteq X\times Y$ が $F$-\textgt{双模倣関係} (bisimulation) であるとは、ある写像 $e:R\to FR$ が存在し、2つの射影 $\pi_1,\pi_2$ をそれぞれの余代数の準同型とするものである。
+	\begin{center}
+		\begin{tikzcd}
+			FX & FR \ar[l,"F\pi_1"'] \ar[r,"F\pi_2"] & FY \\
+			X \ar[u,"c"] & R \ar[l,"\pi_1"] \ar[r,"\pi_2"'] \ar[u,"e"'] & Y \ar[u,"d"']
+		\end{tikzcd}
+	\end{center}
+	2つの状態 $x\in X$ と $y\in Y$ が $F$-\textgt{双模倣} (bisimilar) であるとは、ある $F$-双模倣関係 $R\subseteq X\times Y$ が存在して $(x,y)\in R$ を満たすことである。
+\end{definition}
 
+\begin{example}
+	... 
+\end{example}
+
+\begin{example}[マルコフ連鎖の間の双模倣関係]
+	関係 $R\subseteq X\times Y$ が余代数 $c:X\to\mathcal DX$ と $d:Y\to\mathcal DY$ の間の $\mathcal D$-双模倣関係であるとは、各 $(x,y)\in R$ ごとに、\textgt{重み関数} (weight function) $w_{x,y}:R\to[0,1]$ が存在して、\[\sum_{(x',y')\in R}w_{x,y}(x',y')=1\] かつ、任意の $x'\in X$ について 
+	\begin{align*}
+		c(x)(x')&=\sum_{(x',y')\in R}w_{x,y}(x',y')  
+	\end{align*}
+	であり、任意の $y'\in Y$ について
+	\begin{align*}
+		d(y)(y')&=\sum_{(x',y')\in R}w_{x,y}(x',y')
+	\end{align*}
+	であること。
+\end{example}
 
 \todo[inline]{書く}
 
@@ -3887,7 +3912,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 				\end{tikzcd}
 		\end{small}
 	\end{center} \vspace{3pt}
-	\item $f:X\to Y$ に対し、述語変換子 $\left(\begin{array}{cccc}f^\ast:&2^Y&\longrightarrow & 2^X\\[-2pt]&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\[-2pt] & (Y\xrightarrow{q}2)&\mapsto & (X\xrightarrow{f^\ast(q)}2) \end{array}\right)$ を \vspace{10pt} \\ $f^\ast:2^Y\to 2^X$, $f^\ast(Q)=\{x\in X\mid f(x)\in Q\}$ で定めます。\vspace{5pt}
+	\item $f:X\to Y$ に対し、述語変換子 $\left(\begin{array}{cccc}\Phi:&2^Y&\longrightarrow & 2^X\\[-2pt]&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\[-2pt] & (Y\xrightarrow{q}2)&\mapsto & (X\xrightarrow{\Phi(q)}2) \end{array}\right)$ を \vspace{10pt} \\ $f^\ast:2^Y\to 2^X$, $f^\ast(Q)=\{x\in X\mid f(x)\in Q\}$ で定めます。\vspace{5pt}
 	\item いま、以下の関数を定めましょう。\vspace{3pt}\\ 
 	% $\exists_c:2^X\to 2^Y$, $\exists_c(P)=\{f(x)\in Y\mid x\in P\}=\{y\in Y \mid \exists\, x\in X,\; f(x)=y\;\textrm{and}\;x\in P\}$
 	$\begin{array}{lccl}\exists_f:2^X\to 2^Y,&\exists_f(P)&\!\!=\!\!&\{f(x)\in Y\mid x\in P\}\\&&\!\!=\!\!&\{y\in Y \mid \exists\, x\in X\; (f(x)=y\;\textrm{and}\;x\in P)\}\\\forall_f:2^X\to 2^Y,& \forall_f(P)&\!\!=\!\!&\{y\in Y\mid f^\ast(\{y\})\subseteq P\}\\&&\!\!=\!\!&\{y\in Y\mid\forall\,x\in X\;(f(x)=y\;\textrm{implies}\;x\in P)\}\end{array}$ \vspace{5pt}
@@ -3940,12 +3965,12 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{small}
 	\hspace*{25pt}
 	\end{center}
-	\item さて、述語変換子 $\left(\begin{array}{cccc}f^\ast:&2^Y&\longrightarrow & 2^X\\[-2pt]&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\[-2pt]& (X\xrightarrow{q}2)&\longmapsto &  (X\xrightarrow{f^\ast(q)}2) \end{array}\right)$ をどうやって手に入れればよいでしょうか？ \vspace{15pt} \\ 以下のようにして得られます。（上段が入力、下段が出力です。）\vspace{5pt}
+	\item さて、述語変換子 $\left(\begin{array}{cccc}\Phi:&2^Y&\longrightarrow & 2^X\\[-2pt]&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\[-2pt]& (X\xrightarrow{q}2)&\longmapsto &  (X\xrightarrow{\Phi(q)}2) \end{array}\right)$ をどうやって手に入れればよいでしょうか？ \vspace{15pt} \\ 以下のようにして得られます。（上段が入力、下段が出力です。）\vspace{5pt}
 	\begin{prooftree}
 		\AXC{$q:Y\to 2$,\; post-condition}
-		\UIC{$\left(\begin{array}{cccccccc}f^\ast(q):&X&\xrightarrow{~f~}&\mathcal PY&\xrightarrow{\;\mathcal P q\;}&\mathcal P2&\xrightarrow[\textrm{modality}]{\tau}&2 \\[-6pt] & \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[-4pt] & x & \longmapsto & \{y_1,\dots,\,y_n\} & \longmapsto & \{q(y_1),\dots,\,q(y_n)\} & \longmapsto & 0 \textrm{ or } 1 \end{array}\right)$} 
+		\UIC{$\left(\begin{array}{cccccccc}\Phi(q):&X&\xrightarrow{~f~}&\mathcal PY&\xrightarrow{\;\mathcal P q\;}&\mathcal P2&\xrightarrow[\textrm{modality}]{\tau}&2 \\[-6pt] & \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[-4pt] & x & \longmapsto & \{y_1,\dots,\,y_n\} & \longmapsto & \{q(y_1),\dots,\,q(y_n)\} & \longmapsto & 0 \textrm{ or } 1 \end{array}\right)$} 
 	\end{prooftree} \vspace{5pt}
-	\item $f:X\to\mathcal PY$ に対し、\\ 述語変換子 $f^\ast$ は、様相 $\tau:\mathcal P2\to 2$（パラメーターマップとも呼ばれる）の選び方に拠って決まります。\\ 具体的には、$f^\ast$ (backward predicate transformer) を以下の2通りの異なるしかたで定義しましょう。 \\$\Box_f(-):2^Y\to 2^X,\,q\mapsto\{x\in X\mid \forall y\in Y\;(x\to y\textrm{ implies } y\in q)\}$ \\ $\Diamond_f(-):2^Y\to 2^X,\,q\mapsto\{x\in X \mid \exists y\in Y \;( x\to y \textrm{ and } y\in q)\}$ \vspace{5pt}
+	\item $f:X\to\mathcal PY$ に対し、\\ 述語変換子 $\Phi$ は、様相 $\tau:\mathcal P2\to 2$（パラメーターマップとも呼ばれる）の選び方に拠って決まります。\\ 具体的には、$\Phi$ (backward predicate transformer) を以下の2通りの異なるしかたで定義しましょう。 \\$\Box_f(-):2^Y\to 2^X,\,q\mapsto\{x\in X\mid \forall y\in Y\;(x\to y\textrm{ implies } y\in q)\}$ \\ $\Diamond_f(-):2^Y\to 2^X,\,q\mapsto\{x\in X \mid \exists y\in Y \;( x\to y \textrm{ and } y\in q)\}$ \vspace{5pt}
 	\item ここで、以下の関数 (forward predicate transformer) を定めましょう。\\ $\exists_f:2^X\to 2^Y$, $p\mapsto \{y\in Y\mid \exists \, x\in X\;(x\to y \textrm{ and } x\in p)\}$ \\ $\forall_f:2^X\to 2^Y$, $p\mapsto \{y\in Y\mid \forall \, x\in X\;(x\to y \textrm{ implies } x\in p)\}$ \vspace{5pt}
 	\item このとき、$\exists_f\dashv \Box_f$ および $\Diamond_f\dashv\forall_f$ がともに成り立ちます。%（後者は実はあまり使わないが）
 	\begin{center}
@@ -4009,13 +4034,13 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{small}
 	\hspace*{50pt}
 	\end{center}
-	\item さて、述語変換子 $f^\ast:[0,1]^Y\to[0,1]^X$ をどうやって手に入れればよいでしょうか？\vspace{2pt} \\ 以下のようにして得られます。（上段が入力、下段が出力です。）\vspace{5pt} 
+	\item さて、述語変換子 $\Phi:[0,1]^Y\to[0,1]^X$ をどうやって手に入れればよいでしょうか？\vspace{2pt} \\ 以下のようにして得られます。（上段が入力、下段が出力です。）\vspace{5pt} 
 	\begin{prooftree}
 		\AXC{$q:Y\to[0,1]$,\; post-condition}
-		\UIC{$\left(\begin{array}{cccccccc} f^\ast(q): & X & \xrightarrow{~f~} & \mathcal DY & \xrightarrow{\;\mathcal Dq\;} & \mathcal D[0,1] & \xrightarrow[=Av]{\tau}& [0,1] \\[-3pt] &\rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[-3pt] & x & \longmapsto & \sum p_i\Ket{y_i} & \longmapsto & \sum p_i\Ket{q(y_i)} & \longmapsto & \sum p_i\cdot q(y_i) \end{array}\right)$}
+		\UIC{$\left(\begin{array}{cccccccc} \Phi(q): & X & \xrightarrow{~f~} & \mathcal DY & \xrightarrow{\;\mathcal Dq\;} & \mathcal D[0,1] & \xrightarrow[=Av]{\tau}& [0,1] \\[-3pt] &\rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[-3pt] & x & \longmapsto & \sum p_i\Ket{y_i} & \longmapsto & \sum p_i\Ket{q(y_i)} & \longmapsto & \sum p_i\cdot q(y_i) \end{array}\right)$}
 	\end{prooftree} \vspace{5pt}
-	\item $f:X\to\mathcal PY$ に対し、述語変換子 $f^\ast:[0,1]^Y\to[0,1]^X$ を以下で定義しましょう。 \[f^\ast(q)(x)=\sum_{y_i\in Y}f(x)(y_i)\cdot q(y_i)\] 
-	つまり、$f^\ast(q)$ は、各 $x$ に対し、$q$ による値の期待値 $p_1 \cdot q(x_1) + p_2 \cdot q(x_2) + \cdots$ を返します。
+	\item $f:X\to\mathcal PY$ に対し、述語変換子 $\Phi:[0,1]^Y\to[0,1]^X$ を以下で定義しましょう。 \[\Phi(q)(x)=\sum_{y_i\in Y}f(x)(y_i)\cdot q(y_i)\] 
+	つまり、$\Phi(q)$ は、各 $x$ に対し、$q$ による値の期待値 $p_1 \cdot q(x_1) + p_2 \cdot q(x_2) + \cdots$ を返します。
 	\begin{center}	
 		\begin{small}
 			\begin{tikzcd}[row sep=8pt]
@@ -4025,8 +4050,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			\end{tikzcd}
 		\end{small}
 	\end{center}
-	\item なお、この $f^\ast$ は、一般には左右いずれの随伴も持ちません。
-	\\ （随伴がないと不便な場面がいろいろあるのですが、対応策としては、米田埋め込みを使って$f^\ast$ から $\widehat{f^\ast}$ を構成する方法があります。詳細は省略しますが、ざっくりとしたアイデアとしては、おおむね下の図の通りです。やや複雑な話なので、読み飛ばして構いません。）
+	\item なお、この $\Phi$ は、一般には左右いずれの随伴も持ちません。
+	\\ （随伴がないと不便な場面がいろいろあるのですが、対応策としては、米田埋め込みを使って$\Phi$ から $\widehat{\Phi}$ を構成する方法があります。詳細は省略しますが、ざっくりとしたアイデアとしては、おおむね下の図の通りです。やや複雑な話なので、読み飛ばして構いません。）
 	\begin{center}
 		% \hspace*{-50pt}
 		\begin{tikzcd}[column sep=68pt,row sep=40pt]
@@ -4035,18 +4060,18 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{tikzcd}
 		\qquad\qquad\qquad 
 		\begin{tikzcd}[column sep=58pt, row sep=30pt]
-			\widehat L \ar[r,"\Lan_y(y\,\circ\, f^\ast)"'] & \widehat L \ar[l,bend right=22pt,"\exists g"',"\top"] \\
-			L \ar[r,"f^\ast"'] \ar[u,"y"] & L \ar[u,"y"']
+			\widehat L \ar[r,"\Lan_y(y\,\circ\, \Phi)"'] & \widehat L \ar[l,bend right=22pt,"\exists g"',"\top"] \\
+			L \ar[r,"\Phi"'] \ar[u,"y"] & L \ar[u,"y"']
 		\end{tikzcd}\vspace{8pt}\\
 			% $\Lan_y(h)(P)=\bigsqcup_{x\in P}h(x),\qquad \Lan_y(y\circ f^\ast)(P)=\{z\in L\mid\exists\,x\in P,\;z\sqsubseteq f^\ast(x)\}$\\
 			% $=\{f^\ast(x)\mid x\in P\}^\downarrow$
 			%%%
 			$\Lan_y(h)(P)=\bigsqcup_{x\in P}h(x), \qquad\qquad 
 			\begin{array}{rrl}
-					\widehat{f^\ast}(P)&:=&\Lan_y(y\circ f^\ast)(P)\\ 
-					&=&\{z\in L\mid z\sqsubseteq f^\ast(x)\;\textrm{for some}\;x\in P\}\\
+					\widehat{\Phi}(P)&:=&\Lan_y(y\circ \Phi)(P)\\ 
+					&=&\{z\in L\mid z\sqsubseteq \Phi(x)\;\textrm{for some}\;x\in P\}\\
 					% &=&\{f^\ast(x)\mid x\in P\}^\downarrow
-					&=& \bigsqcup_{x\in P} f^{\ast}(x)^\downarrow
+					&=& \bigsqcup_{x\in P} \Phi(x)^\downarrow
 				\end{array}$
 	\end{center}
 \end{itemize}
