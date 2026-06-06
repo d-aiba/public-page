@@ -2096,7 +2096,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 % \clearpage
 
 \begin{definition}[強モナド]
-	カルテシアン閉圏 $(\mathbb C,\otimes,I)$ 上で定義される\textgt{左-強モナド} (left-strong monad) とは、モナド $(T,\eta,\mu)$ すなわち任意の $X\in \mathbb C$ について 1) $T(X)\in \mathbb C$, 2) $\eta_X:X\to T(X)$, 3) $\mu_X:T(T(X))\to T(X)$ の3つ組であって、さらにそれに加えて 4) \textgt{左-ストレングス} (left-strength)  \[str_{X,Y}^L:X\otimes T(Y)\to T(X\otimes Y)\] を持ち、
+	カルテシアン閉圏 $(\mathbb C,\otimes,I)$ 上で定義される\textgt{左-強モナド} (left-strong monad) とは、モナド $(T,\eta,\mu)$ 
+	であって、さらにそれに加えて\textgt{左-ストレングス} (left-strength)  \[str_{X,Y}^L:X\otimes T(Y)\to T(X\otimes Y)\] を持ち、
 	以下の図式を可換にするものである。
 	\begin{center}
 		\begin{tikzcd}[column sep=0pt]
@@ -2132,6 +2133,23 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{supplement}
 	$\Set$上のモナドは強モナドである。（$\Set$を、直積$\times$をテンソル積として持った対称モノイダル圏と見る！）
 \end{supplement}
+
+\noindent ストレングス $\mathrm{str}_{X,Y}:X\otimes T(Y)\to T(X\otimes Y)$ の直観は、「使っていない引数には触るな！」です。
+\begin{align*}
+	% \begin{array}{c}
+	% 	\textrm{---\!---}\fbox{~~~$f$~~~}\textrm{---\!---} \\
+	% 	\textrm{---\!\!---\!---\!---\!---\!---\!---\!---}
+	% \end{array}
+	\begin{array}{ccc}
+		 \rule{25pt}{0.5pt} \hspace*{-11pt} & \rule{40pt}{0.5pt} & \hspace*{-11pt} \rule{25pt}{0.5pt}\\[-3pt] 
+		\rule[3pt]{25pt}{0.5pt} \hspace*{-11pt}  & \fbox{~~~$f$~~~} & \hspace*{-11pt}  \rule[3pt]{25pt}{0.5pt}
+	\end{array}
+	\implies 
+	\begin{array}{ccc}
+		\begin{array}{c} \rule{25pt}{0.5pt} \\[-7pt] \rule{25pt}{0.5pt} \\[-13pt] ~ \end{array} \hspace*{-15pt} & \fbox{~~~$\begin{array}{c} ~\\[-18pt] f \\[-18pt] ~ \end{array}$~~~} & \hspace*{-15pt} \begin{array}{c} \rule{25pt}{0.5pt} \\[-7pt] \rule{25pt}{0.5pt} \\[-13pt] ~ \end{array}
+	\end{array}
+	% \textrm{---\!---\fbox{~~~$f$~~~}---\!---}
+\end{align*}
 
 \clearpage
 
@@ -3522,37 +3540,39 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \noindent さて、\textgt{自由モナド} (free monad) と\textgt{余自由コモナド} (cofree comonad) の話をしましょう。
 \begin{itemize}
-	\item まず\textgt{自由モナド}は、以下の議論から得られます。（できるだけギリギリに、小さく、自由に！）
+	\item まず、\textgt{自由モナド} $F^\ast$ は、以下の議論から得られます。（できるだけギリギリに、小さく、自由に！）
 	\begin{center}\small
 		\begin{tikzcd}
 			\mathbf{Mon}(\Set) \ar[d,bend left=14pt,"\dashv"',"\textrm{Forgetful}"] & \left(\begin{array}{l}\textrm{\underline{obj}. $T$: monad}\\\textrm{\underline{arr}. monad morphism}\end{array}\right) \\
 			{[\Set,\Set]} \ar[u,bend left=14pt,"\mathrm{Free}"] & \left(\begin{array}{l}\textrm{\underline{obj}. $F:\Set\to\Set$}\\\textrm{\underline{arr}. natural transformation}\end{array}\right)
 		\end{tikzcd}
 	\end{center}
-	この自由モナド関手 $\mathrm{Free}:[\Set,\Set]\to\mathbf{Mon}(\Set)$ はどんなものでしょうか。具体的に考えてみましょう。\vspace{2pt}\\ たとえば、$F:\Set\to\Set$ を、以下のような多項式関手 (polynomial functor) としましょう。
-	\[F=\underset{\substack{~\\[1.5pt]\rotatebox{90}{)}\\0}}{1}+(\underparenthesis{1}{-})+(\underparenthesis{2}{-})^2+(\underparenthesis{2}{-})^2\]
-	% \[(\underparenthesis{2}{-})^2+(\underparenthesis{b}{-})^1+\underset{\substack{~\\[1.5pt]\rotatebox{90}{)}\\c}}{1}+(\underparenthesis{d}{-})^2\]
-	そして、以下を考えます。
+	この自由モナド関手 $\mathrm{Free}:[\Set,\Set]\to\mathbf{Mon}(\Set)$ はどんなものでしょうか。具体的に考えてみましょう。\vspace{0pt}\\ $F:\Set\to\Set$ を多項式関手 (polynomial functor) $F(-)=\sum_{\sigma\in\Sigma}(-)^{|\sigma|}$ とします。\\
+	% \[FY=\sum_{\sigma\in\Sigma}Y^{|\sigma|}\]
+	% 例えば次のようなものです。
+	% \[F=\underset{\substack{~\\[1.5pt]\rotatebox{90}{)}\\0}}{1}+(\underparenthesis{1}{-})+(\underparenthesis{2}{-})^2+(\underparenthesis{2}{-})^2\]
+	そして、以下を考えます。（上の多項式関手に $|X|$-many 0-ary operations を追加します。つまり、syntax を変数集合 $X$ で拡張する、ということです。）
 	\[\begin{array}{cccc}
 		X+F(-): & \Set & \longrightarrow & \Set\\
 		& Y & \longmapsto & X+FY
 	\end{array}\]
-	（つまり、上の多項式関手に $|X|$-many 0-ary operations を追加します。\\言い換えると、syntax を変数集合 $X$ で拡張する、ということです。）\vspace{3pt}\\
-	ここで、以下の始代数を考えましょう。
+	% （上の多項式関手に $|X|$-many 0-ary operations を追加します。つまり、syntax を変数集合 $X$ で拡張する、ということです。）\vspace{5pt}\\
+	ここで、この始代数 $\mu \,(X+F(-))$ を考えましょう。（各 node が $\sigma\in\Sigma$ でラベル付けされ、各 $\sigma$-node が $|\sigma|$-個の子を持ち、葉が $x\in X$ でラベル付けされた、well-founded な有限木となります。）
 	\[\left(\begin{array}{c}
 		X+F(F^\ast X)\\
 		~~\substack{\cong}\downarrow\substack{\textrm{initial}}\\
 		F^\ast X
 	\end{array}\right)\]
-	そうすると、このように $X+F(-)$ の最小不動点 $F^\ast X$ が得られました。\\
-	いま、$F^\ast$（つまり $X$ をとって上記の $F^\ast X$ を返すもの）が自由モナドです。\[X\xmapsto{~~~~} F^\ast X\]
+	% そうすると、このように $X+F(-)$ の最小不動点 $F^\ast X$ が得られました。\\
+	いま、$F^\ast$（つまり、$X$ をとって上記の $F^\ast X$ を返すもの、$X\xmapsto{~~~~} F^\ast X$）が自由モナドです。 \vspace{0pt}\\
+	% 一般に、多項式関手 $F=\sum_{\sigma\in\Sigma}Y^{|\sigma|}$ について、自由 $F$-代数  とは、各 node が $\sigma\in\Sigma$ でラベル付けされ、各 $\sigma$-node が $|\sigma|$-個の子を持ち、葉が $X$ でラベル付けされた、有限の well-founded tree になります。\\ 
 	なお、endofunctor の間の natural transformation は、自由モナドの間の monad morphism になります。
 	\begin{prooftree}
 		\AXC{$F\Rightarrow G$, natural transformation}
 		\UIC{$F^\ast\Rightarrow G^\ast$, monad morphism}
 	\end{prooftree}
 	この $F^\ast\Rightarrow G^\ast$ は、$F^\ast X$ 側の initiality 
-	\begin{center}
+	\begin{center} \small
 		\begin{tikzcd}
 			X+F(F^\ast X) \ar[r,dashed] \ar[d,"\textrm{init}"] & X+F(G^\ast X) \ar[d] \\
 			F^\ast X \ar[r,dashed] & G^\ast X
@@ -3563,20 +3583,15 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\AXC{$F^\ast X\to G^\ast X$}
 		\UIC{$\left(\begin{array}{c} X+F(G^\ast X)\\\downarrow\\ G^\ast X\end{array}\right)$, pattern matching}
 	\end{prooftree}
-	\item 今度は、\textgt{余自由コモナド}についても考えましょう。
+	\item 今度は、\textgt{余自由コモナド} $F^\infty$ についても考えましょう。
 	\begin{center}\small
 		\begin{tikzcd}
 			\mathbf{CoMon}(\Set) \ar[d,bend left=14pt,"\vdash"',"\textrm{Forgetful}"] & \left(\begin{array}{l}\textrm{\underline{obj}. $M$: comonad}\\\textrm{\underline{arr}. comonad morphism}\end{array}\right) \\
 			{[\Set,\Set]} \ar[u,bend left=14pt,"\mathrm{Cofree}"] & \left(\begin{array}{l}\textrm{\underline{obj}. $F:\Set\to\Set$}\\\textrm{\underline{arr}. natural transformation}\end{array}\right)
 		\end{tikzcd}
 	\end{center}
-	このとき、余自由コモナドは、以下のように作られます。\\
-	$F:\Set\to\Set$ と $X\in\Set$ が与えられたとき、\[\begin{array}{cccc}X\times F(-):&\Set&\longrightarrow&\Set\\&Y&\longmapsto& X\times FY\end{array}\] を考えて、以下の終余代数 \[\left(\begin{array}{c}X\times F(F^\infty X)\\ ~\substack{\cong}\uparrow\substack{\textrm{final}}\\ F^\infty X\end{array}\right)\] を作ると、$F^\infty$ が余自由コモナドです。\[X\xmapsto{~~~~}F^\infty X\] 
-	復習: 
-	\begin{align*}
-		... 
-	\end{align*}
-	% \item 
+	このとき、余自由コモナドは、以下のように作られます。
+	$F:\Set\to\Set$ と $X\in\Set$ が与えられたとき、\[\begin{array}{cccc}X\times F(-):&\Set&\longrightarrow&\Set\\&Y&\longmapsto& X\times FY\end{array}\] を考えて、以下の終余代数 $\nu\,(X\times F(-))$（各 node が $x\in X$ と $\sigma\in\Sigma$ でラベル付けされ、各 node が $|\sigma|$-個の子を持つ、possibly infinite な木） \[\left(\begin{array}{c}X\times F(F^\infty X)\\ ~\substack{\cong}\uparrow\substack{\textrm{final}}\\ F^\infty X\end{array}\right)\] を作ると、この $F^\infty$ が余自由コモナドです。%$X\xmapsto{~~~~}F^\infty X$
 \end{itemize}
 
 % \begin{definition}
