@@ -1948,24 +1948,28 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \clearpage
 
 \begin{definition}[モナド]
-	\textgt{モナド} (monad) とは3つ組 $(T,\eta,\mu)$ であって、以下を満たすものである。\\ 1) $T:\C\to\C$は関手である。2) 単位 $\eta:\id_{\mathbb C}\Rightarrow T$は自然変換である。3) 乗法 $\mu:T\circ T\Rightarrow T$ は自然変換である。そして、以下の図式を可換にする。\vspace{5pt}
+	\textgt{モナド} (monad) とは3つ組 $(T,\eta,\mu)$ であって、以下を満たすものである。\\ 1) $T:\C\to\C$は自己関手である。2) 単位 $\eta:\id_{\mathbb C}\Rightarrow T$は自然変換である。3) 乗法 $\mu:T\circ T\Rightarrow T$ は自然変換である。そして、以下の2つの条件、単位律 (unitality) と結合律 (associativity) を満たすものである。\vspace{5pt}
 	% \begin{multicols}{2}
 		\begin{center}
 			\small
+			% \begin{tikzcd}
+			% 	\id_\C\circ T \ar[r,Rightarrow,"\eta\cdot\id_T"] \ar[rd,equal] & T\circ T \ar[d,Rightarrow,"\mu"]\ar[r,Leftarrow,"\id_T\cdot\eta"] & T\circ\id_\C \ar[ld,equal]\\
+			% 	&T&
+			% \end{tikzcd}
 			\begin{tikzcd}
-				\id_\C\circ T \ar[r,Rightarrow,"\eta\cdot\id_T"] \ar[rd,equal] & T\circ T \ar[d,Rightarrow,"\mu"]\ar[r,Leftarrow,"\id_T\cdot\eta"] & T\circ\id_\C \ar[ld,equal]\\
+				\id_\C\circ T \ar[r,Rightarrow,"\eta T"] \ar[rd,equal] & T\circ T \ar[d,Rightarrow,"\mu"]\ar[r,Leftarrow,"T\eta"] & T\circ\id_\C \ar[ld,equal]\\
 				&T&
 			\end{tikzcd}
 		% \end{center}
 		\qquad\qquad
 		% \begin{center}
 			\begin{tikzcd}
-				T\circ T\circ T \ar[r,Rightarrow,"\id_T\cdot\mu"] \ar[d,Rightarrow,"\mu\cdot \id_T"'] & T\circ T \ar[d,Rightarrow,"\mu"]\\
+				T\circ T\circ T \ar[r,Rightarrow,"T\mu"] \ar[d,Rightarrow,"\mu T"'] & T\circ T \ar[d,Rightarrow,"\mu"]\\
 				T\circ T \ar[r,Rightarrow,"\mu"'] & T
 			\end{tikzcd}\vspace{5pt}
 		\end{center}
 	% \end{multicols}
-	言い換えると、任意の対象 $X\in\C$ について、$\eta_X:X\to T(X)$ と $\mu_X:T(T(X))\to T(X)$ は以下を満たす。\vspace{5pt}
+	つまり、各対象 $X\in\C$ について、$\eta_X:X\to TX$ と $\mu_X:TTX\to TX$ は、以下を可換にする。\vspace{5pt}
 	% \begin{multicols}{2}
 		\begin{center}
 			\small
@@ -3242,7 +3246,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\begin{center}
 		\begin{tikzcd}
 			1+\Sigma\times X \ar[r,"{F\mathrm{tr}_{c}}",dashed] & 1+\Sigma\times\Sigma^\ast & \fbox{in $\C_{\mathcal P}$} \\
-			X \ar[r,"{\mathrm{tr}_{c}}"',dashed] \ar[u,"c~","\shortmid" marking] & \Sigma^\ast \ar[u,"~\eta_{1+\Sigma\times\Sigma^\ast}\,\circ\,\alpha^{-1}"',"\shortmid" marking]
+			X \ar[r,"{\mathrm{tr}_{c}}"',dashed] \ar[u,"c~","\shortmid" marking] & \Sigma^\ast \ar[u,"~\eta_{\,1+\Sigma\times\Sigma^\ast}\,\circ\,\alpha^{-1}"',"\shortmid" marking]
 		\end{tikzcd}
 	\end{center}\vspace{15pt}
 	\item (2) に関して、このような\textgt{冪集合構成} (powerset construction) の恩恵は、以下のことができる点にもある。\\ $\cdots$終$FT$-余代数が作れない場合でも、終$F$-余代数なら作れることがある。%\\ \quad\; つまり $c:X\to FTX$ には終余代数意味論がつかないが $c':TX\to FTX$ には終余代数意味論がつく、という場合がある。
@@ -3320,51 +3324,201 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-さて、以上のように、モナド分配則はあると便利なのですが、実際には、いつも都合良くモナド分配則が手に入るとは限りません。以下ではそのことについて、簡単な例をもとに考えてみましょう。（以下に挙げるような例は、自然変換にならないため、したがってモナド分配則の候補にもなれないことを確認しましょう。）
+% さて、以上のように、モナド分配則はあると便利なのですが、実際には、いつも都合良くモナド分配則が手に入るとは限りません。以下ではそのことについて、簡単な例をもとに考えてみましょう。（以下に挙げるような例は、自然変換にならないため、したがってモナド分配則の候補にもなれないことを確認しましょう。）
+
+% \begin{example}
+% 	$\mathcal P:\Set\to\Set$ を冪集合モナドとする。このとき、以下の $\lambda:\mathcal P\mathcal P\Rightarrow\mathcal P\mathcal P$ は自然変換にならない。
+% 	\[\sum_{i\in I} a_i\Ket{\sum_{x\in X} b_{ix}\Ket{x}}\;\xmapsto{~~\lambda~~}\; \sum_{f\in X^I} \left(\prod_{i\in I} b_{i,f(i)}\right) \Ket{ \sum_{i\in I} a_i \Ket{f(i)}}\]
+% 	たとえば、$X=\{a,b,c,d\}$, $Y=\{\alpha,\beta\}$ とし、
+% 	\begin{align*}
+% 		\begin{array}{ccccc}
+% 			f: & X & \longrightarrow & Y\\
+% 			& a & \mapsto & \alpha\\[-5pt]
+% 			& b & \mapsto & \beta \\[-5pt]
+% 			& c & \mapsto & \alpha\\[-5pt]
+% 			& d & \mapsto & \beta &\!.
+% 		\end{array}
+% 	\end{align*}
+% 	とする。このとき、以下の図式は可換にならない。（自然性が成り立たない）\vspace{10pt}
+% 	\begin{center} %\small
+% 		\begin{tikzcd}[column sep=24pt]
+% 			\{\{a,b\},\{c,d\}\} \ar[r,mapsto,"\lambda"] \ar[dd,mapsto,"PPf"']  & \{\{a,c\},\{a,d\}, \ar[rdd,mapsto,bend left=15pt,"PPf"]\\[-25pt]
+% 			& ~~\{b,c\},\{b,d\}\}  \\
+% 			~~\{\{\alpha,\beta\}\}~~ \ar[r,mapsto,"\lambda"'] & \{\{\alpha\},\{\beta\}\} \ar[r,phantom,"\neq"] & \{\{\alpha\},\{\alpha,\beta\},\{\beta\}\}
+% 		\end{tikzcd}\vspace{5mm} 
+% 	\end{center}
+% 	（なお、ケット記法では、$\{\{a,b\},\{c,d\}\}$ は、$\BigKet{\Ket{a}+\Ket{b}}+\BigKet{\Ket{c}+\Ket{d}}$ と書かれることに注意。）
+% \end{example}
+
+% 他にも有名な例だと、以下のようなモナド分配則もないことが知られています。
+
+% \begin{example}[Plotkin]
+%   No-Go theorem
+% 	冪集合モナド $\mathcal P:\Set\to\Set$ と、分布モナド $\mathcal D:\Set\to\Set$ について、
+% 	\[\mathcal D\mathcal P\Rightarrow\mathcal P\mathcal D\] 
+% 	や
+% 	\[\mathcal P\mathcal D\Rightarrow\mathcal D\mathcal P\] 
+% 	は自然変換にならない。
+% 	% といった分配則は得られない。
+% 	（詳細は省略）
+% \end{example}
+
+
+% \todo[inline]{Rewrite}
+
+
+% \vspace{120pt}
+
+% 寄り道（余談）はこのくらいにしておいて、次節では、いよいよ（この記事の本題である）「グロタンディーク・ファイブレーション」の話に移りましょう。
+
+
+\clearpage
+
+\noindent\textgt{コラム: モナドとコモナド} \vspace{5pt}
+% \subsubsection*{コラム: モナドとコモナド}
+
+\noindent ここでは、モナドに関連する話題（余談）として、\textgt{コモナド} (comonad) について取り上げます。まずは定義です。
+
+\begin{definition}[コモナド]
+	\textgt{コモナド} (comonad) とは3つ組 $(M,\varepsilon,\delta)$ であって、以下を満たすものである。\\ 1) $M:\C\to\C$ は自己関手である。 2) 余単位 $\varepsilon:M\Rightarrow\id_\C$ は自然変換である。3) 余乗法 $\delta:M\Rightarrow M\circ M$ は自然変換である。そして、以下の2つの条件、余単位律 (counitality) と余結合律 (coassociativity) を満たす。\vspace{5pt}
+	\begin{center}\small
+		\begin{tikzcd}
+			& M \ar[d,"\delta"',Rightarrow] \ar[ld,equal] \ar[rd,equal] & \\
+			\id_\C\circ M & M\circ M \ar[l,Rightarrow,"\varepsilon M"] \ar[r,Rightarrow,"M\varepsilon"'] & M\circ\id_\C %\\
+		\end{tikzcd}
+		\qquad\quad
+		\begin{tikzcd}
+			M \ar[r,Rightarrow,"\delta"] \ar[d,Rightarrow,"\delta"'] & M\circ M \ar[d,Rightarrow,"M\delta"] \\
+			M\circ M \ar[r,Rightarrow,"\delta M"'] & M\circ M\circ M
+		\end{tikzcd} \vspace{5pt}
+	\end{center}
+	言い換えると、各対象 $X\in\C$ について、$\varepsilon_X:MX\to X$ と $\delta_X:MX\to MMX$ は、以下を可換にする。\vspace{5pt}
+	\begin{center}
+		\begin{tikzcd}
+			& MX \ar[d,"\delta_X"'] \ar[ld,"\id_{MX}"'] \ar[rd,"\id_{MX}"] & \\
+			MX & MMX \ar[l,"\varepsilon_{MX}"] \ar[r,"M\varepsilon_X"'] & MX %\\
+		\end{tikzcd}
+		\qquad\quad
+		\begin{tikzcd}
+			MX \ar[r,"\delta_X"] \ar[d,"\delta_{X}"'] & MMX \ar[d,"M\delta_X"] \\
+			MMX \ar[r,"\delta_{MX}"'] & MMMX
+		\end{tikzcd}
+	\end{center}
+\end{definition}
+
+\noindent ここで、comonadic computation は、以下のようなものです。
+\begin{prooftree}
+	\AXC{$X\mathbin{-\!\!\!\mapsto} Y$ ~ in $\mathbf{CoKl}(M)$}
+	\doubleLine
+	\UIC{$MX\to Y$ ~ in $\Set$}
+\end{prooftree}
+また、余クライスリ圏 $\mathbf{CoKl}(M)$ における composition は、以下のように与えられます。
+\begin{prooftree}
+	\AXC{$X\overset{~f~}{\mathbin{-\!\!\!\mapsto}} Y$}
+	\doubleLine
+	\UIC{$MX\xrightarrow{~f~} Y$}
+	\UIC{$M^2X\xrightarrow{~Mf~} MY$}
+		\AXC{$Y\overset{g}{\mathbin{-\!\!\!\mapsto}} Z$}
+		\doubleLine
+		\UIC{$MY\xrightarrow{~g~} Z$}
+	\BIC{$MX\xrightarrow{~\delta_X~} M^2X \xrightarrow{~Mf~}MY\xrightarrow{~g~}Z$}
+\end{prooftree}
+モナドは、\uwave{出力側}に additional structure が入った computation を考えるのに対し、\\ コモナドは、\uwave{入力側}に additional structure が入った computation を考えます。
+\begin{itemize}
+	\item \underline{monad}: structured output
+	\item \underline{comonad}: structured input
+	% \item \underline{monad, comonad, distributive law}: structured input and output
+\end{itemize}
 
 \begin{example}
-	$\mathcal P:\Set\to\Set$ を冪集合モナドとする。このとき、以下の $\lambda:\mathcal P\mathcal P\Rightarrow\mathcal P\mathcal P$ は自然変換にならない。
-	\[\sum_{i\in I} a_i\Ket{\sum_{x\in X} b_{ix}\Ket{x}}\;\xmapsto{~~\lambda~~}\; \sum_{f\in X^I} \left(\prod_{i\in I} b_{i,f(i)}\right) \Ket{ \sum_{i\in I} a_i \Ket{f(i)}}\]
-	たとえば、$X=\{a,b,c,d\}$, $Y=\{\alpha,\beta\}$ とし、
+	コモナド $M=S\times(-)$ を考えましょう。（ここで $S$ は集合。writer モナドのコモナド版。）\\
+	このコモナドの counit と comultiplication は以下のように与えられます。
 	\begin{align*}
 		\begin{array}{ccccc}
-			f: & X & \longrightarrow & Y\\
-			& a & \mapsto & \alpha\\[-5pt]
-			& b & \mapsto & \beta \\[-5pt]
-			& c & \mapsto & \alpha\\[-5pt]
-			& d & \mapsto & \beta &\!.
+			X & \xleftarrow{~\varepsilon_X~} & MX & \xrightarrow{~\delta_X~} & M(MX) \\
+			&&\rotatebox{90}{$=$} && \rotatebox{90}{$=$}\\
+			&& S\times X && S\times(S\times X)\\
+			&&\rotatebox{90}{$\in$} && \rotatebox{90}{$\in$}\\
+			x & \reflectbox{$\longmapsto$} & (s,x) & \longmapsto & (s,(s,x))
 		\end{array}
 	\end{align*}
-	とする。このとき、以下の図式は可換にならない。（自然性が成り立たない）\vspace{10pt}
-	\begin{center} %\small
-		\begin{tikzcd}[column sep=24pt]
-			\{\{a,b\},\{c,d\}\} \ar[r,mapsto,"\lambda"] \ar[dd,mapsto,"PPf"']  & \{\{a,c\},\{a,d\}, \ar[rdd,mapsto,bend left=15pt,"PPf"]\\[-25pt]
-			& ~~\{b,c\},\{b,d\}\}  \\
-			~~\{\{\alpha,\beta\}\}~~ \ar[r,mapsto,"\lambda"'] & \{\{\alpha\},\{\beta\}\} \ar[r,phantom,"\neq"] & \{\{\alpha\},\{\alpha,\beta\},\{\beta\}\}
-		\end{tikzcd}\vspace{5mm} 
+	このとき、comonadic computation は、関数にパラメータをつけて束ねたものに相当します。
+	\begin{prooftree}
+		\AXC{$X\overset{~f~}{\mathbin{-\!\!\!\mapsto}} Y$, comonadic computation}
+		\doubleLine
+		\UIC{$S\times X\xrightarrow{~f~}Y$, function with parameter}
+		\doubleLine
+		\UIC{$(X\xrightarrow{~f_s~}Y)_{s\in S}$, bundle of functions}
+	\end{prooftree}
+\end{example}
+
+\clearpage
+
+\noindent では、\uwave{入力側}にも\uwave{出力側}にも構造が入った computation を考えたい場合はどうすればいいでしょうか。\\ その場合、モナドとコモナドの間の distributive law を使います。
+\begin{itemize}
+	\item \underline{monad, comonad, and distributive law}: structured input and output
+\end{itemize}
+いま、$T$: monad, $M$: comonad とし、$MX \xrightarrow{~f~} TY$ という computation を考えたいです。\\ このとき、合成
+\begin{prooftree}
+	\AXC{$MX\xrightarrow{~f~} TY$}
+	\AXC{$MY\xrightarrow{~g~} TZ$} \RL{aim}
+	\BIC{$MX\xrightarrow{~g\,\odot\,f~} TZ$}
+\end{prooftree}
+は、分配則を用いて以下のように与えられます。
+\begin{center}
+	\begin{tikzcd}
+		M(MX) \ar[r,"Mf"] & MTY \ar[r,"\lambda_Y"] & TMY \ar[r,"Tg"] & T(TZ) \ar[d,"\mu_Z"] \\
+		MX \ar[u,"\delta_X"] &&& TZ
+	\end{tikzcd}
+\end{center}
+\begin{definition}
+	モナド $T$ とコモナド $M$ の\textgt{分配則} (distributive law) とは、自然変換 $\lambda:MT\Rightarrow TM$ であり、モナド構造とコモナド構造に整合的なものである。
+	\begin{center}
+		\begin{tikzcd}
+			MTX \ar[r,"\lambda"] & TMX \\
+			MX \ar[u,"M\eta"] \ar[ur,"\eta M"'] &
+		\end{tikzcd}
+		\qquad
+		\begin{tikzcd}
+			MTX \ar[r,"\lambda"] \ar[d,"\varepsilon T"'] & TMX \ar[ld,"T\varepsilon"] \\
+			TX &
+		\end{tikzcd}
 	\end{center}
-	（なお、ケット記法では、$\{\{a,b\},\{c,d\}\}$ は、$\BigKet{\Ket{a}+\Ket{b}}+\BigKet{\Ket{c}+\Ket{d}}$ と書かれることに注意。）
+	%%
+	\begin{center}
+		\begin{tikzcd}
+			MT^2X \ar[r,"M\mu_X"] \ar[d,"\lambda_{TX}"'] & MTX \ar[dd,"\lambda_X"] \\
+			TMTX \ar[d,"T\lambda_X"'] &  \\
+			T^2MX \ar[r,"\mu_{MX}"'] & TMX
+		\end{tikzcd}
+		\qquad 
+		% \begin{tikzcd}
+		% 	{} \ar[r,"T\delta_X"] \ar[d,"\lambda_{MX}"'] & {MTX} \ar[dd,"\lambda_X"] \\
+		% 	{} \ar[d,"M\lambda_X"'] & {} \\
+		% 	{} \ar[r,"\delta_{TX}"'] & {TMX}
+		% \end{tikzcd}
+		\begin{tikzcd}
+			MTX \ar[r,"\delta_{TX}"] \ar[dd,"\lambda_X"'] & M^2TX \ar[d,"M\lambda_X"] \\
+			{} & MTMX \ar[d,"\lambda_{MX}"] \\
+			TMX \ar[r,"T\delta_X"'] & TM^2X
+		\end{tikzcd}
+	\end{center}
+\end{definition}
+
+\begin{example}
+% \noindent 
+例として、$M=(-)^\omega$（無限ストリームコモナド）とし、$T=\mathcal P$（冪集合モナド）としましょう。\\ 分配則は以下のように与えられます。
+\[\begin{array}{cccc}\lambda_X:&(\mathcal PX)^\omega&\longrightarrow&\mathcal P(X^\omega)\\ & \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\ & (s_0,s_1,\dots) & \mapsto & \left\{(x_0,x_1,\dots) \mid x_i\in S_i\; (\forall i\in\omega) \right\} \end{array}\]
+これがあることによって、$f:X^\omega\to\mathcal PY$ のような、入力が無限ストリームであり、出力が非決定的であるような computation をどうやって合成すればいいかがわかるようになります。
 \end{example}
 
-他にも有名な例だと、以下のようなモナド分配則もないことが知られています。
+\noindent さて、自由モナド (free monad) と余自由コモナド (cofree comonad) の話をしましょう。
 
-\begin{example}[Plotkin]
-	冪集合モナド $\mathcal P:\Set\to\Set$ と、分布モナド $\mathcal D:\Set\to\Set$ について、
-	\[\mathcal D\mathcal P\Rightarrow\mathcal P\mathcal D\] 
-	や
-	\[\mathcal P\mathcal D\Rightarrow\mathcal D\mathcal P\] 
-	は自然変換にならない。
-	% といった分配則は得られない。
-	（詳細は省略）
-\end{example}
+% \begin{definition}
+	
+% \end{definition}
 
-
-\todo[inline]{Rewrite}
-
-
-\vspace{120pt}
-
-寄り道（余談）はこのくらいにしておいて、次節では、いよいよ（この記事の本題である）「グロタンディーク・ファイブレーション」の話に移りましょう。
+% 寄り道（余談）はこのくらいにしておいて、次節では、いよいよ（この記事の本題である）「グロタンディーク・ファイブレーション」の話に移りましょう。
 
 
 
