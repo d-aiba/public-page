@@ -1173,7 +1173,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent ではここで、$\Set$上の多項式関手（集合演算$+,\times,{(-)}^{n}$だけを用いて書けるような関手）について、始代数と終余代数を\kenten{具体的に}求める練習をしましょう。
+\noindent ではここで、$\Set$上の\textgt{多項式関手}（集合演算$+,\times,{(-)}^{n}$だけを用いて書けるような関手。代数的データ型のBNF記法を圏論の言葉で書いたもの！）について、始代数と終余代数を\kenten{具体的に}求める練習をしましょう。
 \vspace{6pt}
 %\\
 
@@ -1542,6 +1542,13 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \todo[inline]{例: odd=even$\circ$tail}
 
 
+\clearpage
+
+\noindent 
+\begin{large}\textgt{コラム: 余代数的様相論理}\end{large}
+\vspace{5pt}
+
+\noindent ここで、\textgt{余代数的様相論理} (coalgebraic modal logic) について
 
 
 
@@ -3374,7 +3381,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent\textgt{コラム: モナドとコモナド} \vspace{5pt}
+\noindent\begin{large}\textgt{コラム: モナドとコモナド}\end{large} \vspace{5pt}
 % \subsubsection*{コラム: モナドとコモナド}
 
 \noindent ここでは、モナドに関連する話題（余談）として、\textgt{コモナド} (comonad) について取り上げます。まずは定義です。
@@ -3472,26 +3479,27 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{tikzcd}
 \end{center}
 \begin{definition}
-	モナド $T$ とコモナド $M$ の\textgt{分配則} (distributive law) とは、自然変換 $\lambda:MT\Rightarrow TM$ であり、モナド構造とコモナド構造に整合的なものである。
+	モナド $T$ とコモナド $M$ の間の\textgt{分配則} (distributive law) とは、自然変換 $\lambda:MT\Rightarrow TM$ であって、モナド構造とコモナド構造に整合的なものである。
 	\begin{center}
 		\begin{tikzcd}
 			MTX \ar[r,"\lambda"] & TMX \\
 			MX \ar[u,"M\eta"] \ar[ur,"\eta M"'] &
 		\end{tikzcd}
-		\qquad
+		\quad
 		\begin{tikzcd}
-			MTX \ar[r,"\lambda"] \ar[d,"\varepsilon T"'] & TMX \ar[ld,"T\varepsilon"] \\
-			TX &
+			MTX \ar[r,"\lambda"] \ar[rd,"\varepsilon T"'] & TMX \ar[d,"T\varepsilon"] \\
+			& TX
 		\end{tikzcd}
 	\end{center}
-	%%
+	% %%
+	% \quad 
 	\begin{center}
 		\begin{tikzcd}
 			MT^2X \ar[r,"M\mu_X"] \ar[d,"\lambda_{TX}"'] & MTX \ar[dd,"\lambda_X"] \\
 			TMTX \ar[d,"T\lambda_X"'] &  \\
 			T^2MX \ar[r,"\mu_{MX}"'] & TMX
 		\end{tikzcd}
-		\qquad 
+		\quad 
 		% \begin{tikzcd}
 		% 	{} \ar[r,"T\delta_X"] \ar[d,"\lambda_{MX}"'] & {MTX} \ar[dd,"\lambda_X"] \\
 		% 	{} \ar[d,"M\lambda_X"'] & {} \\
@@ -3512,13 +3520,86 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 これがあることによって、$f:X^\omega\to\mathcal PY$ のような、入力が無限ストリームであり、出力が非決定的であるような computation をどうやって合成すればいいかがわかるようになります。
 \end{example}
 
-\noindent さて、自由モナド (free monad) と余自由コモナド (cofree comonad) の話をしましょう。
+\noindent さて、\textgt{自由モナド} (free monad) と\textgt{余自由コモナド} (cofree comonad) の話をしましょう。
+\begin{itemize}
+	\item まず\textgt{自由モナド}は、以下の議論から得られます。（できるだけギリギリに、小さく、自由に！）
+	\begin{center}\small
+		\begin{tikzcd}
+			\mathbf{Mon}(\Set) \ar[d,bend left=14pt,"\dashv"',"\textrm{Forgetful}"] & \left(\begin{array}{l}\textrm{\underline{obj}. $T$: monad}\\\textrm{\underline{arr}. monad morphism}\end{array}\right) \\
+			{[\Set,\Set]} \ar[u,bend left=14pt,"\mathrm{Free}"] & \left(\begin{array}{l}\textrm{\underline{obj}. $F:\Set\to\Set$}\\\textrm{\underline{arr}. natural transformation}\end{array}\right)
+		\end{tikzcd}
+	\end{center}
+	この自由モナド関手 $\mathrm{Free}:[\Set,\Set]\to\mathbf{Mon}(\Set)$ はどんなものでしょうか。具体的に考えてみましょう。\vspace{2pt}\\ たとえば、$F:\Set\to\Set$ を、以下のような多項式関手 (polynomial functor) としましょう。
+	\[F=\underset{\substack{~\\[1.5pt]\rotatebox{90}{)}\\0}}{1}+(\underparenthesis{1}{-})+(\underparenthesis{2}{-})^2+(\underparenthesis{2}{-})^2\]
+	% \[(\underparenthesis{2}{-})^2+(\underparenthesis{b}{-})^1+\underset{\substack{~\\[1.5pt]\rotatebox{90}{)}\\c}}{1}+(\underparenthesis{d}{-})^2\]
+	そして、以下を考えます。
+	\[\begin{array}{cccc}
+		X+F(-): & \Set & \longrightarrow & \Set\\
+		& Y & \longmapsto & X+FY
+	\end{array}\]
+	（つまり、上の多項式関手に $|X|$-many 0-ary operations を追加します。\\言い換えると、syntax を変数集合 $X$ で拡張する、ということです。）\vspace{3pt}\\
+	ここで、以下の始代数を考えましょう。
+	\[\left(\begin{array}{c}
+		X+F(F^\ast X)\\
+		~~\substack{\cong}\downarrow\substack{\textrm{initial}}\\
+		F^\ast X
+	\end{array}\right)\]
+	そうすると、このように $X+F(-)$ の最小不動点 $F^\ast X$ が得られました。\\
+	いま、$F^\ast$（つまり $X$ をとって上記の $F^\ast X$ を返すもの）が自由モナドです。\[X\xmapsto{~~~~} F^\ast X\]
+	なお、endofunctor の間の natural transformation は、自由モナドの間の monad morphism になります。
+	\begin{prooftree}
+		\AXC{$F\Rightarrow G$, natural transformation}
+		\UIC{$F^\ast\Rightarrow G^\ast$, monad morphism}
+	\end{prooftree}
+	この $F^\ast\Rightarrow G^\ast$ は、$F^\ast X$ 側の initiality 
+	\begin{center}
+		\begin{tikzcd}
+			X+F(F^\ast X) \ar[r,dashed] \ar[d,"\textrm{init}"] & X+F(G^\ast X) \ar[d] \\
+			F^\ast X \ar[r,dashed] & G^\ast X
+		\end{tikzcd}
+	\end{center}
+	を使うと、以下のようなものになります。（代数的データ型でパターンマッチを行うことに相当します。）
+	\begin{prooftree}
+		\AXC{$F^\ast X\to G^\ast X$}
+		\UIC{$\left(\begin{array}{c} X+F(G^\ast X)\\\downarrow\\ G^\ast X\end{array}\right)$, pattern matching}
+	\end{prooftree}
+	\item 今度は、\textgt{余自由コモナド}についても考えましょう。
+	\begin{center}\small
+		\begin{tikzcd}
+			\mathbf{CoMon}(\Set) \ar[d,bend left=14pt,"\vdash"',"\textrm{Forgetful}"] & \left(\begin{array}{l}\textrm{\underline{obj}. $M$: comonad}\\\textrm{\underline{arr}. comonad morphism}\end{array}\right) \\
+			{[\Set,\Set]} \ar[u,bend left=14pt,"\mathrm{Cofree}"] & \left(\begin{array}{l}\textrm{\underline{obj}. $F:\Set\to\Set$}\\\textrm{\underline{arr}. natural transformation}\end{array}\right)
+		\end{tikzcd}
+	\end{center}
+	このとき、余自由コモナドは、以下のように作られます。\\
+	$F:\Set\to\Set$ と $X\in\Set$ が与えられたとき、\[\begin{array}{cccc}X\times F(-):&\Set&\longrightarrow&\Set\\&Y&\longmapsto& X\times FY\end{array}\] を考えて、以下の終余代数 \[\left(\begin{array}{c}X\times F(F^\infty X)\\ ~\substack{\cong}\uparrow\substack{\textrm{final}}\\ F^\infty X\end{array}\right)\] を作ると、$F^\infty$ が余自由コモナドです。\[X\xmapsto{~~~~}F^\infty X\] 
+	復習: 
+	\begin{align*}
+		... 
+	\end{align*}
+	% \item 
+\end{itemize}
 
 % \begin{definition}
 	
 % \end{definition}
 
-% 寄り道（余談）はこのくらいにしておいて、次節では、いよいよ（この記事の本題である）「グロタンディーク・ファイブレーション」の話に移りましょう。
+
+\clearpage
+
+\noindent\begin{large}\textgt{コラム: ラヴェア理論と有限モナド}\end{large}\vspace{5pt}
+
+\noindent 少し寄り道をして、\textgt{ラヴェア理論} (Lawvere theory) と\textgt{有限モナド} (finitary monad) の関係について扱います。
+
+\begin{itemize}
+	\item 
+	\item 
+	\item 
+\end{itemize}
+
+
+\vspace{120pt}
+
+寄り道（余談）はこのくらいにしておいて、次節では、いよいよ（この記事の本題である）「グロタンディーク・ファイブレーション」の話に移りましょう。
 
 
 
