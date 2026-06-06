@@ -1545,12 +1545,82 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \clearpage
 
 \noindent 
-\begin{large}\textgt{コラム: 余代数的様相論理}\end{large}
+\begin{large}\textgt{コラム: 余代数様相論理}\end{large}
 \vspace{5pt}
 
-\noindent ここで、\textgt{余代数的様相論理} (coalgebraic modal logic) について
-
-
+\noindent ここで、\textgt{余代数様相論理} (coalgebraic modal logic) について取り上げます。
+\begin{definition}[余代数様相論理]
+	$\C,\A$ を圏とし、$F^\op,P,L,S^\op$ を以下のような関手とする。
+	\begin{center}
+		\begin{tikzcd}[column sep=40pt]
+			\C^\op\! \ar[loop left,"F^\op"] \ar[r,bend left=14pt,"P","\top"'] & \,\A\, \ar[loop right,"L"] \ar[l,bend left=14pt,"S^\op"] 
+		\end{tikzcd}
+	\end{center}
+	さらに、以下の制約を課す。
+	\begin{itemize}
+		\item 自然変換 $\sigma:LP\Rightarrow PF^\op$ がある
+		\item 関手 $L$ は、始代数 $L(\mathrm{Form})\xrightarrow{\cong}\mathrm{Form}$ を持つ
+		\item 圏 $\C$ が factorization system $(\mathcal E,\mathcal M)$ を持つ
+	\end{itemize}
+	このとき、$(L,\sigma)$ は $T$ の\textgt{余代数様相論理} (coalgebraic modal logic) であるという。
+\end{definition}
+\noindent これだと定義が抽象的なので、ひとつずつ丁寧に見ていきましょう。
+\begin{itemize}
+	\item $\C$: state spaces (例: $\Set$)
+	\item $\A$: propositional logic (例: $\mathbf{BA}$)
+	\item $F$: transition type
+	\item $L$: modalities
+\end{itemize}
+より具体的に言うと、
+\begin{center}
+	\begin{tikzcd}[column sep=50pt,row sep=30pt]
+		\!\!\mathbf{Coalg}_F^\op \ar[d] \ar[r,bend left=10pt,"\top"'] & \mathbf{Alg}_L \ar[d] \ar[l,bend left=10pt] \\
+		\C^\op \ar[loop left,"F^\op",looseness=6pt] \ar[r,bend left=10pt,"P","\top"'] & \A \ar[loop right,"L"] \ar[l,bend left=10pt,"S^\op"] 
+	\end{tikzcd}
+\end{center}
+\begin{itemize}
+	\item 任意の $F$-余代数に対し、以下のやり方で $L$-代数が得られます。
+	\begin{prooftree}
+		\AXC{$c:X\to FX$, ~ an $F$-coalgebra}
+		\UIC{$LPX\xrightarrow{\sigma_X}PTX\xrightarrow{P(c)}PX$, ~ an $L$-algebra}
+	\end{prooftree}
+	% \[LPX\xrightarrow{\sigma_X}PTX\xrightarrow{P(c)}PX\]
+	\item そして、始$L$-代数 $L(\mathrm{Form})\xrightarrow{\cong}\mathrm{Form}$ は、一意な代数準同型射 $\llbracket-\rrbracket:\mathrm{Form}\to PX$ をもたらします。
+	\begin{center}
+		\begin{tikzcd}
+			L(\mathrm{Form}) \ar[r,"L(\llbracket-\rrbracket)"] \ar[d,"\cong"'] & LPX \ar[d,"P(c)\,\circ\,\sigma_X"]\\
+			\mathrm{Form} \ar[r,"\llbracket - \rrbracket"'] & PX
+		\end{tikzcd}
+	\end{center}
+	% \item 
+	この一意な射 $\llbracket-\rrbracket$ は\textgt{解釈関数} (interpretation function) です。\\（たとえば $P$ が冪集合関手 $\mathcal P$ の場合、$x\in\llbracket\varphi\rrbracket_c\iff x\models_c\varphi$ となります。）
+	\[\begin{array}{cccc}
+		\llbracket-\rrbracket\colon & \mathrm{Form} & \longrightarrow & PX \\
+		& \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\
+		& \varphi & \mapsto & \llbracket\varphi\rrbracket_c
+	\end{array}\]
+	% which maps a formula $\varphi \in \mathrm{Form}$ to its interpretation $\llbracket \varphi\rrbracket_c\in PX$. 
+	\item 随伴関係 $S^\op\dashv P$ より、$\llbracket-\rrbracket$ の transpose として、\textgt{理論写像} (theory map) $\mathrm{th}_c\colon X \to F(\mathrm{Form})$ が得られます。これは、各状態 $x\in X$ を、$x$ が満たす論理式の集まり $\mathrm{th}_c(x)\in F(\mathrm{Form})$ に写像します。\\
+	（たとえば $P$ が冪集合関手 $\mathcal P$ の場合、$x\in\llbracket\varphi\rrbracket_c\iff\varphi\in\mathrm{th}_c(x)$ となります。）
+	% \begin{prooftree}
+	% 	\AXC{$\varphi\in\mathrm{th}_c(x)$}
+	% 	\doubleLine
+	% 	\UIC{$x\in\llbracket\varphi\rrbracket_c$}
+	% \end{prooftree}
+\end{itemize} \clearpage
+\noindent 典型的には、以下の例を考えるとわかりやすいでしょう。\vspace{3pt}
+\begin{center}
+	\begin{tikzcd}[column sep=50pt,row sep=30pt]
+		\!\!\mathbf{Coalg}_F^\op \ar[d] \ar[r,bend left=10pt,"\top"'] & \mathbf{Alg}_L \ar[d] \ar[l,bend left=10pt] \\
+		\Set^\op \ar[loop left,"F^\op",looseness=6pt] \ar[r,bend left=10pt,"P","\top"'] & \mathbf{BA} \ar[loop right,"L"] \ar[l,bend left=10pt,"S^\op"] 
+	\end{tikzcd}\vspace{3pt}
+\end{center}
+これはストーン双対性とのアナロジーで捉えることができます。\vspace{3pt}
+\begin{center}
+	\begin{tikzcd}[column sep=50pt]
+		\!\!\!\!\!\mathbf{Stone}^\op \ar[r,bend left=15pt,"P"] \ar[r,"\substack{\simeq}", phantom] & ~\mathbf{BA}~ \ar[l,bend left=15pt,"S^\op"] 
+	\end{tikzcd}\vspace{3pt}
+\end{center}
 
 \clearpage
 
