@@ -1821,10 +1821,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \subsubsection*{\fbox{(2) Cospan equivalence always exists!}}
 
-\noindent 準備として、まずは\textgt{余極限を創出する関手} (colimit-creating functor) を定義します。
+\noindent 忘却関手 $U:\Coalg(F)\to\C$ が余極限を創出するという性質を使います。\\まずは\textgt{余極限を創出する関手} (colimit-creating functor) の定義を述べます。
 
 \begin{definition}[colimit-creating functor]
-	$T:\C\to\D$ を関手とする。$T$ が colimit を create するとは、任意の diagram $D:\mathbb I\to\C$ と、$\D$ における $TD$ の任意の colimiting cocone $(X,(\lambda_I:TDI\to X)_{I\in\mathbb I})$ について、$\C$ における $D$ の cocone $(L,(\ell_I:DI\to L)_{I\in\mathbb I})$ が存在し、1) $TL=X$ および任意の $I\in\mathbb I$ について $T(\ell_I)=\lambda_I$ が成り立ち、かつ 2) $(L,(\ell_I:DI\to L)_{I\in\mathbb I})$ が $\C$ における $D$ の colimiting cocone であることである。\vspace{10pt}
+	$T:\C\to\D$ を関手とする。$T$ が colimit を create するとは、任意の diagram $D:\mathbb I\to\C$ と、$\D$ における $TD$ の任意の colimiting cocone $(X,(\lambda_I:TDI\to X)_{I\in\mathbb I})$ について、$\C$ における $D$ の cocone $(L,(\ell_I:DI\to L)_{I\in\mathbb I})$ が存在し、1) $TL=X$ および任意の $I\in\mathbb I$ について $T(\ell_I)=\lambda_I$ が成り立ち、かつ 2) $(L,(\ell_I:DI\to L)_{I\in\mathbb I})$ が $\C$ における $D$ の colimiting cocone であること。\vspace{10pt}
 	\begin{center}
 		% \begin{scriptsize}
 			\begin{tikzcd}[column sep=2pt,row sep=5pt]
@@ -1840,14 +1840,11 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{definition}
 
 % \begin{remark}
-% 	$T\colon\C\to\D$ が余極限を創出するとは、つまり$\C$ におけるすべての余極限が、$\D$の中で計算されるということ。
+% 	つまり、$\C$ の中で余極限を計算したければ、$\D$ の中で計算すればよい、ということ！
 % \end{remark}
+\noindent 直観的には: 「$\C$ の中で余極限を計算したければ、$\D$ の中で計算すればよい」ということ！\vspace{5pt}
 
-\begin{remark}
-	つまり、$\C$ の中で余極限を計算したければ、$\D$ の中で計算すればよい、ということ！
-\end{remark}
-
-\noindent ここで、忘却関手 $U:\Coalg(F)\to\C$ が余極限を創出することを、以下の命題で確認しましょう。
+\noindent ここで、忘却関手 $U:\Coalg(F)\to\C$ が余極限を創出することを、確認しましょう。
 
 \begin{proposition}
 	任意の圏 $\C$ と、任意の自己関手 $F:\C\to\C$ について、忘却関手 $U:\Coalg(F)\to\C$ は余極限を創出する。すなわち、任意の図式 $D:\mathbb I\to\Coalg(F)$ に対し、$\C$ における $UD$ の余極限 \[(X,(\lambda_I:UDI\to X)_{I\in\mathbb I})\] が与えられたとき、一意な $F$-余代数構造 $\gamma:X\to FX$ が手に入り、\[((X,\gamma),(\lambda_I:DI\to(X,\gamma))_{I\in\mathbb I})\]
@@ -2919,7 +2916,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent まずは、準備として、以下の自由忘却随伴 (free-forgetful adjunction) について確認しておきましょう。
 
 \begin{proposition}
-	クライスリ圏とEM圏について、それぞれ、以下のような自由忘却随伴がある。（証明略） %(free-forgetful adjunction) 
+	クライスリ圏とEM圏について、それぞれ、以下のような自由忘却随伴がある。（詳細は省略） %(free-forgetful adjunction) 
 	\begin{multicols}{2}
 		% \begin{center}
 		% 	\begin{tikzcd}[row sep=large,column sep=large]
