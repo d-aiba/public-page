@@ -3697,13 +3697,104 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \noindent\begin{large}\textgt{コラム: ラヴェア理論と有限モナド}\end{large}\vspace{5pt}
 
-\noindent 少し寄り道をして、\textgt{ラヴェア理論} (Lawvere theory) と\textgt{有限モナド} (finitary monad) の関係について扱います。\\
-まず、ラヴェア理論とは、代数理論を圏として表したものです。
+\noindent 少し寄り道をして、\textgt{ラヴェア理論} (Lawvere theory) と\textgt{有限モナド} (finitary monad) の関係について扱います。\vspace{3pt}%\\
+\begin{center}
+	\begin{tikzcd}
+		\fbox{$\begin{array}{c}\textrm{Lawvere theories}\\\mathbf{FinSet}^\op\to\mathbb L\end{array}$} \ar[r,hookrightarrow,shift right=5pt] \ar[d,"\simeq"] & \fbox{~$\begin{array}{c}\textrm{algebraic specs}\\((\Sigma_n)_n,E)\end{array}$~} \ar[l,twoheadrightarrow, shift right=5pt] \\
+		\fbox{~~~~~$\begin{array}{c}\textrm{clones}\\(X_n)_{n\in\omega}\end{array}$~~~~~} \ar[r,"\simeq"] & \fbox{~$\begin{array}{c}\textrm{finitary monads}\\T:\Set\to\Set\end{array}$~}
+	\end{tikzcd}
+\end{center}
+
+\subsubsection*{(1) 代数仕様}
+\noindent はじめに、代数仕様を定義します。
+\begin{definition}[代数仕様]
+	まず、\textgt{代数シグニチャ} (algebraic signeture) $\Sigma$ を、以下のような集合の族とする。
+	\begin{align*}
+		\Sigma &= (\Sigma_0,\Sigma_1,\Sigma_2,\dots)\\
+		&=(\Sigma_n)_{n\in\omega}
+	\end{align*}
+	なお、各 $\sigma\in\Sigma_n$ を、\textgt{$n$項演算子} ($n$-ary operation) と呼ぶ。\\
+	また、$E$ を等式の集合とする。なお、$E$ に属する各等式 $(\mathbf{s}=\mathbf{t})\in E$ を、\textgt{公理} (axiom) と呼ぶ。 \\
+	ここで、\textgt{代数仕様} (algebraic specification) を、代数シグニチャ $\Sigma$ と等式の集合 $E$ の組 $(\Sigma,E)$ とする。
+\end{definition}
+
+\begin{definition}[文脈つき項]
+	... 
+\end{definition}
+
+\subsubsection*{(2) ラヴェア理論}
+\noindent ラヴェア理論とは、代数理論を圏として表したものです。
 \begin{itemize}
-	\item object: arity 
-	\item arrow: terms (in contexts) 
-	\item commuting diagram: axioms 
+	\item object $0,1,2,3,\dots$: ``arities'' 
+	\item arrow: ``terms (in contexts)'' 
+	\item commuting diagram: ``axioms'' 
 \end{itemize}
+
+\begin{definition}[ラヴェア理論]
+	...... 
+	\[\mathbf{FinSet}^\op\to\mathbb L\]
+	...... 
+\end{definition}
+
+\subsubsection*{(3) クローン}
+\noindent ここで、クローンを簡単に導入します。
+% \begin{definition}[クローン]
+% 	... 
+% \end{definition}
+
+\subsubsection*{(4) 有限モナド}
+\noindent 次に、有限モナドを定義します。
+
+\begin{definition}[有限関手]
+	関手 $T\colon\C\to\C$ が\textgt{有限関手} (finitary functor) であるとは、$T$ がフィルターつき余直積 (filtered colimits) を保存することである。
+\end{definition}
+
+\noindent 直観としては、「各 $t\in TX$ は、$X$ の有限な要素だけしか使わずに定められている」ということです。
+
+\noindent 次の性質が知られています。
+
+\begin{proposition}
+	$T:\Set\to\Set$ を有限モナドとする。このとき、以下が成り立つ。\[TX\;\cong\;\int^{\,n\,\in\,\mathbf{FinSet}}X^n \times Tn\]
+\end{proposition}
+
+\clearpage
+
+\subsubsection*{(A) ラヴェア理論から有限モナドへ}
+
+\noindent ラヴェア理論 $\mathbb L$ が与えられたとき、有限モナド $T$ を以下のように定めます。
+% \[\left.\Bigl(Tn:=\mathbb L(n,1)\Bigr)\right/_{{\sim}_E}\]
+\begin{align*}
+	Tn \;&:=\; \mathbb L(n,1)\\
+	&\;=\; \left.\{x_1,\dots,x_n\vdash t\}\,\right/_{{\sim}_E}\\[5pt]
+	TX&\;=\;\int^{\,n\,\in\,\mathbf{FinSet}}X^n\times Tn
+\end{align*}
+直観としては: 
+\begin{itemize}
+	\item $Tn=\{y_1,\dots,y_n\vdash t\}\\ \hspace*{17pt} = \{\textrm{terms with ``virtual'' variables $y_1,\dots, y_n$}\}$
+	\item $X^n=\{f:n\to X\}\\\hspace*{16pt}= \{\textrm{mappings from ``virtual'' variables to ``actual'' variables}\}$
+	\item $TX=\{x_1,\dots,x_n\vdash t\}\\\hspace*{19pt} = \{\textrm{terms with variables from $X$}\}$ 
+	% \item $\begin{array}{rcl}Tn&=&\{y_1,\dots,y_n\vdash t\}\\ &=&\{\textrm{terms with ``virtual'' variables $y_1,\dots, y_n$}\}\end{array}$
+	% \item $\begin{array}{rcl}X^n&=&\{f:n\to X\}\\ &=& \{\textrm{mappings from ``virtual'' variables to ``actual'' variables}\}\end{array}$
+	% \item $TX=\{x_1,\dots,x_n\vdash t\}\\~~~~\, = \{\textrm{terms with variables from $X$}\}$ 
+\end{itemize}
+
+\noindent なお、別の見方をすると、左Kan拡張を使って以下のように定めていると理解することもできます。\vspace{5pt}
+\begin{center}
+	\begin{tikzcd}[column sep=75pt,row sep=55pt]
+		\Set \ar[rrd,"{T\,:=\,\mathrm{Lan}_P\,\mathbb L(-,1)}",bend left=18pt] & {} & {} \\
+		\mathbf{FinSet} \ar[u,"P",hookrightarrow] \ar[r,"\substack{\mathbf{FinSet}^\op\to\mathbb L\\[1pt]\textrm{is given}}"'] \ar[ur,"\rotatebox{40}{$\substack{\rotatebox{-40}{$\substack{\alpha}$}\\\displaystyle\Longrightarrow}$}",phantom] & \mathbb L^\op \ar[r,"{\mathbb L(-,1)}"'] & \Set 
+	\end{tikzcd}\vspace{5pt}
+\end{center}
+
+\noindent このとき、$T$ が関手であることやモナドであることを、以下のように確かめましょう。......
+
+\subsubsection*{(B) 有限モナドからラヴェア理論へ}
+
+\noindent 有限モナド $T$ が与えられたとき、ラヴェア理論 $\mathbb L$ を以下のように定めます。
+\begin{align*}
+	\mathbb L(n,1) &\;:=\; Tn \\
+	\mathbb L(n,m) &\;\;=\; \left(\mathbb L(n,1)\right)^m
+\end{align*}
 
 
 \vspace{120pt}
