@@ -3724,7 +3724,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 以下では、変数 (variables) の集合を $\mathrm{Var}$ と表記することにしましょう。\\ 
 ここで、\textgt{文脈つき項} (terms in contexts) を定義します。
 \begin{definition}[文脈つき項]
-	$x_1,\dots,x_n\vdash t$ は以下のように帰納的に定義されます。\\ (``$t$ is a $\Sigma$-term in a context $x_1,\dots,x_n$'') \vspace{15pt}
+	$x_1,\dots,x_n\vdash t$ は以下のように帰納的に定義される。\\ (``$t$ is a $\Sigma$-term in a context $x_1,\dots,x_n$'') \vspace{15pt}
 	% \begin{multicols}{2}
 	\begin{center}
 	% \begin{prooftree}
@@ -3762,10 +3762,16 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{itemize}
 
 \begin{definition}[ラヴェア理論]
-	...... 
-	\[\mathbf{FinSet}^\op\to\mathbb L\]
-	...... 
+	\textgt{ラヴェア理論} (Lawvere theory) とは、有限直積を持つ圏 $\mathbb L$ に、有限直積を保存し、対象上全単射 (bijective on objects) であるような関手 
+	\[J:\mathbf{FinSet}^\op\to\mathbb L\]
+	が備わったものである。\\ 
+	% （つまり、ある指定された対象 (distinguished object) $1\in\mathbb L$ があり、任意の対象 $k\in\mathbb L$ に対して、ある自然数 $n$ が存在して $k\cong 1^n$ となる）
+	なお、任意の有限集合 $k=\{0,1,2,\dots,k-1\}\in\FinSet^\op$ に対し、$Jk\in\mathbb L$ を単に $k\in\mathbb L$ と表記する。
 \end{definition}
+
+\begin{remark}
+	圏 $\mathbb L$ の中では、対象は $m=1^m$ であり、射 $f:n\to m$ は各 $f_i:n\to 1$ の組 $\langle f_1,\dots,f_m\rangle$ です。\\ なお、$1\in\mathbb L$ は終対象ではなく、$0\in\mathbb L$ が終対象です（なぜなら $0\in\FinSet^\op$ が終対象だから）。
+\end{remark}
 
 \noindent たとえば、モノイドのラヴェア理論は以下の通りです。
 \begin{multicols}{2}
@@ -3938,7 +3944,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent なお余談ですが、始代数と終余代数との関連で、以下の定理についても確認しておきます。
+\noindent なお余談ですが、始代数や終余代数と関連する話題として、以下の定理も確認しておきます。
 
 
 \begin{theorem}
