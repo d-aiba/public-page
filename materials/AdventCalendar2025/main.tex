@@ -785,26 +785,21 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{small}
 \end{center}\vspace{30pt}
 
-\clearpage
+% \clearpage
 
-\subsection{安全性 (safety property) と到達性 (reachability property) の考え方}
+% \subsection{安全性 (safety property) と到達性 (reachability property) の考え方}
 
-% \noindent ここで、safety property と reachability property の考え方・違いについて理解しておきましょう。
+% \noindent モデル検査で示したいことは「\textgt{モデル} $\mathcal M$ のもとで\textgt{仕様} $\varphi$（望ましい性質）が成り立つかどうか」でした。(\ref{sec:intro}章を参照)\\
+% ここで、広く用いられる2種類の仕様、\textgt{安全性} (safety property) と\textgt{到達性} (reachability property) の考え方・違いについて理解しておきましょう。
 
-% \noindent 一般に、モデル検査で示したいことは、「\textgt{モデル} $M$ のもとで\textgt{仕様} $\varphi$（望ましい性質）が成り立つかどうか」です。
-% \[M\models\varphi\quad\textrm{($M$ satisfies $\varphi$)}\]
-% 仕様は、典型的には、時相論理式（例えば $\mathbf{G}\,(\mathit{req}\to\mathbf{F}\,\mathit{resp})$「リクエストが生じたらレスポンスが返ってくる」など）で書かれることが多いですが、ここでは特定の形式化に限定せず、大きく分けて2種類の仕様に注目しましょう。
-\noindent モデル検査で示したいことは「\textgt{モデル} $\mathcal M$ のもとで\textgt{仕様} $\varphi$（望ましい性質）が成り立つかどうか」でした。(\ref{sec:intro}章を参照)\\
-ここで、広く用いられる2種類の仕様、\textgt{安全性} (safety property) と\textgt{到達性} (reachability property) の考え方・違いについて理解しておきましょう。
+% \begin{itemize}
+% 	\item \textgt{安全性} (safety property): 悪いことが決して起こらない
+% 	\item \textgt{到達性} (reachability property): 良いことがいつか起こる
+% \end{itemize}
 
-\begin{itemize}
-	\item \textgt{安全性} (safety property): 悪いことが決して起こらない
-	\item \textgt{到達性} (reachability property): 良いことがいつか起こる
-\end{itemize}
+% \todo[inline]{safety property が gfp で、reachability property が lfp、という話を書く。}
 
-\todo[inline]{safety property が gfp で、reachability property が lfp、という話を書く。}
-
-\todo[inline]{safety/reachability property  の、upperbound/lowerbound estimation の、verification/refutation の方法}
+% \todo[inline]{safety/reachability property  の、upperbound/lowerbound estimation の、verification/refutation の方法}
 
 \clearpage
 
@@ -1076,9 +1071,9 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 % \todo[inline]{まだ}
 
-\begin{proposition}[ランベックの補題]
+\begin{theorem}[ランベックの補題]
 	$\zeta:Z\to F(Z)$ が終余代数なら、$\zeta$ は同型射である。つまり $Z\cong F(Z)$ である。
-\end{proposition}
+\end{theorem}
 
 \begin{proof}
 	余代数 $F(\zeta):F(Z)\to F(F(Z))$ を考える。$Z$ の終対象性より、一意な $g:F(Z)\to Z$ が手に入る。
@@ -1124,9 +1119,9 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 % % 	% 
 % % \end{proposition}
 
-\begin{proposition}[終余代数の構成]
+\begin{theorem}[終余代数の構成]
 	... 
-\end{proposition}
+\end{theorem}
 
 \begin{proof}
 	... 
@@ -1163,9 +1158,9 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	... 
 \end{proposition}
 
-\begin{proposition}[始代数の構成]
+\begin{theorem}[始代数の構成]
 	... 
-\end{proposition}
+\end{theorem}
 
 \todo[inline]{主張だけ書く}
 
@@ -1846,12 +1841,12 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \noindent ここで、忘却関手 $U:\Coalg(F)\to\C$ が余極限を創出することを、確認しましょう。
 
-\begin{proposition}
+\begin{theorem}
 	任意の圏 $\C$ と、任意の自己関手 $F:\C\to\C$ について、忘却関手 $U:\Coalg(F)\to\C$ は余極限を創出する。すなわち、任意の図式 $D:\mathbb I\to\Coalg(F)$ に対し、$\C$ における $UD$ の余極限 \[(X,(\lambda_I:UDI\to X)_{I\in\mathbb I})\] が与えられたとき、一意な $F$-余代数構造 $\gamma:X\to FX$ が手に入り、\[((X,\gamma),(\lambda_I:DI\to(X,\gamma))_{I\in\mathbb I})\]
 	が $\Coalg(F)$ における $D$ の余極限になる。
 	\\
 	（つまり、$\Coalg(F)$ におけるすべての余極限は、$\C$ の中で計算される！）
-\end{proposition}
+\end{theorem}
 
 \begin{proof}
 	証明の方針としては、以下の図のような状況を考えたい。
@@ -2915,7 +2910,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \noindent まずは、準備として、以下の自由忘却随伴 (free-forgetful adjunction) について確認しておきましょう。
 
-\begin{proposition}
+\begin{theorem}
 	クライスリ圏とEM圏について、それぞれ、以下のような自由忘却随伴がある。（詳細は省略） %(free-forgetful adjunction) 
 	\begin{multicols}{2}
 		% \begin{center}
@@ -2955,7 +2950,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{center}
 	\end{multicols}
 	%%%
-\end{proposition}\vspace{12pt}
+\end{theorem}\vspace{12pt}
 
 \noindent ここで、\textgt{クライスリ拡大} $F_T$ と \textgt{アイレンバーグ・ムーア持ち上げ} $F^T$ の、両者を定義します。
 
@@ -3700,34 +3695,70 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent 少し寄り道をして、\textgt{ラヴェア理論} (Lawvere theory) と\textgt{有限モナド} (finitary monad) の関係について扱います。\vspace{3pt}%\\
 \begin{center}
 	\begin{tikzcd}
-		\fbox{$\begin{array}{c}\textrm{Lawvere theories}\\\mathbf{FinSet}^\op\to\mathbb L\end{array}$} \ar[r,hookrightarrow,shift right=5pt] \ar[d,"\simeq"] & \fbox{~$\begin{array}{c}\textrm{algebraic specs}\\((\Sigma_n)_n,E)\end{array}$~} \ar[l,twoheadrightarrow, shift right=5pt] \\
-		\fbox{~~~~~$\begin{array}{c}\textrm{clones}\\(X_n)_{n\in\omega}\end{array}$~~~~~} \ar[r,"\simeq"] & \fbox{~$\begin{array}{c}\textrm{finitary monads}\\T:\Set\to\Set\end{array}$~}
+		\fbox{$\begin{array}{c}\textrm{Lawvere theories}\\\mathbf{FinSet}^\op\to\mathbb L\end{array}$} \ar[r,hookrightarrow,shift right=5pt] \ar[d,"\simeq"] & \fbox{$\begin{array}{c}\textrm{algebraic theories}\\((\Sigma_n)_{n\in\omega},E)\end{array}$} \ar[l,twoheadrightarrow, shift right=5pt] \\
+		\fbox{~~~~~$\begin{array}{c}\textrm{clones}\\(X_n)_{n\in\omega}\end{array}$~~~~~} \ar[r,"\simeq"] & \fbox{~$\begin{array}{c}\textrm{finitary monads}\\T\colon\Set\to\Set\end{array}$~}
 	\end{tikzcd}
 \end{center}
 
-\subsubsection*{(1) 代数仕様}
-\noindent はじめに、代数仕様を定義します。
+\subsubsection*{(1) 代数理論}
+\noindent それではまず、代数理論を導入します。\\ はじめに、\textgt{代数仕様} (algebraic specification) を定義します。
 \begin{definition}[代数仕様]
 	まず、\textgt{代数シグニチャ} (algebraic signeture) $\Sigma$ を、以下のような集合の族とする。
 	\begin{align*}
 		\Sigma &= (\Sigma_0,\Sigma_1,\Sigma_2,\dots)\\
 		&=(\Sigma_n)_{n\in\omega}
 	\end{align*}
-	なお、各 $\sigma\in\Sigma_n$ を、\textgt{$n$項演算子} ($n$-ary operation) と呼ぶ。\\
-	また、$E$ を等式の集合とする。なお、$E$ に属する各等式 $(\mathbf{s}=\mathbf{t})\in E$ を、\textgt{公理} (axiom) と呼ぶ。 \\
+	なお、各 $\sigma\in\Sigma_n$ を、\textgt{$n$項演算子} ($n$-ary operation) と呼ぶことにする。\\
+	また、$E$ を等式の集合とする。なお、$E$ に属する各等式 $({s}={t})\in E$ を、\textgt{公理} (axiom) と呼ぶ。 \\
 	ここで、\textgt{代数仕様} (algebraic specification) を、代数シグニチャ $\Sigma$ と等式の集合 $E$ の組 $(\Sigma,E)$ とする。
 \end{definition}
-
+\noindent たとえば、モノイドの代数仕様は以下の通りです。
+\[
+\begin{array}{lcl}
+	\textrm{\!\!\!operations:} &{\qquad\qquad}& \textrm{\!\!\!equations:} \\
+	e \in \Sigma_0 &&  t\cdot e=t\\
+	\cdot \in \Sigma_2 && e\cdot t=t\\
+	&& s\cdot (t\cdot u)=(s\cdot t)\cdot u {\qquad}
+\end{array}
+\]
+以下では、変数 (variables) の集合を $\mathrm{Var}$ と表記することにしましょう。\\ 
+ここで、\textgt{文脈つき項} (terms in contexts) を定義します。
 \begin{definition}[文脈つき項]
-	... 
+	$x_1,\dots,x_n\vdash t$ は以下のように帰納的に定義されます。\\ (``$t$ is a $\Sigma$-term in a context $x_1,\dots,x_n$'') \vspace{15pt}
+	% \begin{multicols}{2}
+	\begin{center}
+	% \begin{prooftree}
+		\AXC{}
+		\UIC{$x_1,\dots,x_n\vdash x_i$}
+		\DisplayProof
+		\qquad\qquad
+	% \end{prooftree}
+	% \begin{prooftree}
+		\AXC{$\sigma\in\Sigma_m$}
+		\AXC{$x_1,\dots,x_n\vdash t_j$ ~ ($\forall j\in[1,m]$)}
+		\BIC{$x_1,\dots,x_n\vdash\sigma(t_1,\dots,t_m)$}
+		\DisplayProof
+	% \end{prooftree}
+	\end{center}
+	% \end{multicols}
 \end{definition}
 
+\noindent たとえば、モノイドの代数シグニチャ $\Sigma=(\Sigma_0=\{e\},\Sigma_2=\{e\})$ と変数集合 $\mathrm{Var}=\{x_1,x_2,x_3\}$ について、$x_1,x_2,x_3\vdash x_1\cdot(x_2\cdot x_3)$ は文脈つき項です。
+\begin{prooftree}
+	\AXC{$\cdot\in\Sigma_2$} \AXC{} \UIC{$x_1,x_2,x_3\vdash x_1$}
+	\AXC{$\cdot\in\Sigma_2$} \AXC{} \UIC{$x_1,x_2,x_3\vdash x_2$} \AXC{} \UIC{$x_1,x_2,x_3\vdash x_3$}
+	\TIC{$x_1,x_2,x_3\vdash x_2\cdot x_3$}
+	\TIC{$x_1,x_2,x_3\vdash x_1\cdot(x_2\cdot x_3)$}
+\end{prooftree}
+
+\clearpage
+
 \subsubsection*{(2) ラヴェア理論}
-\noindent ラヴェア理論とは、代数理論を圏として表したものです。
+\noindent \textgt{ラヴェア理論} (Lawvere theory) とは、代数理論を圏として表したものです。
 \begin{itemize}
-	\item object $0,1,2,3,\dots$: ``arities'' 
-	\item arrow: ``terms (in contexts)'' 
-	\item commuting diagram: ``axioms'' 
+	\item objects $0,1,2,3,\dots$: ``arities'' 
+	\item arrows: ``terms (in contexts)'' 
+	\item commuting diagrams: ``axioms'' 
 \end{itemize}
 
 \begin{definition}[ラヴェア理論]
@@ -3736,26 +3767,242 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	...... 
 \end{definition}
 
+\noindent たとえば、モノイドのラヴェア理論は以下の通りです。
+\begin{multicols}{2}
+	\begin{center}
+		\begin{tikzcd}
+			1 \ar[r,"\langle \id{,}e\rangle"] \ar[rd,"\id"'] & 2 \ar[r,leftarrow,"\langle e{,}\id\rangle"] \ar[d,"m"] & 1 \ar[ld,"\id"]\\ & 1 & 
+			% \\
+			% & 0 \ar[u,"e"'] &
+		\end{tikzcd}
+	\end{center}
+	\begin{center}
+		\begin{tikzcd}
+			3 \ar[r,"m\times\id"] \ar[d,"\id\times m"']& 2 \ar[d,"m"] \\
+			2 \ar[r,"m"'] & 1
+		\end{tikzcd}
+	\end{center}
+\end{multicols}
+\noindent なお、それぞれの射は、各 terms in contexts を等式で割った同値類に相当します。
+\begin{itemize}
+	\item $0\overset{e}\longrightarrow 1$ denotes $[\,\vdash e\,]$. 
+	\item $1\overset{\id}\longrightarrow 1$ denotes $[\,x_1\vdash x_1\,]$.
+	\item $2\overset{m}\longrightarrow 1$ denotes $[\,x_1,x_2\vdash x_1\cdot x_2\,]$.
+\end{itemize}
+
+\noindent 先ほどの代数理論とラヴェア理論は、次のように対応しています。
+\[\left.\left.\AXC{} \UIC{$x_1,\dots,x_n\vdash x_i$} \DisplayProof \qquad\middle/\hspace*{-12pt}\middle/\qquad \begin{tikzcd} n \ar[r,"\pi_i"] & 1\\[-25pt] \rotatebox{90}{$=$}\\[-25pt] 1\times\cdots\times 1 \end{tikzcd} \right.\right.\]
+\[\left.\left.\AXC{$\sigma\in\Sigma_m$}\AXC{$x_1,\dots,x_n\vdash t_j$ ~ ($\forall j\in[1,m]$)}\BIC{$x_1,\dots,x_n\vdash\sigma(t_1,\dots,t_m)$}\DisplayProof \qquad\middle/\hspace*{-12pt}\middle/\qquad \begin{tikzcd}[row sep=0pt]
+	& 1 \\
+	{} & {}\\
+	{} & {}\\
+	n \ar[ruuu,"t_1"] \ar[rddd,"t_m"'] \ar[rr,"{\langle t_1,\dots,t_m \rangle}"] && m \ar[r,"\sigma"] & 1\\[-5pt]
+	{} &\vdots& \rotatebox{90}{$=$}\\[-5pt]
+	{} && {1\times\cdots\times 1}\\[-2pt]
+	& 1
+\end{tikzcd}\right.\right.\]
+
 \subsubsection*{(3) クローン}
 \noindent ここで、クローンを簡単に導入します。
 % \begin{definition}[クローン]
 % 	... 
 % \end{definition}
 
-\subsubsection*{(4) 有限モナド}
-\noindent 次に、有限モナドを定義します。
+\clearpage
 
-\begin{definition}[有限関手]
-	関手 $T\colon\C\to\C$ が\textgt{有限関手} (finitary functor) であるとは、$T$ がフィルターつき余直積 (filtered colimits) を保存することである。
+\subsubsection*{(4) 有限モナド}
+\noindent そしてここで、\textgt{有限モナド} (finitary monad $\reflectbox{$\leadsto$}$ ``finite arity'' monad) を定義します。
+
+% \begin{definition}[有限関手]
+% 	関手 $T\colon\C\to\C$ が\textgt{有限関手} (finitary functor) であるとは、$T$ がフィルターつき余極限 (filtered colimits) を保つことである。
+% \end{definition}
+
+\begin{definition}[有限モナド]
+	モナド $(T,\eta,\mu)$ が\textgt{有限モナド} (finitary monad) であるとは、自己関手 $T\colon\C\to\C$ が\textgt{フィルターづけられた余極限} (filtered colimits) を保つ、つまり $T(\colim D)\;\cong\;\colim TD$ が成り立つこと。 
+	% \[T(\colim D)\;\cong\;\colim TD\]
+	\begin{itemize}
+		\item 図式 $D:\J\to\C$ の余極限 $\colim D$ が\textgt{フィルターづけられた余極限} (filtered colimit) であるとは、圏 $\J$ が\textgt{フィルターづけられた圏} (filtered category) であること。\vspace{8pt}
+		\begin{itemize}
+			\item[\bullet~] 圏 $\J$ が\textgt{フィルターづけられた圏} (filtered category) であるとは、 (``unified in the end'') \vspace{3pt}
+			\begin{enumerate}
+				\item 各 $I_1,I_2,\dots,I_n\in\J$（有限な族）に対し、ある $I\in\J$ と $u_i:I_i\to I$ (for all $i\in[1,n]$) が存在する
+				\begin{center}
+					\begin{tikzcd}[row sep=15pt]
+						I_1 \ar[rd] & \\
+						I_2 \ar[r] \ar[d,"\vdots",phantom] & \exists\, I \\
+						I_n \ar[ru] & 
+					\end{tikzcd}
+				\end{center}
+				% かつ、\vspace{3pt}
+				\item 各 \!\!\begin{tikzcd}[column sep=20pt] I \ar[r,shift left=2.6pt,"u"] \ar[r,shift right=2.6pt,"v"'] & J\end{tikzcd}\!\! に対し、ある対象 $K\in\J$ と射 \!\!\begin{tikzcd}[column sep=20pt] J \ar[r,"w"] & K \end{tikzcd} が存在し、$w\circ u=w\circ v$ となること
+				\begin{center}
+					\begin{tikzcd}
+						I \ar[r,shift left=2.6pt,"u"] \ar[r,shift right=2.6pt,"v"'] & J \ar[r,"\exists\,w"] & \exists\,K
+					\end{tikzcd}
+				\end{center}
+			\end{enumerate}
+			% \begin{enumerate}
+			% 	\item 各 $I_1,I_2,\dots,I_n\in\J$ について、ある $I\in\J$ と $u_i:I_i\to I$ (for all $i\in[1,n]$) が存在すること。
+			% \end{enumerate}
+		\end{itemize}
+	\end{itemize}
 \end{definition}
 
-\noindent 直観としては、「各 $t\in TX$ は、$X$ の有限な要素だけしか使わずに定められている」ということです。
+\noindent $\C=\Set$ の場合の直観:「各 $t\in TX$ が、$X$ の有限な要素だけ (only finitely many elements) で構成されている」\\ （補足: filtered colimit は、集合論の言葉を使わずに「対象のサイズ」について述べる、圏論の古めの概念です。）\vspace{6pt}\\このあたりについて詳しくは、J. Adamek, J. Rosicky (1994) Locally Presentable and Accessible Categories などの教科書を参照してみるとよいでしょう。%\\ (When $\C=\Set$, any $t\in FX$ is composed of only finitely many elements of $X$.) 
 
-\noindent 次の性質が知られています。
+\begin{theorem}
+	関手 $F:\C\to\C$ が finitary なら、the initial sequence が $\omega$-ステップで収束 (stabilize) する。
+	\[\begin{array}{ccccccccccc}0&\longrightarrow& F0&\longrightarrow&F^20&\longrightarrow&\cdots&\longrightarrow&F^\omega 0&\xrightarrow[\!\!\substack{\textrm{by universality}\\\textrm{of colimit}}\!\!]{\cong}&F^{\omega+1}0\\{}&{}&{}&{}&{}&{}&{}&{}&\rotatebox{90}{$=$}&{}&{}\\{}&{}&{}&{}&{}&{}&{}&{}&\!\!\!\!\!\!\displaystyle\colim_{n<\omega}F^n0\!\!\!\!\!\!&{}&{}\end{array}\]
+\end{theorem}
+
+\begin{proof}[証明の概略]
+	今われわれが colimit を取ろうとしている the initial sequence は、filtered である。 \\（というのも、この sequence の中から任意の有限な対象を選ぶと、その upperbound が常に存在する。）\\ ここで、$F$ は finitary、つまり filtered colimit を保つので、以下のようになる。 
+	\begin{center}\small
+		\begin{tikzcd}
+			{} & {} & {} & F^\omega 0 \\[-8pt]
+			0 \ar[rrru,bend left=10pt] \ar[r] & F0 \ar[rru,bend left=10pt] \ar[r] \ar[d,"\rotatebox{90}{\reflectbox{$~\longmapsto$}}",phantom,"~~~\substack{F}"] & \cdots & {} \\
+			{} & {} & {} & F^{\omega+1} 0 \\[-8pt]
+			F0 \ar[rrru,bend left=10pt] \ar[r] & F^20 \ar[rru,bend left=10pt] \ar[r] & \cdots & {} 
+		\end{tikzcd}
+	\end{center}
+	ここで、$0$の initiality より、$\colim(F0\to F^20\to\cdots)\;\cong\;\colim(0\to F0\to F^20\to\cdots)$ である。\\よって $F^\omega 0\;\cong\;F^{\omega+1}0$ である。
+\end{proof}
+
+\clearpage
+
+\noindent 「有限の要素だけで構成される」という直観を裏付けるために、以下の命題を見ておきましょう。
 
 \begin{proposition}
-	$T:\Set\to\Set$ を有限モナドとする。このとき、以下が成り立つ。\[TX\;\cong\;\int^{\,n\,\in\,\mathbf{FinSet}}X^n \times Tn\]
+	集合圏 $\Set$ において、各集合 $X\in\Set$ は、有限の集合たちからなる図式の filtered colimit である。
+	\begin{center}
+		\begin{small}
+			\begin{tikzcd}[column sep=15pt,row sep=12pt]
+				&& && X~~ \ar[llddd,bend right=25pt,leftarrow] \ar[ddl,bend right=7pt,leftarrow] \ar[ddd,bend left=15pt,leftarrow] & \\[22pt] %[15pt]
+				& {\hspace{-8em}\vspace{-10em}} \ar[rrrrr,dash,shorten =-1.0pt] \ar[lddd,dash,shorten =-1.8pt] &&&&& {\hspace{-8em}\vspace{-10em}} \ar[lddd,dash,shorten =-1.8pt] \\[-13pt]
+				&& & DI &\\[-10pt]
+				&& DJ && DK \\[-10pt]
+				{\hspace{-8em}} \ar[rrrrr,dash,shorten =-1.0pt] &&&&& {\hspace{-8em}}
+			\end{tikzcd}%\vspace{2mm}
+		\end{small}
+	\end{center}
 \end{proposition}
+
+\begin{proof}[証明のスケッチ]
+	$\Set$ における図式 $D:\J\to\Set$ を以下のように定めます。
+	\begin{itemize}
+		\item \underline{obj}. all finite subsets $X'\subseteq_{\mathrm{fin}}X'$ 
+		\item \underline{arr}. subset inclusion
+	\end{itemize}
+	% \[\left[ \begin{array}{cc}\textrm{e.g.}&{} \\ {} & 
+	% 	\begin{tikzcd}[row sep=-3pt]
+	% 		\{0\} \ar[rd] & \\
+	% 		{} & \{0,1\} & \vdots \\
+	% 		\{1\} \ar[ur] \ar[rd] & {} & \{2,3,4\} & &\\
+	% 		{} & \{1,2\} & \vdots & \!\!\!\!\ddots\!\!\!\! \\
+	% 		\{2\} \ar[rd] \ar[ur] & {} & &\\
+	% 		{} & \{2,3\} \ar[ruuu] & \\
+	% 		\{3\} \ar[ur] & {\vdots} \\
+	% 		{\vdots} & 
+	% 	\end{tikzcd}
+	% \end{array} \right]\]
+	このとき、$X\cong\colim D$ を示すのはそれほど難しくない。
+\end{proof}
+
+\begin{proposition}
+	$F:\Set\to\Set$ が finitary であることは、以下の主張と同値: \\ 
+	任意の集合 $X\in\Set$ と、任意の $t\in FX$ について、ある有限部分集合 $X'\subseteq_{\mathrm{fin}}X$ が存在し、
+	\[t\in \mathrm{Im}(F\iota)\] である。\vspace{3pt}\\
+	なお、$\iota:X'\hookrightarrow X$ は subset inclusion であり、$F\iota$ はこの $\iota$ に関手 $F$ を適用したもの。\vspace{6pt}
+	\begin{prooftree}
+		\AXC{$\iota:X'\hookrightarrow X$ in $\Set$}
+		\UIC{$FX\xrightarrow{F\iota}FX$}
+	\end{prooftree}
+\end{proposition}
+
+\begin{proof}[証明のスケッチ]
+	($\Rightarrow$): $X\in\Set$ とする。このとき、ひとつ前の命題より、$X=\colim D$ である。\\ （図式 $D:\J\to \Set$ は、$\J$ が filtered であり、各 $DI$ が有限部分集合であるような、filtered diagram とする。）\\ このとき、
+	\begin{align*}
+		FX &\;=\; F\bigl(\colim\,(D:\J\to\Set)\bigr) \\
+		&\;\cong\; \colim \left(\J\xrightarrow{\;D\;}\Set\xrightarrow{\;F\;}\Set\right) & \textrm{($F$: finitary)}\\
+		&\;\cong\;\left.\left(\coprod_{X'\subseteq_{\mathrm{fin}} X} FX'\right)\middle/_{\sim}\right.
+	\end{align*}
+	が得られる。\vspace{5pt}\\
+	($\Leftarrow$): 省略
+\end{proof}
+
+%%%
+
+% \noindent 有限モナドの例（とそうでない例）としては
+% \begin{itemize}
+% 	\item 例1)
+% 	\item 例2)
+% 	\item 例3) 
+% \end{itemize}
+
+\clearpage
+
+\noindent いくつかの事実を見ておきましょう。
+
+\begin{proposition}
+	関手
+	\[\begin{array}{ccccl}(-)^A:&\Set&\longrightarrow&\Set\\{}&\rotatebox{90}{$\in$}&{}&\rotatebox{90}{$\in$}\\{}&X&\longmapsto&X^A&=\{f:A\to X,\;\textrm{functions}\}\\{}&{}&{}&{}&=\{(x_a)_{a\in A}\mid x_a\in X,\;\textrm{for all $a\in A$}\}\end{array}\] が finitary であるのは、$A$ が有限集合であることと同値。
+\end{proposition}
+
+\begin{proposition}
+	多項式関手 (polynomial functor) \[F=\coprod_{i\in I}\,(-)^{A_i}:\Set\to\Set\] が finitary であるのは、各 $A_i$ が有限集合であること（つまり各 arity が有限であること）と同値。
+\end{proposition}
+
+% \begin{corollary}
+% 	多項式関手
+% \end{corollary}
+
+% \begin{supplement}
+% 	フィルターつき余極限について、%正確な定義を述べることはここでは省きますが、
+% 	直観だけ説明します。
+% 	\begin{itemize}
+% 		% \item フィルターつき圏 (filtered category) とは、
+% 		% \item フィルターつき図式 (filtered diagram) とは、
+% 		% \item フィルターつき余極限 (filtered colimit) とは、フィルターつき図式の余極限のこと。
+% 		% \item 関手 $T:\C\to\C$ がフィルターつき余極限を保つとは、
+% 		\item $\Set$ の場合、任意の集合 $X$ は、その有限部分集合たちの filtered colimit で表せることが知られています。\[X\,\cong\,\colim_{A\subseteq_{\mathrm{fin}}X}A\]
+% 		\item この事実と、$T:\Set\to\Set$ が filtered colimit を保つという性質を合わせると、以下が得られます。
+% 		\begin{align*}
+% 			T(X) & \,\cong\, T(\colim_{A\subseteq_{\mathrm{fin}}X} A) \\
+% 			&\,\cong\, \colim_{A\subseteq_{\mathrm{fin}}X} T(A)
+% 		\end{align*}
+% 		\item つまり $T(X)$ の各要素は、ある有限部分集合 $A\subseteq_{\mathrm{fin}} X$ の、要素 $t\in T(A)$ たちから来るものだと言えます。
+% 	\end{itemize}
+% \end{supplement}
+
+
+
+\noindent 有限モナドの例（とそうでない例）としては
+\begin{itemize}
+	\item 例1)
+	\item 例2)
+	\item 例3) 
+\end{itemize}
+
+\noindent 次の定理も知られています。
+\begin{theorem}
+	$F:\Set\to\Set$ が finitary とする。このとき、$F$-終余代数が存在する。なお、the final sequence 
+	\[1\longleftarrow F1\longleftarrow F^2 1\longleftarrow\cdots\]
+	は $\omega$ よりも先まで十分大きくなることがあり、$\omega+\omega$ ステップで収束 (stabilize) する。
+\end{theorem}
+
+\begin{supplement}
+	詳細は、Dirk Pattinson, Introduction to Coalgebra, (NASSLLI'03 Lecture Note) を参照。
+\end{supplement}
+
+\noindent さて、後の議論で次の性質を使うことになります。見ておきましょう。
+
+\begin{theorem}
+	$T:\Set\to\Set$ を有限モナドとする。このとき、以下が成り立つ。\[TX\;\cong\;\int^{\,n\,\in\,\mathbf{FinSet}}X^n \times Tn\]
+\end{theorem}
+
+\begin{proof}
+	... 
+\end{proof}
 
 \clearpage
 
@@ -3766,17 +4013,24 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{align*}
 	Tn \;&:=\; \mathbb L(n,1)\\
 	&\;=\; \left.\{x_1,\dots,x_n\vdash t\}\,\right/_{{\sim}_E}\\[5pt]
-	TX&\;=\;\int^{\,n\,\in\,\mathbf{FinSet}}X^n\times Tn
+	TX&:=\;\int^{\,n\,\in\,\mathbf{FinSet}}X^n\times Tn
 \end{align*}
 直観としては: 
 \begin{itemize}
-	\item $Tn=\{y_1,\dots,y_n\vdash t\}\\ \hspace*{17pt} = \{\textrm{terms with ``virtual'' variables $y_1,\dots, y_n$}\}$
-	\item $X^n=\{f:n\to X\}\\\hspace*{16pt}= \{\textrm{mappings from ``virtual'' variables to ``actual'' variables}\}$
-	\item $TX=\{x_1,\dots,x_n\vdash t\}\\\hspace*{19pt} = \{\textrm{terms with variables from $X$}\}$ 
+	% \item $Tn=\{y_1,\dots,y_n\vdash t\}\\ \hspace*{17pt} = \{\textrm{terms with ``virtual'' variables $y_1,\dots, y_n$}\}$
+	% \item $X^n=\{f:n\to X\}\\\hspace*{16pt}= \{\textrm{mappings from ``virtual'' variables to ``actual'' variables}\}$
+	% \item $TX=\{x_1,\dots,x_n\vdash t\}\\\hspace*{19pt} = \{\textrm{terms with variables from $X$}\}$ 
+	\item $Tn\hspace*{2pt}=\,\{y_1,\dots,y_n\vdash t\}\\ \hspace*{17pt}\hspace*{2pt} =\, \{\textrm{terms with ``virtual'' variables $y_1,\dots, y_n$}\}$
+	\item $X^n\hspace*{3pt}=\,\{f:n\to X\}\\\hspace*{16pt}\hspace*{3pt}=\, \{\textrm{mappings from ``virtual'' variables to ``actual'' variables}\}$
+	% \item $TX=\,\{x_1,\dots,x_n\vdash t\}\\\hspace*{19pt} =\, \{\textrm{terms with variables from $X$}\}$ 
+	\item $TX=\,\{\textrm{terms with variables from $X$}\}\,/_{{\sim}_E}$
 	% \item $\begin{array}{rcl}Tn&=&\{y_1,\dots,y_n\vdash t\}\\ &=&\{\textrm{terms with ``virtual'' variables $y_1,\dots, y_n$}\}\end{array}$
 	% \item $\begin{array}{rcl}X^n&=&\{f:n\to X\}\\ &=& \{\textrm{mappings from ``virtual'' variables to ``actual'' variables}\}\end{array}$
 	% \item $TX=\{x_1,\dots,x_n\vdash t\}\\~~~~\, = \{\textrm{terms with variables from $X$}\}$ 
 \end{itemize}
+ここで、coend は、``coproduct \& quotienting'' に相当します。たとえば、以下の2つのものを同一視します。
+\[\left(\left[ \begin{array}{c} y_1\mapsto x_1\\ y_2\mapsto x_2 \end{array} \right],y_1\cdot y_2\right) \,\sim\, \left(\left[ \begin{array}{c} y_1\mapsto x_2\\ y_2\mapsto x_1 \end{array} \right],y_2\cdot y_1\right)\]
+
 
 \noindent なお、別の見方をすると、左Kan拡張を使って以下のように定めていると理解することもできます。\vspace{5pt}
 \begin{center}
