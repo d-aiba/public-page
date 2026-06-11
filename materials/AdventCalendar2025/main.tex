@@ -3827,7 +3827,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 % \end{definition}
 
 \begin{definition}[有限モナド]
-	モナド $(F,\eta,\mu)$ が\textgt{有限モナド} (finitary monad) であるとは、自己関手 $T\colon\C\to\C$ が\textgt{フィルターづけられた余極限} (filtered colimits) を保つ、つまり $T(\colim D)\;\cong\;\colim FD$ が成り立つこと。 
+	モナド $(F,\eta,\mu)$ が\textgt{有限モナド} (finitary monad) であるとは、自己関手 $F\colon\C\to\C$ が\textgt{フィルターづけられた余極限} (filtered colimits) を保つ、つまり $F(\colim D)\;\cong\;\colim FD$ が成り立つこと。 
 	% \[T(\colim D)\;\cong\;\colim TD\]
 	\begin{itemize}
 		\item 図式 $D:\J\to\C$ の余極限 $\colim D$ が\textgt{フィルターづけられた余極限} (filtered colimit) であるとは、圏 $\J$ が\textgt{フィルターづけられた圏} (filtered category) であること。\vspace{8pt}
@@ -3864,7 +3864,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{itemize}
 	\item 例1) 冪集合関手 $\mathcal P:\Set\to\Set$ は、finitary ではない。
 	\item 例2) 有限冪集合関手 $\mathcal P_{\mathrm{fin}}:\Set\to\Set$（有限な部分集合を返す関手）は、finitary である。
-	\item 例3) $TX=\{\textrm{all the $\Sigma$-terms with variables from $X$}\}$ が finitary であるのは、$\Sigma$ が有限な arity の演算子のみを持つ場合である。
+	\item 例3) $FX=\{\textrm{all the $\Sigma$-terms with variables from $X$}\}$ が finitary であるのは、$\Sigma$ が有限な arity の演算子のみを持つ場合である。
 \end{itemize}
 
 % \clearpage
@@ -3994,22 +3994,22 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \subsubsection*{(A) ラヴェア理論から有限モナドへ}
 
-\noindent ラヴェア理論 $\mathbb L$ が与えられたとき、有限モナド $T$ を以下のように定めます。
+\noindent ラヴェア理論 $\mathbb L$ が与えられたとき、有限モナド $F_{\mathbb L}$ を以下のように定めます。
 % \[\left.\Bigl(Tn:=\mathbb L(n,1)\Bigr)\right/_{{\sim}_E}\]
 \begin{align*}
-	Tn \;&:=\; \mathbb L(n,1)\\
+	Fn \;&:=\; \mathbb L(n,1)\\
 	&\;=\; \left.\{x_1,\dots,x_n\vdash t\}\,\right/_{{\sim}_E}\\[5pt]
-	TX&:=\;\int^{\,n\,\in\,\mathbf{FinSet}}X^n\times Tn
+	FX&:=\;\int^{\,n\,\in\,\mathbf{FinSet}}X^n\times Fn
 \end{align*}
 直観としては: 
 \begin{itemize}
 	% \item $Tn=\{y_1,\dots,y_n\vdash t\}\\ \hspace*{17pt} = \{\textrm{terms with ``virtual'' variables $y_1,\dots, y_n$}\}$
 	% \item $X^n=\{f:n\to X\}\\\hspace*{16pt}= \{\textrm{mappings from ``virtual'' variables to ``actual'' variables}\}$
 	% \item $TX=\{x_1,\dots,x_n\vdash t\}\\\hspace*{19pt} = \{\textrm{terms with variables from $X$}\}$ 
-	\item $Tn\hspace*{2pt}=\,\{y_1,\dots,y_n\vdash t\}\\ \hspace*{17pt}\hspace*{2pt} =\, \{\textrm{terms with ``virtual'' variables $y_1,\dots, y_n$}\}$
+	\item $Fn\hspace*{2pt}=\,\{y_1,\dots,y_n\vdash t\}\\ \hspace*{17pt}\hspace*{2pt} =\, \{\textrm{terms with ``virtual'' variables $y_1,\dots, y_n$}\}$
 	\item $X^n\hspace*{3pt}=\,\{f:n\to X\}\\\hspace*{16pt}\hspace*{3pt}=\, \{\textrm{mappings from ``virtual'' variables to ``actual'' variables}\}$
 	% \item $TX=\,\{x_1,\dots,x_n\vdash t\}\\\hspace*{19pt} =\, \{\textrm{terms with variables from $X$}\}$ 
-	\item $TX=\,\{\textrm{terms with variables from $X$}\}\,/_{{\sim}_E}$
+	\item $FX=\,\{\textrm{terms with variables from $X$}\}\,/_{{\sim}_E}$
 	% \item $\begin{array}{rcl}Tn&=&\{y_1,\dots,y_n\vdash t\}\\ &=&\{\textrm{terms with ``virtual'' variables $y_1,\dots, y_n$}\}\end{array}$
 	% \item $\begin{array}{rcl}X^n&=&\{f:n\to X\}\\ &=& \{\textrm{mappings from ``virtual'' variables to ``actual'' variables}\}\end{array}$
 	% \item $TX=\{x_1,\dots,x_n\vdash t\}\\~~~~\, = \{\textrm{terms with variables from $X$}\}$ 
@@ -4021,20 +4021,31 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent なお、別の見方をすると、左Kan拡張を使って以下のように定めていると理解することもできます。\vspace{5pt}
 \begin{center}
 	\begin{tikzcd}[column sep=75pt,row sep=55pt]
-		\Set \ar[rrd,"{T\,:=\,\mathrm{Lan}_P\,\mathbb L(-,1)}",bend left=18pt] & {} & {} \\
+		\Set \ar[rrd,"{F\,:=\,\mathrm{Lan}_P\,\mathbb L(-,1)}",bend left=18pt] & {} & {} \\
 		\mathbf{FinSet} \ar[u,"P",hookrightarrow] \ar[r,"\substack{\mathbf{FinSet}^\op\to\mathbb L\\[1pt]\textrm{is given}}"'] \ar[ur,"\rotatebox{40}{$\substack{\rotatebox{-40}{$\substack{\alpha}$}\\\displaystyle\Longrightarrow}$}",phantom] & \mathbb L^\op \ar[r,"{\mathbb L(-,1)}"'] & \Set 
 	\end{tikzcd}\vspace{5pt}
 \end{center}
 
-\noindent このとき、$T$ が関手であることやモナドであることを、以下のように確かめましょう。......
+\noindent このとき、$F_{\mathbb L}$ が関手であることやモナドであることを、以下のように確かめましょう。%......
+\begin{itemize}
+	\item 
+	\item 
+\end{itemize}
 
 \subsubsection*{(B) 有限モナドからラヴェア理論へ}
 
-\noindent 有限モナド $T$ が与えられたとき、ラヴェア理論 $\mathbb L$ を以下のように定めます。
+\noindent 有限モナド $F$ が与えられたとき、ラヴェア理論 $\mathbb L_F$ を以下のように定めます。
 \begin{align*}
-	\mathbb L(n,1) &\;:=\; Tn \\
+	\mathbb L(n,1) &\;:=\; Fn \\
 	\mathbb L(n,m) &\;\;=\; \left(\mathbb L(n,1)\right)^m
 \end{align*}
+
+\noindent このとき、$\mathbb L_F$ が圏であることや
+\begin{itemize}
+	\item 
+	\item 
+	\item 
+\end{itemize}
 
 
 \vspace{120pt}
