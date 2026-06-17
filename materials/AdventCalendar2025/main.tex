@@ -5112,9 +5112,9 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{answer}
 	方針: 
 	\[\mathrm{GCD}(x-y,y)=\mathrm{GCD}(x,y)\]
-	および
+	% および
 	\[\mathrm{GCD}(x,y-x)=\mathrm{GCD}(x,y)\]
-	が成り立つことを使う。
+	が成り立つことを使う。\vspace{5pt}
 	\\
 	(1) ループ不変量 $I$ は、以下の論理式。\[I\;\equiv\;x>0 \,\land\, y>0 \,\land\, \mathrm{GCD}(x,y)=\mathrm{GCD}(X,Y)\]
 	(2) 設問の Hoare triple のホーア論理における導出木は、以下の通り。
@@ -5127,14 +5127,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\BIC{$\left\{\substack{\displaystyle X>0\land\\\displaystyle Y>0}\right\}\;P\;\{I\,\land\,x=y\}$}
 		\UIC{$\left\{\substack{\displaystyle X>0\land\\\displaystyle Y>0}\right\}\;P\;\{x=y=\mathrm{GCD}(X,Y)\}$}
 	\end{prooftree}
-	% \begin{prooftree}
-	% 	\AXC{$\{X>0\,\land\,Y>0\}\; {x:= X;\;y:=Y} \;\{I\}$}
-	% 	\AXC{$\{I\,\land\, x\neq y \,\land\, x\geq y\}\;x:=x-y \;\{I\}$}
-	% 	\AXC{$\{\substack{I\,\land\, x\neq y\\\land\,\lnot(x\geq y)}\}\;y:=y-x\;\{I\}$}
-	% 	\BIC{$\{I\land x\neq y\}\;C\;\{I\}$}
-	% 	\UIC{$\{I\}\;\mathbf{while}\;(x\neq y)\;C\;\{I\land x=y\}$}
-	% 	\BIC{$\{X>0\,\land\, Y>0\}\;P\;\{x=y=\mathrm{GCD}(X,Y)\}$}
-	% \end{prooftree}
+	なお、最後のステップでは、\[I\land x=y\implies x=y=\mathrm{GCD}(X,Y)\] という帰結関係が成り立つことを使っている。
 \end{answer}
 
 \clearpage
