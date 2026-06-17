@@ -5093,6 +5093,79 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 %-----
 \clearpage
 
+\section*{Exercises}
+\subsection*{A ホーア論理・最弱事前条件意味論}
+
+\begin{practice}
+	正の整数 $X,Y>0$ の最大公約数 $\mathrm{GCD}(X,Y)$ を計算するための以下のプログラム $P$ を考える。
+	\begin{verbatim}
+	 x := X
+	 y := Y
+	 while (x≠y) {
+	    if x≧y
+	       then x := x-y
+	       else y := y-x
+	 }\end{verbatim}
+	このプログラムについて、(1) ループ不変量 $I$ を求めよ。 (2) 次の Hoare triple の導出木を与えよ。\[\{X>0\land Y>0\}\;P\;\{x=y=\mathrm{GCD}(X,Y)\}\]
+\end{practice}
+
+\begin{answer}
+	方針: 
+	\[\mathrm{GCD}(x-y,y)=\mathrm{GCD}(x,y)\]
+	および
+	\[\mathrm{GCD}(x,y-x)=\mathrm{GCD}(x,y)\]
+	が成り立つことを使う。
+	\\
+	(1) ループ不変量 $I$ は、以下の論理式。\[I\;\equiv\;x>0 \,\land\, y>0 \,\land\, \mathrm{GCD}(x,y)=\mathrm{GCD}(X,Y)\]
+	(2) 設問の Hoare triple のホーア論理における導出木は、以下の通り。
+	\begin{prooftree}
+		\AXC{$\left\{\substack{\displaystyle X>0\,\land\\\displaystyle Y>0}\right\}\; \substack{\displaystyle x:= X;\\\displaystyle y:=Y} \;\{I\}$}
+		\AXC{$\left\{\substack{\displaystyle I\,\land\, x\neq y\\\displaystyle \land\, x\geq y}\right\}\;x:=x-y \;\{I\}$}
+		\AXC{$\left\{\substack{\displaystyle I\,\land\, x\neq y\\\displaystyle \land\,\lnot(x\geq y)}\right\}\;y:=y-x\;\{I\}$}
+		\BIC{$\{I\land x\neq y\}\;C\;\{I\}$}
+		\UIC{$\{I\}\;\mathbf{while}\;(x\neq y)\;C\;\{I\,\land\, x=y\}$}
+		\BIC{$\left\{\substack{\displaystyle X>0\land\\\displaystyle Y>0}\right\}\;P\;\{I\,\land\,x=y\}$}
+		\UIC{$\left\{\substack{\displaystyle X>0\land\\\displaystyle Y>0}\right\}\;P\;\{x=y=\mathrm{GCD}(X,Y)\}$}
+	\end{prooftree}
+	% \begin{prooftree}
+	% 	\AXC{$\{X>0\,\land\,Y>0\}\; {x:= X;\;y:=Y} \;\{I\}$}
+	% 	\AXC{$\{I\,\land\, x\neq y \,\land\, x\geq y\}\;x:=x-y \;\{I\}$}
+	% 	\AXC{$\{\substack{I\,\land\, x\neq y\\\land\,\lnot(x\geq y)}\}\;y:=y-x\;\{I\}$}
+	% 	\BIC{$\{I\land x\neq y\}\;C\;\{I\}$}
+	% 	\UIC{$\{I\}\;\mathbf{while}\;(x\neq y)\;C\;\{I\land x=y\}$}
+	% 	\BIC{$\{X>0\,\land\, Y>0\}\;P\;\{x=y=\mathrm{GCD}(X,Y)\}$}
+	% \end{prooftree}
+\end{answer}
+
+\clearpage
+
+\begin{practice} % RIMS 2024 数学 専門科目 修士課程 院試問題
+	$a_0,a_1$ を整数とし、$c_1,c_2,\dots$ を整数の可算無限列とする。また、任意の整数 $i,j$ に対して \[\textstyle\delta_{ij}=\begin{cases}1 & i=j\\0 & i\neq j\end{cases}\] と定める。このとき、以下のプログラムを考える。
+	\begin{verbatim}
+	 x := 1;
+	 y := 0;
+	 while (y < 2) {
+	    if y=0
+	       then if c_{x+y} = a_0 
+	               then y := y+1
+	               else x := x+1
+	       else if c_{x+y} = a_1
+	               then y := y+1
+	               else x := x+1+δ_{a_0 a_1}; 
+	                    y := 0
+	 }\end{verbatim}
+	このプログラムについて、以下の性質をともに満たす論理式 $\varphi$ を与えよ。
+	\begin{enumerate}
+		\item $\varphi$ はプログラム中の while ループの不変条件である。
+		\item $\varphi\land\lnot(y<2)$ ならば、\[(c_x=a_0)\land(c_{x+1}=a_1)\land\forall i\;(1\leq i < x\Rightarrow(c_i\neq a_0\lor c_{i+1}\neq a_1))\]
+	\end{enumerate}
+\end{practice}
+
+\begin{answer}
+	... 
+\end{answer}
+
+
 % \section*{Appendices and Exercises}
 
 % \subsection*{A ホーア論理}
