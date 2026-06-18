@@ -5077,8 +5077,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 %-----
 % \clearpage
 \begin{thebibliography}{99}
-	\item 蓮尾 (2011) 「Hoare論理によるプログラム検証」（資料）, \href{https://group-mmm.org/~ichiro/talks/komabaSogoHandout.pdf}{[URL]}. 
-    \item 郡 (2025)「圏で圏を集める？---ファイブレーション入門」, 『圏論の歩き方 [改訂版]』, 日本評論社.
+	% \item 蓮尾 (2011) 「Hoare論理によるプログラム検証」（資料）, \href{https://group-mmm.org/~ichiro/talks/komabaSogoHandout.pdf}{[URL]}. 
+    % \item 郡 (2025)「圏で圏を集める？---ファイブレーション入門」, 『圏論の歩き方 [改訂版]』, 日本評論社.
     \item Ad\'{a}mek J, Milius S, Moss LS. \textit{Initial Algebras and Terminal Coalgebras: The Theory of Fixed Points of Functors}. Cambridge Tracts in Theoretical Computer Science. Cambridge University Press. 
     \item Barr, M. (1999) \textit{Terminal coalgebras for endofunctors on sets}. Theoretical Coputer Science 114(2), pp. 299-315, \href{https://www.math.mcgill.ca/barr/papers/trmclg.pdf}{[URL]}. 
     \item Beck, J. (1969) Distributive laws. In: Seminar on Triples and Categorical Homology Theory (Zürich, 1966/1967), vol. 80, pp. 119-140. Lecture Notes in Mathematics. Springer.
@@ -5094,10 +5094,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \clearpage
 
 \section*{Exercises}
-\subsection*{A ホーア論理・最弱事前条件意味論}
+% \subsection*{A ホーア論理}
 
-\begin{practice}
-	正の整数 $X,Y>0$ の最大公約数 $\mathrm{GCD}(X,Y)$ を計算するための以下のプログラム $P$ を考える。
+\begin{practice}[ループ不変量]
+	正の整数 $X,Y>0$ の最大公約数 $\mathrm{GCD}(X,Y)$ を計算するプログラム $P$ を考える。
 	\begin{verbatim}
 	 x := X
 	 y := Y
@@ -5117,7 +5117,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	が成り立つことを使う。\vspace{5pt}
 	\\
 	(1) ループ不変量 $I$ は、以下の論理式。\[I\;\equiv\;x>0 \,\land\, y>0 \,\land\, \mathrm{GCD}(x,y)=\mathrm{GCD}(X,Y)\]
-	(2) 設問の Hoare triple のホーア論理における導出木は、以下の通り。
+	(2) 設問の Hoare triple のホーア論理における導出木は、以下の通り。\\（以下では、プログラム中の while ループの中身を $C$ をおく。）
 	\begin{prooftree}
 		\AXC{$\left\{\substack{\displaystyle X>0\,\land\\\displaystyle Y>0}\right\}\; \substack{\displaystyle x:= X;\\\displaystyle y:=Y} \;\{I\}$}
 		\AXC{$\left\{\substack{\displaystyle I\,\land\, x\neq y\\\displaystyle \land\, x\geq y}\right\}\;x:=x-y \;\{I\}$}
@@ -5125,14 +5125,14 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\BIC{$\{I\land x\neq y\}\;C\;\{I\}$}
 		\UIC{$\{I\}\;\mathbf{while}\;(x\neq y)\;C\;\{I\,\land\, x=y\}$}
 		\BIC{$\left\{\substack{\displaystyle X>0\land\\\displaystyle Y>0}\right\}\;P\;\{I\,\land\,x=y\}$}
-		\UIC{$\left\{\substack{\displaystyle X>0\land\\\displaystyle Y>0}\right\}\;P\;\{x=y=\mathrm{GCD}(X,Y)\}$}
+		\UIC{$\left\{\substack{\displaystyle X>0\,\land\\\displaystyle Y>0}\right\}\;P\;\{x=y=\mathrm{GCD}(X,Y)\}$}
 	\end{prooftree}
 	なお、最後のステップでは、\[I\land x=y\implies x=y=\mathrm{GCD}(X,Y)\] という帰結関係が成り立つことを使っている。
 \end{answer}
 
 \clearpage
 
-\begin{practice} % RIMS 2024 数学 専門科目 修士課程 院試問題
+\begin{practice}[ループ不変量] % RIMS 2024 数学 専門科目 修士課程 院試問題
 	$a_0,a_1$ を整数とし、$c_1,c_2,\dots$ を整数の可算無限列とする。また、任意の整数 $i,j$ に対して \[\textstyle\delta_{ij}=\begin{cases}1 & i=j\\0 & i\neq j\end{cases}\] と定める。このとき、以下のプログラムを考える。
 	\begin{verbatim}
 	 x := 1;
@@ -5158,6 +5158,107 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	... 
 \end{answer}
 
+% \subsection*{B 最弱事前条件意味論}
+
+
+
+% \subsection*{C 束論・不動点理論}
+
+
+
+\clearpage
+
+\begin{practice}[不動点]
+	$U=\{1,2,3,4\}$ とし、$F:\mathcal P(U)\to\mathcal P(U)$ を 
+	\[F(A)=\{1\mid 2\in A\}\cup\{2\mid 3,4\in A\}\cup\{3\}\cup\{4\mid4\in A\}\] 
+	で定める。
+	\begin{enumerate}
+		\item $\varnothing,F(\varnothing),F^2(\varnothing),\ldots$ を安定するまで求めよ。
+		\item $U,F(U),F^2(U),\ldots$ を安定するまで求めよ。
+		\item $\mu F$ と $\nu F$ は一致するか。
+	\end{enumerate}
+\end{practice}
+
+\begin{answer}
+	... 
+\end{answer}
+
+
+\begin{practice}[相互再帰, Beki\'c の補題] % Beki\'c の補題
+	$(L,\leq)$, $(M,\leq)$ を完備束とし、
+	\[f:L\times M\to L,\qquad g:L\times M\to M\] を単調写像とする。また、$L\times M$ 上の順序を \[(x,y)\leq(x',y')\iff x\leq x',\; y\leq y'\] とし、
+	\[h:L\times M\to L\times M\] を
+	\[h(x,y)=(f(x,y),g(x,y))\] で定める。
+	\begin{enumerate}
+		\item 写像 $h$ が $L\times M$ 上で単調であることを示せ。
+		% \item %$\mu h=\mu x.\,f(x,\,\mu y.\,g(x,y))$ を示せ。
+		\item $\mu(x,y).\,\bigl(f(x,y),g(x,y)\bigr)=\left( \mu x.\, f(x,\mu y.\,g(x,y)), \; \mu y.\,g(\mu x.\, f(x,\mu z.\,g(x,z)),y) \right)$ を示せ。
+		\\（「同時再帰」は「入れ子の再帰」に展開することができる。）
+	\end{enumerate}
+\end{practice}
+
+\begin{answer}
+	... 
+\end{answer}
+
+\clearpage
+
+\begin{practice}[wp と wlp]
+	状態集合を $S=\{a,b,c,d,e\}$ とする。以下の while ループを考える。
+	\[\mathrm{while}~\varphi(x)~\mathrm{do}~f(x)\]
+	ガード $\varphi$ は、$e$ で偽、それ以外で真とする。
+	\[\varphi(a)=\varphi(b)=\varphi(c)=\varphi(d)=1,\quad \varphi(e)=0\]
+	本体 $f$ は、以下のような決定的遷移（分岐がない遷移）で与えられているものとする。 \[a\mapsto c,\quad b\mapsto b,\quad c\mapsto d,\quad d\mapsto e,\quad e\mapsto e\] 事後条件を $Q=\{e\}$ とする。%この $Q$ を保証する2種類の事前条件 (wp と wlp) をそれぞれ求めよ。
+	\[\Phi(X)=(\neg\varphi\cap Q)\cup(\varphi\cap f^{-1}X)\]
+	\begin{enumerate}
+		\item $\mu\Phi$ を求めよ。($Q$ の weakest precondition)
+		\item $\nu\Phi$ を求めよ。($Q$ の weakest liberal precondition)
+	\end{enumerate}
+\end{practice}
+
+\begin{answer}
+	... 
+\end{answer}
+
+
+\begin{practice}[抽象解釈] % Cousot–Cousot
+	プログラム
+	\[\begin{array}{l}
+		x:=0; \quad y:=10\\
+		\mathrm{while}~x<y~\mathrm{do}~\begin{cases}x:=x+2\\y:=y-1\end{cases}
+	\end{array}\]
+	を、区間抽象領域 
+	\[I=\{[l,u]\mid l,u\in \Z\cup\{-\infty,\infty\}, l\leq u\}\]
+	で解析する。以下の問いに答えよ。
+	\begin{enumerate}
+		\item 
+		\item 
+		\item 
+		\item 
+		\item 
+	\end{enumerate}
+\end{practice}
+
+\begin{answer}
+	方針: 
+	\[(0,10)\to(2,9)\to(4,8)\to(6,7)\to(8,6)~~\textrm{停止}\]
+\end{answer}
+
+\clearpage
+
+\begin{practice}
+	ラベル付き遷移系を \[0\xrightarrow{~a~}1,\quad 0\xrightarrow{~a~}2,\quad 1\xrightarrow{~b~}3,\quad 2\xrightarrow{~b~}3,\] 
+	\[1\xrightarrow{~a~}1,\quad 2\xrightarrow{~a~}2,\quad 3\xrightarrow{~a~}3\] 
+	で定める。
+	\begin{enumerate}
+		\item 双模倣性（最大双模倣関係）を求めよ。
+		\item 商遷移系を描け。
+	\end{enumerate}
+\end{practice}
+
+\begin{answer}
+	... 
+\end{answer}
 
 % \section*{Appendices and Exercises}
 
@@ -5171,7 +5272,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 % 	\item 
 % \end{enumerate}
 
-% \subsection*{B 最弱事前条件意味論}
+
 
 % \begin{enumerate}
 % 	\item 
