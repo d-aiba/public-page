@@ -142,6 +142,8 @@
 \section{導入：モデル検査とは？ なぜ圏論を使うのか？}
 \label{sec:intro}
 
+\subsection*{形式検証とは}
+
 \noindent 
 \textgt{形式検証}と呼ばれる分野では、\textgt{バグのないソフトウェア}を目指します。（ソフトウェア``工学''的な「テストでバグを見つけ出す・ひとつずつ修正する」といったアプローチというよりかはむしろ）ソフトウェア``科学''では、\textgt{論理学の知見を使って「この範囲には絶対にバグがない」と証明}します。範囲はたしかに限定的ですが、特定の範囲についての安全性を数学的に保証すれば、そこをテスト範囲から除外することができ、そのぶん効率的なテストを行えます。
 \vspace{4pt}
@@ -161,6 +163,30 @@
 \end{itemize}
 \end{oframed}\vspace{4pt}
 
+\noindent 形式検証の技術は、もはや研究者たちの toy ではなく、現実の様々なシステムに活用されています。
+\begin{itemize}
+	\item デバイスドライバの自動検証 (Microsoft)
+	\item 航空機制御ソフトウェアの検証 (Airbus)
+	\item 
+	\item 
+	\item 
+\end{itemize}
+
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		テスト (test) & \multicolumn{3}{c|}{検証 (verification)} \\
+		& モデル検査 & 自動定理証明 & 対話定理証明 \\\hline
+		% 産業界で主流 & 総当りで検査 & 全自動 & 博士論文1本分 \\\hline
+		\multicolumn{4}{|c|}{低 … \hspace*{70pt} コスト \hspace*{70pt} … 高} \\\hline
+		\multicolumn{4}{|c|}{低 … \hspace*{25pt} システム品質保証の度合い \hspace*{25pt} … 高} \\\hline
+	\end{tabular}
+\end{center}
+
+\clearpage
+
+\subsection*{モデル検査とは}
+
 \noindent %一般に、
 % \textgt{モデル検査}は、\textgt{形式検証}の分野の中に位置づけられます。
 % \\
@@ -174,7 +200,7 @@
 
 \begin{framed}
 	\noindent 【見取り図】
-	\vspace{8pt}
+	\vspace{5pt}
 	% \begin{center}
 	% 	\begin{tikzcd}[row sep=15pt,column sep=38pt]
 	% 		\textrm{(real-world system)} \ar[r,"\textrm{formalize}"] & \fbox{formal model} \ar[dr,"\textrm{input}" sloped] & {} & {} \\
@@ -183,15 +209,15 @@
 	% 	\end{tikzcd}
 	% \end{center}
 	\begin{center}
-		\begin{tikzcd}[row sep=3pt,column sep=36pt]
+		\begin{tikzcd}[row sep=0pt,column sep=36pt]
 			\textrm{(real-world system)} \ar[r,"\textrm{formalize}"] & \framebox[9.0em]{\rule{0pt}{1.5ex} $\substack{\displaystyle\textrm{system model}\\[5pt]\displaystyle\mathcal M}$} \ar[dr,"\textrm{input}" sloped] & {} & {} \\
 			& & \doublebox{~~~$\substack{\displaystyle\textrm{model checker}\\[5pt]\displaystyle\mathcal M\models\varphi\;?}$~~~} \ar[r,"\textrm{output}"'] & ~\textrm{\ding{51}\;or\;\ding{55}}~ \\
 			~~~\;\textrm{(requirement)}\;~~~ \ar[r,"\textrm{formalize}"'] & \framebox[9.0em]{\rule{0pt}{1.5ex} $\substack{\displaystyle\textrm{specification}\\[5pt]\displaystyle\varphi}$} \ar[ur,"\textrm{input}"' sloped] & {} & {}
 		\end{tikzcd}
 	\end{center}
-	\vspace{8pt}
+	\vspace{5pt}
 \end{framed}
-\vspace{4pt}
+\vspace{3pt}
 
 % \noindent 仕様 $\varphi$ は典型的には、時相論理式（例えば $\mathbf{G}\,(p\to\mathbf{F}\,q)$「リクエスト$p$が生じたらレスポンス$q$が返ってくる」など）で書かれることが多いですが、
 % \noindent モデルとは、オートマトンやマルコフ連鎖など。また、仕様とは、たとえば以下のようなものが挙げられます。
@@ -202,21 +228,23 @@
 % 本記事では特定の形式化には限定せずに、一般論を展開することを目指します。
 
 \noindent モデルとしては、オートマトンやマルコフチェーンをはじめとする\textgt{状態遷移システム}と呼ばれるものを考えます。また、\\
-\noindent 仕様 $\varphi$ は典型的には、\textgt{時相論理式}（例えば $\mathbf{G}\,(p\to\mathbf{F}\,q)$「リクエスト$p$を送ったらレスポンス$q$が返ってくる」など）で書かれることが多いです。が、本記事では特定の形式化のしかたに限定せずに、一般論を展開することを目指します。\vspace{8pt}
+\noindent 仕様 $\varphi$ は典型的には、\textgt{時相論理式}（例えば $\mathbf{G}\,(p\to\mathbf{F}\,q)$「リクエスト$p$を送ったらレスポンス$q$が返ってくる」など）で書かれることが多いです。が、本記事では特定の形式化のしかたに限定せずに、一般論を展開することを目指します。\vspace{5pt}
 
 \noindent (補足: なお実際の場面では、複雑なプログラムを考える際に、現実のシステムをモデル化すること自体が困難ないしハイコストであったり、望む性質を適切に形式化して仕様として記述することが難しい、といったこともよくあります。そのような観点については本記事では扱いきれませんが、近年さまざまな発展があります。)
 
-\clearpage
+% \clearpage
+
+\subsection*{なぜモデル検査に圏論を使うのか}
 
 \noindent 本記事ではとりわけ「\kenten{圏論を使ったモデル検査}」を紹介するのですが、
 \textgt{なぜ圏論を使うのか}について説明しておきます。
-\vspace{8pt}\\
+\vspace{5pt}\\
 \noindent 圏論とは、数学の概念を抽象化して統一的に記述するための「言語」です。圏論を使うと、様々な数学的対象の共通点を見出して、俯瞰的に議論することができるようになります。また、特にコンピューターサイエンス（計算機科学）においては、そのような一般化・抽象化は、「\textgt{よりよい手法の考案}」に繋がります。
-\vspace{8pt}\\
-\noindent 現代において、情報システムが急速に複雑化・多様化する中、単一の理論的パラダイムにのみ特化した手法を追究し続けるのでは、変化に対処しきれません。それに対し、\textgt{情報科学における圏論的手法の強み}は、抽象的・俯瞰的であるがゆえに、分野の動向や理論的パラダイムに変化が生じた場合にも、\textgt{既存の議論や知見を再編することで新たな問題設定に柔軟に適応できる}という点にあると言えます。それゆえ、圏論を用いた俯瞰的視座から形式検証の問題群に取り組むことは、分野の理論的発展にとって非常に有益です。
-\vspace{8pt}\\
-\noindent 特にコンピューターサイエンスの研究の現場では、圏論は以下のようなしかたで使われることがよくあります。
-\vspace{8pt}
+% \vspace{6pt}\\
+% \noindent 現代において、情報システムが急速に複雑化・多様化する中、単一の理論的パラダイムにのみ特化した手法を追究し続けるのでは、変化に対処しきれません。それに対し、\textgt{情報科学における圏論的手法の強み}は、抽象的・俯瞰的であるがゆえに、分野の動向や理論的パラダイムに変化が生じた場合にも、\textgt{既存の議論や知見を再編することで新たな問題設定に柔軟に適応できる}という点にあると言えます。それゆえ、圏論を用いた俯瞰的視座から形式検証の問題群に取り組むことは、分野の理論的発展にとって非常に有益です。
+% \vspace{8pt}\\
+% \noindent 特にコンピューターサイエンスの研究の現場では、圏論は以下のようなしかたで使われることがよくあります。
+\vspace{3pt}
 
 \begin{framed}
 \noindent 【コンピューターサイエンスにおける圏論の使い方（の一例）】
@@ -229,9 +257,9 @@
 	\item パンチの効いた\textgt{応用事例}と\textgt{実験結果}を含めて、成果を論文に書く（表向きは圏論を使わないこともある！）
 \end{enumerate}
 \end{framed}
-% \vspace{3pt}
+\vspace{3pt}
 
-% \noindent 現代において情報システムが急速に複雑化・多様化するなか、単一の理論的パラダイムにのみ特化した手法を追究し続けるのでは、変化に対処しきれません。それに対し、\textgt{情報科学における圏論的手法の強み}は、抽象的・俯瞰的であるがゆえに、分野の動向や理論的パラダイムに変化が生じた場合にも、\textgt{既存の議論や知見を再編することで新たな問題設定に柔軟に適応できる}という点にあると言えます。そのため、圏論を用いた俯瞰的視座から形式検証の問題群に取り組むことは、分野の理論的発展にとって非常に有用です。
+\noindent 現代において情報システムが急速に複雑化・多様化する中、単一の理論的パラダイムにのみ特化した手法を追究し続けるのでは、変化に対処しきれません。それに対し、\textgt{情報科学における圏論的手法の強み}は、抽象的・俯瞰的であるがゆえに、分野の動向や理論的パラダイムに変化が生じた場合にも、\textgt{既存の議論や知見を再編することで新たな問題設定に柔軟に適応できる}という点にあると言えます。それゆえ、圏論を用いた俯瞰的視座から形式検証の問題群に取り組むことは、分野の理論的発展にとって非常に有益です。
 
 
 \clearpage
