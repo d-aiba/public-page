@@ -144,7 +144,7 @@
 
 \noindent 本記事で扱う\textgt{モデル検査} (model checking) は、\textgt{形式検証} (formal verification) の分野の中に位置づけられます。
 
-\subsection*{形式検証とは}
+\subsection*{1.1~ 形式検証とは}
 
 \noindent 
 \textgt{形式検証}と呼ばれる分野では、\textgt{バグのないソフトウェア}を目指します。（ソフトウェア``工学''的な「テストでバグを見つけ出す・ひとつずつ修正する」といったアプローチよりかはむしろ）ソフトウェア\kenten{科学}としては、\textgt{論理学の知見を使って「この範囲には絶対にバグがない」と証明}します。範囲はたしかに限定的ですが、特定の範囲についての安全性を数学的に保証すれば、そこをテスト範囲から除外することができ、そのぶん効率的なテストを行えます。
@@ -165,21 +165,23 @@
 \end{itemize}
 \end{oframed}\vspace{4pt}
 
-\noindent 形式検証の技術は、もはや研究者たちの toy ではなく、現実の様々なシステムに活用されています。
+\noindent 形式検証の技術は、もはや研究者たちによる単なる理論的産物ではなく、現実の様々なシステムに活用されています。\\ よく知られた例: 
+% \todo[inline]{追加・加筆する}
 \begin{itemize}
-	\item IC design の＊＊＊ (Intel)
+	\item CPU IC 設計の検証 (Intel)
 	\item デバイスドライバの自動検証 (Microsoft)
 	\item 航空機制御ソフトウェアの検証 (Airbus)
-	\item ＊＊＊＊＊の軽量形式検証 (Facebook)
-	\item ＊＊＊の＊＊＊検証 (Amazon AWS)
-	\item 
+	\item アプリケーションの軽量形式検証 (Facebook)
+	\item TLS (transport layer security) の安全性検証 (Amazon AWS) \vspace{10pt}
+	% \item 
 \end{itemize}
 
+\noindent なお、形式検証の中でも手法ごとに「システム品質保証の度合い」に違いがあります。簡単にまとめると以下の通りです。\vspace{12pt}
 \begin{center}
 	\begin{tabular}{|c|c|c|c|}
 		\hline
-		テスト (test) & \multicolumn{3}{c|}{検証 (verification)} \\
-		& モデル検査 & 自動定理証明 & 対話定理証明 \\\hline
+		\textgt{テスト} (test) & \multicolumn{3}{c|}{\textgt{形式検証} (formal verification)} \\
+		& \textgt{モデル検査} & \textgt{自動定理証明} & \textgt{対話定理証明} \\\hline
 		% 産業界で主流 & 総当りで検査 & 全自動 & 博士論文1本分 \\\hline
 		\multicolumn{4}{|c|}{低 … \hspace*{70pt} コスト \hspace*{70pt} … 高} \\\hline
 		\multicolumn{4}{|c|}{低 … \hspace*{25pt} システム品質保証の度合い \hspace*{25pt} … 高} \\\hline
@@ -188,7 +190,7 @@
 
 \clearpage
 
-\subsection*{モデル検査とは}
+\subsection*{1.2~ モデル検査とは}
 
 \noindent %一般に、
 % \textgt{モデル検査}は、\textgt{形式検証}の分野の中に位置づけられます。
@@ -233,11 +235,11 @@
 \noindent モデルとしては、オートマトンやマルコフチェーンをはじめとする\textgt{状態遷移システム}と呼ばれるものを考えます。また、\\
 \noindent 仕様 $\varphi$ は典型的には、\textgt{時相論理式}（例えば $\mathbf{G}\,(p\to\mathbf{F}\,q)$「リクエスト$p$を送ったらレスポンス$q$が返ってくる」など）で書かれることが多いです。が、本記事では特定の形式化のしかたに限定せずに、一般論を展開することを目指します。\vspace{5pt}
 
-\noindent (補足: なお実際の場面では、複雑なプログラムを考える際に、現実のシステムをモデル化すること自体が困難ないしハイコストであったり、望む性質を適切に形式化して仕様として記述することが難しい、といったこともよくあります。そのような観点については本記事では扱いきれませんが、近年さまざまな発展があります。)
+\noindent (補足: なお実際の場面では、複雑なシステムについて考える際に、現実のシステムをモデル化すること自体が困難ないしハイコストであったり、望む性質を適切に形式化して仕様として記述することが難しい、といったこともよくあります。そのような観点については本記事では扱いきれませんが、近年さまざまな発展があります。)
 
 % \clearpage
 
-\subsection*{なぜモデル検査に圏論を使うのか}
+\subsection*{1.3~ なぜモデル検査に圏論を使うのか}
 
 \noindent 本記事ではとりわけ「\kenten{圏論を使ったモデル検査}」を紹介するのですが、
 \textgt{なぜ圏論を使うのか}について説明しておきます。
