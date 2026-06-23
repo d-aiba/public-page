@@ -874,7 +874,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{tabular}
 \end{center}\vspace{15pt}
 
-もう少し詳しく見ておくと: \vspace{-5pt}
+\noindent もう少し詳しく見ておくと: \vspace{-5pt}
 \begin{itemize}
 	\begin{multicols}{2}
 	\item \textgt{最小不動点の上界推定} (by Knaster-Tarski): 
@@ -911,7 +911,42 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 % \vspace{5pt}
 \vspace{18pt}
 
-さて、本章でこれまで扱ってきた述語変換子の考え方は、圏論の言葉を使うととても見通しがよくなります。そのための準備として、次章では、圏論を用いて情報システムの振舞いをとらえる方法について紹介します。%（すでに「余代数」や「モナド」や「グロタンディーク・ファイブレーション」のことは知っているよ、という人は\ref{sec:categorical-weakest-precondition}章へ飛んでください。）
+% さて、本章でこれまで扱ってきた述語変換子の考え方は、圏論の言葉を使うととても見通しがよくなります。そのための準備として、次章では、圏論を用いて情報システムの振舞いをとらえる方法について紹介します。%（すでに「余代数」や「モナド」や「グロタンディーク・ファイブレーション」のことは知っているよ、という人は\ref{sec:categorical-weakest-precondition}章へ飛んでください。）
+\clearpage
+
+\subsection{到達性 (liveness property) と安全性 (safety property)}
+
+\noindent モデル検査で示したいことは「\textgt{モデル} $\mathcal M$ のもとで\textgt{仕様} $\varphi$（望ましい性質）が成り立つかどうか」でした。(\ref{sec:intro}章を参照)\\
+ここで、広く用いられる2種類の仕様、\textgt{到達性} (liveness property) と\textgt{安全性} (safety property) の考え方について、理解しておきましょう。
+\begin{itemize}
+	\item \textgt{到達性} (liveness property): 良いことがいつか起こる
+	\item \textgt{安全性} (safety property): 悪いことが決して起こらない
+\end{itemize}
+\noindent ここで、\textgt{到達性}は最小不動点 (lfp) で与えられ、\textgt{安全性}は最大不動点 (gfp) で与えられることを確認しましょう。%\vspace{8pt}\\
+% 状態遷移系 $(S,\leadsto)$ があり、良い状態の集合を $G\subseteq S$ とします。\\ このとき、「すべての path でいつか $G$ に到達する」(i.e. CTL formula で書くと $AFG$) は \[AFG\,=\,\mu X.\;(G\,\cup\,\{s\in S\mid \forall\, t\in S,\, s\leadsto t\implies t\in X\})\] で与えられます。（``良い状態であるか、次にどう進んでも最終的に良い状態へ行けるような状態''）\vspace{8pt}\\ また、悪い状態の集合を $B\subseteq S$ とします。\\ このとき「すべての path で決して悪いことが怒らない」(i.e. CTL formula で書くと $AG\lnot B$) は \[AG\lnot B\,=\,\nu X.\;(\lnot B\,\cap\,\{s\in S\mid \forall\, t\in S,\,s\leadsto t\implies t\in X\})\] で与えられます。（``悪い状態でなく、かつ、どの状態へ進んでも悪い状態に行かない''）
+\begin{itemize}
+	\item 状態遷移系 $(S,\leadsto)$ があり、良い状態の集合を $G\subseteq S$、悪い状態の集合を $B\subseteq S$ とします。
+	\item このとき、\textgt{到達性}「すべての path でいつか $G$ に到達する」(i.e. CTL formula で書くと $AFG$) は \[AFG\,=\,\mu X.\;(G\,\cup\,\{s\in S\mid \forall\, t\in S,\, s\leadsto t\implies t\in X\})\] で与えられます。（``良い状態であるか、または、どう進んでも最終的に良い状態へ行ける''）\vspace{8pt}
+	\item また、\textgt{安全性}「すべての path で決して悪いことが起こらない」(i.e. CTL formula で書くと $AG\lnot B$) は \[AG\lnot B\,=\,\nu X.\;(\lnot B\,\cap\,\{s\in S\mid \forall\, t\in S,\,s\leadsto t\implies t\in X\})\] で与えられます。（``悪い状態でなく、かつ、どう進んでも悪い状態へ行かない''）
+\end{itemize}
+
+\noindent いま、「開始状態 (initial states) の集合 $A\subseteq S$ からの安全性・到達性」を考えることにしましょう。これはまさに、前節で見た「最小・最大不動点の下界推定」(under approximation, lowerbound estimation of lfp/gfp) です。
+\begin{itemize}
+	\item 
+	\item 
+\end{itemize}
+% (補足: 完備束 $2^S$ 上の順序 ``$\sqsubseteq$'' は、状態空間 $S$ の部分集合のあいだの包含関係によって定められたものです。)
+
+\clearpage
+
+\subsection*{コラム: 最小不動点と最大不動点の一致 (lfp-gfp coincidence) について}
+
+\noindent 一般には $\mu f\sqsubseteq\nu f$ ですが、一致する ($\mu f=\nu f$) 場合もあります。一致すると何が嬉しいかを見ておきましょう。\\
+
+\vspace{150pt}
+
+さて、本章でこれまで扱ってきた述語変換子の考え方は、圏論の言葉を使うととても見通しがよくなります。そのための準備として、次章では、圏論を用いて情報システムの振舞いをとらえる方法について紹介します。
+
 \clearpage
 
 \section{圏論を用いて「情報システムの振舞い」をとらえる手法}
