@@ -5168,7 +5168,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 %-----
 \clearpage
 
-\section*{Exercises}
+\section*{演習問題}
 % \subsection*{A ホーア論理}
 
 \begin{practice}[ループ不変量]
@@ -5199,7 +5199,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\AXC{$\left\{\substack{\displaystyle I\,\land\, x\neq y\\\displaystyle \land\,\lnot(x\geq y)}\right\}\;y:=y-x\;\{I\}$}
 		\BIC{$\{I\land x\neq y\}\;C\;\{I\}$}
 		\UIC{$\{I\}\;\mathbf{while}\;(x\neq y)\;C\;\{I\,\land\, x=y\}$}
-		\BIC{$\left\{\substack{\displaystyle X>0\land\\\displaystyle Y>0}\right\}\;P\;\{I\,\land\,x=y\}$}
+		\BIC{$\left\{\substack{\displaystyle X>0\,\land\\\displaystyle Y>0}\right\}\;P\;\left\{\substack{\displaystyle I\,\land\,\\[0pt]\displaystyle x=y}\right\}$}
 		\UIC{$\left\{\substack{\displaystyle X>0\,\land\\\displaystyle Y>0}\right\}\;P\;\{x=y=\mathrm{GCD}(X,Y)\}$}
 	\end{prooftree}
 	なお、最後のステップでは、\[I\land x=y\implies x=y=\mathrm{GCD}(X,Y)\] という帰結関係が成り立つことを使っている。
@@ -5295,6 +5295,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	... 
 \end{answer}
 
+\clearpage
 
 \begin{practice}[抽象解釈] % Cousot–Cousot
 	プログラム
@@ -5303,25 +5304,41 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\mathrm{while}~x<y~\mathrm{do}~\begin{cases}x:=x+2\\y:=y-1\end{cases}
 	\end{array}\]
 	を、区間抽象領域 
-	\[I=\{[l,u]\mid l,u\in \Z\cup\{-\infty,\infty\}, l\leq u\}\]
+	\[I=\{\emptyset\}\cup\{[l,u]\mid l,u\in \Z\cup\{-\infty,\infty\}, l\leq u\}\]
 	で解析する。以下の問いに答えよ。
 	\begin{enumerate}
-		\item 
-		\item 
-		\item 
-		\item 
+		\item このプログラムの具体的な実行パスを書け。
+		\item 具体化写像 $\gamma$, 抽象化写像 $\alpha$, 順序 $\sqsubseteq$, 結び $\sqcup$ を適切に定義せよ。
+		\item 抽象状態 $A=([a,b],[c,d])\in I^2$ に対し、
+		\begin{itemize}
+			\item ガード $x<y$ による抽象フィルター $G^\#_{<}$ \item 否定ガード $x\geq y$ による抽象フィルター $G^\#_{\geq}$ \item ループ本体の抽象変換 $B^\#$ 
+		\end{itemize} 
+		を与えよ。
+		\item 反復列 \[H_0=\bot,\quad H_{n+1}=A_0\sqcup B^\sharp(G^\sharp_{<}(H_n))\] を、安定するまで計算せよ。ただし $A_0=([0,0],[10,10])$ である。
 		\item 
 	\end{enumerate}
 \end{practice}
 
 \begin{answer}
-	方針: 
-	\[(0,10)\to(2,9)\to(4,8)\to(6,7)\to(8,6)~~\textrm{停止}\]
+	\begin{enumerate}
+		\item 実行列は以下の通り。
+		\[(0,10)\to(2,9)\to(4,8)\to(6,7)\to(8,6)~~\textrm{停止}\]
+		\item 通常だと、具体化 $\gamma:I\to \mathcal P(\Z)$ は \[\gamma([l,u])=\{n\in\mathbb Z\mid l\leq n\leq u\}\] で定められ、抽象化 $\alpha:\mathcal P(\Z)\to I$ は \[\alpha(S)=[\min S,\sup S]\] で定められる。だが、今回は「2変数状態」を考えるので、具体化 $\gamma:I\times I\to\mathcal P(\Z)$ を \[\gamma(([l,u],[l',u']))=\gamma([l,u])\times\gamma([l',u'])\] で定め、抽象化 $\alpha:\mathcal P(\Z)\times\mathcal P(\Z)\to I$ を \[\alpha(R)=\left( [\min\{x\mid (x,y)\in R\},\sup\{x\mid (x,y)\in R\}], [\min\{y\mid (x,y)\in R\},\sup\{y\mid (x,y)\in R\}] \right)\] で定める。また、$I$ 上の順序は \[[l,u]\sqsubseteq[l',u'] \quad\Longleftrightarrow\quad l'\leq l\; \textrm{かつ}\; u\leq u'\] であり、結び $\sqcup$ は \[[l,u]\sqcup[l',u']=[\min(l,l'),\max(u,u')]\] で定めればよい。
+		\item 
+		\item 抽象反復の計算 
+		\begin{align*}
+			H_0 &= \bot\\
+			H_1 &= ([0,0],[10,10]) \\
+			H_2 &= 
+		\end{align*}
+	\end{enumerate}
 \end{answer}
+
+\todo[inline]{これはうまく行かないので例を作り直し。タンクの水位制御の例とか？}
 
 \clearpage
 
-\begin{practice}
+\begin{practice}[双模倣]
 	ラベル付き遷移系を \[0\xrightarrow{~a~}1,\quad 0\xrightarrow{~a~}2,\quad 1\xrightarrow{~b~}3,\quad 2\xrightarrow{~b~}3,\] 
 	\[1\xrightarrow{~a~}1,\quad 2\xrightarrow{~a~}2,\quad 3\xrightarrow{~a~}3\] 
 	で定める。
@@ -5334,6 +5351,51 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{answer}
 	... 
 \end{answer}
+
+\clearpage
+
+\subsection*{代数的コンパクト圏と lfp-gfp coincidence に関する演習問題}
+
+\begin{practice}[型なしラムダ計算のモデル]
+	$\C$ をカルテシアン閉圏とし、ある対象 $D\in\C$ について、同型 \[D\cong D^D\] が与えられているとする。（「全ての項は関数としても値としても使える」）この同型の向きを \\ \[i:D\xrightarrow{\cong} D^D,\qquad j:D^D\xrightarrow{\cong} D\] （「値を関数に unfold する」、「関数を値に fold する」）とし、 \[i\circ j=\mathrm{id}_{D^D},\qquad j\circ i=\mathrm{id}_D\] を満たすとする。
+	\begin{enumerate}
+		\item 「関数適用」に対応する射 $\mathsf{app}:D\times D\to D$ を、評価射 $\mathsf{ev}:D^D\times D\to D$ を用いて定義せよ。
+		\item 任意の対象 $\Gamma\in\C$ と射 $f:\Gamma\times D\to D$ に対し、「関数抽象」に対応する射 \[\lambda(f):\Gamma\to D\] を定義せよ。
+		\item $\beta$-等式を示せ。\[\mathsf{app}\circ\langle \lambda(f)\circ\pi_1,\pi_2\rangle=f\] 
+		\item $\eta$-等式を示せ。任意の $g:\Gamma\to D$ について、\[\lambda\bigl(\mathsf{app}\circ\langle g\circ\pi_1,\pi_2\rangle\bigr)=g\] 
+		\item 集合の圏 $\mathbf{Set}$ では、非自明な集合 $D$ について $D\cong D^D$ が成り立たないことを示せ。これが、ラムダ計算のモデルを作るうえで $\mathbf{Set}$ ではなく領域理論的な圏を考える理由の1つであることを説明せよ。
+	\end{enumerate}
+\end{practice}
+
+\begin{answer}
+	\begin{enumerate}
+		\item $\mathsf{app} = \mathsf{ev}\circ(i\times\mathrm{id}_D)$ と定めればよい。
+		\item CCC のカリー化を $\Lambda(f):\Gamma\to D^D$ と書くと、$\lambda(f)=j\circ\Lambda(f)$ である。
+		\item $\mathsf{app}\circ\langle \lambda(f)\circ\pi_1,\pi_2\rangle = \mathsf{ev}\circ\langle i\circ j\circ\Lambda(f)\circ\pi_1,\pi_2\rangle = \mathsf{ev}\circ\langle \Lambda(f)\circ\pi_1,\pi_2\rangle = f$ より従う。
+		\item $\lambda\bigl(\mathsf{app}\circ\langle g\circ\pi_1,\pi_2\rangle\bigr) = j\circ\Lambda\bigl(\mathsf{ev}\circ\langle i\circ g\circ\pi_1,\pi_2\rangle\bigr) = j\circ i\circ g = g.$ 
+		\item $|D|\geq 2$ なら Cantor の定理により $|D^D|>|D|$ となるため、$D\cong D^D$ は不可能。空集合も $\varnothing^\varnothing\cong 1$ なので解にならない。したがって $\mathbf{Set}$ での解は1点集合の場合に限られ、ラムダ計算の非自明なモデルにはならない。
+	\end{enumerate}
+\end{answer}
+
+\begin{practice}[再帰型つきラムダ計算のモデル]
+	以下の問いに答えよ。
+	\begin{itemize}
+		\item 圏 $\C$ が\textgt{代数的コンパクト圏} (algebraically compact category) であるとは、任意の自己関手 $F:\C\to\C$ について、始代数 $F(\mu F)\xrightarrow{\cong} \mu F$ (fold) と終余代数 $\nu F\xrightarrow{\cong} F(\nu F)$ (unfold) を持ち、さらに $\mu F\cong\nu F$ (lfp-gfp coincidence) が成り立つ ????? ことである。また、次の2つの事実を使ってよいものとする。
+		\begin{itemize}
+			\item 主張1:「圏 $\C$ と $\D$ が代数的コンパクトなら、$\C\times \D$ も代数的コンパクトである」
+			\item 主張2:「$\C$ が代数的コンパクトなら、$\C^\op$ も代数的コンパクトである」
+		\end{itemize}
+		\item 上の主張を用いて、代数的コンパクト圏 $\C$ において、任意の双関手 $T:\C^\op\times\C\to\C$ に対し、ある $D\in\C$ が存在して、$D\cong T(D,D)$ が成り立つことを示せ。(問1)
+		\item カルテシアン閉な代数的コンパクト圏 $\C$ において、再帰型つきラムダ計算のモデルを作ることができる。「関数抽象」「関数適用」「$\beta$-等式」「$\eta$-等式」をそれぞれ定義せよ。(問2)
+		\item 型なしラムダ計算のモデルは、再帰型つきラムダ計算のモデルの一種である。どういうことか説明せよ。(問3)
+	\end{itemize}
+\end{practice}
+
+\todo[inline]{たぶん $\mu F\cong\nu F$ だけでなく「initial algebra の inverse が final coalgebra」などが必要。}
+
+% \begin{practice}[代数的コンパクト圏における lfp-gfp coincidence]
+% 	... 
+% \end{practice}
 
 % \section*{Appendices and Exercises}
 
