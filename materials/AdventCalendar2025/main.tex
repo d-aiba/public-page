@@ -147,7 +147,9 @@
 \subsection*{1.1~ 形式検証とは}
 
 \noindent 
-\textgt{形式検証}と呼ばれる分野では、\textgt{バグのないソフトウェア}を目指します。（ソフトウェア``工学''的な「テストでバグを見つけ出す・ひとつずつ修正する」といったアプローチよりかはむしろ）ソフトウェア\kenten{科学}としては、\textgt{論理学の知見を使って「この範囲には絶対にバグがない」と証明}します。範囲はたしかに限定的ですが、特定の範囲についての安全性を数学的に保証すれば、そこをテスト範囲から除外することができ、そのぶん効率的なテストを行えます。
+\textgt{形式検証}と呼ばれる分野では、\textgt{バグのないソフトウェア}を目指します。（ソフトウェア``工学''的な「テストでバグを見つけ出す・ひとつずつ修正する」といったアプローチよりかはむしろ）ソフトウェア\kenten{科学}としては、\textgt{論理学の知見を使って「この範囲には絶対にバグがないこと」証明}します。%（このような性質のことを安全性と言います。）\vspace{3pt}\\
+範囲はたしかに限定的ですが、強力です。
+（特定の範囲についての安全性を数学的に保証すれば、そこをテスト範囲から除外することができ、そのぶん効率的なテストも可能になります。）
 \vspace{4pt}
 
 \begin{oframed}
@@ -163,8 +165,23 @@
 		% \item \textgt{モデル検査} (model checking): \\ $\cdots$正しさの問題 (correctness problem) を、``グラフ理論的な問題''に帰着させ、\\~~~~\,``グラフ・アルゴリズム''を使ってその問題を解く。\\~~~~（ここでの ``グラフ理論的'' とは、状態遷移システム (transition system) といった広い意味で。）
 	\end{enumerate}
 \end{itemize}
-\end{oframed}\vspace{4pt}
-
+\end{oframed}%\vspace{4pt}
+%%%
+\vspace{15pt}
+%%% 
+\begin{center}
+	\begin{tabular}{|c|c|c|c|}
+		\hline
+		\textgt{テスト} (test) & \multicolumn{3}{c|}{\textgt{形式検証} (formal verification)} \\
+		& \textgt{モデル検査} & \textgt{自動定理証明} & \textgt{対話定理証明} \\\hline
+		% 産業界で主流 & 総当りで検査 & 全自動 & 博士論文1本分 \\\hline
+		\multicolumn{4}{|c|}{低 … \hspace*{70pt} コスト \hspace*{70pt} … 高} \\\hline
+		\multicolumn{4}{|c|}{低 … \hspace*{25pt} システム品質保証の度合い \hspace*{25pt} … 高} \\\hline
+	\end{tabular}
+\end{center}
+%%% 
+\vspace{15pt}
+%%%
 \noindent 形式検証の技術は、もはや研究者たちによる単なる理論的産物ではなく、現実の様々なシステムに活用されています。\\ よく知られている事例 (一部)： 
 % \todo[inline]{追加・加筆する}
 \begin{itemize}
@@ -176,17 +193,17 @@
 	% \item 
 \end{itemize}
 
-\noindent 形式検証の中でも、手法ごとに「検証のためにかかるコスト」や「システム品質保証の度合い」に違いがあります。\\ 簡単にまとめると以下の表の通りです。\vspace{12pt}
-\begin{center}
-	\begin{tabular}{|c|c|c|c|}
-		\hline
-		\textgt{テスト} (test) & \multicolumn{3}{c|}{\textgt{形式検証} (formal verification)} \\
-		& \textgt{モデル検査} & \textgt{自動定理証明} & \textgt{対話定理証明} \\\hline
-		% 産業界で主流 & 総当りで検査 & 全自動 & 博士論文1本分 \\\hline
-		\multicolumn{4}{|c|}{低 … \hspace*{70pt} コスト \hspace*{70pt} … 高} \\\hline
-		\multicolumn{4}{|c|}{低 … \hspace*{25pt} システム品質保証の度合い \hspace*{25pt} … 高} \\\hline
-	\end{tabular}
-\end{center}
+% \noindent 形式検証の中でも、手法ごとに「検証のためにかかるコスト」や「システム品質保証の度合い」に違いがあります。\\ 簡単にまとめると以下の表の通りです。\vspace{12pt}
+% \begin{center}
+% 	\begin{tabular}{|c|c|c|c|}
+% 		\hline
+% 		\textgt{テスト} (test) & \multicolumn{3}{c|}{\textgt{形式検証} (formal verification)} \\
+% 		& \textgt{モデル検査} & \textgt{自動定理証明} & \textgt{対話定理証明} \\\hline
+% 		% 産業界で主流 & 総当りで検査 & 全自動 & 博士論文1本分 \\\hline
+% 		\multicolumn{4}{|c|}{低 … \hspace*{70pt} コスト \hspace*{70pt} … 高} \\\hline
+% 		\multicolumn{4}{|c|}{低 … \hspace*{25pt} システム品質保証の度合い \hspace*{25pt} … 高} \\\hline
+% 	\end{tabular}
+% \end{center}
 
 \clearpage
 
@@ -251,12 +268,20 @@
 \vspace{3pt}
 \begin{framed}
 	\noindent 【コンピューターサイエンスで圏論が使われる場面】
+	% \begin{align*}
+	% 	\begin{array}{ll}
+	% 		\textbf{approaches} & \textbf{applications} \\[3pt]
+	% 		\textrm{\bullet\, as generalized monoids} & \begin{cases} \textrm{\bullet\, semantics of functional programs (e.g. Haskell)} \\[-8pt] \textrm{\bullet\, quantum computation (e.g. ZX calculus)} \end{cases} \\[5pt]
+	% 		\textrm{\bullet\, as generalized lattices} & \begin{cases} \textrm{\bullet\, categorical logic} \\[-8pt] \textrm{\bullet\, categorical model checking} \end{cases} \\[5pt] 
+	% 		\!\!\begin{array}{l}\textrm{\bullet\, from $\Set$,}\\[-5pt] \textrm{\quad the category of sets and functions}\end{array} & \begin{cases} \textrm{\bullet\, coalgebra (categorical automata theory)} \end{cases}
+	% 	\end{array}
+	% \end{align*}
 	\begin{align*}
-		\begin{array}{ll}
-			\textbf{approaches} & \textbf{applications} \\[3pt]
-			\textrm{\bullet\, as generalized monoids} & \begin{cases} \textrm{\bullet\, semantics of functional programs (e.g. Haskell)} \\[-8pt] \textrm{\bullet\, quantum computation (e.g. ZX calculus)} \end{cases} \\[5pt]
-			\textrm{\bullet\, as generalized lattices} & \begin{cases} \textrm{\bullet\, categorical logic} \\[-8pt] \textrm{\bullet\, categorical model checking} \end{cases} \\[5pt] 
-			\!\!\begin{array}{l}\textrm{\bullet\, from $\Set$,}\\[-5pt] \textrm{\quad the category of sets and functions}\end{array} & \begin{cases} \textrm{\bullet\, coalgebra (categorical automata theory)} \end{cases}
+		\begin{array}{lcl}
+			\underline{\textbf{approaches}} && \underline{\textbf{applications}} \\[3pt]
+			\textrm{\bullet\, as generalized monoids} & \longrightarrow & \begin{cases} \textrm{\bullet\, semantics of functional programs (e.g. Haskell)} \\[-8pt] \textrm{\bullet\, quantum computation (e.g. ZX calculus)} \end{cases} \\[5pt]
+			\textrm{\bullet\, as generalized lattices} & \longrightarrow & \begin{cases} \textrm{\bullet\, categorical logic} \\[-8pt] \textrm{\bullet\, categorical model checking} \end{cases} \\[5pt] 
+			\!\!\begin{array}{l}\textrm{\bullet\, from $\Set$,}\\[-5pt] \textrm{\quad the category of sets and functions}\end{array} & \longrightarrow & \begin{cases} \textrm{\bullet\, coalgebra (categorical automata theory)} \end{cases}
 		\end{array}
 	\end{align*}
 \end{framed}
