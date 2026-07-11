@@ -112,9 +112,10 @@
 \noindent 本記事では、以下のことは扱いません。
 
 \begin{itemize}
-	\item LTLやSTLといった、時相論理（様相論理）の特定の体系を用いたモデル検査については扱いません。
-	\item 様相$\mu$計算については、本質的にかなり密接に関係のある話もしますが、明示的には扱いません。
-	\item 本記事では、関手の余代数については扱うものの、コモナドの余代数については扱いません。
+	% \item LTLやSTLといった、時相論理（様相論理）の特定の体系を用いたモデル検査については扱いません。
+	% \item 様相$\mu$計算については、本質的にかなり密接に関係のある話もしますが、明示的には扱いません。
+	% \item 本記事では、関手の余代数については扱うものの、コモナドの余代数については扱いません。
+	\item 
 	\item 
 	\item 
 \end{itemize}
@@ -122,7 +123,7 @@
 \noindent また、以下の事柄は ``前提知識'' として本文中で使用します。（知識を適宜補いながら、本記事を読んでください。）\\ ただし、これらすべてを詳細に知っておかなければ本記事を読めないわけではないので、安心してください。むしろ、\\これらの道具が実際にどのような使われ方をするかを本記事で見ることで、後から勉強しやすくなるかもしれません。
 
 \begin{itemize}
-	\item {順序集合}と{不動点理論}の基本事項（ナスター・タルスキの定理、クリーネ / クーゾー・クーゾーの定理、など）
+	% \item {順序集合}と{不動点理論}の基本事項（ナスター・タルスキの定理、クリーネ / クーゾー・クーゾーの定理、など）
 	\item {数理論理学}に関する基本事項（古典命題論理、順序数の基本的な性質、様相論理のクリプキフレーム、など）
 	\item {圏論}の基本事項（圏、関手、自然変換、極限と余極限、随伴、カルテシアン閉圏、2-圏の初歩的な知識、など）
 	% \item \uline{2-圏論}の基本事項（lax）
@@ -3664,7 +3665,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\UIC{$MY\xrightarrow{~g~} Z$}
 	\BIC{$MX\xrightarrow{~\delta_X~} M^2X \xrightarrow{~Mf~}MY\xrightarrow{~g~}Z$}
 \end{prooftree}
-モナドは、\uwave{出力側}に additional structure が入った computation を考えるのに対し、\\ コモナドは、\uwave{入力側}に additional structure が入った computation を考えます。
+モナドは、\kenten{出力側}に additional structure が入った computation を考えるのに対し、\\ コモナドは、\kenten{入力側}に additional structure が入った computation を考えます。
 \begin{itemize}
 	\item \underline{monad}: structured output
 	\item \underline{comonad}: structured input
@@ -3695,7 +3696,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent では、\uwave{入力側}にも\uwave{出力側}にも構造が入った computation を考えたい場合はどうすればいいでしょうか。\\ その場合、モナドとコモナドの間の distributive law を使います。
+\noindent では、\kenten{入力側}にも\kenten{出力側}にも構造が入った computation を考えたい場合はどうすればいいでしょうか。\\ その場合、モナドとコモナドの間の distributive law を使います。
 \begin{itemize}
 	\item \underline{monad, comonad, and distributive law}: structured input and output
 \end{itemize}
@@ -3767,7 +3768,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% \[FY=\sum_{\sigma\in\Sigma}Y^{|\sigma|}\]
 	% 例えば次のようなものです。
 	% \[F=\underset{\substack{~\\[1.5pt]\rotatebox{90}{)}\\0}}{1}+(\underparenthesis{1}{-})+(\underparenthesis{2}{-})^2+(\underparenthesis{2}{-})^2\]
-	そして、以下を考えます。（上の多項式関手に $|X|$-many 0-ary operations を追加します。つまり、syntax を変数集合 $X$ で拡張する、ということです。）
+	そして、以下を考えます。（上の多項式関手 $F$ に、$|X|$-many 0-ary operations を追加します。つまり、syntax を変数集合 $X$ で拡張する、ということです。）
 	\[\begin{array}{cccc}
 		X+F(-): & \Set & \longrightarrow & \Set\\
 		& Y & \longmapsto & X+FY
@@ -3780,7 +3781,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		F^\ast X
 	\end{array}\right)\]
 	% そうすると、このように $X+F(-)$ の最小不動点 $F^\ast X$ が得られました。\\
-	いま、$F^\ast$（つまり、$X$ をとって上記の $F^\ast X$ を返すもの、$X\xmapsto{~~~~} F^\ast X$）が自由モナドです。 \vspace{0pt}\\
+	いま、$F^\ast$（つまり、$X$ をとって上記の $F^\ast X$ を返すもの、$X\longmapsto F^\ast X$）が\textgt{自由モナド}です。 \vspace{0pt}\\
 	% 一般に、多項式関手 $F=\sum_{\sigma\in\Sigma}Y^{|\sigma|}$ について、自由 $F$-代数  とは、各 node が $\sigma\in\Sigma$ でラベル付けされ、各 $\sigma$-node が $|\sigma|$-個の子を持ち、葉が $X$ でラベル付けされた、有限の well-founded tree になります。\\ 
 	なお、endofunctor の間の natural transformation は、自由モナドの間の monad morphism になります。
 	\begin{prooftree}
@@ -3807,7 +3808,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{tikzcd}
 	\end{center}
 	このとき、余自由コモナドは、以下のように作られます。
-	$F:\Set\to\Set$ と $X\in\Set$ が与えられたとき、\[\begin{array}{cccc}X\times F(-):&\Set&\longrightarrow&\Set\\&Y&\longmapsto& X\times FY\end{array}\] を考えて、以下の終余代数 $\nu\,(X\times F(-))$（各 node が $x\in X$ と $\sigma\in\Sigma$ でラベル付けされ、各 node が $|\sigma|$-個の子を持つ、possibly infinite な木） \[\left(\begin{array}{c}X\times F(F^\infty X)\\ ~\substack{\cong}\uparrow\substack{\textrm{final}}\\ F^\infty X\end{array}\right)\] を作ると、この $F^\infty$ が余自由コモナドです。%$X\xmapsto{~~~~}F^\infty X$
+	$F:\Set\to\Set$ と $X\in\Set$ が与えられたとき、\[\begin{array}{cccc}X\times F(-):&\Set&\longrightarrow&\Set\\&Y&\longmapsto& X\times FY\end{array}\] を考えて、以下の終余代数 $\nu\,(X\times F(-))$（各 node が $x\in X$ と $\sigma\in\Sigma$ でラベル付けされ、各 node が $|\sigma|$-個の子を持つ、possibly infinite な木） \[\left(\begin{array}{c}X\times F(F^\infty X)\\ ~\substack{\cong}\uparrow\substack{\textrm{final}}\\ F^\infty X\end{array}\right)\] を作ると、この $F^\infty$ が\textgt{余自由コモナド}です。%$X\xmapsto{~~~~}F^\infty X$
 \end{itemize}
 
 % \begin{definition}
@@ -4940,59 +4941,45 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 これまで見た具体例をもとに、一般論を展開していきましょう。
 
 \begin{itemize}
-	\item 副作用つき計算 $c:X\to FY$、真理値の集合 $\Omega$、様相 $\tau:F\Omega\to\Omega$ が与えられたとき、\\ 述語変換子 $wp\llbracket c\rrbracket:\Omega^Y\to\Omega^X$ は以下のしかたで得られます。
+	\item 副作用つき計算 $c:X\to FY$、真理値の集合 $\Omega$、様相 $\tau:F\Omega\to\Omega$ が与えられたとき、\\ 述語変換子 $wp\llbracket c\rrbracket:\Omega^Y\to\Omega^X$ は、%以下のしかたで得られます。
+	任意の事後条件 $q:Y\to\Omega$に対し $wp\llbracket c\rrbracket (q)=\tau\circ Fq\circ c$ で定まります。
 	\begin{prooftree}
 		\AXC{$Y\xrightarrow{~q~} \Omega$,\; post-condition}
 		\UIC{$wp\llbracket c \rrbracket (q):X\xrightarrow{~c~}FY\xrightarrow{\;Fq\;}F\Omega\xrightarrow{~\tau~}\Omega$,\; weakest pre-condition}
-	\end{prooftree}\vspace{5pt}
-	このように $wp\llbracket c\rrbracket (q)=\tau\circ Fq\circ c$ で定まります。\vspace{8pt} %\clearpage
+	\end{prooftree}\vspace{2pt}
+	% このように $wp\llbracket c\rrbracket (q)=\tau\circ Fq\circ c$ で定まります。\vspace{8pt} %\clearpage
 \end{itemize}
 
 \noindent 
 これを、グロタンディーク・ファイブレーションの言葉で次のように捉えることができます。
 
 \begin{itemize}
-	\item （状況設定） ファイブレーション $p:\Pred\to\Set$ を考えます。各ファイバー $\Pred_X=\Omega^X$ は「各状態集合 $X$ 上の述語全体」であり順序集合をなし、各 $f:X\to Y$ に対する置換 $f^\ast:\Omega^Y\to\Omega^X,\,q\mapsto q\circ f$ は「事後条件 $q$ を $f$ によって引き戻した事前条件」$f^\ast(q)$ を返します。 \vspace{10pt}
-	\item （課題） いま、副作用つき計算$c:X\to FY$が与えられたとき、単に $c^\ast$ を考えると、これは $\Omega^{FX}\to\Omega^X$という型を持ちます。しかし、われわれが欲しい述語変換子は、$\Omega^Y\to\Omega^X$ という型を持つものです。\\（というのも、事後条件（$Y$上の述語）から事前条件（$X$上の述語）への変換を行いたいからです。）\vspace{10pt}
-	\item （解決策） ここで、様相 $\tau:F\Omega\to\Omega$ が重要な役割を果たします。この $\tau$ は、「\uwave{$Y$上の述語}」から「\uwave{$FY$上の述語}」へと持ち上げる操作、\textgt{述語持ち上げ} (predicate lifting) を誘導します。\vspace{8pt}\\
-	具体的には、各 $Y$ について、\[\dot F_Y:\Omega^Y\to\Omega^{FY},\quad \dot F_Y(q):=\tau\circ Fq\qquad \textrm{(ただし $q:Y\to\Omega$ は任意の述語とする)}\] と定めます。この $\dot F_Y$ は、「$Y$上の述語$q$を、計算効果$F$で包まれた状態空間$FY$上の述語 $\dot F_Y(q)$ へと持ち上げる」操作です。これを、\textgt{述語持ち上げ}と呼びます。（通常、$\tau$ には単調性を課し、$\dot F_Y$ が単調になるようにします。）\vspace{8pt} \\
-	すると、最弱事前条件 $wp\llbracket c\rrbracket$ は、この「述語持ち上げ $\dot F_Y$」と「計算 $c$ の引き戻し $c^\ast$」の合成として書けます。
-	\[\begin{tikzcd}
-		\Omega^Y \ar[r,"\dot F_Y"] \ar[rd,"wp\llbracket c\rrbracket"'] & \Omega^{FY} \ar[d,"c^\ast"]\\
-		& \Omega^X
-	\end{tikzcd}\]
-	すなわち、任意の事後条件 $q:Y\to\Omega$に対して、以下のように理解できます。
-	\begin{align*}
-		wp\llbracket c\rrbracket(q)&=c^\ast(\dot F_Y(q))\\ &=c^\ast(\tau\circ Fq) \\ &=\tau\circ Fq\circ c
-	\end{align*}
-	% となります。
-	% \begin{multicols}{3}
-	% 	% \[
-	% 	\begin{center}
-	% 	\begin{tikzcd}
-	% 	\Omega^Y \ar[r,"\dot F_Y"] \ar[rd,"wp\llbracket c\rrbracket"'] & \Omega^{FY} \ar[d,"c^\ast"]\\
-	% 	& \Omega^X
-	% 	\end{tikzcd}
-	% 	\end{center}
-	% 	% \]
-	% 	%
-	% 	\begin{align*}
-	% 	wp\llbracket c\rrbracket(q)&=c^\ast(\dot F_Y(q))\\ &=c^\ast(\tau\circ Fq) \\ &=\tau\circ Fq\circ c
-	% 	\end{align*}
-	% 	%
-	% 	\begin{center}
-	% 		~\\[-15pt]
-	% 		（$q:Y\to\Omega$は任意の事後条件）
-	% 	\end{center}
-	% \end{multicols}
-	% 
-	%%%
-	% \noindent まとめると、述語変換子は %\vspace{1pt}
-	% \begin{enumerate}
-	% 	\item[1)~~] $Y$ 上の述語 $q$ を、\uwave{様相 $\tau$ を用いて} $FY$ 上に\textbf{\kenten{持ち上げて}}、%\vspace{1pt}
-	% 	\item[2)~~] それを \uwave{計算 $c$ に沿って} $X$ 上に\textbf{\kenten{引き戻す}}、%\vspace{2pt}
-	% \end{enumerate}
-	% という2段階のプロセスとして理解できます。（スローガン:「\textbf{\kenten{持ち上げて}、\kenten{引き戻す}！}」）
+	\item （状況設定） ファイブレーション $p:\Pred\to\Set$ を考えます。各ファイバー $\Pred_X=\Omega^X$ は「各状態集合 $X$ 上の述語全体」であり順序集合をなし、各 $f:X\to Y$ に対する置換 $f^\ast:\Omega^Y\to\Omega^X,\,q\mapsto q\circ f$ は「事後条件 $q$ を $f$ によって引き戻した事前条件」$f^\ast(q)$ を返します。 \vspace{8pt}
+	\item （課題） いま、副作用つき計算$c:X\to FY$が与えられたとき、単に $c^\ast$ を考えると、これは $\Omega^{FX}\to\Omega^X$という型を持ちます。しかし、われわれが欲しい述語変換子は、$\Omega^Y\to\Omega^X$ という型を持つものです。\\（というのも、事後条件（$Y$上の述語）から事前条件（$X$上の述語）への変換を行いたいからです。）\vspace{8pt}
+	\item （解決策） ここで、様相 $\tau:F\Omega\to\Omega$ が重要な役割を果たします。この $\tau$ は、「\uwave{$Y$上の述語}」から「\uwave{$FY$上の述語}」へと持ち上げる操作、\textgt{述語持ち上げ} (predicate lifting) を誘導します。\vspace{5pt}\\
+	具体的には、各 $Y$ について、\;$\dot F_Y:\Omega^Y\to\Omega^{FY},~ \dot F_Y(q):=\tau\circ Fq\quad \textrm{(ただし $q:Y\to\Omega$ は任意の述語とする)}$ と定めます。この $\dot F_Y$ は、「$Y$上の述語$q$を、計算効果$F$で包まれた状態空間$FY$上の述語 $\dot F_Y(q)$ へと持ち上げる」操作です。これを、\textgt{述語持ち上げ}と呼びます。（通常、$\tau$ には単調性を課し、$\dot F_Y$ が単調になるようにします。）\vspace{5pt} \\
+	すると、述語変換子 $wp\llbracket c\rrbracket$ は、この「述語持ち上げ $\dot F_Y$」と「計算 $c$ の引き戻し $c^\ast$」の合成として書けます。
+	\begin{multicols}{2}
+		\begin{center}
+			\begin{tikzcd}
+				\Omega^Y \ar[r,"\dot F_Y"] \ar[rd,"wp\llbracket c\rrbracket"'] & \Omega^{FY} \ar[d,"c^\ast"]\\
+				& \Omega^X
+			\end{tikzcd}
+		\end{center}
+		%
+		\begin{align*}
+			wp\llbracket c\rrbracket(q)&=c^\ast(\dot F_Y(q))\\ &=c^\ast(\tau\circ Fq) \\ &=\tau\circ Fq\circ c
+		\end{align*}
+	\end{multicols}
+	\noindent なお、この述語変換子は、副作用つき計算 $c_1:X\to FY$ と $c_2:Y\to FZ$ のクライスリ合成 $c_1;c_2$ について、\\ 合成性 $wp\llbracket c_1;c_2 \rrbracket=wp\llbracket c_1 \rrbracket \circ wp\llbracket c_2\rrbracket$ を満たします。（証明略）%\\ $c_1;c_2$ は、逐次合成 (sequential composition)、つまり、クライスリ合成 (Kleisli composition) です。
+	\begin{center} %\small
+        \AXC{$X\xrightarrow{\;c_1\;}FY$} \AXC{$Y\xrightarrow{\;c_2\;}FZ$} \BIC{$X\xrightarrow{\;c_1;c_2\;}FZ$} \DisplayProof 
+        \qquad\qquad 
+        \AXC{$\Omega^{X}\xleftarrow{\;wp\llbracket c_1\rrbracket\;}\Omega^{Y}$} \AXC{$\Omega^{Y}\xleftarrow{\;wp\llbracket c_2\rrbracket\;}\Omega^{Z}$} 
+        \BIC{$\Omega^{X}\xleftarrow[\;=\,wp\llbracket c_1\rrbracket\,\circ\, wp\llbracket c_2\rrbracket\;]{wp\llbracket c_1;c_2\rrbracket}\Omega^{Z}$} 
+        % \BIC{$\Omega^{X}\xleftarrow{\;\substack{wp\llbracket c_1;c_2\rrbracket\\=\,wp\llbracket c_1\rrbracket\,\circ\, wp\llbracket c_2\rrbracket}\;}\Omega^{Z}$} 
+        \DisplayProof
+    \end{center}
 \end{itemize}
 
 \begin{screen}
@@ -5006,13 +4993,14 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent なお、余代数 $c:X\to FX$ について扱う場合は、まさに、以下の図のような状況を考えます。（次節で詳しく見ます）\vspace{8pt}
+% \noindent なお、余代数 $c:X\to FX$ について扱う場合は、まさに、以下の図のような状況を考えます。（次節で詳しく見ます）\vspace{8pt}
+\noindent なお、余代数 $c:X\to FX$ について扱う場合は、まさに、以下の図のような状況を考えることになります。\\（いくつかの具体例を次節で詳しく扱うので、それを見ながらさらに理解を深めていきましょう。）\vspace{10pt}
 \begin{center}
 	% \begin{small}
 		\begin{tikzcd}
 			&\mathbf{\Omega}^{X} \ar[rr,bend left=12pt,"\dot F_X"] && \mathbf{\Omega}^{FX} \ar[ll,bend left=12pt,"c^\ast"] \\[-5pt]
-			& q \ar[rrd,mapsto,shorten=3pt] \\[-25pt] 
-			\Pred \ar[loop left,"\dot F"] \ar[dd,"p"'] &&& \dot F_X q \ar[lld,mapsto,shorten=3pt] \\[-25pt] 
+			& q \ar[rrd,mapsto,shorten=3pt] \\[-28pt] 
+			\Pred \ar[loop left,"\dot F"] \ar[dd,"p"'] &&& \dot{F}_X q \ar[lld,mapsto,shorten=3pt] \\[-28pt] 
 			& c^\ast\dot F_X q & \\
 			~\Set~ \ar[loop left,"F"]  & X \ar[rr,"c"'] && FX 
 		\end{tikzcd}
@@ -5022,7 +5010,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \subsection{抽象化された一般論に基づいてさらなる具体例を取り出す}
 
-\noindent ここまでで、\textgt{述語変換子} (predicate transformer) の手に入れ方の一般論がわかったところで、今度はそれを適用して、\uwave{もっと他の応用例を取り出す}ことに試みましょう。ここでは、状態遷移システムにおける「\textgt{状態どうしの類似性}」を表す2種類の概念、\textgt{双模倣性} (bisimilarity) と \textgt{Wasserstein距離} (Wasserstein distance) を題材にして観察します。\vspace{10pt}%\\
+\noindent ここまでで、\textgt{述語変換子} (predicate transformer) の手に入れ方の一般論がわかったところで、今度はそれを適用して、\uwave{もっと他の応用例を取り出す}ことに試みましょう。ここでは、状態遷移システムにおける「\textgt{状態どうしの類似性}」を表す概念、\textgt{双模倣性} (bisimilarity) と \textgt{Wasserstein距離} (Wasserstein distance) を題材にして観察していきます。\vspace{10pt}%\\
 
 \begin{oframed}
 \noindent 基本形はいつも以下の形です。
