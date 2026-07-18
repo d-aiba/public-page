@@ -4993,6 +4993,36 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
+\noindent 以下では、前ページで見た「圏論的な weakest precondition reasoning」をより正確に導入します。
+
+\begin{definition}[様相] \label{def:modality}
+	$F$ を圏 $\C$ 上のモナドとし、$\Omega$ を圏 $\C$ の対象とする（これを\textgt{真理値領域} (truth value domain) と呼ぶ）。このとき、$F$ に対する $\Omega$ 上の\textgt{様相} (modality) を、アイレンバーグ-ムーア代数 $\tau\colon F\Omega\to\Omega$ と定める。つまり、様相 $\tau$ とは、$\C$ の射であって、$\tau\circ\eta_{\Omega}=\id_{\Omega}$ と $\tau\circ\mu_{\Omega}=\tau\circ F\tau$ を満たすものである。 
+\end{definition}
+
+\begin{supplement}[述語持ち上げ]
+	$F$ が単に関手である場合、\textgt{様相} $\tau\colon F\Omega\to\Omega$（ただし、上の定義\ref{def:modality} から $\eta, \mu$ の整合性を除いたもの）は、\textgt{述語持ち上げ} $\lambda\colon\C(-,\Omega)\to\C(F(-),\Omega)$ を誘導し、またその逆も誘導する。\\（これら両者の対応関係は、米田の補題から従う。）
+\end{supplement}
+
+\begin{definition}[モナド的な後ろ向き述語変換子意味論]
+	上の定義\ref{def:modality}の状況において、$f:X\computationrightarrow Y$ をクライスリ圏 $\C_F$ の射（つまり $\C$ の射 $f:X\to FY$）とする。このとき、そのような射 $f$ は、
+	\[wp_\tau\llbracket f\rrbracket:\C(Y,\Omega)\longrightarrow\C(X,\Omega),\qquad q\longmapsto(X\xrightarrow{f}FY\xrightarrow{Fq}F\Omega\xrightarrow{\tau}\Omega)\] 
+	を誘導する。これを\textgt{モナド的な後ろ向き述語変換子} (monadic backward predicate transformer) と呼ぶ。
+\end{definition}
+
+\noindent なお、$wp$ という記法は、Dijkstra の ``weakest precondition'' に由来します。$wp_\tau\llbracket f \rrbracket$ は、事後条件 $q\colon Y\to\Omega$ を、事前条件 $wp_\tau\llbracket f \rrbracket(q)\colon X\to\Omega$ に運んでいます。
+
+\begin{proposition}
+	... 
+\end{proposition}
+
+\begin{example}
+	... 
+\end{example}
+
+\todo[inline]{加筆する}
+
+%%%%%
+
 % \noindent なお、余代数 $c:X\to FX$ について扱う場合は、まさに、以下の図のような状況を考えます。（次節で詳しく見ます）\vspace{8pt}
 \noindent なお、余代数 $c:X\to FX$ について扱う場合は、まさに、以下の図のような状況を考えることになります。\\（いくつかの具体例を次節で詳しく扱うので、それを見ながらさらに理解を深めていきましょう。）\vspace{10pt}
 \begin{center}
@@ -5007,6 +5037,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% \end{small}
 \end{center}
 \vspace{25pt}
+
+\clearpage
 
 \subsection{抽象化された一般論に基づいてさらなる具体例を取り出す}
 
@@ -5181,7 +5213,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{thebibliography}{99}
 	% \item 蓮尾 (2011) 「Hoare論理によるプログラム検証」（資料）, \href{https://group-mmm.org/~ichiro/talks/komabaSogoHandout.pdf}{[URL]}. 
     % \item 郡 (2025)「圏で圏を集める？---ファイブレーション入門」, 『圏論の歩き方 [改訂版]』, 日本評論社.
-    \item Ad\'{a}mek J, Milius S, Moss LS. \textit{Initial Algebras and Terminal Coalgebras: The Theory of Fixed Points of Functors}. Cambridge Tracts in Theoretical Computer Science. Cambridge University Press. 
+    \item Ad\'{a}mek, J., Milius S., Moss, LS. (2025) \textit{Initial Algebras and Terminal Coalgebras: The Theory of Fixed Points of Functors}. Cambridge Tracts in Theoretical Computer Science. Cambridge University Press. 
+    \item Aguirre, A., Katsumata, S. (2020) Weakest Preconditions in Fibrations. Electronic Notes in Theoretical Computer Science 352. pp. 5-27.
     \item Barr, M. (1999) \textit{Terminal coalgebras for endofunctors on sets}. Theoretical Coputer Science 114(2), pp. 299-315, \href{https://www.math.mcgill.ca/barr/papers/trmclg.pdf}{[URL]}. 
     \item Beck, J. (1969) Distributive laws. In: Seminar on Triples and Categorical Homology Theory (Zürich, 1966/1967), vol. 80, pp. 119-140. Lecture Notes in Mathematics. Springer.
     \item Jacobs, B. (1999) \textit{Categorical logic and type theory}, Elsevier.
