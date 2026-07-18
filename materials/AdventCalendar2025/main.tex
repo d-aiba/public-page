@@ -4996,15 +4996,15 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent 以下では、前ページで見た「圏論的な weakest precondition reasoning」をより正確に導入します。
 
 \begin{definition}[様相] \label{def:modality}
-	$F$ を圏 $\C$ 上のモナドとし、$\Omega$ を圏 $\C$ の対象とする（これを\textgt{真理値領域} (truth value domain) と呼ぶ）。このとき、$F$ に対する $\Omega$ 上の\textgt{様相} (modality) を、アイレンバーグ-ムーア代数 $\tau\colon F\Omega\to\Omega$ と定める。つまり、様相 $\tau$ とは、$\C$ の射であって、$\tau\circ\eta_{\Omega}=\id_{\Omega}$ と $\tau\circ\mu_{\Omega}=\tau\circ F\tau$ を満たすものである。 
+	$F$ を圏 $\C$ 上のモナドとし、$\Omega$ を圏 $\C$ の対象とする（これを\textgt{真理値領域} (truth value domain) と呼ぶ）。このとき、$F$ に対する $\Omega$ 上の\textgt{様相} (modality) とは、アイレンバーグ-ムーア代数 $\tau\colon F\Omega\to\Omega$ である。つまり、様相 $\tau$ とは、$\C$ の射であって、$\tau\circ\eta_{\Omega}=\id_{\Omega}$ と $\tau\circ\mu_{\Omega}=\tau\circ F\tau$ を満たすものである。 
 \end{definition}
 
 \begin{supplement}[述語持ち上げ]
-	$F$ が単に関手である場合、\textgt{様相} $\tau\colon F\Omega\to\Omega$（ただし、上の定義\ref{def:modality} から $\eta, \mu$ の整合性を除いたもの）は、\textgt{述語持ち上げ} $\lambda\colon\C(-,\Omega)\to\C(F(-),\Omega)$ を誘導し、またその逆も誘導する。\\（これら両者の対応関係は、米田の補題から従う。）
+	$F$ が単に関手である場合、\textgt{様相} $\tau\colon F\Omega\to\Omega$（ただし、上の定義\ref{def:modality} から $\eta, \mu$ の整合性の条件を除いたもの）は、\textgt{述語持ち上げ} $\lambda\colon\C(-,\Omega)\to\C(F(-),\Omega)$ を誘導する。また、その逆も誘導する。\\（これら両者の対応関係は、米田の補題から従う。）
 \end{supplement}
 
 \begin{definition}[モナド的な後ろ向き述語変換子意味論]
-	上の定義\ref{def:modality}の状況において、$f:X\computationrightarrow Y$ をクライスリ圏 $\C_F$ の射（つまり $\C$ の射 $f:X\to FY$）とする。このとき、そのような射 $f$ は、
+	上の定義\ref{def:modality}の状況において、$f:X\computationrightarrow Y$ をクライスリ圏 $\C_F$ における射（つまり $\C$ における射 $f:X\to FY$）とする。このとき、そのような射 $f$ は、以下の関数
 	\[wp_\tau\llbracket f\rrbracket:\C(Y,\Omega)\longrightarrow\C(X,\Omega),\qquad q\longmapsto(X\xrightarrow{f}FY\xrightarrow{Fq}F\Omega\xrightarrow{\tau}\Omega)\] 
 	を誘導する。これを\textgt{モナド的な後ろ向き述語変換子} (monadic backward predicate transformer) と呼ぶ。
 \end{definition}
@@ -5012,8 +5012,14 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent なお、$wp$ という記法は、Dijkstra の ``weakest precondition'' に由来します。$wp_\tau\llbracket f \rrbracket$ は、事後条件 $q\colon Y\to\Omega$ を、事前条件 $wp_\tau\llbracket f \rrbracket(q)\colon X\to\Omega$ に運んでいます。
 
 \begin{proposition}[合成性]
-	... 
+	$wp$ は合成的 (compositional) である。つまり、以下の意味で関手的 (functorial) である。
+	\[wp_\tau\llbracket \id_X \rrbracket = \id_{\C(X,\Omega)},\quad wp_{\tau}\llbracket f;g\rrbracket = wp_{\tau}\llbracket f\rrbracket \circ wp_{\tau}\llbracket g\rrbracket\]
+	なお、$\id_X:X\computationrightarrow X$ は、クライスリ圏 $\C_F$ における恒等射（それゆえ、$\C$ における $\eta_X:X\to FX$）であり、\\ $f;g$ は、クライスリ圏における射の合成（それゆえ、$\C$ における $\mu_Y\circ Ff\circ g$）である。
 \end{proposition}
+
+\begin{proof}
+	... 
+\end{proof}
 
 \begin{example}
 	... 
