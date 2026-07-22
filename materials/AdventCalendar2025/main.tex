@@ -1247,6 +1247,16 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 % % 	% 
 % % \end{proposition}
 
+\begin{definition}[終鎖]
+	$F:\Set\to\Set$ とする。このとき、\textgt{終鎖} (final chain) とは、以下の図式である。
+	\[1\xleftarrow{~!~}F1\xleftarrow{~F!~}F^21\xleftarrow{~~~}\cdots\]
+	正確に言えば、添字圏 
+	\begin{tikzcd}[column sep=5pt]
+		\J= (\!\!\! & 0 &&& 1 \ar[lll,"i_0^1"] &&& 2 \ar[lll,"i_1^2"] \ar[llllll,bend right,"i_0^2"'] &&& 3 \ar[lll,"i_2^3"] \ar[llllll,bend right,"i_1^3"'] \ar[lllllllll,bend left=28pt,"i_0^3"] && \cdots & \!\!\!)
+	\end{tikzcd}
+	について、図式 $D:\J\to\Set$ である。
+\end{definition}
+
 \begin{theorem}[終余代数の構成]
 	... 
 \end{theorem}
@@ -5396,7 +5406,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\begin{enumerate}
 		\item このプログラムの具体的な実行パス（遷移する状態の列）を書け。
 		\item 具体化写像 $\gamma:I\to\mathcal P(\Z)$, 抽象化写像 $\alpha:\mathcal P(\Z)\to I$ の定義を適切に述べよ。\\ また、区間領域 $I$ における順序 $\sqsubseteq$と結び $\sqcup$ の定義を適切に述べよ。
-		\item 抽象状態 $A=([a,b],[c,d])\in I^2$ に対し、
+		\item 抽象状態 $A=([a,b])\in I$ に対し、
 		\begin{itemize}
 			\item ガード ($x<10$) による抽象フィルター $G^\#_{<10}$ \item 否定ガード ($x\geq 10$) による抽象フィルター $G^\#_{\geq 10}$ \item ループ本体 ($x:=x+3$) による抽象変換 $B^\#$ 
 		\end{itemize} 
