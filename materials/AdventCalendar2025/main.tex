@@ -250,7 +250,7 @@
 % \end{itemize}
 % 本記事では特定の形式化には限定せずに、一般論を展開することを目指します。
 
-\noindent モデルとしては、オートマトンやマルコフチェーンをはじめとする\textgt{状態遷移システム}と呼ばれるものを考えます。また、\\
+\noindent モデルとしては、オートマトンやマルコフチェーンをはじめとする\textgt{状態遷移システム}と呼ばれるものを用います。また、\\
 \noindent 仕様 $\varphi$ は典型的には、\textgt{時相論理式}（例えば $\mathbf{G}\,(p\to\mathbf{F}\,q)$「リクエスト$p$を送ったらレスポンス$q$が返ってくる」など）で書かれることが多いです。が、本記事では特定の形式化のしかたに限定せずに、一般論を展開することを目指します。\vspace{5pt}
 
 \noindent (補足: なお実際の場面では、複雑なシステムについて考える際に、現実のシステムをモデル化すること自体が困難ないしハイコストであったり、望む性質を適切に形式化して仕様として記述することが難しい、といったこともよくあります。そのような観点については本記事では扱いきれませんが、近年さまざまな発展があります。)
@@ -961,36 +961,99 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 % さて、本章でこれまで扱ってきた述語変換子の考え方は、圏論の言葉を使うととても見通しがよくなります。そのための準備として、次章では、圏論を用いて情報システムの振舞いをとらえる方法について紹介します。%（すでに「余代数」や「モナド」や「グロタンディーク・ファイブレーション」のことは知っているよ、という人は\ref{sec:categorical-weakest-precondition}章へ飛んでください。）
 \clearpage
 
-\subsection{到達性 (liveness property) と安全性 (safety property)}
+% \subsection{到達性 (liveness property) と安全性 (safety property)}
 
-\noindent モデル検査で示したいことは「\textgt{モデル} $\mathcal M$ のもとで\textgt{仕様} $\varphi$（望ましい性質）が成り立つかどうか」でした。(\ref{sec:intro}章を参照)\\
-ここで、広く用いられる2種類の仕様、\textgt{到達性} (liveness property) と\textgt{安全性} (safety property) の考え方について、理解しておきましょう。
-\begin{itemize}
-	\item \textgt{到達性} (liveness property): 良いことがいつか起こる
-	\item \textgt{安全性} (safety property): 悪いことが決して起こらない
-\end{itemize}
-\noindent ここで、\textgt{到達性}は最小不動点 (lfp) で与えられ、\textgt{安全性}は最大不動点 (gfp) で与えられることを確認しましょう。%\vspace{8pt}\\
-% 状態遷移系 $(S,\leadsto)$ があり、良い状態の集合を $G\subseteq S$ とします。\\ このとき、「すべての path でいつか $G$ に到達する」(i.e. CTL formula で書くと $AFG$) は \[AFG\,=\,\mu X.\;(G\,\cup\,\{s\in S\mid \forall\, t\in S,\, s\leadsto t\implies t\in X\})\] で与えられます。（``良い状態であるか、次にどう進んでも最終的に良い状態へ行けるような状態''）\vspace{8pt}\\ また、悪い状態の集合を $B\subseteq S$ とします。\\ このとき「すべての path で決して悪いことが怒らない」(i.e. CTL formula で書くと $AG\lnot B$) は \[AG\lnot B\,=\,\nu X.\;(\lnot B\,\cap\,\{s\in S\mid \forall\, t\in S,\,s\leadsto t\implies t\in X\})\] で与えられます。（``悪い状態でなく、かつ、どの状態へ進んでも悪い状態に行かない''）
-\begin{itemize}
-	\item 状態遷移系 $(S,\leadsto)$ があり、良い状態の集合を $G\subseteq S$、悪い状態の集合を $B\subseteq S$ とします。
-	\item このとき、\textgt{到達性}「すべての path でいつか $G$ に到達する」(i.e. CTL formula で書くと $AFG$) は \[AFG\,=\,\mu X.\;(G\,\cup\,\{s\in S\mid \forall\, t\in S,\, s\leadsto t\implies t\in X\})\] で与えられます。（``良い状態であるか、または、どう進んでも最終的に良い状態へ行ける''）\vspace{8pt}
-	\item また、\textgt{安全性}「すべての path で決して悪いことが起こらない」(i.e. CTL formula で書くと $AG\lnot B$) は \[AG\lnot B\,=\,\nu X.\;(\lnot B\,\cap\,\{s\in S\mid \forall\, t\in S,\,s\leadsto t\implies t\in X\})\] で与えられます。（``悪い状態でなく、かつ、どう進んでも悪い状態へ行かない''）
-\end{itemize}
+% \noindent モデル検査で示したいことは「\textgt{モデル} $\mathcal M$ のもとで\textgt{仕様} $\varphi$（望ましい性質）が成り立つかどうか」でした。(\ref{sec:intro}章を参照)\\
+% ここで、広く用いられる2種類の仕様、\textgt{到達性} (liveness property) と\textgt{安全性} (safety property) の考え方について、理解しておきましょう。
+% \begin{itemize}
+% 	\item \textgt{到達性} (liveness property): 良いことがいつか起こる
+% 	\item \textgt{安全性} (safety property): 悪いことが決して起こらない
+% \end{itemize}
+% \noindent ここで、\textgt{到達性}は最小不動点 (lfp) で与えられ、\textgt{安全性}は最大不動点 (gfp) で与えられることを確認しましょう。%\vspace{8pt}\\
+% % 状態遷移系 $(S,\leadsto)$ があり、良い状態の集合を $G\subseteq S$ とします。\\ このとき、「すべての path でいつか $G$ に到達する」(i.e. CTL formula で書くと $AFG$) は \[AFG\,=\,\mu X.\;(G\,\cup\,\{s\in S\mid \forall\, t\in S,\, s\leadsto t\implies t\in X\})\] で与えられます。（``良い状態であるか、次にどう進んでも最終的に良い状態へ行けるような状態''）\vspace{8pt}\\ また、悪い状態の集合を $B\subseteq S$ とします。\\ このとき「すべての path で決して悪いことが怒らない」(i.e. CTL formula で書くと $AG\lnot B$) は \[AG\lnot B\,=\,\nu X.\;(\lnot B\,\cap\,\{s\in S\mid \forall\, t\in S,\,s\leadsto t\implies t\in X\})\] で与えられます。（``悪い状態でなく、かつ、どの状態へ進んでも悪い状態に行かない''）
+% \begin{itemize}
+% 	\item 状態遷移系 $(S,\leadsto)$ があり、良い状態の集合を $G\subseteq S$、悪い状態の集合を $B\subseteq S$ とします。
+% 	\item このとき、\textgt{到達性}「すべての path でいつか $G$ に到達する」(i.e. CTL formula で書くと $AFG$) は \[AFG\,=\,\mu X.\;(G\,\cup\,\{s\in S\mid \forall\, t\in S,\, s\leadsto t\implies t\in X\})\] で与えられます。（``良い状態であるか、または、どう進んでも最終的に良い状態へ行ける''）\vspace{8pt}
+% 	\item また、\textgt{安全性}「すべての path で決して悪いことが起こらない」(i.e. CTL formula で書くと $AG\lnot B$) は \[AG\lnot B\,=\,\nu X.\;(\lnot B\,\cap\,\{s\in S\mid \forall\, t\in S,\,s\leadsto t\implies t\in X\})\] で与えられます。（``悪い状態でなく、かつ、どう進んでも悪い状態へ行かない''）
+% \end{itemize}
 
-\noindent いま、「開始状態 (initial states) の集合 $A\subseteq S$ からの安全性・到達性」を考えることにしましょう。これはまさに、前節で見た「最小・最大不動点の下界推定」(under approximation, lowerbound estimation of lfp/gfp) です。
-\begin{itemize}
-	\item 
-	\item 
-\end{itemize}
-% (補足: 完備束 $2^S$ 上の順序 ``$\sqsubseteq$'' は、状態空間 $S$ の部分集合のあいだの包含関係によって定められたものです。)
+% \noindent いま、「開始状態 (initial states) の集合 $A\subseteq S$ からの安全性・到達性」を考えることにしましょう。これはまさに、前節で見た「最小・最大不動点の下界推定」(under approximation, lowerbound estimation of lfp/gfp) です。
+% \begin{itemize}
+% 	\item 
+% 	\item 
+% \end{itemize}
+% % (補足: 完備束 $2^S$ 上の順序 ``$\sqsubseteq$'' は、状態空間 $S$ の部分集合のあいだの包含関係によって定められたものです。)
 
 \clearpage
 
 \subsection*{コラム: 最小不動点と最大不動点の一致 (lfp-gfp coincidence) について}
 
-\noindent 一般的に $\mu f\sqsubseteq\nu f$ ですが、一致する ($\mu f=\nu f$) 場合もあります。一致すると何が嬉しいかを見ておきましょう。\\
+\noindent 一般的に $\mu f\sqsubseteq\nu f$ ですが、一致する ($\mu f=\nu f$) 場合もあります。\kenten{一致すると何が嬉しいか}を見ておきましょう。%\\
 
-\vspace{150pt}
+\begin{enumerate}
+	\item 一般には lfp の lower bound を与えるのは難しいが、gfp でもあるので Knaster-Tarski を使える: \[y\sqsubseteq f(y) ~\&~ \mu f=\nu f\implies y\sqsubseteq \mu f\]  \[\left(\begin{tikzcd}[row sep=5pt,column sep=50pt] & y\sqsubseteq \mu f \\ y\sqsubseteq f(y) \ar[ru,Rightarrow,"/" marking,sloped] \ar[rd,Rightarrow,"\textrm{Knaster-Tarski}"'] & \\ & y\sqsubseteq \nu f \ar[uu,Rightarrow,"\;\mu f\,=\,\nu f\;"'] \end{tikzcd}\right)\]
+	\item Bounded value iteration をすることができる: \\ 単純確率ゲーム (simple stochastic game; SGC) における到達確率（初期状態 $s_0$ から目標状態へ到達する確率）\[V(s_0)=\sup_\sigma\inf_\tau\Pr_{s_0}^{\sigma,\tau}(\Diamond\mathrm{Target})\] (ただし $\sigma$: 最大化プレイヤーの戦略、$\tau$: 最小化プレイヤーの戦略) を計算する3つの手法が知られています。
+	\begin{itemize}
+		\item \textgt{戦略反復法} (strategy iteration; SI): 正確だが非常に遅い。
+		\item \textgt{値反復法} (value iteration; VI): 下からの値反復を繰り返す。理論的には収束が保証されるが、いつ止まるかはわからない。場合によっては、収束するまでに多くの反復回数を必要とする。
+		\item \textgt{有界値反復法} (bounded value iteration; BVI): 下からも上からも同時に値反復を行うので、「誤差を保証したうえで停止する」ことが可能になり、結果的に高速化につながる。ただし、上からの反復が ``見せかけの不動点'' (spurious fixed point) に貼り付いてしまう（降りてこない）ことがよくある。\\ $\cdots\cdots$ もし最小・最大不動点の一致が成り立てば、上からの反復が、最小不動点とは別の不動点に留まってしまう可能性がなくなり、bounded value iteration を有効に行うことができる。
+	\end{itemize}
+	\begin{center}
+		\begin{tabular}{ccc}
+			Value Iteration & ~~ & Bounded Value Iteration \\
+			\begin{tikzpicture}
+				\draw[->, line width=1pt] (0,0) -- (6,0);
+				\draw[dashed, line width=1pt] (0,2) -- (5.8,2);
+				\draw[->, line width=1pt] (0,0) -- (0,4);
+				\foreach \x/\y in {
+					1/0.5,
+					2/0.9,
+					3/1.2,
+					4/1.5,
+					5/1.7
+				}{
+					\node[
+					font=\small
+					]
+					at (\x,\y) {$+$};
+				}
+			\end{tikzpicture}
+			&&
+			\begin{tikzpicture}
+				\draw[->, line width=1pt] (0,0) -- (6,0);
+				\draw[dashed, line width=1pt] (0,2) -- (5.8,2);
+				\draw[->, line width=1pt] (0,0) -- (0,4);
+				\foreach \x/\y in {
+					1/0.5,
+					2/0.9,
+					3/1.2,
+					4/1.5,
+					5/1.7
+				}{
+					\node[
+					font=\small
+					]
+					at (\x,\y) {$+$};
+				}
+				\foreach \x/\y in {
+					1/3.5,
+					2/3.2,
+					3/2.8,
+					4/2.6,
+					5/2.3
+				}{
+					\node[
+					font=\small
+					]
+					at (\x,\y) {$+$};
+				}
+			\end{tikzpicture}
+		\end{tabular}
+	\end{center}
+	\item 型理論・領域理論においては、ラムダ計算のモデルができる: \\ 代数的コンパクト (algebraically compact) な
+\end{enumerate}
+
+\vspace{100pt}
 
 さて、本章でこれまで扱ってきた述語変換子の考え方は、圏論の言葉を使うととても見通しがよくなります。そのための準備として、次章では、圏論を用いて情報システムの振舞いをとらえる方法について紹介します。
 
@@ -1252,9 +1315,9 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\[1\xleftarrow{~!~}F1\xleftarrow{~F!~}F^21\xleftarrow{~~~}\cdots\]
 	正確に言えば、添字圏 
 	\begin{tikzcd}[column sep=5pt]
-		\J= (\!\!\! & 0 &&& 1 \ar[lll,"i_0^1"] &&& 2 \ar[lll,"i_1^2"] \ar[llllll,bend right,"i_0^2"'] &&& 3 \ar[lll,"i_2^3"] \ar[llllll,bend right,"i_1^3"'] \ar[lllllllll,bend left=28pt,"i_0^3"] && \cdots & \!\!\!)
+		\J= (\!\!\! & 0 &&& 1 \ar[lll,"i_0^1"] &&& 2 \ar[lll,"i_1^2"] \ar[llllll,bend right,"i_0^2"'] &&& 3 \ar[lll,"i_2^3"] \ar[llllll,bend right,"i_1^3"'] \ar[lllllllll,bend left=40pt,"i_0^3"] &&& \cdots \ar[lll] & \!\!\!)
 	\end{tikzcd}
-	について、図式 $D:\J\to\Set$ である。
+	について、図式 $D:\J\to\Set$ のことである。
 \end{definition}
 
 \begin{theorem}[終余代数の構成]
