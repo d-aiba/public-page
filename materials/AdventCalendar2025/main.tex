@@ -1305,19 +1305,18 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \clearpage
 
 \noindent ここからは、どうやって終余代数を構成するかについて見ていきます。
-% % 終余代数の構成は、順序集合についての「クーゾー・クーゾーの定理」(the Cousot-Cousot theorem) を一般化したものなので、まずはその復習から始めましょう。
-% % \begin{proposition}[クーゾー・クーゾーの定理]
-% % 	% 
-% % \end{proposition}
+
+\subsection*{(終余代数の構成-1) 超限反復}
+
 
 \begin{definition}[終鎖]
-	$F:\Set\to\Set$ とする。このとき、\textgt{終鎖} (final chain) とは、以下の図式である。
+	$F:\C\to\C$ とする。このとき、\textgt{終鎖} (final chain) とは、以下の図式である。
 	\[1\xleftarrow{~!~}F1\xleftarrow{~F!~}F^21\xleftarrow{~F^2!~}\cdots\xleftarrow{~F^{n-1}!~}F^n1\xleftarrow{~F^{n}!~}F^{n+1}\xleftarrow{~~~}\cdots\]
 	正確に言えば、添字圏 
 	\begin{tikzcd}[column sep=5pt]
 		\J= (\!\!\! & 0 &&& 1 \ar[lll,"i_0^1"] &&& 2 \ar[lll,"i_1^2"] \ar[llllll,bend right,"i_0^2"'] &&& 3 \ar[lll,"i_2^3"] \ar[llllll,bend right,"i_1^3"'] \ar[lllllllll,bend left=45pt,"i_0^3"] &&& \cdots \ar[lll] & \!\!\!)
 	\end{tikzcd}
-	について、図式 $D:\J\to\Set$ のことである。
+	について、図式 $D:\J\to\C$ のことである。
 \end{definition}
 
 \begin{theorem}[終余代数の構成]
@@ -1327,6 +1326,12 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{proof}
 	... 
 \end{proof}
+
+\subsection*{(終余代数の構成-2) $F$が$\Set$上の finitary functor なら$\omega+\omega$ステップで反復が止まる}
+
+\subsection*{(終余代数の構成-3) $F$が極限と交換するなら$\omega$ステップで反復が止まる}
+
+\subsection*{(終余代数の構成-4) $ω$ステップで得た weakly terminal coalgebra を同値関係で割る}
 
 \todo[inline]{証明を書く。ordinal な議論に気をつけて。}
 
