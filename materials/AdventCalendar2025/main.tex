@@ -992,7 +992,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \begin{enumerate}
 	\item 一般には lfp の lower bound を与えるのは難しいが、gfp でもあるので Knaster-Tarski を使える: \[y\sqsubseteq f(y) ~\&~ \mu f=\nu f\implies y\sqsubseteq \mu f\]  \[\left(\begin{tikzcd}[row sep=5pt,column sep=50pt] & y\sqsubseteq \mu f \\ y\sqsubseteq f(y) \ar[ru,Rightarrow,"/" marking,sloped] \ar[rd,Rightarrow,"\textrm{Knaster-Tarski}"'] & \\ & y\sqsubseteq \nu f \ar[uu,Rightarrow,"\;\mu f\,=\,\nu f\;"'] \end{tikzcd}\right)\]
-	\item Bounded value iteration をすることができる: \\ 単純確率ゲーム (simple stochastic game; SGC) における到達確率（初期状態 $s_0$ から目標状態へ到達する確率）\[V(s_0)=\sup_\sigma\inf_\tau\Pr_{s_0}^{\sigma,\tau}(\Diamond\mathrm{Target})\] (ただし $\sigma$: 最大化プレイヤーの戦略、$\tau$: 最小化プレイヤーの戦略) を計算する3つの手法が知られています。
+	\item Bounded value iteration をすることができる: \\ 単純確率ゲーム (simple stochastic game; SSG) における到達確率（初期状態 $s_0$ から目標状態へ到達する確率）\[V(s_0)=\sup_\sigma\inf_\tau\Pr_{s_0}^{\sigma,\tau}(\Diamond\mathrm{Target})\] (ただし $\sigma$: 最大化プレイヤーの戦略、$\tau$: 最小化プレイヤーの戦略) を計算する3つの手法が知られています。
 	\begin{itemize}
 		\item \textgt{戦略反復法} (strategy iteration; SI): 正確だが非常に遅い。
 		\item \textgt{値反復法} (value iteration; VI): 下からの値反復を繰り返す。理論的には収束が保証されるが、いつ止まるかはわからない。場合によっては、収束するまでに多くの反復回数を必要とする。
@@ -1312,10 +1312,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \begin{definition}[終鎖]
 	$F:\Set\to\Set$ とする。このとき、\textgt{終鎖} (final chain) とは、以下の図式である。
-	\[1\xleftarrow{~!~}F1\xleftarrow{~F!~}F^21\xleftarrow{~~~}\cdots\]
+	\[1\xleftarrow{~!~}F1\xleftarrow{~F!~}F^21\xleftarrow{~F^2!~}\cdots\xleftarrow{~F^{n-1}!~}F^n1\xleftarrow{~F^{n}!~}F^{n+1}\xleftarrow{~~~}\cdots\]
 	正確に言えば、添字圏 
 	\begin{tikzcd}[column sep=5pt]
-		\J= (\!\!\! & 0 &&& 1 \ar[lll,"i_0^1"] &&& 2 \ar[lll,"i_1^2"] \ar[llllll,bend right,"i_0^2"'] &&& 3 \ar[lll,"i_2^3"] \ar[llllll,bend right,"i_1^3"'] \ar[lllllllll,bend left=40pt,"i_0^3"] &&& \cdots \ar[lll] & \!\!\!)
+		\J= (\!\!\! & 0 &&& 1 \ar[lll,"i_0^1"] &&& 2 \ar[lll,"i_1^2"] \ar[llllll,bend right,"i_0^2"'] &&& 3 \ar[lll,"i_2^3"] \ar[llllll,bend right,"i_1^3"'] \ar[lllllllll,bend left=45pt,"i_0^3"] &&& \cdots \ar[lll] & \!\!\!)
 	\end{tikzcd}
 	について、図式 $D:\J\to\Set$ のことである。
 \end{definition}
@@ -4202,7 +4202,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{theorem}
 	$F:\Set\to\Set$ が finitary とする。このとき、$F$-終余代数が存在する。なお、the final sequence 
 	\[1 \,\longleftarrow\, F1 \,\longleftarrow\, F^2 1 \,\longleftarrow\,\cdots\]
-	は $\omega$ よりも先まで十分大きくなることがあり、$\omega+\omega$ ステップで収束 (stabilize) する。
+	は $\omega$ よりも先まで十分大きくなることがあり、遅くとも $\omega+\omega$ ステップで収束 (stabilize) する。
 \end{theorem}
 
 \begin{supplement}
