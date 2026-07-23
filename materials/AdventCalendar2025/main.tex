@@ -998,7 +998,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\begin{itemize}
 		\item \textgt{戦略反復法} (strategy iteration; SI): 正確だが非常に遅い。
 		\item \textgt{値反復法} (value iteration; VI): 下からの値反復を繰り返す。理論的には収束が保証されるが、いつ止まるかはわからない。場合によっては、収束するまでに多くの反復回数を必要とする。\\ $\cdots\cdots$ 下限だけでは「真の値にどこまで近いか」がわからず、収束するまで待つことになり、時間がかかる。
-		\item \textgt{有界値反復法} (bounded value iteration; BVI): 下からも上からも同時に値反復を行うので、「精度・誤差を保証したうえで停止する」ことが可能になり、結果的に高速化につながる。\\ $\cdots\cdots$ ただし、上からの反復が、求めたい真の値とは異なる ``見せかけの不動点'' (spurious fixed point) に貼り付いてしまう（上のほうに留まったまま降りてこない）ことがよくある。\\ $\cdots\cdots$ そこで、最小・最大不動点の一致が成り立てば、上からの反復が、最小不動点とは別の不動点に留まってしまう可能性がなくなり、bounded value iteration を有効に行うことができる。
+		\item \textgt{有界値反復法} (bounded value iteration; BVI): 下からも上からも同時に値反復を行うので、「精度・誤差を保証したうえで停止する」ことが可能になり、結果的に意思決定の高速化につながる。\\ $\cdots\cdots$ ただし、上からの反復が、求めたい真の値とは異なる ``見せかけの不動点'' (spurious fixed point) に貼り付いてしまう（上のほうに留まったまま降りてこない）ことがよくある。\\ $\cdots\cdots$ そこで、最小・最大不動点の一致が成り立てば、上からの反復が、最小不動点とは別の不動点に留まってしまう可能性がなくなり、bounded value iteration を有効に行うことができる。
 	\end{itemize}
 	\begin{center}
 		\begin{tabular}{ccc}
