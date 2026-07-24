@@ -991,7 +991,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent 一般的に $\mu f\sqsubseteq\nu f$ ですが、一致する ($\mu f=\nu f$) 場合もあります。\kenten{一致すると何が嬉しいか}を見ておきましょう。%\\
 
 \begin{enumerate}
-	\item 一般には lfp の lower bound を与えるのは難しい (Aiming low is harder!) が、\\ gfp でもあるので Knaster-Tarski を使える！
+	\item 一般には lfp の lower bound を与えるのは難しい% (Aiming low is harder!) 
+	が、gfp でもあるので Knaster-Tarski を使える！
 	\[y\sqsubseteq f(y) ~\&~ \mu f=\nu f\implies y\sqsubseteq \mu f\] ~ \[\left(\begin{tikzcd}[row sep=5pt,column sep=50pt] & y\sqsubseteq \mu f \\ y\sqsubseteq f(y) \ar[ru,Rightarrow,"/" marking,sloped] \ar[rd,Rightarrow,"\textrm{Knaster-Tarski}"',near end] & \\ & y\sqsubseteq \nu f \ar[uu,Rightarrow,"\;\mu f\,=\,\nu f\;"'] \end{tikzcd}\right)\]
 	\item Bounded value iteration をすることができる！ \\ 単純確率ゲーム (simple stochastic game; SSG) における到達確率（初期状態 $s_0$ から目標状態へ到達する確率）%\[V(s_0)=\sup_\sigma\inf_\tau\Pr_{s_0}^{\sigma,\tau}(\Diamond\mathrm{Target})\] (ただし $\sigma$: 最大化プレイヤーの戦略、$\tau$: 最小化プレイヤーの戦略) 
 	% を計算する3つの手法%が知られています。
@@ -1019,6 +1020,19 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 					font=\small
 					]
 					at (\x,\y) {$+$};
+				};
+				\foreach \x/\y in {
+					1/0,
+					2/0,
+					3/0,
+					4/0,
+					5/0
+				}{
+					\node[
+					below, 
+					font=\small
+					]
+					at (\x,\y) {$\x$};
 				};
 			\end{tikzpicture}
 			&&
@@ -1049,6 +1063,19 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 					font=\small
 					]
 					at (\x,\y) {$+$};
+				};
+				\foreach \x/\y in {
+					1/0,
+					2/0,
+					3/0,
+					4/0,
+					5/0
+				}{
+					\node[
+					below, 
+					font=\small
+					]
+					at (\x,\y) {$\x$};
 				};
 			\end{tikzpicture}
 		\end{tabular}
@@ -1248,7 +1275,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\subsection{終余代数とその構成}
+\subsection{終余代数およびその構成}
 
 ここでは、終余代数の定義と、その構成のしかたを紹介します。まずは定義です。
 
@@ -1313,7 +1340,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 
 \begin{definition}[終鎖]
-	$F:\C\to\C$ とする。このとき、\textgt{終鎖} (final chain) とは、以下の図式である。
+	$F:\C\to\C$ とする。このとき、\textgt{終鎖} (final chain, final sequence) とは、以下の図式である。
 	\[1\xleftarrow{~!~}F1\xleftarrow{~F!~}F^21\xleftarrow{~F^2!~}\cdots\xleftarrow{~F^{n-1}!~}F^n1\xleftarrow{~F^{n}!~}F^{n+1}\xleftarrow{~~~}\cdots\]
 	正確に言えば、添字圏 
 	\begin{tikzcd}[column sep=5pt]
@@ -2351,11 +2378,11 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 % 	\mu_X\left( \sum_{i\in I} a_i \Ket{\sum_{x\in X} b_{ix} \Ket{x}} \right)=\sum_{x\in X} \left( \sum_{i\in I} a_i b_{ix} \right) \Ket{x}
 % \end{align*}
 \begin{itemize}
-	\item $\mathcal D:\Set\to\Set$, such that 
+	\item $\mathcal D_{\leq 1}:\Set\to\Set$, such that 
 	\begin{align*}
-		\mathcal D(X)&=\{d:X\to [0,1]\mid\textstyle\sum d(x)\leq 1\}\\&=\{\textstyle\,\sum p_i\ket{x_i}\,\textrm{, where each $p_i$ is a probability $d(x_i)\in[0,1]$.}\}\\\mathcal D(f)&:\mathcal D(X)\to\mathcal D(Y)\\&\mathcal D(f)(\textstyle\sum p_i\ket{x_i})=\textstyle\sum p_i\ket{f(x_i)}
+		\mathcal D_{\leq 1}(X)&=\{d:X\to [0,1]\mid\textstyle\sum d(x)\leq 1\}\\&=\{\textstyle\,\sum p_i\ket{x_i}\,\textrm{, where each $p_i$ is a probability $d(x_i)\in[0,1]$.}\}\\\mathcal D_{\leq 1}(f)&:\mathcal D_{\leq 1}(X)\to\mathcal D_{\leq 1}(Y)\\&\mathcal D_{\leq 1}(f)(\textstyle\sum p_i\ket{x_i})=\textstyle\sum p_i\ket{f(x_i)}
 	\end{align*}%\vspace{-5pt}
-	\item $\eta_X:X\to\mathcal D(X)$,\, $\mu_X:\mathcal D(\mathcal D(X))\to\mathcal D(X)$, such that 
+	\item $\eta_X:X\to\mathcal D_{\leq 1}(X)$,\, $\mu_X:\mathcal D_{\leq 1}(\mathcal D_{\leq 1}(X))\to\mathcal D_{\leq 1}(X)$, such that 
 	\begin{align*}
 		\eta_X(x)=1\cdot\Ket{x},\qquad 
 		\mu_X\left( \sum_{i\in I} a_i \Ket{\sum_{x\in X} b_{ix} \Ket{x}} \right)=\sum_{x\in X} \left( \sum_{i\in I} a_i b_{ix} \right) \Ket{x}
@@ -2380,7 +2407,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{center}
 \end{itemize}
 
-\noindent なお「\textgt{劣分布}」(sub-distribution) とは、遷移確率が$1$\kenten{以下}である確率分布のことです。たとえば、「$x_0$から、確率$0.4$で$x_1$に遷移し、確率$0.3$で$x_2$に遷移し、それ以外は異常停止 (deadlock) する」といった、合計が1よりも小さい遷移確率も認めるものです。（これは理論的にも便利で、sub-distribution の集合は $\omega$-cpo になります。）%\vspace{10pt}
+\noindent なお「\textgt{劣分布}」(sub-distribution) とは、遷移確率が$1$\kenten{以下}である確率分布のことです。たとえば、「$x_0$から、確率$0.4$で$x_1$に遷移し、確率$0.3$で$x_2$に遷移し、それ以外は異常停止 (deadlock) する」といった、合計が1よりも小さい遷移確率も認める、というものです。（これは理論的にも便利で、sub-distribution の集合は $\omega$-cpo になります。）%\vspace{10pt}
 
 % \clearpage
 
