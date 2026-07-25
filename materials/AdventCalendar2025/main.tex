@@ -1340,7 +1340,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 
 \begin{definition}[終鎖]
-	$F:\C\to\C$ とする。このとき、\textgt{終鎖} (final chain, final sequence) とは、以下の図式である。
+	$F:\C\to\C$ とする。このとき、\textgt{終鎖} (final chain) とは、以下の図式である。
 	\[1\xleftarrow{~!~}F1\xleftarrow{~F!~}F^21\xleftarrow{~F^2!~}\cdots\xleftarrow{~F^{n-1}!~}F^n1\xleftarrow{~F^{n}!~}F^{n+1}\xleftarrow{~~~}\cdots\]
 	正確に言えば、添字圏 
 	\begin{tikzcd}[column sep=5pt]
@@ -1749,7 +1749,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	のように\kenten{解体}されます。ここで $\mathrm{\mathbf{head}}$ と $\mathrm{\mathbf{tail}}$ は、それぞれ次のような関数です。
 	\[\mathrm{\mathbf{head}}:A^\omega\to A,\qquad \mathrm{\mathbf{tail}}:A^\omega\to A^\omega\]
 	これらをまとめると、ストリームの構造射は、以下の\kenten{終余代数}です。
-	\[\langle\mathrm{\mathbf{head}},\mathrm{\mathbf{tail}}\rangle:A^\omega\xrightarrow{\,\cong\,} A\times A^\omega\]
+	\[\langle\mathrm{\mathbf{head}},\mathrm{\mathbf{tail}}\rangle:A^\omega\xrightarrow{\;\cong\;} A\times A^\omega\]
 \end{itemize}
 
 \clearpage
@@ -1759,10 +1759,16 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\item \textgt{定義原理としての余帰納法} (coinduction as a definition principle)
 	\item \textgt{証明原理としての余帰納法} (coinduction as a proof principle)
 \end{itemize}
-の考え方を確認しましょう。\\
+の考え方を確認しましょう。\\以下では $A=\{0,1\}$ とし、$F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tail}\rangle:A^\omega\xrightarrow{\;\cong\;} A\times A^\omega$ です。\\
 
 \noindent\fbox{\textgt{定義原理としての余帰納法} (coinduction as a definition principle)}\vspace{5pt}\\
-あああ
+以下のような再帰的な定義を考えましょう。
+\begin{align*}
+	\mathbf{evens}(\sigma)&=(\mathbf{head}(\sigma),\mathbf{evens}(\mathbf{tail}(\mathbf{tail}(\sigma)))) \\
+	\mathbf{odds}(\sigma)&=(\mathbf{head}(\mathbf{tail}(\sigma)),\mathbf{odds}(\mathbf{tail}(\mathbf{tail}(\sigma))))\\
+	\mathbf{ones}&=(1,\mathbf{ones})
+\end{align*}
+これらの well-definedness は、定義を余代数として書き表すことで保証されます。
 
 \todo[inline]{even, odd, ones, ...}
 
@@ -1868,11 +1874,19 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\subsection{双模倣関係と双模倣性：無限に続くプロセスの等価性を判定する}
+\subsection{双模倣関係と双模倣性：無限に続きうるプロセスの等価性を判定する}
 
 \noindent 本節では、\textgt{双模倣関係} (bisimulation) および\textgt{双模倣性} (bisimilarity) について扱います。
 
-\begin{definition}[双模倣関係と双模倣性]
+\subsection*{(双模倣-1) 状態遷移システムに対する非圏論的な双模倣関係・双模倣性}
+
+...
+
+確率的な双模倣性をどう定義するか？などの問題が生じます。そこで、圏論的に抽象化、一般化
+
+\subsection*{(双模倣-2) Aczel-Mendler の圏論的な双模倣関係・双模倣性}
+
+\begin{definition}[双模倣関係、双模倣性]
 	$F:\Set\to\Set$ を $\Set$ 上の自己関手とし、$c:X\to FX$ と $d:X\to FY$ を $F$-余代数とします。関係 $R\subseteq X\times Y$ が $F$-\textgt{双模倣関係} (bisimulation) であるとは、ある写像 $e:R\to FR$ が存在し、2つの射影 $\pi_1,\pi_2$ をそれぞれの余代数の準同型とするものである。\vspace{3pt}
 	\begin{center}
 		\begin{tikzcd}
@@ -2252,7 +2266,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent 典型例として、例外処理 (exception handling) と呼ばれる計算効果を表す関手 $F(Y)=Y+E$ を用いた、効果つきの計算 $f:X\to Y+E$ が挙げられます。ここでは $+$ は余積を表し、$E$ は ``エラーの集合'' とみなしましょう。このとき、計算 $f:X\to Y+E$ は、単に入力値 $x\in X$ から出力値 $y\in Y$ を返すだけでなく、「もし例外が生じたらエラー $e\in E$ を返す」という\textgt{副作用} (side effect) を持ちます。
 % \[\begin{array}{cccc}f:&X&\longrightarrow&Y+E\\&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&x&\longmapsto &y\\&x'&\longmapsto&e\end{array}\]
 \[\begin{array}{cccccc}f:&X&\longrightarrow&Y\!\!&\!+\!&\!\!E\\&\rotatebox{90}{$\in$}&&&\!\!\rotatebox{90}{$\in$}\!\!\\&x&\longmapsto &y\!\!\\&x'&\longmapsto&&&\!\!e\end{array}\]
-では、この例のような副作用を持つ計算（効果つき計算）どうしの「合成」はどう考えればいいでしょうか。たとえば、2つの効果つき計算 $f:X\to Y+E$ と $g:Y\to Z+E$ を合成して、$g\circ f:X\to Z+E$ のようなものを作りたいとき、$f,g$の両者は型が合っていないため、一筋縄ではいかないことがわかります。そこで、次節で導入する「\textgt{モナド}」や「クライスリ圏」といった道具が役立ちます。 (``Computational effects are modeled by monads.''  [Moggi])\vspace{5pt}\\
+では、この例のような副作用を持つ計算（効果つき計算）どうしの「合成」はどう考えればいいでしょうか。たとえば、2つの効果つき計算 $f:X\to Y+E$ と $g:Y\to Z+E$ を合成して、$g\circ f:X\to Z+E$ のようなものを作りたいとき、$f,g$の両者は型が合っていないため、一筋縄ではいかないことがわかります。そこで、次節で導入する「\textgt{モナド}」や「クライスリ圏」といった道具が役立ちます。 (``Computational effects are modeled by monads''  [Moggi])\vspace{5pt}\\
 %（次節でもあらためてこの例外処理の例について取り上げます。）
 
 % なお、作用つき計算 $f:X\to F(Y)$ を、便宜的に $f:X\computationrightarrow Y$ という特殊な矢印で表記することがよくあります。（厳密に言えば、これはモナド $F$ のクライスリ圏における射を表す記法ですが、ここでは詳細の説明は省略します。この点については、次節を読んで「モナド」や「クライスリ圏」について学んだ後ならわかるはずです。）\\
