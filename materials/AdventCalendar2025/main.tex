@@ -1268,7 +1268,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% \end{multicols}
 \end{example}
 
-\begin{remark}[分布関手のためのケット記法]
+\begin{remark}[確率分布の ket notation]
 	% 分布に対して次の記法を用いる。
 	$\mathcal D(X)=\{\, d: X \to [0,1]\mid \sum d(x)=1 \,\}$ の各要素を $\sum p_i\lvert x_i\rangle$ と書く。ここで、各 $p_i$ は確率 $d(x_i)\in[0,1]$ である。例えば、コイントス $X=\{H,T\}$ を考えるとき、「公平なコイン」の分布は $d=\tfrac12\lvert H\rangle+\tfrac12\lvert T\rangle$ と書ける。なお、$\lvert H\rangle=\left(\begin{smallmatrix}1\\0\end{smallmatrix}\right)$ および $\lvert T\rangle=\left(\begin{smallmatrix}0\\1\end{smallmatrix}\right)$ である。
 \end{remark}
@@ -1723,7 +1723,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \noindent 集合$A$を固定します。ここで、$A$上の\textgt{リスト}の集まり $A^\ast$ と、$A$上の\textgt{ストリーム}の集まり $A^\omega$ は、それぞれ
 \[A^\ast\,\cong\,1+A\times A^\ast,\qquad A^\omega\,\cong\,A\times A^\omega\]
-という構造を持ちます。（前ページの表も参照！\,実はそれぞれ \textgt{始$1+A\times(-)$-代数} と \textgt{終$A\times(-)$-余代数} です！）
+という構造を持ちます。（前ページの表も参照！\,それぞれ \textgt{始$1+A\times(-)$-代数} と \textgt{終$A\times(-)$-余代数} です！）
 \begin{itemize}
 	\item \textgt{リスト}は、$(a_0\,a_1\,a_2\cdots a_{n-1})$ といった\kenten{有限列}であり、これは2種類の\kenten{構成子} $\mathrm{\mathbf{nil}}$ と $\mathrm{\mathbf{cons}}$ によって
 	% \[(a_0\,a_1\,a_2\,a_3)\,=\,\textsf{cons}(a_0,\textsf{cons}(a_1,\textsf{cons}(a_2,\textsf{cons}(a_3,\textsf{nil}(\ast)))))\]
@@ -1781,112 +1781,158 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent 
-\begin{large}\textgt{コラム: 余代数様相論理}\end{large}
-\vspace{5pt}
+% \noindent 
+% \begin{large}\textgt{コラム: 余代数様相論理}\end{large}
+% \vspace{5pt}
 
-\noindent ここで、\textgt{余代数様相論理} (coalgebraic modal logic) について取り上げます。
-\begin{definition}[余代数様相論理]
-	$\C,\A$ を圏とし、$F,P,L,S$ を以下のような関手とする。
-	\begin{center}
-		\begin{tikzcd}[column sep=40pt]
-			\C^\op\! \ar[loop left,"F"] \ar[r,bend left=14pt,"P","\top"'] & \,\A\, \ar[loop right,"L"] \ar[l,bend left=14pt,"S"] 
-		\end{tikzcd}
-	\end{center}
-	さらに、以下の制約を課す。
-	\begin{itemize}
-		\item 自然変換 $\sigma:LP\Rightarrow PF$ がある
-		\item 関手 $L$ は、始代数 $\alpha:L(\mathrm{Form})\xrightarrow{\cong}\mathrm{Form}$ を持つ
-		\item 圏 $\C$ が factorization system $(\mathcal E,\mathcal M)$ を持つ
-	\end{itemize}
-	このとき、$(L,\sigma)$ を $F$ の\textgt{余代数様相論理} (coalgebraic modal logic) という。
-\end{definition}
-\noindent これだと定義が抽象的なので、ひとつずつ丁寧に見ていきましょう。
-\begin{multicols}{2} %%
-\begin{itemize}
-	\item $\C$: state spaces (例: $\Set$)
-	\item $\A$: propositional logic (例: $\mathbf{BA}$)
-	\item $F$: transition type
-	\item $L$: modalities
-\end{itemize}
-% より具体的に言うと、
-% \begin{center}
-	\begin{small}
-	\begin{tikzcd}[column sep=50pt,row sep=25pt]
-		\!\!\mathbf{Coalg}_F^\op \ar[d] \ar[r,bend left=10pt,"\top"'] & \mathbf{Alg}_L \ar[d] \ar[l,bend left=10pt] \\
-		\C^\op \ar[loop left,"F",looseness=6pt] \ar[r,bend left=10pt,"P","\top"'] & \A \ar[loop right,"L"] \ar[l,bend left=10pt,"S"] 
-	\end{tikzcd}
-	\end{small}
+% \noindent ここで、\textgt{余代数様相論理} (coalgebraic modal logic) について取り上げます。
+% \begin{definition}[余代数様相論理]
+% 	$\C,\A$ を圏とし、$F,P,L,S$ を以下のような関手とする。
+% 	\begin{center}
+% 		\begin{tikzcd}[column sep=40pt]
+% 			\C^\op\! \ar[loop left,"F"] \ar[r,bend left=14pt,"P","\top"'] & \,\A\, \ar[loop right,"L"] \ar[l,bend left=14pt,"S"] 
+% 		\end{tikzcd}
+% 	\end{center}
+% 	さらに、以下の制約を課す。
+% 	\begin{itemize}
+% 		\item 自然変換 $\sigma:LP\Rightarrow PF$ がある
+% 		\item 関手 $L$ は、始代数 $\alpha:L(\mathrm{Form})\xrightarrow{\cong}\mathrm{Form}$ を持つ
+% 		\item 圏 $\C$ が factorization system $(\mathcal E,\mathcal M)$ を持つ
+% 	\end{itemize}
+% 	このとき、$(L,\sigma)$ を $F$ の\textgt{余代数様相論理} (coalgebraic modal logic) という。
+% \end{definition}
+% \noindent これだと定義が抽象的なので、ひとつずつ丁寧に見ていきましょう。
+% \begin{multicols}{2} %%
+% \begin{itemize}
+% 	\item $\C$: state spaces (例: $\Set$)
+% 	\item $\A$: propositional logic (例: $\mathbf{BA}$)
+% 	\item $F$: transition type
+% 	\item $L$: modalities
+% \end{itemize}
+% % より具体的に言うと、
+% % \begin{center}
+% 	\begin{small}
+% 	\begin{tikzcd}[column sep=50pt,row sep=25pt]
+% 		\!\!\mathbf{Coalg}_F^\op \ar[d] \ar[r,bend left=10pt,"\top"'] & \mathbf{Alg}_L \ar[d] \ar[l,bend left=10pt] \\
+% 		\C^\op \ar[loop left,"F",looseness=6pt] \ar[r,bend left=10pt,"P","\top"'] & \A \ar[loop right,"L"] \ar[l,bend left=10pt,"S"] 
+% 	\end{tikzcd}
+% 	\end{small}
+% % \end{center}
+% \end{multicols} %%
+% \noindent より具体的に言うと、
+% \begin{itemize}
+% 	\item 任意の $F$-余代数に対し、以下のやり方で $L$-代数が得られます。
+% 	\begin{prooftree}
+% 		\AXC{$c:X\to FX$, ~ an $F$-coalgebra}
+% 		\UIC{$LPX\xrightarrow{\sigma_X}PFX\xrightarrow{P(c)}PX$, ~ an $L$-algebra}
+% 	\end{prooftree}
+% 	% \[LPX\xrightarrow{\sigma_X}PTX\xrightarrow{P(c)}PX\]
+% 	\item そして、始$L$-代数 $\alpha:L(\mathrm{Form})\xrightarrow{\cong}\mathrm{Form}$ は、一意な代数準同型射 $\llbracket-\rrbracket:\mathrm{Form}\to PX$ をもたらします。\\ この一意な射 $\llbracket-\rrbracket$ は\textgt{解釈関数} (interpretation function) です。\\（たとえば $P$ が冪集合関手 $\mathcal P$ の場合、$x\in\llbracket\varphi\rrbracket_c\iff x\models_c\varphi$ です。）
+% 	\begin{multicols}{2}
+% 	\begin{center}\small
+% 		\begin{tikzcd}
+% 			L(\mathrm{Form}) \ar[r,"L(\llbracket-\rrbracket)"] \ar[d,"\cong"'] & LPX \ar[d,"P(c)\,\circ\,\sigma_X"]\\
+% 			\mathrm{Form} \ar[r,"\llbracket - \rrbracket"'] & PX
+% 		\end{tikzcd}
+% 	\end{center}
+% 	% \item 
+% 	% この一意な射 $\llbracket-\rrbracket$ は\textgt{解釈関数} (interpretation function) です。\\（たとえば $P$ が冪集合関手 $\mathcal P$ の場合、$x\in\llbracket\varphi\rrbracket_c\iff x\models_c\varphi$ です。）
+% 	\begin{center}
+% 		$\begin{array}{cccc}
+% 			\llbracket-\rrbracket\colon & \mathrm{Form} & \longrightarrow & PX \\[-2pt]
+% 			& \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[-3pt]
+% 			& \varphi & \mapsto & \llbracket\varphi\rrbracket_c
+% 		\end{array}$
+% 	\end{center}
+% 	\end{multicols}
+% 	% which maps a formula $\varphi \in \mathrm{Form}$ to its interpretation $\llbracket \varphi\rrbracket_c\in PX$. 
+% 	\item 随伴関係 $S\dashv P$ より、$\llbracket-\rrbracket$ の transpose として\textgt{理論写像} (theory map) $\mathrm{th}_c\colon X \to S(\mathrm{Form})$ が得られます。
+% 	\[\A(\mathrm{Form},PX)\;\cong\;\C^\op(S(\mathrm{Form}),X)\;\cong\;\C(X,S(\mathrm{Form}))\] 
+% 	これは、各状態 $x\in X$ を、$x$ が満たす論理式の集まり $\mathrm{th}_c(x)\in F(\mathrm{Form})$ に写像します。\\
+% 	（たとえば $P$ が冪集合関手 $\mathcal P$ の場合、$x\in\llbracket\varphi\rrbracket_c\iff\varphi\in\mathrm{th}_c(x)$ となります。）
+% 	% \begin{prooftree}
+% 	% 	\AXC{$\varphi\in\mathrm{th}_c(x)$}
+% 	% 	\doubleLine
+% 	% 	\UIC{$x\in\llbracket\varphi\rrbracket_c$}
+% 	% \end{prooftree}
+% \end{itemize} %\clearpage
+% \noindent 典型的には、以下の例を考えるとわかりやすいでしょう。（ストーン双対性とのアナロジーで捉えることができます。）%\vspace{5pt}
+% \begin{multicols}{2}
+% \begin{center}\small
+% 	\begin{tikzcd}[column sep=50pt,row sep=20pt]
+% 		\!\!\mathbf{Coalg}_F^\op \ar[d] \ar[r,bend left=10pt,"\top"'] & \mathbf{Alg}_L \ar[d] \ar[l,bend left=10pt] \\
+% 		\Set^\op \ar[loop left,"F",looseness=6pt] \ar[r,bend left=10pt,"P","\top"'] & \mathbf{BA} \ar[loop right,"L"] \ar[l,bend left=10pt,"S"] 
+% 	\end{tikzcd}%\vspace{5pt}
 % \end{center}
-\end{multicols} %%
-\noindent より具体的に言うと、
-\begin{itemize}
-	\item 任意の $F$-余代数に対し、以下のやり方で $L$-代数が得られます。
-	\begin{prooftree}
-		\AXC{$c:X\to FX$, ~ an $F$-coalgebra}
-		\UIC{$LPX\xrightarrow{\sigma_X}PFX\xrightarrow{P(c)}PX$, ~ an $L$-algebra}
-	\end{prooftree}
-	% \[LPX\xrightarrow{\sigma_X}PTX\xrightarrow{P(c)}PX\]
-	\item そして、始$L$-代数 $\alpha:L(\mathrm{Form})\xrightarrow{\cong}\mathrm{Form}$ は、一意な代数準同型射 $\llbracket-\rrbracket:\mathrm{Form}\to PX$ をもたらします。\\ この一意な射 $\llbracket-\rrbracket$ は\textgt{解釈関数} (interpretation function) です。\\（たとえば $P$ が冪集合関手 $\mathcal P$ の場合、$x\in\llbracket\varphi\rrbracket_c\iff x\models_c\varphi$ です。）
-	\begin{multicols}{2}
-	\begin{center}\small
-		\begin{tikzcd}
-			L(\mathrm{Form}) \ar[r,"L(\llbracket-\rrbracket)"] \ar[d,"\cong"'] & LPX \ar[d,"P(c)\,\circ\,\sigma_X"]\\
-			\mathrm{Form} \ar[r,"\llbracket - \rrbracket"'] & PX
-		\end{tikzcd}
-	\end{center}
-	% \item 
-	% この一意な射 $\llbracket-\rrbracket$ は\textgt{解釈関数} (interpretation function) です。\\（たとえば $P$ が冪集合関手 $\mathcal P$ の場合、$x\in\llbracket\varphi\rrbracket_c\iff x\models_c\varphi$ です。）
-	\begin{center}
-		$\begin{array}{cccc}
-			\llbracket-\rrbracket\colon & \mathrm{Form} & \longrightarrow & PX \\[-2pt]
-			& \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[-3pt]
-			& \varphi & \mapsto & \llbracket\varphi\rrbracket_c
-		\end{array}$
-	\end{center}
-	\end{multicols}
-	% which maps a formula $\varphi \in \mathrm{Form}$ to its interpretation $\llbracket \varphi\rrbracket_c\in PX$. 
-	\item 随伴関係 $S\dashv P$ より、$\llbracket-\rrbracket$ の transpose として\textgt{理論写像} (theory map) $\mathrm{th}_c\colon X \to S(\mathrm{Form})$ が得られます。
-	\[\A(\mathrm{Form},PX)\;\cong\;\C^\op(S(\mathrm{Form}),X)\;\cong\;\C(X,S(\mathrm{Form}))\] 
-	これは、各状態 $x\in X$ を、$x$ が満たす論理式の集まり $\mathrm{th}_c(x)\in F(\mathrm{Form})$ に写像します。\\
-	（たとえば $P$ が冪集合関手 $\mathcal P$ の場合、$x\in\llbracket\varphi\rrbracket_c\iff\varphi\in\mathrm{th}_c(x)$ となります。）
-	% \begin{prooftree}
-	% 	\AXC{$\varphi\in\mathrm{th}_c(x)$}
-	% 	\doubleLine
-	% 	\UIC{$x\in\llbracket\varphi\rrbracket_c$}
-	% \end{prooftree}
-\end{itemize} %\clearpage
-\noindent 典型的には、以下の例を考えるとわかりやすいでしょう。（ストーン双対性とのアナロジーで捉えることができます。）%\vspace{5pt}
-\begin{multicols}{2}
-\begin{center}\small
-	\begin{tikzcd}[column sep=50pt,row sep=20pt]
-		\!\!\mathbf{Coalg}_F^\op \ar[d] \ar[r,bend left=10pt,"\top"'] & \mathbf{Alg}_L \ar[d] \ar[l,bend left=10pt] \\
-		\Set^\op \ar[loop left,"F",looseness=6pt] \ar[r,bend left=10pt,"P","\top"'] & \mathbf{BA} \ar[loop right,"L"] \ar[l,bend left=10pt,"S"] 
-	\end{tikzcd}%\vspace{5pt}
-\end{center}
-% これはストーン双対性とのアナロジーで捉えることができます。\vspace{5pt}
-\begin{center}\small
-	\begin{tikzcd}[column sep=50pt]
-		\!\!\!\!\!\mathbf{Stone}^\op \ar[r,bend left=15pt,"P"] \ar[r,"\substack{\simeq}", phantom] & ~\mathbf{BA}~ \ar[l,bend left=15pt,"S"] 
-	\end{tikzcd}%\vspace{5pt}
-\end{center}
-\end{multicols}
+% % これはストーン双対性とのアナロジーで捉えることができます。\vspace{5pt}
+% \begin{center}\small
+% 	\begin{tikzcd}[column sep=50pt]
+% 		\!\!\!\!\!\mathbf{Stone}^\op \ar[r,bend left=15pt,"P"] \ar[r,"\substack{\simeq}", phantom] & ~\mathbf{BA}~ \ar[l,bend left=15pt,"S"] 
+% 	\end{tikzcd}%\vspace{5pt}
+% \end{center}
+% \end{multicols}
 
 \clearpage
 
-\subsection{双模倣関係と双模倣性：無限に続きうるプロセスの等価性を判定する}
+\subsection{双模倣関係と双模倣同値性：無限に続きうるプロセスの等価性を判定する}
 
-\noindent 本節では、\textgt{双模倣関係} (bisimulation) および\textgt{双模倣性} (bisimilarity) について扱います。
+\noindent 本節では、\textgt{双模倣関係} (bisimulation) および\textgt{双模倣同値性} (bisimilarity) について扱います。
 
-\subsection*{(双模倣-1) 状態遷移システムに対する非圏論的な双模倣関係・双模倣性}
+\subsection*{(双模倣-1) 状態遷移システムに対する非圏論的な双模倣関係・双模倣同値性}
+
+\noindent まずは、
+
+\begin{definition}[双模倣関係、双模倣同値性]
+	... 
+\end{definition}
+
+% \noindent 双模倣同値性は、状態間の同値関係のひとつであり、たとえば \begin{tikzcd}
+% 	\to\bullet \ar[loop right,"a"]
+% \end{tikzcd}
+% と \begin{tikzcd}
+% 	{\to\bullet} \ar[r,bend left=12pt,"a"] & {\bullet}~~~ \ar[l,bend left=12pt,"a"] 
+% \end{tikzcd}\!\!\!\!\!\! 
+% を同一視します。%\\ そして、
+\noindent 状態遷移システムをこの同値関係で割ることで、振る舞いを変えずに、状態数を削減することができます。%\vspace{10pt}
+\begin{framed}
+\noindent 例: 
+\begin{center}
+	\begin{tikzcd}[column sep=10pt]
+		& S & {} \ar[rr,rightsquigarrow,"\textrm{quotient by $\sim$}"] & ~~~~~ & {} & S/{\sim} & \\[-5pt]
+		& \circled{$s_0$} \ar[ld,"a"'] \ar[rd,"b"] & & & & \circled{$c_0$} \ar[loop right,"a"] \ar[d,"b"] & \\
+		\circled{$s_1$} \ar[loop left,leftarrow,"a"] \ar[d,"b"'] && \circled{$s_2$} & & & \circled{$c_1$} & \\
+		\circled{$s_3$} & 
+	\end{tikzcd}
+\end{center}
+補足: もとの LTS において $s_0\sim s_1$, $s_2\sim s_3$ なので、同値類は $c_0=\{s_0,s_1\}$, $c_1=\{s_2,s_3\}$ を取っている。
+\end{framed}
+
+\noindent このような状態どうしの双模倣同値性は、遷移系どうしの双模倣同値性を誘導します。
+
+\begin{definition}[遷移系の間の双模倣同値性]
+	... 
+\end{definition}
+
+\noindent これは状態遷移系どうしの同値関係のひとつであり、たとえば 
+\begin{tikzcd}
+	\to\bullet \ar[loop right,"a"]
+\end{tikzcd}
+と \begin{tikzcd}
+	{\to\bullet} \ar[r,bend left=12pt,"a"] & {\bullet}~~~ \ar[l,bend left=12pt,"a"] 
+\end{tikzcd}\!\!\!\!\!\! 
+を同一視します。
 
 ...
 
-確率的な双模倣性をどう定義するか？などの問題が生じます。そこで、圏論的に抽象化、一般化
+\noindent たとえば、確率的な双模倣性をどう定義するか？などの問題が生じます。そこで、圏論的に抽象化、一般化
 
-\subsection*{(双模倣-2) Aczel-Mendler の圏論的な双模倣関係・双模倣性}
+\clearpage
 
-\begin{definition}[双模倣関係、双模倣性]
+\subsection*{(双模倣-2) Aczel-Mendler の圏論的な双模倣関係・双模倣同値性}
+
+\noindent 前ページの「遷移系の間の双模倣性」を圏論的に一般化したものが、以下の定義です。
+
+\begin{definition}[余代数の双模倣関係、双模倣同値性]
 	$F:\Set\to\Set$ を $\Set$ 上の自己関手とし、$c:X\to FX$ と $d:X\to FY$ を $F$-余代数とします。関係 $R\subseteq X\times Y$ が $F$-\textgt{双模倣関係} (bisimulation) であるとは、ある写像 $e:R\to FR$ が存在し、2つの射影 $\pi_1,\pi_2$ をそれぞれの余代数の準同型とするものである。\vspace{3pt}
 	\begin{center}
 		\begin{tikzcd}
@@ -1897,23 +1943,9 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	2つの状態 $x\in X$ と $y\in Y$ が $F$-\textgt{双模倣} (bisimilar) であるとは、ある $F$-双模倣関係 $R\subseteq X\times Y$ が存在して $(x,y)\in R$ を満たすことである。
 \end{definition}
 
-\noindent 双模倣性は、遷移系の間の同値関係のひとつであり、たとえば \begin{tikzcd}
-	\to\bullet \ar[loop right,"a"]
-\end{tikzcd}
-と \begin{tikzcd}
-	{\to\bullet} \ar[r,bend left=12pt,"a"] & {\bullet}~~~ \ar[l,bend left=12pt,"a"] 
-\end{tikzcd}\!\!\!\!\!\! 
-が同一視されます。
+\noindent たとえば確率的な双模倣性は、以下のように与えられます。
 
-\begin{proposition}
-	... 
-\end{proposition}
-
-\begin{example}
-	... 
-\end{example}
-
-\begin{example}[マルコフ連鎖の間の双模倣関係]
+\begin{example}[マルコフ連鎖の双模倣関係、双模倣同値性]
 	関係 $R\subseteq X\times Y$ が余代数 $c:X\to\mathcal DX$ と $d:Y\to\mathcal DY$ の間の $\mathcal D$-双模倣関係であるとは、各 $(x,y)\in R$ ごとに、\textgt{重み関数} (weight function) $w_{x,y}:R\to[0,1]$ が存在して、
 	\[\sum_{(x',y')\in R}w_{x,y}(x',y')=1\] 
 	かつ、任意の $x'\in X$ について 
@@ -1926,6 +1958,17 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{align*}
 	であること。
 \end{example}
+
+
+\begin{proposition}
+	... 
+\end{proposition}
+
+\begin{example}
+	... 
+\end{example}
+
+
 
 \todo[inline]{書く}
 
