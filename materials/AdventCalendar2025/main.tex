@@ -1275,7 +1275,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\subsection{終余代数およびその構成}
+\subsection{終余代数の定義およびその構成のしかた}
 
 ここでは、終余代数の定義と、その構成のしかたを紹介します。まずは定義です。
 
@@ -1874,33 +1874,35 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\subsection{双模倣関係と双模倣同値性：無限に続きうるプロセスの等価性を判定する}
+\subsection{双模倣関係と双模倣性：システムの振る舞いの等価性を判定する}
 
-\noindent 本節では、\textgt{双模倣関係} (bisimulation) および\textgt{双模倣同値性} (bisimilarity) について扱います。
+\noindent 本節では、\textgt{双模倣関係} (bisimulation) および\textgt{双模倣性} (bisimilarity) について扱います。
+\\まずは、ラベル付き状態遷移系 (labeled transition system; LTS) についての双模倣関係・双模倣性を定義します。
 
-\subsection*{(双模倣-1) 状態遷移系に対する非圏論的な双模倣関係・双模倣同値性}
+\subsection*{(双模倣-その1) ラベル付き状態遷移系に対する非圏論的な双模倣関係・双模倣性}
 
-\noindent まずは、ラベル付き状態遷移系 (LTS) についての双模倣関係を定義します。
+% \noindent まずは、ラベル付き状態遷移系 (labeled transition system; LTS) についての双模倣関係を定義します。
 
-\begin{definition}[双模倣関係、双模倣同値性]
+\begin{definition}[双模倣関係、双模倣性]
 	$c:S\to\mathcal P(A\times S)$ をラベル付き状態遷移系とする。二項関係 $R\subseteq S\times S$ が\textgt{双模倣関係} (bisimulation) であるとは、任意の $s,t\in S$ と $a\in A$ について、以下の2つの条件を満たすこと。
 	\begin{enumerate}
 		\item 前向き条件: $sRt$ かつ $s\xrightarrow{a}s'$ ならば、ある $t'$ が存在して $t\xrightarrow{a} t'$ かつ $s'Rt'$ が成り立つ。
-		\begin{center}
+		\begin{center}\small
 			\begin{tikzcd}
 				\circled{\;$s$\;} \ar[r,"a"] \ar[d,dash,"R"] & \circled{\,$s'$\,} & & \circled{\;$s$\;} \ar[r,"a"] \ar[d,dash,"R"] & \circled{\,$s'$\,} \ar[d,dash,"R"] \\
 				\circled{\;$t$\;} & & & \circled{\,$t$\,} \ar[r,"a"] & \circled{\,$t'$\,}
 			\end{tikzcd}
 		\end{center}
 		\item 後ろ向き条件: $sRt$ かつ $t\xrightarrow{a}t'$ ならば、ある $s'$ が存在して $s\xrightarrow{a}s'$ かつ $s'Rt'$ が成り立つ。
-		\begin{center}
+		\begin{center}\small
 			\begin{tikzcd}
 				\circled{\;$s$\;} \ar[d,dash,"R"] & & & \circled{\;$s$\;} \ar[r,"a"] \ar[d,dash,"R"] & \circled{\,$s'$\,} \ar[d,dash,"R"] \\
 				\circled{\;$t$\;} \ar[r,"a"] & \circled{\,$t'$\,} & & \circled{\,$t$\,} \ar[r,"a"] & \circled{\,$t'$\,}
 			\end{tikzcd}
 		\end{center}
 	\end{enumerate}
-	状態 $s,t\in S$ が\textgt{双模倣同値} (bisimilar) であるとは、ある双模倣関係 $R$ が存在して $sRt$ が成り立つことをいう。このとき $s\sim t$ と書く。この関係 $\sim$ を\textgt{双模倣同値性} (bisimilarity) と呼ぶ。
+	状態 $s,t\in S$ が\textgt{双模倣} (bisimilar) であるとは、ある双模倣関係 $R$ が存在して $sRt$ が成り立つことをいう。\\ このとき $s\sim t$ と書く。この関係 $\sim$ を\textgt{双模倣性} (bisimilarity) と呼ぶ。
+	\[{\sim}=\bigcup\{R\subseteq S\times S\mid\textrm{$R$ は双模倣関係}\}\]
 \end{definition}
 
 % \noindent 双模倣同値性は、状態間の同値関係のひとつであり、たとえば \begin{tikzcd}
@@ -1910,9 +1912,17 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 % 	{\to\bullet} \ar[r,bend left=12pt,"a"] & {\bullet}~~~ \ar[l,bend left=12pt,"a"] 
 % \end{tikzcd}\!\!\!\!\!\! 
 % を同一視します。%\\ そして、
-\noindent 状態遷移系をこの同値関係で割る（つまり、双模倣的に区別できない状態をひとつの状態にまとめる）ことで、振る舞いを変えずに、状態数を削減することができます。%\vspace{10pt}
+\noindent 状態遷移系をこの``同値関係'' $\sim$ で割る（つまり、双模倣的に区別できない状態をひとつの状態にまとめる）ことで、\vspace{-1pt}\\振る舞いを変えずに、状態数を削減することができます。（たとえば 
+\begin{tikzcd}
+	{\to\bullet} \ar[r,bend left=12pt,"a"] & {\bullet}~~~ \ar[l,bend left=12pt,"a"] 
+\end{tikzcd}\!\!\!\!\!\! を
+\begin{tikzcd}
+	\to\bullet \ar[loop right, looseness=6pt,"a"]
+\end{tikzcd}
+にします。）
+%\vspace{10pt}
 \begin{framed}
-\noindent 例: 
+\noindent 例: \vspace{-2pt}
 \begin{center}
 	\begin{tikzcd}[column sep=10pt]
 		& S & {} \ar[rr,rightsquigarrow,"\substack{\textrm{quotient}\\\textrm{by $\sim$}}"] & ~~~~~ & {} & S/{\sim} & \\[-5pt]
@@ -1924,47 +1934,64 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 補足: もとの LTS において $s_0\sim s_1$, $s_2\sim s_3$ なので、同値類は $c_0=\{s_0,s_1\}$, $c_1=\{s_2,s_3\}$ を取っている。
 \end{framed}
 
+\noindent （なお、双模倣性 $\sim$ が同値関係であることはちゃんと次ページで示します。）
+
 \clearpage
 
-\noindent このような状態どうしの双模倣同値性は、遷移系どうしの双模倣同値性を誘導します。
+\noindent 以下では、双模倣関係 $R$ および双模倣性 $\sim$ についての基本的な性質を確認しましょう。
 
-\begin{definition}[遷移系の間の双模倣同値性]
+\begin{proposition} \label{prop:bisimulation-prop}
+	以下が成り立つ。
+	\begin{enumerate}
+		\item 恒等関係 $\Delta_S=\{(s,s)\mid s\in S\}$ は双模倣関係である。
+		\item $R$ が双模倣関係なら、その逆関係 $R^{-1}=\{(t,s)\mid sRt\}$ も双模倣関係である。
+		\item $R,Q$ が双模倣関係なら、$R\circ Q=\{(s,t)\mid \textrm{ある $u\in S$ が存在して $sQu$ かつ $uRt$}\}$ も双模倣関係である。
+	\end{enumerate}
+\end{proposition}
+
+\begin{proof}
 	... 
-\end{definition}
+\end{proof}
 
-\noindent これは状態遷移系どうしの同値関係のひとつであり、たとえば 
-\begin{tikzcd}
-	\to\bullet \ar[loop right,"a"]
-\end{tikzcd}
-と \begin{tikzcd}
-	{\to\bullet} \ar[r,bend left=12pt,"a"] & {\bullet}~~~ \ar[l,bend left=12pt,"a"] 
-\end{tikzcd}\!\!\!\!\!\! 
-を同一視します。
 
-...
+\begin{proposition} \label{prop:bisimilarity-prop}
+	双模倣性 $\sim$ は最大の双模倣関係である。
+\end{proposition}
 
-\noindent たとえば、確率的な双模倣性をどう定義するか？などの問題が生じます。そこで、圏論的に抽象化、一般化
+\begin{proof}
+	$\{R_i\}_{i\in I}$ を双模倣関係の族としたとき、$\bigcup_{i\in I} R_i$ も双模倣関係であることを示す。\\
+	$s\mathbin{(\bigcup_i R_i)}t$ かつ $s\xrightarrow{a}s'$ とする。このとき、ある $i\in I$ が存在して $sR_i t$ である。$R_i$ は双模倣関係なので、ある $t'$ が存在して $t\xrightarrow{a}t'$ かつ $s'R_it'$ である。したがって $s'\mathbin{(\bigcup_i R_i)}t'$ である。逆向きも同様。
+\end{proof}
+
+
+\begin{proposition}
+	双模倣性 $\sim$ は $S$ 上の同値関係である。
+\end{proposition}
+
+\begin{proof}
+	命題 \ref{prop:bisimulation-prop}, \ref{prop:bisimilarity-prop} から従う。
+\end{proof}
 
 \clearpage
 
-\subsection*{(双模倣-2) Aczel-Mendler の圏論的な双模倣関係・双模倣同値性}
+\subsection*{(双模倣-その2) Aczel-Mendler の圏論的な双模倣関係・双模倣性}
 
-\noindent 前ページの「遷移系の間の双模倣性」を圏論的に一般化したものが、以下の定義です。
+\noindent さて、たとえば「確率的な双模倣性をどう定義すればよいか？」などといった問題が自然に生じることでしょう。そこで、前ページの「LTSについての双模倣性」を圏論的に一般化して、圏論的な定義を与えましょう。
 
-\begin{definition}[余代数の双模倣関係、双模倣同値性]
-	$F:\Set\to\Set$ を $\Set$ 上の自己関手とし、$c:X\to FX$ と $d:X\to FY$ を $F$-余代数とします。関係 $R\subseteq X\times Y$ が $F$-\textgt{双模倣関係} (bisimulation) であるとは、ある写像 $e:R\to FR$ が存在し、2つの射影 $\pi_1,\pi_2$ をそれぞれの余代数の準同型とするものである。\vspace{3pt}
+\begin{definition}[余代数の双模倣関係、双模倣性]
+	$F:\Set\to\Set$ を $\Set$ 上の自己関手とし、$c:X\to FX$ と $d:X\to FY$ を $F$-余代数とします。関係 $R\subseteq X\times Y$ が $F$-\textgt{双模倣関係} (bisimulation) であるとは、ある $e:R\to FR$ が存在し、2つの射影 $\pi_1,\pi_2$ をそれぞれ余代数準同型とするものである。\vspace{3pt}
 	\begin{center}
 		\begin{tikzcd}
 			FX & FR \ar[l,"F\pi_1"'] \ar[r,"F\pi_2"] & FY \\
 			X \ar[u,"c"] & R \ar[l,"\pi_1"] \ar[r,"\pi_2"'] \ar[u,"e"'] & Y \ar[u,"d"']
 		\end{tikzcd}
 	\end{center}\vspace{3pt}
-	2つの状態 $x\in X$ と $y\in Y$ が $F$-\textgt{双模倣} (bisimilar) であるとは、ある $F$-双模倣関係 $R\subseteq X\times Y$ が存在して $(x,y)\in R$ を満たすことである。
+	2つの状態 $x\in X$ と $y\in Y$ が $F$-\textgt{双模倣} (bisimilar) であるとは、ある $F$-双模倣関係 $R\subseteq X\times Y$ が存在して $(x,y)\in R$ を満たすことをいう。このとき $x\sim y$ と書く。この関係 $\sim$ を\textgt{双模倣性} (bisimilarity) と呼ぶ。
 \end{definition}
 
 \noindent たとえば確率的な双模倣性は、以下のように与えられます。
 
-\begin{example}[マルコフ連鎖の双模倣関係、双模倣同値性]
+\begin{example}[マルコフ連鎖の双模倣関係、双模倣性]
 	関係 $R\subseteq X\times Y$ が、余代数 $c:X\to\mathcal DX$ と $d:Y\to\mathcal DY$ の間の $\mathcal D$-双模倣関係であるとは、各 $(x,y)\in R$ ごとに、\textgt{重み関数} (weight function) $w_{x,y}:R\to[0,1]$ が存在して、
 	\[\sum_{(x',y')\in R}w_{x,y}(x',y')=1\] 
 	かつ、任意の $x'\in X$ について 
@@ -1975,7 +2002,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\begin{align*}
 		d(y)(y')&=\sum_{(x',y')\in R}w_{x,y}(x',y')
 	\end{align*}
-	であること。
+	であることをいう。
 \end{example}
 
 
@@ -2077,7 +2104,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{small}
 		\\
 		\hline 
-		\textbf{Span's transitivity} does not hold. & \textbf{Cospan's transitivity} holds. 
+		\textbf{Span's transitivity} may not hold. & \textbf{Cospan's transitivity} holds. 
 		\\
 		\begin{small}
 		\begin{tikzcd}[row sep=8pt,column sep=2.8pt]
@@ -2266,7 +2293,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			\end{tikzcd}
 		\end{small}\vspace{15pt}
 	\end{center}
-	また、その帰結として、コスパンの推移性（pushout によってもたらされる）が成り立つ。\vspace{8pt}
+	また、その帰結として、コスパンの推移性（これは pushout によってもたらされる）が成り立つ。\vspace{8pt}
 	\begin{center}
 		\begin{small}
 		\begin{tikzcd}[row sep=8pt,column sep=2.8pt]
@@ -2295,7 +2322,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent【まとめ】
 \begin{itemize}
 	\item 個々の余代数に対し、意味は終余代数への一意な射で与えられ、意味の等しさは余帰納法で証明される！
-	\item 双模倣同値性は、最大の双模倣関係として与えられる。これはスパン同値性の一種である。
+	\item 双模倣性は、最大の双模倣関係として与えられる。これはスパン同値性の一種である。
 	% \item 振舞いの同値性には、スパン同値性とコスパン同値性がある。
 	\item 関手 $F$ が weak pullback preserving なら、スパンの推移性が成り立つ（のでスパン同値性が手に入る）。
 	\item それに対し、コスパン同値性はいつでも手に入る。なぜなら $U:\Coalg(F)\to\C$ が余極限を創出するから。
@@ -2311,7 +2338,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \noindent \ref{subsec:def-and-example-of-coalgebra}節でいくつか例を挙げながら紹介したように、余代数 (coalgebra) は「1ステップの状態遷移」を表します。\[c:X\to F(X)\] 
 
-\noindent より一般に、計算 (computation) は、以下のように表されます。（なお $X=Y$ とすれば余代数です。）\[f:X\to F(Y)\] 
+\noindent より一般に、計算 (computation) は、以下のように表されます。（なお、$X=Y$ とすれば余代数です。）\[f:X\to F(Y)\] 
 
 \noindent ここで「\textgt{ただの関数}」(pure function) と「\textgt{効果つき計算}」(effectful computation) を区別することは重要です。%\[\textrm{pure function} \quad f:X\to Y \qquad \textrm{vs} \qquad \textrm{effectful computation} \quad c:X\to F(Y)\]
 \begin{framed}
