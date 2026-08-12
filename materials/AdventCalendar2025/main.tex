@@ -162,7 +162,7 @@
 			\item \textgt{対話型定理証明} (interactive theorem proving): Lean, Rocq/Coq, Agda, など \\ $\cdots$数学的な証明を書くためのソフトウェア。
 			\item \textgt{自動定理証明} (automatic theorem proving): SAT/SMT solvers など \\ $\cdots$形式的な仕様が与えられると、証明や反例を探索し、その性質が成り立つかどうかを判定する。\vspace{8pt}
 		\end{itemize}
-		\item \textgt{モデル検査} (model checking): \\ $\cdots$正しさの問題 (correctness problem) を、状態遷移システム（有向グラフ）に関する問題に帰着させ、 \\~~~~\,その問題を、状態遷移システムに関する（広い意味で``グラフ理論的''な）アルゴリズムを使って解く。%\\~~~~（ここでの ``グラフ理論的'' とは、状態遷移システム (transition system) といった広い意味で。）
+		\item \textgt{モデル検査} (model checking): \\ $\cdots$正しさの問題 (correctness problem) を、状態遷移系（有向グラフ）に関する問題に帰着させ、 \\~~~~\,その問題を、状態遷移系に関する（広い意味で``グラフ理論的''な）アルゴリズムを使って解く。%\\~~~~（ここでの ``グラフ理論的'' とは、状態遷移システム (transition system) といった広い意味で。）
 		% \item \textgt{モデル検査} (model checking): \\ $\cdots$正しさの問題 (correctness problem) を、``グラフ理論的な問題''に帰着させ、\\~~~~\,``グラフ・アルゴリズム''を使ってその問題を解く。\\~~~~（ここでの ``グラフ理論的'' とは、状態遷移システム (transition system) といった広い意味で。）
 	\end{enumerate}
 \end{itemize}
@@ -250,7 +250,7 @@
 % \end{itemize}
 % 本記事では特定の形式化には限定せずに、一般論を展開することを目指します。
 
-\noindent モデルとしては、オートマトンやマルコフチェーンをはじめとする\textgt{状態遷移システム}と呼ばれるものを用います。また、\\
+\noindent モデルとしては、オートマトンやマルコフチェーンをはじめとする\textgt{状態遷移系}と呼ばれるものを用います。また、\\
 \noindent 仕様 $\varphi$ は典型的には、\textgt{時相論理式}（例えば $\mathbf{G}\,(p\to\mathbf{F}\,q)$「リクエスト$p$を送ったらレスポンス$q$が返ってくる」など）で書かれることが多いです。が、本記事では特定の形式化のしかたに限定せずに、一般論を展開することを目指します。\vspace{5pt}
 
 \noindent (補足: なお実際の場面では、複雑なシステムについて考える際に、現実のシステムをモデル化すること自体が困難ないしハイコストであったり、望む性質を適切に形式化して仕様として記述することが難しい、といったこともよくあります。そのような観点については本記事では扱いきれませんが、近年さまざまな発展があります。)
@@ -1093,9 +1093,9 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 情報科学における「\textgt{圏論的な手法の強み}」は、抽象的・俯瞰的であるがゆえに、\uwave{様々な種類の情報システムに対して、} \uwave{既存の議論や知見を再編することで新たな問題設定に柔軟に適応できる}点にあると言えます。
 
-本章で紹介する\textgt{余代数} (coalgebra) は、そのように、多様な状態遷移システム（例: 二分木グラフ、ストリーム、クリプキフレーム、オートマトン、マルコフ連鎖、マルコフ決定過程、etc.）を扱う際にとても役立つ道具です。
+本章で紹介する\textgt{余代数} (coalgebra) は、そのように、多様な状態遷移系（例: 二分木グラフ、ストリーム、クリプキフレーム、オートマトン、マルコフ連鎖、マルコフ決定過程、etc.）を扱う際にとても役立つ道具です。
 
-\subsection{余代数：状態遷移システムでの「1ステップの状態遷移」をとらえる}
+\subsection{余代数：状態遷移系での「1ステップの状態遷移」をとらえる}
 \label{subsec:def-and-example-of-coalgebra}
 
 \noindent まずは、\textgt{余代数} (coalgebra) および\textgt{余代数準同型} (coalgebra homomorphism) を定義します。
@@ -1878,12 +1878,29 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \noindent 本節では、\textgt{双模倣関係} (bisimulation) および\textgt{双模倣同値性} (bisimilarity) について扱います。
 
-\subsection*{(双模倣-1) 状態遷移システムに対する非圏論的な双模倣関係・双模倣同値性}
+\subsection*{(双模倣-1) 状態遷移系に対する非圏論的な双模倣関係・双模倣同値性}
 
-\noindent まずは、
+\noindent まずは、ラベル付き状態遷移系 (LTS) についての双模倣関係を定義します。
 
 \begin{definition}[双模倣関係、双模倣同値性]
-	... 
+	$c:S\to\mathcal P(A\times S)$ をラベル付き状態遷移系とする。二項関係 $R\subseteq S\times S$ が\textgt{双模倣関係} (bisimulation) であるとは、任意の $s,t\in S$ と $a\in A$ について、以下の2つの条件を満たすこと。
+	\begin{enumerate}
+		\item 前向き条件: $sRt$ かつ $s\xrightarrow{a}s'$ ならば、ある $t'$ が存在して $t\xrightarrow{a} t'$ かつ $s'Rt'$ が成り立つ。
+		\begin{center}
+			\begin{tikzcd}
+				\circled{\;$s$\;} \ar[r,"a"] \ar[d,dash,"R"] & \circled{\,$s'$\,} & & \circled{\;$s$\;} \ar[r,"a"] \ar[d,dash,"R"] & \circled{\,$s'$\,} \ar[d,dash,"R"] \\
+				\circled{\;$t$\;} & & & \circled{\,$t$\,} \ar[r,"a"] & \circled{\,$t'$\,}
+			\end{tikzcd}
+		\end{center}
+		\item 後ろ向き条件: $sRt$ かつ $t\xrightarrow{a}t'$ ならば、ある $s'$ が存在して $s\xrightarrow{a}s'$ かつ $s'Rt'$ が成り立つ。
+		\begin{center}
+			\begin{tikzcd}
+				\circled{\;$s$\;} \ar[d,dash,"R"] & & & \circled{\;$s$\;} \ar[r,"a"] \ar[d,dash,"R"] & \circled{\,$s'$\,} \ar[d,dash,"R"] \\
+				\circled{\;$t$\;} \ar[r,"a"] & \circled{\,$t'$\,} & & \circled{\,$t$\,} \ar[r,"a"] & \circled{\,$t'$\,}
+			\end{tikzcd}
+		\end{center}
+	\end{enumerate}
+	状態 $s,t\in S$ が\textgt{双模倣同値} (bisimilar) であるとは、ある双模倣関係 $R$ が存在して $sRt$ が成り立つことをいう。このとき $s\sim t$ と書く。この関係 $\sim$ を\textgt{双模倣同値性} (bisimilarity) と呼ぶ。
 \end{definition}
 
 % \noindent 双模倣同値性は、状態間の同値関係のひとつであり、たとえば \begin{tikzcd}
@@ -1893,12 +1910,12 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 % 	{\to\bullet} \ar[r,bend left=12pt,"a"] & {\bullet}~~~ \ar[l,bend left=12pt,"a"] 
 % \end{tikzcd}\!\!\!\!\!\! 
 % を同一視します。%\\ そして、
-\noindent 状態遷移システムをこの同値関係で割ることで、振る舞いを変えずに、状態数を削減することができます。%\vspace{10pt}
+\noindent 状態遷移系をこの同値関係で割る（つまり、双模倣的に区別できない状態をひとつの状態にまとめる）ことで、振る舞いを変えずに、状態数を削減することができます。%\vspace{10pt}
 \begin{framed}
 \noindent 例: 
 \begin{center}
 	\begin{tikzcd}[column sep=10pt]
-		& S & {} \ar[rr,rightsquigarrow,"\textrm{quotient by $\sim$}"] & ~~~~~ & {} & S/{\sim} & \\[-5pt]
+		& S & {} \ar[rr,rightsquigarrow,"\substack{\textrm{quotient}\\\textrm{by $\sim$}}"] & ~~~~~ & {} & S/{\sim} & \\[-5pt]
 		& \circled{$s_0$} \ar[ld,"a"'] \ar[rd,"b"] & & & & \circled{$c_0$} \ar[loop right,"a"] \ar[d,"b"] & \\
 		\circled{$s_1$} \ar[loop left,leftarrow,"a"] \ar[d,"b"'] && \circled{$s_2$} & & & \circled{$c_1$} & \\
 		\circled{$s_3$} & 
@@ -1906,6 +1923,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{center}
 補足: もとの LTS において $s_0\sim s_1$, $s_2\sim s_3$ なので、同値類は $c_0=\{s_0,s_1\}$, $c_1=\{s_2,s_3\}$ を取っている。
 \end{framed}
+
+\clearpage
 
 \noindent このような状態どうしの双模倣同値性は、遷移系どうしの双模倣同値性を誘導します。
 
@@ -1946,7 +1965,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent たとえば確率的な双模倣性は、以下のように与えられます。
 
 \begin{example}[マルコフ連鎖の双模倣関係、双模倣同値性]
-	関係 $R\subseteq X\times Y$ が余代数 $c:X\to\mathcal DX$ と $d:Y\to\mathcal DY$ の間の $\mathcal D$-双模倣関係であるとは、各 $(x,y)\in R$ ごとに、\textgt{重み関数} (weight function) $w_{x,y}:R\to[0,1]$ が存在して、
+	関係 $R\subseteq X\times Y$ が、余代数 $c:X\to\mathcal DX$ と $d:Y\to\mathcal DY$ の間の $\mathcal D$-双模倣関係であるとは、各 $(x,y)\in R$ ごとに、\textgt{重み関数} (weight function) $w_{x,y}:R\to[0,1]$ が存在して、
 	\[\sum_{(x',y')\in R}w_{x,y}(x',y')=1\] 
 	かつ、任意の $x'\in X$ について 
 	\begin{align*}
@@ -3062,7 +3081,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \subsubsection*{\fbox{(1) Kleisli approach}}
 \label{subsec:Kleisli-approach}
 \begin{itemize}
-	\item 状態遷移システム $\gamma:X\to TFX$ を考えます。
+	\item 状態遷移系 $\gamma:X\to TFX$ を考えます。
 	\begin{itemize}
 		\item $T$: 分岐をあらわす冪集合モナド $\mathcal P(-)$
 		\item $F$: 1ステップ遷移をあらわす関手 $1+\Sigma\times(-)$
@@ -3100,7 +3119,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \subsubsection*{\fbox{(2) Eilenberg-Moore approach}} 
 \label{subsec:EM-approach}
 \begin{itemize}
-	\item 状態遷移システム $\gamma:X\to FTX$ を考えます。
+	\item 状態遷移系 $\gamma:X\to FTX$ を考えます。
 	\begin{itemize}
 		\item $T$: 分岐をあらわす冪集合モナド $\mathcal P(-)$
 		\item $F$: 1ステップ遷移をあらわす関手 $2\times(-)^\Sigma$
@@ -5213,7 +5232,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \subsection{抽象化された一般論に基づいてさらなる具体例を取り出す}
 
-\noindent ここまでで、\textgt{述語変換子} (predicate transformer) の手に入れ方の一般論がわかったところで、今度はそれを適用して、\uwave{もっと他の応用例を取り出す}ことに試みましょう。ここでは、状態遷移システムにおける「\textgt{状態どうしの類似性}」を表す概念、\textgt{双模倣性} (bisimilarity) と \textgt{Wasserstein距離} (Wasserstein distance) を題材にして観察していきます。\vspace{10pt}%\\
+\noindent ここまでで、\textgt{述語変換子} (predicate transformer) の手に入れ方の一般論がわかったところで、今度はそれを適用して、\uwave{もっと他の応用例を取り出す}ことに試みましょう。ここでは、状態遷移系における「\textgt{状態どうしの類似性}」を表す概念、\textgt{双模倣性} (bisimilarity) と \textgt{Wasserstein距離} (Wasserstein distance) を題材にして観察していきます。\vspace{10pt}%\\
 
 \begin{oframed}
 \noindent 基本形はいつも以下の形です。
@@ -5224,7 +5243,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{array}\]
 \end{oframed}
 
-\subsubsection*{具体例 (a) 双模倣性: 非決定的な状態遷移システムにおける``状態どうしの類似性''の概念}
+\subsubsection*{具体例 (a) 双模倣性: 非決定的な状態遷移系における``状態どうしの類似性''の概念}
 
 \begin{itemize}
 	\item 
@@ -5236,7 +5255,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\subsubsection*{具体例 (b) Wasserstein距離: 確率的な状態遷移システムにおける``状態どうしの類似性''の概念}
+\subsubsection*{具体例 (b) Wasserstein距離: 確率的な状態遷移系における``状態どうしの類似性''の概念}
 
 \begin{itemize}
 	\item まず準備として、カップリング (coupling) を定義します。\\ 
