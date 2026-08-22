@@ -2626,7 +2626,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{definition}
 
 
-\begin{example}[モノイドによる計算効果] \label{ex:monoid-computational-effect}
+\begin{example}[モノイドによる計算効果] \label{ex:monoid-computational-effect} \label{ex:writer-monad}
 	\kenten{モノイド} $(M,e,m)$ に対し、$T:=M\otimes(-)$ は\kenten{モナド}をなす。
 	\begin{itemize}
 		\item モナドの単位 $X\xrightarrow{\,\eta_X\,} M\otimes X$ は、以下で与えられる。（なお $I\xrightarrow{e} M$ はモノイドの単位。）
@@ -2653,7 +2653,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{center}
 		% \end{multicols}
 	\end{enumerate}\vspace{2pt}
-	なお、$T=M\otimes(-)$ が \textgt{\kenten{可換モナド}} であるのは、$M$ が \textgt{\kenten{可換モノイド}} であるとき、かつそのときに限る。\vspace{6pt}
+	このような $(T,\eta,\mu)$ のことを\textgt{ライターモナド} (writer monad) と呼ぶ。\vspace{10pt}\\
+	なお、$T=M\otimes(-)$ が \textgt{\kenten{可換モナド}} であるのは、$M$ が \textgt{\kenten{可換モノイド}} であるときかつそのときに限る。\vspace{6pt}
 	\begin{center}
 		\begin{scriptsize} %\!\!\!\!\!
 			\begin{tikzcd}[row sep=0mm,column sep=15pt]
@@ -2671,16 +2672,17 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			& M &
 		\end{tikzcd}
 		\end{footnotesize}
-	\end{center}
+	\end{center}\vspace{6pt}
+	また、この $T$ が\kenten{非可換モナド}であるような例としては、自由モノイド（それゆえ\kenten{非可換}モノイド）$\Sigma^\ast$について $T=\Sigma^\ast\times(-)$ などが代表例としてよく用いられる。
 \end{example}
 
-\begin{supplement}%[writerモナド]
-	上の\textgt{例\ref{ex:monoid-computational-effect}}が自由モノイド（それゆえ\kenten{非可換}）の場合、\textgt{ライターモナド} (writer monad) $T=\Sigma^\ast\times(-)$と呼ぶ。これは、各実行ごとに文字を吐き出していき、それを順に並べていって文字列にして出力するモナドである。
-\end{supplement}
+% \begin{supplement}%[writerモナド]
+% 	上の\textgt{例\ref{ex:monoid-computational-effect}}が自由モノイド（それゆえ\kenten{非可換}）の場合、\textgt{ライターモナド} (writer monad) $T=\Sigma^\ast\times(-)$と呼ぶ。これは、各実行ごとに文字を吐き出していき、それを順に並べていって文字列にして出力するモナドである。
+% \end{supplement}
 
 \clearpage
 
-\begin{example}[コモノイドによる計算効果]
+\begin{example}[コモノイドによる計算効果] \label{ex:reader-monad}
 	\kenten{コモノイド} $(C,!_C,\Delta_C)$ に対し、$T:=(-)^C=[C,-]$ は\kenten{モナド}をなす。
 	\begin{itemize}
 		\item モナドの単位 $X\xrightarrow{\,\eta_X\,}X^C$ は、以下で与えられる。（なお $C\xrightarrow{!_C}I$ はコモノイドの余単位。）
@@ -2723,12 +2725,12 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	このような $(T,\eta,\mu)$ のことを\textgt{リーダーモナド} (reader monad) と呼ぶ。
 \end{example}
 
-\noindent では、ここまで writer monad と reader monad を見ましたが、それらを整理しておきましょう。\vspace{-3pt}
+\noindent では、これまで writer monad と reader monad を見ましたが、それらを整理しておきましょう。\vspace{-3pt}
 
 \begin{center}
 	\begin{tabular}{|c|c|}
 		\hline
-		\textgt{ライターモナド} (writer monad) & \textgt{リーダーモナド} (reader monad) \\ \hline
+		\textgt{ライターモナド} (writer monad) $\cdots\cdots$ 例\ref{ex:writer-monad}  & \textgt{リーダーモナド} (reader monad) $\cdots\cdots$ 例\ref{ex:reader-monad} \\ \hline
 		$(M,\,1\!\xrightarrow{e}\!M,\,M\times M\!\xrightarrow{m}\!M)$: monoid in $(\Set,1,\times)$ & $(C,\,C\xrightarrow{!_C}1,\,C\xrightarrow{\Delta_C}C\times C)$: comonoid in $(\Set,1,\times)$ \\ 
 		$\implies$ $M\times(-)$: monad on $\Set$ & $\implies$ $(-)^C=[C,-]$: monad on $\Set$ \\\hline
 		効果つき計算 $f:X\to M\times X$ & 効果つき計算 $f:X\to Y^C$ (i.e. $f:C\times X\to Y$) \\
@@ -2738,7 +2740,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \vspace{10pt}
 
-\noindent そこで、両者を組み合わせて、以下の随伴から得られるモナドを考えましょう。それが\textgt{ステートモナド} (state monad) と呼ばれるものです。（効果つき計算 $f:V\times X\to V\times Y$ は、入力と出力を両方扱うことができます。）\vspace{8pt}
+\noindent ここで、「出力を吐き出す」関手 $V\times(-)$ と「入力を受け取る」関手 $(-)^V$ を組み合わせて、随伴から得られるモナドを考えましょう。それが\textgt{ステートモナド} (state monad) と呼ばれるものです。（効果つき計算 $f:V\times X\to V\times Y$ は、入力と出力を両方扱うことができます。）\vspace{5pt}
 
 \begin{center}
 	\begin{tikzcd}[row sep=35pt]
