@@ -2590,7 +2590,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{definition}
 
 \begin{supplement}
-	$\Set$上のモナドは強モナドである。（$\Set$を、直積$\times$をテンソル積として持った対称モノイダル圏と見る！）
+	任意の$\Set$上のモナドは、$(\Set,\times,1)$上の強モナドである。\\（$\Set$を、直積$\times$をテンソル積として持った対称モノイダル圏と見る！）\\（任意の関手 $T:\Set\to\Set$ には、カノニカルな strength が入る！）
 \end{supplement}
 
 \noindent 強モナドのストレングス $\mathrm{str}_{X,Y}:X\otimes T(Y)\to T(X\otimes Y)$ の直観は、「\kenten{使っていない引数には触るな}！」です。
@@ -2740,7 +2740,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \vspace{10pt}
 
-\noindent ここで、「出力を吐き出す」関手 $V\times(-)$ と「入力を受け取る」関手 $(-)^V$ を組み合わせて、随伴から得られるモナドを考えましょう。それが\textgt{ステートモナド} (state monad) と呼ばれるものです。（効果つき計算 $f:V\times X\to V\times Y$ は、入力と出力を両方扱うことができます。）\vspace{5pt}
+\noindent ここで、同一の集合 $V$ について、「出力を吐き出す」関手 $V\times(-)$ と「入力を受け取る」関手 $(-)^V$ を組み合わせて、随伴から得られるモナドを考えましょう。それが\textgt{ステートモナド} (state monad) と呼ばれるものです。（効果つき計算 $f:V\times X\to V\times Y$ は、入力と出力を両方扱うことができます。）\vspace{5pt}
 
 \begin{center}
 	\begin{tikzcd}[row sep=35pt]
@@ -4269,7 +4269,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{definition}
 
 
-\noindent さて、先ほどの代数理論とラヴェア理論は、次のように対応しています。
+\noindent さて、先ほどの代数理論とラヴェア理論は、次のように互いに対応しています。
 \[\left.\left.\AXC{} \UIC{$x_1,\dots,x_n\vdash x_i$} \DisplayProof \qquad\middle/\hspace*{-12pt}\middle/\qquad \begin{tikzcd} n \ar[r,"\pi_i"] & 1\\[-25pt] \rotatebox{90}{$=$}\\[-25pt] 1\times\cdots\times 1 \end{tikzcd} \right.\right.\]
 \[\left.\left.\AXC{$\sigma\in\Sigma_m$}\AXC{$x_1,\dots,x_n\vdash t_j$ ~ ($\forall j\in[1,m]$)}\BIC{$x_1,\dots,x_n\vdash\sigma(t_1,\dots,t_m)$}\DisplayProof \qquad\middle/\hspace*{-12pt}\middle/\qquad \begin{tikzcd}[row sep=0pt]
 	& 1 \\
