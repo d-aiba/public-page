@@ -2617,7 +2617,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent 強モナドのうち、特に可換モナドと呼ばれるものがあります。\vspace{-2pt}
 
 \begin{definition}[可換モナド]
-	\textgt{可換モナド}とは、\textgt{二重-ストレングス} (double-strength) $T(X)\otimes T(Y)\to T(X\otimes Y)$ を持った強モナドである。なお、二重-ストレングスとは、以下の図式のように、左右のストレングスから構成され、$\mu\circ T(str^L)\circ str^R=\mu\circ T(str^R)\circ str^L$ というふうに一致するものをいう。（可換性）\vspace{5pt}
+	\textgt{可換モナド}とは、\textgt{二重ストレングス} (double strength) $dst_{X,Y}:T(X)\otimes T(Y)\to T(X\otimes Y)$ を持った強モナドである。なお、二重ストレングスとは、以下の図式のように、左右のストレングスから構成され、$\mu\circ T(str^L)\circ str^R=\mu\circ T(str^R)\circ str^L$ を満たすものをいう。（可換性）\vspace{5pt}
 	\begin{center}
 		\begin{tikzcd}[row sep=3pt,column sep=35pt]
 			& T(X\otimes T(Y)) \ar[r,"T(str^L)"] & T(T(X\otimes Y)) \ar[rd,"\mu"]\\
@@ -2742,15 +2742,23 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \vspace{10pt}
 
-\noindent ここで、同一の集合 $V$ について、「出力を吐き出す」関手 $V\times(-)$ と「入力を受け取る」関手 $(-)^V$ を組み合わせて、随伴から得られるモナドを考えましょう。それが\textgt{ステートモナド} (state monad) と呼ばれるものです。（効果つき計算 $f:V\times X\to V\times Y$ は、入力と出力を両方扱うことができます。）\vspace{5pt}
+\noindent ここで、同一の集合 $S$ について、「出力を吐き出す」関手 $S\times(-)$ と「入力を受け取る」関手 $(-)^S$ を組み合わせて、随伴から得られるモナドを考えましょう。それが\textgt{ステートモナド} (state monad) と呼ばれるものです。（効果つき計算 $f:S\times X\to S\times Y$ は、入力と出力を両方扱うことができます。）\vspace{5pt}
 
 \begin{center}
 	\begin{tikzcd}[row sep=35pt]
-		\Set \ar[d,bend left=20pt,"(-)^V"] \\
-		\Set \ar[u,bend left=20pt,"V\times(-)","\dashv"'] 
+		\Set \ar[d,bend left=20pt,"(-)^S"] \\
+		\Set \ar[u,bend left=20pt,"S\times(-)","\dashv"'] 
 	\end{tikzcd}
-	\quad $\implies$ \quad $(V\times(-))^V$: a state monad on $\Set$ 
+	\quad $\implies$ \quad $(S\times(-))^S$: a state monad on $\Set$ 
 \end{center}
+
+\clearpage
+
+\begin{example}[ステートモナド]
+	... 
+\end{example}
+
+\clearpage
 
 
 % \begin{itemize}
@@ -2764,7 +2772,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 % 	\end{itemize}
 % \end{itemize}
 
-\clearpage
+
 
 % \noindent いくつかモナドの例を挙げます。
 
@@ -4131,9 +4139,18 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	$F:\Set\to\Set$ と $X\in\Set$ が与えられたとき、\[\begin{array}{cccc}X\times F(-):&\Set&\longrightarrow&\Set\\&Y&\longmapsto& X\times FY\end{array}\] を考えて、以下の終余代数 $\nu\,(X\times F(-))$（各 node が $x\in X$ と $\sigma\in\Sigma$ でラベル付けされ、各 node が $|\sigma|$-個の子を持つ、possibly infinite な木） \[\left(\begin{array}{c}X\times F(F^\infty X)\\ ~\substack{\cong}\uparrow\substack{\textrm{final}}\\ F^\infty X\end{array}\right)\] を作ると、この $F^\infty$ が\textgt{余自由コモナド}です。%$X\xmapsto{~~~~}F^\infty X$
 \end{itemize}
 
-% \begin{definition}
-	
-% \end{definition}
+\clearpage
+
+\noindent ここまでの話（自由モナドと余自由コモナド）についてより正確に理解しておきましょう。
+
+\begin{definition}[自由モナド]
+	... 
+\end{definition}
+
+\begin{definition}[余自由コモナド]
+	... 
+\end{definition}
+
 
 
 \clearpage
@@ -4157,7 +4174,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		&=(\Sigma_n)_{n\in\omega}
 	\end{align*}
 	なお、各 $\sigma\in\Sigma_n$ を、\textgt{$n$項演算子} ($n$-ary operation) と呼ぶことにする。\\
-	また、$E$ を等式の集合とする。なお、$E$ に属する各等式 $({s}={t})\in E$ を、\textgt{公理} (axiom) と呼ぶ。 \\
+	また、$E$ を\textgt{等式の集合}とする。なお、$E$ に属する各等式 $({s}={t})\in E$ を、\textgt{公理} (axiom) と呼ぶ。 \\
 	ここで、\textgt{代数仕様} (algebraic specification) を、代数シグニチャ $\Sigma$ と等式の集合 $E$ の組 $(\Sigma,E)$ とする。
 \end{definition}
 \noindent たとえば、モノイドの代数仕様は以下の通りです。
@@ -4219,6 +4236,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{definition}[有限集合圏 FinSet]
 	... 
 \end{definition}
+
+\begin{remark}
+	各有限集合を、自然数と同一視する。（フォン・ノイマン構成） ...... もっとちゃんと書く！
+\end{remark}
 
 \begin{definition}[ラヴェア理論]
 	\textgt{ラヴェア理論} (Lawvere theory) とは、有限直積を持つ圏 $\mathbb L$ に、有限直積を保存し、対象上全単射 (bijective on objects) であるような関手 
