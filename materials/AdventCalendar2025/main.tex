@@ -4024,23 +4024,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent では、\kenten{入力側}にも\kenten{出力側}にも構造が入った computation を考えたい場合はどうすればいいでしょうか。\\ その場合、モナドとコモナドの間の distributive law を使います。
-\begin{itemize}
-	\item \underline{monad, comonad, and distributive law}: structured input and output
-\end{itemize}
-いま、$T$: monad, $M$: comonad とし、$MX \xrightarrow{~f~} TY$ という computation を考えたいです。\\ このとき、合成
-\begin{prooftree}
-	\AXC{$MX\xrightarrow{~f~} TY$}
-	\AXC{$MY\xrightarrow{~g~} TZ$} \RL{aim}
-	\BIC{$MX\xrightarrow{~g\,\odot\,f~} TZ$}
-\end{prooftree}
-は、分配則を用いて以下のように与えられます。
-\begin{center}
-	\begin{tikzcd}
-		M(MX) \ar[r,"Mf"] & MTY \ar[r,"\lambda_Y"] & TMY \ar[r,"Tg"] & T(TZ) \ar[d,"\mu_Z"] \\
-		MX \ar[u,"\delta_X"] &&& TZ
-	\end{tikzcd}
-\end{center}
+\noindent では、\kenten{入力側}にも\kenten{出力側}にも構造が入った computation を考えたい場合はどうすればいいでしょうか。\\ その場合、モナドとコモナドの間の\textgt{分配則} (distributive law) を使います。
 \begin{definition}
 	モナド $T$ とコモナド $M$ の間の\textgt{分配則} (distributive law) とは、自然変換 $\lambda:MT\Rightarrow TM$ であって、モナド構造とコモナド構造に整合的なものである。
 	\begin{center}
@@ -4075,6 +4059,23 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{tikzcd}
 	\end{center}
 \end{definition}
+\begin{itemize}
+	\item \underline{monad, comonad, and distributive law}: structured input and output
+\end{itemize}
+例として、$T$: monad, $M$: comonad とし、$MX \xrightarrow{~f~} TY$ という computation を考えましょう。\\ このとき、合成
+\begin{prooftree}
+	\AXC{$MX\xrightarrow{~f~} TY$}
+	\AXC{$MY\xrightarrow{~g~} TZ$} \RL{aim}
+	\BIC{$MX\xrightarrow{~g\,\odot\,f~} TZ$}
+\end{prooftree}
+は、分配則を用いて以下のように与えられます。
+\begin{center}
+	\begin{tikzcd}
+		M(MX) \ar[r,"Mf"] & MTY \ar[r,"\lambda_Y"] & TMY \ar[r,"Tg"] & T(TZ) \ar[d,"\mu_Z"] \\
+		MX \ar[u,"\delta_X"] &&& TZ
+	\end{tikzcd}
+\end{center}
+
 
 \begin{example}
 % \noindent 
@@ -4344,18 +4345,18 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\begin{itemize}
 		\item 図式 $D:\J\to\C$ の余極限 $\colim D$ が\textgt{フィルターづけられた余極限} (filtered colimit) であるとは、圏 $\J$ が\textgt{フィルターづけられた圏} (filtered category) であること。\vspace{8pt}
 		\begin{itemize}
-			\item[\bullet~] 圏 $\J$ が\textgt{フィルターづけられた圏} (filtered category) であるとは、以下の1, 2 (``unified in the end'') \vspace{3pt}
+			\item[\bullet~] $\J$ が\textgt{フィルターづけられた圏} (filtered category) であるとは、以下1, 2を満たすこと。\begin{scriptsize}(``unified in the end'')\end{scriptsize} \vspace{3pt}
 			\begin{enumerate}
-				\item 各 $I_1,I_2,\dots,I_n\in\J$（有限な族）に対し、ある $I\in\J$ と $u_i:I_i\to I$ (for all $i\in[1,n]$) が存在する
+				\item 各 $I_1,I_2,\dots,I_n\in\J$（有限な族）に対し、ある $I\in\J$ と $u_i:I_i\to I$ (for all $i\in[1,n]$) が存在する。
 				\begin{center}
 					\begin{tikzcd}[row sep=15pt]
-						I_1 \ar[rd] & \\
+						I_1 \ar[rd] & \\[-5pt]
 						I_2 \ar[r] \ar[d,"\vdots",phantom] & \exists\, I \\
 						I_n \ar[ru] & 
 					\end{tikzcd}
 				\end{center}
 				% かつ、\vspace{3pt}
-				\item 各 \!\!\begin{tikzcd}[column sep=20pt] I \ar[r,shift left=2.6pt,"u"] \ar[r,shift right=2.6pt,"v"'] & J\end{tikzcd}\!\! に対し、ある対象 $K\in\J$ と射 \!\!\begin{tikzcd}[column sep=20pt] J \ar[r,"w"] & K \end{tikzcd} が存在し、$w\circ u=w\circ v$ となる
+				\item 各 \!\!\begin{tikzcd}[column sep=20pt] I \ar[r,shift left=2.6pt,"u"] \ar[r,shift right=2.6pt,"v"'] & J\end{tikzcd}\!\! に対し、ある対象 $K\in\J$ と射 \!\!\begin{tikzcd}[column sep=20pt] J \ar[r,"w"] & K \end{tikzcd} が存在し、$w\circ u=w\circ v$ となる。
 				\begin{center}
 					\begin{tikzcd}
 						I \ar[r,shift left=2.6pt,"u"] \ar[r,shift right=2.6pt,"v"'] & J \ar[r,"\exists\,w"] & \exists\,K
