@@ -1157,7 +1157,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent いくつか例を挙げます。余代数が「\textgt{1ステップの状態遷移}」をとらえるものであることを理解しましょう。
 
 \begin{example}
-	二分木グラフは、$\Set$ 上の関手 $F(X)=(X\times X)+1$ に対する余代数 $c:X\to F(X)$ として与えられる。
+	二分木グラフは、$\Set$ 上の関手 $F(X)=(X\times X)+1$ に対する余代数 $c:X\to F(X)$ である。
 	\[\textrm{分岐}\quad c(x)=(x',x'') \qquad\textrm{or}\qquad \textrm{停止}\quad c(x)=\ast\]
 	\begin{small}
 	\begin{center}
@@ -1199,7 +1199,19 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \clearpage
 
 \begin{example}
-	様相論理におけるクリプキフレーム (Kripke frame) は、余代数 $\delta:X\to\mathcal P(X)$ で与えられる。\[\begin{array}{cccl}\delta:&X&\longrightarrow&\mathcal P(X)\\&\rotatebox{90}{$\in$}&&~~\rotatebox{90}{$\in$}\\&x&\longmapsto&\delta(x)=\{x'\mid x\leadsto x'\}\end{array}\]
+	ストリームオートマトン $c:A^\omega\to A\times A^\omega$ は、$\Set$ 上の関手 $F(-)=A\times (-)$ に対する余代数である。
+	たとえば以下の図は、$abbbbb\cdots$ というストリーム（無限長の文字列）を受理するストリームオートマトンである。\vspace{10pt}
+	\begin{center}
+		\begin{tikzcd}
+			{} \ar[r,shorten <=16pt,shorten >= -3pt]&\underset{abbbbb\dots}{\circled{\hspace*{1pt}$q_0$\hspace*{1pt}}} \ar[r,"a"] & \underset{~~bbb\dots}{\underset{~bbbb\dots}{\underset{bbbbb\dots}{\circled{\hspace*{1pt}$q_1$\hspace*{1pt}}}}} \ar[loop right,"b"]
+		\end{tikzcd}
+	\end{center}
+	ストリーム $x=(x_1,x_2,x_3,\dots)$ について、$\head(x)=x_1,\,\tail(x)=(x_2,x_3,\dots)$ と書く。\[c(x)=(\head(x),\tail(x))\]
+	（ストリームに関しては p.\,\pageref{page:list-and-stream} でさらに詳しく扱います。）
+\end{example}
+
+\begin{example}
+	様相論理におけるクリプキフレーム (Kripke frame) は、余代数 $\gamma:X\to\mathcal P(X)$ で与えられる。\[\begin{array}{cccl}\gamma:&X&\longrightarrow&\mathcal P(X)\\&\rotatebox{90}{$\in$}&&~~\rotatebox{90}{$\in$}\\&x&\longmapsto&\gamma(x)=\{x'\mid x\leadsto x'\}\end{array}\]
 	\begin{small}
 	\begin{center}
 		\begin{tikzcd}[row sep=0pt]
@@ -1209,6 +1221,36 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{tikzcd}
 	\end{center}
 	\end{small}
+	なお、クリプキフレーム間の余代数準同型は、いわゆる bounded morphism (pseudo morphism) である。
+	\begin{multicols}{2}
+		\begin{center}
+			$\delta\circ f=\mathcal Pf\circ\gamma$ \qquad
+			\begin{tikzcd}
+				\mathcal P(S) \ar[r,"\mathcal P(f)"] & \mathcal P(S') \\
+				S \ar[r,"f"'] \ar[u,"\gamma"] & S' \ar[u,"\delta"']
+			\end{tikzcd}
+		\end{center}
+		%
+		% \begin{center}
+		% 	% \begin{tikzcd}
+		% 	% \end{tikzcd}
+		% \end{center}
+		%
+		% \begin{center}
+		\begin{framed}
+			$\{y'\in S'\mid f(x)R'y'\}=\{f(y)\mid xRy\}$
+			\begin{itemize}
+				\item ($\supseteq$) $xRy\implies f(x)R'f(y)$
+				\item ($\subseteq$) $f(x)R'y'\implies \exists y:xRy\mathbin{\&}f(y)=y'$
+			\end{itemize}\vspace{-7pt}
+		\end{framed}
+		% \end{center}
+	\end{multicols}
+	% \begin{center}
+	% 	\begin{tikzcd}
+			
+	% 	\end{tikzcd}
+	% \end{center}
 \end{example}
 
 \begin{example}%[決定性オートマトン・非決定性オートマトン]
@@ -1273,16 +1315,18 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% 	\UIC{$X\to\mathcal P(A\times X)$}
 	% \end{prooftree}
 	% \vspace{-5pt}
-	% \vspace{5pt}
-
-	% （非決定的とは、次に遷移する状態が複数存在しうるということ。）
+	\vspace{5pt}
+	（非決定性 (nondeterminism) とは、次に遷移する状態が複数存在しうるということ。\\たとえば上の例だと、状態 $x_2$ から文字 $b$ を食って状態 $x_2$ か $x_3$ かのいずれかに行く。）
 \end{example}
 
-% \clearpage
+\clearpage
 
 \begin{example} \label{ex:MarkovChain}
 	マルコフ連鎖は、余代数 $\gamma:X\to \mathcal D(X)$ で与えられる。なお、関手 $\mathcal D:\Set\to\Set$ は
-	\begin{align*}\mathcal D(X)&=\{d:X\to [0,1]\mid\textstyle\sum d(x)=1\}\\&=\{\textstyle\,\sum p_i\ket{x_i}\,\textrm{, where each $p_i$ is a probability $d(x_i)\in[0,1]$.}\}\\\mathcal D(f)&:\mathcal D(X)\to\mathcal D(Y)\\&\mathcal D(f)(\textstyle\sum p_i\ket{x_i})=\textstyle\sum p_i\ket{f(x_i)}\end{align*}
+	\begin{align*}
+		\mathcal D(X)&=\{d:X\to [0,1]\mid\textstyle\sum d(x)=1,\,\textrm{finite support}\;(\textrm{i.e.}\;\{x\in X\mid d(x)>0\}\;\textrm{is finite})\,\}\\
+		&=\{\textstyle\,\sum p_i\ket{x_i}\,\textrm{, where each $p_i$ is a probability $d(x_i)\in[0,1]$.}\}\\\mathcal D(f)&:\mathcal D(X)\to\mathcal D(Y)\\&\mathcal D(f)(\textstyle\sum p_i\ket{x_i})=\textstyle\sum p_i\ket{f(x_i)}
+	\end{align*}
 	と定められているものとする。
 	% \begin{multicols}{2}
 	\begin{center}
@@ -1300,6 +1344,12 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% 分布に対して次の記法を用いる。
 	$\mathcal D(X)=\{\, d: X \to [0,1]\mid \sum d(x)=1 \,\}$ の各要素を $\sum p_i\lvert x_i\rangle$ と書く。ここで、各 $p_i$ は確率 $d(x_i)\in[0,1]$ である。例えば、コイントス $X=\{H,T\}$ を考えるとき、「公平なコイン」の分布は $d=\tfrac12\lvert H\rangle+\tfrac12\lvert T\rangle$ と書ける。なお、$\lvert H\rangle=\left(\begin{smallmatrix}1\\0\end{smallmatrix}\right)$ および $\lvert T\rangle=\left(\begin{smallmatrix}0\\1\end{smallmatrix}\right)$ である。
 \end{remark}
+
+
+\begin{example}[マルコフ決定過程]
+	... 
+\end{example}
+
 
 \clearpage
 
@@ -1345,7 +1395,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	2) 第二に、$\zeta\circ g=\id_{F(Z)}$ である。（以下の簡単な計算により示せる。）
 	\begin{align*}
 		\zeta\circ g&=F(g)\circ F(\zeta)&(\textrm{by definition of }g)\\
-		&=F(g\circ\zeta)&(\textrm{functionality of }F)\\
+		&=F(g\circ\zeta)&(\textrm{functoriality of }F)\\
 		&=F(\id_Z)&(g\circ\zeta=\id_Z\textrm{ as we proved})\\
 		&=\id_{F(Z)}&(\textrm{because } F \textrm{ is a functor})
 	\end{align*}
@@ -1402,7 +1452,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent ここで「\textgt{終余代数意味論}」(final coalgebra semantics) という考え方について取り上げます。\\
 \noindent 終$F$-余代数は、あらゆる個々の$F$-余代数から一意に射を受け取る対象です。
 
-\todo[inline]{続きを書く}
+\todo[inline]{続きを書く。beh など。}
 
 \clearpage
 
@@ -1650,7 +1700,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{tikzcd}\vspace{3pt}
 \end{center}
 
-\noindent このとき、$\nu F$ は、そのような木たちの全体なので、$A$ 上の言語全体、つまり $2^{A^\ast}$ となります。\\（補足: 各言語 $L\subseteq A^\ast$ は、「各語 $w\in A^\ast$ を受理するかどうか」を 0 か 1 で返す関数 $L:A^\ast\to 2$ です。）
+\noindent このとき、$\nu F$ は、そのような木たちの全体なので、$A$ 上の言語全体 (all $A$-languages) つまり $2^{A^\ast}$ となります。\\（補足: 各言語 $L\subseteq A^\ast$ は、「各語 $w\in A^\ast$ を受理するかどうか」を 0 か 1 で返す関数 $L:A^\ast\to 2$ です。）
 \begin{align*}
 	\mu F &= \emptyset \\
 	\nu F &= 2^{A^\ast} \;(\cong \mathcal P(A^\ast))
@@ -1730,7 +1780,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent 始代数と終余代数の典型例として、\textgt{リスト} (list) と\textgt{ストリーム} (stream)、そして両者の違いを見ておきましょう。
+\noindent 始代数と終余代数の典型例として、\textgt{リスト} (list) と\textgt{ストリーム} (stream)、そして両者の違いを見ておきましょう。 \label{page:list-and-stream}
 
 \begin{definition}[リスト]
 	集合 $A$ 上の\textgt{リスト}の集まり$A^\ast$は、次のように\kenten{帰納的}に定義される。
@@ -1749,7 +1799,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{itemize}
 \end{definition}
 
-\noindent 集合$A$を固定します。ここで、$A$上の\textgt{リスト}の集まり $A^\ast$ と、$A$上の\textgt{ストリーム}の集まり $A^\omega$ は、それぞれ
+\noindent $A$を集合とします。ここで、$A$上の\textgt{リスト}の集まり $A^\ast$ と、$A$上の\textgt{ストリーム}の集まり $A^\omega$ は、それぞれ
 \[A^\ast\,\cong\,1+A\times A^\ast,\qquad A^\omega\,\cong\,A\times A^\omega\]
 という構造を持ちます。（前ページの表も参照！\,それぞれ \textgt{始$1+A\times(-)$-代数} と \textgt{終$A\times(-)$-余代数} です！）
 \begin{itemize}
@@ -1797,6 +1847,26 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\mathbf{ones}&=(1,\mathbf{ones})
 \end{align*}
 これらの well-definedness は、定義を余代数として書き表すことで保証されます。
+\begin{multicols}{2}
+	\begin{center}
+		% \begin{tikzcd}
+		% 	A\times(A^\omega\times A^\omega) \ar[r,"\id_A\times\mathbf{zip}"] & A\times A^\omega\\
+		% 	A^\omega\times A^\omega \ar[r,"\mathbf{zip}"'] \ar[u,"{\delta(\alpha,\beta):=(\mathbf{head}(\alpha),(\beta,\mathbf{tail}(\alpha)))}"] & A^\omega \ar[u,"{\langle\mathbf{head},\mathbf{tail}\rangle}"']
+		% \end{tikzcd}
+		\begin{tikzcd}
+			A\times(A^\omega\times A^\omega) \ar[r,"\id_A\times\mathbf{zip}"] & A\times A^\omega\\
+			A^\omega\times A^\omega \ar[r,"\mathbf{zip}"'] \ar[u,"\substack{(\alpha,\beta)\;\longmapsto\;\\(\mathbf{head}(\alpha),(\beta,\mathbf{tail}(\alpha)))}"] & A^\omega \ar[u,"{\langle\mathbf{head},\mathbf{tail}\rangle}"']
+		\end{tikzcd}
+	\end{center}
+	This diagram means\\
+	$\bullet$~ $\mathbf{head}(\mathbf{zip}(\alpha,\beta))=\mathbf{head}(\alpha)$\\
+	$\bullet$~ $\mathbf{tail}(\mathbf{zip}(\alpha,\beta))=\mathbf{zip}(\beta,\mathbf{tail}(\alpha))$
+	% \begin{align*}
+	% 	\mathbf{head}(\mathbf{zip}(\alpha,\beta))&=\mathbf{head}(\alpha)\\
+	% 	\mathbf{tail}(\mathbf{zip}(\alpha,\beta))&=\mathbf{zip}(\beta,\mathbf{tail}(\alpha))
+	% \end{align*}
+\end{multicols}
+
 
 \todo[inline]{even, odd, ones, ...}
 
@@ -1907,30 +1977,30 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent 本節では、\textgt{双模倣関係} (bisimulation) および\textgt{双模倣性} (bisimilarity) について扱います。
 \\まずは、ラベル付き状態遷移系 (labeled transition system; LTS) についての双模倣関係・双模倣性を定義します。
 
-\subsection*{(双模倣-その1) ラベル付き状態遷移系に対する非圏論的な双模倣関係・双模倣性}
+\subsection*{(双模倣-その1) ラベル付き状態遷移系における ``非圏論的な'' 双模倣関係・双模倣性}
 
 % \noindent まずは、ラベル付き状態遷移系 (labeled transition system; LTS) についての双模倣関係を定義します。
 
 \begin{definition}[双模倣関係、双模倣性]
-	$c:S\to\mathcal P(A\times S)$ をラベル付き状態遷移系とする。二項関係 $R\subseteq S\times S$ が\textgt{双模倣関係} (bisimulation) であるとは、任意の $s,t\in S$ と $a\in A$ について、以下の2つの条件を満たすこと。
+	$c:S\to\mathcal P(A\times S)$ をラベル付き状態遷移系とする。二項関係 $B\subseteq S\times S$ が\textgt{双模倣関係} (bisimulation) であるとは、任意の $s,t\in S$ と $a\in A$ について、以下の2つの条件を満たすこと。
 	\begin{enumerate}
-		\item 前向き条件: $sRt$ かつ $s\xrightarrow{a}s'$ ならば、ある $t'$ が存在して $t\xrightarrow{a} t'$ かつ $s'Rt'$ が成り立つ。
+		\item 前向き条件: $sBt$ かつ $s\xrightarrow{a}s'$ ならば、ある $t'$ が存在して $t\xrightarrow{a} t'$ かつ $s'Bt'$ が成り立つ。
 		\begin{center}\small
 			\begin{tikzcd}
-				\circled{\;$s$\;} \ar[r,"a"] \ar[d,dash,"R"] & \circled{\,$s'$\,} & & \circled{\;$s$\;} \ar[r,"a"] \ar[d,dash,"R"] & \circled{\,$s'$\,} \ar[d,dash,"R"] \\
-				\circled{\;$t$\;} & & & \circled{\,$t$\,} \ar[r,"a"] & \circled{\,$t'$\,}
+				\circled{\;$s$\;} \ar[r,"a"] \ar[d,dash,"B"] & \circled{\,$s'$\,} & {} \ar[rd,"\implies",phantom] & {} & \circled{\;$s$\;} \ar[r,"a"] \ar[d,dash,"B"] & \circled{\,$s'$\,} \ar[d,dash,"B"] \\
+				\circled{\;$t$\;} & {} & {} & {} & \circled{\,$t$\,} \ar[r,"a"] & \circled{\,$t'$\,}
 			\end{tikzcd}
 		\end{center}
-		\item 後ろ向き条件: $sRt$ かつ $t\xrightarrow{a}t'$ ならば、ある $s'$ が存在して $s\xrightarrow{a}s'$ かつ $s'Rt'$ が成り立つ。
+		\item 後ろ向き条件: $sBt$ かつ $t\xrightarrow{a}t'$ ならば、ある $s'$ が存在して $s\xrightarrow{a}s'$ かつ $s'Bt'$ が成り立つ。
 		\begin{center}\small
 			\begin{tikzcd}
-				\circled{\;$s$\;} \ar[d,dash,"R"] & & & \circled{\;$s$\;} \ar[r,"a"] \ar[d,dash,"R"] & \circled{\,$s'$\,} \ar[d,dash,"R"] \\
-				\circled{\;$t$\;} \ar[r,"a"] & \circled{\,$t'$\,} & & \circled{\,$t$\,} \ar[r,"a"] & \circled{\,$t'$\,}
+				\circled{\;$s$\;} \ar[d,dash,"B"] & {} & {} \ar[rd,"\implies",phantom] & {} & \circled{\;$s$\;} \ar[r,"a"] \ar[d,dash,"B"] & \circled{\,$s'$\,} \ar[d,dash,"B"] \\
+				\circled{\;$t$\;} \ar[r,"a"] & \circled{\,$t'$\,} & {} & {} & \circled{\,$t$\,} \ar[r,"a"] & \circled{\,$t'$\,}
 			\end{tikzcd}
 		\end{center}
 	\end{enumerate}
-	状態 $s,t\in S$ が\textgt{双模倣} (bisimilar) であるとは、ある双模倣関係 $R$ が存在して $sRt$ が成り立つことをいう。\\ このとき $s\sim t$ と書く。この関係 $\sim$ を\textgt{双模倣性} (bisimilarity) と呼ぶ。
-	\[{\sim}=\bigcup\{R\subseteq S\times S\mid\textrm{$R$ は双模倣関係}\}\]
+	状態 $s,t\in S$ が\textgt{双模倣} (bisimilar) であるとは、ある双模倣関係 $B$ が存在して $sBt$ が成り立つことをいう。\\ このとき $s\sim t$ と書く。この関係 $\sim$ を\textgt{双模倣性} (bisimilarity) と呼ぶ。
+	\[{\sim}\,=\,\bigcup\{B\subseteq S\times S\mid\textrm{$B$ は双模倣関係}\}\]
 \end{definition}
 
 % \noindent 双模倣同値性は、状態間の同値関係のひとつであり、たとえば \begin{tikzcd}
@@ -1947,13 +2017,13 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{tikzcd}
 	\to\bullet \ar[loop right, looseness=6pt,"a"]
 \end{tikzcd}
-にします。）
+に潰します。）
 %\vspace{10pt}
 \begin{framed}
 \noindent 例: \vspace{-2pt}
 \begin{center}
 	\begin{tikzcd}[column sep=10pt]
-		& S & {} \ar[rr,rightsquigarrow,"\substack{\textrm{quotient}\\\textrm{by $\sim$}}"] & ~~~~~ & {} & S/{\sim} & \\[-5pt]
+		& S & {} \ar[rr,rightsquigarrow,"\substack{\textrm{quotient}\\\textrm{by $\sim$}}"] & ~~~~~ & {} & S/{\sim} & \\[-8pt]
 		& \circled{$s_0$} \ar[ld,"a"'] \ar[rd,"b"] & & & & \circled{$c_0$} \ar[loop right,"a"] \ar[d,"b"] & \\
 		\circled{$s_1$} \ar[loop left,leftarrow,"a"] \ar[d,"b"'] && \circled{$s_2$} & & & \circled{$c_1$} & \\
 		\circled{$s_3$} & 
@@ -1966,7 +2036,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent 以下では、双模倣関係 $R$ および双模倣性 $\sim$ についての基本的な性質を確認しましょう。
+\noindent 以下では、双模倣関係 $B$ および双模倣性 $\sim$ についての基本的な性質を確認しましょう。
 
 \begin{proposition} \label{prop:bisimulation-prop}
 	以下が成り立つ。
@@ -2002,37 +2072,46 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\subsection*{(双模倣-その2) Aczel-Mendler の圏論的な双模倣関係・双模倣性}
+\subsection*{(双模倣-その2) 2つの異なるラベル付き状態遷移系に対する双模倣関係・双模倣性}
+
+
+
+\clearpage
+
+\subsection*{(双模倣-その3) Aczel-Mendler の圏論的な双模倣関係・双模倣性・振舞等価性}
 
 \noindent さて、たとえば「確率的な双模倣性をどう定義すればよいか？」などといった問題が自然に生じることでしょう。そこで、前ページの「LTSについての双模倣性」を圏論的に一般化して、圏論的な定義を与えましょう。
 
 \begin{definition}[余代数の双模倣関係、双模倣性]
-	$F:\Set\to\Set$ を $\Set$ 上の自己関手とし、$c:X\to FX$ と $d:X\to FY$ を $F$-余代数とします。関係 $R\subseteq X\times Y$ が $F$-\textgt{双模倣関係} (bisimulation) であるとは、ある $e:R\to FR$ が存在し、2つの射影 $\pi_1,\pi_2$ をそれぞれ余代数準同型とするものである。\vspace{3pt}
+	$F:\Set\to\Set$ を自己関手とし、$c:X\to FX$ と $d:X\to FY$ を $F$-余代数とします。関係 $B\subseteq X\times Y$ が $F$-\textgt{双模倣関係} (bisimulation) であるとは、$F$-余代数 $b:B\to FB$ が存在し、2つの射影 $\pi_1,\pi_2$ がそれぞれ余代数準同型であるものである。\vspace{3pt}
 	\begin{center}
 		\begin{tikzcd}
-			FX & FR \ar[l,"F\pi_1"'] \ar[r,"F\pi_2"] & FY \\
-			X \ar[u,"c"] & R \ar[l,"\pi_1"] \ar[r,"\pi_2"'] \ar[u,"e"'] & Y \ar[u,"d"']
+			FX & FB \ar[l,"F\pi_1"'] \ar[r,"F\pi_2"] & FY \\
+			X \ar[u,"c"] & B \ar[l,"\pi_1"] \ar[r,"\pi_2"'] \ar[u,"b"'] & Y \ar[u,"d"']
 		\end{tikzcd}
 	\end{center}\vspace{3pt}
-	2つの状態 $x\in X$ と $y\in Y$ が $F$-\textgt{双模倣} (bisimilar) であるとは、ある $F$-双模倣関係 $R\subseteq X\times Y$ が存在して $(x,y)\in R$ を満たすことをいう。このとき $x\sim y$ と書く。この関係 $\sim$ を\textgt{双模倣性} (bisimilarity) と呼ぶ。
+	2つの状態 $x\in X$ と $y\in Y$ が $F$-\textgt{双模倣} (bisimilar) であるとは、ある $F$-双模倣関係 $B\subseteq X\times Y$ が存在して $(x,y)\in B$ を満たすことをいう。このとき $x\sim y$ と書く。この関係 $\sim$ を\textgt{双模倣性} (bisimilarity) と呼ぶ。
 \end{definition}
 
-\noindent たとえば確率的な双模倣性は、以下のように与えられます。
+\noindent たとえば確率的な双模倣性は、上の定義の instance として、以下のように与えられます。
 
 \begin{example}[マルコフ連鎖の双模倣関係、双模倣性]
-	関係 $R\subseteq X\times Y$ が、余代数 $c:X\to\mathcal DX$ と $d:Y\to\mathcal DY$ の間の $\mathcal D$-双模倣関係であるとは、各 $(x,y)\in R$ ごとに、\textgt{重み関数} (weight function) $w_{x,y}:R\to[0,1]$ が存在して、
-	\[\sum_{(x',y')\in R}w_{x,y}(x',y')=1\] 
+	関係 $B\subseteq X\times Y$ が、余代数 $c:X\to\mathcal DX$ と $d:Y\to\mathcal DY$ の間の $\mathcal D$-双模倣関係であるとは、各 $(x,y)\in B$ ごとに、\textgt{重み関数} (weight function) $w_{x,y}:B\to[0,1]$ が存在して、
+	\[\sum_{(x',y')\in B}w_{x,y}(x',y')=1\] 
 	かつ、任意の $x'\in X$ について 
 	\begin{align*}
-		c(x)(x')&=\sum_{(x',y')\in R}w_{x,y}(x',y')  
+		c(x)(x')&=\sum_{(x',y')\in B}w_{x,y}(x',y')  
 	\end{align*}
 	であり、任意の $y'\in Y$ について
 	\begin{align*}
-		d(y)(y')&=\sum_{(x',y')\in R}w_{x,y}(x',y')
+		d(y)(y')&=\sum_{(x',y')\in B}w_{x,y}(x',y')
 	\end{align*}
 	であることをいう。
 \end{example}
 
+\begin{definition}[振る舞い等価性]
+	振る舞い等価性 (behavioural equivalence) 
+\end{definition}
 
 \begin{proposition}
 	... 
@@ -2048,6 +2127,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 
 \clearpage
+
+\subsection*{(双模倣-その4) スパン同値性としての双模倣性・コスパン同値性としての振舞等価性}
 
 \noindent ここで、\textgt{スパン同値性} (span equivalence) と\textgt{コスパン同値性} (cospan equivalence) について、整理しておきます。
 
@@ -2065,13 +2146,13 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\begin{center}
 			\begin{small}
 				\begin{tikzcd}[row sep=15pt,column sep=10pt]
-					&\left(\begin{array}{c}F(R)\\~\uparrow{\scriptstyle\rho}\\R\end{array}\right) \ar[ld,"f"'] \ar[rd,"g"] &\\
+					&\left(\begin{array}{c}F(B)\\~\uparrow{\scriptstyle\beta}\\B\end{array}\right) \ar[ld,"f"'] \ar[rd,"g"] &\\
 					\left(\begin{array}{c}F(X)\\~\uparrow{\scriptstyle\gamma}\\X\end{array}\right) && \left(\begin{array}{c}F(Y)\\~\uparrow{\scriptstyle\delta}\\Y\end{array}\right)
 				\end{tikzcd}
 			\end{small}
 		\end{center}	
 		~\\[10pt]
-		& \centering$x\sim_{\mathrm{sp}} y\iff \exists \, r\;\textrm{such that}\;x=f(r)\;\textrm{and}\;y=g(r)$
+		& \centering$x\sim_{\mathrm{spn}} y\iff \exists \, r\;\textrm{such that}\;x=f(r)\;\textrm{and}\;y=g(r)$
 	\end{tabular}
 	\end{center}
 \end{definition}
@@ -2175,9 +2256,26 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \subsubsection*{\fbox{(1) Span equivalence sometimes fails!}}
 
-\noindent まず、
+\noindent 
+スパン同値性を必ずしも作れるわけではないことを確かめるために、反例として関手 $F^3_2:\Set\to\Set$ を考えます。
+\[F^3_2(X)=\{(x_1,x_2,x_3)\in X^3\mid|\{x_1,x_2,x_3\}|\leq 2\}\] 
+\[F^3_2(f):T^3_2(X)\to T^3_2(Y),\]\[F^3_2(f)(x_1,x_2,x_3)=(f(x_1),f(x_2),f(x_3))\]
 
+\todo[inline]{monotone neighborhood functor も}
 
+\noindent では、どんな functor に関してなら、
+
+\begin{definition}[weak pullback preserving functor]
+	
+\end{definition}
+
+\begin{proposition}
+	
+\end{proposition}
+
+\begin{supplement}
+	
+\end{supplement}
 
 \clearpage
 
@@ -2344,7 +2442,13 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \noindent 以上の議論によって、コスパン同値性がいつでも手に入ることがわかりました。
 
-\vspace{30pt}
+\clearpage
+
+\subsection*{(双模倣-その5) 関係持ち上げによる議論}
+
+% \vspace{30pt}
+
+\clearpage
 
 \begin{screen}
 \noindent【まとめ】
@@ -5357,6 +5461,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \begin{supplement}[述語持ち上げ]
 	$F$ が単に関手である場合、\textgt{様相} $\tau\colon F\Omega\to\Omega$（ただし、上の定義\ref{def:modality} から $\eta, \mu$ の整合性の条件を除いたもの）は、\textgt{述語持ち上げ} $\lambda\colon\C(-,\Omega)\to\C(F(-),\Omega)$ を誘導する。また、その逆も誘導する。\\（これら両者の対応関係は、米田の補題から従う。）
+	\[\mathrm{Nat}(\C(-,\Omega),\C(F(-),\Omega))\;\cong\;\C(F\Omega,\Omega).\]
 \end{supplement}
 
 \begin{definition}[モナド的な後ろ向き述語変換子意味論]
@@ -5365,7 +5470,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	を誘導する。これを\textgt{モナド的な後ろ向き述語変換子} (monadic backward predicate transformer) と呼ぶ。
 \end{definition}
 
-\noindent なお、$wp$ という記法は、Dijkstra の ``weakest precondition'' に由来します。$wp_\tau\llbracket f \rrbracket$ は、事後条件 $q\colon Y\to\Omega$ を、事前条件 $wp_\tau\llbracket f \rrbracket(q)\colon X\to\Omega$ に運んでいます。
+\noindent なお、$wp$ という記法は、Dijkstra の ``weakest precondition'' に由来します。$wp_\tau\llbracket f \rrbracket$ は、事後条件 $q\colon Y\to\Omega$ を、事前条件 $wp_\tau\llbracket f \rrbracket(q)\colon X\to\Omega$ に変換しています。
 
 \begin{proposition}[合成性]
 	$wp$ は合成的 (compositional) である。つまり、以下の意味で関手的 (functorial) である。
@@ -5374,14 +5479,14 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{proposition}
 
 \begin{proof}
-	... 
+	diagram chasing ...
 \end{proof}
 
-\begin{example}
-	... 
-\end{example}
+% \begin{example}
+% 	... 
+% \end{example}
 
-\todo[inline]{加筆する}
+% \todo[inline]{加筆する}
 
 %%%%%
 
@@ -5579,17 +5684,17 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{multicols} %%
 \noindent より具体的に言うと、
 \begin{itemize}
-	\item 任意の $F$-余代数に対し、以下のやり方で $L$-代数が得られます。
+	\item 任意の $F$-余代数 $c:X\to FX$ に対し、以下のやり方で $L$-代数 $(Pc\circ\sigma_X):LPX\to PX$ が得られます。
 	\begin{prooftree}
 		\AXC{$c:X\to FX$, ~ an $F$-coalgebra}
-		\UIC{$LPX\xrightarrow{\sigma_X}PFX\xrightarrow{P(c)}PX$, ~ an $L$-algebra}
+		\UIC{$LPX\xrightarrow{\sigma_X}PFX\xrightarrow{Pc}PX$, ~ an $L$-algebra}
 	\end{prooftree}
 	% \[LPX\xrightarrow{\sigma_X}PTX\xrightarrow{P(c)}PX\]
-	\item そして、始$L$-代数 $\alpha:L(\mathrm{Form})\xrightarrow{\cong}\mathrm{Form}$ は、一意な代数準同型射 $\llbracket-\rrbracket:\mathrm{Form}\to PX$ をもたらします。\\ この一意な射 $\llbracket-\rrbracket$ は\textgt{解釈関数} (interpretation function) です。\\（たとえば $P$ が冪集合関手 $\mathcal P$ の場合、$x\in\llbracket\varphi\rrbracket_c\iff x\models_c\varphi$ です。）
+	\item そして、始$L$-代数 $\alpha:L(\mathrm{Form})\xrightarrow{\cong}\mathrm{Form}$ は、一意な代数準同型射 $\llbracket-\rrbracket:\mathrm{Form}\to PX$ をもたらします。\\ この一意な射 $\llbracket-\rrbracket$ は\textgt{解釈関数} (interpretation function) です。\\（たとえば $P$ が反変-冪集合関手 $\mathcal P$ の場合、$x\in\llbracket\varphi\rrbracket_c\iff x\models_c\varphi$ です。）
 	\begin{multicols}{2}
 	\begin{center}\small
 		\begin{tikzcd}
-			L(\mathrm{Form}) \ar[r,"L(\llbracket-\rrbracket)"] \ar[d,"\cong"'] & LPX \ar[d,"P(c)\,\circ\,\sigma_X"]\\
+			L(\mathrm{Form}) \ar[r,"L(\llbracket-\rrbracket)"] \ar[d,"\cong"'] & LPX \ar[d,"Pc\,\circ\,\sigma_X"]\\
 			\mathrm{Form} \ar[r,"\llbracket - \rrbracket"'] & PX
 		\end{tikzcd}
 	\end{center}
@@ -5604,17 +5709,17 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{center}
 	\end{multicols}
 	% which maps a formula $\varphi \in \mathrm{Form}$ to its interpretation $\llbracket \varphi\rrbracket_c\in PX$. 
-	\item 随伴関係 $S\dashv P$ より、$\llbracket-\rrbracket$ の transpose として\textgt{理論写像} (theory map) $\mathrm{th}_c\colon X \to S(\mathrm{Form})$ が得られます。
+	\item 随伴関係 $S\dashv P$ より、$\llbracket-\rrbracket$ の transpose として\textgt{理論写像} (theory map) $\mathrm{Th}_c\colon X \to S(\mathrm{Form})$ が得られます。
 	\[\A(\mathrm{Form},PX)\;\cong\;\C^\op(S(\mathrm{Form}),X)\;\cong\;\C(X,S(\mathrm{Form}))\] 
-	これは、各状態 $x\in X$ を、$x$ が満たす論理式の集まり $\mathrm{th}_c(x)\in F(\mathrm{Form})$ に写像します。\\
-	（たとえば $P$ が冪集合関手 $\mathcal P$ の場合、$x\in\llbracket\varphi\rrbracket_c\iff\varphi\in\mathrm{th}_c(x)$ となります。）
+	これは、各状態 $x\in X$ を、$x$ が満たす論理式の集まり $\mathrm{Th}_c(x)\in S(\mathrm{Form})$ に写像します。\\
+	（たとえば $P$ が反変-冪集合関手 $\mathcal P$ の場合、$x\in\llbracket\varphi\rrbracket_c\iff\varphi\in\mathrm{Th}_c(x)$ です。）
 	% \begin{prooftree}
 	% 	\AXC{$\varphi\in\mathrm{th}_c(x)$}
 	% 	\doubleLine
 	% 	\UIC{$x\in\llbracket\varphi\rrbracket_c$}
 	% \end{prooftree}
 \end{itemize} %\clearpage
-\noindent 典型的には、以下の場合を考えるとわかりやすいでしょう。（ストーン双対性とのアナロジーで捉えよう。）%\vspace{5pt}
+\noindent 典型的には、以下の場合を考えるとわかりやすいでしょう。（ストーン双対性とのアナロジーで捉えよう！）%\vspace{5pt}
 \begin{multicols}{2}
 \begin{center}\small
 	\begin{tikzcd}[column sep=50pt,row sep=20pt]
@@ -5629,6 +5734,14 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{tikzcd}%\vspace{5pt}
 \end{center}
 \end{multicols}
+
+% \clearpage
+
+% この意味での coalgebraic modal logic を具体的に計算してみましょう。
+% \begin{itemize}
+% 	\item $F=\mathcal P_{\mathrm{fin}}$
+% 	\item 
+% \end{itemize}
 
 
 \clearpage
