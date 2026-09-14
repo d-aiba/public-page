@@ -5630,11 +5630,11 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent まとめると次のように整理できます。
 \begin{oframed}
 	\noindent 【圏論的 predicate transformer についてのまとめ】\vspace{5pt}\\
-	$F:\Set\to\Set$: モナド\\
+	Given \\
+	$F:\Set\to\Set$: monad\\
 	$\tau:F\Omega\to\Omega$: Eilenberg-Moore algebra of $F$\\
-	$\Omega$: complete lattice\\
-	が与えられると...\vspace{5pt}\\
-	$\implies$ $F$ の持ち上げ $\dot F$ が定まる。
+	$\Omega$: complete lattice\vspace{5pt}\\
+	$\implies$ We obtain a predicate lifting $\dot F$ of $F$.
 	\begin{multicols}{2}
 		\begin{center}
 			\begin{tikzcd}
@@ -5646,7 +5646,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\begin{itemize}
 			\item $p^{-1}(X)=\Omega^X$
 			\item $\mathrm{Ob}(\Pred)=(X\in\Set,p\in\Omega^X)$
-			\item $\Pred((X,p),(Y,q))$\vspace{-6pt}\\$=\{f:X\to Y\;\textrm{in}\;\Set\;\textrm{s.t.}$ \begin{tikzcd}[row sep=-3pt,column sep=12pt] X \ar[rd,"p",shorten=-1pt,near start] \ar[dd,"f"',shorten=-1pt] & \\ {} \ar[r,"\rotatebox{45}{$\scriptstyle\geq$}",phantom,near start] & \Omega\\ Y \ar[ru,"q"',shorten=-1pt,near start] & \end{tikzcd} $\}$
+			\item $\Pred((X,p),(Y,q))$\vspace{-6pt}\\$=\{u:X\to Y\;\textrm{in}\;\Set~\textrm{s.t.}$ \begin{tikzcd}[row sep=-3pt,column sep=12pt] X \ar[rd,"p",shorten=-1pt,near start] \ar[dd,"u"',shorten=-1pt] & \\ {} \ar[r,"\rotatebox{45}{$\scriptstyle\geq$}",phantom,near start] & \Omega\\ Y \ar[ru,"q"',shorten=-1pt,near start] & \end{tikzcd}$\}$
 		\end{itemize}
 	\end{multicols}
 	% \noindent 
@@ -5936,6 +5936,60 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \subsection*{(2) 非圏論的な解決策}
 
 \subsection*{(3) 圏論的な抽象化・公理化}
+
+\begin{multicols}{2}
+	\begin{oframed}
+		\noindent \underline{\textbf{Usual framework}}: \vspace{5pt}\\
+		\noindent Given \\
+		$F:\Set\to\Set$: monad\\
+		$(F\Omega\xrightarrow{\tau}\Omega)$: Eilenberg-Moore algebra of $F$\\
+		$\Omega$: complete lattice\vspace{5pt}
+		% \vspace{80pt} %
+		\\
+		$\implies$ We obtain a predicate lifting $\dot F$ of $F$.
+		\begin{center}
+			\begin{tikzcd}
+				\Pred \ar[r,"\dot F"] \ar[d,"p"'] & \Pred \ar[d,"p"] \\[5pt]
+				\Set \ar[r,"F"'] & \Set
+			\end{tikzcd}
+		\end{center}
+		\begin{itemize}
+			\item $p^{-1}(X)=\Omega^X$
+			\item $\mathrm{Ob}(\Pred)=(X\in\Set,p\in\Omega^X)$
+			\item $\Pred((X,p),(Y,q))$\vspace{-6pt}\\$=\{u:X\to Y\;\textrm{in}\;\Set~\textrm{s.t.}$ \begin{tikzcd}[row sep=-3pt,column sep=12pt] X \ar[rd,"p",shorten=-1pt,near start] \ar[dd,"u"',shorten=-1pt] & \\ {} \ar[r,"\rotatebox{45}{$\scriptstyle\geq$}",phantom,near start] & \Omega\\ Y \ar[ru,"q"',shorten=-1pt,near start] & \end{tikzcd}$\}$
+		\end{itemize}
+		$\dot F(X,p)=(FX,(FX\xrightarrow{Fp}F\Omega\xrightarrow{\tau}\Omega)\in\Omega^{FX})$
+	\end{oframed}
+	% 
+	\begin{oframed}
+		\noindent \underline{\textbf{Our framework}}: \vspace{5pt}\\
+		\noindent Given \\
+		$F:\Set\to\Set$: monad\\
+		$(F\Omega_1\xrightarrow{\tau_1}\Omega_1),(F\Omega_2\xrightarrow{\tau_2}\Omega_2)$: EM algebras of $F$\\
+		$\Omega_1,\Omega_2$: complete lattices \\
+		$d:\Omega_1\to\Omega_2$: monotone and \vspace{2pt}
+		\begin{center}\small
+			% \begin{tikzcd}
+			% 	F\Omega_1 \ar[r,"\tau_1"] \ar[d,"Fd"'] & \Omega_1 \ar[d,"d"] \ar[ld,"\rotatebox{45}{$\geq$}",phantom] \\
+			% 	F\Omega_2 \ar[r,"\tau_2"'] & \Omega_2
+			% \end{tikzcd} \quad (lax homomorphism)
+			\begin{tikzcd}
+				F\Omega_1 \ar[d,"\tau_1"'] \ar[r,"Fd"] \ar[rd,"\rotatebox{45}{$\leq$}",phantom] & F\Omega_2 \ar[d,"\tau_2"]  \\
+				\Omega_1 \ar[r,"d"'] & \Omega_2
+			\end{tikzcd} \quad (lax homomorphism)
+		\end{center}\vspace{10pt}
+		$\implies$ We obtain predicate liftings $\dot F_1,\dot F_2$. \vspace{2pt}
+		\begin{center}\small
+			\begin{tikzcd}[column sep=3pt,row sep=15pt]
+				\Pred_1 \ar[rrr,"\dot F_1"] \ar[rrd,"d"] \ar[rdd,"p_1"'] &&& \Pred_1 \ar[rrd,"d"] \ar[rdd,"p_1"',near end] \ar[ld,"\rotatebox{-135}{$\Rightarrow$}",phantom] && \\[-6pt]
+				&& \Pred_2 \ar[rrr,"\dot F_2",near start] \ar[ld,"p_2"] &&& \Pred_2 \ar[ld,"p_2"] \\[10pt]
+				& \Set \ar[rrr,"F"'] & & & \Set &
+			\end{tikzcd}
+		\end{center}\vspace{5pt}
+		% $\forall (X,\varphi)\in\Pred_1$,\; 
+		$d\,\dot F_1\,\varphi\,\leq\,\dot F_2\,d\,\varphi$ \; (order in $p_2^{-1}(TX)$)
+	\end{oframed}
+\end{multicols}
 
 \subsection*{(4) 具体的状況への応用事例と実験結果}
 
