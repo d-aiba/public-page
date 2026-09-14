@@ -935,7 +935,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\begin{align*}
 			&\bot\,\sqsubseteq\, f(\bot) \,\sqsubseteq\, f^2(\bot) \,\sqsubseteq\,\cdots\,\longrightarrow\, \mu f\\ 
 			& (\textrm{stabilizes, and converges to $\mu f$})\\
-			&\textrm{thus}~ f^\alpha(\bot)\sqsubseteq\mu f~\textrm{for each}~\alpha\in\mathbf{Ord}
+			&\textrm{thus}~ f^\alpha(\bot)\sqsubseteq\mu f~\textrm{for each}~\alpha\in\mathbf{Ord}~~~~~~~~\\~
 		\end{align*}
 	\end{multicols}
 	%%
@@ -944,7 +944,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\begin{align*}
 			&\top\,\sqsupseteq\, f(\top) \,\sqsupseteq\, f^2(\top) \,\sqsupseteq\, \cdots \,\longrightarrow\,\nu f\\
 			&(\textrm{stabilizes, and converges to $\nu f$})\\
-			&\textrm{thus}~\nu f\sqsubseteq f^\alpha(\top)~\textrm{for each}~\alpha\in\mathbf{Ord}
+			&\textrm{thus}~\nu f\sqsubseteq f^\alpha(\top)~\textrm{for each}~\alpha\in\mathbf{Ord}~~~~~~~~\\~
 		\end{align*}
 	\item \textgt{最大不動点の上界推定} (by Cousot-Cousot): 
 		\begin{align*}
@@ -1206,7 +1206,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			{} \ar[r,shorten <=16pt,shorten >= -3pt]&\underset{abbbbb\dots}{\circled{\hspace*{1pt}$q_0$\hspace*{1pt}}} \ar[r,"a"] & \underset{~~bbb\dots}{\underset{~bbbb\dots}{\underset{bbbbb\dots}{\circled{\hspace*{1pt}$q_1$\hspace*{1pt}}}}} \ar[loop right,"b"]
 		\end{tikzcd}
 	\end{center}
-	ストリーム $x=(x_1,x_2,x_3,\dots)$ について、$\head(x)=x_1,\,\tail(x)=(x_2,x_3,\dots)$ と書く。\[c(x)=(\head(x),\tail(x))\]
+	なお、ストリーム $x=(x_0,x_1,x_2,x_3,\dots)$ について、$\head(x)=x_1,\,\tail(x)=(x_1,x_2,x_3,\dots)$ と書く。\[c(x)=(\head(x),\tail(x))\]
 	（ストリームに関しては p.\,\pageref{page:list-and-stream} でさらに詳しく扱います。）
 \end{example}
 
@@ -1981,7 +1981,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 % \noindent まずは、ラベル付き状態遷移系 (labeled transition system; LTS) についての双模倣関係を定義します。
 
-\begin{definition}[双模倣関係、双模倣性]
+\begin{definition}[ラベル付き状態遷移系における双模倣関係・双模倣性]
 	$c:S\to\mathcal P(A\times S)$ をラベル付き状態遷移系とする。二項関係 $B\subseteq S\times S$ が\textgt{双模倣関係} (bisimulation) であるとは、任意の $s,t\in S$ と $a\in A$ について、以下の2つの条件を満たすこと。
 	\begin{enumerate}
 		\item 前向き条件: $sBt$ かつ $s\xrightarrow{a}s'$ ならば、ある $t'$ が存在して $t\xrightarrow{a} t'$ かつ $s'Bt'$ が成り立つ。
@@ -2082,45 +2082,109 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \noindent さて、たとえば「確率的な双模倣性をどう定義すればよいか？」などといった問題が自然に生じることでしょう。そこで、前ページの「LTSについての双模倣性」を圏論的に一般化して、圏論的な定義を与えましょう。
 
-\begin{definition}[余代数の双模倣関係、双模倣性]
-	$F:\Set\to\Set$ を自己関手とし、$c:X\to FX$ と $d:X\to FY$ を $F$-余代数とします。関係 $B\subseteq X\times Y$ が $F$-\textgt{双模倣関係} (bisimulation) であるとは、$F$-余代数 $b:B\to FB$ が存在し、2つの射影 $\pi_1,\pi_2$ がそれぞれ余代数準同型であるものである。\vspace{3pt}
+\begin{definition}[双模倣関係・双模倣性]
+	$F:\Set\to\Set$ を自己関手とし、$\gamma:X\to FX$ と $\delta:X\to FY$ を $F$-余代数とする。関係 $B\subseteq X\times Y$ が $F$-\textgt{双模倣関係} (bisimulation) であるとは、$F$-余代数 $\beta:B\to FB$ が存在し、2つの射影 $\pi_1,\pi_2$ がそれぞれ余代数準同型であるものである。\vspace{3pt}
 	\begin{center}
 		\begin{tikzcd}
 			FX & FB \ar[l,"F\pi_1"'] \ar[r,"F\pi_2"] & FY \\
-			X \ar[u,"c"] & B \ar[l,"\pi_1"] \ar[r,"\pi_2"'] \ar[u,"b"'] & Y \ar[u,"d"']
+			X \ar[u,"\gamma"] & B \ar[l,"\pi_1"] \ar[r,"\pi_2"'] \ar[u,"\beta"'] & Y \ar[u,"\delta"']
 		\end{tikzcd}
 	\end{center}\vspace{3pt}
-	2つの状態 $x\in X$ と $y\in Y$ が $F$-\textgt{双模倣} (bisimilar) であるとは、ある $F$-双模倣関係 $B\subseteq X\times Y$ が存在して $(x,y)\in B$ を満たすことをいう。このとき $x\sim y$ と書く。この関係 $\sim$ を\textgt{双模倣性} (bisimilarity) と呼ぶ。
+	2つの状態 $x\in X$ と $y\in Y$ が $F$-\textgt{双模倣} (bisimilar) であるとは、ある $F$-双模倣関係 $B\subseteq X\times Y$ が存在して $(x,y)\in B$ を満たすことをいう。このとき $x\bisim_F y$ と書く。この関係 $\bisim_F$ を\textgt{双模倣性} (bisimilarity) と呼ぶ。
 \end{definition}
 
-\noindent たとえば確率的な双模倣性は、上の定義の instance として、以下のように与えられます。
+\noindent たとえば、確率的な双模倣性は、上の定義の instance として、以下のように与えられます。
 
-\begin{example}[マルコフ連鎖の双模倣関係、双模倣性]
-	関係 $B\subseteq X\times Y$ が、余代数 $c:X\to\mathcal DX$ と $d:Y\to\mathcal DY$ の間の $\mathcal D$-双模倣関係であるとは、各 $(x,y)\in B$ ごとに、\textgt{重み関数} (weight function) $w_{x,y}:B\to[0,1]$ が存在して、
+\begin{example}[マルコフ連鎖の双模倣関係・双模倣性]
+	関係 $B\subseteq X\times Y$ が、余代数 $\gamma:X\to\mathcal DX$ と $\delta:Y\to\mathcal DY$ の間の $\mathcal D$-双模倣関係であるとは、各 $(x,y)\in B$ ごとに\textgt{重み関数} (weight function) $w_{x,y}:B\to[0,1]$ が存在し、
 	\[\sum_{(x',y')\in B}w_{x,y}(x',y')=1\] 
 	かつ、任意の $x'\in X$ について 
 	\begin{align*}
-		c(x)(x')&=\sum_{(x',y')\in B}w_{x,y}(x',y')  
+		\gamma(x)(x')&=\sum_{(x',y')\in B}w_{x,y}(x',y')  
 	\end{align*}
 	であり、任意の $y'\in Y$ について
 	\begin{align*}
-		d(y)(y')&=\sum_{(x',y')\in B}w_{x,y}(x',y')
+		\delta(y)(y')&=\sum_{(x',y')\in B}w_{x,y}(x',y')
 	\end{align*}
 	であることをいう。
 \end{example}
 
-\begin{definition}[振る舞い等価性]
-	振る舞い等価性 (behavioural equivalence) 
+\noindent さてここで、振舞等価性 (behavioural equivalence) を定義します。これは、双模倣性と密接に関わる性質です。
+
+\begin{definition}[振舞等価性]
+	$F:\Set\to\Set$ を自己関手とし、$\gamma:X\to FX$ と $\delta:X\to FY$ を $F$-余代数とする。状態 $x\in X$ と $y\in Y$ が
+	\textgt{振舞等価} (behavioural equivalent) であるとは、ある余代数 $\zeta:Z\to FZ$ が存在し、$f:X\to Z$ と $g:Y\to Z$ が余代数準同型であり、$f(x)=g(y)$ を満たすこと。このとき $x\equiv_F y$ と書く。%\vspace{3pt}
+	\begin{center}
+		\begin{tikzcd}
+			FX \ar[r,"Ff"] & FZ & FY \ar[l,"Fg"'] \\
+			X \ar[r,"f"'] \ar[u,"\gamma"] & Z \ar[u,"\zeta"'] & Y \ar[l,"g"] \ar[u,"\delta"']
+		\end{tikzcd}
+	\end{center}
 \end{definition}
 
-\begin{proposition}
-	... 
+\begin{supplement}
+	もし終$F$-余代数が存在するなら、それを $\zeta:Z\to FZ$ とすればいい。その場合、$x$ と $y$ が振舞等価であるとは $\mathbf{beh}_\gamma(x)=\mathbf{beh}_\delta(x)$ であることを意味する。（ただし、必ずしも終余代数でなくて構わない。）
+\end{supplement}
+
+\clearpage
+
+\noindent ここで以下の重要な2つの性質を確認しましょう。\vspace{3pt}\\
+\textgt{(1) Bisimilarity implies behavioural equivalence (${\bisim_F}\subseteq{\equiv_F}$)} %\vspace{2pt}
+
+\begin{proposition}[${\bisim_F}\subseteq{\equiv_F}$]
+	$F:\Set\to\Set$ とし、余代数 $\gamma:X\to FX$ と $\delta:Y\to FY$ を考える。\\任意の状態 $x\in X$ と $y\in Y$ に対し、もし $x\bisim_F y$ ならば $x\equiv_F y$ である。
 \end{proposition}
+
+\begin{proof}
+	\underline{Aim}: 押し出し (pushout) をとる。
+	\begin{center}
+		\begin{center}
+			\begin{small}
+				\begin{tikzcd}[row sep=15pt,column sep=10pt]
+					&\left(\begin{array}{c}FB\\~\uparrow{\scriptstyle\beta}\\B\end{array}\right) \ar[ld,"\pi_1"'] \ar[rd,"\pi_2"] &&&&\left(\begin{array}{c}FB\\~\uparrow{\scriptstyle\beta}\\B\end{array}\right) \ar[ld,"\pi_1"'] \ar[rd,"\pi_2"] \ar[dd,"\rotatebox{135}{$\lrcorner$}",phantom,very near end] &\\
+					\left(\begin{array}{c}FX\\~\uparrow{\scriptstyle\gamma}\\X\end{array}\right) && \left(\begin{array}{c}FY\\~\uparrow{\scriptstyle\delta}\\Y\end{array}\right) & \implies & \left(\begin{array}{c}FX\\~\uparrow{\scriptstyle\gamma}\\X\end{array}\right) \ar[rd,"f"'] && \left(\begin{array}{c}FY\\~\uparrow{\scriptstyle\delta}\\Y\end{array}\right) \ar[ld,"g"]\\
+					&&&&& \left(\begin{array}{c}FZ\\~\uparrow{\scriptstyle\zeta}\\Z\end{array}\right) &
+				\end{tikzcd}
+			\end{small}
+		\end{center}	
+	\end{center}
+	具体的には、次のように考える。
+	\begin{multicols}{2}
+	\begin{center}
+		\begin{tikzcd}[column sep=25pt,row sep=18pt]
+			& TX \ar[rr,"Ff"] & & TZ \\[-5pt]
+			TB \ar[ur,"F\pi_1"] \ar[rr,"F\pi_2"'{pos=0.7}] & & TY \ar[ur,"Fg"'] & \\[18pt]
+			& X \ar[uu,"\gamma"{pos=0.4}] \ar[rr,"f"{pos=0.40}] & & Z \ar[uu,dashed,"\zeta"'] \\[-5pt]
+			B \ar[rr,"\pi_2"'] \ar[ru,"\pi_1"] \ar[uu,"\beta"] & & Y \ar[ur,"g"'] \ar[uu,"\delta"'] & 
+		\end{tikzcd}
+	\end{center}
+	%
+	\begin{center}\small
+		\begin{tikzcd}
+			& X \ar[rd] \ar[rrrd,bend left] & & \\
+			B \ar[ur] \ar[dr] \ar[rr,dashed,"\rotatebox{-135}{$\lrcorner$}",phantom,very near end] & & Z \ar[rr,dashed] & & TZ \\
+			& Y \ar[ru] \ar[rrru,bend right] & &
+		\end{tikzcd}
+	\end{center}
+	\end{multicols}
+	余代数 $\zeta:Z\to FZ$ は\uwave{底面の pushout によって}与えられ、各々の射 $f,g$ が coalgebra homomorphism であることは pushout の性質から従う。
+\end{proof}
+
+\noindent \textgt{(2) Behavioural equivalence may not imply bisimilarity (${\equiv_F}\not\subseteq{\bisim_F}$)}
 
 \begin{example}
 	... 
 \end{example}
 
+\clearpage
+
+\begin{definition}[weak pullback preserving functor]
+	
+\end{definition}
+
+\begin{proposition}[${\equiv_F}\subseteq{\bisim_F}$]
+	$F:\Set\to\Set$ とし、余代数 $\gamma:X\to FX$ と $\delta:Y\to FY$ を考える。\\ $F$ が \uwave{weak pullback を保つとき}、任意の $x\in X$ と $y\in Y$ に対し、もし $x\equiv_F y$ ならば $x\bisim_F y$ である。
+\end{proposition}
 
 
 \todo[inline]{書く}
@@ -2189,7 +2253,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\textbf{Span equivalence} in $\Coalg(F)$ & \textbf{Cospan equivalence} in $\Coalg(F)$
 		\\
 		\hline
-		Pullback does not always exist. & Pushout always exists. 
+		\textbf{Pullback} does not always exist. & \textbf{Pushout} always exists. 
 		\\
 		\begin{small}
 		\begin{tikzcd}[row sep=8pt,column sep=8pt]
@@ -2207,48 +2271,117 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{tikzcd}
 		\end{small}
 		\\[-4pt]
-		& 
+		\begin{small}
+			\!\!\fontsize{9pt}{9pt}\selectfont (It \textit{does} when $F$ preserves weak pullbacks.)\!\!
+		\end{small} 
+		&
 		\begin{small}
 			\!\!\fontsize{9pt}{9pt}\selectfont (Because $U\colon\Coalg(F)\to\C$ creates colimits.)\!\!
 		\end{small}
 		\\
 		\hline 
-		\textbf{Span's transitivity} may not hold. & \textbf{Cospan's transitivity} holds. 
-		\\
-		\begin{small}
-		\begin{tikzcd}[row sep=8pt,column sep=2.8pt]
-			\\[5pt]
-			& \bullet \ar[ld] \ar[rd] && \bullet \ar[ld] \ar[rd] &\\
-			\bullet && \bullet && \bullet 
-		\end{tikzcd} 
-		$\centernot\implies$
-		\begin{tikzcd}[row sep=8pt,column sep=2.8pt]
-			&& \bigstar \ar[dl]\ar[dr] \arrow[dd, phantom, "\rotatebox{-45}{$\lrcorner$}", very near start] &&\\
-			& \bullet \ar[dl]\ar[dr] &&\bullet \ar[dl]\ar[dr] &\\
-			\bullet && \bullet && \bullet
-		\end{tikzcd}
-		\end{small}
-		&
-		\begin{small}
-		\begin{tikzcd}[row sep=8pt,column sep=2.8pt]
-			\bullet \ar[rd] && \bullet \ar[ld] \ar[rd] && \bullet \ar[ld] \\
-			& \bullet && \bullet & \\[14pt]
-		\end{tikzcd}
-		$\implies$
-		\begin{tikzcd}[row sep=8pt,column sep=2.8pt]
-			\bullet \ar[dr] && \bullet \ar[dl] \ar[dr] && \bullet \ar[dl]\\
-			& \bullet \ar[dr] &&\bullet \ar[dl] &\\
-			&& \bigstar \arrow[uu, phantom, "\rotatebox{-45}{\!$\ulcorner$}", very near start] &&\\
-		\end{tikzcd}
-		\end{small}
-		\\[-6pt]
-		\begin{small}
-			\!\!\fontsize{9pt}{9pt}\selectfont (It \textit{does} when $F$ preserves weak pullbacks.)\!\!
-		\end{small} 
-		& 
-		\\\hline
+		% \textbf{Span's transitivity} may not hold. & \textbf{Cospan's transitivity} holds. 
+		% \\
+		% \begin{small}
+		% \begin{tikzcd}[row sep=8pt,column sep=2.8pt]
+		% 	\\[5pt]
+		% 	& \bullet \ar[ld] \ar[rd] && \bullet \ar[ld] \ar[rd] &\\
+		% 	\bullet && \bullet && \bullet 
+		% \end{tikzcd} 
+		% $\centernot\implies$
+		% \begin{tikzcd}[row sep=8pt,column sep=2.8pt]
+		% 	&& \bigstar \ar[dl]\ar[dr] \arrow[dd, phantom, "\rotatebox{-45}{$\lrcorner$}", very near start] &&\\
+		% 	& \bullet \ar[dl]\ar[dr] &&\bullet \ar[dl]\ar[dr] &\\
+		% 	\bullet && \bullet && \bullet
+		% \end{tikzcd}
+		% \end{small}
+		% &
+		% \begin{small}
+		% \begin{tikzcd}[row sep=8pt,column sep=2.8pt]
+		% 	\bullet \ar[rd] && \bullet \ar[ld] \ar[rd] && \bullet \ar[ld] \\
+		% 	& \bullet && \bullet & \\[14pt]
+		% \end{tikzcd}
+		% $\implies$
+		% \begin{tikzcd}[row sep=8pt,column sep=2.8pt]
+		% 	\bullet \ar[dr] && \bullet \ar[dl] \ar[dr] && \bullet \ar[dl]\\
+		% 	& \bullet \ar[dr] &&\bullet \ar[dl] &\\
+		% 	&& \bigstar \arrow[uu, phantom, "\rotatebox{-45}{\!$\ulcorner$}", very near start] &&\\
+		% \end{tikzcd}
+		% \end{small}
+		% % \\[-6pt]
+		% % \begin{small}
+		% % 	\!\!\fontsize{9pt}{9pt}\selectfont (It \textit{does} when $F$ preserves weak pullbacks.)\!\!
+		% % \end{small} 
+		% % & 
+		% \\\hline
 	\end{tabular}\vspace{18pt}
 \end{center}
+% \begin{center}
+% 	\begin{tabular}{|c|c|}
+% 		\hline 
+% 		\textbf{Span equivalence} in $\Coalg(F)$ & \textbf{Cospan equivalence} in $\Coalg(F)$
+% 		\\
+% 		\hline
+% 		Pullback does not always exist. & Pushout always exists. 
+% 		\\
+% 		\begin{small}
+% 		\begin{tikzcd}[row sep=8pt,column sep=8pt]
+% 			&&&&&\bullet \ar[ld] \ar[rd] \arrow[dd, phantom, "\rotatebox{-45}{$\lrcorner$}", very near start] &\\
+% 			\bullet \ar[dr] && \bullet \ar[dl] & \centernot\implies &\bullet \ar[rd] &&\bullet \ar[ld]\\
+% 			& \bullet &&&& \bullet &
+% 		\end{tikzcd}
+% 		\end{small}
+% 		&
+% 		\begin{small}
+% 		\begin{tikzcd}[row sep=9.5pt,column sep=8pt]
+% 			& \bullet \ar[ld] \ar[rd] &&&& \bullet \ar[ld] \ar[rd] & \\
+% 			\bullet && \bullet & \implies & \bullet \ar[rd] && \bullet \ar[ld] \\
+% 			&&&&& \bullet \arrow[uu, phantom, "\rotatebox{-45}{\!$\ulcorner$}", very near start] &
+% 		\end{tikzcd}
+% 		\end{small}
+% 		\\[-4pt]
+% 		& 
+% 		\begin{small}
+% 			\!\!\fontsize{9pt}{9pt}\selectfont (Because $U\colon\Coalg(F)\to\C$ creates colimits.)\!\!
+% 		\end{small}
+% 		\\
+% 		\hline 
+% 		\textbf{Span's transitivity} may not hold. & \textbf{Cospan's transitivity} holds. 
+% 		\\
+% 		\begin{small}
+% 		\begin{tikzcd}[row sep=8pt,column sep=2.8pt]
+% 			\\[5pt]
+% 			& \bullet \ar[ld] \ar[rd] && \bullet \ar[ld] \ar[rd] &\\
+% 			\bullet && \bullet && \bullet 
+% 		\end{tikzcd} 
+% 		$\centernot\implies$
+% 		\begin{tikzcd}[row sep=8pt,column sep=2.8pt]
+% 			&& \bigstar \ar[dl]\ar[dr] \arrow[dd, phantom, "\rotatebox{-45}{$\lrcorner$}", very near start] &&\\
+% 			& \bullet \ar[dl]\ar[dr] &&\bullet \ar[dl]\ar[dr] &\\
+% 			\bullet && \bullet && \bullet
+% 		\end{tikzcd}
+% 		\end{small}
+% 		&
+% 		\begin{small}
+% 		\begin{tikzcd}[row sep=8pt,column sep=2.8pt]
+% 			\bullet \ar[rd] && \bullet \ar[ld] \ar[rd] && \bullet \ar[ld] \\
+% 			& \bullet && \bullet & \\[14pt]
+% 		\end{tikzcd}
+% 		$\implies$
+% 		\begin{tikzcd}[row sep=8pt,column sep=2.8pt]
+% 			\bullet \ar[dr] && \bullet \ar[dl] \ar[dr] && \bullet \ar[dl]\\
+% 			& \bullet \ar[dr] &&\bullet \ar[dl] &\\
+% 			&& \bigstar \arrow[uu, phantom, "\rotatebox{-45}{\!$\ulcorner$}", very near start] &&\\
+% 		\end{tikzcd}
+% 		\end{small}
+% 		\\[-6pt]
+% 		\begin{small}
+% 			\!\!\fontsize{9pt}{9pt}\selectfont (It \textit{does} when $F$ preserves weak pullbacks.)\!\!
+% 		\end{small} 
+% 		& 
+% 		\\\hline
+% 	\end{tabular}\vspace{18pt}
+% \end{center}
 
 \noindent このことを以下で正確に理解しておきましょう。
 
@@ -5460,17 +5593,19 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{definition}
 
 \begin{supplement}[述語持ち上げ]
-	$F$ が単に関手である場合、\textgt{様相} $\tau\colon F\Omega\to\Omega$（ただし、上の定義\ref{def:modality} から $\eta, \mu$ の整合性の条件を除いたもの）は、\textgt{述語持ち上げ} $\lambda\colon\C(-,\Omega)\to\C(F(-),\Omega)$ を誘導する。また、その逆も誘導する。\\（これら両者の対応関係は、米田の補題から従う。）
+	% $F$ が単に関手である場合、\textgt{様相} $\tau\colon F\Omega\to\Omega$（ただし、上の定義\ref{def:modality} から $\eta, \mu$ の整合性の条件を除いたもの）は、\textgt{述語持ち上げ} $\lambda\colon\C(-,\Omega)\to\C(F(-),\Omega)$ を誘導する。また、その逆も誘導する。\\（これら両者の対応関係は、米田の補題から従う。）
+	\textgt{様相} $\tau\colon F\Omega\to\Omega$は、\textgt{述語持ち上げ} $\lambda\colon\Omega^{(-)}\Rightarrow\Omega^{F(-)}$ を誘導する。また、その逆も誘導する。（これら両者の対応関係は、米田の補題から従う。）
 	\[\mathrm{Nat}(\C(-,\Omega),\C(F(-),\Omega))\;\cong\;\C(F\Omega,\Omega).\]
 \end{supplement}
 
 \begin{definition}[モナド的な後ろ向き述語変換子意味論]
 	上の定義\ref{def:modality}の状況において、$f:X\computationrightarrow Y$ をクライスリ圏 $\C_F$ における射（つまり $\C$ における射 $f:X\to FY$）とする。このとき、そのような射 $f$ は、以下の関数
-	\[wp_\tau\llbracket f\rrbracket:\C(Y,\Omega)\longrightarrow\C(X,\Omega),\qquad q\longmapsto(X\xrightarrow{f}FY\xrightarrow{Fq}F\Omega\xrightarrow{\tau}\Omega)\] 
+	\[wp_\tau\llbracket f\rrbracket\colon\C(Y,\Omega)\longrightarrow\C(X,\Omega),\qquad q\,\longmapsto\,(X\xrightarrow{f}FY\xrightarrow{Fq}F\Omega\xrightarrow{\tau}\Omega)\] 
 	を誘導する。これを\textgt{モナド的な後ろ向き述語変換子} (monadic backward predicate transformer) と呼ぶ。
 \end{definition}
 
 \noindent なお、$wp$ という記法は、Dijkstra の ``weakest precondition'' に由来します。$wp_\tau\llbracket f \rrbracket$ は、事後条件 $q\colon Y\to\Omega$ を、事前条件 $wp_\tau\llbracket f \rrbracket(q)\colon X\to\Omega$ に変換しています。
+\[\left(\begin{array}{cccccc}(X\xrightarrow{f}FY) &\;\implies\; & wp_\tau\llbracket f\rrbracket\colon \!\!\!& \Omega^Y & \!\!\!\!\!\!\xrightarrow{\,F(-)\,} \; (F\Omega)^{FY} \; \xrightarrow{\;\;\tau\;\;} \; \Omega^{FY} \; \xrightarrow{\;\;f^\ast\;\;}\!\!\!\!\!\!\!\!\!\!&\Omega^X\\ &&& \rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&&&\scriptstyle(Y\overset{q}{\to}\Omega)& \longmapsto & \scriptstyle \!\!\!(X\overset{f}{\to} FY\overset{Fq}{\to} F\Omega\overset{\tau}{\to}\Omega)\!\!\! \end{array}\right)\]
 
 \begin{proposition}[合成性]
 	$wp$ は合成的 (compositional) である。つまり、以下の意味で関手的 (functorial) である。
@@ -5490,8 +5625,38 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 %%%%%
 
-% \noindent なお、余代数 $c:X\to FX$ について扱う場合は、まさに、以下の図のような状況を考えます。（次節で詳しく見ます）\vspace{8pt}
-\noindent なお、余代数 $c:X\to FX$ について扱う場合は、まさに、以下の図のような状況を考えることになります。\\（いくつかの具体例を次節で詳しく扱うので、それを見ながらさらに理解を深めていきましょう。）\vspace{10pt}
+\clearpage
+
+\noindent まとめると次のように整理できます。
+\begin{oframed}
+	\noindent 【圏論的 predicate transformer についてのまとめ】\vspace{5pt}\\
+	$F:\Set\to\Set$: モナド\\
+	$\tau:F\Omega\to\Omega$: Eilenberg-Moore algebra of $F$\\
+	$\Omega$: complete lattice\\
+	が与えられると...\vspace{5pt}\\
+	$\implies$ $F$ の持ち上げ $\dot F$ が定まる。
+	\begin{multicols}{2}
+		\begin{center}
+			\begin{tikzcd}
+				\Pred \ar[r,"\dot F"] \ar[d,"p"'] & \Pred \ar[d,"p"] \\[5pt]
+				\Set \ar[r,"F"'] & \Set
+			\end{tikzcd}
+		\end{center}
+		%
+		\begin{itemize}
+			\item $p^{-1}(X)=\Omega^X$
+			\item $\mathrm{Ob}(\Pred)=(X\in\Set,p\in\Omega^X)$
+			\item $\Pred((X,p),(Y,q))$\vspace{-6pt}\\$=\{f:X\to Y\;\textrm{in}\;\Set\;\textrm{s.t.}$ \begin{tikzcd}[row sep=-3pt,column sep=12pt] X \ar[rd,"p",shorten=-1pt,near start] \ar[dd,"f"',shorten=-1pt] & \\ {} \ar[r,"\rotatebox{45}{$\scriptstyle\geq$}",phantom,near start] & \Omega\\ Y \ar[ru,"q"',shorten=-1pt,near start] & \end{tikzcd} $\}$
+		\end{itemize}
+	\end{multicols}
+	% \noindent 
+	$\dot F(X,p)=(FX,(FX\xrightarrow{Fp}F\Omega\xrightarrow{\tau}\Omega)\in\Omega^{FX})$
+	% \begin{itemize}
+	% 	\item 
+	% \end{itemize}
+\end{oframed}
+
+\noindent なお、副作用つき計算の一種として余代数 $c:X\to FX$ を扱う場合、まさに以下の図のような状況になります。\\（いくつかの具体例を次節で詳しく扱うので、それを見ながらさらに理解を深めていきましょう。）\vspace{10pt}
 \begin{center}
 	% \begin{small}
 		\begin{tikzcd}
@@ -5514,7 +5679,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{oframed}
 \noindent 基本形はいつも以下の形です。
 \[\begin{array}{cccccc}
-	\substack{\displaystyle\textrm{predicate}\\\displaystyle\textrm{transformer}}~~\Phi:& \mathbf\Omega^{X} & \xrightarrow[\dot F_X]{~~~\substack{\textrm{predicate}\\ \textrm{lifting}}~~~} & \mathbf\Omega^{FX} & \xrightarrow[c^\ast]{~~~\substack{\textrm{pullback by}\\\textrm{coalgebra}}~~~} & \mathbf\Omega^{X} \\
+	\substack{\displaystyle\textrm{predicate}\\\displaystyle\textrm{transformer}}~~\Phi:& \mathbf\Omega^{X} & \xrightarrow[\dot F_X]{~~~\substack{\textrm{predicate}\\ \textrm{lifting}}~~~~} & \mathbf\Omega^{FX} & \xrightarrow[c^\ast]{~~\substack{\textrm{substitution along}\\\textrm{a coalgebra}}~~} & \mathbf\Omega^{X} \\
 	& \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} &&\rotatebox{90}{$\in$}\\
 	& q & \longmapsto & \dot F_X q & \longmapsto & c^\ast\dot F_X q
 \end{array}\]
