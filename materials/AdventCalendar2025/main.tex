@@ -3401,7 +3401,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		&\mu\circ\eta T=\id_T \tag{2} \\
 		&\mu\circ\mu T=\mu\circ T\mu \tag{3}
 	\end{align*}
-	を示せばよい。以下 (1) と (2) では、随伴の三角恒等式（下記の図を参照）を用いる。
+	を示せばよい。以下 (1) と (2) では、随伴の三角恒等式（下記の図式を参照）を用いる。
 	\begin{center}
 		\begin{tikzcd}
 			LRL \ar[d,"\varepsilon L"'] & L \ar[l,"L\eta"'] \ar[ld,"\id_L"] \\
@@ -3442,6 +3442,22 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{align*}
 	が得られる。
 \end{proof}
+
+\clearpage
+
+\noindent そして、比較関手 (comparison functor) について
+
+\begin{theorem}[比較関手定理]
+	随伴 \begin{tikzcd}\A \ar[d,bend left=22pt,"R"]\\\C\ar[u,bend left=22pt,"L","\dashv"']\end{tikzcd} が誘導するモナドを $T=RL:\C\to\C$ と書くことにする。このとき、Kleisli圏 $\C_T$ と Eilenberg-Moore圏 $\C^T$ に対し、カノニカルな関手 $J:\C_T\to\A$ および $K:\A\to\C^T$ が存在する。さらに、Kleisli 随伴を \begin{tikzcd}\C_T \ar[d,bend left=22pt,"R_T"]\\\C\ar[u,bend left=22pt,"L_T","\dashv"']\end{tikzcd} とし、Eilenberg-Moore 随伴を \begin{tikzcd}\C^T \ar[d,bend left=22pt,"R^T"]\\\C\ar[u,bend left=22pt,"L^T","\dashv"']\end{tikzcd} とすると、
+	\[JL_T=L,\qquad RJ=R_T\] および \[KL=L^T,\qquad R^TK=R\] が成り立つ。
+	\begin{center}\large
+		\begin{tikzcd}
+			{} & \A \ar[dd,bend left=15pt] \ar[rd,dashed] & {} \\[-18pt]
+			\C_T \ar[dr,bend left=16pt] \ar[ru,dashed] & {} & \C^T \ar[dl,bend left=16pt] \\[10pt]
+			& \C \ar[ul,bend left=16pt,"\dashv"'] \ar[uu,bend left=15pt,"\dashv"'] \ar[ur,bend left=16pt,"\dashv"'] \ar[loop below,looseness=15pt,"T"] &
+		\end{tikzcd}
+	\end{center}
+\end{theorem}
 
 
 \begin{example}
@@ -3662,10 +3678,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{enumerate}
 に基づくものだと言えます。このことについて、以下で詳しく見ていきます。\vspace{18pt}
 
-\noindent まずは、準備として、以下の自由忘却随伴 (free-forgetful adjunction) について確認しておきましょう。
+\noindent まずは、準備として、以下の自由忘却随伴 (free-forgetful adjunction) について復習しておきましょう。
 
-\begin{theorem}
-	クライスリ圏とEM圏について、それぞれ、以下のような自由忘却随伴がある。（詳細は省略） %(free-forgetful adjunction) 
+\begin{proposition}[再掲]
+	クライスリ圏とEM圏について、それぞれ以下のような自由忘却随伴がある。（詳細は省略） %(free-forgetful adjunction) 
 	\begin{multicols}{2}
 		% \begin{center}
 		% 	\begin{tikzcd}[row sep=large,column sep=large]
@@ -3704,7 +3720,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{center}
 	\end{multicols}
 	%%%
-\end{theorem}\vspace{12pt}
+\end{proposition}\vspace{12pt}
 
 \noindent ここで、\textgt{クライスリ拡大} $F_T$ と \textgt{アイレンバーグ・ムーア持ち上げ} $F^T$ の、両者を定義します。
 
