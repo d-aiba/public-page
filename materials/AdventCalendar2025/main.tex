@@ -3250,9 +3250,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \clearpage
 
 \noindent 
-ここで、モナド、クライスリ圏、アイレンバーグ・ムーア圏を考えることのモチベーションをつかむために、例として、
-% \textgt{代数的エフェクト} (algebraic effect)、および
-\textgt{例外処理} (exception handler) の例を見ておくことにしましょう。%\vspace{10pt}
+ここで、モナド、クライスリ圏、アイレンバーグ・ムーア圏を考えることのモチベーションをつかむために、例として、\textgt{例外処理} (exception handler) について見ておくことにしましょう。%\vspace{10pt}
 \begin{oframed}
 \begin{itemize}
 	\item まず、\textgt{例外モナド} (exception monad) は以下のように与えられます。
@@ -3378,6 +3376,77 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 の両者は一致するからです！%\vspace{5pt}\\
 
 \end{supplement}
+
+\clearpage
+
+さてここで、有名でかつよく使う性質として、「\textgt{随伴からモナドを作る}」方法について見ていきましょう。
+
+\begin{proposition}
+	任意の随伴 \begin{tikzcd}\A \ar[d,bend left=22pt,"R"]\\\C\ar[u,bend left=22pt,"L","\dashv"']\end{tikzcd} 
+	% $\left(\begin{array}{ll} \textrm{unit} & \eta_X:X\to RLX\\\textrm{counit} & \varepsilon_X:LRX\to X\end{array}\right)$ 
+	は、モナド $RL:\C\to\C$ を誘導する。 \vspace{5pt}\\
+	なお、随伴の$\left(\begin{array}{ll} \textrm{単位} & \eta:\id_\C\Rightarrow RL\\\textrm{余単位} & \varepsilon:LR\Rightarrow \id_\A\end{array}\right)$から、モナドの単位・乗法は	$\left(\begin{array}{ll} \textrm{単位} & \eta:\id_\C\Rightarrow RL\\\textrm{乗法} & \mu:=R\varepsilon L:RLRL\Rightarrow RL \end{array}\right)$で与えられる。
+\end{proposition}
+
+\begin{proof}
+	この $(T,\eta,\mu):=(RL,\eta,R\varepsilon L)$ がモナドであることを示すためには、%任意の $X\in\C$ に対して
+	% \begin{align*}
+	% 	&\mu_X\circ\eta_{TX}=\id_{TX},\tag{1}\\
+	% 	&\mu_X\circ T\eta_X=\id_{TX},\tag{2}\\
+	% 	&\mu_X\circ T\mu_X=\mu_X\circ\mu_{TX}\tag{3}
+	% \end{align*}
+	% を示せばよい。
+	\begin{align*}
+		&\mu\circ T\eta=\id_T \tag{1} \\
+		&\mu\circ\eta T=\id_T \tag{2} \\
+		&\mu\circ\mu T=\mu\circ T\mu \tag{3}
+	\end{align*}
+	を示せばよい。以下 (1) と (2) では、随伴の三角恒等式（下記の図を参照）を用いる。
+	\begin{center}
+		\begin{tikzcd}
+			LRL \ar[d,"\varepsilon L"'] & L \ar[l,"L\eta"'] \ar[ld,"\id_L"] \\
+			L
+		\end{tikzcd}
+		\qquad\qquad 
+		\begin{tikzcd}
+			R \ar[r,"\eta R"] \ar[rd,"\id_R"'] & RLR \ar[d,"R\varepsilon"] \\
+			& R
+		\end{tikzcd}
+	\end{center}
+	\[\left(\textrm{別の見方だと}~ 
+		\begin{tikzcd} 
+			\C \ar[rd,"\id_\C"'] \ar[r,"L"] & \A \ar[d,"R"] \ar[rd,"\id_\A"] & {} \\ {} \ar[ur,"\scriptstyle\rotatebox{45}{$\Rightarrow$}\!\eta"{pos=0.85},phantom] & \C \ar[r,"L"'] \ar[ur,"\scriptstyle\rotatebox{45}{$\Rightarrow$}\!\varepsilon"{pos=0.25},phantom] & \A 
+		\end{tikzcd} 
+		\!\!\! = 
+		\begin{tikzcd}
+			\C\ar[r,bend left=20pt,"L"] \ar[r,bend right=20pt,"L"'] \ar[r,"\scriptstyle \Uparrow\;\id_L",phantom] & \A 
+		\end{tikzcd} 
+		\qquad\qquad
+		\begin{tikzcd} \A \ar[rd,"\id_\A"'] \ar[r,"R"] & \C \ar[d,"L"] \ar[rd,"\id_\C"] & {} \\ {} \ar[ur,"\scriptstyle\rotatebox{45}{$\Leftarrow$}\!\varepsilon"{pos=0.85},phantom] & \A \ar[r,"R"'] \ar[ur,"\scriptstyle\rotatebox{45}{$\Leftarrow$}\!\eta"{pos=0.25},phantom] & \C \end{tikzcd} 
+		\!\!\! = 
+		\begin{tikzcd}\A\ar[r,bend left=20pt,"R"] \ar[r,bend right=20pt,"R"'] \ar[r,"\scriptstyle \Downarrow\;\id_R",phantom] & \C \end{tikzcd}  
+	\right)\]
+	\begin{multicols}{2}
+	(1) $T=RL$, $\mu=R\varepsilon L$ なので、
+	\begin{align*}
+		\mu\circ T\eta &= (R\varepsilon L)\circ(RL\eta) \\ &= R((\varepsilon L)\circ(L\eta)) \\ &= R(\id_L) & \textrm{\small{(三角恒等式より)}} \\ &= \id_{RL} \\&=\id_T
+	\end{align*}
+	(2) 同様に、
+	\begin{align*}
+		\mu\circ \eta T &= (R\varepsilon L)\circ (\eta RL) \\ &= ((R\varepsilon)\circ(\eta R))L \\ &=(\id_R)L & \textrm{\small{(三角恒等式より)}} \\&=\id_{RL}\\&=\id_T
+	\end{align*}
+	\end{multicols}
+	(3) さらに、$\varepsilon$ の自然性（任意の $f\colon A\to B$ に対して $f\circ \varepsilon_A=\varepsilon_B\circ LR(f)$ が成り立つ）\\（特に $X\in\A$ と $f=\varepsilon_X\colon LRX\to X$ について、$\varepsilon_X\circ\varepsilon_{LRX}=\varepsilon_X\circ LR(\varepsilon_X)$ が言える）を用いると、
+	\begin{align*}
+		\mu\circ\mu T &= (R\varepsilon L)\circ(R\varepsilon LRL) \\ &= R(\varepsilon \circ\varepsilon LR)L \\ &= R(\varepsilon\circ LR\varepsilon)L & \textrm{\small{($\varepsilon$ の自然性より)}} \\ &= (R\varepsilon L)\circ(RLR\varepsilon L) \\ &= \mu\circ T\mu
+	\end{align*}
+	が得られる。
+\end{proof}
+
+
+\begin{example}
+
+\end{example}
 
 \clearpage
 
@@ -5605,7 +5674,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{definition}
 
 \noindent なお、$wp$ という記法は、Dijkstra の ``weakest precondition'' に由来します。$wp_\tau\llbracket f \rrbracket$ は、事後条件 $q\colon Y\to\Omega$ を、事前条件 $wp_\tau\llbracket f \rrbracket(q)\colon X\to\Omega$ に変換しています。
-\[\left(\begin{array}{cccccc}(X\xrightarrow{f}FY) &\;\implies\; & wp_\tau\llbracket f\rrbracket\colon \!\!\!& \Omega^Y & \!\!\!\!\!\!\xrightarrow{\,F(-)\,} \; (F\Omega)^{FY} \; \xrightarrow{\;\;\tau\;\;} \; \Omega^{FY} \; \xrightarrow{\;\;f^\ast\;\;}\!\!\!\!\!\!\!\!\!\!&\Omega^X\\ &&& \rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&&&\scriptstyle(Y\overset{q}{\to}\Omega)& \longmapsto & \scriptstyle \!\!\!(X\overset{f}{\to} FY\overset{Fq}{\to} F\Omega\overset{\tau}{\to}\Omega)\!\!\! \end{array}\right)\]
+\[\left(\begin{array}{cccccc}(X\xrightarrow{f}FY) &\;\implies\; & wp_\tau\llbracket f\rrbracket\colon \!\!\!& \Omega^Y & \!\!\!\!\!\!\xrightarrow{\,F(-)\,} \; (F\Omega)^{FY} \; \xrightarrow{\;\;\tau^{FY}\;\;} \; \Omega^{FY} \; \xrightarrow{\;\;f^\ast\;\;}\!\!\!\!\!\!\!\!\!\!&\Omega^X\\ &&& \rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&&&\scriptstyle(Y\overset{q}{\to}\Omega)& \longmapsto & \scriptstyle \!\!\!(X\overset{f}{\to} FY\overset{Fq}{\to} F\Omega\overset{\tau}{\to}\Omega)\!\!\! \end{array}\right)\]
 
 \begin{proposition}[合成性]
 	$wp$ は合成的 (compositional) である。つまり、以下の意味で関手的 (functorial) である。
@@ -5629,7 +5698,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \noindent まとめると次のように整理できます。
 \begin{oframed}
-	\noindent 【圏論的 predicate transformer についてのまとめ】\vspace{5pt}\\
+	\noindent 【圏論的 predicate transformer のまとめ】\vspace{5pt}\\
 	Given \\
 	$F:\Set\to\Set$: monad\\
 	$\tau:F\Omega\to\Omega$: Eilenberg-Moore algebra of $F$\\
@@ -5939,11 +6008,11 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \begin{multicols}{2}
 	\begin{oframed}
-		\noindent \underline{\textbf{Usual framework}}: \vspace{5pt}\\
+		\noindent \underline{\textbf{Usual setting}}: \vspace{5pt}\\
 		\noindent Given \\
 		$F:\Set\to\Set$: monad\\
 		$(F\Omega\xrightarrow{\tau}\Omega)$: Eilenberg-Moore algebra of $F$\\
-		$\Omega$: complete lattice\vspace{5pt}
+		$\Omega$: complete lattice\vspace{20pt}
 		% \vspace{80pt} %
 		\\
 		$\implies$ We obtain a predicate lifting $\dot F$ of $F$.
@@ -5978,7 +6047,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 				\Omega_1 \ar[r,"d"'] & \Omega_2
 			\end{tikzcd} \quad (lax homomorphism)
 		\end{center}\vspace{10pt}
-		$\implies$ We obtain predicate liftings $\dot F_1,\dot F_2$. \vspace{2pt}
+		$\implies$ We obtain predicate liftings $\dot F_1,\dot F_2$ s.t. \vspace{2pt}
 		\begin{center}\small
 			\begin{tikzcd}[column sep=3pt,row sep=15pt]
 				\Pred_1 \ar[rrr,"\dot F_1"] \ar[rrd,"d"] \ar[rdd,"p_1"'] &&& \Pred_1 \ar[rrd,"d"] \ar[rdd,"p_1"',near end] \ar[ld,"\rotatebox{-135}{$\Rightarrow$}",phantom] && \\[-6pt]
@@ -5987,6 +6056,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			\end{tikzcd}
 		\end{center}\vspace{5pt}
 		% $\forall (X,\varphi)\in\Pred_1$,\; 
+		for all $(X,\varphi)\in\Pred_1$,\;\\
 		$d\,\dot F_1\,\varphi\,\leq\,\dot F_2\,d\,\varphi$ \; (order in $p_2^{-1}(TX)$)
 	\end{oframed}
 \end{multicols}
