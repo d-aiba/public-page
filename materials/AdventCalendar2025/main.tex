@@ -3445,6 +3445,27 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
+\begin{proposition}
+	以下の随伴がある。
+	\begin{enumerate}
+		\item Kleisli adjunction
+		\begin{center}
+			\begin{tikzcd}
+				X\overset{\eta_Y\circ f}{\mathbin{-\!\!\!\mapsto}} Y & \C_T \ar[d,bend left=16pt,"R_T"] & X\overset{g}{\mathbin{-\!\!\!\mapsto}} Y \ar[d,mapsto,bend left=25pt] \\[15pt]
+				X\xrightarrow{f} Y \ar[u,mapsto,bend left=25pt] & \C \ar[loop below,"T"] \ar[u,bend left=16pt,"L_T","\dashv"'] & TX\xrightarrow{\mu_Y\circ Tg} TY
+			\end{tikzcd}
+		\end{center}
+		\item Eilenberg-Moore adjunction
+		\begin{center}
+			\begin{tikzcd}
+				\left(\!\scriptstyle\begin{array}{c}\small TTX\\[-5pt] \small ~~~ \downarrow\,\scriptstyle\mu_X\\[-5pt]\small TX\end{array}\!\right)\xrightarrow{Tf} \left(\!\scriptstyle\begin{array}{c}\small TTY\\[-5pt] \small ~~~ \downarrow\,\scriptstyle\mu_Y\\[-5pt]\small TY\end{array}\!\right) & \C^T \ar[d,bend left=16pt,"R^T"] & \left(\!\scriptstyle\begin{array}{c}\small TA\\[-5pt] \small ~~~ \downarrow\,\scriptstyle a\\[-5pt]\small A\end{array}\!\right) \xrightarrow{h} \left(\!\scriptstyle\begin{array}{c}\small TB\\[-5pt] \small ~~~ \downarrow\,\scriptstyle b\\[-5pt]\small B\end{array}\!\right) \ar[d,mapsto,bend left=25pt] \\
+				X\xrightarrow{f} Y \ar[u,mapsto,bend left=25pt] & \C \ar[loop below,"T"] \ar[u,bend left=16pt,"L^T","\dashv"'] & A\xrightarrow{h}B
+			\end{tikzcd}
+		\end{center}
+	\end{enumerate}
+	
+\end{proposition}
+
 \noindent そして、比較関手 (comparison functor) について
 
 \begin{theorem}[比較関手定理]
