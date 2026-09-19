@@ -148,7 +148,7 @@
 \subsection*{1.1~ 形式検証とは}
 
 \noindent 
-\textgt{形式検証}と呼ばれる分野では、\textgt{バグのないソフトウェア}を目指します。（ソフトウェア``工学''的な「テストでバグを見つけ出す・ひとつずつ修正する」といったアプローチよりかはむしろ）ソフトウェア\kenten{科学}としては、\textgt{論理学の知見を使って「この範囲には絶対にバグがないこと」証明}します。%（このような性質のことを安全性と言います。）\vspace{3pt}\\
+\textgt{形式検証}と呼ばれる分野では、\textgt{バグのないソフトウェア}を目指します。（ソフトウェア\kenten{工学}的な「テストでバグを見つけ出す・ひとつずつ修正する」といったアプローチよりかはむしろ）ソフトウェア\kenten{科学}としては、\textgt{論理学の知見を使って「この範囲には絶対にバグがないこと」を証明}します。%（このような性質のことを安全性と言います。）\vspace{3pt}\\
 範囲はたしかに限定的ですが、強力です。
 （特定の範囲についての安全性を数学的に保証すれば、そこをテスト範囲から除外することができ、そのぶん効率的なテストも可能になります。）
 \vspace{4pt}
@@ -183,7 +183,7 @@
 %%% 
 \vspace{15pt}
 %%%
-\noindent 形式検証の技術は、もはや研究者たちによる単なる理論的産物ではなく、現実の様々なシステムに活用されています。\\ よく知られている事例 (一部)： 
+\noindent 形式検証の技術は、もはや研究者たちによる単なる理論的産物ではなく、現実の様々なシステムに活用されています。\\ よく知られている事例 (ごく一部)： 
 % \todo[inline]{追加・加筆する}
 \begin{itemize}
 	\item 集積回路設計 (IC design) の形式検証 (Intel, 1990年代半ばから2000年代初頭)
@@ -3445,6 +3445,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
+\noindent ここで、クライスリ圏 $\C_T$ および EM 圏 $\C^T$ について、以下のような自由忘却随伴を作れることを確認しましょう。
+
 \begin{proposition}
 	以下の随伴がある。
 	\begin{enumerate}
@@ -3452,32 +3454,45 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\begin{center}
 			\begin{tikzcd}
 				X\overset{\eta_Y\circ f}{\mathbin{-\!\!\!\mapsto}} Y & \C_T \ar[d,bend left=16pt,"R_T"] & X\overset{g}{\mathbin{-\!\!\!\mapsto}} Y \ar[d,mapsto,bend left=25pt] \\[15pt]
-				X\xrightarrow{f} Y \ar[u,mapsto,bend left=25pt] & \C \ar[loop below,"T"] \ar[u,bend left=16pt,"L_T","\dashv"'] & TX\xrightarrow{\mu_Y\circ Tg} TY
+				X\xrightarrow{\;f\;} Y \ar[u,mapsto,bend left=25pt] & \C \ar[loop below,"T"] \ar[u,bend left=16pt,"L_T","\dashv"'] & TX\xrightarrow{\;\mu_Y\circ Tg\;} TY
 			\end{tikzcd}
 		\end{center}
 		\item Eilenberg-Moore adjunction
 		\begin{center}
 			\begin{tikzcd}
-				\left(\!\scriptstyle\begin{array}{c}\small TTX\\[-5pt] \small ~~~ \downarrow\,\scriptstyle\mu_X\\[-5pt]\small TX\end{array}\!\right)\xrightarrow{Tf} \left(\!\scriptstyle\begin{array}{c}\small TTY\\[-5pt] \small ~~~ \downarrow\,\scriptstyle\mu_Y\\[-5pt]\small TY\end{array}\!\right) & \C^T \ar[d,bend left=16pt,"R^T"] & \left(\!\scriptstyle\begin{array}{c}\small TA\\[-5pt] \small ~~~ \downarrow\,\scriptstyle a\\[-5pt]\small A\end{array}\!\right) \xrightarrow{h} \left(\!\scriptstyle\begin{array}{c}\small TB\\[-5pt] \small ~~~ \downarrow\,\scriptstyle b\\[-5pt]\small B\end{array}\!\right) \ar[d,mapsto,bend left=25pt] \\
-				X\xrightarrow{f} Y \ar[u,mapsto,bend left=25pt] & \C \ar[loop below,"T"] \ar[u,bend left=16pt,"L^T","\dashv"'] & A\xrightarrow{h}B
+				\left(\!\scriptstyle\begin{array}{c}\small TTX\\[-5pt] \small ~~~ \downarrow\,\scriptstyle\mu_X\\[-5pt]\small TX\end{array}\!\right)\xrightarrow{\;Tf\;} \left(\!\scriptstyle\begin{array}{c}\small TTY\\[-5pt] \small ~~~ \downarrow\,\scriptstyle\mu_Y\\[-5pt]\small TY\end{array}\!\right) & \C^T \ar[d,bend left=16pt,"R^T"] & \left(\!\scriptstyle\begin{array}{c}\small TA\\[-5pt] \small ~~ \downarrow\,\scriptstyle a\\[-5pt]\small A\end{array}\!\right) \xrightarrow{\;h\;} \left(\!\scriptstyle\begin{array}{c}\small TB\\[-5pt] \small ~~ \downarrow\,\scriptstyle b\\[-5pt]\small B\end{array}\!\right) \ar[d,mapsto,bend left=25pt] \\
+				X\xrightarrow{\;f\;} Y \ar[u,mapsto,bend left=25pt] & \C \ar[loop below,"T"] \ar[u,bend left=16pt,"L^T","\dashv"'] & A\xrightarrow{\;h\;}B & ~~~
 			\end{tikzcd}
 		\end{center}
 	\end{enumerate}
 	
 \end{proposition}
 
-\noindent そして、比較関手 (comparison functor) について
+\begin{proof}
+	
+\end{proof}
+
+\clearpage
+
+\noindent そして、比較関手 (comparison functor) と呼ばれるものを考えることにしましょう。
 
 \begin{theorem}[比較関手定理]
-	随伴 \begin{tikzcd}\A \ar[d,bend left=22pt,"R"]\\\C\ar[u,bend left=22pt,"L","\dashv"']\end{tikzcd} が誘導するモナドを $T=RL:\C\to\C$ と書くことにする。このとき、Kleisli圏 $\C_T$ と Eilenberg-Moore圏 $\C^T$ に対し、カノニカルな関手 $J:\C_T\to\A$ および $K:\A\to\C^T$ が存在する。さらに、Kleisli 随伴を \begin{tikzcd}\C_T \ar[d,bend left=22pt,"R_T"]\\\C\ar[u,bend left=22pt,"L_T","\dashv"']\end{tikzcd} とし、Eilenberg-Moore 随伴を \begin{tikzcd}\C^T \ar[d,bend left=22pt,"R^T"]\\\C\ar[u,bend left=22pt,"L^T","\dashv"']\end{tikzcd} とすると、
+	随伴 \begin{tikzcd}\A \ar[d,bend left=22pt,"R"]\\\C\ar[u,bend left=22pt,"L","\dashv"']\end{tikzcd} が誘導するモナドを $T:=RL\colon\C\to\C$ と書くことにする。このとき、Kleisli圏 $\C_T$ と Eilenberg-Moore圏 $\C^T$ に対し、カノニカルな関手 $J:\C_T\to\A$ および $K:\A\to\C^T$ が存在する。さらに、Kleisli 随伴を \begin{tikzcd}\C_T \ar[d,bend left=22pt,"R_T"]\\\C\ar[u,bend left=22pt,"L_T","\dashv"']\end{tikzcd} とし、Eilenberg-Moore 随伴を \begin{tikzcd}\C^T \ar[d,bend left=22pt,"R^T"]\\\C\ar[u,bend left=22pt,"L^T","\dashv"']\end{tikzcd} とすると、
 	\[JL_T=L,\qquad RJ=R_T\] および \[KL=L^T,\qquad R^TK=R\] が成り立つ。
 	\begin{center}\large
 		\begin{tikzcd}
-			{} & \A \ar[dd,bend left=15pt] \ar[rd,dashed] & {} \\[-18pt]
-			\C_T \ar[dr,bend left=16pt] \ar[ru,dashed] & {} & \C^T \ar[dl,bend left=16pt] \\[10pt]
+			{} & \A \ar[dd,bend left=15pt] \ar[rd,dashed,"K"] & {} \\[-18pt]
+			\C_T \ar[dr,bend left=16pt] \ar[ru,dashed,"J"] & {} & \C^T \ar[dl,bend left=16pt] \\[10pt]
 			& \C \ar[ul,bend left=16pt,"\dashv"'] \ar[uu,bend left=15pt,"\dashv"'] \ar[ur,bend left=16pt,"\dashv"'] \ar[loop below,looseness=15pt,"T"] &
 		\end{tikzcd}
 	\end{center}
+	% \begin{center}\large
+	% 	\begin{tikzcd}
+	% 		{} & \A \ar[dd,bend left=15pt] \ar[rd,dashed,"K"] & {} \\[-18pt]
+	% 		\C_T \ar[dr,bend left=16pt,"R_T"] \ar[ru,dashed,"J"] & {} & \C^T \ar[dl,bend left=16pt] \\[10pt]
+	% 		& \C \ar[ul,bend left=16pt,"\dashv"',"L_T"] \ar[uu,bend left=15pt,"\dashv"',"L"] \ar[ur,bend left=16pt,"\dashv"',"L^T"] \ar[loop below,looseness=15pt,"T"] &
+	% 	\end{tikzcd}
+	% \end{center}
 \end{theorem}
 
 
