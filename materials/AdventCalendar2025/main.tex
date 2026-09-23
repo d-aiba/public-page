@@ -3447,8 +3447,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \noindent ここで、クライスリ圏 $\C_T$ および EM 圏 $\C^T$ について、以下のような自由忘却随伴を作れることを確認しましょう。
 
-\begin{proposition}
-	以下の随伴がある。
+\begin{proposition}[自由忘却随伴]
+	以下の随伴がある。 \label{prop:Kleisli-EM-adjunction}
 	\begin{enumerate}
 		\item Kleisli adjunction
 		\begin{center}
@@ -3469,7 +3469,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{proposition}
 
 \begin{proof}
-	
+	\begin{enumerate}
+		\item 示すべきことは、自然な全単射 \[\C_T(L_TX,Y)\;\cong\;\C(X,R_TY)\] が存在すること。定義から、\[\C_T(L_TX,Y)=\C(X,TY)=\C(X,R_TY)\] なので、上の全単射は恒等写像によって与えられる。よって $L_T\dashv R_T$ である。\vspace{5pt} 
+		\item 示すべきことは、自然な全単射 \[\begin{array}{ccc}\C^T\left(\left(\begin{array}{c}TTX\\[-4pt]~~\downarrow\;\scriptstyle\mu_X\\[-4pt]TX\end{array}\right),\left(\begin{array}{c}TA\\[-4pt]~~\downarrow\;\scriptstyle a\\[-4pt]A\end{array}\right)\right)~~~ &\cong& ~~~\C(X,A)~~~ \\[20pt] \rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\ h&\longmapsto&h\circ\eta_X\\a\circ Tf&\reflectbox{$\longmapsto$}&f\end{array}\] が存在すること。$a\circ Tf\colon TX\to A$ は、$(a\circ Tf)\circ\mu_X=a\circ\mu_A\circ TTf=a\circ Ta\circ TTf=a\circ T(a\circ Tf)$ なので、$T$-algebra morphism である。ここで、\[a\circ Tf\circ \eta_X=a\circ\eta_A\circ f=f\] および \[a\circ T(h\circ\eta_X)=a\circ Th\circ T\eta_X=h\circ\mu_X\circ T\eta_X=h\] なので、よって $L^T\dashv R^T$ である。
+	\end{enumerate}
 \end{proof}
 
 \clearpage
@@ -3717,7 +3720,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent まずは、準備として、以下の自由忘却随伴 (free-forgetful adjunction) について復習しておきましょう。
 
 \begin{proposition}[再掲]
-	クライスリ圏とEM圏について、それぞれ以下のような自由忘却随伴がある。（詳細は省略） %(free-forgetful adjunction) 
+	クライスリ圏とEM圏について、それぞれ自由忘却随伴がある。（詳細は命題\ref{prop:Kleisli-EM-adjunction}） %(free-forgetful adjunction) 
 	\begin{multicols}{2}
 		% \begin{center}
 		% 	\begin{tikzcd}[row sep=large,column sep=large]
@@ -6116,6 +6119,44 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \subsection*{(4) 具体的状況への応用事例と実験結果}
 
 \todo[inline]{まだ}
+
+
+\clearpage
+
+\begin{screen}
+	\[\underbracket{~\nu\Phi=\bot~}_{\substack{\textsf{almost-sure}\\\textsf{termination}}}\overset{?}{\implies} \underbracket{~\mu\Psi=\nu\Psi}_{\substack{\textsf{lfp-gfp}\\\textsf{coincidence}}}\]
+\end{screen}
+
+\begin{screen}
+\begin{center}%\Large
+	\begin{tikzcd}[column sep=15pt]
+		\Omega^X \ar[rrrrrr,"\Psi","\textrm{predicate transformer}"'] & & & & & & \Omega^X \\[20pt] %
+		\Omega^X \ar[rrr,"\dot F_X","\textrm{predicate lifting}"'] & & & \Omega^{FX} \ar[rrr,"c^\ast","\substack{\textrm{substitution along}\\\textrm{the coalgebra}}"'] & & & \Omega^X \\[20pt] %
+		\Omega^X \ar[rr,"F(-)"] & & (F\Omega)^{FX} \ar[rr,"\tau^{FX}","\textrm{modality}"'] & & \Omega^{FX} \ar[rr,"c^\ast"] & & \Omega^X
+	\end{tikzcd}
+\end{center}
+\end{screen}
+
+\begin{screen}
+	\begin{center}\Large
+        \begin{tikzcd}
+            {[0,1]}^{X\times[0,M]} \ar[rrd,"\Phi\,:=\,\Lan_d(d\circ\Psi)",bend left=20pt] & {} & {} \\[10pt]
+            ({[0,M]}^{X\times[0,M]})^2 \ar[u,"d"] \ar[r,"\Psi^2"'] \ar[ru,"\rotatebox{45}{\leq}",phantom] & ({[0,M]}^{X\times[0,M]})^2  \ar[r,"d"'] & {[0,1]}^{X\times[0,M]}
+        \end{tikzcd}
+    \end{center}
+\end{screen}
+
+\begin{screen}
+	\begin{center}
+		\begin{tikzcd}
+			E^2 \ar[r,"\Psi^2"] \ar[d,"d"'] & E^2 \ar[d,"d"] \ar[ld,"\rotatebox{45}{$\geq$}",phantom] \\
+			A \ar[r,"\Phi"'] & A 
+		\end{tikzcd}
+	\end{center}
+\end{screen}
+
+\clearpage
+
 
 % \textbf{停止性} (almost-sure termination) および\textbf{期待実行時間} (expected runtime) の検証
 
