@@ -3480,8 +3480,9 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent そして、比較関手 (comparison functor) と呼ばれるものを考えることにしましょう。
 
 \begin{theorem}[比較関手定理]
-	随伴 \begin{tikzcd}\A \ar[d,bend left=22pt,"R"]\\\C\ar[u,bend left=22pt,"L","\dashv"']\end{tikzcd} が誘導するモナドを $T:=RL\colon\C\to\C$ と書くことにする。このとき、Kleisli圏 $\C_T$ と Eilenberg-Moore圏 $\C^T$ に対し、カノニカルな関手 $J:\C_T\to\A$ および $K:\A\to\C^T$ が存在する。さらに、Kleisli 随伴を \begin{tikzcd}\C_T \ar[d,bend left=22pt,"R_T"]\\\C\ar[u,bend left=22pt,"L_T","\dashv"']\end{tikzcd} とし、Eilenberg-Moore 随伴を \begin{tikzcd}\C^T \ar[d,bend left=22pt,"R^T"]\\\C\ar[u,bend left=22pt,"L^T","\dashv"']\end{tikzcd} とすると、
-	\[JL_T=L,\qquad RJ=R_T\] および \[KL=L^T,\qquad R^TK=R\] が成り立つ。
+	随伴 \begin{tikzcd}\A \ar[d,bend left=22pt,"R"]\\\C\ar[u,bend left=22pt,"L","\dashv"']\end{tikzcd} を考え、この随伴が誘導するモナドを $T:=RL\colon\C\to\C$ と書く。このとき、Kleisli圏 $\C_T$ と Eilenberg-Moore圏 $\C^T$ に対し、カノニカルな関手 $J:\C_T\to\A$ および $K:\A\to\C^T$ が存在する。さらに、Kleisli 随伴を \begin{tikzcd}\C_T \ar[d,bend left=22pt,"R_T"]\\\C\ar[u,bend left=22pt,"L_T","\dashv"']\end{tikzcd} とし、Eilenberg-Moore 随伴を \begin{tikzcd}\C^T \ar[d,bend left=22pt,"R^T"]\\\C\ar[u,bend left=22pt,"L^T","\dashv"']\end{tikzcd} とすると、
+	% \[JL_T=L,\qquad RJ=R_T\] および \[KL=L^T,\qquad R^TK=R\] が成り立つ。
+	\begin{multicols}{2}
 	\begin{center}\large
 		\begin{tikzcd}
 			{} & \A \ar[dd,bend left=15pt] \ar[rd,dashed,"K"] & {} \\[-18pt]
@@ -3489,13 +3490,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			& \C \ar[ul,bend left=16pt,"\dashv"'] \ar[uu,bend left=15pt,"\dashv"'] \ar[ur,bend left=16pt,"\dashv"'] \ar[loop below,looseness=15pt,"T"] &
 		\end{tikzcd}
 	\end{center}
-	% \begin{center}\large
-	% 	\begin{tikzcd}
-	% 		{} & \A \ar[dd,bend left=15pt] \ar[rd,dashed,"K"] & {} \\[-18pt]
-	% 		\C_T \ar[dr,bend left=16pt,"R_T"] \ar[ru,dashed,"J"] & {} & \C^T \ar[dl,bend left=16pt] \\[10pt]
-	% 		& \C \ar[ul,bend left=16pt,"\dashv"',"L_T"] \ar[uu,bend left=15pt,"\dashv"',"L"] \ar[ur,bend left=16pt,"\dashv"',"L^T"] \ar[loop below,looseness=15pt,"T"] &
-	% 	\end{tikzcd}
-	% \end{center}
+	%
+	~\vspace{5pt}
+	\[JL_T=L,\qquad RJ=R_T\] および \[KL=L^T,\qquad R^TK=R\] が成り立つ。
+	\end{multicols} \vspace{3pt}
 \end{theorem}
 
 
