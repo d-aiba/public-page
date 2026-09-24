@@ -3447,7 +3447,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \noindent ここで、クライスリ圏 $\C_T$ および EM 圏 $\C^T$ について、以下のような\textgt{自由忘却随伴}を作れることを確認しましょう。
 
-\begin{proposition}[自由忘却随伴, free-forgetful adjunction]
+\begin{proposition}[free-forgetful adjunction]
 	以下の随伴がある。 \label{prop:Kleisli-EM-adjunction}
 	\begin{enumerate}
 		\item Kleisli adjunction
@@ -5450,6 +5450,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{center}
 \end{remark}
 
+% \clearpage
+
 \noindent さて、次章では、本章で導入した道具立てをフル活用して、様々な種類の（非決定的、確率的、etc.）プログラムに対する最弱事前条件を定める方法を紹介します。
 \clearpage
 
@@ -5715,8 +5717,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{definition}
 
 \begin{supplement}[述語持ち上げ]
-	% $F$ が単に関手である場合、\textgt{様相} $\tau\colon F\Omega\to\Omega$（ただし、上の定義\ref{def:modality} から $\eta, \mu$ の整合性の条件を除いたもの）は、\textgt{述語持ち上げ} $\lambda\colon\C(-,\Omega)\to\C(F(-),\Omega)$ を誘導する。また、その逆も誘導する。\\（これら両者の対応関係は、米田の補題から従う。）
-	\textgt{様相} $\tau\colon F\Omega\to\Omega$は、\textgt{述語持ち上げ} $\lambda\colon\Omega^{(-)}\Rightarrow\Omega^{F(-)}$ を誘導する。また、その逆も誘導する。（これら両者の対応関係は、米田の補題から従う。）
+	$F$ が単に関手である場合、\textgt{様相} $\tau\colon F\Omega\to\Omega$（ただし、上の定義\ref{def:modality} から $\eta, \mu$ の整合性の条件を除いたもの）は、\textgt{述語持ち上げ} $\lambda\colon\C(-,\Omega)\to\C(F(-),\Omega)$ を誘導する。また、その逆も誘導する。\\（これら両者の対応関係は、米田の補題から従う。）
+	% \textgt{様相} $\tau\colon F\Omega\to\Omega$は、\textgt{述語持ち上げ} $\lambda\colon\Omega^{(-)}\Rightarrow\Omega^{F(-)}$ を誘導する。また、その逆も誘導する。（これら両者の対応関係は、米田の補題から従う。）
 	\[\mathrm{Nat}(\C(-,\Omega),\C(F(-),\Omega))\;\cong\;\C(F\Omega,\Omega).\]
 \end{supplement}
 
@@ -5791,6 +5793,96 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% \end{small}
 \end{center}
 \vspace{25pt}
+
+\clearpage
+
+\subsection*{コラム: ファイブレーションにおける極限・余極限を計算する方法}
+
+\begin{multicols}{2}
+	\begin{center}
+		\begin{tikzcd}
+			\J \ar[r,"D"] & \E \ar[d,"p"] \\
+			& \C
+		\end{tikzcd}
+	\end{center}
+	$\Lim D$ は、以下の手順で計算します。
+	\begin{enumerate}
+		\item まず、$\Lim pD$ を、$\C$ の中で計算する。
+		\item 次に、極限を、ファイバー $\E_{\,\Lim pD}$ の中で計算する。
+	\end{enumerate}
+\end{multicols}
+
+\noindent 具体的には、以下の通りです。
+\begin{center} \small
+	\begin{tikzcd}
+		{} & {} & {} & {} & \begin{array}{c}\E_{\,\Lim pD}\\\ovalbox{$\begin{array}{c} ~ \\[-5pt] \pi_I^\ast DI \\ ~~~~~ \downarrow ~~~~~ \\\pi_J^\ast DJ \\[-5pt] ~ \end{array}$}\end{array} \ar[lldd,bend right=20pt,"\overline{\pi_I}"'] \ar[lddd,bend left=10pt,"\overline{\pi_J}"] & \\[-10pt]
+		{} & {} & {} \ar[rrr,dash,shorten=-5.3pt] \ar[lddd,dash,shorten >= -2.4pt, shorten <= -7.5pt] & {} & {} & {} \ar[lddd,dash,shorten >= -2.8pt, shorten <= -6.2pt] & {}  \\[-15pt]
+		\E \ar[ddddd,"p"] & {} & DI \ar[rd,"Du"] & {} \\[-25pt]
+		{} & {} & {} &  DJ & {} \\[-15pt]
+		{} & {} \ar[rrr,dash,shorten=-5.3pt] & {} & {} & {} & {} \\
+		%%%
+		{} & {} & {} & {} & {\Lim pD} \ar[lldd,bend right=10pt,"\pi_I"'] \ar[lddd,bend left=10pt,"\pi_J"] & {} \\[8pt]
+		{} & {} & {} \ar[rrr,dash,shorten=-5.3pt] \ar[lddd,dash,shorten >= -2.4pt, shorten <= -7.5pt] & {} & {} & {} \ar[lddd,dash,shorten >= -2.8pt, shorten <= -6.2pt] & {}  \\[-15pt]
+		\C & {} & pDI \ar[rd,"pDu"] & {} & {} \\[-25pt]
+		{} & {} & {} & pDJ & {} \\[-15pt]
+		{} & {} \ar[rrr,dash,shorten=-5.3pt] & {} & {} & {} & {} \\
+	\end{tikzcd}
+\end{center}
+
+\clearpage
+
+\noindent 特に、\textgt{余帰納的述語} (coinductive predicate) を考える際には、以下のような final sequence を考えます。
+% \begin{itemize}
+% 	\item base category での $F$-final sequence 
+% 	\item 
+% \end{itemize}
+
+\begin{oframed}
+\begin{center} \tiny
+\rotatebox{90}{
+\begin{tikzcd}[ampersand replacement=\&]
+	\&\&\&\&\&\&\&\&\&\&\& \ovalbox{${~\zeta^\ast\circ\dot F \textrm{ final sequence}~}$} \&\&\&\& \ovalbox{${~ c^\ast\circ\dot F\textrm{ final sequence} ~}$} \\[20pt]
+	\&\&\& {\top_1} \&\&\&\&\&\&\&\& {\top_{\nu F} \cong \pi_{\omega,0}^* (\top_1)} \&\&\&\& {\top_X} \&\& \\
+	\&\&\&\&\& {\dot{F}\top_1} \&\& {{}} \&\&\& {{}} \& {(\zeta^*\circ\dot{F})(\top_{\nu F}) \;\cong\;\pi_{\omega,1}^*(\dot{F}\top_1)} \& {{}} \& ~~~~~~~~~~ \& {{}} \& {(c^*\circ\dot{F})(\top_X) \;\cong\; \mathrm{beh}_c^*((\zeta^*\circ\dot{F})(\top_{\nu F}))} \\
+	{\mathbb{E}} \&\&\&\&\&\&\& {\dot{F}^2\top_1} \&\&\&\& {(\zeta^*\circ\dot{F})^2(\top_{\nu F}) \;\cong\;\pi_{\omega,2}^*(\dot{F}^2\top_1)} \&\&\&\& {(c^*\circ\dot{F})^2(\top_X) \;\cong\; \mathrm{beh}_c^*((\zeta^*\circ\dot{F})^2(\top_{\nu F}))} \\
+	\&\&\&\&\&\&\&\&\& \cdots \&\& \vdots \&\&\&\& \vdots \\
+	\&\&\&\&\&\&\&\&\&\&\& {\mathrm{Lim}_n \dot{F}^n \top_1 \,=\,\nu \dot{F}\;\cong\;\mathrm{Lim}_n(\zeta^*\circ\dot{F})^n(\top_{\nu F})} \&\&\&\& {\mathrm{Lim}_n  (c^*\circ\dot{F})^n(\top_X) \,=\,\nu (c^*\circ\dot{F})} \\
+	\\[50pt]
+	\&\&\& 1 \\
+	\&\&\&\&\& F1 \&\&\&\&\&\&\&\&\&\& X \\
+	{\mathbb{C}} \&\&\&\&\&\&\& {F^21} \&\&\&\&\&\&\&\&\&\& FX \\
+	\&\&\&\&\&\&\&\&\& \cdots \\
+	\&\&\&\&\&\&\&\&\&\&\& {\mathrm{Lim}_n F^n1 \,=\,\nu F}
+	\arrow["{!}", from=3-6, to=2-4]
+	\arrow["{\substack{\text{pulling back} \\\textrm{along } \pi_{\omega, n}}}", Rightarrow, from=3-8, to=3-11]
+	\arrow["{\substack{\text{pulling back} \\\textrm{along } \mathrm{beh}_c}}", Rightarrow, from=3-13, to=3-15]
+	\arrow[from=3-12, to=2-12]
+	\arrow[from=3-16, to=2-16]
+	\arrow["p", from=4-1, to=10-1]
+	\arrow["{\dot{F}!}", from=4-8, to=3-6]
+	\arrow[from=4-12, to=3-12]
+	\arrow[from=4-16, to=3-16]
+	\arrow[from=5-10, to=4-8]
+	\arrow[from=5-12, to=4-12]
+	\arrow[from=5-16, to=4-16]
+	\arrow[from=6-12, to=5-10]
+	\arrow[from=6-12, to=5-12]
+	\arrow[from=6-16, to=5-16]
+	\arrow["{\pi_{1,0}={!}}"', from=9-6, to=8-4]
+	\arrow["c"{description}, from=9-16, to=10-18]
+	\arrow["{\substack{\mathrm{beh}_c \\(\text{by finality of } \nu F)}}", dashed, from=9-16, to=12-12]
+	\arrow["{\pi_{2,0}}",bend left=40pt, from=10-8, to=8-4]
+	\arrow["{\pi_{2,1} = F!}"', from=10-8, to=9-6]
+	\arrow[from=11-10, to=10-8]
+	\arrow["{\pi_{\omega,0}}"', bend right, from=12-12, to=8-4]
+	\arrow["{\pi_{\omega,1}}"{description}, bend right, from=12-12, to=9-6]
+	\arrow[from=12-12, to=11-10]
+	\arrow[from=2-4,to=6-12,phantom,shift right=60pt,"\ovalbox{${\dot F} \textrm{ final sequence}$}"]
+	\arrow[from=8-4,to=12-12,phantom,shift right=50pt,"\ovalbox{${F} \textrm{ final sequence}$}"]
+\end{tikzcd}
+}
+\end{center}
+\end{oframed}
 
 \clearpage
 
