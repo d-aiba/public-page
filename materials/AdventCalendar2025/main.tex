@@ -5799,17 +5799,17 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \subsection*{コラム: ファイブレーションにおける極限・余極限を計算する方法}
 
 \begin{multicols}{2}
+	\noindent 極限 $\Lim D$ は、以下の手順で計算します。
+	\begin{enumerate}
+		\item まず、基底圏 $\C$ の中で極限 $\Lim pD$ を取る。
+		\item 次に、ファイバー $\E_{\,\Lim pD}$ でもう一度極限を取る。
+	\end{enumerate}
 	\begin{center}
 		\begin{tikzcd}
 			\J \ar[r,"D"] & \E \ar[d,"p"] \\
 			& \C
 		\end{tikzcd}
 	\end{center}
-	$\Lim D$ は、以下の手順で計算します。
-	\begin{enumerate}
-		\item まず、$\Lim pD$ を、基底圏 $\C$ の中で計算する。
-		\item 次に、極限を、ファイバー $\E_{\,\Lim pD}$ の中で計算する。
-	\end{enumerate}
 \end{multicols}
 
 \noindent 具体的には、以下の通りです。\\ 図式 $D$ のコピーがファイバー $\E_{\,\Lim pD}$ の中に作られるので、$\E_{\,\Lim pD}$ の中でもさらに limit を取ります。
@@ -5829,7 +5829,15 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{tikzcd}
 \end{center}
 
-\noindent つまり、このように、ファイブレーションにおいて極限を計算するときは、極限を2回計算することになります。
+\noindent つまり上の図のように、\underline{$\C$ の中}と、\underline{$\E_{\,\Lim pD}$ の中}で、極限を2回計算することになります。\vspace{5pt}
+\begin{screen}
+\noindent 【まとめ】 ファイブレーションにおいて極限を取るときは、極限を2回計算する！
+\begin{enumerate}
+	\item 基底圏 $\C$ の中で極限を計算する \[L=\Lim_{\C} pD\]
+	\item ファイバー $\E_{\,\Lim pD}$ の中でもう一度極限を計算する \[\Lim_\E D \;\cong\; \Lim_{\E_{L}}(I\mapsto\pi_I^\ast DI)\]
+\end{enumerate}
+\end{screen}
+% \[\Lim_\E D \;\cong\; \Lim_{\E_{L}}(I\mapsto\pi_I^\ast DI),\qquad L=\Lim_{\C} pD\]
 
 \clearpage
 
