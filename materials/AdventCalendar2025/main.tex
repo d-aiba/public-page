@@ -5807,15 +5807,15 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{center}
 	$\Lim D$ は、以下の手順で計算します。
 	\begin{enumerate}
-		\item まず、$\Lim pD$ を、$\C$ の中で計算する。
+		\item まず、$\Lim pD$ を、基底圏 $\C$ の中で計算する。
 		\item 次に、極限を、ファイバー $\E_{\,\Lim pD}$ の中で計算する。
 	\end{enumerate}
 \end{multicols}
 
-\noindent 具体的には、以下の通りです。
+\noindent 具体的には、以下の通りです。\\ 図式 $D$ のコピーがファイバー $\E_{\,\Lim pD}$ の中に作られるので、$\E_{\,\Lim pD}$ の中でもさらに limit を取ります。
 \begin{center} \small
 	\begin{tikzcd}
-		{} & {} & {} & {} & \begin{array}{c}\E_{\,\Lim pD}\\\ovalbox{$\begin{array}{c} ~ \\[-5pt] \pi_I^\ast DI \\ ~~~~~ \downarrow ~~~~~ \\\pi_J^\ast DJ \\[-5pt] ~ \end{array}$}\end{array} \ar[lldd,bend right=20pt,"\overline{\pi_I}"'] \ar[lddd,bend left=10pt,"\overline{\pi_J}"] & \\[-10pt]
+		{} & {} & {} & {} & \begin{array}{c} ~\\ ~\\ \E_{\,\Lim pD}\\\ovalbox{$\begin{array}{c} ~ \\[-5pt] \pi_I^\ast DI \\ ~~~~~ \downarrow ~~~~~ \\\pi_J^\ast DJ \\[-5pt] ~ \end{array}$}\end{array} \ar[lldd,bend right=20pt,"\overline{\pi_I}"'] \ar[lddd,bend left=10pt,"\overline{\pi_J}"] & \\[-10pt]
 		{} & {} & {} \ar[rrr,dash,shorten=-5.3pt] \ar[lddd,dash,shorten >= -2.4pt, shorten <= -7.5pt] & {} & {} & {} \ar[lddd,dash,shorten >= -2.8pt, shorten <= -6.2pt] & {}  \\[-15pt]
 		\E \ar[ddddd,"p"] & {} & DI \ar[rd,"Du"] & {} \\[-25pt]
 		{} & {} & {} &  DJ & {} \\[-15pt]
@@ -5829,6 +5829,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\end{tikzcd}
 \end{center}
 
+\noindent つまり、このように、ファイブレーションにおいて極限を計算するときは、極限を2回計算することになります。
+
 \clearpage
 
 \noindent 特に、\textgt{余帰納的述語} (coinductive predicate) を考える際には、以下のような final sequence を考えます。\\（スペースの都合上、図式を横向きに表示しています。）
@@ -5841,7 +5843,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{center} \tiny
 \rotatebox{90}{
 \begin{tikzcd}[ampersand replacement=\&]
-	\&\&\&\&\&\&\&\&\&\&\& \ovalbox{${~\zeta^\ast\circ\dot F \textrm{ final sequence}~}$} \&\&\&\& \ovalbox{${~ c^\ast\circ\dot F\textrm{ final sequence} ~}$} \\[20pt]
+	\&\&\&\&\&\&\&\&\&\&\& \ovalbox{$\substack{{~\zeta^\ast\circ\dot F \textrm{ final sequence}~}\\\implies\textrm{coinductive predicate over }\nu F}$} \&\&\&\& \ovalbox{$\substack{{~ c^\ast\circ\dot F\textrm{ final sequence} ~}\\\implies\textrm{coinductive predicate}\\\textrm{over a coalgebra } c:X\to FX}$} \\[20pt]
 	\&\&\& {\top_1} \&\&\&\&\&\&\&\& {\top_{\nu F} \cong \pi_{\omega,0}^* (\top_1)} \&\&\&\& {\top_X} \&\& \\
 	\&\&\&\&\& {\dot{F}\top_1} \&\& {{}} \&\&\& {{}} \& {(\zeta^*\circ\dot{F})(\top_{\nu F}) \;\cong\;\pi_{\omega,1}^*(\dot{F}\top_1)} \& {{}} \& ~~~~~~~~~~ \& {{}} \& {(c^*\circ\dot{F})(\top_X) \;\cong\; \mathrm{beh}_c^*((\zeta^*\circ\dot{F})(\top_{\nu F}))} \\
 	{\mathbb{E}} \&\&\&\&\&\&\& {\dot{F}^2\top_1} \&\&\&\& {(\zeta^*\circ\dot{F})^2(\top_{\nu F}) \;\cong\;\pi_{\omega,2}^*(\dot{F}^2\top_1)} \&\&\&\& {(c^*\circ\dot{F})^2(\top_X) \;\cong\; \mathrm{beh}_c^*((\zeta^*\circ\dot{F})^2(\top_{\nu F}))} \\
@@ -5883,6 +5885,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 }
 \end{center}
 \end{oframed}
+
+\noindent $\dot F$-final sequence（左上の斜めの列）は複数の fiber にまたがっているのに対し、それを各 $\pi_{\omega,n}$ に沿って引き戻した $\zeta^\ast\circ\dot F$-final sequence（中央上部の縦の列）は $\nu F$ 上のファイバー $\E_{\,\nu F}$ の中だけで考えることができます。
 
 \clearpage
 
