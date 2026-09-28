@@ -5688,10 +5688,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			wp\llbracket c\rrbracket(q)&=c^\ast(\dot F_Y(q))\\ &=c^\ast(\tau\circ Fq) \\ &=\tau\circ Fq\circ c
 		\end{align*}
 	\end{multicols}
-	\noindent なお、この述語変換子は、副作用つき計算 $c_1:X\to FY$ と $c_2:Y\to FZ$ のクライスリ合成 $c_1;c_2$ について、\\ \textgt{合成性} (compositionality)\, $wp\llbracket c_1;c_2 \rrbracket=wp\llbracket c_1 \rrbracket \circ wp\llbracket c_2\rrbracket$ を満たします。（証明略）\vspace{2pt} %\\ $c_1;c_2$ は、逐次合成 (sequential composition)、つまり、クライスリ合成 (Kleisli composition) です。
+	\noindent なお、この述語変換子は、副作用つき計算 $c_1:X\to FY$ と $c_2:Y\to FZ$ のクライスリ合成 $c_1;c_2$ について、\\ \textgt{合成性} (compositionality)\, $wp\llbracket c_1;c_2 \rrbracket=wp\llbracket c_1 \rrbracket \circ wp\llbracket c_2\rrbracket$ を満たします。（後述）\vspace{2pt} %\\ $c_1;c_2$ は、逐次合成 (sequential composition)、つまり、クライスリ合成 (Kleisli composition) です。
 	\begin{center} %\small
         \AXC{$X\xrightarrow{\;c_1\;}FY$} \AXC{$Y\xrightarrow{\;c_2\;}FZ$} \BIC{$X\xrightarrow{\;c_1;c_2\;}FZ$} \DisplayProof 
-        \qquad\qquad 
+        \quad$\implies$\quad 
         \AXC{$\Omega^{X}\xleftarrow{\;wp\llbracket c_1\rrbracket\;}\Omega^{Y}$} \AXC{$\Omega^{Y}\xleftarrow{\;wp\llbracket c_2\rrbracket\;}\Omega^{Z}$} 
         \BIC{$\Omega^{X}\xleftarrow[\;=\,wp\llbracket c_1\rrbracket\,\circ\, wp\llbracket c_2\rrbracket\;]{wp\llbracket c_1;c_2\rrbracket}\Omega^{Z}$} 
         % \BIC{$\Omega^{X}\xleftarrow{\;\substack{wp\llbracket c_1;c_2\rrbracket\\=\,wp\llbracket c_1\rrbracket\,\circ\, wp\llbracket c_2\rrbracket}\;}\Omega^{Z}$} 
@@ -5710,16 +5710,43 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent 以下では、前ページで見た「圏論的な weakest precondition reasoning」を、より正確に導入します。
+\noindent 前ページで見た「圏論的な weakest precondition reasoning」を、以下でより正確に導入します。
 
 \begin{definition}[様相] \label{def:modality}
-	$F$ を圏 $\C$ 上のモナドとし、$\Omega$ を圏 $\C$ の対象とする（これを\textgt{真理値領域} (truth value domain) と呼ぶ）。このとき、$F$ に対する $\Omega$ 上の\textgt{様相} (modality) とは、アイレンバーグ-ムーア代数 $\tau\colon F\Omega\to\Omega$ である。つまり、様相 $\tau$ とは、$\C$ の射であって、$\tau\circ\eta_{\Omega}=\id_{\Omega}$ と $\tau\circ\mu_{\Omega}=\tau\circ F\tau$ を満たすものである。 
+	$F$ を圏 $\C$ 上のモナドとし、$\Omega$ を圏 $\C$ の対象とする（これを\textgt{真理値領域} (truth value domain) と呼ぶ）。このとき、$F$ に対する $\Omega$ 上の\textgt{様相} (modality) とは、アイレンバーグ-ムーア代数 $\tau\colon F\Omega\to\Omega$ である。つまり、様相 $\tau$ とは、$\C$ の射であって、$\tau\circ\eta_{\Omega}=\id_{\Omega}$ と $\tau\circ\mu_{\Omega}=\tau\circ F\tau$ を満たすものである。\vspace{5pt}
+
+	\begin{center}
+		\begin{tikzcd}
+			\Omega \ar[r,"\eta_{\Omega}"] \ar[rd,"\id_{\Omega}"'] & F\Omega \ar[d,"\tau"] \\
+			& \Omega
+		\end{tikzcd}
+		\qquad
+		\begin{tikzcd}
+			FF\Omega \ar[r,"\mu_{\Omega}"] \ar[d,"F\tau"'] & F\Omega \ar[d,"\tau"] \\
+			F\Omega \ar[r,"\tau"'] & \Omega
+		\end{tikzcd}
+	\end{center}
 \end{definition}
 
 \begin{supplement}[述語持ち上げ]
-	$F$ が単に関手である場合、\textgt{様相} $\tau\colon F\Omega\to\Omega$（ただし、上の定義\ref{def:modality} から $\eta, \mu$ の整合性の条件を除いたもの）は、\textgt{述語持ち上げ} $\lambda\colon\C(-,\Omega)\to\C(F(-),\Omega)$ を誘導する。また、その逆も誘導する。\\（これら両者の対応関係は、米田の補題から従う。）
-	% \textgt{様相} $\tau\colon F\Omega\to\Omega$は、\textgt{述語持ち上げ} $\lambda\colon\Omega^{(-)}\Rightarrow\Omega^{F(-)}$ を誘導する。また、その逆も誘導する。（これら両者の対応関係は、米田の補題から従う。）
-	\[\mathrm{Nat}(\C(-,\Omega),\C(F(-),\Omega))\;\cong\;\C(F\Omega,\Omega).\]
+	% $F$ が単に関手である場合、\textgt{様相} $\tau\colon F\Omega\to\Omega$（ただし、上の定義\ref{def:modality} から $\eta, \mu$ の整合性の条件を除いたもの）は、\textgt{述語持ち上げ} $\lambda\colon\C(-,\Omega)\to\C(F(-),\Omega)$ を誘導する。また、その逆も誘導する。\\（これら両者の対応関係は、米田の補題から従う。）
+	\textgt{様相} $\tau\colon F\Omega\to\Omega$は、\textgt{述語持ち上げ} $\lambda\colon\Omega^{(-)}\Rightarrow\Omega^{F(-)}$ を誘導する。また、その逆も誘導する。（これら両者の対応関係は、米田の補題から従う。）
+	% \[\begin{array}{ccc}\mathrm{Nat}\left(\C(-,\Omega),\C\left(F(-),\Omega\right)\right) &\;\cong\; &\C(F\Omega,\Omega) \\ \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$}\\ \lambda_X(q):=\tau\circ Fq \quad(X\!\xrightarrow{q}\!\Omega) & \reflectbox{$\longmapsto$} & \tau \\ \lambda & \longmapsto & \end{array}\]
+	\[\begin{array}{ccc}\mathrm{Nat}\left(\C(-,\Omega),\C\left(F(-),\Omega\right)\right) &\;\cong\; &\C(F\Omega,\Omega) \\ \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$}\\ \lambda:=\left(\displaystyle\small\frac{X\xrightarrow{\;q\;}\Omega}{\lambda_X(q)\colon FX\xrightarrow{Fq}F\Omega\xrightarrow{\tau}\Omega}\right)_{\!\! X\in\C} & \reflectbox{$\longmapsto$} & \tau \\[20pt] \lambda & \longmapsto & \tau:=\left(F\Omega\xrightarrow{\;\lambda_{\Omega}(\id_\Omega)\;}\Omega\right)\end{array}\]
+	述語持ち上げ $\lambda$ には、自然性に加え、モナド構造との整合性条件が課される： 任意の $X\in\C$ と $(X\xrightarrow{q}\Omega)$ に対し
+	% \[\eta^\ast\circ\lambda=\id,\qquad\mu^\ast\circ\lambda=\lambda_F\circ\lambda\]
+	\[\lambda_X(q)\circ\eta_X=q,\qquad \lambda_{FX}(\lambda_X(q))=\lambda_X(q)\circ\mu_X.\]
+	% \begin{center}
+	% 	\begin{tikzcd}
+	% 		X \ar[r,"\eta_X"] \ar[rd,"q"'] & FX \ar[d,"\lambda_X(q)"] \\
+	% 		& \Omega
+	% 	\end{tikzcd}
+	% 	\qquad 
+	% 	\begin{tikzcd}
+	% 		FFX \ar[r,"\mu_X"] \ar[d,"\lambda_X(q)"'] & FX \ar[d,"\lambda_X(q)"] \\
+	% 		FX \ar[r,"\lambda_{FX}(-)"'] & \Omega 
+	% 	\end{tikzcd}
+	% \end{center}
 \end{supplement}
 
 \begin{definition}[モナド的な後ろ向き述語変換子意味論]
@@ -5728,17 +5755,26 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	を誘導する。これを\textgt{モナド的な後ろ向き述語変換子} (monadic backward predicate transformer) と呼ぶ。
 \end{definition}
 
-\noindent なお、$wp$ という記法は、Dijkstra の ``weakest precondition'' に由来します。$wp_\tau\llbracket f \rrbracket$ は、事後条件 $q\colon Y\to\Omega$ を、事前条件 $wp_\tau\llbracket f \rrbracket(q)\colon X\to\Omega$ に変換しています。
-\[\left(\begin{array}{cccccc}(X\xrightarrow{f}FY) &\;\implies\; & wp_\tau\llbracket f\rrbracket\colon \!\!\!& \Omega^Y & \!\!\!\!\!\!\xrightarrow{\,F(-)\,} \; (F\Omega)^{FY} \; \xrightarrow{\;\;\tau^{FY}\;\;} \; \Omega^{FY} \; \xrightarrow{\;\;f^\ast\;\;}\!\!\!\!\!\!\!\!\!\!&\Omega^X\\ &&& \rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&&&\scriptstyle(Y\overset{q}{\to}\Omega)& \longmapsto & \scriptstyle \!\!\!(X\overset{f}{\to} FY\overset{Fq}{\to} F\Omega\overset{\tau}{\to}\Omega)\!\!\! \end{array}\right)\]
+\noindent 述語変換子 $wp_\tau\llbracket f \rrbracket$ は、事後条件 $q\colon Y\to\Omega$ を、事前条件 $wp_\tau\llbracket f \rrbracket(q)\colon X\to\Omega$ に変換します。
+\[\left(\begin{array}{cccccc} (X\xrightarrow{\;f\;}FY) &\;\implies\; & wp_\tau\llbracket f\rrbracket\colon \!\!\!& \Omega^Y & \!\!\!\!\!\!\xrightarrow{\,F(-)\,} \; (F\Omega)^{FY} \; \xrightarrow{\;\;\tau^{FY}\;\;} \; \Omega^{FY} \; \xrightarrow{\;\;f^\ast\;\;}\!\!\!\!\!\!\!\!\!\!&\Omega^X\\ &&& \rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&&&\scriptstyle(Y\,\overset{q}{\to}\,\Omega)& \longmapsto & \scriptstyle \!\!\!(X \,\overset{f}{\to}\, FY \,\overset{Fq}{\to}\, F\Omega \,\overset{\tau}{\to}\, \Omega)\!\!\! \end{array}\right)\]
+同値な言い換えとして、述語持ち上げを用いても同じものを定義することができます。
+\[\left(\begin{array}{cccccc} (X\xrightarrow{\;f\;}FY) &\;\implies\; & wp_\tau\llbracket f\rrbracket\colon \!\!\!& \Omega^Y & \!\!\!\!\!\! \xrightarrow{~\;\lambda_Y\;~}\; \Omega^{FY} \; \xrightarrow{\;\;f^\ast\;\;}\!\!\!\!\!\!\!\!\!\!&\Omega^X\\ &&& \rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&&&\scriptstyle(Y\,\overset{q}{\to}\,\Omega)& \longmapsto & \scriptstyle \!\!\!(X \,\overset{f}{\longrightarrow}\, FY \,\overset{\lambda_Y(q)}{\longrightarrow}\, \Omega)\!\!\! \end{array}\right)\]
+なお、この ``$wp$'' という記法は、Dijkstra の ``weakest precondition'' に由来します。
+
+\clearpage
 
 \begin{proposition}[合成性]
 	$wp$ は合成的 (compositional) である。つまり、以下の意味で関手的 (functorial) である。
-	\[wp_\tau\llbracket \id_X \rrbracket = \id_{\C(X,\Omega)},\quad wp_{\tau}\llbracket f;g\rrbracket = wp_{\tau}\llbracket f\rrbracket \circ wp_{\tau}\llbracket g\rrbracket\]
+	\[wp_\tau\llbracket \id_X \rrbracket = \id_{\Omega^X},\qquad wp_{\tau}\llbracket f;g\rrbracket = wp_{\tau}\llbracket f\rrbracket \circ wp_{\tau}\llbracket g\rrbracket\]
 	なお、$\id_X:X\computationrightarrow X$ は、クライスリ圏 $\C_F$ における恒等射（それゆえ、$\C$ における $\eta_X:X\to FX$）であり、\\ $f;g$ は、クライスリ圏における射の合成（それゆえ、$\C$ における $\mu_Y\circ Ff\circ g$）である。
 \end{proposition}
 
 \begin{proof}
-	diagram chasing ...
+	以下のような diagram chasing をすれば確かめることができる。
+	\begin{enumerate}
+		\item 恒等射の保存: 
+		\item 合成の保存: 
+	\end{enumerate}
 \end{proof}
 
 % \begin{example}
@@ -5793,6 +5829,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% \end{small}
 \end{center}
 \vspace{25pt}
+
+\clearpage
+
+\subsection*{コラム: 関係持ち上げ (relation lifting) について}
 
 \clearpage
 
