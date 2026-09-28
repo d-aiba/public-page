@@ -5807,9 +5807,9 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent まとめると次のように整理できます。
-\begin{oframed}
-	\noindent 【圏論的 predicate transformer のまとめ】\vspace{5pt}\\
+\noindent まとめると、次のように整理できます。\vspace{5pt}
+\begin{screen}
+	\noindent 【述語変換子をつくるためのファイブレーション的な状況設定】\vspace{5pt}\\
 	Given \\
 	$F:\Set\to\Set$: monad\\
 	$\tau:F\Omega\to\Omega$: Eilenberg-Moore algebra of $F$\\
@@ -5834,9 +5834,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	% \begin{itemize}
 	% 	\item 
 	% \end{itemize}
-\end{oframed}
+\end{screen}
+\vspace{5pt}
 
-\noindent なお、副作用つき計算の一種として余代数 $c:X\to FX$ を扱う場合、まさに以下の図のような状況になります。\\（いくつかの具体例を次節で詳しく扱うので、それを見ながらさらに理解を深めていきましょう。）\vspace{10pt}
+\noindent なお、副作用つき計算の一種として余代数 $c:X\to FX$ を扱う場合、まさに以下の図のような状況になります。\\（いくつかの具体例を次節で詳しく扱うので、それを見ながらさらに理解を深めていきましょう。）\vspace{15pt}
 \begin{center}
 	% \begin{small}
 		\begin{tikzcd}
@@ -5848,120 +5849,18 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		\end{tikzcd}
 	% \end{small}
 \end{center}
-\vspace{25pt}
+\vspace{20pt}
 
-\clearpage
-
-\subsection*{コラム: 関係持ち上げ (relation lifting) について}
-
-\clearpage
-
-\subsection*{コラム: ファイブレーションにおける極限・余極限を計算する方法}
-
-\noindent $p:\E\to\C$ をファイブレーションとし、
-\begin{itemize}
-	\item 
-	\item 
-	\item 
-\end{itemize}
-とします。このとき、\vspace{-12pt}
-\begin{multicols}{2}
-	\noindent 右図の状況で、極限 $\Lim D$ は、以下の手順で計算します。
-	\begin{enumerate}
-		\item まず、基底圏 $\C$ の中で極限 $\Lim pD$ を取る。
-		\item 次に、ファイバー $\E_{\,\Lim pD}$ でもう一度極限を取る。
-	\end{enumerate}
-	\begin{center}
-		\begin{tikzcd}
-			\J \ar[r,"D"] & \E \ar[d,"p"] \\
-			& \C
-		\end{tikzcd}
-	\end{center}
-\end{multicols}
-
-\noindent 具体的には、以下の通りです。\\ 図式 $D$ のコピーがファイバー $\E_{\,\Lim pD}$ の中に作られるので、$\E_{\,\Lim pD}$ の中でもさらに limit を取ります。\vspace{-12pt}
-\begin{center} \small
-	\begin{tikzcd}
-		{} & {} & {} & {} & \begin{array}{c} ~\\ ~\\ \E_{\,\Lim pD}\\\ovalbox{$\begin{array}{c} ~ \\[-5pt] \pi_I^\ast DI \\ ~~~~~ \downarrow ~~~~~ \\\pi_J^\ast DJ \\[-5pt] ~ \end{array}$}\end{array} \ar[lldd,bend right=20pt,"\overline{\pi_I}"'] \ar[lddd,bend left=10pt,"\overline{\pi_J}"] & \\[-10pt]
-		{} & {} & {} \ar[rrr,dash,shorten=-5.3pt] \ar[lddd,dash,shorten >= -2.4pt, shorten <= -7.5pt] & {} & {} & {} \ar[lddd,dash,shorten >= -2.8pt, shorten <= -6.2pt] & {}  \\[-15pt]
-		\E \ar[ddddd,"p"] & {} & DI \ar[rd,"Du"] & {} \\[-25pt]
-		{} & {} & {} &  DJ & {} \\[-15pt]
-		{} & {} \ar[rrr,dash,shorten=-5.3pt] & {} & {} & {} & {} \\
-		%%%
-		{} & {} & {} & {} & {\Lim pD} \ar[lldd,bend right=15pt,"\pi_I"'] \ar[lddd,bend left=15pt,"\pi_J"] & {} \\[25pt]
-		{} & {} & {} \ar[rrr,dash,shorten=-5.3pt] \ar[lddd,dash,shorten >= -2.4pt, shorten <= -7.5pt] & {} & {} & {} \ar[lddd,dash,shorten >= -2.8pt, shorten <= -6.2pt] & {}  \\[-15pt]
-		\C & {} & pDI \ar[rd,"pDu"] & {} & {} \\[-25pt]
-		{} & {} & {} & pDJ & {} \\[-15pt]
-		{} & {} \ar[rrr,dash,shorten=-5.3pt] & {} & {} & {} & {} \\
+\begin{screen}
+\noindent【述語変換子の圏論的意味論のつくりかた】\vspace{8pt}
+\begin{center}%\large
+	\begin{tikzcd}[column sep=15pt]
+		\Omega^X \ar[rrrrrr,"\Phi","\textrm{predicate transformer}"'] & & & & & & \Omega^X \\[20pt] %
+		\Omega^X \ar[rrr,"\dot F_X","\textrm{predicate lifting}"'] & & & \Omega^{FX} \ar[rrr,"c^\ast","\substack{\textrm{substitution along}\\\textrm{the coalgebra}}"'] & & & \Omega^X \\[20pt] %
+		\Omega^X \ar[rr,"F(-)"] & & (F\Omega)^{FX} \ar[rr,"\tau^{FX}","\textrm{modality}"'] & & \Omega^{FX} \ar[rr,"c^\ast"] & & \Omega^X
 	\end{tikzcd}
 \end{center}
-
-\noindent つまり上の図のように、\underline{$\C$ の中}と、\underline{$\E_{\,\Lim pD}$ の中}で、極限を2回計算することになります。\vspace{5pt}
-\begin{screen}
-\noindent 【まとめ】 ファイブレーションにおいて極限を取るときは、極限を2回計算する！
-\begin{enumerate}
-	\item 基底圏 $\C$ の中で極限を計算する \[L=\Lim_{\C} pD\]
-	\item ファイバー $\E_{\,\Lim pD}$ の中でもう一度極限を計算する \[\Lim_\E D \;\cong\; \Lim_{\E_{L}}(I\mapsto\pi_I^\ast DI)\]
-\end{enumerate}
 \end{screen}
-% \[\Lim_\E D \;\cong\; \Lim_{\E_{L}}(I\mapsto\pi_I^\ast DI),\qquad L=\Lim_{\C} pD\]
-
-\clearpage
-
-\noindent 特に、\textgt{余帰納的述語} (coinductive predicate) を考える際には、以下のような final sequence を考えます。\\（スペースの都合上、図式を横向きに表示しています。）
-% \begin{itemize}
-% 	\item base category での $F$-final sequence 
-% 	\item 
-% \end{itemize}
-
-\begin{oframed}
-\begin{center} \tiny
-\rotatebox{90}{
-\begin{tikzcd}[ampersand replacement=\&]
-	\&\&\&\&\&\&\&\&\&\&\& \ovalbox{$\substack{{~\zeta^\ast\circ\dot F \textrm{ final sequence}~}\\\implies\textrm{coinductive predicate over }\nu F}$} \&\&\&\& \ovalbox{$\substack{{~ c^\ast\circ\dot F\textrm{ final sequence} ~}\\\implies\textrm{coinductive predicate}\\\textrm{over a coalgebra } c:X\to FX}$} \\[20pt]
-	\&\&\& {\top_1} \&\&\&\&\&\&\&\& {\top_{\nu F} \cong \pi_{\omega,0}^* (\top_1)} \&\&\&\& {\top_X} \&\& \\
-	\&\&\&\&\& {\dot{F}\top_1} \&\& {{}} \&\&\& {{}} \& {(\zeta^*\circ\dot{F})(\top_{\nu F}) \;\cong\;\pi_{\omega,1}^*(\dot{F}\top_1)} \& {{}} \& ~~~~~~~~~~ \& {{}} \& {(c^*\circ\dot{F})(\top_X) \;\cong\; \mathrm{beh}_c^*((\zeta^*\circ\dot{F})(\top_{\nu F}))} \\
-	{\mathbb{E}} \&\&\&\&\&\&\& {\dot{F}^2\top_1} \&\&\&\& {(\zeta^*\circ\dot{F})^2(\top_{\nu F}) \;\cong\;\pi_{\omega,2}^*(\dot{F}^2\top_1)} \&\&\&\& {(c^*\circ\dot{F})^2(\top_X) \;\cong\; \mathrm{beh}_c^*((\zeta^*\circ\dot{F})^2(\top_{\nu F}))} \\
-	\&\&\&\&\&\&\&\&\& \cdots \&\& \vdots \&\&\&\& \vdots \\
-	\&\&\&\&\&\&\&\&\&\&\& {\mathrm{Lim}_n \dot{F}^n \top_1 \,=\,\nu \dot{F}\;\cong\;\mathrm{Lim}_n(\zeta^*\circ\dot{F})^n(\top_{\nu F})} \&\&\&\& {\mathrm{Lim}_n  (c^*\circ\dot{F})^n(\top_X) \,=\,\nu (c^*\circ\dot{F})} \\
-	\\[50pt]
-	\&\&\& 1 \\
-	\&\&\&\&\& F1 \&\&\&\&\&\&\&\&\&\& X \\
-	{\mathbb{C}} \&\&\&\&\&\&\& {F^21} \&\&\&\&\&\&\&\&\&\& FX \\
-	\&\&\&\&\&\&\&\&\& \cdots \\
-	\&\&\&\&\&\&\&\&\&\&\& {\mathrm{Lim}_n F^n1 \,=\,\nu F}
-	\arrow["{!}", from=3-6, to=2-4]
-	\arrow["{\substack{\text{pulling back} \\\textrm{along } \pi_{\omega, n}}}", Rightarrow, from=3-8, to=3-11]
-	\arrow["{\substack{\text{pulling back} \\\textrm{along } \mathrm{beh}_c}}", Rightarrow, from=3-13, to=3-15]
-	\arrow[from=3-12, to=2-12]
-	\arrow[from=3-16, to=2-16]
-	\arrow["p", from=4-1, to=10-1]
-	\arrow["{\dot{F}!}", from=4-8, to=3-6]
-	\arrow[from=4-12, to=3-12]
-	\arrow[from=4-16, to=3-16]
-	\arrow[from=5-10, to=4-8]
-	\arrow[from=5-12, to=4-12]
-	\arrow[from=5-16, to=4-16]
-	\arrow[from=6-12, to=5-10]
-	\arrow[from=6-12, to=5-12]
-	\arrow[from=6-16, to=5-16]
-	\arrow["{\pi_{1,0}={!}}"', from=9-6, to=8-4]
-	\arrow["c"{description}, from=9-16, to=10-18]
-	\arrow["{\substack{\mathrm{beh}_c \\(\text{by finality of } \nu F)}}", dashed, from=9-16, to=12-12]
-	\arrow["{\pi_{2,0}}",bend left=20pt, from=10-8, to=8-4]
-	\arrow["{\pi_{2,1} = F!}"', from=10-8, to=9-6]
-	\arrow[from=11-10, to=10-8]
-	\arrow["{\pi_{\omega,0}}"', bend right, from=12-12, to=8-4]
-	\arrow["{\pi_{\omega,1}}"{description}, bend right, from=12-12, to=9-6]
-	\arrow[from=12-12, to=11-10]
-	\arrow[from=2-4,to=6-12,phantom,shift right=60pt,"\ovalbox{${\dot F} \textrm{ final sequence}$}"]
-	\arrow[from=8-4,to=12-12,phantom,shift right=50pt,"\ovalbox{${F} \textrm{ final sequence}$}"]
-\end{tikzcd}
-}
-\end{center}
-\end{oframed}
-
-\noindent $\dot F$-final sequence（左上の斜めの列）は複数の fiber にまたがっているのに対し、それを各 $\pi_{\omega,n}$ に沿って引き戻した $\zeta^\ast\circ\dot F$-final sequence（中央上部の縦の列）は $\nu F$ 上のファイバー $\E_{\,\nu F}$ の中だけで考えることができます。
 
 \clearpage
 
@@ -5969,14 +5868,14 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \noindent ここまでで、\textgt{述語変換子} (predicate transformer) の手に入れ方の一般論がわかったところで、今度はそれを適用して、\uwave{もっと他の応用例を取り出す}ことに試みましょう。ここでは、状態遷移系における「\textgt{状態どうしの類似性}」を表す概念、\textgt{双模倣性} (bisimilarity) と \textgt{Wasserstein距離} (Wasserstein distance) を題材にして観察していきます。\vspace{10pt}%\\
 
-\begin{oframed}
-\noindent 基本形はいつも以下の形です。
+\begin{screen}
+\noindent 基本形はいつも以下のとおりです。
 \[\begin{array}{cccccc}
-	\substack{\displaystyle\textrm{predicate}\\\displaystyle\textrm{transformer}}~~\Phi:& \mathbf\Omega^{X} & \xrightarrow[\dot F_X]{~~~\substack{\textrm{predicate}\\ \textrm{lifting}}~~~~} & \mathbf\Omega^{FX} & \xrightarrow[c^\ast]{~~\substack{\textrm{substitution along}\\\textrm{a coalgebra}}~~} & \mathbf\Omega^{X} \\
+	\substack{\displaystyle\textrm{predicate}\\\displaystyle\textrm{transformer}}~~\Phi:& \Omega^{X} & \xrightarrow[\dot F_X]{~~~\substack{\textrm{predicate}\\ \textrm{lifting}}~~~~} & \Omega^{FX} & \xrightarrow[c^\ast]{~~\substack{\textrm{substitution along}\\\textrm{a coalgebra}}~~} & \Omega^{X} \\
 	& \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} &&\rotatebox{90}{$\in$}\\
 	& q & \longmapsto & \dot F_X q & \longmapsto & c^\ast\dot F_X q
 \end{array}\]
-\end{oframed}
+\end{screen}
 
 \subsubsection*{具体例 (a) 双模倣性: 非決定的な状態遷移系における``状態どうしの類似性''の概念}
 
@@ -6090,6 +5989,118 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{screen}
 
 \clearpage
+
+
+\subsection*{コラム: 関係持ち上げ (relation lifting) について}
+
+\clearpage
+
+\subsection*{コラム: ファイブレーションにおける極限・余極限を計算する方法}
+
+\noindent $p:\E\to\C$ をファイブレーションとし、
+\begin{itemize}
+	\item 
+	\item 
+	\item 
+\end{itemize}
+とします。このとき、\vspace{-12pt}
+\begin{multicols}{2}
+	\noindent 右図の状況で、極限 $\Lim D$ は、以下の手順で計算します。
+	\begin{enumerate}
+		\item まず、基底圏 $\C$ の中で極限 $\Lim pD$ を取る。
+		\item 次に、ファイバー $\E_{\,\Lim pD}$ でもう一度極限を取る。
+	\end{enumerate}
+	\begin{center}
+		\begin{tikzcd}
+			\J \ar[r,"D"] & \E \ar[d,"p"] \\
+			& \C
+		\end{tikzcd}
+	\end{center}
+\end{multicols}
+
+\noindent 具体的には、以下の通りです。\\ 図式 $D$ のコピーがファイバー $\E_{\,\Lim pD}$ の中に作られるので、$\E_{\,\Lim pD}$ の中でもさらに limit を取ります。\vspace{-12pt}
+\begin{center} \small
+	\begin{tikzcd}
+		{} & {} & {} & {} & \begin{array}{c} ~\\ ~\\ \E_{\,\Lim pD}\\\ovalbox{$\begin{array}{c} ~ \\[-5pt] \pi_I^\ast DI \\ ~~~~~ \downarrow ~~~~~ \\\pi_J^\ast DJ \\[-5pt] ~ \end{array}$}\end{array} \ar[lldd,bend right=20pt,"\overline{\pi_I}"'] \ar[lddd,bend left=10pt,"\overline{\pi_J}"] & \\[-10pt]
+		{} & {} & {} \ar[rrr,dash,shorten=-5.3pt] \ar[lddd,dash,shorten >= -2.4pt, shorten <= -7.5pt] & {} & {} & {} \ar[lddd,dash,shorten >= -2.8pt, shorten <= -6.2pt] & {}  \\[-15pt]
+		\E \ar[ddddd,"p"] & {} & DI \ar[rd,"Du"] & {} \\[-25pt]
+		{} & {} & {} &  DJ & {} \\[-15pt]
+		{} & {} \ar[rrr,dash,shorten=-5.3pt] & {} & {} & {} & {} \\
+		%%%
+		{} & {} & {} & {} & {\Lim pD} \ar[lldd,bend right=15pt,"\pi_I"'] \ar[lddd,bend left=15pt,"\pi_J"] & {} \\[25pt]
+		{} & {} & {} \ar[rrr,dash,shorten=-5.3pt] \ar[lddd,dash,shorten >= -2.4pt, shorten <= -7.5pt] & {} & {} & {} \ar[lddd,dash,shorten >= -2.8pt, shorten <= -6.2pt] & {}  \\[-15pt]
+		\C & {} & pDI \ar[rd,"pDu"] & {} & {} \\[-25pt]
+		{} & {} & {} & pDJ & {} \\[-15pt]
+		{} & {} \ar[rrr,dash,shorten=-5.3pt] & {} & {} & {} & {} \\
+	\end{tikzcd}
+\end{center}
+
+\noindent つまり上の図のように、\underline{$\C$ の中}と、\underline{$\E_{\,\Lim pD}$ の中}で、極限を2回計算することになります。\vspace{5pt}
+\begin{screen}
+\noindent 【まとめ】 ファイブレーションにおいて極限を取るときは、極限を2回計算する！
+\begin{enumerate}
+	\item 基底圏 $\C$ の中で極限を計算する \[L=\Lim_{\C} pD\]
+	\item ファイバー $\E_{\,\Lim pD}$ の中でもう一度極限を計算する \[\Lim_\E D \;\cong\; \Lim_{\E_{L}}(I\mapsto\pi_I^\ast DI)\]
+\end{enumerate}
+\end{screen}
+% \[\Lim_\E D \;\cong\; \Lim_{\E_{L}}(I\mapsto\pi_I^\ast DI),\qquad L=\Lim_{\C} pD\]
+
+\clearpage
+
+\noindent 特に、\textgt{余帰納的述語} (coinductive predicate) を考える際には、以下のような final sequence を考えます。\\（スペースの都合上、図式を横向きに表示しています。）
+% \begin{itemize}
+% 	\item base category での $F$-final sequence 
+% 	\item 
+% \end{itemize}
+
+\begin{oframed}
+\begin{center} \tiny
+\rotatebox{90}{
+\begin{tikzcd}[ampersand replacement=\&]
+	\&\&\&\&\&\&\&\&\&\&\& \ovalbox{$\substack{{~\zeta^\ast\circ\dot F \textrm{ final sequence}~}\\\implies\textrm{coinductive predicate over }\nu F}$} \&\&\&\& \ovalbox{$\substack{{~ c^\ast\circ\dot F\textrm{ final sequence} ~}\\\implies\textrm{coinductive predicate}\\\textrm{over a coalgebra } c:X\to FX}$} \\[20pt]
+	\&\&\& {\top_1} \&\&\&\&\&\&\&\& {\top_{\nu F} \cong \pi_{\omega,0}^* (\top_1)} \&\&\&\& {\top_X} \&\& \\
+	\&\&\&\&\& {\dot{F}\top_1} \&\& {{}} \&\&\& {{}} \& {(\zeta^*\circ\dot{F})(\top_{\nu F}) \;\cong\;\pi_{\omega,1}^*(\dot{F}\top_1)} \& {{}} \& ~~~~~~~~~~ \& {{}} \& {(c^*\circ\dot{F})(\top_X) \;\cong\; \mathrm{beh}_c^*((\zeta^*\circ\dot{F})(\top_{\nu F}))} \\
+	{\mathbb{E}} \&\&\&\&\&\&\& {\dot{F}^2\top_1} \&\&\&\& {(\zeta^*\circ\dot{F})^2(\top_{\nu F}) \;\cong\;\pi_{\omega,2}^*(\dot{F}^2\top_1)} \&\&\&\& {(c^*\circ\dot{F})^2(\top_X) \;\cong\; \mathrm{beh}_c^*((\zeta^*\circ\dot{F})^2(\top_{\nu F}))} \\
+	\&\&\&\&\&\&\&\&\& \cdots \&\& \vdots \&\&\&\& \vdots \\
+	\&\&\&\&\&\&\&\&\&\&\& {\mathrm{Lim}_n \dot{F}^n \top_1 \,=\,\nu \dot{F}\;\cong\;\mathrm{Lim}_n(\zeta^*\circ\dot{F})^n(\top_{\nu F})} \&\&\&\& {\mathrm{Lim}_n  (c^*\circ\dot{F})^n(\top_X) \,=\,\nu (c^*\circ\dot{F})} \\
+	\\[50pt]
+	\&\&\& 1 \\
+	\&\&\&\&\& F1 \&\&\&\&\&\&\&\&\&\& X \\
+	{\mathbb{C}} \&\&\&\&\&\&\& {F^21} \&\&\&\&\&\&\&\&\&\& FX \\
+	\&\&\&\&\&\&\&\&\& \cdots \\
+	\&\&\&\&\&\&\&\&\&\&\& {\mathrm{Lim}_n F^n1 \,=\,\nu F}
+	\arrow["{!}", from=3-6, to=2-4]
+	\arrow["{\substack{\text{pulling back} \\\textrm{along } \pi_{\omega, n}}}", Rightarrow, from=3-8, to=3-11]
+	\arrow["{\substack{\text{pulling back} \\\textrm{along } \mathrm{beh}_c}}", Rightarrow, from=3-13, to=3-15]
+	\arrow[from=3-12, to=2-12]
+	\arrow[from=3-16, to=2-16]
+	\arrow["p", from=4-1, to=10-1]
+	\arrow["{\dot{F}!}", from=4-8, to=3-6]
+	\arrow[from=4-12, to=3-12]
+	\arrow[from=4-16, to=3-16]
+	\arrow[from=5-10, to=4-8]
+	\arrow[from=5-12, to=4-12]
+	\arrow[from=5-16, to=4-16]
+	\arrow[from=6-12, to=5-10]
+	\arrow[from=6-12, to=5-12]
+	\arrow[from=6-16, to=5-16]
+	\arrow["{\pi_{1,0}={!}}"', from=9-6, to=8-4]
+	\arrow["c"{description}, from=9-16, to=10-18]
+	\arrow["{\substack{\mathrm{beh}_c \\(\text{by finality of } \nu F)}}", dashed, from=9-16, to=12-12]
+	\arrow["{\pi_{2,0}}",bend left=20pt, from=10-8, to=8-4]
+	\arrow["{\pi_{2,1} = F!}"', from=10-8, to=9-6]
+	\arrow[from=11-10, to=10-8]
+	\arrow["{\pi_{\omega,0}}"', bend right, from=12-12, to=8-4]
+	\arrow["{\pi_{\omega,1}}"{description}, bend right, from=12-12, to=9-6]
+	\arrow[from=12-12, to=11-10]
+	\arrow[from=2-4,to=6-12,phantom,shift right=60pt,"\ovalbox{${\dot F} \textrm{ final sequence}$}"]
+	\arrow[from=8-4,to=12-12,phantom,shift right=50pt,"\ovalbox{${F} \textrm{ final sequence}$}"]
+\end{tikzcd}
+}
+\end{center}
+\end{oframed}
+
+\noindent $\dot F$-final sequence（左上の斜めの列）は複数の fiber にまたがっているのに対し、それを各 $\pi_{\omega,n}$ に沿って引き戻した $\zeta^\ast\circ\dot F$-final sequence（中央上部の縦の列）は $\nu F$ 上のファイバー $\E_{\,\nu F}$ の中だけで考えることができます。
 
 
 \clearpage
