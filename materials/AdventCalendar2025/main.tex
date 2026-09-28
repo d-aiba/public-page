@@ -5765,15 +5765,35 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \begin{proposition}[合成性]
 	$wp$ は合成的 (compositional) である。つまり、以下の意味で関手的 (functorial) である。
-	\[wp_\tau\llbracket \id_X \rrbracket = \id_{\Omega^X},\qquad wp_{\tau}\llbracket f;g\rrbracket = wp_{\tau}\llbracket f\rrbracket \circ wp_{\tau}\llbracket g\rrbracket\]
-	なお、$\id_X:X\computationrightarrow X$ は、クライスリ圏 $\C_F$ における恒等射（それゆえ、$\C$ における $\eta_X:X\to FX$）であり、\\ $f;g$ は、クライスリ圏における射の合成（それゆえ、$\C$ における $\mu_Y\circ Ff\circ g$）である。
+	\[wp_\tau\llbracket \id_X \rrbracket = \id_{\Omega^X},\qquad wp_{\tau}\llbracket g \odot f \rrbracket = wp_{\tau}\llbracket f\rrbracket \circ wp_{\tau}\llbracket g\rrbracket\]
+	なお、$\id_X:X\computationrightarrow X$ は、クライスリ圏 $\C_F$ における恒等射（それゆえ、$\C$ における $\eta_X:X\to FX$）であり、\\ $g\odot f$ は、クライスリ圏における射の合成（それゆえ、$\C$ における $\mu_Z\circ Fg\circ f$）である。
 \end{proposition}
 
 \begin{proof}
 	以下のような diagram chasing をすれば確かめることができる。
 	\begin{enumerate}
-		\item 恒等射の保存: 
-		\item 合成の保存: 
+		\item 恒等射の保存: Kleisli category における恒等射 $\id_X$ は、$\eta_X:X\to FX$ である。$q:X\to \Omega$ をとる。\\ 示したいのは \[wp_\tau\llbracket\id_X\rrbracket(q)=q\] である。ここで、以下の図式を考える。（上の四角は $\eta$ の自然性、下の四角は EM 代数の定義より。）
+		\begin{center}
+			\begin{tikzcd}
+				X \ar[r,"\eta_X"] \ar[d,"q"'] & FX \ar[d,"Fq"] \\
+				\Omega \ar[r,"\eta_\Omega"] \ar[rd,"\id_\Omega"'] & F\Omega \ar[d,"\tau"] \\
+				& \Omega
+			\end{tikzcd}
+		\end{center}
+		すると、右回りにたどると \[X\xrightarrow{\;\eta_X\;}FX\xrightarrow{\;Fq\;}F\Omega\xrightarrow{\;\tau\;}\Omega\] となり $wp_\tau\llbracket\id_X\rrbracket(q)$ が得られ、左回りにたどると $q$ が得られる。可換図式の外周を追えば両者は一致する。\vspace{8pt}
+		\item 合成の保存: $f:X\to FY$, $g:Y\to FZ$ とし、$q:Z\to \Omega$ とする。示したいのは \[wp_\tau\llbracket g\odot f\rrbracket(q)=wp_\tau\llbracket f\rrbracket(wp_\tau\llbracket g\rrbracket(q))\] である。ここで、以下の図式を考える。（上の四角は $\mu$ の自然性、下の四角は EM 代数の定義より。）
+		\begin{center}
+			\begin{tikzcd}
+				X \ar[r,"f"] & FY \ar[r,"Fg"] & 
+				FFZ \ar[r,"\mu_Z"] \ar[d,"FFq"'] & FZ \ar[d,"Fq"] \\
+				& & FF\Omega \ar[d,"F\tau"'] \ar[r,"\mu_\Omega"] & F\Omega \ar[d,"\tau"]\\
+				& & F\Omega \ar[r,"\tau"'] & \Omega
+			\end{tikzcd}
+		\end{center}
+		すると、右回りにたどると
+		\[\underbracket{~X\xrightarrow{\;f\;}FY\xrightarrow{\;Fg\;}FFZ\xrightarrow{\;\mu_Z\;}FZ~}_{=\,g\odot f}\xrightarrow{\;Fq\;}F\Omega\xrightarrow{\;\tau\;}\Omega\]
+		となり $wp_\tau\llbracket g\odot f \rrbracket(q)$ が得られ、左回りにたどると
+		\[X\xrightarrow{\;f\;} \underbracket{~FY\xrightarrow{\;Fg\;}FFZ\xrightarrow{\;FFq\;}FF\Omega\xrightarrow{\;F\tau\;}F\Omega~}_{\substack{=\,F(\tau\circ Fq\circ g)\\=\,wp_\tau\llbracket g\rrbracket(q)\;\,}}\xrightarrow{\tau}\Omega\] となり $wp_\tau\llbracket f\rrbracket(wp_\tau\llbracket g\rrbracket(q))$ が得られる。可換図式の外周を追えば両者は一致する。\vspace{-20pt}
 	\end{enumerate}
 \end{proof}
 
