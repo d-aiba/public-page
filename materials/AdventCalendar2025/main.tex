@@ -2392,7 +2392,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \noindent 
 スパン同値性を必ずしも作れるわけではないことを確かめるために、反例として関手 $F^3_2:\Set\to\Set$ を考えます。
 \[F^3_2(X)=\{(x_1,x_2,x_3)\in X^3\mid|\{x_1,x_2,x_3\}|\leq 2\}\] 
-\[F^3_2(f):T^3_2(X)\to T^3_2(Y),\]\[F^3_2(f)(x_1,x_2,x_3)=(f(x_1),f(x_2),f(x_3))\]
+\[F^3_2(f):F^3_2(X)\to F^3_2(Y),\]\[F^3_2(f)(x_1,x_2,x_3)=(f(x_1),f(x_2),f(x_3))\]
 
 \todo[inline]{monotone neighborhood functor も}
 
@@ -3379,7 +3379,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-さてここで、有名でかつよく使う性質として、「\textgt{随伴からモナドを作る}」方法について見ていきましょう。
+さて、ここで、有名でかつよく使う性質として、「\textgt{随伴からモナドを作る}」方法について見ていきましょう。
 
 \begin{proposition}
 	任意の随伴 \begin{tikzcd}\A \ar[d,bend left=22pt,"R"]\\\C\ar[u,bend left=22pt,"L","\dashv"']\end{tikzcd} 
@@ -3500,6 +3500,26 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \begin{example}
 
 \end{example}
+
+\clearpage
+
+\noindent そして、Beck's monadicity theorem についても触れておきましょう。\\ 比較関手が圏同値になる条件についての数学的主張です。
+
+\begin{theorem}[Beck's monadicity theorem]
+	... 
+\end{theorem}
+
+\clearpage
+
+さて、ここで\textgt{モナド射} (monad morphism) について学びましょう。
+
+\begin{definition}[モナド射]
+	$(T,\eta,\mu)$ と $(T',\eta',\mu')$ を圏 $\C$ 上のモナドとする。\textgt{モナド射} (monad morphism) \[\alpha:T\Rightarrow T'\] とは、自然変換であって、任意の対象 $X\in\C$ に対して以下の2つの条件を満たすものである。
+	\begin{itemize}
+		\item 単位の保存:
+		\item 乗法の保存:
+	\end{itemize}
+\end{definition}
 
 \clearpage
 
