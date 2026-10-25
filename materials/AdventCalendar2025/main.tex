@@ -1837,28 +1837,48 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	\item \textgt{定義原理としての余帰納法} (coinduction as a definition principle)
 	\item \textgt{証明原理としての余帰納法} (coinduction as a proof principle)
 \end{itemize}
-の考え方を確認しましょう。\\以下では $A=\{0,1\}$ とし、$F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tail}\rangle:A^\omega\xrightarrow{\;\cong\;} A\times A^\omega$ です。\\
+の考え方を確認しましょう。\\
+以下では %$A=\{0,1\}$ とし、
+$F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tail}\rangle:A^\omega\xrightarrow{\;\cong\;} A\times A^\omega$ です。\\
 
 \noindent\fbox{\textgt{定義原理としての余帰納法} (coinduction as a definition principle)}\vspace{5pt}\\
 以下のような再帰的な定義を考えましょう。
 \begin{align*}
-	\mathbf{evens}(\sigma)&=(\mathbf{head}(\sigma),\mathbf{evens}(\mathbf{tail}(\mathbf{tail}(\sigma)))) \\
-	\mathbf{odds}(\sigma)&=(\mathbf{head}(\mathbf{tail}(\sigma)),\mathbf{odds}(\mathbf{tail}(\mathbf{tail}(\sigma))))\\
+	\mathbf{even}(\sigma)&=(\mathbf{head}(\sigma),\mathbf{even}(\mathbf{tail}(\mathbf{tail}(\sigma)))) \\
+	\mathbf{odd}(\sigma)&=(\mathbf{head}(\mathbf{tail}(\sigma)),\mathbf{odd}(\mathbf{tail}(\mathbf{tail}(\sigma))))\\
+	\mathbf{zip}(\alpha,\beta)&=(\mathbf{head}(\alpha),\mathbf{zip}(\beta,\mathbf{tail}(\beta)))\\
 	\mathbf{ones}&=(1,\mathbf{ones})
 \end{align*}
 これらの well-definedness は、定義を余代数として書き表すことで保証されます。
+\begin{multicols}{2}
+	\begin{center}
+		\begin{tikzcd}[column sep=42pt]
+			A\times A^\omega \ar[r,"\id_A\times\mathbf{even}"] & A\times A^\omega \\
+			A^\omega \ar[u,"\substack{\sigma\;\longmapsto\\(\mathbf{head}(\sigma),\mathbf{tail}(\mathbf{tail}(\sigma)))}"] \ar[r,"\mathbf{even}"'] & A^\omega \ar[u,"{\langle\mathbf{head},\mathbf{tail}\rangle}"']
+		\end{tikzcd}
+	\end{center} 
+	\noindent This diagram means: \\
+	$\bullet$~ $\mathbf{head}(\mathbf{even}(\sigma))=\mathbf{head}(\sigma)$ 
+	\\
+	$\bullet$~ $\mathbf{tail}(\mathbf{even}(\sigma))=\mathbf{even}(\mathbf{tail}(\mathbf{tail}(\sigma)))$
+	% \begin{itemize}
+	% 	\item $\mathbf{head}(\mathbf{evens}(\sigma))=\mathbf{head}(\sigma)$ 
+	% 	\item $\mathbf{tail}(\mathbf{evens}(\sigma))=\mathbf{evens}(\mathbf{tail}(\mathbf{tail}(\sigma)))$
+	% \end{itemize}
+\end{multicols}
+%
 \begin{multicols}{2}
 	\begin{center}
 		% \begin{tikzcd}
 		% 	A\times(A^\omega\times A^\omega) \ar[r,"\id_A\times\mathbf{zip}"] & A\times A^\omega\\
 		% 	A^\omega\times A^\omega \ar[r,"\mathbf{zip}"'] \ar[u,"{\delta(\alpha,\beta):=(\mathbf{head}(\alpha),(\beta,\mathbf{tail}(\alpha)))}"] & A^\omega \ar[u,"{\langle\mathbf{head},\mathbf{tail}\rangle}"']
 		% \end{tikzcd}
-		\begin{tikzcd}
+		\begin{tikzcd}[column sep=38pt]
 			A\times(A^\omega\times A^\omega) \ar[r,"\id_A\times\mathbf{zip}"] & A\times A^\omega\\
 			A^\omega\times A^\omega \ar[r,"\mathbf{zip}"'] \ar[u,"\substack{(\alpha,\beta)\;\longmapsto\;\\(\mathbf{head}(\alpha),(\beta,\mathbf{tail}(\alpha)))}"] & A^\omega \ar[u,"{\langle\mathbf{head},\mathbf{tail}\rangle}"']
 		\end{tikzcd}
 	\end{center}
-	This diagram means\\
+	\noindent This diagram means: \\
 	$\bullet$~ $\mathbf{head}(\mathbf{zip}(\alpha,\beta))=\mathbf{head}(\alpha)$\\
 	$\bullet$~ $\mathbf{tail}(\mathbf{zip}(\alpha,\beta))=\mathbf{zip}(\beta,\mathbf{tail}(\alpha))$
 	% \begin{align*}
@@ -1868,14 +1888,18 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{multicols}
 
 
-\todo[inline]{even, odd, ones, ...}
+% \todo[inline]{even, odd, ones, ...}
 
 
-\noindent\fbox{\textgt{証明原理としての余帰納法} (coinduction as a proof principle)}\vspace{5pt}\\
-あああ
+\noindent\fbox{\textgt{証明原理としての余帰納法} (coinduction as a proof principle)}\vspace{5pt}%\\
+% \todo[inline]{例: odd=even$\circ$tail}
 
-\todo[inline]{例: odd=even$\circ$tail}
+\noindent ストリーム間の関係$R$が、「関係する2つのストリームは、現在の観測 (head) が一致し、その後続 (tail) も再び同じ関係にある」という条件
+\[\alpha \mathbin{R} \beta ~~\implies~~ \mathbf{head}(\alpha)=\mathbf{head}(\beta) ~\mathbin{\&}~ \mathbf{tail}(\alpha)\mathbin{R}\mathbf{tail}(\beta) \]
+を満たすとします。すると、上の条件から、「$R$で関係する2つのストリームは、どこまで有限に観測しても区別できない」と結論づけることができます。このような証明原理を、\textgt{双模倣(bisimulation) による余帰納法}と言います。\vspace{8pt}
 
+\noindent たとえば、$\mathbf{odd}=\mathbf{even}\circ\mathbf{tail}$（つまり、任意のストリーム $\sigma$ について、$\mathbf{odd}(\sigma)=\mathbf{even}(\mathbf{tail}(\sigma))$ が成り立つこと）を証明するためには、
+% \[\]
 
 \clearpage
 
@@ -1975,7 +1999,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \subsection{双模倣関係と双模倣性：システムの振る舞いの等価性を判定する}
 
 \noindent 本節では、\textgt{双模倣関係} (bisimulation) および\textgt{双模倣性} (bisimilarity) について扱います。
-\\まずは、ラベル付き状態遷移系 (labeled transition system; LTS) についての双模倣関係・双模倣性を定義します。
+\\まずは、ラベル付き状態遷移系 (labeled transition system; LTS) について双模倣関係・双模倣性を定義します。
 
 \subsection*{(双模倣-その1) ラベル付き状態遷移系における ``非圏論的な'' 双模倣関係・双模倣性}
 
@@ -4460,7 +4484,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 % \noindent 
 例として、$M=(-)^\omega$（無限ストリームコモナド）とし、$T=\mathcal P$（冪集合モナド）としましょう。\\ 分配則は以下のように与えられます。
 \[\begin{array}{cccc}\lambda_X:&(\mathcal PX)^\omega&\longrightarrow&\mathcal P(X^\omega)\\ & \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\ & (s_0,s_1,\dots) & \mapsto & \left\{(x_0,x_1,\dots) \mid x_i\in S_i\; (\forall i\in\omega) \right\} \end{array}\]
-これがあることによって、$f:X^\omega\to\mathcal PY$ のような、入力が無限ストリームであり、出力が非決定的であるような computation をどうやって合成すればいいかがわかるようになります。
+これがあることによって、$f:X^\omega\to\mathcal PY$ のような、入力が無限ストリームであり、出力が非決定的であるような computation を、どうやって合成すればいいかがわかるようになります。
 \end{example}
 
 \noindent さて、\textgt{自由モナド} (free monad) と\textgt{余自由コモナド} (cofree comonad) の話をしましょう。
