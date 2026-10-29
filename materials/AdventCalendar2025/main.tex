@@ -4947,20 +4947,22 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	\item 例1) 冪集合関手 $\mathcal P:\Set\to\Set$ は、finitary ではない。
 	\item 例2) 有限冪集合関手 $\mathcal P_{\mathrm{fin}}:\Set\to\Set$（有限な部分集合を返す関手）は、finitary である。
 	\item 例3) $FX=\{\textrm{all the $\Sigma$-terms with variables from $X$}\}$ が finitary であるのは、$\Sigma$ が有限な arity の演算子のみを持つ場合である。
+	\item 例4) 以下の関手\[\begin{array}{ccccl}(-)^A:&\Set&\longrightarrow&\Set\\{}&\rotatebox{90}{$\in$}&{}&\rotatebox{90}{$\in$}\\{}&X&\longmapsto&X^A&=\{f:A\to X,\;\textrm{functions}\}\\{}&{}&{}&{}&=\{(x_a)_{a\in A}\mid x_a\in X,\;\textrm{for all $a\in A$}\}\end{array}\] が finitary であるのは、$A$ が有限集合である場合である。
+	\item 例5) 多項式関手 (polynomial functor) \[F=\coprod_{i\in I}\,(-)^{A_i}:\Set\to\Set\] が finitary であるのは、各 $A_i$ が有限集合である（つまり各 arity が有限であること）場合である。
 \end{itemize}
 
 % \clearpage
 
 % \noindent いくつかの事実を見ておきましょう。
 
-\begin{example}
-	以下の関手
-	\[\begin{array}{ccccl}(-)^A:&\Set&\longrightarrow&\Set\\{}&\rotatebox{90}{$\in$}&{}&\rotatebox{90}{$\in$}\\{}&X&\longmapsto&X^A&=\{f:A\to X,\;\textrm{functions}\}\\{}&{}&{}&{}&=\{(x_a)_{a\in A}\mid x_a\in X,\;\textrm{for all $a\in A$}\}\end{array}\] が finitary であるのは、$A$ が有限集合であることと同値。
-\end{example}
+% \begin{example}
+% 	以下の関手
+% 	\[\begin{array}{ccccl}(-)^A:&\Set&\longrightarrow&\Set\\{}&\rotatebox{90}{$\in$}&{}&\rotatebox{90}{$\in$}\\{}&X&\longmapsto&X^A&=\{f:A\to X,\;\textrm{functions}\}\\{}&{}&{}&{}&=\{(x_a)_{a\in A}\mid x_a\in X,\;\textrm{for all $a\in A$}\}\end{array}\] が finitary であるのは、$A$ が有限集合であることと同値。
+% \end{example}
 
-\begin{example}
-	多項式関手 (polynomial functor) \[F=\coprod_{i\in I}\,(-)^{A_i}:\Set\to\Set\] が finitary であるのは、各 $A_i$ が有限集合であること（つまり各 arity が有限であること）と同値。
-\end{example}
+% \begin{example}
+% 	多項式関手 (polynomial functor) \[F=\coprod_{i\in I}\,(-)^{A_i}:\Set\to\Set\] が finitary であるのは、各 $A_i$ が有限集合であること（つまり各 arity が有限であること）と同値。
+% \end{example}
 
 \clearpage
 
