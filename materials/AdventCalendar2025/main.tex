@@ -3647,7 +3647,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	% ~\vspace{5pt}\\
 	~\\
 	\noindent 
-	左の図式のとおり、 
+	左の図式に見られる通り、 
 	\[JL_T=L,\qquad RJ=R_T\] および \[KL=L^T,\qquad R^TK=R\] が成り立つ。
 	\end{multicols} \vspace{3pt}
 \end{theorem}
@@ -3708,7 +3708,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 		\item Kleisli category の間の functor %$\Set_T\to\Set_{T'}$
 		\[\begin{array}{cccc} \mathrm{Kl}(\alpha):& \C_T&\longrightarrow&\C_{T'} \\ & \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[5pt] & \left(X\xrightarrow{f}TY\right) & \mapsto & \left(X\xrightarrow{f}TY\xrightarrow{\alpha_Y}T'Y\right) \end{array}\]
 	\end{itemize}
-	が誘導されます。（補足: $\mathrm{EM}(\alpha)$ のほうは反変になっていることに注意！）
+	が誘導されます。\\（補足: $\mathrm{EM}(\alpha)$ のほうは反変になっていることに注意！）
 % \end{itemize}
 
 \clearpage
@@ -4711,15 +4711,81 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 
 \clearpage
 
-\noindent ここまでの話（自由モナドと余自由コモナド）についてより正確に理解しておきましょう。
+\begin{screen}
+	【free algebra と cofree coalgebra のまとめ】\vspace{8pt}
+	\begin{center}
+		\begin{tabular}{|c|c|}
+			\hline
+			~ & ~ \\[-4pt]
+			an initial $F$-algebra & a final $F$-coalgebra \\[3pt]
+			$\left(\!\!\!\begin{array}{c} FA \\ ~{\scriptstyle\cong} \, \downarrow\,{\scriptstyle\textrm{init.}} \\ A \end{array}\!\!\!\right)$ & $\left(\!\!\!\begin{array}{c} FZ \\ ~{\scriptstyle\cong} \, \uparrow\,{\scriptstyle\textrm{fin.}} \\ Z \end{array}\!\!\!\right)$ \\[-4pt]
+			~ & ~ \\\hline
+			~ & ~ \\
+			~~ \AXC{a free $F$-algebra over $X$} \doubleLine
+			\UIC{an initial $(X+F(-))$-algebra} \DisplayProof ~~ & 
+			~~ \AXC{a cofree $F$-coalgebra over $X$} \doubleLine
+			\UIC{a final $(X\times F(-))$-coalgebra} \DisplayProof ~~ \\[-2pt]~&~\\
+			$\left( \!\! \begin{array}{c} X+F\widetilde{A} \\ ~~{\scriptstyle\cong} \; \downarrow\;{\scriptstyle\textrm{init.}} \\ \widetilde{A} \end{array} \!\! \right)$ & 
+			$\left( \! \begin{array}{c} X\times F\widetilde{Z} \\~{\scriptstyle\cong}\;\uparrow\;{\scriptstyle\textrm{fin.}} \\ \widetilde{Z} \end{array} \! \right)$ \\[-4pt]
+			~ & ~ \\
+			($X$: ``extra seeds'') & ($X$: ``extra observations/colors'')\\[3pt]
+			% ~ & ~ \\
+			\hline
+		\end{tabular}\vspace{10pt}%\\
+	\end{center}
+	上の記法で言うと、$X\mapsto\widetilde{A}$ （つまり $X$ 上の free $F$-algebra を作る操作）が free monad $F^{\ast}$ であり、\\ $X\mapsto\widetilde{Z}$ （つまり $X$ 上の cofree $F$-coalgebra を作る操作）が cofree comonad $F^{\infty}$ である。
+	\begin{itemize}
+		\item free monad $F^\ast$
+		\begin{itemize}
+			\item $F^\ast:X\mapsto F^\ast X$ \\ such that $\left(\!\!\begin{array}{c}X+F(F^\ast X)\\[-2pt] {\scriptstyle\cong}\,\downarrow\,{\scriptstyle\textrm{init.}}\\[-2pt] F^\ast X\end{array}\!\!\right)$ is an initial $(X+F(-))$-algebra.
+			\item $\eta_X:X\to F^\ast X$ is given by \[X\xrightarrow{\,\mathrm{inl}\,}X+F(F^\ast X)\xrightarrow[\,\textrm{init.}\,]{\cong}F^\ast X.\]
+			\item $\mu_X:F^\ast(F^\ast X)\to F^\ast X$ is given by 
+			\begin{center}
+				\begin{tikzcd}[column sep=42pt]
+					F^\ast X + F(F^\ast(F^\ast X)) \ar[r,"\id+F\mu_X",dashed] \ar[d,"\textrm{initial $(F^\ast X\times F(-))$-algebra}"',"\cong"] & F^\ast X + F(F^\ast X) \ar[d,"{[\id,\mathrm{init}\,\circ\,\mathrm{inr}]}"] \\
+					F^\ast (F^\ast X) \ar[r,"\mu_X"',dashed] & F^\ast X
+				\end{tikzcd}
+			\end{center}
+		\end{itemize}
+		\item cofree comonad $F^\infty$
+		\begin{itemize}
+			\item $F^\infty:X\mapsto F^\infty X$ \\ such that $\left(\!\!\begin{array}{c}X\times F(F^\infty X)\\[-2pt] {\scriptstyle\cong}\,\uparrow\,{\scriptstyle\textrm{fin.}}\\[-2pt] F^\infty X\end{array}\!\!\right)$ is a final $(X\times F(-))$-coalgebra.
+			\item $\varepsilon_X:F^\infty X\to X$ is given by \[F^\infty X\xrightarrow[\;\textrm{fin.}\;]{\cong}X\times F(F^\infty X)\xrightarrow{\;\pi_1\;}X.\]
+			\item $\delta_X:F^\infty X\to F^\infty (F^\infty X)$ is given by 
+			\begin{center}
+				\begin{tikzcd}[column sep=42pt]
+					F^\infty X\times F(F^\infty X) \ar[r,"\id\times F\delta_X",dashed] & F^\infty X\times F(F^\infty (F^\infty X)) \\
+					F^\infty X \ar[r,"\delta_X"',dashed] \ar[u,"{\langle\id,\pi_2\,\circ\,\mathrm{fin}\rangle}"] & F^\infty(F^\infty X) \ar[u,"\textrm{final $(F^\infty X\times F(-))$-coalgebra}"',"\cong"]
+				\end{tikzcd}
+			\end{center}
+		\end{itemize}
+	\end{itemize}
+	% \begin{itemize}
+	% 	\item $i_X:X+F(F^\ast X)\xrightarrow[\textrm{init.}]{\cong}F^\ast X$ induces: 
+	% 	\begin{itemize}
+	% 		\item 
+	% 		\item 
+	% 	\end{itemize}
+	% 	\item $o_X:F^{\infty}X\xrightarrow[\textrm{fin.}]{\cong}X\times F(F^\infty X)$ induces 
+	% 	\begin{itemize}
+	% 		\item 
+	% 		\item 
+	% 	\end{itemize}
+	% \end{itemize}
+\end{screen}
 
-\begin{definition}[自由モナド]
-	... 
-\end{definition}
+% \clearpage
+% \vspace{10pt}
 
-\begin{definition}[余自由コモナド]
-	... 
-\end{definition}
+% \noindent ここまでの話（自由モナドと余自由コモナド）についてより正確に理解しておきましょう。
+
+% \begin{definition}[自由モナド]
+% 	... 
+% \end{definition}
+
+% \begin{definition}[余自由コモナド]
+% 	... 
+% \end{definition}
 
 
 
