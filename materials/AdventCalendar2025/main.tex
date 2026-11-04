@@ -4693,7 +4693,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 		& Y & \longmapsto & X+FY
 	\end{array}\]
 	% （上の多項式関手に $|X|$-many 0-ary operations を追加します。つまり、syntax を変数集合 $X$ で拡張する、ということです。）\vspace{5pt}\\
-	ここで、この関手 $X+F(-)$ の始代数 $\mu \,(X+F(-))$ を考えましょう。（各 node が $\sigma\in\Sigma$ でラベル付けされ、各 $\sigma$-node が $|\sigma|$-個の子を持ち、葉が $x\in X$ でラベル付けされた、well-founded な有限木となります。）
+	ここで、この関手 $X+F(-)$ の始代数 $\mu \,(X+F(-))$ を考えましょう。（各 node が $\sigma\in\Sigma$ でラベル付けされ、各 $\sigma$-node が $|\sigma|$-個の子を持ち、葉が $x\in X$ でラベル付けされた、well-founded な有限木の集まり。）
 	\[\left(\begin{array}{c}
 		X+F(F^\ast X)\\
 		~~\substack{\cong}\downarrow\substack{\textrm{initial}}\\
@@ -4717,7 +4717,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	を使って、以下のようなものになります。（代数的データ型でパターンマッチを行うことに相当します。）
 	\begin{prooftree}
 		\AXC{$F^\ast X\to G^\ast X$}
-		\UIC{$\left(\begin{array}{c} X+F(G^\ast X)\\\downarrow\\ G^\ast X\end{array}\right)$, pattern matching}
+		\UIC{$\left(\begin{array}{c} X+F(G^\ast X)\\[-2pt]\downarrow\\[-2pt] G^\ast X\end{array}\right)$, pattern matching}
 	\end{prooftree}
 	\item 今度は、\textgt{余自由コモナド} $F^\infty$ についても考えましょう。
 	\begin{center}\small
@@ -4727,7 +4727,37 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 		\end{tikzcd}
 	\end{center}
 	このとき、余自由コモナドは、以下のように作られます。
-	$F:\Set\to\Set$ と $X\in\Set$ が与えられたとき、\[\begin{array}{cccc}X\times F(-):&\Set&\longrightarrow&\Set\\&Y&\longmapsto& X\times FY\end{array}\] を考えて、以下の終余代数 $\nu\,(X\times F(-))$（各 node が $x\in X$ と $\sigma\in\Sigma$ でラベル付けされ、各 node が $|\sigma|$-個の子を持つ、possibly infinite な木） \[\left(\begin{array}{c}X\times F(F^\infty X)\\ ~\substack{\cong}\uparrow\substack{\textrm{final}}\\ F^\infty X\end{array}\right)\] を作ると、この $F^\infty$ が\textgt{余自由コモナド}です。%$X\xmapsto{~~~~}F^\infty X$
+	$F:\Set\to\Set$ と $X\in\Set$ が与えられたとき、\[\begin{array}{cccc}X\times F(-):&\Set&\longrightarrow&\Set\\&Y&\longmapsto& X\times FY\end{array}\] を考えて、以下の終余代数 $\nu\,(X\times F(-))$（各 node が $x\in X$ と $\sigma\in\Sigma$ でラベル付けされ、各 node が $|\sigma|$-個の子を持つ、finite または infinite な木の集まり） 
+	を作ると、この $F^\infty$ が\textgt{余自由コモナド}です。\vspace{-8pt}
+	% \[\left(\begin{array}{c}X\times F(F^\infty X)\\ ~\substack{\cong}\uparrow\substack{\textrm{final}}\\ F^\infty X\end{array}\right)\] %を作ると、この $F^\infty$ が\textgt{余自由コモナド}です。%$X\xmapsto{~~~~}F^\infty X$
+	% \begin{multicols}{2}
+	\begin{center}
+		$\left(\begin{array}{c}X\times F(F^\infty X)\\ ~\substack{\cong}\uparrow\substack{\textrm{final}}\\ F^\infty X\end{array}\right)$
+		\qquad\qquad\qquad 
+		\raisebox{-2em}{
+		\begin{tikzpicture}
+			\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90, xscale=0.8] (node1) at (0.26,0) {};
+			\node[draw=none] at (0.26,0.05) {$t_1$};
+			\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90, xscale=0.8] (node4) at (0.1,1.8) {};
+			\node[draw=none] at (0.1,1.85) {$t_1$};
+			\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90, xscale=0.8] (node5) at (1.05,1.8) {};
+			\node[draw=none] at (1.05,1.85) {$t_2$};
+			\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90, xscale=0.8] (node2) at (1.08,0) {};
+			\node[draw=none] at (1.08,0.05) {$t_2$};
+			\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90, xscale=0.8] (node3) at (1.88,0) {};
+			\node[draw=none] at (1.88,0.05) {$t_3$};
+			\draw (node1.east) -- (1.08,0.8);
+			\draw (1.08,0.8) -- (node2.east);
+			\draw (node3.east) -- (1.08,0.8);
+			\node[draw=none, rotate=90] at (1.1,1.2) {$\mapsto$};
+			\node[draw=none] at (1.06,1.95) {$\bigl(\qquad,\qquad,\qquad\bigr)$};
+			\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90, xscale=0.8] (node6) at (2,1.8) {};
+			\node[draw=none] at (2,1.85) {$t_3$};
+			\node at (1.08,3.12) {};
+		\end{tikzpicture}
+		}\vspace{-30pt}
+	\end{center}
+	% \end{multicols}
 \end{itemize}
 
 \clearpage
@@ -4808,42 +4838,42 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 % 	... 
 % \end{definition}
 
-\clearpage
+% \clearpage
 
-\noindent ここで、例として、多項式関手 (polynomial functor) $F:\Set\to\Set$ についての
-\begin{itemize}
-	\item 自由代数 (free algebra) \, $F^\ast X \,:=\, \mu(X+F(-))$
-	\item 余自由余代数 (cofree coalgebra) \, $F^{\infty} X \,:=\, \nu(X\times F(-))$ 
-\end{itemize}
-がどんなものかを確認しておきましょう。\\
+% \noindent ここで、例として、多項式関手 (polynomial functor) $F:\Set\to\Set$ についての
+% \begin{itemize}
+% 	\item 自由代数 (free algebra) \, $F^\ast X \,:=\, \mu(X+F(-))$
+% 	\item 余自由余代数 (cofree coalgebra) \, $F^{\infty} X \,:=\, \nu(X\times F(-))$ 
+% \end{itemize}
+% がどんなものかを確認しておきましょう。\\
 
-\noindent まず、自由代数 $\mu(X+F(-))$ は、・・・・・・\\
+% \noindent まず、自由代数 $\mu(X+F(-))$ は、・・・・・・\\
 
-\noindent 余自由余代数の台集合 $F^\infty X$ は、「すべての頂点を $X$ の要素でラベル付けた、有限または無限の $F$-木」の集合です。\\ また、構造射 $c:F^\infty X\to X \times F(F^\infty X)$ は、以下の図のように、部分木の族を返します。\vspace{8pt}
-\begin{center}\small
-	\begin{tikzpicture}
-		\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90] (node1) at (0.26,1.28) {};
-		\node[draw=none] at (0.26,1.33) {$t_1$};
-		\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90] (node4) at (0.2,3.55) {};
-		\node[draw=none] at (0.2,3.6) {$t_1$};
-		\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90] (node5) at (1.05,3.55) {};
-		\node[draw=none] at (1.05,3.6) {$t_2$};
-		\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90] (node2) at (1.08,1.28) {};
-		\node[draw=none] at (1.08,1.33) {$t_2$};
-		\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90] (node3) at (1.88,1.28) {};
-		\node[draw=none] at (1.88,1.33) {$t_3$};
-		\draw (node1.east) -- (1.08,2.4);
-		\draw (1.08,2.4) -- (node2.east);
-		\draw (node3.east) -- (1.08,2.4);
-		\node[draw=none, rotate=90] at (1.08,2.85) {$\mapsto$};
-		\node[draw=none] at (1.06,3.75) {$\Bigl(\qquad,\qquad,\qquad\Bigr)$};
-		\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90] (node6) at (1.9,3.55) {};
-		\node[draw=none] at (1.9,3.6) {$t_3$};
-	%   \node[draw=none] at (-2.49,1.87) {${F^\infty X}\qquad{\scriptstyle \ni}$};
-	%   \node[draw=none] at (-2.59,3.6) {${F(F^\infty X})\quad{\scriptstyle \ni}$};
-	%   \node[draw=none, rotate=90] at (-2.89,2.72) {$\longrightarrow$};
-	\end{tikzpicture}
-\end{center}
+% \noindent 余自由余代数の台集合 $F^\infty X$ は、「すべての頂点を $X$ の要素でラベル付けた、有限または無限の $F$-木」の集合です。\\ また、構造射 $c:F^\infty X\to X \times F(F^\infty X)$ は、以下の図のように、部分木の族を返します。\vspace{8pt}
+% \begin{center}\small
+% 	\begin{tikzpicture}
+% 		\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90] (node1) at (0.26,1.28) {};
+% 		\node[draw=none] at (0.26,1.33) {$t_1$};
+% 		\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90] (node4) at (0.2,3.55) {};
+% 		\node[draw=none] at (0.2,3.6) {$t_1$};
+% 		\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90] (node5) at (1.05,3.55) {};
+% 		\node[draw=none] at (1.05,3.6) {$t_2$};
+% 		\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90] (node2) at (1.08,1.28) {};
+% 		\node[draw=none] at (1.08,1.33) {$t_2$};
+% 		\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90] (node3) at (1.88,1.28) {};
+% 		\node[draw=none] at (1.88,1.33) {$t_3$};
+% 		\draw (node1.east) -- (1.08,2.4);
+% 		\draw (1.08,2.4) -- (node2.east);
+% 		\draw (node3.east) -- (1.08,2.4);
+% 		\node[draw=none, rotate=90] at (1.08,2.85) {$\mapsto$};
+% 		\node[draw=none] at (1.06,3.75) {$\Bigl(\qquad,\qquad,\qquad\Bigr)$};
+% 		\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90] (node6) at (1.9,3.55) {};
+% 		\node[draw=none] at (1.9,3.6) {$t_3$};
+% 	%   \node[draw=none] at (-2.49,1.87) {${F^\infty X}\qquad{\scriptstyle \ni}$};
+% 	%   \node[draw=none] at (-2.59,3.6) {${F(F^\infty X})\quad{\scriptstyle \ni}$};
+% 	%   \node[draw=none, rotate=90] at (-2.89,2.72) {$\longrightarrow$};
+% 	\end{tikzpicture}
+% \end{center}
 
 \clearpage
 
