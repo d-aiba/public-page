@@ -1832,16 +1832,18 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \clearpage
 
-\noindent ここで、ストリームを例にして、
+\subsection{定義原理としての余帰納法、証明原理としての余帰納法}
+
+\noindent ここで、前ページで導入したストリームを例にして、
 \begin{itemize}
-	\item \textgt{定義原理としての余帰納法} (coinduction as a definition principle)
-	\item \textgt{証明原理としての余帰納法} (coinduction as a proof principle)
+	\item (1) \textgt{定義原理としての余帰納法} (coinduction as a definition principle)
+	\item (2) \textgt{証明原理としての余帰納法} (coinduction as a proof principle)
 \end{itemize}
 の考え方を確認しましょう。\\
 以下では %$A=\{0,1\}$ とし、
 $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tail}\rangle:A^\omega\xrightarrow{\;\cong\;} A\times A^\omega$ です。\\
 
-\noindent\fbox{\textgt{定義原理としての余帰納法} (coinduction as a definition principle)}\vspace{5pt}\\
+\noindent\fbox{(1) \textgt{定義原理としての余帰納法} (coinduction as a definition principle)}\vspace{5pt}\\
 以下のような再帰的な定義を考えましょう。
 \begin{align*}
 	\mathbf{even}(\sigma)&=(\mathbf{head}(\sigma),\mathbf{even}(\mathbf{tail}(\mathbf{tail}(\sigma)))) \\
@@ -1849,7 +1851,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	\mathbf{zip}(\alpha,\beta)&=(\mathbf{head}(\alpha),\mathbf{zip}(\beta,\mathbf{tail}(\beta)))\\
 	\mathbf{ones}&=(1,\mathbf{ones})
 \end{align*}
-これらの well-definedness は、定義を余代数として書き表すことで保証されます。
+これらの well-definedness は、定義を余代数として書き表すことで保証されます。たとえば：
 \begin{multicols}{2}
 	\begin{center}
 		\begin{tikzcd}[column sep=42pt]
@@ -1890,8 +1892,9 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 
 % \todo[inline]{even, odd, ones, ...}
 
+\clearpage
 
-\noindent\fbox{\textgt{証明原理としての余帰納法} (coinduction as a proof principle)}\vspace{5pt}%\\
+\noindent\fbox{(2) \textgt{証明原理としての余帰納法} (coinduction as a proof principle)}\vspace{5pt}%\\
 % \todo[inline]{例: odd=even$\circ$tail}
 
 \noindent ストリーム間の関係$R$が、「関係する2つのストリームは、現在の観測 (head) が一致し、その後続 (tail) も再び同じ関係にある」という条件
@@ -1908,8 +1911,10 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 
 \clearpage
 
-\noindent 前ページでは、ストリームを例にして、双模倣による余帰納法を紹介しました。\\
-ここでは、ラベル付き状態遷移系 (labeled transition system) に対する双模倣についても考えましょう。
+\subsubsection*{\underline{◆「証明原理としての余帰納法」の他の例: ラベル付き状態遷移系に対する双模倣}} \vspace{3pt}
+
+\noindent 前ページでは、ストリームの場合を例にして、双模倣による「余帰納的な証明」について取り上げました。\\
+さてここでは、ラベル付き状態遷移系 (labeled transition system) に対する双模倣についても考えましょう。
 
 \begin{definition}[ラベル付き状態遷移系に対する双模倣関係・双模倣性]
 	$c:S\to\mathcal P(A\times S)$ をラベル付き状態遷移系とする。二項関係 $B\subseteq S\times S$ が\textgt{双模倣関係} (bisimulation) であるとは、任意の $s,t\in S$ と $a\in A$ について、以下の2つの条件を満たすこと。
@@ -1932,6 +1937,22 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	状態 $s,t\in S$ が\textgt{双模倣} (bisimilar) であるとは、ある双模倣関係 $B$ が存在して $sBt$ が成り立つことをいう。\\ このとき $s\sim t$ と書く。この関係 $\sim$ を\textgt{双模倣性} (bisimilarity) と呼ぶ。
 	\[{\sim}\,=\,\bigcup\{B\subseteq S\times S\mid\textrm{$B$ は双模倣関係}\}\]
 \end{definition}
+
+\begin{supplement}
+	同様に、2つのラベル付き状態遷移系の間の2つの状態を比べるしかたで、双模倣関係・双模倣性を導入するのもよいです。やり方は上記とほとんど同じです。つまり、
+\end{supplement}
+
+\noindent いくつか例を見てみましょう。
+
+\begin{oframed}
+	\noindent 例: 
+\end{oframed}
+
+\begin{oframed}
+	\noindent 例: 
+\end{oframed}
+
+\clearpage
 
 \noindent 以下では、双模倣関係 $B$ および双模倣性 $\sim$ についての基本的な性質を確認しましょう。
 
@@ -1991,12 +2012,12 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 
 \vspace{5pt}
 
-\noindent さて、ここまで見てきた
-\begin{itemize}
-	\item ストリームに対する双模倣
-	\item ラベル付き状態遷移系に対する双模倣
-\end{itemize}
-を抽象化して、次節では、それを一般論として扱う方法を考えることにしましょう。
+\noindent さて、ここまで見てきた「ストリームに対する双模倣」や「ラベル付き状態遷移系に対する双模倣」
+% \begin{itemize}
+% 	\item ストリームに対する双模倣
+% 	\item ラベル付き状態遷移系に対する双模倣
+% \end{itemize}
+を抽象化して、次節では、それらを扱うための一般論について考えることにしましょう。
 
 \clearpage
 
@@ -2095,7 +2116,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 
 \subsection{双模倣関係と双模倣性：システムの振る舞いの等価性を判定する}
 
-\noindent 本節では、\textgt{双模倣関係} (bisimulation) および\textgt{双模倣性} (bisimilarity) についての一般論を扱います。
+\noindent 本節では、\textgt{双模倣関係} (bisimulation) および\textgt{双模倣性} (bisimilarity) について（の圏論的な一般論を）扱います。
 % \\まずは、ラベル付き状態遷移系 (labeled transition system; LTS) について双模倣関係・双模倣性を定義します。
 
 % \subsection*{(双模倣-その1) ラベル付き状態遷移系における ``非圏論的な'' 双模倣関係・双模倣性}
@@ -4787,7 +4808,42 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 % 	... 
 % \end{definition}
 
+\clearpage
 
+\noindent ここで、例として、多項式関手 (polynomial functor) $F:\Set\to\Set$ についての
+\begin{itemize}
+	\item 自由代数 (free algebra) \, $F^\ast X \,:=\, \mu(X+F(-))$
+	\item 余自由余代数 (cofree coalgebra) \, $F^{\infty} X \,:=\, \nu(X\times F(-))$ 
+\end{itemize}
+がどんなものかを確認しておきましょう。\\
+
+\noindent まず、自由代数 $\mu(X+F(-))$ は、・・・・・・\\
+
+\noindent 余自由余代数の台集合 $F^\infty X$ は、「すべての頂点を $X$ の要素でラベル付けた、有限または無限の $F$-木」の集合です。\\ その構造射 $c:F^\infty X\to X \times F(F^\infty X)$ は、以下の図のように、部分木の族を返します。\vspace{8pt}
+\begin{center}\small
+	\begin{tikzpicture}
+		\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90] (node1) at (0.26,1.28) {};
+		\node[draw=none] at (0.26,1.33) {$t_1$};
+		\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90] (node4) at (0.2,3.55) {};
+		\node[draw=none] at (0.2,3.6) {$t_1$};
+		\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90] (node5) at (1.05,3.55) {};
+		\node[draw=none] at (1.05,3.6) {$t_2$};
+		\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90] (node2) at (1.08,1.28) {};
+		\node[draw=none] at (1.08,1.33) {$t_2$};
+		\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90] (node3) at (1.88,1.28) {};
+		\node[draw=none] at (1.88,1.33) {$t_3$};
+		\draw (node1.east) -- (1.08,2.4);
+		\draw (1.08,2.4) -- (node2.east);
+		\draw (node3.east) -- (1.08,2.4);
+		\node[draw=none, rotate=90] at (1.08,2.85) {$\mapsto$};
+		\node[draw=none] at (1.06,3.75) {$\Bigl(\qquad,\qquad,\qquad\Bigr)$};
+		\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90] (node6) at (1.9,3.55) {};
+		\node[draw=none] at (1.9,3.6) {$t_3$};
+	%   \node[draw=none] at (-2.49,1.87) {${F^\infty X}\qquad{\scriptstyle \ni}$};
+	%   \node[draw=none] at (-2.59,3.6) {${F(F^\infty X})\quad{\scriptstyle \ni}$};
+	%   \node[draw=none, rotate=90] at (-2.89,2.72) {$\longrightarrow$};
+	\end{tikzpicture}
+\end{center}
 
 \clearpage
 
