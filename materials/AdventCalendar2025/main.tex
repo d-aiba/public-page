@@ -4631,7 +4631,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	% %%
 	% \quad 
 	\begin{center}
-		\begin{tikzcd}
+		\begin{tikzcd}[row sep=14pt]
 			MT^2X \ar[r,"M\mu_X"] \ar[d,"\lambda_{TX}"'] & MTX \ar[dd,"\lambda_X"] \\
 			TMTX \ar[d,"T\lambda_X"'] &  \\
 			T^2MX \ar[r,"\mu_{MX}"'] & TMX
@@ -4642,7 +4642,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 		% 	{} \ar[d,"M\lambda_X"'] & {} \\
 		% 	{} \ar[r,"\delta_{TX}"'] & {TMX}
 		% \end{tikzcd}
-		\begin{tikzcd}
+		\begin{tikzcd}[row sep=14pt]
 			MTX \ar[r,"\delta_{TX}"] \ar[dd,"\lambda_X"'] & M^2TX \ar[d,"M\lambda_X"] \\
 			{} & MTMX \ar[d,"\lambda_{MX}"] \\
 			TMX \ar[r,"T\delta_X"'] & TM^2X
@@ -4674,7 +4674,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 これがあることによって、$f:X^\omega\to\mathcal PY$ のような、入力が無限ストリームであり、出力が非決定的であるような computation を、どうやって合成すればいいかがわかるようになります。
 \end{example}
 
-\noindent さて、\textgt{自由モナド} (free monad) と\textgt{余自由コモナド} (cofree comonad) の話をしましょう。
+\noindent さて、\textgt{自由モナド} (free monad) と\textgt{余自由コモナド} (cofree comonad) の話をしましょう。\vspace{-2pt}
 \begin{itemize}
 	\item まず、\textgt{自由モナド} $F^\ast$ は、以下の議論から得られます。（できるだけギリギリに、小さく、自由に！）
 	\begin{center}\small
@@ -4695,8 +4695,8 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	% （上の多項式関手に $|X|$-many 0-ary operations を追加します。つまり、syntax を変数集合 $X$ で拡張する、ということです。）\vspace{5pt}\\
 	ここで、この関手 $X+F(-)$ の始代数 $\mu \,(X+F(-))$ を考えましょう。（各 node が $\sigma\in\Sigma$ でラベル付けされ、各 $\sigma$-node が $|\sigma|$-個の子を持ち、葉が $x\in X$ でラベル付けされた、well-founded な有限木の集まり。）
 	\[\left(\begin{array}{c}
-		X+F(F^\ast X)\\
-		~~\substack{\cong}\downarrow\substack{\textrm{initial}}\\
+		X+F(F^\ast X)\\[-3pt]
+		~~\substack{\cong}\downarrow\substack{\textrm{initial}}\\[-3pt]
 		F^\ast X
 	\end{array}\right)\]
 	% そうすると、このように $X+F(-)$ の最小不動点 $F^\ast X$ が得られました。\\
@@ -4709,15 +4709,15 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	\end{prooftree}
 	この $F^\ast\Rightarrow G^\ast$ は、$F^\ast X$ 側の initiality 
 	\begin{center} \small
-		\begin{tikzcd}
-			X+F(F^\ast X) \ar[r,dashed] \ar[d,"\textrm{init}"] & X+F(G^\ast X) \ar[d] \\
+		\begin{tikzcd}[row sep=15pt]
+			X+F(F^\ast X) \ar[r,dashed] \ar[d,"\textrm{init.}"] & X+F(G^\ast X) \ar[d] \\
 			F^\ast X \ar[r,dashed] & G^\ast X
 		\end{tikzcd}
 	\end{center}
 	を使って、以下のようなものになります。（代数的データ型でパターンマッチを行うことに相当します。）
 	\begin{prooftree}
 		\AXC{$F^\ast X\to G^\ast X$}
-		\UIC{$\left(\begin{array}{c} X+F(G^\ast X)\\[-2pt]\downarrow\\[-2pt] G^\ast X\end{array}\right)$, pattern matching}
+		\UIC{$\left(\begin{array}{c} X+F(G^\ast X)\\[-3pt]\downarrow\\[-3pt] G^\ast X\end{array}\right)$, pattern matching}
 	\end{prooftree}
 	\item 今度は、\textgt{余自由コモナド} $F^\infty$ についても考えましょう。
 	\begin{center}\small
@@ -4728,7 +4728,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	\end{center}
 	このとき、余自由コモナドは、以下のように作られます。
 	$F:\Set\to\Set$ と $X\in\Set$ が与えられたとき、\[\begin{array}{cccc}X\times F(-):&\Set&\longrightarrow&\Set\\&Y&\longmapsto& X\times FY\end{array}\] を考えて、以下の終余代数 $\nu\,(X\times F(-))$（各 node が $x\in X$ と $\sigma\in\Sigma$ でラベル付けされ、各 node が $|\sigma|$-個の子を持つ、finite または infinite な木の集まり） 
-	を作ると、この $F^\infty$ が\textgt{余自由コモナド}です。\vspace{-8pt}
+	を作ると、この $F^\infty$ が\textgt{余自由コモナド}です。\vspace{-25pt}
 	% \[\left(\begin{array}{c}X\times F(F^\infty X)\\ ~\substack{\cong}\uparrow\substack{\textrm{final}}\\ F^\infty X\end{array}\right)\] %を作ると、この $F^\infty$ が\textgt{余自由コモナド}です。%$X\xmapsto{~~~~}F^\infty X$
 	% \begin{multicols}{2}
 	\begin{center}
@@ -4738,10 +4738,10 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 		\begin{tikzpicture}
 			\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90, xscale=0.8] (node1) at (0.26,0) {};
 			\node[draw=none] at (0.26,0.05) {$t_1$};
-			\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90, xscale=0.8] (node4) at (0.1,1.8) {};
-			\node[draw=none] at (0.1,1.85) {$t_1$};
-			\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90, xscale=0.8] (node5) at (1.05,1.8) {};
-			\node[draw=none] at (1.05,1.85) {$t_2$};
+			\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90, xscale=0.8] (node4) at (0.1,1.7) {};
+			\node[draw=none] at (0.1,1.75) {$t_1$};
+			\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90, xscale=0.8] (node5) at (1.05,1.7) {};
+			\node[draw=none] at (1.05,1.75) {$t_2$};
 			\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90, xscale=0.8] (node2) at (1.08,0) {};
 			\node[draw=none] at (1.08,0.05) {$t_2$};
 			\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90, xscale=0.8] (node3) at (1.88,0) {};
@@ -4749,13 +4749,13 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 			\draw (node1.east) -- (1.08,0.8);
 			\draw (1.08,0.8) -- (node2.east);
 			\draw (node3.east) -- (1.08,0.8);
-			\node[draw=none, rotate=90] at (1.1,1.2) {$\mapsto$};
-			\node[draw=none] at (1.06,1.95) {$\bigl(\qquad,\qquad,\qquad\bigr)$};
-			\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90, xscale=0.8] (node6) at (2,1.8) {};
-			\node[draw=none] at (2,1.85) {$t_3$};
+			\node[draw=none, rotate=90] at (1.1,1.15) {$\mapsto$};
+			\node[draw=none] at (1.06,1.85) {$\bigl(\qquad,\qquad,\qquad\bigr)$};
+			\node[draw, shape=isosceles triangle, minimum width=18pt, rotate=90, xscale=0.8] (node6) at (2,1.7) {};
+			\node[draw=none] at (2,1.75) {$t_3$};
 			\node at (1.08,3.12) {};
 		\end{tikzpicture}
-		}\vspace{-30pt}
+		} %\vspace{-30pt}
 	\end{center}
 	% \end{multicols}
 \end{itemize}
