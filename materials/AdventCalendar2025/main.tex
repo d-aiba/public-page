@@ -657,15 +657,15 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 
 \clearpage
 
-\subsection{不動点理論入門}
+\subsection{完備束と不動点理論への入門}
 
-\noindent ここで少し時間をとって、\textgt{不動点理論} (fixed point theory) に入門しましょう。（これまでのホーア論理や述語変換子の根幹を成している構造だけを取り出して、ここから先は、program syntax に拠らない議論を展開していきます。）
+\noindent ここで少し時間をとって、\textgt{不動点理論} (fixed point theory) に入門しましょう。（これまでのホーア論理や述語変換子の根幹をなす数学的構造を取り出して、ここから先は、program syntax に拠らない議論を展開していきます。）
 
 \begin{definition}[完備束]
 	... 
 \end{definition}
 
-\begin{definition}[単調関数]
+\begin{definition}[単調写像]
 	... 
 \end{definition}
 
@@ -681,7 +681,29 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 	... 
 \end{theorem}
 
-% \todo[inline]{完備束、単調関数、sup と inf、Knaster-Tarski、Cousot-Cousot}
+\begin{definition}[随伴]
+	... 
+\end{definition}
+
+\begin{theorem}[Freyd の随伴定理]
+	% $L,L'$ を完備束とし、単調写像 $f,g$ が随伴 $f\dashv g$ をなすとする。
+	$L,L'$ を完備束とする。
+	\begin{center}
+		\begin{tikzcd}
+			L \ar[r,bend left=18pt,"f","\bot"'] & L' \ar[l,bend left=18pt,"g"]
+		\end{tikzcd}
+	\end{center}
+	% このとき、
+	% \begin{align*}
+	% 	f(x) &= \bigsqcap\left\{y\in L'\mid x\sqsubseteq g(y)\right\} \\ 
+	% 	g(y) &= \bigsqcup\left\{x\in L\mid f(x)\sqsubseteq y\right\}
+	% \end{align*}
+	% が成り立つ。
+	\begin{enumerate}
+		\item 単調写像 $g\colon L'\to L$ が左随伴を持つための必要十分条件は、$g$ が\uwave{任意の下限を保存する}ことである。\\ （任意の $S\subseteq L$ に対し、$\bigsqcap S$ が存在するならば、$\bigsqcap f(S)$ も存在し、$f(\bigsqcap S)=\bigsqcap f(S)$ となる。）\\ このとき、左随伴 $f\colon L\to L'$ は一意であり、以下で与えられる。\[f(x) = \bigsqcap\left\{y\in L'\mid x\sqsubseteq g(y)\right\} \]
+		\item 単調写像 $f\colon L\to L'$ が右随伴を持つための必要十分条件は、$f$ が\uwave{任意の上限を保存する}ことである。\\ （任意の $S\subseteq L$ に対し、$\bigsqcup S$ が存在するならば、$\bigsqcup f(S)$ も存在し、$f(\bigsqcup S)=\bigsqcup f(S)$ となる。）\\ このとき、右随伴 $g\colon L'\to L$ は一意であり、以下で与えられる。\[g(y) = \bigsqcup\left\{x\in L\mid f(x)\sqsubseteq y\right\}\]
+	\end{enumerate}
+\end{theorem}
 
 \vspace{150pt}
 
