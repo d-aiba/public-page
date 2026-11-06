@@ -673,16 +673,15 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 	... 
 \end{definition}
 
-\begin{theorem}[Knaster-Tarski]
-	... 
-\end{theorem}
-
-\begin{theorem}[Cousot-Cousot]
-	... 
-\end{theorem}
+\clearpage
 
 \begin{definition}[随伴]
-	... 
+	$L,L'$ を完備束とし、$f:L\to L'$ と $g:L'\to L$ を単調写像とする。\\ このとき、$f$ と $g$ が\textgt{随伴} (adjunction) をなすとは、各 $x\in L$ と $y\in L'$ に対し、\vspace{3pt}
+	\begin{prooftree}
+		\AXC{$x\sqsubseteq g(y)$ \; (in $L$)} \doubleLine
+		\UIC{$f(x)\sqsubseteq y$ \; (in $L'$)}
+	\end{prooftree}
+	が成り立つことをいう。これを $f\dashv g$ と表記する。
 \end{definition}
 
 \begin{theorem}[Freyd の随伴定理]
@@ -703,6 +702,68 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 		\item 単調写像 $g\colon L'\to L$ が左随伴を持つための必要十分条件は、$g$ が\uwave{任意の下限を保存する}ことである。\\ （任意の $S\subseteq L'$ に対し、$\bigsqcap S$ が存在するならば、$\bigsqcap g(S)$ も存在し、$g(\bigsqcap S)=\bigsqcap g(S)$ となる。）\\ このとき、左随伴 $f\colon L\to L'$ は一意であり、以下で与えられる。\[f(x) = \bigsqcap\left\{y\in L'\mid x\sqsubseteq g(y)\right\} \]
 		\item 単調写像 $f\colon L\to L'$ が右随伴を持つための必要十分条件は、$f$ が\uwave{任意の上限を保存する}ことである。\\ （任意の $S\subseteq L$ に対し、$\bigsqcup S$ が存在するならば、$\bigsqcup f(S)$ も存在し、$f(\bigsqcup S)=\bigsqcup f(S)$ となる。）\\ このとき、右随伴 $g\colon L'\to L$ は一意であり、以下で与えられる。\[g(y) = \bigsqcup\left\{x\in L\mid f(x)\sqsubseteq y\right\}\]
 	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	(1, $\Rightarrow$):  \\
+	(1, $\Leftarrow$): \\
+	(2, $\Rightarrow$): 任意の $z\in L'$ について、以下が言える。
+	\begin{prooftree}
+		\AXC{~~~ $f\left(\bigsqcup S\right)\sqsubseteq z$ ~~~} \RL{$f\dashv g$}\doubleLine
+		\UIC{\; $\bigsqcup S\sqsubseteq g(z)$ \;} \RL{rule for $\bigsqcup$}\doubleLine
+		\UIC{$s\sqsubseteq g(z)$ \; for each $s\in S$} \RL{$f\dashv g$}\doubleLine
+		\UIC{$f(s)\sqsubseteq z$ \; for each $s\in S$} \RL{$f(S)$ is the image}\doubleLine
+		\UIC{$t\sqsubseteq z$ \; for each $t\in f(S)$} \RL{rule for $\bigsqcup$}\doubleLine
+		\UIC{$\bigsqcup f(S)\sqsubseteq z$}
+	\end{prooftree}
+	% \begin{prooftree}
+	% 	\AXC{$\bigsqcup f(S)\sqsubseteq z$} \RL{rule for $\bigsqcup$}\doubleLine
+	% 	\UIC{$t\sqsubseteq z$ \; for each $t\in f(S)$} \RL{$f(S)$ is the image} \doubleLine
+	% 	\UIC{$f(s)\sqsubseteq z$ \; for each $s\in S$} \RL{$f\dashv g$} \doubleLine
+	% 	\UIC{}
+	% 	\UIC{$f\left(\bigsqcup S\right)\sqsubseteq z$}
+	% \end{prooftree}
+	米田の補題より、$f(\bigsqcup S)=\bigsqcup f(S)$ である。\\
+	(2, $\Leftarrow$): 
+	随伴の定義を満たすこと（つまり以下の双条件が成り立つこと）を示す。%\vspace{3pt}
+	\begin{prooftree}
+		\AXC{$x\sqsubseteq g(y)$ \; (in $L$)} \doubleLine
+		\UIC{$f(x)\sqsubseteq y$ \; (in $L'$)}
+	\end{prooftree}
+	\begin{itemize}
+		\item (Upwards): 以下が成り立つ。
+		\begin{align*}
+			&f(x)\sqsubseteq y\\
+			&\implies x\in\{x\in L\mid f(x)\sqsubseteq y\}\\
+			&\implies x\sqsubseteq\bigsqcup\{x\in L\mid f(x)\sqsubseteq y\}\\
+			&\implies x\sqsubseteq g(y)
+		\end{align*}
+		\item (Downwards): 大前提として、$f(g(y))\sqsubseteq y$ である。なぜなら
+		\begin{align*}
+			f(g(y)) &= f\left(\bigsqcup\{x\in L\mid f(x)\sqsubseteq y\}\right) \tag{$g$ の定義より} & \\
+			&= \bigsqcup\{f(x)\mid x\in L,\, f(x)\sqsubseteq y\} \tag{$f$ は $\bigsqcup$-preserving} \\
+			& \sqsubseteq y
+		\end{align*}
+		だからである。これを使うと、
+		\begin{align*}
+			&x\sqsubseteq g(y)\\
+			&\implies f(x)\sqsubseteq f(g(y))  \tag{$f$ は monotone}\\
+			&\implies f(x) \sqsubseteq y \tag{$f(g(y))\sqsubseteq y$ と推移性より}
+		\end{align*}
+		が成り立つ。
+	\end{itemize}
+\end{proof}
+
+\begin{definition}[不動点]
+	... 
+\end{definition}
+
+\begin{theorem}[Knaster-Tarski]
+	... 
+\end{theorem}
+
+\begin{theorem}[Cousot-Cousot]
+	... 
 \end{theorem}
 
 \vspace{150pt}
@@ -1025,7 +1086,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			\item 下限だけでは「真の値にどこまで近いか」がわからず、収束するまで待つことになり、時間がかかる。
 		\end{itemize}
 		% \\ $\cdots\cdots$ 下限だけでは「真の値にどこまで近いか」がわからず、収束するまで待つことになり、時間がかかる。
-		\item \textgt{有界値反復法} (bounded value iteration; BVI): 下からも上からも同時に値反復を行うので、「精度・誤差を保証したうえで停止する」ことが可能になり、結果的に意思決定の高速化につながる。
+		\item \textgt{有界値反復法} (bounded value iteration; BVI): 下からも上からも同時に値反復を行うので、「精度・誤差を保証したうえで停止する」ことが可能になり、結果として意思決定の高速化につながる。
 		\begin{itemize}
 			\item ただし、上からの反復が、求めたい真の値とは異なる ``見せかけの不動点'' (spurious fixed point) に貼り付いてしまう（上のほうに留まったまま降りてこない）ことがよくある。
 			\item そこで、最小・最大不動点の一致が成り立つことがわかれば、上からの反復が、最小不動点とは別の不動点に留まってしまう可能性がなくなり、bounded value iteration を有効に行うことができる。
