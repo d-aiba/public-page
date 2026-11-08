@@ -2876,7 +2876,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 
 集合の写像は、その像を経由して「全射と単射の合成」に分解することができます。では、余代数準同型についても、同じような分解ができるでしょうか？ つまり、余代数準同型の像に余代数構造を入れて、分解によって得られる2つの写像をどちらも余代数準同型にすることができるでしょうか？\vspace{8pt}
 
-この問いに答えるために、(1) まずは写像の像分解について復習し、(2) それを一般の圏において扱うための道具である「分解系」(factorization system) を導入します。その後、(3) 終余代数への意味写像に像分解を適用することで、振舞等価な状態をひとつにまとめた余代数を構成します。
+この問いに答えるために、(1) まずは写像の\textgt{像分解}について復習し、(2) それを一般の圏において扱うための道具である「\textgt{分解系}」(factorization system) を導入します。その後、(3) 余代数の圏へと分解系を持ち上げる方法を議論し、(4) 終余代数への意味写像に像分解を適用することで振舞等価な状態をひとつにまとめた余代数を構成します。
 
 \subsubsection*{(1) 写像の像分解についての復習 (in Set)}
 
@@ -2900,10 +2900,11 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 \[x\sim_{f}x'\;\iff\;f(x)=f(x')\]
 で定めると、
 \[\begin{array}{ccc} X/{\sim_f}& \,\xrightarrow{~~\cong~~}\,&\mathrm{Im}(f)\\ \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\ {[x]} & \longmapsto & f(x)\end{array}\]
-という全単射が得られます。\vspace{8pt}
+という全単射が得られます。（cf. 群論や環論における準同型定理 $G/\mathrm{Ker}(f)\,\cong\,\mathrm{Im}(f)$ のことも思い出そう。）\vspace{8pt}
 
 \noindent さて、後の議論で重要になるため、以下の性質を確認しておきましょう。
 \begin{lemma}[全射と単射の diagonal fill-in]
+	\label{lem:diagonal-fill-in-in-set}
 	集合圏 $\Set$ における任意の可換四角形 $m\circ f=g\circ e$ について、\\$e$ が全射、$m$ が単射のとき、ある $d$ が一意に存在し、$d\circ e=f$ と $m\circ d=g$ が成り立つ。\vspace{8pt}
 	\begin{center}
 		\begin{tikzcd}[column sep=32pt,row sep=28pt]
@@ -2913,14 +2914,21 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	\end{center}
 \end{lemma}
 
-\begin{proof}
-	... 
+% \begin{proof}
+% 	$b\in B$ を任意にとる。$e$ は全射なので、$e(a)=b$ を満たすような $a\in A$ が存在する。そこで $d(b):=f(a)$ と定めたい。この値が $a$ の選び方によらないことを確かめる。$e(a)=e(a')=b$ なら、四角形の可換性より、\[m(f(a))=g(e(a))=g(b)=g(e(a'))=m(f(a'))\] である。$m$ は単射なので、$f(a)=f(a')$ が従う。したがって、このような $d$ の定義 \[d(b):=f(a)\qquad\textrm{ただし~} e(a)=b\] は、代表元の選び方によらずに、写像 $d$ を定める。
+% \end{proof}
+
+\begin{proof}%[証明の概略]
+\noindent 写像 $d:B\to C$ を以下のしかたで定めます。
+\[d(b):=f(a)\qquad\textrm{ただし~} e(a)=b\]
+% \vspace{-4pt}
+% 確認すべきことは：
+\begin{itemize}
+	\item $e$ の全射性によって、各 $b\in B$ を代表元 $a\in A$ で表すことができる。\\（任意の $b\in B$ に対し、$e(a)=b$ を満たすような $a\in A$ が存在する。）
+	\item $m$ の単射性によって、上記の $d$ の定義のしかたが代表元の選び方によらないことを示す。\\（$e(a)=e(a')=b$ ならば、$m(f(a))=g(e(a))=g(b)=g(e(a'))=m(f(a'))$ である。\\ ここで、$m$ が単射なので、$f(a)=f(a')$ である。）%\vspace{-8pt}
+\end{itemize}
+可換性や一意性の証明は省略（簡単）。
 \end{proof}
-
-\noindent この diagonal fill-in の直観としては、......
-
-% 全射性によって各 \(b\in B\) を代表元 \(a\in A\) で表し、単射性によって代表元の選び方によらないことを示す (??)
-
 
 \subsubsection*{(2) 分解系 (factorization system)}
 
@@ -2930,18 +2938,18 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	$\C$ を圏とし、$\mathcal E,\mathcal M$ を圏 $\C$ の射のクラスとする。次の3条件を満たすとき、$(\mathcal E,\mathcal M)$ は $\C$ における\textgt{分解系} (factorization system) であるという。
 	\begin{enumerate}
 		\item $\mathcal E,\mathcal M$ は両方とも、すべての同型射を含んでおり、合成で閉じている。
-		\item 任意の射 $f:X\to Y$ に対し、ある対象 $I$ と射 $e\in\mathcal E$, $m\in\mathcal M$ が存在し、$f=m\circ e$ を満たす。
+		\item 任意の射 $f:X\to Y$ に対し、ある対象 $I$ と射 $e\in\mathcal E$, $m\in\mathcal M$ が存在し、$f=m\circ e$ を満たす。\\（注意: 以下では、$\mathcal E$ に属する射を $\twoheadrightarrow$ と表記し、$\mathcal M$ に属する射を $\rightarrowtail$ と表記する。）
 		\begin{center}
 			\begin{tikzcd}[row sep=10pt,column sep=24pt]
-				X \ar[rr,"f"] \ar[rd,"e\,\in\,\mathcal E"'] && Y \\
-				& I \ar[ur,"m\,\in\,\mathcal M"'] &
+				X \ar[rr,"f"] \ar[rd,"e\,\in\,\mathcal E"',twoheadrightarrow] && Y \\
+				& I \ar[ur,"m\,\in\,\mathcal M"',rightarrowtail] &
 			\end{tikzcd}
 		\end{center}
 		\item 任意の可換四角形 $g\circ e=m\circ f$ について、$e\in\mathcal E$, $m\in\mathcal M$ のとき、ある $d$ が一意に存在して、\\ $d\circ e=f$ と $m\circ d=g$ を満たす。(diagonal fill-in property)
 		\begin{center}
 			\begin{tikzcd}[column sep=32pt,row sep=28pt]
-				A \ar[r,"e\,\in\,\mathcal E"] \ar[d,"f"'] & B \ar[d,"g"] \ar[ld,"d",dashed] \\
-				C \ar[r,"m\,\in\,\mathcal M"'] & D
+				A \ar[r,"e\,\in\,\mathcal E",twoheadrightarrow] \ar[d,"f"'] & B \ar[d,"g"] \ar[ld,"d",dashed] \\
+				C \ar[r,"m\,\in\,\mathcal M"',rightarrowtail] & D
 			\end{tikzcd}
 		\end{center}
 	\end{enumerate}
@@ -2951,16 +2959,17 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	分解系において、分解 $I$ は、一意な同型を除いて一意 (unique up to unique isomorphism) である。\\より正確には、%\vspace{3pt}
 	\begin{center}
 		\begin{tikzcd}[row sep=10pt,column sep=24pt]
-			X \ar[rr,"f"] \ar[rd,"e\,\in\,\mathcal E"'] && Y \\
-			& I \ar[ur,"m\,\in\,\mathcal M"'] &
+			X \ar[rr,"f"] \ar[rd,"e\,\in\,\mathcal E"',twoheadrightarrow] && Y \\
+			& I \ar[ur,"m\,\in\,\mathcal M"',rightarrowtail] &
 		\end{tikzcd}
 		\qquad\qquad
 		\begin{tikzcd}[row sep=10pt,column sep=24pt]
-			X \ar[rr,"f"] \ar[rd,"e'\,\in\,\mathcal E"'] && Y \\
-			& I' \ar[ur,"m'\,\in\,\mathcal M"'] &
+			X \ar[rr,"f"] \ar[rd,"e'\,\in\,\mathcal E"',twoheadrightarrow] && Y \\
+			& I' \ar[ur,"m'\,\in\,\mathcal M"',rightarrowtail] &
 		\end{tikzcd}
 	\end{center}
-	という2つの分解に対して、一意な同型射 $\varphi:I\xrightarrow{\,\cong\,} I'$ が存在し、$\varphi\circ e= e'$ かつ $m'\circ \varphi=m$ が成り立つ。\\ （というのも、$e$ と $m'$ に対する diagonal fill-in property から $\varphi:I\to I'$ が得られ、同様に $e'$ と $m$ から $\psi:I'\to I$ が得られる。そして、diagonal fill-in の一意性により、$\psi\circ\varphi=\id_I$ かつ $\varphi\circ\psi=\id_{I'}$ となるため、$\varphi$ は一意な同型射である。）\vspace{5pt}
+	という2つの分解に対して、一意な同型射 $\varphi:I\xrightarrow{\,\cong\,} I'$ が存在し、$\varphi\circ e= e'$ かつ $m'\circ \varphi=m$ が成り立つ。\\ （というのも、$e$ と $m'$ に対する diagonal fill-in property から $\varphi:I\to I'$ が得られ、同様に $e'$ と $m$ から $\psi:I'\to I$ が得られる。そして、diagonal fill-in の一意性により、$\psi\circ\varphi=\id_I$ かつ $\varphi\circ\psi=\id_{I'}$ となる。）%ため、$\varphi$ は一意な同型射である。）
+	\vspace{6pt}
 	\begin{center}
 		\begin{tikzcd}
 			X \ar[r,"e"] \ar[d,"e'"'] & I \ar[d,"m"] \ar[ld,"\varphi",dashed] \\
@@ -2984,7 +2993,63 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	\end{center}
 \end{supplement}
 
-\subsubsection*{(3) 終余代数への意味写像に像分解を適用する}
+\clearpage
+
+なお、集合圏 $\Set$ の場合（\textgt{補題\ref{lem:diagonal-fill-in-in-set}}）とは異なり、一般の圏では、$e$ が epi で $m$ が mono であるというだけでは、対角を埋める射の存在がいつでも保証されるわけではありません。そこで、次の概念を用いることがあります。
+
+\begin{definition}[strong epi]
+	エピ射 (epi) $e:A\to B$ が\textgt{強エピ射} (strong epi) であるとは、任意のモノ射 (mono) $m:C\to D$ と、$m\circ f=g\circ e$ を満たす射 $f:A\to C$, $g:B\to D$ に対して、ある射 $d:B\to C$ が存在し、$d\circ e=f$ および $m\circ d=g$ が成り立つことをいう。
+\end{definition}
+
+\noindent $(\mathrm{StrongEpi},\mathrm{Mono})$ は分解系をなします。
+
+% \begin{proposition}
+% 	$(\mathrm{StrongEpi},\mathrm{Mono})$ は分解系をなす。
+% \end{proposition}
+
+\subsubsection*{(3) 余代数の圏への分解系の持ち上げ}
+
+\noindent ここまでの一般論をふまえたうえで、以下が成り立つことを確認しましょう。
+
+\begin{proposition}
+	圏 $\C$ が $(\mathcal E,\mathcal M)$-分解系を持ち、$F:\C\to\C$ が $\mathcal M$ に属する射を保つ (i.e. $m\in\mathcal M\implies Fm\in\mathcal M$) とする。このとき、(1) 任意の余代数準同型 $f$ が、$e\in\mathcal E$ と $m\in\mathcal M$ に分解できる。\vspace{3pt}
+	\begin{center}\small
+		\begin{tikzcd}[row sep=0pt,column sep=28pt]
+			\left(\!\begin{array}{c} FX \\[-3pt] ~~\uparrow\substack{c} \\[-3pt] X \end{array}\!\right) \ar[rr,"f"] \ar[rd,"e"',twoheadrightarrow] && \left(\!\begin{array}{c} FY \\[-3pt] ~~\uparrow\substack{d} \\[-3pt] Y \end{array}\!\right) \\
+			& \left(\!\begin{array}{c} FI \\[-3pt] ~~\uparrow\substack{i} \\[-3pt] I \end{array}\!\right) \ar[ur,"m"',rightarrowtail] & 
+		\end{tikzcd}
+	\end{center}
+	さらに、(2) diagonal fill-in property が、基底圏 $\C$ から余代数の圏 $\Coalg_F$ へと持ち上がる。\vspace{3pt}
+	\begin{center}\small
+		\begin{tikzcd}
+			\left(\!\begin{array}{c} FA \\[-3pt] ~~\uparrow\substack{\alpha} \\[-3pt] A \end{array}\!\right) \ar[r,"e"] \ar[d,"f"'] & \left(\!\begin{array}{c} FB \\[-3pt] ~~\uparrow\substack{\beta} \\[-3pt] B \end{array}\!\right) \ar[d,"g"] \ar[ld,"d",dashed,shorten=-5pt] \\
+			\left(\!\begin{array}{c} FC \\[-3pt] ~~\uparrow\substack{\gamma} \\[-3pt] C \end{array}\!\right) \ar[r,"m"'] & \left(\!\begin{array}{c} FD \\[-3pt] ~~\uparrow\substack{\delta} \\[-3pt] D \end{array}\!\right)
+		\end{tikzcd}
+	\end{center}
+\end{proposition}
+
+\begin{proof}
+	(1) $f:(X,c)\to(Y,d)$ を余代数準同型とする。基底圏 $\C$ の中で、$(\mathcal E,\mathcal M)$-分解 $f=m\circ e$ をとる。\\ ここで、以下の図式を考える。
+	\begin{center}
+		\begin{tikzcd}
+			FX \ar[r,"Fe"] & FI \ar[r,"Fm",rightarrowtail] & FY \\
+			X \ar[u,"c"] \ar[r,"e"',twoheadrightarrow] & I \ar[u,"\exists!\,i"',dashed] \ar[r,"m"',rightarrowtail] & Y \ar[u,"d"']
+		\end{tikzcd}
+	\end{center}
+	$Fm\in\mathcal M$ なので、$e$ と $Fm$ に対する diagonal fill-in property (in $\C$) から、一意な余代数構造射 $i:I\to FI$ が存在し、$e,m$ はそれぞれ余代数準同型となる。\\ 
+	(2) 基底圏 $\C$ における diagonal fill-in property により、$d\circ e=f$, $m\circ d=g$ を満たす一意な射 $d:B\to C$ が得られる。この $d$ が余代数準同型となること（つまり $\gamma\circ d=Fd\circ\beta$ が成り立つこと）を示す。
+	\begin{center}
+		\begin{tikzcd}
+			FA \ar[r,"Fe"] & FB \ar[r,"Fd"] & FC \ar[r,"Fm",rightarrowtail] & FD \\ 
+			A \ar[u,"\alpha"] \ar[r,"e"',twoheadrightarrow] & B \ar[r,"d"'] \ar[u,"\beta"] \ar[ur,dashed] & C \ar[r,"m"',rightarrowtail] \ar[u,"\gamma"'] & D \ar[u,"\delta"]
+		\end{tikzcd}
+	\end{center}
+	$Fm\in\mathcal M$ なので、$e$ と $Fm$ に対する diagonal fill-in property (in $\C$) から、対角射 $B\to FC$ が一意であることがわかり、それゆえ $\gamma\circ d=Fd\circ\beta$ が従う。
+\end{proof}
+
+\clearpage
+
+\subsubsection*{(4) 終余代数への意味写像に像分解を適用する}
 % \noindent 
 
 \clearpage
@@ -3007,10 +3072,10 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 % \end{tabular}
 % \end{center}
 
-\noindent 典型例として、例外処理 (exception handling) と呼ばれる計算効果を表す関手 $F(Y)=Y+E$ を用いた、効果つきの計算 $f:X\to Y+E$ が挙げられます。ここでは $+$ は余積を表し、$E$ は ``エラーの集合'' とみなしましょう。このとき、計算 $f:X\to Y+E$ は、単に入力値 $x\in X$ から出力値 $y\in Y$ を返すだけでなく、「もし例外が生じたらエラー $e\in E$ を返す」という\textgt{副作用} (side effect) を持ちます。
+\noindent 典型例として、例外処理 (exception handling) と呼ばれる計算効果を表す関手 $F(Y)=Y+E$ を用いた、効果つきの計算 $f:X\to Y+E$ が挙げられます。ここでは $+$ は余積 (coproduct) を表し、$E$ は ``エラーの集合'' とみなしましょう。このとき、計算 $f:X\to Y+E$ は、単に入力値 $x\in X$ から出力値 $y\in Y$ を返すだけでなく、「もし例外が生じたらエラー $e\in E$ を返す」という\textgt{副作用} (side effect) を持ちます。
 % \[\begin{array}{cccc}f:&X&\longrightarrow&Y+E\\&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&x&\longmapsto &y\\&x'&\longmapsto&e\end{array}\]
 \[\begin{array}{cccccc}f:&X&\longrightarrow&Y\!\!&\!+\!&\!\!E\\&\rotatebox{90}{$\in$}&&&\!\!\rotatebox{90}{$\in$}\!\!\\&x&\longmapsto &y\!\!\\&x'&\longmapsto&&&\!\!e\end{array}\]
-では、この例のような副作用を持つ計算（効果つき計算）どうしの「合成」はどう考えればいいでしょうか。たとえば、2つの効果つき計算 $f:X\to Y+E$ と $g:Y\to Z+E$ を合成して、$g\circ f:X\to Z+E$ のようなものを作りたいとき、$f,g$の両者は型が合っていないため、一筋縄ではいかないことがわかります。そこで、次節で導入する「\textgt{モナド}」や「クライスリ圏」といった道具が役立ちます。 (``Computational effects are modeled by monads''  [Moggi])\vspace{5pt}\\
+では、この例のような副作用を持つ計算（効果つき計算）どうしの「合成」はどう考えればいいでしょうか。たとえば、2つの効果つき計算 $f:X\to Y+E$ と $g:Y\to Z+E$ を合成して、$g\circ f:X\to Z+E$ のようなものを作りたいとき、$f,g$の両者は型が合っていないため、一筋縄ではいかないことがわかります。そこで、次節で導入する「\textgt{モナド}」や「\textgt{クライスリ圏}」といった道具が役立ちます。 (``Computational effects are modeled by monads''  [Moggi])\vspace{5pt}\\
 %（次節でもあらためてこの例外処理の例について取り上げます。）
 
 % なお、作用つき計算 $f:X\to F(Y)$ を、便宜的に $f:X\computationrightarrow Y$ という特殊な矢印で表記することがよくあります。（厳密に言えば、これはモナド $F$ のクライスリ圏における射を表す記法ですが、ここでは詳細の説明は省略します。この点については、次節を読んで「モナド」や「クライスリ圏」について学んだ後ならわかるはずです。）\\
