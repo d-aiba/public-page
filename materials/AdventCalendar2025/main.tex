@@ -168,16 +168,16 @@
 \end{itemize}
 \end{oframed}%\vspace{4pt}
 %%%
-\vspace{15pt}
+\vspace{18pt}
 %%% 
 \begin{center}
 	\begin{tabular}{|c|c|c|c|}
 		\hline
-		\textgt{テスト} (test) & \multicolumn{3}{c|}{\textgt{形式検証} (formal verification)} \\
+		\textgt{テスト} (test) & \multicolumn{3}{c|}{\textgt{形式検証} (formal verification)} \\\cline{2-4} 
 		& \textgt{モデル検査} & \textgt{自動定理証明} & \textgt{対話定理証明} \\\hline
 		% 産業界で主流 & 総当りで検査 & 全自動 & 博士論文1本分 \\\hline
-		\multicolumn{4}{|c|}{低 … \hspace*{70pt} コスト \hspace*{70pt} … 高} \\\hline
-		\multicolumn{4}{|c|}{低 … \hspace*{25pt} システム品質保証の度合い \hspace*{25pt} … 高} \\\hline
+		\multicolumn{4}{|c|}{低 ~ $\leftarrow$ \hspace*{65pt} コスト \hspace*{65pt} $\rightarrow$ ~ 高} \\\hline
+		\multicolumn{4}{|c|}{低 ~ $\leftarrow$ \hspace*{20pt} システム品質保証の度合い \hspace*{20pt} $\rightarrow$ ~ 高} \\\hline
 	\end{tabular}
 \end{center}
 %%% 
@@ -190,8 +190,8 @@
 	\item デバイスドライバの自動検証 (Microsoft, 2000年代前半)
 	\item 航空機制御ソフトウェアの検証 (Airbus, 2000年代前半)
 	\item アプリケーションの軽量形式検証 (Facebook, 2010年代前半から中盤)
-	\item 暗号実装や分散システム設計などの検証 (Amazon AWS, 2010年代以降) \vspace{10pt}
-	% \item 
+	\item 暗号実装や分散システム設計などの検証 (Amazon AWS, 2010年代以降) %\vspace{10pt}
+	\item ... 
 \end{itemize}
 
 % \noindent 形式検証の中でも、手法ごとに「検証のためにかかるコスト」や「システム品質保証の度合い」に違いがあります。\\ 簡単にまとめると以下の表の通りです。\vspace{12pt}
@@ -250,8 +250,8 @@
 % \end{itemize}
 % 本記事では特定の形式化には限定せずに、一般論を展開することを目指します。
 
-\noindent モデルとしては、オートマトンやマルコフチェーンをはじめとする\textgt{状態遷移系}と呼ばれるものを用います。また、\\
-\noindent 仕様 $\varphi$ は典型的には、\textgt{時相論理式}（例えば $\mathbf{G}\,(p\to\mathbf{F}\,q)$「リクエスト$p$を送ったらレスポンス$q$が返ってくる」など）で書かれることが多いです。が、本記事では特定の形式化のしかたに限定せずに、一般論を展開することを目指します。\vspace{5pt}
+\noindent モデルとしては、オートマトンやマルコフチェーンをはじめとする\textgt{状態遷移系}と呼ばれるものをよく用います。また、\\
+\noindent 仕様 $\varphi$ は典型的には、\textgt{時相論理式}（例えば $\mathbf{G}\,(p\to\mathbf{F}\,q)$「リクエスト$p$を送ったらレスポンス$q$が返ってくる」など）で書かれることが多いです。が、本記事では特定の形式化のしかたに限定せずに、一般論を展開することを目指します。\vspace{15pt}
 
 \noindent (補足: なお実際の場面では、複雑なシステムについて考える際に、現実のシステムをモデル化すること自体が困難ないしハイコストであったり、望む性質を適切に形式化して仕様として記述することが難しい、といったこともよくあります。そのような観点については本記事では扱いきれませんが、近年さまざまな発展があります。)
 
@@ -669,9 +669,22 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 	... 
 \end{definition}
 
-\begin{definition}[sup, inf]
+\begin{definition}[上限・下限]
 	... 
 \end{definition}
+
+\begin{theorem}[Yoneda の補題]
+	$P$ を poset とする（ここでは完備束でなくてもよい）。任意の $x,y\in P$ について、
+	% \begin{center}
+	% 	$x=y$ $\iff$ 
+	% \end{center}
+	\[x=y \;\iff\; \AXC{$y\sqsubseteq z$}\doubleLine\UIC{$x\sqsubseteq z$}\DisplayProof \textrm{~ for each $z\in P$}\]
+	が成り立つ。
+\end{theorem}
+
+\begin{proof}
+	... 
+\end{proof}
 
 \clearpage
 
@@ -754,15 +767,17 @@ $N$に正の自然数を入力してこのプログラムを実行した後に�
 	\end{itemize}
 \end{proof}
 
+\clearpage
+
 \begin{definition}[不動点]
 	... 
 \end{definition}
 
-\begin{theorem}[Knaster-Tarski]
+\begin{theorem}[Knaster-Tarski の不動点定理]
 	... 
 \end{theorem}
 
-\begin{theorem}[Cousot-Cousot]
+\begin{theorem}[Cousot-Cousot の不動点定理]
 	... 
 \end{theorem}
 
@@ -981,7 +996,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \subsection{最小・最大不動点を推定するためのアルゴリズム}
 
-\noindent ここで、完備束 (complete lattice) の\textgt{不動点} (lfp, gfp) \textgt{を推定}するための\textgt{アルゴリズム}について考えましょう。\\ 現実の場面では、最小・最大不動点の値そのものをぴったり求めることは困難であることが多いので、\textgt{上界・下界推定} (over/under-approximation) をしたいです。具体的には、以下の表に挙げたやり方で行うことができます。\\（補足： これらは、完備束 $L$ と単調関数 $f:L\to L$ についての2種類の不動点定理、the Knaster-Tarski theorem と the Cousot-Cousot theorem からの帰結です。）\vspace{15pt}
+\noindent ここで、完備束 (complete lattice) の\textgt{不動点} (lfp, gfp) \textgt{を推定}するための\textgt{アルゴリズム}について考えましょう。\\ 現実の場面では、最小・最大不動点の値そのものをぴったり求めることは困難であることが多いので、\textgt{上界・下界推定} (over/under-approximation) をしたいです。具体的には、以下の表に挙げたやり方で行うことができます。\\%（補足： これらは、完備束 $L$ と単調関数 $f:L\to L$ についての2種類の不動点定理、the Knaster-Tarski theorem と the Cousot-Cousot theorem からの帰結です。）\vspace{15pt}
+（補足： これらは、2種類の不動点定理、Knaster-Tarski と Cousot-Cousot からの帰結です。）\vspace{15pt}
 
 \begin{center}
 	\begin{tabular}{c|c|c}
@@ -1071,7 +1087,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 \subsection*{コラム: 最小不動点と最大不動点の一致 (lfp-gfp coincidence) について}
 
-\noindent 一般的に $\mu f\sqsubseteq\nu f$ ですが、一致する ($\mu f=\nu f$) 場合もあります。\kenten{一致すると何が嬉しいか}を見ておきましょう。%\\
+\noindent 一般に $\mu f\sqsubseteq\nu f$ ですが、一致する ($\mu f=\nu f$) 場合もあります。\kenten{一致すると何が嬉しいか}を見ておきましょう。%\\
 
 \begin{enumerate}
 	\item 一般には lfp の lower bound を与えるのは難しい% (Aiming low is harder!) 
@@ -1294,7 +1310,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{example}
 
 \begin{example}
-	様相論理におけるクリプキフレーム (Kripke frame) は、余代数 $\gamma:X\to\mathcal P(X)$ で与えられる。\[\begin{array}{cccl}\gamma:&X&\longrightarrow&\mathcal P(X)\\&\rotatebox{90}{$\in$}&&~~\rotatebox{90}{$\in$}\\&x&\longmapsto&\gamma(x)=\{x'\mid x\leadsto x'\}\end{array}\]
+	様相論理におけるクリプキフレーム (Kripke frame) は、余代数 $c:X\to\mathcal P(X)$ で与えられる。\[\begin{array}{cccl}\gamma:&X&\longrightarrow&\mathcal P(X)\\&\rotatebox{90}{$\in$}&&~~\rotatebox{90}{$\in$}\\&x&\longmapsto&c(x)=\{x'\mid x\leadsto x'\}\end{array}\]
 	\begin{small}
 	\begin{center}
 		\begin{tikzcd}[row sep=0pt]
@@ -1307,10 +1323,10 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 	なお、クリプキフレーム間の余代数準同型は、いわゆる bounded morphism (pseudo morphism) である。
 	\begin{multicols}{2}
 		\begin{center}
-			$\delta\circ f=\mathcal Pf\circ\gamma$ \qquad
+			$d\circ f=\mathcal Pf\circ c$ \qquad
 			\begin{tikzcd}
 				\mathcal P(S) \ar[r,"\mathcal P(f)"] & \mathcal P(S') \\
-				S \ar[r,"f"'] \ar[u,"\gamma"] & S' \ar[u,"\delta"']
+				S \ar[r,"f"'] \ar[u,"c"] & S' \ar[u,"d"']
 			\end{tikzcd}
 		\end{center}
 		%
@@ -1320,12 +1336,12 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 		% \end{center}
 		%
 		% \begin{center}
-		\begin{framed}
-			$\{y'\in S'\mid f(x)R'y'\}=\{f(y)\mid xRy\}$
+		\begin{framed}\small
+			$\{y'\in S'\mid f(x)\overset{d}{\leadsto}y'\}=\{f(y)\mid x\overset{c}{\leadsto}y\}$
 			\begin{itemize}
-				\item ($\supseteq$) $xRy\implies f(x)R'f(y)$
-				\item ($\subseteq$) $f(x)R'y'\implies \exists y:xRy\mathbin{\&}f(y)=y'$
-			\end{itemize}\vspace{-7pt}
+				\item ($\supseteq$) $x\overset{c}{\leadsto}y\implies f(x)\overset{d}{\leadsto}f(y)$
+				\item ($\subseteq$) $f(x)\overset{d}{\leadsto}y'\implies \exists y:x\overset{c}{\leadsto}y\mathbin{\&}f(y)=y'$
+			\end{itemize}\vspace{-3pt}
 		\end{framed}
 		% \end{center}
 	\end{multicols}
@@ -1405,7 +1421,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \clearpage
 
 \begin{example} \label{ex:MarkovChain}
-	マルコフ連鎖は、余代数 $\gamma:X\to \mathcal D(X)$ で与えられる。なお、関手 $\mathcal D:\Set\to\Set$ は
+	マルコフ連鎖は、余代数 $c:X\to \mathcal D(X)$ で与えられる。なお、関手 $\mathcal D:\Set\to\Set$ は
 	\begin{align*}
 		\mathcal D(X)&=\{d:X\to [0,1]\mid\textstyle\sum d(x)=1,\,\textrm{finite support}\;(\textrm{i.e.}\;\{x\in X\mid d(x)>0\}\;\textrm{is finite})\,\}\\
 		&=\{\textstyle\,\sum p_i\ket{x_i}\,\textrm{, where each $p_i$ is a probability $d(x_i)\in[0,1]$.}\}\\\mathcal D(f)&:\mathcal D(X)\to\mathcal D(Y)\\&\mathcal D(f)(\textstyle\sum p_i\ket{x_i})=\textstyle\sum p_i\ket{f(x_i)}
@@ -1419,7 +1435,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 			\circled{$x_3$} \ar[loop below,looseness=5, "1"] 
 		\end{tikzcd}
 	\end{center}
-		\begin{align*}\gamma(x_1) & =0.2\ket{x_1}+0.3\ket{x_2}+0.5\ket{x_3},\\[-2pt]\gamma(x_2) & = 0.3\ket{x_1}+0.7\ket{x_3}, \\[-2pt] \gamma(x_3) & = \ket{x_3}. \end{align*}
+		\begin{align*}c(x_1) & =0.2\ket{x_1}+0.3\ket{x_2}+0.5\ket{x_3},\\[-2pt] c(x_2) & = 0.3\ket{x_1}+0.7\ket{x_3}, \\[-2pt] c(x_3) & = \ket{x_3}. \end{align*}
 	% \end{multicols}
 \end{example}
 
@@ -1429,8 +1445,8 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 \end{remark}
 
 
-\begin{example}[マルコフ決定過程]
-	... 
+\begin{example}%[マルコフ決定過程]
+	マルコフ決定過程は、
 \end{example}
 
 
@@ -2022,7 +2038,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 \end{definition}
 
 \begin{supplement}
-	同様に、2つのラベル付き状態遷移系の間の2つの状態を比べるしかたで、双模倣関係・双模倣性を導入するのもよいです。やり方は上記とほとんど同じです。つまり、
+	同様に、異なる2つのラベル付き状態遷移系の間で2つの状態を比べる、というしかたで、双模倣関係・双模倣性を導入することもあります。やり方は上記とほとんど同じです。後ほど圏論的一般化を与える際にはそちらのやり方を採用しているので、詳しくは次節を参照してください。
 \end{supplement}
 
 \noindent いくつか例を見てみましょう。
@@ -2338,7 +2354,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 
 \begin{definition}[振舞等価性]
 	$F:\Set\to\Set$ を自己関手とし、$\gamma:X\to FX$ と $\delta:Y\to FY$ を $F$-余代数とする。状態 $x\in X$ と $y\in Y$ が
-	\textgt{振舞等価} (behavioural equivalent) であるとは、ある余代数 $\zeta:Z\to FZ$ が存在し、$f:X\to Z$ と $g:Y\to Z$ が余代数準同型であり、$f(x)=g(y)$ を満たすこと。このとき $x\equiv_F y$ と書く。%\vspace{3pt}
+	\textgt{振舞等価} (behavioural equivalent) であるとは、ある余代数 $\zeta:Z\to FZ$ が存在し、$f:X\to Z$ と $g:Y\to Z$ が余代数準同型であり、$f(x)=g(y)$ を満たすこと。このとき $x\equiv_F y$ と書く。\vspace{3pt}
 	\begin{center}
 		\begin{tikzcd}
 			FX \ar[r,"Ff"] & FZ & FY \ar[l,"Fg"'] \\
@@ -2834,7 +2850,8 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 
 \clearpage
 
-\subsection*{(双模倣-その5) 関係持ち上げによる議論}
+% \subsection*{(双模倣-その5) 関係持ち上げによる議論}
+~
 
 % \vspace{30pt}
 
