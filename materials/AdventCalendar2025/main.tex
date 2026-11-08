@@ -2848,14 +2848,14 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 
 \noindent 以上の議論によって、コスパン同値性がいつでも手に入ることがわかりました。
 
-\clearpage
+% \clearpage
 
 % \subsection*{(双模倣-その5) 関係持ち上げによる議論}
 ~
 
 % \vspace{30pt}
 
-\clearpage
+% \clearpage
 
 \begin{screen}
 \noindent【まとめ】
@@ -2870,6 +2870,122 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 \end{itemize}
 \end{screen}
 
+\clearpage
+
+\subsection*{コラム: 像分解 (image factorization) について}
+
+集合の写像は、その像を経由して「全射と単射の合成」に分解することができます。では、余代数準同型についても、同じような分解ができるでしょうか？ つまり、余代数準同型の像に余代数構造を入れて、分解によって得られる2つの写像をどちらも余代数準同型にすることができるでしょうか？\vspace{8pt}
+
+この問いに答えるために、(1) まずは写像の像分解について復習し、(2) それを一般の圏において扱うための道具である「分解系」(factorization system) を導入します。その後、(3) 終余代数への意味写像に像分解を適用することで、振舞等価な状態をひとつにまとめた余代数を構成します。
+
+\subsubsection*{(1) 写像の像分解についての復習 (in Set)}
+
+\noindent 任意の写像 $f:X\to Y$ に対し、その像を
+\[\mathrm{Im}(f):=\{y\in Y\mid \exists x\in X,\, f(x)=y\}\]
+と定めます。このとき、$f$ は
+\begin{center}
+	\begin{tikzcd}[row sep=16pt,column sep=25pt]
+		X \ar[rr,"f"] \ar[rd,twoheadrightarrow,"\substack{e\\全射}"'] && Y \\
+		& \!\mathrm{Im}(f)\! \ar[ru,rightarrowtail,"\substack{m\\単射}"'] &
+	\end{tikzcd}
+\end{center}
+と分解することができます。\\（ここでは、$e(x)=f(x)$ であり、$m$ は包含写像。）\vspace{8pt}
+
+\noindent この分解には、次の2つの見方があります。
+\begin{itemize}
+	\item 定義域 $X$ の側から見ると、「$e$ は、$f$ によって同じ値に送られる要素どうしをひとつにまとめている！」 \\ （つまり、像 $\mathrm{Im}(f) $ は、定義域 $X$ の商集合！）
+	\item 値域 $Y$ の側から見ると、「$m$ は、$f$ の値として実際に現れる要素を集めて $Y$ に埋め込んでいる！」 \\ （つまり、像 $\mathrm{Im}(f) $ は、値域 $Y$ の部分集合！）
+\end{itemize}
+実際、$X$ 上の同値関係を
+\[x\sim_{f}x'\;\iff\;f(x)=f(x')\]
+で定めると、
+\[\begin{array}{ccc} X/{\sim_f}& \,\xrightarrow{~~\cong~~}\,&\mathrm{Im}(f)\\ \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\ {[x]} & \longmapsto & f(x)\end{array}\]
+という全単射が得られます。\vspace{8pt}
+
+\noindent さて、後の議論で重要になるため、以下の性質を確認しておきましょう。
+\begin{lemma}[全射と単射の diagonal fill-in]
+	集合圏 $\Set$ における任意の可換四角形 $m\circ f=g\circ e$ について、\\$e$ が全射、$m$ が単射のとき、ある $d$ が一意に存在し、$d\circ e=f$ と $m\circ d=g$ が成り立つ。\vspace{8pt}
+	\begin{center}
+		\begin{tikzcd}[column sep=32pt,row sep=28pt]
+			A \ar[r,"e",twoheadrightarrow] \ar[d,"f"'] & B \ar[d,"g"] \ar[ld,"d",dashed] \\
+			C \ar[r,"m"',rightarrowtail] & D
+		\end{tikzcd}
+	\end{center}
+\end{lemma}
+
+\begin{proof}
+	... 
+\end{proof}
+
+\noindent この diagonal fill-in の直観としては、......
+
+% 全射性によって各 \(b\in B\) を代表元 \(a\in A\) で表し、単射性によって代表元の選び方によらないことを示す (??)
+
+
+\subsubsection*{(2) 分解系 (factorization system)}
+
+\noindent さて、像分解を一般の圏で扱うために、「分解系」(factorization system) と呼ばれる道具を導入しましょう。 
+
+\begin{definition}[分解系]
+	$\C$ を圏とし、$\mathcal E,\mathcal M$ を圏 $\C$ の射のクラスとする。次の3条件を満たすとき、$(\mathcal E,\mathcal M)$ は $\C$ における\textgt{分解系} (factorization system) であるという。
+	\begin{enumerate}
+		\item $\mathcal E,\mathcal M$ は両方とも、すべての同型射を含んでおり、合成で閉じている。
+		\item 任意の射 $f:X\to Y$ に対し、ある対象 $I$ と射 $e\in\mathcal E$, $m\in\mathcal M$ が存在し、$f=m\circ e$ を満たす。
+		\begin{center}
+			\begin{tikzcd}[row sep=10pt,column sep=24pt]
+				X \ar[rr,"f"] \ar[rd,"e\,\in\,\mathcal E"'] && Y \\
+				& I \ar[ur,"m\,\in\,\mathcal M"'] &
+			\end{tikzcd}
+		\end{center}
+		\item 任意の可換四角形 $g\circ e=m\circ f$ について、$e\in\mathcal E$, $m\in\mathcal M$ のとき、ある $d$ が一意に存在して、\\ $d\circ e=f$ と $m\circ d=g$ を満たす。(diagonal fill-in property)
+		\begin{center}
+			\begin{tikzcd}[column sep=32pt,row sep=28pt]
+				A \ar[r,"e\,\in\,\mathcal E"] \ar[d,"f"'] & B \ar[d,"g"] \ar[ld,"d",dashed] \\
+				C \ar[r,"m\,\in\,\mathcal M"'] & D
+			\end{tikzcd}
+		\end{center}
+	\end{enumerate}
+\end{definition}
+
+\begin{supplement}
+	分解系において、分解 $I$ は、一意な同型を除いて一意 (unique up to unique isomorphism) である。\\より正確には、%\vspace{3pt}
+	\begin{center}
+		\begin{tikzcd}[row sep=10pt,column sep=24pt]
+			X \ar[rr,"f"] \ar[rd,"e\,\in\,\mathcal E"'] && Y \\
+			& I \ar[ur,"m\,\in\,\mathcal M"'] &
+		\end{tikzcd}
+		\qquad\qquad
+		\begin{tikzcd}[row sep=10pt,column sep=24pt]
+			X \ar[rr,"f"] \ar[rd,"e'\,\in\,\mathcal E"'] && Y \\
+			& I' \ar[ur,"m'\,\in\,\mathcal M"'] &
+		\end{tikzcd}
+	\end{center}
+	という2つの分解に対して、一意な同型射 $\varphi:I\xrightarrow{\,\cong\,} I'$ が存在し、$\varphi\circ e= e'$ かつ $m'\circ \varphi=m$ が成り立つ。\\ （というのも、$e$ と $m'$ に対する diagonal fill-in property から $\varphi:I\to I'$ が得られ、同様に $e'$ と $m$ から $\psi:I'\to I$ が得られる。そして、diagonal fill-in の一意性により、$\psi\circ\varphi=\id_I$ かつ $\varphi\circ\psi=\id_{I'}$ となるため、$\varphi$ は一意な同型射である。）\vspace{5pt}
+	\begin{center}
+		\begin{tikzcd}
+			X \ar[r,"e"] \ar[d,"e'"'] & I \ar[d,"m"] \ar[ld,"\varphi",dashed] \\
+			I' \ar[r,"m'"'] & Y
+		\end{tikzcd}
+		\qquad\quad 
+		\begin{tikzcd}
+			X \ar[r,"e'"] \ar[d,"e"'] & I' \ar[d,"m'"] \ar[ld,"\psi",dashed] \\
+			I \ar[r,"m"'] & Y
+		\end{tikzcd}
+		\qquad\quad  
+		\begin{tikzcd}
+			X \ar[r,"e"] \ar[d,"e"'] & I \ar[d,"m"] \ar[ld,"\psi\circ\varphi"',"=\,\id_I",dashed] \\
+			I \ar[r,"m"'] & Y
+		\end{tikzcd}
+		\qquad\quad
+		\begin{tikzcd}
+			X \ar[r,"e'"] \ar[d,"e'"'] & I' \ar[d,"m'"] \ar[ld,"\varphi\circ\psi"',"=\,\id_{I'}",dashed] \\
+			I' \ar[r,"m'"'] & Y
+		\end{tikzcd}
+	\end{center}
+\end{supplement}
+
+\subsubsection*{(3) 終余代数への意味写像に像分解を適用する}
+% \noindent 
 
 \clearpage
 
