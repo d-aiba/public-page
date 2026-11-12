@@ -1446,7 +1446,7 @@ $\omega+1$よりもさらに先で安定 (stabilize) する例もあります。
 
 
 \begin{example}%[マルコフ決定過程]
-	マルコフ決定過程は、
+	マルコフ決定過程 (MDP) は、
 \end{example}
 
 
@@ -2874,9 +2874,9 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 
 \subsection*{コラム: 像分解 (image factorization) について}
 
-集合の写像は、その像を経由して「全射と単射の合成」に分解することができます。では、余代数準同型についても、同じような分解ができるでしょうか？ つまり、余代数準同型の像に余代数構造を入れて、分解によって得られる2つの写像をどちらも余代数準同型にすることができるでしょうか？\vspace{8pt}
+集合の写像は、その像を経由して「全射と単射の合成」に分解することができます。では、余代数準同型についても、同じような分解ができるでしょうか？ つまり、余代数準同型の像に余代数構造を入れて、分解によって得られる2つの写像をどちらも余代数準同型にすることができるでしょうか？  （はい、できます。）\vspace{8pt}
 
-この問いに答えるために、(1) まずは写像の\textgt{像分解}について復習し、(2) それを一般の圏において扱うための道具である「\textgt{分解系}」(factorization system) を導入します。その後、(3) 余代数の圏へと分解系を持ち上げる方法を議論し、(4) 終余代数への意味写像に像分解を適用することで振舞等価な状態をひとつにまとめた余代数を構成します。
+これを実際に行うために、(1) まずは写像の\textgt{像分解}について復習し、(2) それを一般の圏において扱うための道具である「\textgt{分解系}」(factorization system) を導入します。その後、(3) 余代数の圏へと分解系を持ち上げる方法を議論し、(4) 終余代数への意味写像に像分解を適用することで振舞等価な状態をひとつにまとめた余代数を構成します。
 
 \subsubsection*{(1) 写像の像分解についての復習 (in Set)}
 
@@ -3050,7 +3050,20 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 \clearpage
 
 \subsubsection*{(4) 終余代数への意味写像に像分解を適用する}
-% \noindent 
+
+\noindent ここまでの話をふまえ、任意の余代数 $c:X\to FX$ から終余代数 $\zeta:Z\to FZ$ への意味写像 $\mathrm{beh}_c:(X,c)\to(Z,\zeta)$（各状態をその振舞いに対応させる写像）にも、像分解を適用してみましょう。
+
+\begin{proposition}[意味写像の像分解]
+	$F:\Set\to\Set$ が単射を保ち、終余代数 $\zeta:Z\to FZ$ が存在すると仮定する。\\ 意味写像 $\mathrm{beh}_c:(X,c)\to(Z,\zeta)$ の像分解を、\vspace{5pt}
+	\begin{center}
+		\begin{tikzcd}[row sep=16pt,column sep=25pt]
+			{(X,c)} \ar[rd,"\substack{e\\全射}"',twoheadrightarrow] \ar[rr,"\mathrm{beh}_c"] && {(Z,\zeta)} \\
+			& (I,\iota) \ar[ur,"\substack{m\\単射}"',rightarrowtail]
+		\end{tikzcd}
+	\end{center}
+	とする。このとき、任意の $x,x'\in X$ に対し、
+	\[e(x)=e(x')\;\iff\;x\equiv_F x'\] が成り立つ。それゆえ、$I\,\cong\,X/{\equiv_F}$（集合として同型）であり、この $\iota\colon I\to FI$ は振舞等価な状態を同一視することによって得られる商余代数である。
+\end{proposition}
 
 \clearpage
 
@@ -5158,9 +5171,9 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 
 \clearpage
 
-\noindent\begin{large}\textgt{コラム: ラヴェア理論と有限モナド}\end{large}\vspace{5pt}
+\noindent\begin{large}\textgt{コラム: ラヴェア理論 (Lawvere theory) と有限モナド (finitary monad)}\end{large}\vspace{5pt}
 
-\noindent ここまでは、やや時間をかけて、モナドについて見てきました。\\そこで少し寄り道をして、\textgt{ラヴェア理論} (Lawvere theory) と\textgt{有限モナド} (finitary monad) の関係について扱います。\vspace{3pt}%\\
+\noindent ここまではやや時間をかけて、モナドについて見てきました。モナドは計算効果 (computational effect) を扱うための強力な道具ですが、何を調べたいかによっては、別の構造を全面に出すほうが見通しのよい場合もあります。（中には、John Power らのように「monad を使うな！ Lawvere theory でやれ！」という勢力もいます。）\\そこで少し寄り道をして、\textgt{ラヴェア理論} (Lawvere theory) と\textgt{有限モナド} (finitary monad) の関係について扱います。\vspace{3pt}%\\
 \begin{center}
 	\begin{tikzcd}
 		\fbox{$\begin{array}{c}\textrm{Lawvere theories}\\\mathbf{FinSet}^\op\to\mathbb L\end{array}$} \ar[r,hookrightarrow,shift right=5pt] \ar[d,"\simeq"] & \fbox{$\begin{array}{c}\textrm{algebraic theories}\\((\Sigma_n)_{n\in\omega},E)\end{array}$} \ar[l,twoheadrightarrow, shift right=5pt] \\
@@ -5189,7 +5202,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	&& s\cdot (t\cdot u)=(s\cdot t)\cdot u {\qquad}
 \end{array}
 \]
-以下では、変数 (variables) の集合を $\mathrm{Var}$ と表記することにしましょう。\\ 
+% なお、以下では、変数 (variables) の集合を $\mathrm{Var}$ と表記しましょう。\\ 
 ここで、\textgt{文脈つき項} (terms in contexts) を定義します。
 \begin{definition}[文脈つき項]
 	$x_1,\dots,x_n\vdash t$ は以下のように帰納的に定義される。\\ (``$t$ is a $\Sigma$-term in a context $x_1,\dots,x_n$'') \vspace{15pt}
@@ -5236,12 +5249,16 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	\item commuting diagrams: ``axioms'' 
 \end{itemize}
 
+\noindent まず準備として、有限集合圏 $\FinSet$ を導入しておきます。
+
 \begin{definition}[有限集合圏 FinSet]
 	... 
 \end{definition}
 
 \begin{remark}
-	各有限集合を、自然数と同一視する。（フォン・ノイマン構成） ...... もっとちゃんと書く！
+	% 以下では、
+	各有限集合を、自然数と同一視する。（フォン・ノイマン構成） 
+	%...... もっとちゃんと書く！
 \end{remark}
 
 \begin{definition}[ラヴェア理論]
@@ -5580,9 +5597,59 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 
 \vspace{120pt}
 
-寄り道（余談）はこのくらいにしておいて、次節では、いよいよ（この記事の本題である）「グロタンディーク・ファイブレーション」の話に移りましょう。
+% 寄り道（余談）はこのくらいにしておいて、次節では、いよいよ（この記事の本題である）「グロタンディーク・ファイブレーション」の話に移りましょう。
 
+\clearpage
 
+% \subsection*{コラム: }
+
+\noindent\begin{large}\textgt{コラム: 半環 (semiring) と計算効果}\end{large}\vspace{5pt}
+
+\noindent 計算効果を持つ計算（非決定的・確率的など）は、複数の結果が可能であったり、それぞれの結果に確率やコストが付随したりします。そのような計算を扱う方法のひとつとして、「\textgt{計算の各結果に、半環 (semiring) の元を重みとして割り当てる}」というやり方もあります。ここでは、その方法について紹介します。
+
+\begin{definition}[半環]
+	半環 (semiring) とは、集合 $R$ に二項演算 $+,{\cdot}$ と定数 $0,1$ が備わり、以下を満たすもの。
+	\begin{enumerate}
+		\item $(R,+,0)$ は可換モノイドである。
+		\begin{align*}
+			(a+b)+c &= a+(b+c)\\
+			a+b&=b+a\\
+			0+a & =a=a+0
+		\end{align*}
+		\item $(R,{\cdot},1)$ はモノイドである。
+		\begin{align*}
+			(a\cdot b)\cdot c &= a\cdot (b\cdot c)\\
+			1\cdot a & =a=a\cdot 1
+		\end{align*}
+		\item 乗算 $\cdot$ は加算 $+$ に対して左右から分配する。
+		\begin{align*}
+			a\cdot (b+c) &= a\cdot b+a\cdot c\\
+			(a+b)\cdot c &= a\cdot c+b\cdot c
+		\end{align*}
+		\item $0$ は乗算 $\cdot$ について吸収元 (absorbing element) である。
+		\[a\cdot 0=0=0\cdot a\]
+	\end{enumerate}
+\end{definition}
+
+\noindent 半環 $(R,+,\cdot,0,1)$ に対し、
+\[T_R(Y)\,:=\,\{p\colon Y\to R\mid\{y\mid p(y)\neq 0\}\;\textrm{is finite}\}\]
+と定め、効果つき計算を \[\begin{array}{cccc}f:&X&\longrightarrow&T_R(Y)\\&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&x&\mapsto&\displaystyle\sum_{y\in Y}f(x)(y)\ket{y}\end{array}\]
+として表します。どの半環を選ぶかによって、記録する計算効果が変わります。\vspace{7pt}
+
+\begin{center}
+	\begin{tabular}{c|c|c}
+		\hline
+		半環 $R$ & $f(x)(y)$ が記録するもの & 表される計算の種類 \\
+		\hline 
+		& & \\\hline 
+		& & \\\hline 
+		& & \\\hline 
+	\end{tabular}
+\end{center}
+
+\clearpage
+
+この $T_R$ は、自由半加群モナド (free $R$-semimodule monad) をなします。
 
 \clearpage
 
@@ -6436,7 +6503,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 			\end{tikzcd}
 		\end{center}
 		すると、右回りにたどると
-		\[\underbracket{~X\xrightarrow{\;f\;}FY\xrightarrow{\;Fg\;}FFZ\xrightarrow{\;\mu_Z\;}FZ~}_{=\,g\odot f}\xrightarrow{\;Fq\;}F\Omega\xrightarrow{\;\tau\;}\Omega\]
+		\[\underbracket{~X\xrightarrow{\;f\;}FY\xrightarrow{\;Fg\;}FFZ\xrightarrow{\;\mu_Z\;}FZ~}_{=\,g\,\odot\,f}\xrightarrow{\;Fq\;}F\Omega\xrightarrow{\;\tau\;}\Omega\]
 		となり $wp_\tau\llbracket g\odot f \rrbracket(q)$ が得られ、左回りにたどると
 		\[X\xrightarrow{\;f\;} \underbracket{~FY\xrightarrow{\;Fg\;}FFZ\xrightarrow{\;FFq\;}FF\Omega\xrightarrow{\;F\tau\;}F\Omega~}_{\substack{=\,F(\tau\circ Fq\circ g)\\=\,wp_\tau\llbracket g\rrbracket(q)\;\,}}\xrightarrow{\tau}\Omega\] となり $wp_\tau\llbracket f\rrbracket(wp_\tau\llbracket g\rrbracket(q))$ が得られる。可換図式の外周を追えば両者は一致する。\vspace{-20pt}
 	\end{enumerate}
@@ -6516,7 +6583,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 \begin{screen}
 \noindent 基本形はいつも以下のとおりです。
 \[\begin{array}{cccccc}
-	\substack{\displaystyle\textrm{predicate}\\\displaystyle\textrm{transformer}}~~\Phi:& \Omega^{X} & \xrightarrow[\dot F_X]{~~~\substack{\textrm{predicate}\\ \textrm{lifting}}~~~~} & \Omega^{FX} & \xrightarrow[c^\ast]{~~\substack{\textrm{substitution along}\\\textrm{a coalgebra}}~~} & \Omega^{X} \\
+	\substack{\displaystyle\textrm{predicate}\\\displaystyle\textrm{transformer}}~~\Phi:& \Omega^{X} & \xrightarrow[~~~\substack{\textrm{predicate}\\ \textrm{lifting}}~~~~]{\dot F_X} & \Omega^{FX} & \xrightarrow[~~\substack{\textrm{substitution along}\\\textrm{a coalgebra}}~~]{c^\ast} & \Omega^{X} \\
 	& \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} &&\rotatebox{90}{$\in$}\\
 	& q & \longmapsto & \dot F_X q & \longmapsto & c^\ast\dot F_X q
 \end{array}\]
@@ -6530,7 +6597,33 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	\item 
 \end{itemize}
 
-\todo[inline]{続きを書く}
+% \[\begin{array}{cccccc} \Phi:& 2^{X\times X}&\xrightarrow{~~\dot\mathcal{P}_X~~}&2^{\mathcal PX\times\mathcal PX}&\xrightarrow{~~(c\times c)^\ast~~}&2^{X\times X} \end{array}\]
+
+\[
+\begin{array}{cccccc}
+\Phi\colon &
+2^{X\times X} &
+\hspace*{-65pt} \xrightarrow{~~~~~~~~~~~ \dot{\mathcal P}_X ~~~~~~~~~~~} \hspace*{-155pt} &
+2^{\mathcal P X\times\mathcal P X} & 
+\hspace*{-175pt} \xrightarrow{~~~~~~~~~~~~~~~~ (c\times c)^* ~~~~~~~~~~~~~~~~} \hspace*{-145pt} &
+2^{X\times X} \\
+& \rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$} & & \rotatebox{90}{$\in$} \\
+& R & \!\longmapsto\! & \left(\!\begin{array}{l}(U,V)\,\mapsto\\[2pt]\displaystyle\left(\bigwedge_{u\in U}\bigvee_{v\in V} R(u,v)\right)\land\displaystyle\left(\bigwedge_{v\in V}\bigvee_{u\in U} R(u,v)\right)\end{array}\!\right) & \!\longmapsto\! & \left(\begin{array}{ccc}
+	X\times X & \!\xrightarrow{c\times c}\! & \mathcal PX\times\mathcal PX \\
+	&& ~~~\downarrow\substack{\dot{\mathcal P}_X(R)}\!\!\! \\
+	& & 2
+\end{array}\right)
+\end{array}
+\]\vspace{1pt}
+
+\noindent ここで、定義から
+\[\begin{aligned}(x,y)\in\Phi(R) ~\Longleftrightarrow~ & \bigl(\forall x'\in c(x),\;\exists y'\in c(y),\;x'Ry'\bigr)\\&{}\land\bigl(\forall y'\in c(y),\;\exists x'\in c(x),\;x'Ry'\bigr)\end{aligned}\]
+であることがわかります。ここで、任意の双模倣関係 $R$ は、$\Phi$ の post-fixed point となります。
+\[R\textrm{~が双模倣関係 (bisimulation) である} ~\Longleftrightarrow~ R\subseteq\Phi(R)\]
+そして、双模倣性 (bisimilarity) とは、最大の双模倣関係、つまり最大不動点 $\nu\Phi$ です。
+\[\top~\sqsupseteq~\Phi(\top)~\sqsupseteq~\Phi^2(\top)~\sqsupseteq~\cdots\cdots~\sqsupseteq\;\nu\Phi\]
+
+% \todo[inline]{続きを書く}
 
 \clearpage
 
@@ -6564,7 +6657,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	% \item 
 	\item この話を踏まえつつ、完備束 $L=[0,1]^{X\times X}$ 上の述語変換子 $\Phi:[0,1]^{X\times X}\to[0,1]^{X\times X}$ を次のように定めます。
 	\[\begin{array}{cccccc}
-		\Phi\colon & [0,1]^{X\times X} & \;\xrightarrow[\mathcal W]{\substack{\textrm{Wasserstein}\\\textrm{lifting}}}\hspace*{-25pt} & [0,1]^{\mathcal DX\times\mathcal DX} & \hspace*{-45pt}\xrightarrow[(c\times c)^\ast]{~~~~~\substack{\textrm{pullback}\\\textrm{by MC}}~~~~~}\hspace*{-45pt} & [0,1]^{X\times X} \\[2pt]
+		\Phi\colon & [0,1]^{X\times X} & \;\xrightarrow[\substack{\textrm{Wasserstein}\\\textrm{lifting}}]{\mathcal W}\hspace*{-25pt} & [0,1]^{\mathcal DX\times\mathcal DX} & \hspace*{-45pt}\xrightarrow[~~~~~\substack{\textrm{pullback}\\\textrm{by MC}}~~~~~]{(c\times c)^\ast}\hspace*{-45pt} & [0,1]^{X\times X} \\[2pt]
 		{} & \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\[1pt]
 		& d & \longmapsto & \left(\begin{array}{l}(\alpha,\beta)\mapsto\\\displaystyle\inf_{\substack{\gamma:\;\textrm{coupling}\\\textrm{of}\;\alpha,\beta}}\sum_{x,x'}\begin{array}{l}\gamma(x,x')\\[-2pt]\,\cdot\, d(x,x')\end{array}\end{array}\right) & \longmapsto & \left(\begin{array}{ccc}
 			X\times X & \xrightarrow{c\times c} & \mathcal DX\times\mathcal DX \\
@@ -6684,15 +6777,15 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 \begin{screen}
 \noindent 【まとめ】 ファイブレーションにおいて極限を取るときは、極限を2回計算する！
 \begin{enumerate}
-	\item 基底圏 $\C$ の中で極限を計算する \[L=\Lim_{\C} pD\]
-	\item ファイバー $\E_{\,\Lim pD}$ の中でもう一度極限を計算する \[\Lim_\E D \;\cong\; \Lim_{\E_{L}}(I\mapsto\pi_I^\ast DI)\]
+	\item 基底圏 $\C$ の中で極限を計算する \[L=\Lim_{\C} pD\] %\[L=\Lim_{\C} pD\]
+	\item ファイバー $\E_{\,\Lim pD}$ の中で極限をもう一度計算する \[\Lim_\E D \;\cong\; \Lim_{\E_{\,\Lim pD}}\,(I\mapsto\pi_I^\ast DI)\] %\[\Lim_\E D \;\cong\; \Lim_{\E_{L}}(I\mapsto\pi_I^\ast DI)\]
 \end{enumerate}
 \end{screen}
 % \[\Lim_\E D \;\cong\; \Lim_{\E_{L}}(I\mapsto\pi_I^\ast DI),\qquad L=\Lim_{\C} pD\]
 
 \clearpage
 
-\noindent 特に、\textgt{余帰納的述語} (coinductive predicate) を考える際には、以下のような final sequence を考えます。\\（スペースの都合上、図式を横向きに表示しています。）
+\noindent 特に、\textgt{余帰納的述語} (coinductive predicate) を考える際には、以下のような final sequence を考えます。\\（スペースの都合上、図式を90度回転させて表示しています。）
 % \begin{itemize}
 % 	\item base category での $F$-final sequence 
 % 	\item 
@@ -6886,108 +6979,108 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 
 \subsection*{(3) 圏論的な抽象化・公理化}
 
-\begin{multicols}{2}
-	\begin{oframed}
-		\noindent \underline{\textbf{Usual setting}}: \vspace{5pt}\\
-		\noindent Given \\
-		$F:\Set\to\Set$: monad\\
-		$(F\Omega\xrightarrow{\tau}\Omega)$: Eilenberg-Moore algebra of $F$\\
-		$\Omega$: complete lattice\vspace{20pt}
-		% \vspace{80pt} %
-		\\
-		$\implies$ We obtain a predicate lifting $\dot F$ of $F$.
-		\begin{center}
-			\begin{tikzcd}
-				\Pred \ar[r,"\dot F"] \ar[d,"p"'] & \Pred \ar[d,"p"] \\[5pt]
-				\Set \ar[r,"F"'] & \Set
-			\end{tikzcd}
-		\end{center}
-		\begin{itemize}
-			\item $p^{-1}(X)=\Omega^X$
-			\item $\mathrm{Ob}(\Pred)=(X\in\Set,p\in\Omega^X)$
-			\item $\Pred((X,p),(Y,q))$\vspace{-6pt}\\$=\{u:X\to Y\;\textrm{in}\;\Set~\textrm{s.t.}$ \begin{tikzcd}[row sep=-3pt,column sep=12pt] X \ar[rd,"p",shorten=-1pt,near start] \ar[dd,"u"',shorten=-1pt] & \\ {} \ar[r,"\rotatebox{45}{$\scriptstyle\geq$}",phantom,near start] & \Omega\\ Y \ar[ru,"q"',shorten=-1pt,near start] & \end{tikzcd}$\}$
-		\end{itemize}
-		$\dot F(X,p)=(FX,(FX\xrightarrow{Fp}F\Omega\xrightarrow{\tau}\Omega)\in\Omega^{FX})$
-	\end{oframed}
-	% 
-	\begin{oframed}
-		\noindent \underline{\textbf{Our framework}}: \vspace{5pt}\\
-		\noindent Given \\
-		$F:\Set\to\Set$: monad\\
-		$(F\Omega_1\xrightarrow{\tau_1}\Omega_1),(F\Omega_2\xrightarrow{\tau_2}\Omega_2)$: EM algebras of $F$\\
-		$\Omega_1,\Omega_2$: complete lattices \\
-		$d:\Omega_1\to\Omega_2$: monotone and \vspace{2pt}
-		\begin{center}\small
-			% \begin{tikzcd}
-			% 	F\Omega_1 \ar[r,"\tau_1"] \ar[d,"Fd"'] & \Omega_1 \ar[d,"d"] \ar[ld,"\rotatebox{45}{$\geq$}",phantom] \\
-			% 	F\Omega_2 \ar[r,"\tau_2"'] & \Omega_2
-			% \end{tikzcd} \quad (lax homomorphism)
-			\begin{tikzcd}
-				F\Omega_1 \ar[d,"\tau_1"'] \ar[r,"Fd"] \ar[rd,"\rotatebox{45}{$\leq$}",phantom] & F\Omega_2 \ar[d,"\tau_2"]  \\
-				\Omega_1 \ar[r,"d"'] & \Omega_2
-			\end{tikzcd} \quad (lax homomorphism)
-		\end{center}\vspace{10pt}
-		$\implies$ We obtain predicate liftings $\dot F_1,\dot F_2$ s.t. \vspace{2pt}
-		\begin{center}\small
-			\begin{tikzcd}[column sep=3pt,row sep=15pt]
-				\Pred_1 \ar[rrr,"\dot F_1"] \ar[rrd,"d"] \ar[rdd,"p_1"'] &&& \Pred_1 \ar[rrd,"d"] \ar[rdd,"p_1"',near end] \ar[ld,"\rotatebox{-135}{$\Rightarrow$}",phantom] && \\[-6pt]
-				&& \Pred_2 \ar[rrr,"\dot F_2",near start] \ar[ld,"p_2"] &&& \Pred_2 \ar[ld,"p_2"] \\[10pt]
-				& \Set \ar[rrr,"F"'] & & & \Set &
-			\end{tikzcd}
-		\end{center}\vspace{5pt}
-		% $\forall (X,\varphi)\in\Pred_1$,\; 
-		for all $(X,\varphi)\in\Pred_1$,\;\\
-		$d\,\dot F_1\,\varphi\,\leq\,\dot F_2\,d\,\varphi$ \; (order in $p_2^{-1}(TX)$)
-	\end{oframed}
-\end{multicols}
+% \begin{multicols}{2}
+% 	\begin{oframed}
+% 		\noindent \underline{\textbf{Usual setting}}: \vspace{5pt}\\
+% 		\noindent Given \\
+% 		$F:\Set\to\Set$: monad\\
+% 		$(F\Omega\xrightarrow{\tau}\Omega)$: Eilenberg-Moore algebra of $F$\\
+% 		$\Omega$: complete lattice\vspace{20pt}
+% 		% \vspace{80pt} %
+% 		\\
+% 		$\implies$ We obtain a predicate lifting $\dot F$ of $F$.
+% 		\begin{center}
+% 			\begin{tikzcd}
+% 				\Pred \ar[r,"\dot F"] \ar[d,"p"'] & \Pred \ar[d,"p"] \\[5pt]
+% 				\Set \ar[r,"F"'] & \Set
+% 			\end{tikzcd}
+% 		\end{center}
+% 		\begin{itemize}
+% 			\item $p^{-1}(X)=\Omega^X$
+% 			\item $\mathrm{Ob}(\Pred)=(X\in\Set,p\in\Omega^X)$
+% 			\item $\Pred((X,p),(Y,q))$\vspace{-6pt}\\$=\{u:X\to Y\;\textrm{in}\;\Set~\textrm{s.t.}$ \begin{tikzcd}[row sep=-3pt,column sep=12pt] X \ar[rd,"p",shorten=-1pt,near start] \ar[dd,"u"',shorten=-1pt] & \\ {} \ar[r,"\rotatebox{45}{$\scriptstyle\geq$}",phantom,near start] & \Omega\\ Y \ar[ru,"q"',shorten=-1pt,near start] & \end{tikzcd}$\}$
+% 		\end{itemize}
+% 		$\dot F(X,p)=(FX,(FX\xrightarrow{Fp}F\Omega\xrightarrow{\tau}\Omega)\in\Omega^{FX})$
+% 	\end{oframed}
+% 	% 
+% 	\begin{oframed}
+% 		\noindent \underline{\textbf{Our framework}}: \vspace{5pt}\\
+% 		\noindent Given \\
+% 		$F:\Set\to\Set$: monad\\
+% 		$(F\Omega_1\xrightarrow{\tau_1}\Omega_1),(F\Omega_2\xrightarrow{\tau_2}\Omega_2)$: EM algebras of $F$\\
+% 		$\Omega_1,\Omega_2$: complete lattices \\
+% 		$d:\Omega_1\to\Omega_2$: monotone and \vspace{2pt}
+% 		\begin{center}\small
+% 			% \begin{tikzcd}
+% 			% 	F\Omega_1 \ar[r,"\tau_1"] \ar[d,"Fd"'] & \Omega_1 \ar[d,"d"] \ar[ld,"\rotatebox{45}{$\geq$}",phantom] \\
+% 			% 	F\Omega_2 \ar[r,"\tau_2"'] & \Omega_2
+% 			% \end{tikzcd} \quad (lax homomorphism)
+% 			\begin{tikzcd}
+% 				F\Omega_1 \ar[d,"\tau_1"'] \ar[r,"Fd"] \ar[rd,"\rotatebox{45}{$\leq$}",phantom] & F\Omega_2 \ar[d,"\tau_2"]  \\
+% 				\Omega_1 \ar[r,"d"'] & \Omega_2
+% 			\end{tikzcd} \quad (lax homomorphism)
+% 		\end{center}\vspace{10pt}
+% 		$\implies$ We obtain predicate liftings $\dot F_1,\dot F_2$ s.t. \vspace{2pt}
+% 		\begin{center}\small
+% 			\begin{tikzcd}[column sep=3pt,row sep=15pt]
+% 				\Pred_1 \ar[rrr,"\dot F_1"] \ar[rrd,"d"] \ar[rdd,"p_1"'] &&& \Pred_1 \ar[rrd,"d"] \ar[rdd,"p_1"',near end] \ar[ld,"\rotatebox{-135}{$\Rightarrow$}",phantom] && \\[-6pt]
+% 				&& \Pred_2 \ar[rrr,"\dot F_2",near start] \ar[ld,"p_2"] &&& \Pred_2 \ar[ld,"p_2"] \\[10pt]
+% 				& \Set \ar[rrr,"F"'] & & & \Set &
+% 			\end{tikzcd}
+% 		\end{center}\vspace{5pt}
+% 		% $\forall (X,\varphi)\in\Pred_1$,\; 
+% 		for all $(X,\varphi)\in\Pred_1$,\;\\
+% 		$d\,\dot F_1\,\varphi\,\leq\,\dot F_2\,d\,\varphi$ \; (order in $p_2^{-1}(TX)$)
+% 	\end{oframed}
+% \end{multicols}
 
-\subsection*{(4) 具体的状況への応用事例と実験結果}
+% \subsection*{(4) 具体的状況への応用事例と実験結果}
 
-\todo[inline]{まだ}
+% \todo[inline]{まだ}
 
 
-\clearpage
+% \clearpage
 
-\begin{screen}
-	\[\underbracket{~\nu\Phi=\bot~}_{\substack{\textsf{almost-sure}\\\textsf{termination}}}\overset{?}{\implies} \underbracket{~\mu\Psi=\nu\Psi}_{\substack{\textsf{lfp-gfp}\\\textsf{coincidence}}}\]
-\end{screen}
+% \begin{screen}
+% 	\[\underbracket{~\nu\Phi=\bot~}_{\substack{\textsf{almost-sure}\\\textsf{termination}}}\overset{?}{\implies} \underbracket{~\mu\Psi=\nu\Psi}_{\substack{\textsf{lfp-gfp}\\\textsf{coincidence}}}\]
+% \end{screen}
 
-\begin{screen}
-\begin{center}%\Large
-	\begin{tikzcd}[column sep=15pt]
-		\Omega^X \ar[rrrrrr,"\Psi","\textrm{predicate transformer}"'] & & & & & & \Omega^X \\[20pt] %
-		\Omega^X \ar[rrr,"\dot F_X","\textrm{predicate lifting}"'] & & & \Omega^{FX} \ar[rrr,"c^\ast","\substack{\textrm{substitution along}\\\textrm{the coalgebra}}"'] & & & \Omega^X \\[20pt] %
-		\Omega^X \ar[rr,"F(-)"] & & (F\Omega)^{FX} \ar[rr,"\tau^{FX}","\textrm{modality}"'] & & \Omega^{FX} \ar[rr,"c^\ast"] & & \Omega^X
-	\end{tikzcd}
-\end{center}
-\end{screen}
+% \begin{screen}
+% \begin{center}%\Large
+% 	\begin{tikzcd}[column sep=15pt]
+% 		\Omega^X \ar[rrrrrr,"\Psi","\textrm{predicate transformer}"'] & & & & & & \Omega^X \\[20pt] %
+% 		\Omega^X \ar[rrr,"\dot F_X","\textrm{predicate lifting}"'] & & & \Omega^{FX} \ar[rrr,"c^\ast","\substack{\textrm{substitution along}\\\textrm{the coalgebra}}"'] & & & \Omega^X \\[20pt] %
+% 		\Omega^X \ar[rr,"F(-)"] & & (F\Omega)^{FX} \ar[rr,"\tau^{FX}","\textrm{modality}"'] & & \Omega^{FX} \ar[rr,"c^\ast"] & & \Omega^X
+% 	\end{tikzcd}
+% \end{center}
+% \end{screen}
 
-\begin{screen}
-	\begin{center}\Large
-        \begin{tikzcd}
-            {[0,1]}^{X\times[0,M]} \ar[rrd,"\Phi\,:=\,\Lan_d(d\circ\Psi)",bend left=20pt] & {} & {} \\[10pt]
-            ({[0,M]}^{X\times[0,M]})^2 \ar[u,"d"] \ar[r,"\Psi^2"'] \ar[ru,"\rotatebox{45}{\leq}",phantom] & ({[0,M]}^{X\times[0,M]})^2  \ar[r,"d"'] & {[0,1]}^{X\times[0,M]}
-        \end{tikzcd}
-    \end{center}
-\end{screen}
+% \begin{screen}
+% 	\begin{center}\Large
+%         \begin{tikzcd}
+%             {[0,1]}^{X\times[0,M]} \ar[rrd,"\Phi\,:=\,\Lan_d(d\circ\Psi)",bend left=20pt] & {} & {} \\[10pt]
+%             ({[0,M]}^{X\times[0,M]})^2 \ar[u,"d"] \ar[r,"\Psi^2"'] \ar[ru,"\rotatebox{45}{\leq}",phantom] & ({[0,M]}^{X\times[0,M]})^2  \ar[r,"d"'] & {[0,1]}^{X\times[0,M]}
+%         \end{tikzcd}
+%     \end{center}
+% \end{screen}
 
-\begin{screen}
-	\begin{center}\Large
-        \begin{tikzcd}
-            {[0,1]}^{X} \ar[rrd,"\Phi\,:=\,\Lan_d(d\circ\Psi)",bend left=20pt] & {} & {} \\[10pt]
-            ({[0,U]}^{X})^2 \ar[u,"d"] \ar[r,"\Psi^2"'] \ar[ru,"\rotatebox{45}{\leq}",phantom] & ({[0,U]}^{X})^2  \ar[r,"d"'] & {[0,1]}^{X}
-        \end{tikzcd}
-    \end{center}
-\end{screen}
+% \begin{screen}
+% 	\begin{center}\Large
+%         \begin{tikzcd}
+%             {[0,1]}^{X} \ar[rrd,"\Phi\,:=\,\Lan_d(d\circ\Psi)",bend left=20pt] & {} & {} \\[10pt]
+%             ({[0,U]}^{X})^2 \ar[u,"d"] \ar[r,"\Psi^2"'] \ar[ru,"\rotatebox{45}{\leq}",phantom] & ({[0,U]}^{X})^2  \ar[r,"d"'] & {[0,1]}^{X}
+%         \end{tikzcd}
+%     \end{center}
+% \end{screen}
 
-\begin{screen}
-	\begin{center}
-		\begin{tikzcd}
-			E^2 \ar[r,"\Psi^2"] \ar[d,"d"'] & E^2 \ar[d,"d"] \ar[ld,"\rotatebox{45}{$\geq$}",phantom] \\
-			A \ar[r,"\Phi"'] & A 
-		\end{tikzcd}
-	\end{center}
-\end{screen}
+% \begin{screen}
+% 	\begin{center}
+% 		\begin{tikzcd}
+% 			E^2 \ar[r,"\Psi^2"] \ar[d,"d"'] & E^2 \ar[d,"d"] \ar[ld,"\rotatebox{45}{$\geq$}",phantom] \\
+% 			A \ar[r,"\Phi"'] & A 
+% 		\end{tikzcd}
+% 	\end{center}
+% \end{screen}
 
 \clearpage
 
