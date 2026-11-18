@@ -5632,7 +5632,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 \end{definition}
 
 \noindent 半環 $(R,+,\cdot,0,1)$ に対し、集合 $Y$ について
-\[T_R(Y)\,:=\,\Bigl\{p\colon Y\to R\,\Bigm|\,\{y\mid p(y)\neq 0\}\;\textrm{is finite}\Bigr\}\]
+\[T_R(Y)\,:=\,\Bigl\{p\colon Y\to R \Bigm| \{y\mid p(y)\neq 0\}\;\textrm{is finite}\Bigr\}\]
 と定め、効果つき計算を \[\begin{array}{cccc}f:&X&\longrightarrow&T_R(Y)\\&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&x&\mapsto&\displaystyle\sum_{y\in Y}f(x)(y)\Ket{y}\end{array}\]
 として表します。どの半環を選ぶかによって、記録する計算効果が変わります。\vspace{8pt}
 
@@ -5649,11 +5649,56 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 
 \clearpage
 
-この $T_R$ は、自由半加群モナド (free $R$-semimodule monad) をなします。
+\noindent この $T_R$ は、自由半加群モナド (free $R$-semimodule monad) をなします。
 
 \clearpage
 
-\noindent\begin{large}\textgt{コラム: マルコフ圏}\end{large}\vspace{5pt}
+\noindent\begin{large}\textgt{コラム: マルコフ圏 (Markov category) について: string diagram による確率論}\end{large}\vspace{5pt}
+
+\noindent 確率分布モナド $\mathcal D:\Set\to\Set$ による計算効果を持つ計算 $f:X\to\mathcal D(Y)$ について調べるうえで便利な既存のツールがあります。それが\textgt{マルコフ圏} (Markov category) というものです。%ここではそれについて取り上げます。
+
+\begin{screen}
+	\noindent 【マルコフ圏とは】
+	\begin{itemize}
+		\item Markov category \\ $=$ monoidal category $+$ symmetry \\ \quad $+$ copy and delete
+		\[\]
+		\item Markov category \\ = cartesian category $-$ naturality of copy
+		\[\]
+	\end{itemize}
+\end{screen}
+
+以下で定義を述べます。
+
+\begin{definition}[モノイダル圏]
+	... 
+\end{definition}
+
+\begin{definition}[マルコフ圏]
+	... 
+\end{definition}
+
+\noindent モナドとマルコフ圏の間には以下の関係があります。
+
+\begin{theorem}[モナドとマルコフ圏の関係]
+	以下がそれぞれ成り立つ
+	\begin{enumerate}
+		\item Affine commutative monads $\Rightarrow$ Markov categories
+		\begin{itemize}
+			\item $(\C,\otimes,I)$ をカルテシアンなモノイダル圏とし、
+			\item $(T,\eta,\mu)$ をアフィンかつ可換なモナドとする。\\ (つまり、$T(I)\cong I$ が成り立ち、二重ストレングス $dst_{A,B}\colon T(A)\otimes T(B)\to T(A\times B)$ がある。)
+			\item このとき、$\mathrm{Kl}(T)$ はマルコフ圏である。
+		\end{itemize}
+		\item Markov categories $\Rightarrow$ affine commutative monads
+		\begin{itemize}
+			\item 任意のマルコフ圏は、アフィンかつ可換なモナドを誘導する。
+		\end{itemize}
+	\end{enumerate}
+\end{theorem}
+
+\clearpage
+
+\noindent $\mathbf{Rel}$ は $\mathcal P$-Kleisli category であるのに対し、$\mathbf{Stoch}$ は $\mathcal D$-Kleisli category です。
+
 
 \clearpage
 
