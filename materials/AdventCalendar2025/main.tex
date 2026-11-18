@@ -4101,19 +4101,19 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 \subsubsection*{\fbox{(1) Kleisli approach}}
 \label{subsec:Kleisli-approach}
 \begin{itemize}
-	\item 状態遷移系 $\gamma:X\to TFX$ を考えます。
+	\item 余代数 $c:X\to TFX$ を考えます。
 	\begin{itemize}
 		\item $T$: 分岐をあらわす冪集合モナド $\mathcal P(-)$
 		\item $F$: 1ステップ遷移をあらわす関手 $1+\Sigma\times(-)$
-		\item つまり、このシステムは $\gamma:X\to\mathcal P(1+\Sigma\times X)$ という余代数で、$\gamma(x)=\{(a,x'),\dots\}$ といったもの。
+		\item つまり、これは $c:X\to\mathcal P(1+\Sigma\times X)$ という状態遷移系で、$c(x)=\{(a,x'),\dots\}$ といったもの。
 	\end{itemize}
 	\item ここで、モナド分配則 $\lambda:FT\Rightarrow TF$ を考えます。
 	\item すると、以下のように\textgt{合成}を考えることができます。（ここで $X\to TF^2X$ が「\textgt{2ステップ遷移}」を表します。）
 	\begin{center}
 		\begin{tikzcd}[row sep=6pt]
-			X \ar[r,"\gamma"] & TFX \\[-4pt]
-			& X \ar[r,"\gamma"] & TFX \\\hline\\
-			X \ar[r,"\gamma"] & TFX \ar[r,"TF\gamma"] & TFTFX \ar[dd,"T\lambda_{FX}"] \\\\
+			X \ar[r,"c"] & TFX \\[-4pt]
+			& X \ar[r,"c"] & TFX \\\hline\\
+			X \ar[r,"c"] & TFX \ar[r,"TFc"] & TFTFX \ar[dd,"T\lambda_{FX}"] \\\\
 			&& TTFFX \ar[dd,"\mu_{F^2X}"] \\\\
 			&& TF^2X \\\hline\\
 			X \ar[rr] && TF^2X \\
@@ -4123,13 +4123,13 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	\item たとえば、以下のようになります。\vspace{-5pt}
 	\begin{center} \small
 		\begin{tikzcd}[row sep=2pt,column sep=5pt, /tikz/column 2/.append style={column sep={55pt}}, /tikz/column 1/.append style={column sep={15pt}}]
-			{} \ar[r]&\circled{$x_1$} \ar[r,"a"] \ar[rd,"b"] & \circled{$x_2$} \ar[loop above,"b"] \ar[r,"c"] & \circled{$x_3$} \\[-2pt]
+			{} \ar[r]&\circled{$x_1$} \ar[r,"a"] \ar[rd,"b"] & \circled{$x_2$} \ar[loop above,"b"] \ar[r,"a"] & \circled{$x_3$} \\[-2pt]
 			&& \circled{$x_4$}\\\\\hline\\\\
-			&x_1 \ar[r,mapsto] & \gamma(x_1) \ar[d,equal] \\[4pt]
-			&& \{(a,x_2),(b,x_4)\} \ar[r,mapsto] & \{(a,\gamma(x_2)),(b,\gamma(x_4))\} \ar[d,equal] \\[4pt]
-			&&& \{(a,\{(b,x_2),(c,x_3)\}),(b,\{\})\} \ar[d,mapsto,"T\lambda_{FX}"]\\[12pt]
-			&&& \{\{ (ab,x_2),(ac,x_3) \},\{\}\} \ar[d,mapsto,"\mu_{F^2X}"] \\[12pt]
-			&&& \{(ab,x_2),(ac,x_3)\}
+			&x_1 \ar[r,mapsto] & c(x_1) \ar[d,equal] \\[4pt]
+			&& \{(a,x_2),(b,x_4)\} \ar[r,mapsto] & \{(a,c(x_2)),(b,c(x_4))\} \ar[d,equal] \\[4pt]
+			&&& \{(a,\{(b,x_2),(a,x_3)\}),(b,\{\})\} \ar[d,mapsto,"T\lambda_{FX}"]\\[12pt]
+			&&& \{\{ (ab,x_2),(aa,x_3) \},\{\}\} \ar[d,mapsto,"\mu_{F^2X}"] \\[12pt]
+			&&& \{(ab,x_2),(aa,x_3)\}
 		\end{tikzcd}
 	\end{center}
 \end{itemize}
@@ -4139,17 +4139,17 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 \subsubsection*{\fbox{(2) Eilenberg-Moore approach}} 
 \label{subsec:EM-approach}
 \begin{itemize}
-	\item 状態遷移系 $\gamma:X\to FTX$ を考えます。
+	\item 余代数 $c:X\to FTX$ を考えます。
 	\begin{itemize}
 		\item $T$: 分岐をあらわす冪集合モナド $\mathcal P(-)$
 		\item $F$: 1ステップ遷移をあらわす関手 $2\times(-)^\Sigma$
-		\item つまり、このシステムは $\gamma:X\to 2\times\mathcal P(X)^\Sigma$ という余代数で、$\gamma(x)(a)=\{x',\dots\}$ といったもの。
+		\item つまり、これは $c:X\to 2\times\mathcal P(X)^\Sigma$ という状態遷移系で、$c(x)(a)=\{x',\dots\}$ といったもの。
 	\end{itemize}
 	\item ここで、モナド分配則 $\lambda':TF\Rightarrow FT$ を考えます。
 	\item すると、以下のように、非決定性オートマトンを\textgt{決定化} (determinize) することができます。
 	\begin{center}
 		\begin{tikzcd}[row sep=12pt]
-			TX \ar[r,"T\gamma"] & TFTX \ar[r,"\lambda'_{TX}"] & FTTX \ar[d,"F\mu_X"]\\
+			TX \ar[r,"Tc"] & TFTX \ar[r,"\lambda'_{TX}"] & FTTX \ar[d,"F\mu_X"]\\
 			&& F(TX)
 		\end{tikzcd}
 	\end{center}
@@ -4158,18 +4158,18 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	詳しく言うと、以下の合成を通じて、
 	\begin{center}
 		\begin{tikzcd}[row sep=12pt]
-			\mathcal P(X) \ar[r,"\mathcal P\gamma"] & \mathcal P(2\times\mathcal P(X)^\Sigma) \ar[r,"\lambda'_{\mathcal P(X)}"] & 2\times\mathcal P(\mathcal P(X))^\Sigma \ar[d,"\;2\times(\mu_X)^\Sigma"]\\
+			\mathcal P(X) \ar[r,"\mathcal Pc"] & \mathcal P(2\times\mathcal P(X)^\Sigma) \ar[r,"\lambda'_{\mathcal P(X)}"] & 2\times\mathcal P(\mathcal P(X))^\Sigma \ar[d,"\;2\times(\mu_X)^\Sigma"]\\
 			&& 2\times\mathcal P(X)^\Sigma
 		\end{tikzcd}
 	\end{center}
-	$\delta(S)(a)=\bigcup_{x\in S}\gamma(x)(a)$ という決定化 (determinization) を得ることができます。
+	$d(S)(a)=\bigcup_{x\in S}c(x)(a)$ という決定化 (determinization) を得ることができます。
 	\begin{center}
 		\begin{tikzcd}[column sep=0pt,row sep=-4pt]
-			\gamma: \ar[d,rightsquigarrow,"\textrm{``determinize''~~}"'] & X & \longrightarrow & 2\times\mathcal P(X)^{\Sigma} \\[15pt]
-			\delta: & \mathcal P(X) & \longrightarrow & 2\times\mathcal P(X)^{\Sigma}  
+			c: \ar[d,rightsquigarrow,"\textrm{``determinize''~~}"'] & X & \longrightarrow & 2\times\mathcal P(X)^{\Sigma} \\[15pt]
+			d: & \mathcal P(X) & \longrightarrow & 2\times\mathcal P(X)^{\Sigma}  
 		\end{tikzcd}
 	\end{center}
-	\item たとえば、以下の非決定性オートマトン $\gamma:X\to 2\times\mathcal P(X)^\Sigma$ は、
+	\item たとえば、以下の非決定性オートマトン $c:X\to 2\times\mathcal P(X)^\Sigma$ は、
 	\begin{multicols}{2}
 		\begin{center}%\small
 			\begin{tikzcd}
@@ -4177,11 +4177,11 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 			\end{tikzcd}
 		\end{center}
 		\begin{align*}
-			\gamma(x_1) &=\left[\begin{array}{ccl} a &\mapsto& \{x_1,x_2\}\\ b&\mapsto &\{x_2\}\end{array}\right] \\
-			\gamma(x_2) &=\left[\begin{array}{ccl} a &\mapsto& \{x_1\}\\ b&\mapsto &\emptyset\end{array}\right]
+			c(x_1) &=\left[\begin{array}{ccl} a &\mapsto& \{x_1,x_2\}\\ b&\mapsto &\{x_2\}\end{array}\right] \\
+			c(x_2) &=\left[\begin{array}{ccl} a &\mapsto& \{x_1\}\\ b&\mapsto &\emptyset\end{array}\right]
 		\end{align*}
 	\end{multicols}
-	$\delta=(F\mu_X\circ \lambda'_{TX}\circ T\gamma): \mathcal P(X)\to 2\times\mathcal P(X)^\Sigma$ により、決定性オートマトンになります。
+	$d=(F\mu_X\circ \lambda'_{TX}\circ Tc): \mathcal P(X)\to 2\times\mathcal P(X)^\Sigma$ により、決定性オートマトンになります。
 	\begin{multicols}{2}
 		\begin{center}%\small
 			\begin{tikzcd}[row sep=-16pt]
@@ -4192,15 +4192,15 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 			\end{tikzcd}
 		\end{center}
 		\begin{align*}
-			\delta(\{x_1\}) &=\left[\begin{array}{ccl} a &\mapsto& \{x_1,x_2\}\\ b&\mapsto &\{x_2\}\end{array}\right] \\
-			\delta(\{x_2\}) &= \left[\begin{array}{ccl} a &\mapsto& \{x_1\}\\ b&\mapsto &\emptyset\end{array}\right]
+			d(\{x_1\}) &=\left[\begin{array}{ccl} a &\mapsto& \{x_1,x_2\}\\ b&\mapsto &\{x_2\}\end{array}\right] \\
+			d(\{x_2\}) &= \left[\begin{array}{ccl} a &\mapsto& \{x_1\}\\ b&\mapsto &\emptyset\end{array}\right]
 			\\
-			\delta(\{x_1,x_2\}) &=\left[\begin{array}{ccl} a &\mapsto& \{x_1,x_2\}\\ b&\mapsto &\{x_2\}\end{array}\right]
+			d(\{x_1,x_2\}) &=\left[\begin{array}{ccl} a &\mapsto& \{x_1,x_2\}\\ b&\mapsto &\{x_2\}\end{array}\right]
 		\end{align*}
 	\end{multicols}
 \end{itemize}
 
-\noindent ※ なお、(1) $\gamma:X\to \mathcal P(1+\Sigma\times X)$ と (2) $\gamma:X\to 2\times\mathcal P(X)^{\Sigma}$ の両者は同じものです（自然同型で対応）。\vspace{5pt}%\\
+\noindent ※ なお、(1) $c:X\to \mathcal P(1+\Sigma\times X)$ と (2) $c:X\to 2\times\mathcal P(X)^{\Sigma}$ の両者は同じものです（自然同型で対応）。\vspace{5pt}%\\
 % \small 
 % \begin{small}
 % \begin{prooftree}
@@ -4243,7 +4243,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 \noindent まずは、準備として、以下の\textgt{自由忘却随伴} (free-forgetful adjunction) について復習しておきましょう。
 
 \begin{proposition}[再掲]
-	クライスリ圏とEM圏について、それぞれ自由忘却随伴がある。（詳細は命題\ref{prop:Kleisli-EM-adjunction}） %(free-forgetful adjunction) 
+	クライスリ圏とEM圏について、それぞれ自由忘却随伴がある。（詳細は命題\ref{prop:Kleisli-EM-adjunction}を参照。） %(free-forgetful adjunction) 
 	\begin{multicols}{2}
 		% \begin{center}
 		% 	\begin{tikzcd}[row sep=large,column sep=large]
@@ -4395,7 +4395,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	\end{multicols}
 \end{supplement}
 
-\noindent ここで、先ほどの (1) Kleisli approach と (2) Eilenberg-Moore approach は、数学的主張として正確に述べると、それぞれ次のようなもの（「自由関手の持ち上げ」）として理解されます。
+\noindent ここで、先ほどの (1) Kleisli approach と (2) Eilenberg-Moore approach は、数学的主張として正確に述べると、それぞれ次のようなもの（自由関手 $L_T, L^T$ の``持ち上げ''）として理解されます。
 
 \begin{proposition}[Kleisli approach]
 	分配則 $\lambda:FT\Rightarrow TF$ が与えられたとき、$L_T$ は $\widehat{L_T}$ に持ち上がる。\vspace{5pt}
@@ -4963,7 +4963,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 
 \begin{example}
 % \noindent 
-例として、$M=(-)^\omega$（無限ストリームコモナド）とし、$T=\mathcal P$（冪集合モナド）としましょう。\\ 分配則は以下のように与えられます。
+例として、$M=(-)^\omega$（無限ストリームコモナド）とし、$T=\mathcal P$（冪集合モナド）としましょう。\\ モナド・コモナド分配則は以下のように与えられます。
 \[\begin{array}{cccc}\lambda_X:&(\mathcal PX)^\omega&\longrightarrow&\mathcal P(X^\omega)\\ & \rotatebox{90}{$\in$} && \rotatebox{90}{$\in$} \\ & (s_0,s_1,\dots) & \mapsto & \left\{(x_0,x_1,\dots) \mid x_i\in S_i\; (\forall i\in\omega) \right\} \end{array}\]
 これがあることによって、$f:X^\omega\to\mathcal PY$ のような、入力が無限ストリームであり、出力が非決定的であるような computation を、どうやって合成すればいいかがわかるようになります。
 \end{example}
@@ -5021,7 +5021,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 		\end{tikzcd}
 	\end{center}
 	このとき、余自由コモナドは、以下のように作られます。
-	$F:\Set\to\Set$ と $X\in\Set$ が与えられたとき、\[\begin{array}{cccc}X\times F(-):&\Set&\longrightarrow&\Set\\&Y&\longmapsto& X\times FY\end{array}\] を考えて、以下の終余代数 $\nu\,(X\times F(-))$（各 node が $x\in X$ と $\sigma\in\Sigma$ でラベル付けされ、各 node が $|\sigma|$-個の子を持つ、finite または infinite な木の集まり） 
+	$F:\Set\to\Set$ と $X\in\Set$ が与えられたとき、\[\begin{array}{cccc}X\times F(-):&\Set&\longrightarrow&\Set\\&Y&\longmapsto& X\times FY\end{array}\] を考えて、以下の終余代数 $\nu\,(X\times F(-))$（各 node が $\sigma\in\Sigma$ と $x\in X$ でラベル付けされ、各 node が $|\sigma|$-個の子を持つ、finite または infinite な木の集まり） 
 	を作ると、この $F^\infty$ が\textgt{余自由コモナド}です。\vspace{-28pt}
 	% \[\left(\begin{array}{c}X\times F(F^\infty X)\\ ~\substack{\cong}\uparrow\substack{\textrm{final}}\\ F^\infty X\end{array}\right)\] %を作ると、この $F^\infty$ が\textgt{余自由コモナド}です。%$X\xmapsto{~~~~}F^\infty X$
 	% \begin{multicols}{2}
@@ -5605,10 +5605,10 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 
 \noindent\begin{large}\textgt{コラム: 半環 (semiring) と計算効果}\end{large}\vspace{5pt}
 
-\noindent 計算効果を持つ計算（非決定的・確率的など）は、複数の結果が可能であったり、それぞれの結果に確率やコストが付随したりします。そのような計算を扱う方法のひとつとして、「\textgt{計算の各結果に、半環 (semiring) の元を重みとして割り当てる}」というやり方もあります。ここでは、その方法について紹介します。
+\noindent 計算効果を持つ計算（非決定的・確率的など）は、その結果が複数あり得たり、各結果に確率やコストが付随したりします。そのような計算を扱う方法のひとつとして、「\textgt{計算の各結果に、半環 (semiring) の元を重みとして割り当てる}」というやり方もあります。ここでは、その方法について紹介します。
 
 \begin{definition}[半環]
-	半環 (semiring) とは、集合 $R$ に二項演算 $+,{\cdot}$ と定数 $0,1$ が備わり、以下を満たすもの。
+	半環 (semiring) とは、集合 $R$ に二項演算 $+,\,{\cdot}$ と定数 $0,1$ が備わり、以下を満たすもの。
 	\begin{enumerate}
 		\item $(R,+,0)$ は可換モノイドである。
 		\begin{align*}
@@ -5631,10 +5631,10 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	\end{enumerate}
 \end{definition}
 
-\noindent 半環 $(R,+,\cdot,0,1)$ に対し、
-\[T_R(Y)\,:=\,\{p\colon Y\to R\mid\{y\mid p(y)\neq 0\}\;\textrm{is finite}\}\]
-と定め、効果つき計算を \[\begin{array}{cccc}f:&X&\longrightarrow&T_R(Y)\\&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&x&\mapsto&\displaystyle\sum_{y\in Y}f(x)(y)\ket{y}\end{array}\]
-として表します。どの半環を選ぶかによって、記録する計算効果が変わります。\vspace{7pt}
+\noindent 半環 $(R,+,\cdot,0,1)$ に対し、集合 $Y$ について
+\[T_R(Y)\,:=\,\Bigl\{p\colon Y\to R\,\Bigm|\,\{y\mid p(y)\neq 0\}\;\textrm{is finite}\Bigr\}\]
+と定め、効果つき計算を \[\begin{array}{cccc}f:&X&\longrightarrow&T_R(Y)\\&\rotatebox{90}{$\in$}&&\rotatebox{90}{$\in$}\\&x&\mapsto&\displaystyle\sum_{y\in Y}f(x)(y)\Ket{y}\end{array}\]
+として表します。どの半環を選ぶかによって、記録する計算効果が変わります。\vspace{8pt}
 
 \begin{center}
 	\begin{tabular}{c|c|c}
@@ -5650,6 +5650,10 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 \clearpage
 
 この $T_R$ は、自由半加群モナド (free $R$-semimodule monad) をなします。
+
+\clearpage
+
+\noindent\begin{large}\textgt{コラム: マルコフ圏}\end{large}\vspace{5pt}
 
 \clearpage
 
@@ -6591,14 +6595,14 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 
 \subsubsection*{具体例 (a) 双模倣性: 非決定的な状態遷移系における``状態どうしの類似性''の概念}
 
+
 \begin{itemize}
-	\item 
-	\item 
-	\item 
+	\item 以下の fibration を考えます。
+	\begin{center}
+		
+	\end{center}
+	\item ここで、完備束 $L=2^{X\times X}$ 上の述語変換子 $\Phi:2^{X\times X}\to 2^{X\times X}$ を次のように定めます。
 \end{itemize}
-
-% \[\begin{array}{cccccc} \Phi:& 2^{X\times X}&\xrightarrow{~~\dot\mathcal{P}_X~~}&2^{\mathcal PX\times\mathcal PX}&\xrightarrow{~~(c\times c)^\ast~~}&2^{X\times X} \end{array}\]
-
 \[
 \begin{array}{cccccc}
 \Phi\colon &
@@ -6614,14 +6618,33 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	& & 2
 \end{array}\right)
 \end{array}
-\]\vspace{1pt}
+\]%\vspace{1pt}
 
-\noindent ここで、定義から
-\[\begin{aligned}(x,y)\in\Phi(R) ~\iff~ & \bigl(\forall x'\in c(x),\;\exists y'\in c(y),\;x'Ry'\bigr)\\&{}\land\bigl(\forall y'\in c(y),\;\exists x'\in c(x),\;x'Ry'\bigr)\end{aligned}\]
-であることがわかります。ここで、任意の双模倣関係 $R$ は、$\Phi$ の post-fixed point となります。
-\[R\textrm{~が双模倣関係 (bisimulation) である} ~\iff~ R\subseteq\Phi(R)\]
-そして、双模倣性 (bisimilarity) とは、最大の双模倣関係、つまり最大不動点 $\nu\Phi$ です。
-\[\top~\sqsupseteq~\Phi(\top)~\sqsupseteq~\Phi^2(\top)~\sqsupseteq~\cdots\cdots~\sqsupseteq\;\nu\Phi\]
+\begin{itemize}
+	\item このとき、定義から、以下の同値性が成り立ちます。
+	\[\begin{aligned}(x,y)\in\Phi(R) ~\iff~ & \bigl(\forall x'\in c(x),\;\exists y'\in c(y),\;x'Ry'\bigr)\\&{}\land\bigl(\forall y'\in c(y),\;\exists x'\in c(x),\;x'Ry'\bigr)\end{aligned}\]
+	\item ここで、任意の双模倣関係 $R$ は、$\Phi$ の post-fixed point となります。
+	\[R\textrm{~が双模倣関係 (bisimulation) である} ~\iff~ R\subseteq\Phi(R)\]
+	\item そして、双模倣性 (bisimilarity) とは、最大の双模倣関係、つまり最大不動点 $\nu\Phi$ です。
+	\[\top~\sqsupseteq~\Phi(\top)~\sqsupseteq~\Phi^2(\top)~\sqsupseteq~\cdots\cdots~\sqsupseteq\;\nu\Phi\qquad\qquad(\textrm{in}~2^{X\times X})\]
+	\begin{itemize}
+		% \item $\top$: 
+		% \item $\Phi(\top)$: 
+		% \item $\Phi^2(\top)$: 
+		\item ここで $\Phi^n(\top)$ は「深さ $n$ まで遷移先を比較したときに区別されない状態の組」を表す。
+	\end{itemize}
+	\item この特徴づけから、双模倣性を示すための余帰納法が得られます。
+	\begin{center}
+		\begin{prooftree}
+			\AXC{$(x,y)\in R$}
+			\AXC{$R\subseteq \Phi(R)$}
+			\BIC{$(x,y)\in\nu\Phi$}\noLine
+			\UIC{(i.e. $x\bisim y$)}
+		\end{prooftree}
+	\end{center}
+\end{itemize}
+% \noindent 
+
 
 % \todo[inline]{続きを書く}
 
@@ -6665,8 +6688,8 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 			& & [0,1]
 		\end{array}\right)
 	\end{array}\]
-	\item ここでわれわれが興味があるのは、最小不動点 $\mu\Phi:X\times X\to[0,1]$ です。これは、以下によって構成されます。
-	\[\bot\;\sqsubseteq\;\Phi(\bot)\;\sqsubseteq\;\Phi^2(\bot)\;\sqsubseteq\;\cdots\cdots\;\sqsubseteq\;\mu\Phi\]
+	\item ここでわれわれが興味があるのは、最小不動点 $\mu\Phi$ です。これは、以下によって構成されます。
+	\[\bot\;\sqsubseteq\;\Phi(\bot)\;\sqsubseteq\;\Phi^2(\bot)\;\sqsubseteq\;\cdots\cdots\;\sqsubseteq\;\mu\Phi\qquad\qquad(\textrm{in}~[0,1]^{X\times X})\]
 	\begin{itemize}
 		\item $\bot$: ``No observation yet, so everything is the same.''
 		\item $\Phi(\bot)$: ``One-step observation, can distinguish some.''
@@ -6707,7 +6730,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 	そして、この述語変換子の最大不動点 $\nu(\Phi^{\lnot\lnot}):X\times X\to[0,1]$ は、
 	\[\nu(\Phi^{\lnot\lnot})\,=\,\lnot(\mu f)\,=\,1-\mu\Phi\] 
 	として得られます。
-	\[\top\;\sqsupseteq\;\Phi^{\lnot\lnot}(\top)\;\sqsupseteq\;(\Phi^{\lnot\lnot})^2(\top)\;\sqsupseteq\;\cdots\cdots\;\sqsupseteq\;\nu(\Phi^{\lnot\lnot})\]
+	\[\top\;\sqsupseteq\;\Phi^{\lnot\lnot}(\top)\;\sqsupseteq\;(\Phi^{\lnot\lnot})^2(\top)\;\sqsupseteq\;\cdots\cdots\;\sqsupseteq\;\nu(\Phi^{\lnot\lnot})\qquad\qquad(\textrm{in}~[0,1]^{X\times X})\]
 	この述語 $\nu(\Phi^{\lnot\lnot})$ がまさに ``状態どうしの類似度'' を表すものです。
 	% \item 
 \end{itemize}
