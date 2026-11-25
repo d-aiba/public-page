@@ -5656,7 +5656,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 \noindent\begin{large}\textgt{コラム: マルコフ圏 (Markov category) について: string diagram による確率論}\end{large}\vspace{5pt}
 
 \noindent 確率分布モナド $\mathcal D:\Set\to\Set$ による計算効果を持つ計算 $f\colon X\to\mathcal D(Y)$ について調べるうえで便利な既存のツールがあります。それが、\textgt{マルコフ圏} (Markov category) と呼ばれるものです。%ここではそれについて取り上げます。
-\vspace{3pt}
+\vspace{5pt}
 
 \begin{screen}
 	\noindent 【マルコフ圏とは】
@@ -5684,7 +5684,7 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 			\end{tikzpicture}
 		\end{center}
 		\item Markov category \\ = cartesian category $-$ naturality of copy
-		\[\mathsf{copy}_Y\circ f ~~\quad\qquad\qquad \neq \quad\qquad (f\otimes f)\circ\mathsf{copy}_X\] \vspace{1pt}
+		\[\mathsf{copy}_Y\circ f ~~\quad\qquad\qquad \neq \quad\qquad (f\otimes f)\circ\mathsf{copy}_X\] \vspace{-5pt}
 		\begin{center}
 			\begin{tikzpicture}
 				\node[draw, minimum width=39.8338586pt] (node1) at (0.8,2.5) {$f$};
@@ -5719,6 +5719,9 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 		\end{center}
 	\end{itemize}
 \end{screen}
+\vspace{0pt}
+
+\noindent 次ページ以降で正確な定義をしますが、
 
 \clearpage
 
@@ -5801,31 +5804,49 @@ $F=A\times(-)$ とします。終余代数は $\langle \mathbf{head},\mathbf{tai
 		\item そして $\otimes$ と $I$ は、``モノイドのような'' 公理を満たす: 
 		\begin{itemize}
 			\item[\bullet~] 以下の自然同型 $\alpha,\lambda,\rho$ があり
+			% 、五角等式 (pentagon equation) と三角等式 (triangle equation) を満たす。%\vspace{5pt}
 			\begin{align*}
 				\alpha_{X,Y,Z}\colon(X\otimes Y)\otimes Z &\xrightarrow{~\cong~} X\otimes(Y\otimes Z) \\
 				\lambda_X\colon I\otimes X &\xrightarrow{~\cong~} X \\
 				\rho_X\colon X\otimes I &\xrightarrow{~\cong~} X 
 			\end{align*}
-			\item[\bullet~] 以下の五角等式 (pentagon equation) と三角等式 (triangle equation) を満たす。\vspace{5pt}
-			\begin{center} \small
-				\begin{tikzcd}[ampersand replacement=\&,column sep= -90pt]
-					\&\&\& {(A\otimes B)\otimes(C\otimes D)} \&\&\& \\
-					{((A\otimes B)\otimes C)\otimes D} \&\&\&\&\&\& {A\otimes(B\otimes(C\otimes D))} \\
-					\& {(A\otimes(B\otimes C))\otimes D} \& ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \& ~~~~~~~~~~ \& ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \& {A\otimes((B\otimes C)\otimes D)}
-					\arrow["{\alpha_{A, B,C\otimes D}}", from=1-4, to=2-7]
-					\arrow["{\alpha_{A\otimes B,C,D}}", from=2-1, to=1-4]
-					\arrow["{\alpha_{A,B,C}\otimes\mathrm{id}_D}"', from=2-1, to=3-2]
-					\arrow["{\alpha_{A,B\otimes C,D}}"', from=3-2, to=3-6]
-					\arrow["{\mathrm{id}_{A}\otimes\alpha_{B,C,D}}"', from=3-6, to=2-7]
-				\end{tikzcd}
-				\qquad 
-				\begin{tikzcd}[column sep=10pt]
-					(A\otimes I)\otimes B \ar[rr,"\alpha_{A,I,B}"] \ar[rd,"\rho_{A}\otimes\id_B"'] && A\otimes(I\otimes Y) \ar[ld,"\id_A\otimes\lambda_{B}"]\\
-					& A\otimes B &
-				\end{tikzcd}
-			\end{center}
+			\item[\bullet~] 以下の五角等式 (pentagon equation) と三角等式 (triangle equation) を満たす。%\vspace{5pt}
+			% \begin{center} \small
+			% 	\begin{tikzcd}[ampersand replacement=\&,column sep= -90pt]
+			% 		\&\&\& {(A\otimes B)\otimes(C\otimes D)} \&\&\& \\
+			% 		{((A\otimes B)\otimes C)\otimes D} \&\&\&\&\&\& {A\otimes(B\otimes(C\otimes D))} \\
+			% 		\& {(A\otimes(B\otimes C))\otimes D} \& ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \& ~~~~~~~~~~ \& ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \& {A\otimes((B\otimes C)\otimes D)}
+			% 		\arrow["{\alpha_{A, B,C\otimes D}}", from=1-4, to=2-7]
+			% 		\arrow["{\alpha_{A\otimes B,C,D}}", from=2-1, to=1-4]
+			% 		\arrow["{\alpha_{A,B,C}\otimes\mathrm{id}_D}"', from=2-1, to=3-2]
+			% 		\arrow["{\alpha_{A,B\otimes C,D}}"', from=3-2, to=3-6]
+			% 		\arrow["{\mathrm{id}_{A}\otimes\alpha_{B,C,D}}"', from=3-6, to=2-7]
+			% 	\end{tikzcd}
+			% 	\qquad 
+			% 	\begin{tikzcd}[column sep=10pt]
+			% 		(A\otimes I)\otimes B \ar[rr,"\alpha_{A,I,B}"] \ar[rd,"\rho_{A}\otimes\id_B"'] && A\otimes(I\otimes Y) \ar[ld,"\id_A\otimes\lambda_{B}"]\\
+			% 		& A\otimes B &
+			% 	\end{tikzcd}
+			% \end{center}
 		\end{itemize}
 	\end{itemize}
+	\begin{center} %\small
+		\begin{tikzcd}[ampersand replacement=\&,column sep= -90pt]
+			\&\&\& {(A\otimes B)\otimes(C\otimes D)} \&\&\& \\
+			{((A\otimes B)\otimes C)\otimes D} \&\&\&\&\&\& {A\otimes(B\otimes(C\otimes D))} \\
+			\& {(A\otimes(B\otimes C))\otimes D} \& ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \& ~~~~~~~~~~ \& ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \& {A\otimes((B\otimes C)\otimes D)}
+			\arrow["{\alpha_{A, B,C\otimes D}}", from=1-4, to=2-7]
+			\arrow["{\alpha_{A\otimes B,C,D}}", from=2-1, to=1-4]
+			\arrow["{\alpha_{A,B,C}\otimes\mathrm{id}_D}"', from=2-1, to=3-2]
+			\arrow["{\alpha_{A,B\otimes C,D}}"', from=3-2, to=3-6]
+			\arrow["{\mathrm{id}_{A}\otimes\alpha_{B,C,D}}"', from=3-6, to=2-7]
+		\end{tikzcd}
+		\qquad 
+		\begin{tikzcd}[column sep=0pt]
+			(A\otimes I)\otimes B \ar[rr,"\alpha_{A,I,B}"] \ar[rd,"\rho_{A}\otimes\id_B"'] && A\otimes(I\otimes Y) \ar[ld,"\id_A\otimes\lambda_{B}"]\\
+			& A\otimes B &
+		\end{tikzcd}
+	\end{center}
 \end{definition}
 
 \clearpage
